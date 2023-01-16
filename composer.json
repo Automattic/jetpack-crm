@@ -28,7 +28,7 @@
 		"automattic/jetpack-autoloader": "^2.11.15",
 		"automattic/woocommerce": "^3.0",
 		"dompdf/dompdf": "2.0.1",
-		"automattic/jetpack-composer-plugin": "^1.1.9-alpha"
+		"automattic/jetpack-composer-plugin": "^1.1.9"
 	},
 	"minimum-stability": "dev",
 	"extra": {
