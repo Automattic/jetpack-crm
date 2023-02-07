@@ -1,0 +1,6 @@
+/*!
+ * Jetpack CRM
+ * https://jetpackcrm.com
+ *
+ * MailPoet Add Edit page JS
+ */

@@ -1,0 +1,9 @@
+/*!
+ * Jetpack CRM
+ * http://www.zerobscrm.com
+ * V1.1.19
+ *
+ * Copyright 2020 Automattic
+ *
+ * Date: 18/10/16
+ */.zbsSortableFieldList ul{text-align:right}.zbsSortableFieldList ul li{background:#f2f4ff;border:1px solid #d1cfee;border-radius:4px;cursor:move;margin-bottom:4px;margin-top:4px;padding:6px 10px}.zbsSortableFieldList ul li:before{color:#ddd;content:"";font-family:FontAwesome;margin:0 0 0 10px}.zbsSortableFieldList ul li.ui-sortable-helper:before{color:#000;content:"";font-family:FontAwesome;margin:0 0 0 10px}.zbsSortableFieldList li .zbs-showhide-field{float:left;line-height:1em;margin-top:-7px;text-align:left}.zbsSortableFieldList li .zbs-showhide-field label{padding-left:6px;padding-top:11px;vertical-align:middle}.zbsSortableFieldList li .zbs-showhide-field input{display:inline-block;line-height:1em;vertical-align:middle}

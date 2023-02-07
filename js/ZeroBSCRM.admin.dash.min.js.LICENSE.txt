@@ -1,0 +1,10 @@
+/*!
+ * Jetpack CRM
+ * https://jetpackcrm.com
+ * V2.4
+ *
+ * Copyright 2020 Automattic
+ * CRM dash date range picker
+ *
+ * Date: 15th August 2018
+ */
