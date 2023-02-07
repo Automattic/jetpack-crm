@@ -13,6 +13,9 @@ This is an alpha version! The changes listed here are not final.
 - adds the necessary migration to move all files that were inside the zbscrm-store folder with a flat struture to the new jpcrm-storage folder that uses a hierarchical structure
 - Copy tests from old repo.
 
+### Fixed
+- Client Portal bug that prevented access from being disabled using the contact page was fixed
+
 ## 5.5.1 - 2022-12-16
 
 - Fixed: Inline field editing no longer prevents listings from being displayed
