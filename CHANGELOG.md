@@ -18,6 +18,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Fixed
 - Client Portal bug that prevented access from being disabled using the contact page was fixed
+- CRM: Adding a JS function to a list of exports so that it can be called outside the bundle it was declared in.
 
 ## 5.5.3 - 2023-01-26
 
