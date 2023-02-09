@@ -18,7 +18,15 @@ This is an alpha version! The changes listed here are not final.
 
 ### Fixed
 - Client Portal bug that prevented access from being disabled using the contact page was fixed
+- CRM: add a missing < which prevented a <script> tag from being opened.
 - CRM: Adding a JS function to a list of exports so that it can be called outside the bundle it was declared in.
+- CRM:  allows custom profile pictures to be shown in the dashboard.
+- CRM: Escaping an invoice ID in ZeroBSCRM.admin.invoicebuilder.js
+- CRM: Fix avatar getting removed when saving a contact
+- CRM: Fixes a contact fild issue when a Woo order subscription is updated.
+- CRM: Fix escape in contact list filters
+- CRM: Fixing minor admin only issue on placeholder fields.
+- CRM:  fix the escape used in the "Bundle holder" notification when uploading files to a contact
 
 ## 5.5.3 - 2023-01-26
 
