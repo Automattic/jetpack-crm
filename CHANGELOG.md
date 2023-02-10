@@ -15,6 +15,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Changed
 - Added webpack build step
+- CRM: changing variable declarations back to var
 
 ### Fixed
 - Client Portal bug that prevented access from being disabled using the contact page was fixed
