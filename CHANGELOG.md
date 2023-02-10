@@ -26,6 +26,7 @@ This is an alpha version! The changes listed here are not final.
 - CRM: Fixes a contact fild issue when a Woo order subscription is updated.
 - CRM: Fix escape in contact list filters
 - CRM: Fixing minor admin only issue on placeholder fields.
+- CRM: fix issue  where exporting contacts shows "County" when it should show "State".
 - CRM:  fix the escape used in the "Bundle holder" notification when uploading files to a contact
 
 ## 5.5.3 - 2023-01-26
