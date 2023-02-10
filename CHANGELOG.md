@@ -21,6 +21,7 @@ This is an alpha version! The changes listed here are not final.
 - Client Portal bug that prevented access from being disabled using the contact page was fixed
 - CRM: add a missing < which prevented a <script> tag from being opened.
 - CRM: Adding a JS function to a list of exports so that it can be called outside the bundle it was declared in.
+- CRM: Adding exports to functions called externally, in all JS fiiles where it is needed.
 - CRM:  allows custom profile pictures to be shown in the dashboard.
 - CRM: Escaping an invoice ID in ZeroBSCRM.admin.invoicebuilder.js
 - CRM: Fix avatar getting removed when saving a contact
