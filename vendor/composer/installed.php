@@ -58,7 +58,7 @@
         'masterminds/html5' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '05cc7305f1ef04064a27ad4d5f270fa04738d542',
+            'reference' => '3d02e3afb75c2f8fcb4e1f78155018459039bdf8',
             'type' => 'library',
             'install_path' => __DIR__ . '/../masterminds/html5',
             'aliases' => array(
