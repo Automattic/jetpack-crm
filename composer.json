@@ -49,6 +49,7 @@
 		"dompdf/dompdf": "2.0.1",
 		"automattic/jetpack-composer-plugin": "^1.1.9"
 	},
+	"repositories": [],
 	"minimum-stability": "dev",
 	"extra": {
 		"autotagger": {
