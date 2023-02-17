@@ -14,6 +14,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Fixed
 - Before kill the frontend (when the option is enabled), skip it for XMLRPC or REST requests
+- Special characters in textarea fields (contacts, transactions, quotes) produce visible HTML entities
 
 ## [5.5.4-alpha] - 2023-02-15
 ### Added
