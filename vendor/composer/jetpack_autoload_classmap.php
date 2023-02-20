@@ -7,43 +7,43 @@ $baseDir   = dirname($vendorDir);
 
 return array(
 	'Autoloader' => array(
-		'version' => '2.11.15.0',
+		'version' => '2.11.16.0-alpha',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-autoloader.php'
 	),
 	'Autoloader_Handler' => array(
-		'version' => '2.11.15.0',
+		'version' => '2.11.16.0-alpha',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-autoloader-handler.php'
 	),
 	'Autoloader_Locator' => array(
-		'version' => '2.11.15.0',
+		'version' => '2.11.16.0-alpha',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-autoloader-locator.php'
 	),
 	'Automattic\\Jetpack\\Autoloader\\AutoloadFileWriter' => array(
-		'version' => '2.11.15.0',
+		'version' => '2.11.16.0-alpha',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/AutoloadFileWriter.php'
 	),
 	'Automattic\\Jetpack\\Autoloader\\AutoloadGenerator' => array(
-		'version' => '2.11.15.0',
+		'version' => '2.11.16.0-alpha',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/AutoloadGenerator.php'
 	),
 	'Automattic\\Jetpack\\Autoloader\\AutoloadProcessor' => array(
-		'version' => '2.11.15.0',
+		'version' => '2.11.16.0-alpha',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/AutoloadProcessor.php'
 	),
 	'Automattic\\Jetpack\\Autoloader\\CustomAutoloaderPlugin' => array(
-		'version' => '2.11.15.0',
+		'version' => '2.11.16.0-alpha',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/CustomAutoloaderPlugin.php'
 	),
 	'Automattic\\Jetpack\\Autoloader\\ManifestGenerator' => array(
-		'version' => '2.11.15.0',
+		'version' => '2.11.16.0-alpha',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/ManifestGenerator.php'
 	),
 	'Automattic\\Jetpack\\Composer\\Manager' => array(
-		'version' => '1.1.9.0',
+		'version' => '1.1.10.0-alpha',
 		'path'    => $vendorDir . '/automattic/jetpack-composer-plugin/src/class-manager.php'
 	),
 	'Automattic\\Jetpack\\Composer\\Plugin' => array(
-		'version' => '1.1.9.0',
+		'version' => '1.1.10.0-alpha',
 		'path'    => $vendorDir . '/automattic/jetpack-composer-plugin/src/class-plugin.php'
 	),
 	'Automattic\\WooCommerce\\Client' => array(
@@ -79,7 +79,7 @@ return array(
 		'path'    => $vendorDir . '/automattic/woocommerce/src/WooCommerce/HttpClient/Response.php'
 	),
 	'Container' => array(
-		'version' => '2.11.15.0',
+		'version' => '2.11.16.0-alpha',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-container.php'
 	),
 	'Dompdf\\Adapter\\CPDF' => array(
@@ -503,15 +503,15 @@ return array(
 		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/WOFF/TableDirectoryEntry.php'
 	),
 	'Hook_Manager' => array(
-		'version' => '2.11.15.0',
+		'version' => '2.11.16.0-alpha',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-hook-manager.php'
 	),
 	'Latest_Autoloader_Guard' => array(
-		'version' => '2.11.15.0',
+		'version' => '2.11.16.0-alpha',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-latest-autoloader-guard.php'
 	),
 	'Manifest_Reader' => array(
-		'version' => '2.11.15.0',
+		'version' => '2.11.16.0-alpha',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-manifest-reader.php'
 	),
 	'Masterminds\\HTML5' => array(
@@ -595,19 +595,19 @@ return array(
 		'path'    => $vendorDir . '/masterminds/html5/src/HTML5/Serializer/Traverser.php'
 	),
 	'PHP_Autoloader' => array(
-		'version' => '2.11.15.0',
+		'version' => '2.11.16.0-alpha',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-php-autoloader.php'
 	),
 	'Path_Processor' => array(
-		'version' => '2.11.15.0',
+		'version' => '2.11.16.0-alpha',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-path-processor.php'
 	),
 	'Plugin_Locator' => array(
-		'version' => '2.11.15.0',
+		'version' => '2.11.16.0-alpha',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-plugin-locator.php'
 	),
 	'Plugins_Handler' => array(
-		'version' => '2.11.15.0',
+		'version' => '2.11.16.0-alpha',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-plugins-handler.php'
 	),
 	'Sabberworm\\CSS\\CSSList\\AtRuleBlockList' => array(
@@ -767,7 +767,7 @@ return array(
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Value/ValueList.php'
 	),
 	'Shutdown_Handler' => array(
-		'version' => '2.11.15.0',
+		'version' => '2.11.16.0-alpha',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-shutdown-handler.php'
 	),
 	'Svg\\CssLength' => array(
@@ -883,11 +883,11 @@ return array(
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/UseTag.php'
 	),
 	'Version_Loader' => array(
-		'version' => '2.11.15.0',
+		'version' => '2.11.16.0-alpha',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-version-loader.php'
 	),
 	'Version_Selector' => array(
-		'version' => '2.11.15.0',
+		'version' => '2.11.16.0-alpha',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-version-selector.php'
 	),
 );
