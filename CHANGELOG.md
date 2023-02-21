@@ -15,6 +15,7 @@ This is an alpha version! The changes listed here are not final.
 ### Fixed
 - Before kill the frontend (when the option is enabled), skip it for XMLRPC or REST requests
 - Importing contacts using CSV files no longer erases fields that are missing
+- OAuth connections page no longer shows critical error after saving credentials
 - Special characters in textarea fields (contacts, transactions, quotes) produce visible HTML entities
 - WooSync now only changes status for contacts with the Lead status
 
