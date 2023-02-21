@@ -5,7 +5,7 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [5.5.5-alpha] - unreleased
+## [5.5.4-a.2] - unreleased
 
 This is an alpha version! The changes listed here are not final.
 
@@ -18,7 +18,7 @@ This is an alpha version! The changes listed here are not final.
 - Special characters in textarea fields (contacts, transactions, quotes) produce visible HTML entities
 - WooSync now only changes status for contacts with the Lead status
 
-## [5.5.4-alpha] - 2023-02-15
+## [5.5.4-a.1] - 2023-02-15
 ### Added
 - adds the necessary migration to move all files that were inside the zbscrm-store folder with a flat struture to the new jpcrm-storage folder that uses a hierarchical structure [#28350]
 - Copy tests from old repo. [#28354]
@@ -72,5 +72,5 @@ This is an alpha version! The changes listed here are not final.
 - Improved: Security around phone numbers viewing
 - Improved: Added a migration to remove outdated AKA lines
 
-[5.5.5-alpha]: https://github.com/Automattic/zero-bs-crm/compare/v5.5.4-alpha...v5.5.5-alpha
-[5.5.4-alpha]: https://github.com/Automattic/zero-bs-crm/compare/v5.5.3...v5.5.4-alpha
+[5.5.4-a.2]: https://github.com/Automattic/jetpack-crm/compare/v5.5.4-a.1...v5.5.4-a.2
+[5.5.4-a.1]: https://github.com/Automattic/jetpack-crm/compare/v5.5.3...v5.5.4-a.1
