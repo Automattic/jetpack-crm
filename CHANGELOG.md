@@ -20,6 +20,7 @@ This is an alpha version! The changes listed here are not final.
 - In Client Portal, the background for the menu in the Twenty Seventeen theme is no longer dark gray
 - OAuth connections page no longer shows critical error after saving credentials
 - PHP notice when a WooCommerce order is in a Draft status
+- Segment list pagination is not working correctly
 - Special characters in textarea fields (contacts, transactions, quotes) produce visible HTML entities
 - WooSync now only changes status for contacts with the Lead status
 
