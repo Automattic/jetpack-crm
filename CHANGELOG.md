@@ -14,6 +14,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Fixed
 - Before kill the frontend (when the option is enabled), skip it for XMLRPC or REST requests
+- Contact Edit: prevent JS error when custom avatars are not enabled
 - Dashboard: show default avatar under activity, when contact image mode set to none.
 - Importing contacts using CSV files no longer erases fields that are missing
 - In Client Portal, the background for the menu in the Twenty Seventeen theme is no longer dark gray
