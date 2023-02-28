@@ -11,6 +11,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Changed
 - CRM: change escape function for API generated activity
+- CRM: highlight popular Woo extensions on extensions page, plus alphabetize results
 - Updated package dependencies.
 
 ### Fixed
