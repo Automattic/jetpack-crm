@@ -17,6 +17,7 @@ This is an alpha version! The changes listed here are not final.
 ### Fixed
 - Before kill the frontend (when the option is enabled), skip it for XMLRPC or REST requests
 - Contact Edit: prevent JS error when custom avatars are not enabled
+- CRM: fix tax page deletion for single entries.
 - CRM: fix tax rate creation link on tax rate settings page.
 - Dashboard: show default avatar under activity, when contact image mode set to none.
 - Fixed accept quote in Client Portal button not working for PHP versions 8.1 and up.
