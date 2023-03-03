@@ -17,6 +17,7 @@ This is an alpha version! The changes listed here are not final.
 ### Fixed
 - Before kill the frontend (when the option is enabled), skip it for XMLRPC or REST requests
 - Contact Edit: prevent JS error when custom avatars are not enabled
+- Contacts: PHP error using empty values for Address Custom Field (Date)
 - CRM: fix tax page deletion for single entries.
 - CRM: fix tax rate creation link on tax rate settings page.
 - Dashboard: show default avatar under activity, when contact image mode set to none.
