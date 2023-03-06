@@ -20,6 +20,7 @@ This is an alpha version! The changes listed here are not final.
 - Contacts: PHP error using empty values for Address Custom Field (Date)
 - CRM: fix tax page deletion for single entries.
 - CRM: fix tax rate creation link on tax rate settings page.
+- CRM: swapping edit and new form titles to correctly reflect page.
 - Dashboard: show default avatar under activity, when contact image mode set to none.
 - Fixed accept quote in Client Portal button not working for PHP versions 8.1 and up.
 - Fixed potential XSS in the Tax Settings page
