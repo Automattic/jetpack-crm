@@ -12,6 +12,7 @@ This is an alpha version! The changes listed here are not final.
 ### Changed
 - CRM: change escape function for API generated activity
 - CRM: highlight popular Woo extensions on extensions page, plus alphabetize results
+- General: indicate full compatibility with the latest version of WordPress, 6.2.
 - Updated package dependencies.
 
 ### Fixed
