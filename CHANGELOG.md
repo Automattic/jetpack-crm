@@ -20,6 +20,7 @@ This is an alpha version! The changes listed here are not final.
 - Contact Edit: prevent JS error when custom avatars are not enabled
 - Contacts: PHP error using empty values for Address Custom Field (Date)
 - CRM: fix several placeholders throughout CRM
+- CRM: fix some export cases by adding a check for the segment index.
 - CRM: fix tax page deletion for single entries.
 - CRM: fix tax rate creation link on tax rate settings page.
 - CRM: swapping edit and new form titles to correctly reflect page.
