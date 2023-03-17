@@ -19,6 +19,7 @@ This is an alpha version! The changes listed here are not final.
 - Before kill the frontend (when the option is enabled), skip it for XMLRPC or REST requests
 - Contact Edit: prevent JS error when custom avatars are not enabled
 - Contacts: PHP error using empty values for Address Custom Field (Date)
+- CRM: fix secondary address placeholders
 - CRM: fix several placeholders throughout CRM
 - CRM: fix some export cases by adding a check for the segment index.
 - CRM: fix tax page deletion for single entries.

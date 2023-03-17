@@ -4,5 +4,9 @@ return array(
   'domain' => 'zero-bs-crm',
   'type' => 'plugins',
   'packages' => array(
+    'jetpack-assets' => array(
+      'path' => 'jetpack_vendor/automattic/jetpack-assets',
+      'ver' => '1.17.34-alpha',
+    ),
   ),
 );
