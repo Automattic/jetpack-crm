@@ -70,6 +70,8 @@ function zbscrmjs_transaction_unsetCompany( o ) {
  * @param obj
  */
 function zbscrmjs_transaction_setCustomer( obj ) {
+	//
+	//	console.log("Customer Chosen!",obj);
 
 	if ( typeof obj.id !== 'undefined' ) {
 		// set vals

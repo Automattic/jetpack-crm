@@ -396,16 +396,10 @@ class zeroBSCRM_Delete{
 
                                                         case ZBS_TYPE_CONTACT:
                                                         case ZBS_TYPE_COMPANY:
-														?>
-														<?php
-															echo '<p>';
-															esc_html_e( 'Shall I also delete the associated Contacts, Invoices, Quotes, Transactions, and Tasks?', 'zero-bs-crm' );
-															echo '<br>';
-															esc_html_e( '(This cannot be undone!)', 'zero-bs-crm' );
-															echo '</p>';
-															break;
-												}
-												?>
+                                                            ?><p><?php esc_html_e('Shall I also delete the associated Contacts, Invoices, Quotes, Transactions and Events?','zero-bs-crm'); echo '<br>'; esc_html_e('(This cannot be undone!)',"zero-bs-crm"); ?></p><?php
+                                                            break;
+
+                                                    } ?>
                                                     <p>
                                                         <select name="zbs-delete-kill-children">
                                                             <option value="no"><?php esc_html_e('No, leave them',"zero-bs-crm"); ?></option>

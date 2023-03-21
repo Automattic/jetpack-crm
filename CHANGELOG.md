@@ -10,7 +10,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 This is an alpha version! The changes listed here are not final.
 
 ### Changed
-- CRM: change customer references to contact in all but Woo and commerce contexts
 - CRM: change escape function for API generated activity
 - CRM: highlight popular Woo extensions on extensions page, plus alphabetize results
 - General: indicate full compatibility with the latest version of WordPress, 6.2.
@@ -20,7 +19,6 @@ This is an alpha version! The changes listed here are not final.
 - Before kill the frontend (when the option is enabled), skip it for XMLRPC or REST requests
 - Contact Edit: prevent JS error when custom avatars are not enabled
 - Contacts: PHP error using empty values for Address Custom Field (Date)
-- Corrected text where tasks where being referred to as events
 - CRM: fix secondary address placeholders
 - CRM: fix several placeholders throughout CRM
 - CRM: fix some export cases by adding a check for the segment index.
@@ -29,9 +27,7 @@ This is an alpha version! The changes listed here are not final.
 - CRM: swapping edit and new form titles to correctly reflect page.
 - Dashboard: show default avatar under activity, when contact image mode set to none.
 - Fixed accept quote in Client Portal button not working for PHP versions 8.1 and up.
-- Fixed message where Invoicing Pro was being referred to as CSV PRO
 - Fixed potential XSS in the Tax Settings page
-- Fixed wrong naming from Customer ID to Contact ID in the Edit Contact page
 - Importing contacts using CSV files no longer erases fields that are missing
 - In Client Portal, the background for the menu in the Twenty Seventeen theme is no longer dark gray
 - OAuth connections page no longer shows critical error after saving credentials
