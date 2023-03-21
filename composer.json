@@ -44,7 +44,7 @@
 		}
 	},
 	"require": {
-		"automattic/jetpack-assets": "^1.17.34-alpha",
+		"automattic/jetpack-assets": "^1.17.34",
 		"automattic/jetpack-autoloader": "^2.11.16",
 		"automattic/woocommerce": "^3.0",
 		"dompdf/dompdf": "2.0.3",
