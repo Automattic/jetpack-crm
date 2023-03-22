@@ -21,6 +21,7 @@ This is an alpha version! The changes listed here are not final.
 - Contact Edit: prevent JS error when custom avatars are not enabled
 - Contacts: PHP error using empty values for Address Custom Field (Date)
 - Corrected text where tasks where being referred to as events
+- CRM: fix changed White Label comments back to how they were to prevent release issues.
 - CRM: fix secondary address placeholders
 - CRM: fix several placeholders throughout CRM
 - CRM: fix some export cases by adding a check for the segment index.
