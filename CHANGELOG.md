@@ -15,6 +15,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Fixed
 - Fixed various corrupt JS files
+- Listview: fixed broken link in bulk actions function
 
 ## [5.6.0] - 2023-03-23
 ### Changed
