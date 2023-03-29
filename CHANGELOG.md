@@ -15,6 +15,7 @@ This is an alpha version! The changes listed here are not final.
 - OAuth: dependencies are now downloaded to wp-content/jpcrm-storage/packages
 
 ### Fixed
+- Email: caught PHP notices if recipient was deleted
 - Fixed various corrupt JS files
 - Listview: fixed broken link in bulk actions function
 
