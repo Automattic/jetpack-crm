@@ -45,7 +45,7 @@
 	},
 	"require": {
 		"automattic/jetpack-assets": "^1.17.34",
-		"automattic/jetpack-autoloader": "^2.11.17",
+		"automattic/jetpack-autoloader": "^2.11.18",
 		"automattic/woocommerce": "^3.0",
 		"dompdf/dompdf": "2.0.3",
 		"automattic/jetpack-composer-plugin": "^1.1.10"
