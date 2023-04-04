@@ -19,6 +19,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Fixed
 - Email: caught PHP notices if recipient was deleted
+- Fixed the Give Feedback link to send to the reviews on .org
 - Fixed various corrupt JS files
 - Listview: fixed broken link in bulk actions function
 
