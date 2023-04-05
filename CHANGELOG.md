@@ -21,6 +21,8 @@ This is an alpha version! The changes listed here are not final.
 - Email: caught PHP notices if recipient was deleted
 - Fixed the Give Feedback link to send to the reviews on .org
 - Fixed various corrupt JS files
+- Importer: Allow import of application/csv mime type
+  Importer: Better parsing of CSV fields
 - Listview: fixed broken link in bulk actions function
 
 ## [5.6.0] - 2023-03-23
