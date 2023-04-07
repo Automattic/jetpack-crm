@@ -24,6 +24,7 @@ This is an alpha version! The changes listed here are not final.
 - Importer: Allow import of application/csv mime type
   Importer: Better parsing of CSV fields
 - Listview: fixed broken link in bulk actions function
+- Tax: new tax rates could not be added
 
 ## [5.6.0] - 2023-03-23
 ### Changed
