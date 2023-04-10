@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'automattic/jetpack-assets' => array(
-            'pretty_version' => '1.18.0',
-            'version' => '1.18.0.0',
-            'reference' => '35d7417188863ccadad8ac8bcf9f509beabe796a',
+            'pretty_version' => '1.18.1-alpha',
+            'version' => '1.18.1.0-alpha',
+            'reference' => 'e3ef7178f40a56b15d7cd899399c6e0df269265b',
             'type' => 'jetpack-library',
             'install_path' => __DIR__ . '/../../jetpack_vendor/automattic/jetpack-assets',
             'aliases' => array(),
@@ -22,7 +22,7 @@
         'automattic/jetpack-autoloader' => array(
             'pretty_version' => '2.11.18',
             'version' => '2.11.18.0',
-            'reference' => '3eafe2e8a1331d8861bc858366ba232665235a27',
+            'reference' => '12636a0ead7e67590ed4eaab63864e46bfe964ba',
             'type' => 'composer-plugin',
             'install_path' => __DIR__ . '/../automattic/jetpack-autoloader',
             'aliases' => array(),
@@ -31,16 +31,16 @@
         'automattic/jetpack-composer-plugin' => array(
             'pretty_version' => '1.1.10',
             'version' => '1.1.10.0',
-            'reference' => '15d96d4ac678d29c1e4d2ef75568aba23819b2f0',
+            'reference' => '04bed6f862b4ec557fd268b03fd30399c27f6698',
             'type' => 'composer-plugin',
             'install_path' => __DIR__ . '/../automattic/jetpack-composer-plugin',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
         'automattic/jetpack-constants' => array(
-            'pretty_version' => '1.6.21',
-            'version' => '1.6.21.0',
-            'reference' => 'c931245400ec7ba75c8cfb0d79a9ada1b32f2687',
+            'pretty_version' => '1.6.22-alpha',
+            'version' => '1.6.22.0-alpha',
+            'reference' => '1100173b9c9a9f07e18635791d39d1404ef5133e',
             'type' => 'jetpack-library',
             'install_path' => __DIR__ . '/../../jetpack_vendor/automattic/jetpack-constants',
             'aliases' => array(),

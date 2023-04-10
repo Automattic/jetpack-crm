@@ -2,21 +2,24 @@
     "packages": [
         {
             "name": "automattic/jetpack-assets",
-            "version": "1.18.0",
-            "version_normalized": "1.18.0.0",
+            "version": "1.18.1-alpha",
+            "version_normalized": "1.18.1.0-alpha",
             "dist": {
                 "type": "path",
                 "url": "/tmp/jetpack-build/Automattic/jetpack-assets",
-                "reference": "35d7417188863ccadad8ac8bcf9f509beabe796a"
+                "reference": "e3ef7178f40a56b15d7cd899399c6e0df269265b"
             },
             "require": {
-                "automattic/jetpack-constants": "^1.6.21"
+                "automattic/jetpack-constants": "^1.6.22-alpha"
             },
             "require-dev": {
                 "automattic/jetpack-changelogger": "^3.3.2",
                 "brain/monkey": "2.6.1",
                 "wikimedia/testing-access-wrapper": "^1.0 || ^2.0",
                 "yoast/phpunit-polyfills": "1.0.4"
+            },
+            "suggest": {
+                "automattic/jetpack-autoloader": "Allow for better interoperability with other plugins that use this package."
             },
             "type": "jetpack-library",
             "extra": {
@@ -72,7 +75,7 @@
             "dist": {
                 "type": "path",
                 "url": "/tmp/jetpack-build/Automattic/jetpack-autoloader",
-                "reference": "3eafe2e8a1331d8861bc858366ba232665235a27"
+                "reference": "12636a0ead7e67590ed4eaab63864e46bfe964ba"
             },
             "require": {
                 "composer-plugin-api": "^1.1 || ^2.0"
@@ -126,7 +129,7 @@
             "dist": {
                 "type": "path",
                 "url": "/tmp/jetpack-build/Automattic/jetpack-composer-plugin",
-                "reference": "15d96d4ac678d29c1e4d2ef75568aba23819b2f0"
+                "reference": "04bed6f862b4ec557fd268b03fd30399c27f6698"
             },
             "require": {
                 "composer-plugin-api": "^2.1.0"
@@ -174,17 +177,20 @@
         },
         {
             "name": "automattic/jetpack-constants",
-            "version": "1.6.21",
-            "version_normalized": "1.6.21.0",
+            "version": "1.6.22-alpha",
+            "version_normalized": "1.6.22.0-alpha",
             "dist": {
                 "type": "path",
                 "url": "/tmp/jetpack-build/Automattic/jetpack-constants",
-                "reference": "c931245400ec7ba75c8cfb0d79a9ada1b32f2687"
+                "reference": "1100173b9c9a9f07e18635791d39d1404ef5133e"
             },
             "require-dev": {
                 "automattic/jetpack-changelogger": "^3.3.2",
                 "brain/monkey": "2.6.1",
                 "yoast/phpunit-polyfills": "1.0.4"
+            },
+            "suggest": {
+                "automattic/jetpack-autoloader": "Allow for better interoperability with other plugins that use this package."
             },
             "type": "jetpack-library",
             "extra": {

@@ -4,13 +4,16 @@
 	"type": "jetpack-library",
 	"license": "GPL-2.0-or-later",
 	"require": {
-		"automattic/jetpack-constants": "^1.6.21"
+		"automattic/jetpack-constants": "^1.6.22-alpha"
 	},
 	"require-dev": {
 		"brain/monkey": "2.6.1",
 		"yoast/phpunit-polyfills": "1.0.4",
 		"automattic/jetpack-changelogger": "^3.3.2",
 		"wikimedia/testing-access-wrapper": "^1.0 || ^2.0"
+	},
+	"suggest": {
+		"automattic/jetpack-autoloader": "Allow for better interoperability with other plugins that use this package."
 	},
 	"autoload": {
 		"files": [
