@@ -12,6 +12,7 @@ This is an alpha version! The changes listed here are not final.
 ### Changed
 - Added optional parameter to the API to set the external service name
   Added optional parameter to the API to replace hyphens from the json response to underscores
+- Build: change build steps so that CSS files are also generated for production
 - CSV Importer: various UI/UX tweaks
 - OAuth: dependencies are now downloaded to wp-content/jpcrm-storage/packages
 - Readme: Update stable tag.
