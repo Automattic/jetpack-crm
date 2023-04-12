@@ -26,6 +26,7 @@ This is an alpha version! The changes listed here are not final.
 - Fixed various corrupt JS files
 - Importer: Allow import of application/csv mime type
   Importer: Better parsing of CSV fields
+- Improved compatibility with PHP 8.1
 - Listview: fixed broken link in bulk actions function
 - Quotes: use current date if quote date is blank
 - Tax: new tax rates could not be added
