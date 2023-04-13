@@ -22,6 +22,7 @@ This is an alpha version! The changes listed here are not final.
 - CRM: change location of save button and add Contact Actions metabox for contacts
 - CRM: change onboarding wizard company name description to remove 'as shown below'
 - CRM: move Quote Status underneath Quote ID
+- CRM Menu: Swap the stacked logo to the horizontal one
 - CSV Importer: various UI/UX tweaks
 - Dashboard: Aligning the Latest Contacts and Revenue Chart buttons
 - Dashboard: Make spacing between panels more consistent

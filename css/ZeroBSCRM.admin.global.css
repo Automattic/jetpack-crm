@@ -5391,7 +5391,7 @@ div.calendar-table .table-condensed > tbody > tr > td, div.calendar-table .table
 
 /* Container box to set the sides relative to */
 .zbs-cube {
-  width: 30px;
+  width: 50px;
   text-align: center;
   margin: 0 auto;
   height: 30px;
@@ -5404,7 +5404,7 @@ div.calendar-table .table-condensed > tbody > tr > td, div.calendar-table .table
 }
 
 .zbs-cube img {
-  max-width: 30px;
+  max-width: 50px;
 }
 
 .zbs-cube .fa, .zbs-cube .icon {
@@ -7138,7 +7138,7 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
     display: none;
   }
   #wpcontent #zbs-main-logo-mobile img {
-    width: 45px;
+    width: 85px;
     cursor: pointer;
     height: auto;
   }
@@ -7266,7 +7266,7 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
 /* TINY old Mobile Style */
 @media only screen and (max-width: 600px) {
   #wpcontent #zbs-mobile-nav.ui.mobile.only {
-    padding-top: 40px;
+    padding-top: 55px;
   }
 }
 /* quick table fix */
@@ -7332,7 +7332,7 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
     display: none;
   }
   #wpcontent #zbs-main-logo-mobile img {
-    width: 45px;
+    width: 85px;
     cursor: pointer;
     height: auto;
   }
@@ -7779,10 +7779,10 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
 }
 
 .zbs-cube {
-  width: 80px !important;
+  width: 120px !important;
 }
 .zbs-cube img {
-  max-width: 80px !important;
+  max-width: 120px !important;
 }
 
 #zbs-list-top-bar .zbs-white {
