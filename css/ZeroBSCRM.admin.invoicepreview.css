@@ -483,12 +483,12 @@
 
 /* large options */
 tr.wh-large label {
-  font-size: 20px;
+  font-size: 14px;
 }
 
 tr.wh-large select, tr.wh-large input {
-  font-size: 20px;
-  height: 36px;
+  font-size: 14px;
+  line-height: 1.4em;
 }
 
 tr.wh-large input[type=radio] {
@@ -534,7 +534,7 @@ span.wh-info {
 }
 
 .zbs-prominent {
-  font-size: 22px;
+  font-size: 14px;
   color: green;
 }
 
@@ -636,7 +636,7 @@ textarea.form-control {
 }
 
 .zbs-field-id {
-  font-size: 20px !important;
+  font-size: 14px !important;
   color: green !important;
   vertical-align: top !important;
 }
@@ -1480,20 +1480,20 @@ output {
 }
 
 .form-control:-moz-placeholder {
-  color: #999;
+  color: #dcdcde;
 }
 
 .form-control::-moz-placeholder {
-  color: #999;
+  color: #dcdcde;
   opacity: 1;
 }
 
 .form-control:-ms-input-placeholder {
-  color: #999;
+  color: #dcdcde;
 }
 
 .form-control::-webkit-input-placeholder {
-  color: #999;
+  color: #dcdcde;
 }
 
 .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
@@ -3880,6 +3880,22 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:focus, a.list-g
   color: inherit;
 }
 
+.jpcrm-latest-contacts-heading {
+  margin-bottom: 40px;
+}
+.jpcrm-latest-contacts-heading .upsell {
+  right: 25px;
+  top: 45px;
+}
+
+.jpcrm-revenue-chart-heading {
+  margin-bottom: 60px;
+}
+.jpcrm-revenue-chart-heading .upsell {
+  right: 20px;
+  top: 45px;
+}
+
 .panel-footer {
   padding: 10px 15px;
   background-color: #f5f5f5;
@@ -6048,9 +6064,9 @@ body.zbs-fullscreen #wpadminbar, body.zbs-fullscreen #adminmenuback, body.zbs-fu
 }
 
 input.zbs-prominent {
-  font-size: 22px !important;
+  font-size: 14px !important;
   color: green !important;
-  line-height: 24px;
+  line-height: 1.4em;
   height: 38px !important;
 }
 
@@ -6132,6 +6148,11 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
   text-align: center;
 }
 
+#zbs-add-tag-value {
+  font-size: 14px;
+  line-height: 1.4em;
+}
+
 /*!
  * Jetpack CRM
  * http://www.zerobscrm.com
@@ -6167,11 +6188,11 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
   text-align: right;
 }
 #wptbpMetaBoxLogs #zbsAddLogForm div#zbsAddLogIco i.fa {
-  font-size: 32px;
+  font-size: 20px;
 }
 #wptbpMetaBoxLogs #zbsAddLogForm select#zbsAddLogType {
   max-width: 200px;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 20px;
   height: 34px;
   margin-bottom: 14px;
@@ -6209,11 +6230,11 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
   text-align: right;
 }
 #wptbpMetaBoxLogs #zbsEditLogForm div#zbsEditLogIco i.fa {
-  font-size: 32px;
+  font-size: 20px;
 }
 #wptbpMetaBoxLogs #zbsEditLogForm select#zbsEditLogType {
   max-width: 200px;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 20px;
   height: 34px;
   margin-bottom: 14px;
@@ -6246,7 +6267,7 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
   padding-top: 4px;
 }
 #wptbpMetaBoxLogs .zbsLogOut .zbsLogOutTitle {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 800;
   border-bottom: 2px solid rgba(9, 185, 129, 0.58);
 }
@@ -6290,7 +6311,7 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
   text-align: right;
 }
 #wptbpMetaBoxLogs .zbsLogOut .zbsLogOutIco i.fa {
-  font-size: 32px;
+  font-size: 20px;
 }
 #wptbpMetaBoxLogs .zbsLogOut .zbsLogOutCreated {
   float: right;
@@ -6344,8 +6365,8 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
   width: 100%;
 }
 .zbstypeaheadwrap.zbsbtypeaheadfullwidth .zbstypeahead, .zbstypeaheadwrap.zbsbtypeaheadfullwidth .zbstypeaheadco {
-  font-size: 15px !important;
-  line-height: 17px !important;
+  font-size: 14px !important;
+  line-height: 1.4em !important;
   height: 36px !important;
   max-width: 100%;
   min-width: 100% !important;
@@ -6747,7 +6768,7 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
 }
 
 #notes {
-  font-size: 20px;
+  font-size: 14px;
 }
 
 #zbsNoAccessPage {
@@ -7072,6 +7093,11 @@ table#zbsFilesTable td {
   width: 850px !important;
 }
 
+@media only screen and (min-width: 768px) and (max-width: 960px) {
+  #zbs-admin-top-bar {
+    margin-left: 0px !important;
+  }
+}
 /*!
  * Jetpack CRM
  * http://www.zerobscrm.com

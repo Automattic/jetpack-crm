@@ -15,7 +15,7 @@
 #zerobs-invoice-edit-box .zbs-inv-no {
   width: 80%;
   float: left;
-  font-size: 18px;
+  font-size: 14px;
 }
 .post-type-zerobs_invoice .zbs-inv-ref,
 #zerobs-invoice-edit-box .zbs-inv-ref {
@@ -390,6 +390,7 @@
 #zerobs-invoice-edit-box #zbs_top_wrapper .zbs-invoice-topper {
   width: 50%;
   float: right;
+  min-width: 335px;
 }
 .post-type-zerobs_invoice #zbs_top_wrapper .zbs-invoice-topper input, .post-type-zerobs_invoice #zbs_top_wrapper .zbs-invoice-topper select,
 #zerobs-invoice-edit-box #zbs_top_wrapper .zbs-invoice-topper input,
@@ -399,7 +400,6 @@
 }
 .post-type-zerobs_invoice #zbs_top_wrapper .zbs-invoice-topper th,
 #zerobs-invoice-edit-box #zbs_top_wrapper .zbs-invoice-topper th {
-  vertical-align: middle;
   text-align: right;
 }
 .post-type-zerobs_invoice #zbs_invoice_send_test2:focus,
@@ -940,6 +940,7 @@
 #zerobs-invoice-edit-box .wh-logo .fa {
   color: #428bca;
   margin-right: 5px;
+  margin-bottom: 10px;
   font-size: 40px;
   font-weight: 100;
 }
@@ -951,6 +952,8 @@
   margin-left: 20px;
   position: absolute;
   top: 63px;
+  display: contents;
+  white-space: nowrap;
 }
 
 #zbsInvoiceActionBlocker {
@@ -1065,4 +1068,10 @@
 }
 .zbs-invoice-email-modal-field label {
   margin-bottom: 0;
+}
+
+@media screen and (max-width: 782px) {
+  div.zbs-invoice-topper th {
+    text-align: left !important;
+  }
 }

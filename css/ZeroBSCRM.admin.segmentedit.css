@@ -24,14 +24,14 @@
   min-width: 400px;
 }
 #zbs-segment-editor .ui.centralsimple.huge {
-  font-size: 1.5em;
+  font-size: 20px;
   text-align: center;
 }
 #zbs-segment-editor .ui.centralsimple.huge .field {
   text-align: center;
 }
 #zbs-segment-editor .ui.centralsimple.huge input {
-  font-size: 1.1em;
+  font-size: 20px;
 }
 #zbs-segment-editor .ui.centralsimple {
   max-width: 800px;
