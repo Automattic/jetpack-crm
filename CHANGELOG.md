@@ -20,6 +20,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Fixed
 - Contact files: fix 403 if file was uploaded via Client Portal Pro using Apache web server
+- Dashboard: adjustments to first-use modals
 - Dashboard: various fixes for the sales funnel
 - Email: caught PHP notices if recipient was deleted
 - Fixed the Give Feedback link to send to the reviews on .org
