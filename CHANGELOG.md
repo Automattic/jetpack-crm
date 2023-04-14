@@ -53,6 +53,7 @@ This is an alpha version! The changes listed here are not final.
 - Importer: Allow import of application/csv mime type
   Importer: Better parsing of CSV fields
 - Improved compatibility with PHP 8.1
+- Invoices: fix ability to remove logo from invoice edit page.
 - Listview: fixed broken link in bulk actions function
 - Outdated YouTube video removed from welcome overlay.
 - Quotes: use current date if quote date is blank
