@@ -55,6 +55,7 @@ This is an alpha version! The changes listed here are not final.
 - Improved compatibility with PHP 8.1
 - Invoices: fix ability to remove logo from invoice edit page.
 - Listview: fixed broken link in bulk actions function
+- Mailpoet Sync: Fixed an issue where contact images would disappear after synchronization.
 - Outdated YouTube video removed from welcome overlay.
 - Quotes: use current date if quote date is blank
 - Tax: new tax rates could not be added
