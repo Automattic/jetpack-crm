@@ -31,6 +31,7 @@ This is an alpha version! The changes listed here are not final.
 - OAuth: dependencies are now downloaded to wp-content/jpcrm-storage/packages
 - Onboarding: make all hint styles consistent
 - Readme: Update stable tag.
+- Tooling: remove CSS from the monorepo but not production and cleaning up gitattibutes and gitignore
 - Transactions: change location of import sub-menu item when CSV Pro is installed and active
 - Transactions: move status select html from Transaction Actions to main edit section underneath ID
 - Updated package dependencies.
