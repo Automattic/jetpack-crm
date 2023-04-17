@@ -47,6 +47,7 @@ This is an alpha version! The changes listed here are not final.
 - Dashboard: adjustments to first-use modals
 - Dashboard: various fixes for the sales funnel
 - Email: caught PHP notices if recipient was deleted
+- Export: catch PHP notice when exporting a subset of objects
 - Fix content overflowing in contact view page.
 - Fixed the Give Feedback link to send to the reviews on .org
 - Fixed various corrupt JS files
