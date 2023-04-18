@@ -13,6 +13,7 @@ This is an alpha version! The changes listed here are not final.
 - CRM: add back to list button on add and edit pages for companies, transactions, invoices, and quotes.
 - CRM: add restore default settings menu item to settings page menu
 - Settings: Remove 'Restore default settings' from the General Settings page
+- Support Page: A new support page has been added for customers to submit support requests.
 
 ### Changed
 - Added optional parameter to the API to set the external service name
