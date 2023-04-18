@@ -64,6 +64,7 @@ This is an alpha version! The changes listed here are not final.
 - Quotes: use current date if quote date is blank
 - Tax: new tax rates could not be added
 - Usage tracking changed from opt-out to opt-in in the onboarding wizard.
+- WooSync: tag existing contacts with new orders
 
 ## [5.6.0] - 2023-03-23
 ### Changed
