@@ -5,67 +5,58 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [5.7.0-alpha] - unreleased
-
-This is an alpha version! The changes listed here are not final.
-
+## [5.7.0] - 2023-04-19
 ### Added
-- CRM: add back to list button on add and edit pages for companies, transactions, invoices, and quotes.
-- CRM: add restore default settings menu item to settings page menu
-- Settings: Remove 'Restore default settings' from the General Settings page
-- Support Page: A new support page has been added for customers to submit support requests.
+- Menus: Add back to list button on add and edit pages for companies, transactions, invoices, and quotes [#29999]
+- Settings: Remove 'Restore default settings' from the General Settings page, add to settings page menu [#29999]
+- Support Page: Add new support page for customers to submit support requests [#29545]
 
 ### Changed
-- Added optional parameter to the API to set the external service name
-  Added optional parameter to the API to replace hyphens from the json response to underscores
-- Build: change build steps so that CSS files are also generated for production
-- Companies: Move status select from Actions to main edit section underneath ID
-- CRM: change location of save button and add Contact Actions metabox for contacts
-- CRM: change onboarding wizard company name description to remove 'as shown below'
-- CRM: move Quote Status underneath Quote ID
-- CRM Menu: Swap the stacked logo to the horizontal one
-- CSV Importer: various UI/UX tweaks
-- Dashboard: Aligning the Latest Contacts and Revenue Chart buttons
-- Dashboard: Make spacing between panels more consistent
-- Invoices: fix overflow issue in the edit invoice page
-- Invoices: move status select html from Invoice Actions to main edit section under ID
-- OAuth: dependencies are now downloaded to wp-content/jpcrm-storage/packages
-- Onboarding: make all hint styles consistent
-- Readme: Update stable tag.
-- Tooling: remove CSS from the monorepo but not production and cleaning up gitattibutes and gitignore
-- Transactions: change location of import sub-menu item when CSV Pro is installed and active
-- Transactions: move status select html from Transaction Actions to main edit section underneath ID
-- Updated package dependencies.
+- API: Add optional parameter to the API to set the external service name, and replace hyphens from the json response to underscores [#29316]
+- Companies: Move status select from Actions to main edit section underneath ID [#29999]
+- Contacts: Change location of save button and add Contact Actions metabox for contacts [#29999]
+- Onboarding: Change onboarding wizard company name description to remove 'as shown below' [#29999]
+- Quotes: Move Quote Status underneath Quote ID [#29999]
+- Menus: Swap the stacked logo to the horizontal one [#30092]
+- CSV Importer: Various UI/UX tweaks [#29851]
+- Dashboard: Align the Latest Contacts and Revenue Chart buttons [#29999]
+- Dashboard: Make spacing between panels more consistent [#29999]
+- Invoices: Fix overflow issue in the edit invoice page [#29999]
+- Invoices: Move status select HTML from Invoice Actions to main edit section under ID [#29999]
+- OAuth: Dependencies are now downloaded to wp-content/jpcrm-storage/packages [#29734]
+- Onboarding: Make all hint styles consistent [#29999]
+- Transactions: Change location of import sub-menu item when CSV Pro is installed and active [#29999]
+- Transactions: Move status select HTML from Transaction Actions to main edit section underneath ID [#29999]
 
 ### Removed
-- CRM: remove company name preview from onboarding wizard
+- Onboarding: Remove company name preview from onboarding wizard [#29999]
 
 ### Fixed
-- Changed fonts to smaller size, and different font family
-- Changed form placeholder colors to a lighter shade of gray.
-- Contact files: fix 403 if file was uploaded via Client Portal Pro using Apache web server
-- CRM: remove border from top menu.
-- Dashboard: adjustments to first-use modals
-- Dashboard: various fixes for the sales funnel
-- Email: caught PHP notices if recipient was deleted
-- Export: catch PHP notice when exporting a subset of objects
-- Fix content overflowing in contact view page.
-- Fixed the Give Feedback link to send to the reviews on .org
-- Fixed various corrupt JS files
-- Get updates (mailing list) changed from opt-out to opt-in in the onboarding wizard.
+- UI: Change fonts to smaller size, and different font family [#29999]
+- UI: Change form placeholder colors to a lighter shade of gray [#29999]
+- Contacts: Fix 403 error if file was uploaded via Client Portal Pro using Apache web server [#29969]
+- Menus: Remove border from top menu [#29999]
+- Dashboard: Adjustments to first-use modals [#30065]
+- Dashboard: Various fixes for the sales funnel [#29995]
+- Email: Caught PHP notices if recipient was deleted [#29747]
+- Exports: Catch PHP notice when exporting a subset of objects [#30111]
+- UI: Fix content overflowing in contact view page [#29999]
+- Support: Fix the Give Feedback link so that it sends to the reviews page on .org [#29873]
+- General: Fix various corrupt JS files [#29705]
+- Onboarding: Get updates (mailing list) changed from opt-out to opt-in in the onboarding wizard [#29999]
 - Importer: Allow import of application/csv mime type
-  Importer: Better parsing of CSV fields
-- Improved compatibility with PHP 8.1
-- Invoices: fix ability to remove logo from invoice edit page.
-- Invoices: PHP notice when sending contact an invoice via email
-- Listview: fixed broken link in bulk actions function
-- Mailpoet Sync: Fixed an issue where contact images would disappear after synchronization.
-- Outdated YouTube video removed from welcome overlay.
-- Quotes: use current date if quote date is blank
-- Settings: fixed broken link on white label installs
-- Tax: new tax rates could not be added
-- Usage tracking changed from opt-out to opt-in in the onboarding wizard.
-- WooSync: tag existing contacts with new orders
+  Importer: Better parsing of CSV fields [#29822]
+- General: Improved compatibility with PHP 8.1 [#29945]
+- Invoices: Fix ability to remove logo from invoice edit page [#30099]
+- Invoices: Fix PHP notice when sending contact an invoice via email [#30110]
+- General: Fix broken link in bulk actions function in list view [#29623]
+- Mailpoet Sync: Fix an issue where contact images would disappear after synchronization [#30091]
+- Onboarding: Remove outdated YouTube video from welcome overlay [#29999]
+- Quotes: Use current date if quote date is blank [#30032]
+- Settings: Fix broken link on white label installs [#30160]
+- Settings: Allow new tax rates to be added [#29938]
+- Onboarding: Usage tracking changed from opt-out to opt-in in the onboarding wizard [#29999]
+- WooSync: Tag existing contacts with new orders [#30107]
 
 ## [5.6.0] - 2023-03-23
 ### Changed
@@ -138,5 +129,5 @@ This is an alpha version! The changes listed here are not final.
 - Improved: Added a migration to remove outdated AKA lines
 
 [5.5.4-a.1]: https://github.com/Automattic/jetpack-crm/compare/v5.5.3...v5.5.4-a.1
-[5.7.0-alpha]: https://github.com/Automattic/jetpack-crm/compare/v5.6.0...v5.7.0-alpha
+[5.7.0]: https://github.com/Automattic/jetpack-crm/compare/v5.6.0...v5.7.0
 [5.6.0]: https://github.com/Automattic/jetpack-crm/compare/v5.5.4-a.1...v5.6.0
