@@ -62,6 +62,7 @@ This is an alpha version! The changes listed here are not final.
 - Mailpoet Sync: Fixed an issue where contact images would disappear after synchronization.
 - Outdated YouTube video removed from welcome overlay.
 - Quotes: use current date if quote date is blank
+- Settings: fixed broken link on white label installs
 - Tax: new tax rates could not be added
 - Usage tracking changed from opt-out to opt-in in the onboarding wizard.
 - WooSync: tag existing contacts with new orders
