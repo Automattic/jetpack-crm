@@ -6608,8 +6608,14 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
   margin-left: 0.4em;
 }
 
-.learn {
-  margin-right: 10px !important;
+div.ui.learn.button {
+  background: transparent;
+  padding: 0;
+  vertical-align: text-bottom;
+}
+div.ui.learn.button .jpcrm-info-gridicon {
+  vertical-align: text-bottom;
+  margin-right: 4px;
 }
 
 .sales-overview {
@@ -7658,6 +7664,13 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
   font-size: 14px;
   color: #000;
   text-decoration: underline;
+}
+#learn-pop .jpcrm-learn-container .jpcrm-learn-content .jpcrm-external-link-icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+  margin: 0px;
+  margin-right: 4px;
 }
 #learn-pop .jpcrm-learn-container .jpcrm-learn-sidebar {
   padding: 61px;
