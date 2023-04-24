@@ -12,6 +12,9 @@ This is an alpha version! The changes listed here are not final.
 ### Changed
 - Navigation: Changed Learn More button and Learn More link to be consistent with Jetpack styles.
 
+### Fixed
+- Tooling: Allowing minification of JS files in development
+
 ## [5.7.0] - 2023-04-19
 ### Added
 - Menus: Add back to list button on add and edit pages for companies, transactions, invoices, and quotes [#29999]
