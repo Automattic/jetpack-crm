@@ -13,6 +13,7 @@ This is an alpha version! The changes listed here are not final.
 - Navigation: Changed Learn More button and Learn More link to be consistent with Jetpack styles.
 
 ### Fixed
+- Settings: Eliminate orphaned references to custom fields within field sorting settings when removing custom fields.
 - Tooling: Allowing minification of JS files in development
 
 ## [5.7.0] - 2023-04-19
