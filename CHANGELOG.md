@@ -11,6 +11,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Changed
 - Navigation: Changed Learn More button and Learn More link to be consistent with Jetpack styles.
+- Updated package dependencies.
 
 ### Fixed
 - Settings: Eliminate orphaned references to custom fields within field sorting settings when removing custom fields.
