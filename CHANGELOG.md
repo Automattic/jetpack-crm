@@ -15,6 +15,7 @@ This is an alpha version! The changes listed here are not final.
 - Updated package dependencies.
 
 ### Fixed
+- Export: contact segments now export company info
 - Settings: Eliminate orphaned references to custom fields within field sorting settings when removing custom fields.
 - Tooling: Allowing minification of JS files in development
 
