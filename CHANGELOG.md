@@ -16,6 +16,7 @@ This is an alpha version! The changes listed here are not final.
 - Updated package dependencies.
 
 ### Fixed
+- Contact / Company: Fix date styling for transactions, invoices and quotes.
 - Export: contact segments now export company info
 - Logs: Facebook, Twitter, Feedback, and Other Contact log types now update last contacted timestamp
 - Settings: Eliminate orphaned references to custom fields within field sorting settings when removing custom fields.
