@@ -531,83 +531,83 @@ return array(
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-manifest-reader.php'
 	),
 	'Masterminds\\HTML5' => array(
-		'version' => 'dev-master',
+		'version' => '2.8.0.0',
 		'path'    => $vendorDir . '/masterminds/html5/src/HTML5.php'
 	),
 	'Masterminds\\HTML5\\Elements' => array(
-		'version' => 'dev-master',
+		'version' => '2.8.0.0',
 		'path'    => $vendorDir . '/masterminds/html5/src/HTML5/Elements.php'
 	),
 	'Masterminds\\HTML5\\Entities' => array(
-		'version' => 'dev-master',
+		'version' => '2.8.0.0',
 		'path'    => $vendorDir . '/masterminds/html5/src/HTML5/Entities.php'
 	),
 	'Masterminds\\HTML5\\Exception' => array(
-		'version' => 'dev-master',
+		'version' => '2.8.0.0',
 		'path'    => $vendorDir . '/masterminds/html5/src/HTML5/Exception.php'
 	),
 	'Masterminds\\HTML5\\InstructionProcessor' => array(
-		'version' => 'dev-master',
+		'version' => '2.8.0.0',
 		'path'    => $vendorDir . '/masterminds/html5/src/HTML5/InstructionProcessor.php'
 	),
 	'Masterminds\\HTML5\\Parser\\CharacterReference' => array(
-		'version' => 'dev-master',
+		'version' => '2.8.0.0',
 		'path'    => $vendorDir . '/masterminds/html5/src/HTML5/Parser/CharacterReference.php'
 	),
 	'Masterminds\\HTML5\\Parser\\DOMTreeBuilder' => array(
-		'version' => 'dev-master',
+		'version' => '2.8.0.0',
 		'path'    => $vendorDir . '/masterminds/html5/src/HTML5/Parser/DOMTreeBuilder.php'
 	),
 	'Masterminds\\HTML5\\Parser\\EventHandler' => array(
-		'version' => 'dev-master',
+		'version' => '2.8.0.0',
 		'path'    => $vendorDir . '/masterminds/html5/src/HTML5/Parser/EventHandler.php'
 	),
 	'Masterminds\\HTML5\\Parser\\FileInputStream' => array(
-		'version' => 'dev-master',
+		'version' => '2.8.0.0',
 		'path'    => $vendorDir . '/masterminds/html5/src/HTML5/Parser/FileInputStream.php'
 	),
 	'Masterminds\\HTML5\\Parser\\InputStream' => array(
-		'version' => 'dev-master',
+		'version' => '2.8.0.0',
 		'path'    => $vendorDir . '/masterminds/html5/src/HTML5/Parser/InputStream.php'
 	),
 	'Masterminds\\HTML5\\Parser\\ParseError' => array(
-		'version' => 'dev-master',
+		'version' => '2.8.0.0',
 		'path'    => $vendorDir . '/masterminds/html5/src/HTML5/Parser/ParseError.php'
 	),
 	'Masterminds\\HTML5\\Parser\\Scanner' => array(
-		'version' => 'dev-master',
+		'version' => '2.8.0.0',
 		'path'    => $vendorDir . '/masterminds/html5/src/HTML5/Parser/Scanner.php'
 	),
 	'Masterminds\\HTML5\\Parser\\StringInputStream' => array(
-		'version' => 'dev-master',
+		'version' => '2.8.0.0',
 		'path'    => $vendorDir . '/masterminds/html5/src/HTML5/Parser/StringInputStream.php'
 	),
 	'Masterminds\\HTML5\\Parser\\Tokenizer' => array(
-		'version' => 'dev-master',
+		'version' => '2.8.0.0',
 		'path'    => $vendorDir . '/masterminds/html5/src/HTML5/Parser/Tokenizer.php'
 	),
 	'Masterminds\\HTML5\\Parser\\TreeBuildingRules' => array(
-		'version' => 'dev-master',
+		'version' => '2.8.0.0',
 		'path'    => $vendorDir . '/masterminds/html5/src/HTML5/Parser/TreeBuildingRules.php'
 	),
 	'Masterminds\\HTML5\\Parser\\UTF8Utils' => array(
-		'version' => 'dev-master',
+		'version' => '2.8.0.0',
 		'path'    => $vendorDir . '/masterminds/html5/src/HTML5/Parser/UTF8Utils.php'
 	),
 	'Masterminds\\HTML5\\Serializer\\HTML5Entities' => array(
-		'version' => 'dev-master',
+		'version' => '2.8.0.0',
 		'path'    => $vendorDir . '/masterminds/html5/src/HTML5/Serializer/HTML5Entities.php'
 	),
 	'Masterminds\\HTML5\\Serializer\\OutputRules' => array(
-		'version' => 'dev-master',
+		'version' => '2.8.0.0',
 		'path'    => $vendorDir . '/masterminds/html5/src/HTML5/Serializer/OutputRules.php'
 	),
 	'Masterminds\\HTML5\\Serializer\\RulesInterface' => array(
-		'version' => 'dev-master',
+		'version' => '2.8.0.0',
 		'path'    => $vendorDir . '/masterminds/html5/src/HTML5/Serializer/RulesInterface.php'
 	),
 	'Masterminds\\HTML5\\Serializer\\Traverser' => array(
-		'version' => 'dev-master',
+		'version' => '2.8.0.0',
 		'path'    => $vendorDir . '/masterminds/html5/src/HTML5/Serializer/Traverser.php'
 	),
 	'PHP_Autoloader' => array(

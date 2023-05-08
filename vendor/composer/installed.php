@@ -74,14 +74,12 @@
             'dev_requirement' => false,
         ),
         'masterminds/html5' => array(
-            'pretty_version' => 'dev-master',
-            'version' => 'dev-master',
-            'reference' => '3d02e3afb75c2f8fcb4e1f78155018459039bdf8',
+            'pretty_version' => '2.8.0',
+            'version' => '2.8.0.0',
+            'reference' => '3c5d5a56d56f48a1ca08a0670f0f80c1dad368f3',
             'type' => 'library',
             'install_path' => __DIR__ . '/../masterminds/html5',
-            'aliases' => array(
-                0 => '2.7.x-dev',
-            ),
+            'aliases' => array(),
             'dev_requirement' => false,
         ),
         'phenx/php-font-lib' => array(
