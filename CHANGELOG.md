@@ -5,7 +5,7 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [5.7.1-alpha] - unreleased
+## [5.8.0-alpha] - unreleased
 
 This is an alpha version! The changes listed here are not final.
 
@@ -21,6 +21,12 @@ This is an alpha version! The changes listed here are not final.
 - Export: contact segments now export company info
 - Logs: Facebook, Twitter, Feedback, and Other Contact log types now update last contacted timestamp
 - Settings: Eliminate orphaned references to custom fields within field sorting settings when removing custom fields.
+- Tasks: start and end times now show correctly throughout the CRM
+  Tasks: new migration to remove timezone offset from database
+  Tasks: removed reliance on strftime for better PHP 8.1 compatibility
+  Tasks: switch to native browser date and time inputs
+  Tasks: catch moment.js notice due to using fallback date format
+  Tasks: fix ##TASK-BODY## placeholder
 - Tooling: Allowing minification of JS files in development
 
 ## [5.7.0] - 2023-04-19
@@ -147,6 +153,6 @@ This is an alpha version! The changes listed here are not final.
 - Improved: Added a migration to remove outdated AKA lines
 
 [5.5.4-a.1]: https://github.com/Automattic/jetpack-crm/compare/v5.5.3...v5.5.4-a.1
-[5.7.1-alpha]: https://github.com/Automattic/jetpack-crm/compare/v5.7.0...v5.7.1-alpha
+[5.8.0-alpha]: https://github.com/Automattic/jetpack-crm/compare/v5.7.0...v5.8.0-alpha
 [5.7.0]: https://github.com/Automattic/jetpack-crm/compare/v5.6.0...v5.7.0
 [5.6.0]: https://github.com/Automattic/jetpack-crm/compare/v5.5.4-a.1...v5.6.0
