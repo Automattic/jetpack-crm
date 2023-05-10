@@ -29,6 +29,7 @@ This is an alpha version! The changes listed here are not final.
   Tasks: catch moment.js notice due to using fallback date format
   Tasks: fix ##TASK-BODY## placeholder
 - Tooling: Allowing minification of JS files in development
+- Woo Sync module: fix PHP Warning.
 
 ## [5.7.0] - 2023-04-19
 ### Added
