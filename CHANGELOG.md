@@ -15,6 +15,7 @@ This is an alpha version! The changes listed here are not final.
 - PDF generator: objects in filenames are translated
 - Update composer.lock
 - Updated package dependencies.
+- WooSync: improved status mapping logic
 
 ### Fixed
 - Contact / Company: Fix date styling for transactions, invoices and quotes.
