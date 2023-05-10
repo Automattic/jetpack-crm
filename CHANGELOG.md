@@ -13,6 +13,7 @@ This is an alpha version! The changes listed here are not final.
 - Code cleanup: Cleaning up WP Editor helper functions and wp_editor usage
 - Navigation: Changed Learn More button and Learn More link to be consistent with Jetpack styles.
 - PDF generator: objects in filenames are translated
+- Update composer.lock
 - Updated package dependencies.
 
 ### Fixed
