@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 This is an alpha version! The changes listed here are not final.
 
+### Added
+- Segments: adding a doesnotcontain condition for email segments, for better compatibility with Advanced Segments
+
 ### Changed
 - Code cleanup: Cleaning up WP Editor helper functions and wp_editor usage
 - Navigation: Changed Learn More button and Learn More link to be consistent with Jetpack styles.
