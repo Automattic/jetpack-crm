@@ -14,6 +14,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Changed
 - Code cleanup: Cleaning up WP Editor helper functions and wp_editor usage
+- General: update link references to releases in changelog.
 - Navigation: Changed Learn More button and Learn More link to be consistent with Jetpack styles.
 - PDF generator: objects in filenames are translated
 - Update composer.lock
@@ -159,6 +160,6 @@ This is an alpha version! The changes listed here are not final.
 - Improved: Added a migration to remove outdated AKA lines
 
 [5.5.4-a.1]: https://github.com/Automattic/jetpack-crm/compare/v5.5.3...v5.5.4-a.1
-[5.8.0-alpha]: https://github.com/Automattic/jetpack-crm/compare/v5.7.0...v5.8.0-alpha
+[5.8.0-alpha]: https://github.com/Automattic/jetpack-crm/compare/5.7.0...5.8.0-alpha
 [5.7.0]: https://github.com/Automattic/jetpack-crm/compare/v5.6.0...v5.7.0
 [5.6.0]: https://github.com/Automattic/jetpack-crm/compare/v5.5.4-a.1...v5.6.0
