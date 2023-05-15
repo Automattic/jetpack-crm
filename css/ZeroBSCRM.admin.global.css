@@ -6839,6 +6839,14 @@ table#zbsFilesTable td {
   width: 850px !important;
 }
 
+.jpcrm-external-link-icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+  margin: 0px;
+  margin-left: 4px;
+}
+
 @media only screen and (min-width: 768px) and (max-width: 960px) {
   #zbs-admin-top-bar {
     margin-left: 0px !important;
@@ -7664,13 +7672,6 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
   font-size: 14px;
   color: #000;
   text-decoration: underline;
-}
-#learn-pop .jpcrm-learn-container .jpcrm-learn-content .jpcrm-external-link-icon {
-  width: 1em;
-  height: 1em;
-  vertical-align: middle;
-  margin: 0px;
-  margin-left: 4px;
 }
 #learn-pop .jpcrm-learn-container .jpcrm-learn-sidebar {
   padding: 61px;
