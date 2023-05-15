@@ -35,6 +35,10 @@ This is an alpha version! The changes listed here are not final.
   Tasks: fix ##TASK-BODY## placeholder
 - Tooling: Allowing minification of JS files in development
 - Transactions: always show current status in editor
+- WooSync: Fix the fee amount from a WooCommerce order is not added to the invoice
+  WooSync: Fix shipping tax and discount amounts from Woocommerce orders are not calculated in invoices
+  WooSync: Fix the subtotal amount from WooCommerce orders is not calculated in invoices
+  Invoices: On invoice update the shipping tax selected is removed resulting on incorrect total amount
 - Woo Sync module: fix PHP Warning.
 
 ## [5.7.0] - 2023-04-19
