@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 This is an alpha version! The changes listed here are not final.
 
 ### Added
+- Composer: Added jetpack-forms as a required dependency to fix a Jetpack form compat issue
 - Segments: adding a doesnotcontain condition for email segments, for better compatibility with Advanced Segments
 
 ### Changed
