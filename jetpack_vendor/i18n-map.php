@@ -18,7 +18,7 @@ return array(
     ),
     'jetpack-forms' => array(
       'path' => 'jetpack_vendor/automattic/jetpack-forms',
-      'ver' => '0.17.1-alpha',
+      'ver' => '0.18.0-alpha',
     ),
   ),
 );
