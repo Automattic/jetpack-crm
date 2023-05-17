@@ -23,6 +23,7 @@ This is an alpha version! The changes listed here are not final.
 - WooSync: improved status mapping logic
 
 ### Fixed
+- Companies: Fix company name prefill so add links - transaction, invoice and tasks - prefill company name
 - Contact / Company: Fix date styling for transactions, invoices and quotes.
 - Contact / company: Profile summary total value and invoice count now removes deleted invoices.
 - Custom fields: use native date pickers
