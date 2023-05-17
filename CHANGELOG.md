@@ -29,6 +29,7 @@ This is an alpha version! The changes listed here are not final.
   Quotes: use native date pickers
 - Export: contact segments now export company info
 - Logs: Facebook, Twitter, Feedback, and Other Contact log types now update last contacted timestamp
+- Segments: Make sure total count is updated on tag changes
 - Settings: Eliminate orphaned references to custom fields within field sorting settings when removing custom fields.
 - Tasks: start and end times now show correctly throughout the CRM
   Tasks: new migration to remove timezone offset from database
