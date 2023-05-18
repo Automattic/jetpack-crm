@@ -5,46 +5,41 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [5.8.0-alpha] - unreleased
-
-This is an alpha version! The changes listed here are not final.
-
+## [5.8.0] - 2023-05-18
 ### Added
-- Composer: Added jetpack-forms as a required dependency to fix a Jetpack form compat issue
-- Segments: adding a doesnotcontain condition for email segments, for better compatibility with Advanced Segments
+- Composer: Added jetpack-forms as a required dependency to fix a Jetpack form compat issue [#30749]
+- Segments: Adding a doesnotcontain condition for email segments, for better compatibility with Advanced Segments [#30422]
 
 ### Changed
-- Code cleanup: Cleaning up WP Editor helper functions and wp_editor usage
-- General: update link references to releases in changelog.
-- Navigation: Changed Learn More button and Learn More link to be consistent with Jetpack styles.
-- PDF generator: objects in filenames are translated
-- Update composer.lock
-- Updated package dependencies.
-- WooSync: improved status mapping logic
+- Code cleanup: Cleaning up WP Editor helper functions and wp_editor usage [#30306]
+- General: Update link references to releases in changelog [#30634]
+- Navigation: Changed Learn More button and Learn More link to be consistent with Jetpack styles [#30135]
+- PDF generator: Objects in filenames are translated [#30295]
+- WooSync: Improved status mapping logic [#30557]
 
 ### Fixed
-- Companies: Fix company name prefill so add links - transaction, invoice and tasks - prefill company name
-- Contact / Company: Fix date styling for transactions, invoices and quotes.
-- Contact / company: Profile summary total value and invoice count now removes deleted invoices.
-- Custom fields: use native date pickers
-  Quotes: use native date pickers
-- Export: contact segments now export company info
-- Logs: Facebook, Twitter, Feedback, and Other Contact log types now update last contacted timestamp
-- Segments: Make sure total count is updated on tag changes
-- Settings: Eliminate orphaned references to custom fields within field sorting settings when removing custom fields.
-- Tasks: start and end times now show correctly throughout the CRM
-  Tasks: new migration to remove timezone offset from database
-  Tasks: removed reliance on strftime for better PHP 8.1 compatibility
-  Tasks: switch to native browser date and time inputs
-  Tasks: catch moment.js notice due to using fallback date format
-  Tasks: fix ##TASK-BODY## placeholder
-- Tooling: Allowing minification of JS files in development
-- Transactions: always show current status in editor
-- WooSync: Fix the fee amount from a WooCommerce order is not added to the invoice
-  WooSync: Fix shipping tax and discount amounts from Woocommerce orders are not calculated in invoices
-  WooSync: Fix the subtotal amount from WooCommerce orders is not calculated in invoices
-  Invoices: On invoice update the shipping tax selected is removed resulting on incorrect total amount
-- Woo Sync module: fix PHP Warning.
+- Companies: Fix company name prefill so add links - transaction, invoice and tasks - prefill company name [#30752]
+- Contact / Company: Fix date styling for transactions, invoices and quotes [#30483]
+- Contact / Company: Profile summary total value and invoice count now removes deleted invoices [#30178]
+- Custom fields: Use native date pickers [#30643]
+- Quotes: Use native date pickers [#30643]
+- Export: Contact segments now export company info [#30393]
+- Logs: Facebook, Twitter, Feedback, and Other Contact log types now update last contacted timestamp [#30470]
+- Settings: Eliminate orphaned references to custom fields within field sorting settings when removing custom fields [#30114]
+- Segments: Make sure total count is updated on tag changes [#30638]
+- Tasks: Start and end times now show correctly throughout the CRM [#30431]
+- Tasks: New migration to remove timezone offset from database [#30431]
+- Tasks: Removed reliance on strftime for better PHP 8.1 compatibility [#30431]
+- Tasks: Switch to native browser date and time inputs [#30431]
+- Tasks: Catch moment.js notice due to using fallback date format [#30431]
+- Tasks: Fix ##TASK-BODY## placeholder [#30431]
+- Tooling: Allowing minification of JS files in development [#30119]
+- Transactions: Always show current status in editor [#30644]
+- WooSync: Fix the fee amount from a WooCommerce order is not added to the invoice [#29650]
+- WooSync: Fix shipping tax and discount amounts from Woocommerce orders are not calculated in invoices [#29650]
+- WooSync: Fix the subtotal amount from WooCommerce orders is not calculated in invoices [#29650]
+- WooSync: Fix PHP Warning [#30572]
+- Invoices: On invoice update the shipping tax selected is removed resulting on incorrect total amount [#29650]
 
 ## [5.7.0] - 2023-04-19
 ### Added
@@ -170,6 +165,6 @@ This is an alpha version! The changes listed here are not final.
 - Improved: Added a migration to remove outdated AKA lines
 
 [5.5.4-a.1]: https://github.com/Automattic/jetpack-crm/compare/v5.5.3...v5.5.4-a.1
-[5.8.0-alpha]: https://github.com/Automattic/jetpack-crm/compare/5.7.0...5.8.0-alpha
+[5.8.0]: https://github.com/Automattic/jetpack-crm/compare/5.7.0...5.8.0
 [5.7.0]: https://github.com/Automattic/jetpack-crm/compare/v5.6.0...v5.7.0
 [5.6.0]: https://github.com/Automattic/jetpack-crm/compare/v5.5.4-a.1...v5.6.0
