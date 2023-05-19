@@ -25,7 +25,7 @@ body.zbs-compat-material-admin #wpcontent {
 body.zbs-compat-material-admin #zbs-admin-top-bar {
   margin-right: 0px !important;
 }
-body.zbs-compat-material-admin .zbs-admin-main-menu, body.zbs-compat-material-admin .zbs-dash-header {
+body.zbs-compat-material-admin .zbs-dash-header {
   margin-left: -30px !important;
 }
 
@@ -39,6 +39,6 @@ body.zbs-compat-material-admin.zbs-fullscreen #wpadminbar, body.zbs-compat-mater
 body.zbs-compat-material-admin.zbs-fullscreen #zbs-admin-top-bar {
   margin-right: 0px !important;
 }
-body.zbs-compat-material-admin.zbs-fullscreen .zbs-admin-main-menu, body.zbs-compat-material-admin.zbs-fullscreen .zbs-dash-header {
+body.zbs-compat-material-admin.zbs-fullscreen .zbs-dash-header {
   margin-left: -30px !important;
 }

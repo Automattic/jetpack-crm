@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 This is an alpha version! The changes listed here are not final.
 
+### Changed
+- Top menu: implement Emerald style
+
 ## [5.8.0] - 2023-05-18
 ### Added
 - Composer: Added jetpack-forms as a required dependency to fix a Jetpack form compat issue [#30749]

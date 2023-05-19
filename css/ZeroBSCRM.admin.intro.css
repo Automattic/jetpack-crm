@@ -7,7 +7,7 @@
  * Date: 1 Mar 2019
  * 
  */
-.admin_page_zerobscrm-plugin #zbs-hide-main-menu {
+.admin_page_zerobscrm-plugin jpcrm-top-menu {
   display: none;
 }
 .admin_page_zerobscrm-plugin .top-bar-welcome {

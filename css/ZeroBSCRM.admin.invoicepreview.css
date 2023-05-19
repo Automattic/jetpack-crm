@@ -5805,87 +5805,10 @@ div.calendar-table .table-condensed > tbody > tr > td, div.calendar-table .table
   margin-top: 12px !important;
 }
 
-.zbs-admin-bg-menu.ui.inverted.menu .active.item, .zbs-admin-bg-menu.ui.inverted.menu .zbs-currently-browsing {
-  background: #3f4348;
-  border-radius: 0px;
-}
-.zbs-admin-bg-menu.ui.inverted.menu .zbs-subsub-ico {
-  margin: 0 !important;
-  padding-top: 0.2em !important;
-  margin-right: -0.2em !important;
-}
-.zbs-admin-bg-menu.ui.inverted.menu .icon.search {
-  color: #81878c !important;
-}
-
-#zbs-user-menu {
-  width: 580px;
-  min-width: 580px;
-}
-#zbs-user-menu a.item:hover {
-  color: #0073aa;
-}
-
 .menu.ui .item.tourhighlight,
 .ui.menu .ui.dropdown .menu > .item.tourhighlight {
   background: #3f4347;
   color: #8bc63f !important;
-}
-
-/* Container box to set the sides relative to */
-.zbs-cube {
-  width: 50px;
-  text-align: center;
-  margin: 0 auto;
-  height: 30px;
-  -webkit-transition: -webkit-transform 0.33s;
-  transition: transform 0.33s;
-  /* Animate the transform properties */
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-  /* <-NB */
-}
-
-.zbs-cube img {
-  max-width: 50px;
-}
-
-.zbs-cube .fa, .zbs-cube .icon {
-  height: 30px;
-  width: 30px;
-  font-size: 30px;
-}
-
-/* The two faces of the cube */
-.zbs-face1, .zbs-face2 {
-  background: none;
-  height: 30px;
-}
-
-/* Position the faces */
-.zbs-face1 {
-  -webkit-transform: translateZ(15px);
-  transform: translateZ(15px);
-}
-
-.zbs-face2 {
-  -webkit-transform: rotateX(-90deg) translateZ(-15px);
-  transform: rotateX(-90deg) translateZ(-15px);
-}
-.zbs-face2 .expand {
-  color: black !important;
-}
-
-#zbs-main-logo:hover .zbs-face1 {
-  display: none;
-}
-
-/* Rotate the cube */
-.zbs-cube:hover {
-  -webkit-transform: rotateX(89deg);
-  transform: rotateX(89deg);
-  /* Text bleed at 90º */
-  cursor: pointer;
 }
 
 #wpcontent {
@@ -6831,7 +6754,6 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
 
 #zbs-admin-top-bar {
   position: relative;
-  margin-left: -30px;
   padding-left: 25px;
   padding-right: 25px;
   margin-top: 0px;
@@ -6885,38 +6807,6 @@ div.ui.learn.button .jpcrm-info-gridicon {
 }
 .sales-overview h3 {
   color: white !important;
-}
-
-.zbs-admin-main-menu {
-  border-radius: 0px !important;
-  margin-left: -20px !important;
-  margin-top: 0px !important;
-  margin-bottom: 0px !important;
-  background: #2e3133 !important;
-}
-.zbs-admin-main-menu .dropdown img {
-  border-radius: 50%;
-}
-.zbs-admin-main-menu .dropdown .item {
-  color: #bdbdbd !important;
-}
-
-.zbs-admin-bg-menu {
-  background: #2e3133;
-}
-
-.ui.menu .ui.dropdown .menu > .item:hover {
-  background: #3f4347 !important;
-  color: #bdbdbd !important;
-  font-size: 14px !important;
-}
-
-.ui.menu {
-  font-size: 14px !important;
-}
-
-.zbs-dropdown .item {
-  color: #bdbdbd !important;
 }
 
 .item:focus {
