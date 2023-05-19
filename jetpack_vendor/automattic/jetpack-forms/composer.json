@@ -6,13 +6,13 @@
 	"require": {
 		"automattic/jetpack-blocks": "^1.4.21",
 		"automattic/jetpack-assets": "^1.18.3",
-		"automattic/jetpack-connection": "^1.51.10",
+		"automattic/jetpack-connection": "^1.52.0-alpha",
 		"automattic/jetpack-status": "^1.17.1"
 	},
 	"require-dev": {
 		"yoast/phpunit-polyfills": "1.0.4",
 		"automattic/jetpack-changelogger": "^3.3.4-alpha",
-		"automattic/jetpack-connection": "^1.51.10",
+		"automattic/jetpack-connection": "^1.52.0-alpha",
 		"automattic/wordbless": "^0.4.1"
 	},
 	"suggest": {
