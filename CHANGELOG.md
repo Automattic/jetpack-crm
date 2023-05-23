@@ -5,12 +5,13 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [5.8.1-alpha] - unreleased
+## [5.9.0-alpha] - unreleased
 
 This is an alpha version! The changes listed here are not final.
 
 ### Changed
 - Bump dependency version.
+- Listviews: implement Emerald style
 - Top menu: implement Emerald style
 
 ## [5.8.0] - 2023-05-18
@@ -173,7 +174,7 @@ This is an alpha version! The changes listed here are not final.
 - Improved: Added a migration to remove outdated AKA lines
 
 [5.5.4-a.1]: https://github.com/Automattic/jetpack-crm/compare/v5.5.3...v5.5.4-a.1
-[5.8.1-alpha]: https://github.com/Automattic/jetpack-crm/compare/5.8.0...5.8.1-alpha
+[5.9.0-alpha]: https://github.com/Automattic/jetpack-crm/compare/5.8.0...5.9.0-alpha
 [5.8.0]: https://github.com/Automattic/jetpack-crm/compare/5.7.0...5.8.0
 [5.7.0]: https://github.com/Automattic/jetpack-crm/compare/v5.6.0...v5.7.0
 [5.6.0]: https://github.com/Automattic/jetpack-crm/compare/v5.5.4-a.1...v5.6.0

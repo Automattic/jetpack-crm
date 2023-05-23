@@ -12,12 +12,6 @@
 	Style overrides for compatibility for Material Admin v3.5
 
 */
-body.zbs-compat-material-admin #zbs-list-wrap.ui.divided.grid {
-  /* margin-left: -1rem; */
-  /* margin-right: -1rem; */
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-}
 body.zbs-compat-material-admin #wpcontent {
   margin-left: 230px !important;
   margin-top: 0px !important;

@@ -37258,77 +37258,8 @@ body.pushable > .pusher {
   margin-top: 4px;
 }
 
-#zbs-list-tags, #zbs-list-filters {
-  max-height: 200px;
-  overflow-y: auto;
-}
-#zbs-list-tags a.button, #zbs-list-filters a.button {
-  margin-bottom: 3px;
-}
-
 #jpcrm-listview-totals-box table tfoot td {
   border-top: 2px solid #a2a2a2;
-}
-
-#zbs-list-table-wrap {
-  overflow-x: auto;
-  padding-left: 30px;
-}
-#zbs-list-table-wrap table td a.ui.label {
-  margin-bottom: 3px;
-}
-#zbs-list-table-wrap table td, #zbs-list-table-wrap table th {
-  vertical-align: middle;
-}
-
-.zbs-list-view-edit-button {
-  background: #FFF !important;
-  margin-top: -6px !important;
-}
-
-.zbs-list-view-edit-button.active {
-  background: #CCC !important;
-}
-
-.zbs-filter-manager-connected {
-  min-height: 34px;
-}
-.zbs-filter-manager-connected .ui.basic.button {
-  margin-top: 4px;
-}
-
-#zbs-list-view-filter-options-current,
-#zbs-list-view-filter-options-available {
-  max-height: 200px;
-  overflow: auto;
-}
-
-.zbs-listview-bulk-hd, .zbs-listview-bulk {
-  padding-right: 0 !important;
-}
-.zbs-listview-bulk-hd .ui.fitted.checkbox, .zbs-listview-bulk .ui.fitted.checkbox {
-  padding-right: 13px;
-}
-
-.zbs-listview-bulk-hd {
-  max-width: 40px !important;
-  width: 40px !important;
-  min-width: 40px !important;
-}
-
-#zbs-listview-footer-count {
-  padding-bottom: 0.5em;
-}
-
-/* div containing bulk actions and pagination above listview */
-.jpcrm-listview-actions {
-  padding: 0 11px 0 11px;
-  height: 40px;
-}
-
-.jpcrm-bulk-actions {
-  padding-top: 0.5em;
-  display: inline-block;
 }
 
 .zbs-select-tag.ui.label {
@@ -37355,21 +37286,6 @@ body.pushable > .pusher {
   vertical-align: middle;
 }
 
-.more-tags {
-  display: none;
-}
-
-#zbs-list-tags a {
-  max-width: 60%;
-  overflow: hidden;
-  white-space: normal;
-  text-overflow: ellipsis;
-}
-
-#zbs-list-sidebar-wrap {
-  padding-left: 30px;
-}
-
 .ui.header > img + .content, .ui.header > .image + .content {
   padding-right: 0.75rem;
   vertical-align: middle;
@@ -37384,32 +37300,10 @@ body.pushable > .pusher {
   color: white !important;
 }
 
-.clearfilters {
-  position: absolute;
-  top: 16px !important;
-  margin-right: 5px !important;
-}
-
 #learn {
   margin-left: 0;
 }
 
-#zbs-listview-clearfilters {
-  margin-right: 6px !important;
-}
-
-#zbs-listview-biline {
-  display: inline-block;
-  margin-right: 10px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-@media (max-width: 1080px) {
-  #zbs-listview-biline {
-    display: none !important;
-  }
-}
 .zero-bs-crm_page_manage-companies-crm .zbs-co-img img {
   width: 30px;
   height: auto;
@@ -37418,17 +37312,13 @@ body.pushable > .pusher {
   border-radius: 50%;
 }
 
-#zbs-list-wrap .zbs-co-img img,
-#zbs-list-wrap .name-and-avatar-list h4.ui.image.header img {
+.jpcrm-listview-table .zbs-co-img img,
+.jpcrm-listview-table .name-and-avatar-list h4.ui.image.header img {
   max-width: 40px !important;
 }
-#zbs-list-wrap .name-and-avatar-list h4.ui.image.header,
-#zbs-list-wrap .name-and-avatar-list h4.ui.header {
+.jpcrm-listview-table .name-and-avatar-list h4.ui.image.header,
+.jpcrm-listview-table .name-and-avatar-list h4.ui.header {
   font-weight: normal;
-}
-
-#zbs-list-wrap.zbs-list-view-transaction .name-and-avatar-list {
-  padding-top: 1em;
 }
 
 #zbs-list-warnings-wrap .ui.message {
@@ -37453,12 +37343,12 @@ body.pushable > .pusher {
 /* 
 		INLINE Editing
 */
-#zbs-list-wrap td.zbs-inline-edit:hover {
+.jpcrm-listview-table td.zbs-inline-edit:hover {
   border-bottom: 2px dashed #8bb7de;
   cursor: pointer;
 }
 
-#zbs-list-wrap td.zbs-inline-editing {
+.jpcrm-listview-table td.zbs-inline-editing {
   border-bottom: 2px dashed orange;
   text-align: center;
   padding-top: 0.6em;

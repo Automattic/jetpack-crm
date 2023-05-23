@@ -57,6 +57,14 @@
 }
 
 /* Remove left padding from WP page content */
+body.jpcrm-admin {
+  background: var(--jp-white-off);
+  font-family: "Lato", "Helvetica Neue", Arial, Helvetica, sans-serif;
+  /* Shows weird arrow if using an input with a list attribute */
+}
+body.jpcrm-admin ::-webkit-calendar-picker-indicator {
+  display: none !important;
+}
 body.jpcrm-admin #wpcontent {
   padding-right: 0;
 }
@@ -126,6 +134,178 @@ jpcrm-top-menu#jpcrm-top-menu menu-bar menu-section #jpcrm-user-menu {
 }
 jpcrm-top-menu#jpcrm-top-menu menu-bar menu-section #jpcrm-user-menu i.icon {
   margin-left: 5px;
+}
+
+.jpcrm-listview {
+  background-color: var(--jp-white);
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 13px;
+}
+
+jpcrm-listview-header#jpcrm-listview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 30px;
+}
+jpcrm-listview-header#jpcrm-listview-header header-item {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+jpcrm-listview-header#jpcrm-listview-header header-item button {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  margin-right: 5px;
+  font: inherit;
+  cursor: pointer;
+}
+jpcrm-listview-header#jpcrm-listview-header header-item button.dashicons:before {
+  font-family: dashicons;
+  font-size: inherit;
+  display: flex;
+  width: 16px;
+}
+jpcrm-listview-header#jpcrm-listview-header header-item .jpcrm-current-filter:not(.hidden) {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  margin: 0 1px;
+  padding: 4px 4px;
+  box-sizing: border-box;
+  font-weight: 600;
+  vertical-align: middle;
+  display: inline-block;
+  border: 1px solid var(--jp-gray-10);
+  border-radius: 2px;
+  height: 100%;
+  width: 200px;
+}
+jpcrm-listview-header#jpcrm-listview-header header-item .table-options {
+  margin: 0 1px;
+  padding: 4px 10px;
+  box-sizing: border-box;
+  font-weight: 600;
+  vertical-align: middle;
+  border: 1px solid var(--jp-gray-10);
+  border-radius: 2px;
+  height: 100%;
+}
+jpcrm-listview-header#jpcrm-listview-header header-item .table-options:hover {
+  background-color: var(--jp-gray-0);
+}
+jpcrm-listview-header#jpcrm-listview-header input, jpcrm-listview-header#jpcrm-listview-header select {
+  box-sizing: border-box;
+  border: 1px solid var(--jp-gray-10);
+  vertical-align: middle;
+  border-radius: 2px;
+  height: 100%;
+  width: 200px;
+}
+jpcrm-listview-header#jpcrm-listview-header input[type=search] {
+  /* padding-left:30px; */
+}
+
+.jpcrm-listview-table-container {
+  clear: both;
+  margin-top: 30px;
+  overflow-x: auto;
+}
+.jpcrm-listview-table-container .jpcrm-listview-table {
+  min-width: 100%;
+  overflow-x: scroll;
+  border-collapse: collapse;
+  /* min-width except for checkbox column */
+}
+.jpcrm-listview-table-container .jpcrm-listview-table thead th {
+  font-weight: 400;
+  border-bottom: 1px solid var(--jp-gray-10);
+}
+.jpcrm-listview-table-container .jpcrm-listview-table a {
+  text-decoration: none;
+  color: var(--jp-grey-80);
+}
+.jpcrm-listview-table-container .jpcrm-listview-table th, .jpcrm-listview-table-container .jpcrm-listview-table td {
+  text-align: right;
+  padding: 10px;
+}
+.jpcrm-listview-table-container .jpcrm-listview-table th:not(:first-child), .jpcrm-listview-table-container .jpcrm-listview-table td:not(:first-child) {
+  min-width: 50px;
+}
+.jpcrm-listview-table-container .jpcrm-listview-table input[type=checkbox] {
+  border: 1px solid var(--jp-gray-10);
+  border-radius: 2px;
+}
+.jpcrm-listview-table-container .jpcrm-listview-table tbody tr.selected {
+  background-color: var(--jp-green-0);
+}
+.jpcrm-listview-table-container .jpcrm-listview-table tbody tr:hover {
+  background-color: var(--jp-gray-0);
+}
+
+jpcrm-listview-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 30px;
+  margin: 20px 0;
+}
+jpcrm-listview-footer footer-item {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+jpcrm-pagination {
+  display: inline-flex;
+  font-size: 16px;
+  gap: 0rem;
+  align-items: center;
+  text-align: center;
+  background: #FFFFFF;
+  border: 1px solid var(--jp-gray-5);
+  border-radius: 3px;
+}
+jpcrm-pagination * {
+  line-height: 2;
+}
+jpcrm-pagination .active {
+  background-color: var(--jp-black);
+  color: var(--jp-white);
+}
+jpcrm-pagination .disabled {
+  color: var(--jp-gray-20);
+}
+jpcrm-pagination a {
+  color: var(--jp-gray-80);
+  text-decoration: none;
+  display: flex;
+}
+jpcrm-pagination a:not(:first-child):not(:last-child) {
+  padding: 0 8px;
+}
+jpcrm-pagination > :first-child, jpcrm-pagination > :last-child {
+  padding: 0 5px;
+}
+jpcrm-pagination > :first-child.disabled, jpcrm-pagination > :last-child.disabled {
+  padding: 0;
+  margin: 0 5px;
+}
+jpcrm-pagination a:hover {
+  background-color: var(--jp-gray-0);
+  color: var(--jp-gray-80);
+}
+jpcrm-pagination a.active:hover {
+  background-color: var(--jp-gray-80);
+  color: var(--jp-white);
+}
+jpcrm-pagination .ellipsis {
+  padding: 0 3px;
 }
 
 /* JP vars */
