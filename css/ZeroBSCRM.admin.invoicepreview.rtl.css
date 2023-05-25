@@ -498,12 +498,12 @@ tr.wh-large input[type=radio] {
 
 tr.wh-large th, tr.wh-large td {
   padding: 6px 20px;
-  color: #304c69;
+  color: black;
 }
 
 table.wh-metatab tr th label {
   padding: 6px 20px;
-  color: #304c69;
+  color: black;
 }
 
 table.wh-metatab tr.wh-large th label, table.wh-metatab tr.wh-large td label {
@@ -637,7 +637,7 @@ textarea.form-control {
 
 .zbs-field-id {
   font-size: 14px !important;
-  color: green !important;
+  color: black !important;
   vertical-align: top !important;
 }
 
@@ -5905,7 +5905,7 @@ input.zbs-prominent {
 }
 
 tr.zbs-field-group-tr .zbs-field-group {
-  border-right: 3px solid #c2e1ff !important;
+  border-right: 3px solid var(--jp-gray-20) !important;
   padding-right: 2% !important;
 }
 
@@ -5919,7 +5919,7 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
     width: 44% !important;
     margin-left: 2% !important;
     display: inline-block !important;
-    border-right: 3px solid #c2e1ff !important;
+    border-right: 3px solid var(--jp-gray-20) !important;
     padding-right: 2% !important;
   }
 
@@ -6010,10 +6010,10 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
 }
 #wptbpMetaBoxLogs #zbsAddLogForm {
   margin: 10px;
-  border: 1px solid #b0a1ec;
+  border: 1px dashed var(--jp-gray-20);
   padding: 12px;
-  border-radius: 5px;
-  background: #e1e6f3;
+  border-radius: 4px;
+  background: var(--jp-gray-0);
   line-height: 32px;
 }
 #wptbpMetaBoxLogs #zbsAddLogForm div#zbsAddLogIco {
@@ -6055,7 +6055,7 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
   border: 1px solid #b0a1ec;
   padding: 12px;
   border-radius: 5px;
-  background: #e1e6f3;
+  background: var(--jp-gray-0);
   line-height: 32px;
 }
 #wptbpMetaBoxLogs #zbsEditLogForm div#zbsEditLogIco {
@@ -6103,7 +6103,7 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
 #wptbpMetaBoxLogs .zbsLogOut .zbsLogOutTitle {
   font-size: 14px;
   font-weight: 800;
-  border-bottom: 2px solid rgba(9, 185, 129, 0.58);
+  border-bottom: 2px solid var(--jp-gray-20);
 }
 #wptbpMetaBoxLogs .zbsLogOut .zbsLogOutTitle .zbsLogOutEdits {
   display: inline-block;
@@ -6118,7 +6118,7 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
   background: #FFF;
 }
 #wptbpMetaBoxLogs .zbsLogOut .zbsLogOutTitle .zbsLogOutEdits .fa {
-  color: #73947c;
+  color: var(--jp-gray-20);
   padding: 4px;
 }
 #wptbpMetaBoxLogs .zbsLogOut .zbsLogOutTitle .zbsLogOutEdits .fa:hover {

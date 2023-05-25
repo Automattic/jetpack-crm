@@ -11,6 +11,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Changed
 - Bump dependency version.
+- CRM: buttons and colors to Emerald style
 - Dashboard: implement Emerald style
 - Listviews: implement Emerald style
 - Top menu: implement Emerald style

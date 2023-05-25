@@ -76,7 +76,7 @@
 #zerobs-invoice-edit-box #zbs-add-new-row {
   padding: 8px;
   background: #f5f5f5;
-  color: #238bd0;
+  color: black;
   cursor: pointer;
   text-align: center;
   border: 1px solid #ddd;
@@ -321,7 +321,7 @@
 #zerobs-invoice-edit-box .zbs-invoice-row .remove-row {
   font-size: 15px;
   margin-top: 10px;
-  color: #238bd0;
+  color: black;
 }
 .post-type-zerobs_invoice .zbs-invoice-row .third,
 #zerobs-invoice-edit-box .zbs-invoice-row .third {
@@ -930,15 +930,15 @@
   margin-top: 20px;
   padding: 30px;
   width: 100%;
-  background: aliceblue;
+  background: var(--jp-gray-0);
   margin-bottom: 20px;
-  border-radius: 11px;
-  border: 1px solid #428bca;
+  border-radius: 4px;
+  border: 1px dashed var(--jp-gray-20);
   cursor: pointer;
 }
 .post-type-zerobs_invoice .wh-logo .fa,
 #zerobs-invoice-edit-box .wh-logo .fa {
-  color: #428bca;
+  color: black;
   margin-left: 5px;
   margin-bottom: 10px;
   font-size: 40px;
@@ -947,7 +947,7 @@
 .post-type-zerobs_invoice .wh-logo .wh-logo-text,
 #zerobs-invoice-edit-box .wh-logo .wh-logo-text {
   font-weight: 300;
-  color: #428bca;
+  color: black;
   font-size: 18px;
   margin-right: 20px;
   position: absolute;

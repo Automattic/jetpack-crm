@@ -307,11 +307,36 @@ jpcrm-dashcount jpcrm-dashcount-card a {
   color: var(--jp-black);
 }
 
+.jpcrm-dropdown {
+  font-size: 14px;
+  padding: 8px 16px 8px 8px;
+}
+.jpcrm-dropdown i {
+  width: 20px;
+  text-align: center;
+  margin-right: 8px;
+  font-size: 18px;
+}
+
 .jpcrm-listview {
   background-color: var(--jp-white);
   padding: 10px;
   margin-bottom: 20px;
   font-size: 13px;
+}
+
+jpcrm-listview-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 30px;
+  margin: 20px 0;
+}
+jpcrm-listview-footer footer-item {
+  display: flex;
+  gap: 6px;
+  align-items: center;
 }
 
 jpcrm-listview-header#jpcrm-listview-header {
@@ -418,20 +443,6 @@ jpcrm-listview-header#jpcrm-listview-header input[type=search] {
   background-color: var(--jp-gray-0);
 }
 
-jpcrm-listview-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  height: 30px;
-  margin: 20px 0;
-}
-jpcrm-listview-footer footer-item {
-  display: flex;
-  gap: 6px;
-  align-items: center;
-}
-
 jpcrm-pagination {
   display: inline-flex;
   font-size: 16px;
@@ -481,4 +492,5 @@ jpcrm-pagination .ellipsis {
 
 /* JP vars */
 /* base file */
+/* top menu */
 /* components */
