@@ -59,7 +59,7 @@
 /* Remove left padding from WP page content */
 body.jpcrm-admin {
   background: var(--jp-white-off);
-  font-family: "Lato", "Helvetica Neue", Arial, Helvetica, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen-Sans", "Ubuntu", "Cantarell", "Helvetica Neue", sans-serif;
   /* Shows weird arrow if using an input with a list attribute */
 }
 body.jpcrm-admin ::-webkit-calendar-picker-indicator {
@@ -67,6 +67,12 @@ body.jpcrm-admin ::-webkit-calendar-picker-indicator {
 }
 body.jpcrm-admin #wpcontent {
   padding-left: 0;
+}
+body.jpcrm-admin #wpcontent #wpbody {
+  display: flex;
+  align-items: center;
+  max-width: 1551px;
+  margin: 0 auto;
 }
 body.jpcrm-admin .alternating-colors tr:nth-child(even) {
   background-color: var(--jp-gray-0);

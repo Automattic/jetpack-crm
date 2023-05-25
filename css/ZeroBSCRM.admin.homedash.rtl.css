@@ -130,6 +130,13 @@ body ::-webkit-scrollbar-track {
 }
 #settings_dashboard_recent_activity_display .jpcrm-listview-table-container .feed-item {
   padding-right: 10px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+#settings_dashboard_recent_activity_display .jpcrm-listview-table-container .feed-item .ui.avatar.img.img-rounded {
+  margin-left: 10px;
 }
 
 .jpcrm-dashcard {
