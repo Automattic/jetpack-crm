@@ -589,10 +589,6 @@ cite {
   text-align: justify;
 }
 
-.text-muted {
-  color: #999;
-}
-
 .text-primary {
   color: #428bca;
 }
@@ -7000,16 +6996,6 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
     font-size: 12px;
   }
 
-  .toplevel_page_zerobscrm-dash .col-6 {
-    width: 100% !important;
-  }
-  .toplevel_page_zerobscrm-dash .col-md-4-db {
-    width: 100% !important;
-  }
-  .toplevel_page_zerobscrm-dash #settings_dashboard_latest_contacts_display {
-    width: 100%;
-  }
-
   #zbs-customer-panel, #zbs-custom-quicklinks, #zbs-edit-table-wrap, #zbs-edit-sidebar-wrap {
     width: 100% !important;
     overflow: hidden;
@@ -7029,11 +7015,6 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
 
   #learn {
     display: none;
-  }
-
-  .zbs-dash-header {
-    margin-top: -2px !important;
-    margin-left: -80px !important;
   }
 
   .auto-fold #adminmenu a.menu-top {
@@ -7166,16 +7147,6 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
     font-size: 12px;
   }
 
-  .toplevel_page_zerobscrm-dash .col-6 {
-    width: 100% !important;
-  }
-  .toplevel_page_zerobscrm-dash .col-md-4-db {
-    width: 100% !important;
-  }
-  .toplevel_page_zerobscrm-dash #settings_dashboard_latest_contacts_display {
-    width: 100%;
-  }
-
   #zbs-customer-panel, #zbs-custom-quicklinks, #zbs-edit-table-wrap, #zbs-edit-sidebar-wrap {
     width: 100% !important;
     overflow: hidden;
@@ -7195,11 +7166,6 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
 
   #learn {
     display: none;
-  }
-
-  .zbs-dash-header {
-    margin-top: -2px !important;
-    margin-left: -80px !important;
   }
 
   .auto-fold #adminmenu a.menu-top {
@@ -7527,10 +7493,6 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
   border: 0 !important;
 }
 
-#settings_dashboard_revenue_chart_display .panel {
-  box-shadow: none !important;
-}
-
 .ui.attached.tabular.menu {
   border: 0;
   box-shadow: none !important;
@@ -7585,11 +7547,6 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
   background: #007cba;
   border-color: #007cba;
   color: white;
-}
-
-.zbs-dash-header {
-  background: #f1f1f1 !important;
-  padding-top: 0px !important;
 }
 
 .dashboard-customiser {

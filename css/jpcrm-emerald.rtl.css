@@ -68,6 +68,9 @@ body.jpcrm-admin ::-webkit-calendar-picker-indicator {
 body.jpcrm-admin #wpcontent {
   padding-right: 0;
 }
+body.jpcrm-admin .alternating-colors tr:nth-child(even) {
+  background-color: var(--jp-gray-0);
+}
 
 jpcrm-top-menu#jpcrm-top-menu {
   padding: 20px 20px 0px 20px;
@@ -134,6 +137,174 @@ jpcrm-top-menu#jpcrm-top-menu menu-bar menu-section #jpcrm-user-menu {
 }
 jpcrm-top-menu#jpcrm-top-menu menu-bar menu-section #jpcrm-user-menu i.icon {
   margin-left: 5px;
+}
+
+.jpcrm-button {
+  padding: 8px 24px;
+  text-decoration: none;
+  background: var(--jp-black);
+  color: var(--jp-white);
+  border: 1.5px solid var(--jp-black);
+  border-radius: 4px;
+  font-family: var(--jpcrm-font-family-emerald);
+  font-style: normal;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  box-sizing: border-box;
+  display: inline-flex;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+}
+.jpcrm-button.font-14px {
+  font-size: 14px;
+  line-height: 24px;
+}
+.jpcrm-button:hover {
+  background: var(--jp-gray-80);
+  color: var(--jp-white);
+}
+.jpcrm-button.white-bg {
+  font-weight: 500;
+  background: var(--jp-white);
+  color: var(--jp-black);
+}
+.jpcrm-button.white-bg:hover {
+  background: var(--jp-gray-0);
+  color: var(--jp-gray-80);
+}
+.jpcrm-button.transparent-bg {
+  font-weight: 500;
+  border: 0px;
+  background: transparent;
+  color: var(--jp-black);
+}
+.jpcrm-button.transparent-bg:hover {
+  background: transparent;
+  color: var(--jp-gray-80);
+}
+.jpcrm-button.zero-padding {
+  padding: 0px;
+}
+
+.jpcrm-dashcard {
+  background: #FFF;
+  filter: drop-shadow(0px 4px 24px rgba(0, 0, 0, 0.05));
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0px;
+}
+.jpcrm-dashcard .jpcrm-dashcard-header {
+  flex: 1 1 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 16px 24px;
+  line-height: 32px;
+  letter-spacing: 0.02em;
+  font-family: var(--jpcrm-font-family-emerald);
+  font-style: normal;
+  color: var(--jp-black);
+}
+.jpcrm-dashcard .jpcrm-dashcard-header h4 {
+  margin: 0px;
+  font-size: 16px;
+  font-weight: 500;
+}
+.jpcrm-dashcard .jpcrm-dashcard-header a {
+  margin: 0px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--jp-black);
+}
+.jpcrm-dashcard .jpcrm-avatar-small {
+  width: 25px;
+}
+.jpcrm-dashcard .jpcrm-listview-table th {
+  font-weight: bold;
+  min-width: unset;
+}
+.jpcrm-dashcard .jpcrm-listview-table td {
+  min-width: unset;
+}
+.jpcrm-dashcard .jpcrm-listview-table td:first-child,
+.jpcrm-dashcard .jpcrm-listview-table th:first-child {
+  padding-right: 24px;
+}
+.jpcrm-dashcard .jpcrm-listview-table td:last-child,
+.jpcrm-dashcard .jpcrm-listview-table th:last-child {
+  padding-left: 24px;
+}
+.jpcrm-dashcard .jpcrm-listview-table .jpcrm-listview-td-valign-span-img {
+  position: relative;
+}
+.jpcrm-dashcard .jpcrm-listview-table .jpcrm-listview-td-valign-span-img span {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.jpcrm-dashcard .jpcrm-listview-table-container {
+  margin-top: 8px;
+}
+.jpcrm-dashcard .jpcrm-listview-table-container .div-message-box {
+  background: var(--jp-gray-0);
+  border: 1px dashed var(--jp-gray-20);
+  border-radius: 4px;
+  margin: 0px 20px 20px;
+  padding: 16px 24px 28px;
+  display: block;
+}
+.jpcrm-dashcard .jpcrm-listview-table-container .div-message {
+  text-align: center;
+  font-family: var(--jpcrm-font-family-emerald);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  letter-spacing: -0.02em;
+  margin-top: 16px;
+}
+
+jpcrm-dashcount {
+  box-sizing: content-box;
+  margin: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 250px);
+  counter-reset: grid-items;
+  grid-gap: 10px 20px;
+}
+jpcrm-dashcount jpcrm-dashcount-card {
+  display: flex;
+  align-items: center;
+  content: counter(grid-item);
+  position: relative;
+  padding: 15px;
+  background-color: var(--jp-white);
+  height: 120px;
+}
+jpcrm-dashcount jpcrm-dashcount-card h3 {
+  position: absolute;
+  top: 18px;
+  font-size: 16px;
+  font-weight: 600;
+  margin-block-start: 0;
+}
+jpcrm-dashcount jpcrm-dashcount-card .range_total {
+  font-size: 42px;
+  color: var(--jp-green-50);
+  margin-left: 10px;
+}
+jpcrm-dashcount jpcrm-dashcount-card a {
+  position: absolute;
+  bottom: 18px;
+  text-decoration: none;
+  color: var(--jp-black);
 }
 
 .jpcrm-listview {
