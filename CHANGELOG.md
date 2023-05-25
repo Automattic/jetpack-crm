@@ -14,6 +14,9 @@ This is an alpha version! The changes listed here are not final.
 - Listviews: implement Emerald style
 - Top menu: implement Emerald style
 
+### Deprecated
+- Minor changes around upcoming functionality change in Twitter.
+
 ## [5.8.0] - 2023-05-18
 ### Added
 - Composer: Added jetpack-forms as a required dependency to fix a Jetpack form compat issue [#30749]
