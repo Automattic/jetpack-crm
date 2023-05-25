@@ -15,6 +15,7 @@ This is an alpha version! The changes listed here are not final.
 - Dashboard: implement Emerald style
 - Listviews: implement Emerald style
 - Top menu: implement Emerald style
+- Update lock file.
 
 ### Deprecated
 - Minor changes around upcoming functionality change in Twitter.
