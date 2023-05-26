@@ -22,6 +22,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Fixed
 - CRM: page layout now has a max width of 1551px
+- Prefer stable composer deps.
 
 ## [5.8.0] - 2023-05-18
 ### Added
