@@ -15,6 +15,7 @@ This is an alpha version! The changes listed here are not final.
 - Dashboard: implement Emerald style
 - Listviews: implement Emerald style
 - Top menu: implement Emerald style
+- Updated composer.lock refs
 - Update lock file.
 
 ### Deprecated
