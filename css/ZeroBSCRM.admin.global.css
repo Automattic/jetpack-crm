@@ -5849,81 +5849,6 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
 /*!
  * Jetpack CRM
  * http://www.zerobscrm.com
- * V2.76+
- *
- * Copyright 2020 Automattic
- *
- * Date: 30/04/18
- */
-#zbs-screen-options {
-  margin-top: -3em;
-  margin-bottom: 2em;
-  margin-right: 1em;
-  z-index: 1;
-  -webkit-transition: background 0.1s ease, box-shadow 0.1s ease, color 0.1s ease;
-  transition: background 0.1s ease, box-shadow 0.1s ease, color 0.1s ease;
-}
-#zbs-screen-options #zbs-screen-options-handle {
-  position: absolute;
-  right: 1em;
-  bottom: -2em;
-  background: #F3F4F5;
-  box-shadow: 0px 1px 2px 0 rgba(34, 36, 38, 0.15);
-  border-radius: 0.28571429rem;
-  border: 1px solid rgba(34, 36, 38, 0.15);
-  color: rgba(0, 0, 0, 0.6);
-  border-top: 0;
-  border-top-right-radius: 0;
-  border-top-left-radius: 0;
-  padding: 0.3em 0.6em;
-}
-#zbs-screen-options #zbs-screen-options-handle .caret.up.icon {
-  display: inline-block;
-  margin-right: 0;
-}
-#zbs-screen-options #zbs-screen-options-handle .caret.down.icon {
-  display: none;
-  margin-right: 0;
-}
-#zbs-screen-options #zbs-screen-options-handle:hover {
-  cursor: pointer;
-}
-#zbs-screen-options #zbs-screen-options-handle:hover .caret.icon {
-  color: #000;
-}
-#zbs-screen-options .zbs-screenoptions-opt {
-  margin-top: 1em;
-}
-#zbs-screen-options .zbs-screenoptions-opt.zbs-screenoptions-metaboxes .ui.checkbox {
-  margin-top: 0;
-  margin-bottom: 0.2em;
-}
-#zbs-screen-options .zbs-screenoptions-opt .ui.header button {
-  margin-left: 1em;
-  vertical-align: middle;
-  margin-top: -0.3em;
-}
-
-#zbs-screen-options.zbs-closed {
-  margin-top: -3.6em;
-  margin-bottom: 1.5em;
-}
-#zbs-screen-options.zbs-closed .zbs-screenoptions-opt {
-  display: none;
-}
-#zbs-screen-options.zbs-closed #zbs-screen-options-handle {
-  background: #FFFFFF;
-}
-#zbs-screen-options.zbs-closed #zbs-screen-options-handle .caret.up.icon {
-  display: none;
-}
-#zbs-screen-options.zbs-closed #zbs-screen-options-handle .caret.down.icon {
-  display: inline-block;
-}
-
-/*!
- * Jetpack CRM
- * http://www.zerobscrm.com
  * V1.1.18
  *
  * Copyright 2020 Automattic
@@ -6403,39 +6328,13 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
   background: #1a6ecc;
 }
 
-#zbs-admin-top-bar {
-  position: relative;
-  padding-left: 25px;
-  padding-right: 25px;
-  margin-top: 0px;
-  margin-right: -25px;
-  padding-top: 8px;
-  background: #3f4347;
-  z-index: 2 !important;
+.jpcrm-learn-menu-container {
+  padding: 10px 20px;
+  margin: 0 auto;
+  max-width: 1551px;
 }
-#zbs-admin-top-bar .content-left {
-  width: 48%;
-  padding: 1%;
-  float: left;
-}
-#zbs-admin-top-bar .video {
-  width: 50%;
-  float: right;
-  margin-left: -10px;
-}
-#zbs-admin-top-bar .ui.popup {
+.jpcrm-learn-menu-container .jpcrm-learn-menu .ui.popup {
   max-width: 800px !important;
-}
-#zbs-admin-top-bar .zbs-add-new {
-  margin-left: 10px;
-  margin-right: -5px;
-}
-
-.zbs-white {
-  font-size: 18px;
-  line-height: 35px;
-  color: white;
-  margin-right: 0.4em;
 }
 
 div.ui.learn.button {
@@ -6460,18 +6359,6 @@ div.ui.learn.button .jpcrm-info-gridicon {
 .item:focus {
   outline: none;
   box-shadow: none !important;
-}
-
-#zbs-list-top-bar {
-  color: white;
-  background: #3f4348;
-  padding-left: 25px;
-  padding-bottom: 11px;
-  margin-left: -25px;
-  padding-right: 25px;
-  margin-right: -25px;
-  margin-top: 0px;
-  margin-bottom: 20px;
 }
 
 .popover.right .arrow {
@@ -6645,11 +6532,6 @@ table#zbsFilesTable td {
   margin-left: 4px;
 }
 
-@media only screen and (min-width: 768px) and (max-width: 960px) {
-  #zbs-admin-top-bar {
-    margin-left: 0px !important;
-  }
-}
 /*!
  * Jetpack CRM
  * http://www.zerobscrm.com
@@ -6917,14 +6799,6 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
     /* optional: just make scrollbar invisible */
   }
 
-  #zbs-screen-options {
-    margin-top: -5.3em !important;
-    margin-bottom: 25px;
-  }
-  #zbs-screen-options .header {
-    padding-top: 5px;
-  }
-
   #wpcontent {
     margin-left: 0px !important;
   }
@@ -6953,12 +6827,6 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
     width: 85px;
     cursor: pointer;
     height: auto;
-  }
-  #wpcontent #zbs-admin-top-bar {
-    margin-right: 0px;
-  }
-  #wpcontent #zbs-admin-top-bar {
-    padding-left: 30px;
   }
   #wpcontent .ui.grid > .row > [class*="eight wide"].column, #wpcontent .ui.grid > .column.row > [class*="eight wide"].column, #wpcontent .ui.grid > [class*="eight wide"].column, #wpcontent .ui.column.grid > [class*="eight wide"].column {
     width: 100% !important;
@@ -7063,9 +6931,6 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
     margin-left: 10px !important;
     padding-left: 15px !important;
   }
-  #wpcontent #zbs-list-top-bar h2.zbs-white {
-    margin-left: 30px;
-  }
 
   #wpbody {
     margin-left: 30px;
@@ -7078,9 +6943,6 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
   #wpcontent #zbs-mobile-nav {
     margin-left: -10px !important;
     padding-left: 10px !important;
-  }
-  #wpcontent #zbs-list-top-bar h2.zbs-white {
-    margin-left: 0;
   }
 
   #wpbody {
@@ -7114,12 +6976,6 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
     width: 85px;
     cursor: pointer;
     height: auto;
-  }
-  #wpcontent #zbs-admin-top-bar {
-    margin-right: 0px;
-  }
-  #wpcontent #zbs-admin-top-bar {
-    padding-left: 30px;
   }
   #wpcontent .ui.grid > .row > [class*="eight wide"].column, #wpcontent .ui.grid > .column.row > [class*="eight wide"].column, #wpcontent .ui.grid > [class*="eight wide"].column, #wpcontent .ui.column.grid > [class*="eight wide"].column {
     width: 100% !important;
@@ -7498,19 +7354,6 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
   box-shadow: none !important;
 }
 
-#zbs-admin-top-bar {
-  background: #f6f7f7 !important;
-}
-
-#zbs-list-top-bar {
-  border-bottom: 1px solid #CCC;
-  background: #f6f7f7 !important;
-}
-
-#zbs-list-top-bar .zbs-white {
-  color: #2a323c;
-}
-
 .ui.blue.button {
   background-color: #007cba;
 }
@@ -7547,10 +7390,6 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
   background: #007cba;
   border-color: #007cba;
   color: white;
-}
-
-.dashboard-customiser {
-  top: -49px !important;
 }
 
 #zbs-settings-menu .branding.item img {

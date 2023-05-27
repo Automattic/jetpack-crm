@@ -324,6 +324,54 @@ jpcrm-dashcount jpcrm-dashcount-card a {
   font-size: 18px;
 }
 
+.jpcrm-learn-menu {
+  display: flex;
+  align-items: center;
+  max-width: 1551px;
+}
+
+.jpcrm-learn-menu-subdiv-75 {
+  width: 75%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.jpcrm-learn-menu-subdiv-25 {
+  width: 25%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 10px;
+  gap: 10px;
+}
+
+.jpcrm-learn-page-title {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 40px;
+  font-family: var(--jpcrm-font-family-emerald);
+  color: var(--jp-black);
+  padding-right: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 5px;
+}
+.jpcrm-learn-page-title .jpcrm-learn-menu-subdiv-25 {
+  align-self: flex-end;
+}
+
+.jpcrm-info-gridicon-emerald {
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  cursor: pointer;
+}
+
 .jpcrm-listview {
   background-color: var(--jp-white);
   padding: 10px;
@@ -386,19 +434,6 @@ jpcrm-listview-header#jpcrm-listview-header header-item .jpcrm-current-filter:no
   border-radius: 2px;
   height: 100%;
   width: 200px;
-}
-jpcrm-listview-header#jpcrm-listview-header header-item .table-options {
-  margin: 0 1px;
-  padding: 4px 10px;
-  box-sizing: border-box;
-  font-weight: 600;
-  vertical-align: middle;
-  border: 1px solid var(--jp-gray-10);
-  border-radius: 2px;
-  height: 100%;
-}
-jpcrm-listview-header#jpcrm-listview-header header-item .table-options:hover {
-  background-color: var(--jp-gray-0);
 }
 jpcrm-listview-header#jpcrm-listview-header input, jpcrm-listview-header#jpcrm-listview-header select {
   box-sizing: border-box;

@@ -6663,39 +6663,13 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
   background: #1a6ecc;
 }
 
-#zbs-admin-top-bar {
-  position: relative;
-  padding-right: 25px;
-  padding-left: 25px;
-  margin-top: 0px;
-  margin-left: -25px;
-  padding-top: 8px;
-  background: #3f4347;
-  z-index: 2 !important;
+.jpcrm-learn-menu-container {
+  padding: 10px 20px;
+  margin: 0 auto;
+  max-width: 1551px;
 }
-#zbs-admin-top-bar .content-left {
-  width: 48%;
-  padding: 1%;
-  float: right;
-}
-#zbs-admin-top-bar .video {
-  width: 50%;
-  float: left;
-  margin-right: -10px;
-}
-#zbs-admin-top-bar .ui.popup {
+.jpcrm-learn-menu-container .jpcrm-learn-menu .ui.popup {
   max-width: 800px !important;
-}
-#zbs-admin-top-bar .zbs-add-new {
-  margin-right: 10px;
-  margin-left: -5px;
-}
-
-.zbs-white {
-  font-size: 18px;
-  line-height: 35px;
-  color: white;
-  margin-left: 0.4em;
 }
 
 div.ui.learn.button {
@@ -6720,18 +6694,6 @@ div.ui.learn.button .jpcrm-info-gridicon {
 .item:focus {
   outline: none;
   box-shadow: none !important;
-}
-
-#zbs-list-top-bar {
-  color: white;
-  background: #3f4348;
-  padding-right: 25px;
-  padding-bottom: 11px;
-  margin-right: -25px;
-  padding-left: 25px;
-  margin-left: -25px;
-  margin-top: 0px;
-  margin-bottom: 20px;
 }
 
 .popover.right .arrow {
@@ -6905,11 +6867,6 @@ table#zbsFilesTable td {
   margin-right: 4px;
 }
 
-@media only screen and (min-width: 768px) and (max-width: 960px) {
-  #zbs-admin-top-bar {
-    margin-right: 0px !important;
-  }
-}
 /*!
  * Jetpack CRM
  * http://www.zerobscrm.com

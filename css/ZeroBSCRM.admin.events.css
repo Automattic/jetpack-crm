@@ -26,14 +26,6 @@
   margin: 0 auto;
 }
 
-#zerobscrm-owner {
-  position: absolute;
-  right: 50px;
-  width: 211px;
-  display: inline-block;
-}
-
-.post-type-zerobs_event #zerobscrm-owner,
 #zerobs-event-edit #zerobscrm-owner {
   margin-top: 4px;
   z-index: 4;
