@@ -14,6 +14,7 @@ This is an alpha version! The changes listed here are not final.
 - CRM: buttons and colors to Emerald style
 - Dashboard: implement Emerald style
 - Learn menu: implement Emerald style
+- Listview: use Emerald style on totals table
 - Listviews: implement Emerald style
 - Top menu: implement Emerald style
 - Updated composer.lock refs
