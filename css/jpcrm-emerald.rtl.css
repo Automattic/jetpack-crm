@@ -56,6 +56,11 @@
   --jp-gap: 16px;
 }
 
+:root {
+  --jpcrm-font-family-emerald: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen-Sans", "Ubuntu",
+  	"Cantarell", "Helvetica Neue", sans-serif;
+}
+
 /* Remove left padding from WP page content */
 body.jpcrm-admin {
   background: var(--jp-white-off);
@@ -324,6 +329,69 @@ jpcrm-dashcount jpcrm-dashcount-card a {
   font-size: 18px;
 }
 
+.jpcrm-form-grid {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  overflow: auto;
+}
+.jpcrm-form-grid select,
+.jpcrm-form-grid input {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  margin: 0px;
+}
+.jpcrm-form-grid.one-column {
+  grid-template-columns: 1fr;
+  padding: 0px;
+}
+
+.jpcrm-form-label {
+  display: block;
+  font-weight: normal;
+  line-height: 1.4;
+  margin-bottom: 8px;
+  padding: 0px;
+}
+
+.jpcrm-form-input, .jpcrm-form-select {
+  width: 100%;
+  max-width: unset !important;
+}
+
+.jpcrm-form-input-group {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.jpcrm-input-text {
+  font-size: 13px;
+}
+
+.jpcrm-input-select {
+  max-width: unset !important;
+}
+
+@media (min-width: 768px) {
+  .jpcrm-form-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .jpcrm-form-group-span-2 {
+    grid-column: span 2;
+  }
+}
+@media (max-width: 767px) {
+  .jpcrm-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .jpcrm-empty-form-group {
+    display: none;
+  }
+}
 .jpcrm-learn-menu {
   display: flex;
   align-items: center;

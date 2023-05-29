@@ -23,6 +23,7 @@ This is an alpha version! The changes listed here are not final.
 - Minor changes around upcoming functionality change in Twitter.
 
 ### Fixed
+- CRM: edit pages changed to match Jetpack Emerald style
 - CRM: page layout now has a max width of 1551px
 - Prefer stable composer deps.
 

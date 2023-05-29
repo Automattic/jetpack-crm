@@ -20,3 +20,11 @@
 #zeroBSCRM-transaction-meta-box #zbs-transaction-assignment-wrap input.zbstypeahead, #zeroBSCRM-transaction-meta-box #zbs-transaction-assignment-wrap .twitter-typeahead {
   width: 100%;
 }
+
+.zbs-infobox-transaction {
+  margin: 0px !important;
+  padding: 0px !important;
+}
+.zbs-infobox-transaction .zbs-live i.zbs-help-ico {
+  font-size: unset;
+}
