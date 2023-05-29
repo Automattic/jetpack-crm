@@ -159,11 +159,6 @@ html, body {
   margin-top: calc(100vh - 50% - 100px);
 }
 
-.inbox-email-list {
-  display: none;
-  width: 25%;
-}
-
 .starred-email-list {
   display: none;
   width: 25%;
@@ -384,14 +379,6 @@ html, body {
 .zbs-email-thread .zbs-message {
   position: relative;
 }
-.zbs-email-thread .inbox {
-  background: #e7f3fd;
-  padding: 5px;
-  border-radius: 5px;
-  width: 90%;
-  float: left;
-  padding-left: 10px;
-}
 .zbs-email-thread .sent {
   background: #efefef;
   padding: 5px;
@@ -537,14 +524,5 @@ html, body {
   color: #ccc;
 }
 .zbsreadsent .bold {
-  font-weight: 900;
-}
-
-.zbsreadinbox {
-  font-size: 13px;
-  text-align: left;
-  color: #b2d6f5;
-}
-.zbsreadinbox .bold {
   font-weight: 900;
 }
