@@ -173,7 +173,7 @@ jpcrm-top-menu#jpcrm-top-menu menu-bar menu-section #jpcrm-user-menu i.icon {
   font-size: 14px;
   line-height: 24px;
 }
-.jpcrm-button:hover {
+.jpcrm-button:active, .jpcrm-button:focus, .jpcrm-button:hover {
   background: var(--jp-gray-80);
   color: var(--jp-white);
 }
@@ -191,6 +191,7 @@ jpcrm-top-menu#jpcrm-top-menu menu-bar menu-section #jpcrm-user-menu i.icon {
   border: 0px;
   background: transparent;
   color: var(--jp-black);
+  padding: 8px 0px;
 }
 .jpcrm-button.transparent-bg:hover {
   background: transparent;
@@ -262,15 +263,17 @@ jpcrm-top-menu#jpcrm-top-menu menu-bar menu-section #jpcrm-user-menu i.icon {
 .jpcrm-dashcard .jpcrm-listview-table-container {
   margin-top: 8px;
 }
-.jpcrm-dashcard .jpcrm-listview-table-container .div-message-box {
-  background: var(--jp-gray-0);
-  border: 1px dashed var(--jp-gray-20);
+
+.jpcrm-div-message-box {
+  background: var(--jp-gray-0) !important;
+  border: 1px dashed var(--jp-gray-20) !important;
   border-radius: 4px;
   margin: 0px 20px 20px;
   padding: 16px 24px 28px;
   display: block;
 }
-.jpcrm-dashcard .jpcrm-listview-table-container .div-message {
+
+.jpcrm-div-message {
   text-align: center;
   font-family: var(--jpcrm-font-family-emerald);
   font-style: normal;
@@ -411,7 +414,7 @@ jpcrm-dashcount jpcrm-dashcount-card a {
   align-items: center;
   flex-direction: row;
   justify-content: flex-end;
-  padding: 10px;
+  padding: 10px 0px;
   gap: 10px;
 }
 
@@ -440,6 +443,18 @@ jpcrm-dashcount jpcrm-dashcount-card a {
   cursor: pointer;
 }
 
+@media (max-width: 768px) {
+  .jpcrm-learn-menu {
+    flex-wrap: wrap;
+  }
+
+  .jpcrm-learn-menu-subdiv-75,
+.jpcrm-learn-menu-subdiv-25 {
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 100%;
+  }
+}
 .jpcrm-listview {
   background-color: var(--jp-white);
   padding: 10px;
@@ -529,6 +544,7 @@ jpcrm-listview-header#jpcrm-listview-header input[type=search] {
 .jpcrm-listview-table-container .jpcrm-listview-table thead th {
   font-weight: 400;
   border-bottom: 1px solid var(--jp-gray-10);
+  cursor: pointer;
 }
 .jpcrm-listview-table-container .jpcrm-listview-table a {
   text-decoration: none;
@@ -539,7 +555,7 @@ jpcrm-listview-header#jpcrm-listview-header input[type=search] {
   padding: 10px;
 }
 .jpcrm-listview-table-container .jpcrm-listview-table th:not(:first-child), .jpcrm-listview-table-container .jpcrm-listview-table td:not(:first-child) {
-  min-width: 50px;
+  min-width: 120px;
 }
 .jpcrm-listview-table-container .jpcrm-listview-table input[type=checkbox] {
   border: 1px solid var(--jp-gray-10);
@@ -557,7 +573,6 @@ jpcrm-pagination {
   font-size: 16px;
   gap: 0rem;
   align-items: center;
-  text-align: center;
   background: #FFFFFF;
   border: 1px solid var(--jp-gray-5);
   border-radius: 3px;

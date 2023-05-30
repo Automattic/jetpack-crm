@@ -37258,22 +37258,6 @@ body.pushable > .pusher {
   color: #FFF;
 }
 
-.ui.header > .image:not(.icon), .ui.header > img {
-  display: inline-block;
-  margin-top: 0.14285714em;
-  height: auto;
-  vertical-align: middle;
-}
-
-.ui.header > img + .content, .ui.header > .image + .content {
-  padding-right: 0.75rem;
-  vertical-align: middle;
-  max-width: 88%;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
 .ui.menu .ui.dropdown .menu > .item:hover {
   background: #3f4347 !important;
   color: white !important;
@@ -37291,13 +37275,22 @@ body.pushable > .pusher {
   border-radius: 50%;
 }
 
-.jpcrm-listview-table .zbs-co-img img,
-.jpcrm-listview-table .name-and-avatar-list h4.ui.image.header img {
-  max-width: 40px !important;
+.jpcrm-listview-table .jpcrm_name_and_avatar {
+  display: flex;
+  align-items: center;
 }
-.jpcrm-listview-table .name-and-avatar-list h4.ui.image.header,
-.jpcrm-listview-table .name-and-avatar-list h4.ui.header {
-  font-weight: normal;
+.jpcrm-listview-table .jpcrm_name_and_avatar img {
+  max-width: 40px;
+  border-radius: 50%;
+  margin-left: 5px;
+}
+.jpcrm-listview-table .jpcrm_name_and_avatar div {
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
+.jpcrm-listview-table .jpcrm_name_and_avatar .icon {
+  font-size: 2em;
+  padding-top: 0.14285714em;
 }
 
 #zbs-list-warnings-wrap .ui.message {
@@ -37331,4 +37324,9 @@ body.pushable > .pusher {
   border-bottom: 2px dashed orange;
   text-align: center;
   padding-top: 0.6em;
+}
+
+.jpcrm-listview-table-container .jpcrm-pagination-container {
+  text-align: left;
+  margin-bottom: 10px;
 }

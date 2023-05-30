@@ -6325,6 +6325,12 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
   margin-left: 0;
 }
 
+.empty-container-with-spinner {
+  display: flex;
+  align-items: center;
+  height: 400px;
+}
+
 /*!
  * Jetpack CRM
  * http://www.zerobscrm.com
@@ -6783,10 +6789,6 @@ div.ui.learn.button .jpcrm-info-gridicon {
 .jpcrm-email-template-label-content {
   position: absolute;
   bottom: 1em;
-}
-
-.zbs-generic-loading {
-  display: block;
 }
 
 .zbs-generic-loaded {

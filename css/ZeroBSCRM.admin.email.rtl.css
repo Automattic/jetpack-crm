@@ -93,23 +93,19 @@ html, body {
   position: relative;
 }
 
-.zbs-email-list-item:hover {
-  background: #f7f7f7;
-  border-right: 7px solid #2085d0 !important;
-}
-
-.zbs-email-list .active:hover {
-  border-right: 7px solid #2085d0 !important;
-  background: #f7f7f7;
-}
-
 .zbs-email-list .item {
   border-right: 7px solid white;
 }
 
+.zbs-email-list .active:hover,
 .zbs-email-list .active {
-  border-right: 7px solid #2085d0;
   background: #f7f7f7;
+  border-right: 7px solid var(--jp-green);
+}
+
+.zbs-email-list-item:hover {
+  background: #f7f7f7;
+  border-right: 7px solid var(--jp-green-5);
 }
 
 .zbs-email-list input[type=checkbox], input[type=radio] {

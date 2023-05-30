@@ -5882,6 +5882,12 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
   margin-left: 0;
 }
 
+.empty-container-with-spinner {
+  display: flex;
+  align-items: center;
+  height: 400px;
+}
+
 /*!
  * Jetpack CRM
  * http://www.zerobscrm.com
@@ -5986,10 +5992,12 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
   display: none;
 }
 
-/* .zbs-metabox.segment.zbs-draggable, .zbs-metabox-head.segment.zbs-draggable {
-    opacity: 0.45;
-    color: rgba(40,40,40,0.3);
-}*/
+#zbs-custom-quicklinks,
+#zbs-edit-sidebar-wrap {
+  box-shadow: unset;
+  padding-right: 0;
+}
+
 /*!
  * Jetpack CRM
  * http://www.zerobscrm.com
@@ -6450,10 +6458,6 @@ div.ui.learn.button .jpcrm-info-gridicon {
   bottom: 1em;
 }
 
-.zbs-generic-loading {
-  display: block;
-}
-
 .zbs-generic-loaded {
   display: none;
 }
@@ -6897,15 +6901,6 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
 
   .zbs-invoice-topper, #zbs_invoice_logos, #zbs-business-info-wrapper, #billing-to, #assign-to, .zbs-controls {
     width: 100% !important;
-  }
-
-  #zbsExtensionsPage .zbsExtensionGroup .zbsExtensionList .zbsExtension {
-    width: 100% !important;
-  }
-
-  .zbs-page-wrap {
-    margin-right: 0px !important;
-    padding-right: 0px !important;
   }
 }
 /* TINY old Mobile Style */
