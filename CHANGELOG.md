@@ -25,6 +25,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Fixed
 - CRM: edit pages changed to match Jetpack Emerald style
+- CRM: Fix new lines display in quote templates
 - CRM: page layout now has a max width of 1551px
 - Extensions: catch PHP notice if offline
 - Prefer stable composer deps.
