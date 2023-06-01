@@ -16,6 +16,7 @@ This is an alpha version! The changes listed here are not final.
 - Listview: use Emerald style on totals table
 - Listviews: implement Emerald style
 - Top menu: implement Emerald style
+- Updated package dependencies.
 
 ### Deprecated
 - Minor changes around upcoming functionality change in Twitter.
