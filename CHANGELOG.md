@@ -10,15 +10,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 This is an alpha version! The changes listed here are not final.
 
 ### Changed
-- Bump dependency version.
 - CRM: buttons and colors to Emerald style
 - Dashboard: implement Emerald style
 - Learn menu: implement Emerald style
 - Listview: use Emerald style on totals table
 - Listviews: implement Emerald style
 - Top menu: implement Emerald style
-- Updated composer.lock refs
-- Update lock file.
 
 ### Deprecated
 - Minor changes around upcoming functionality change in Twitter.
@@ -29,7 +26,6 @@ This is an alpha version! The changes listed here are not final.
 - CRM: fix whitelabel bug with full menu layout
 - CRM: page layout now has a max width of 1551px
 - Extensions: catch PHP notice if offline
-- Prefer stable composer deps.
 - Quotes: sort by status now works
 
 ## [5.8.0] - 2023-05-18
