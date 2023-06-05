@@ -17,6 +17,7 @@ This is an alpha version! The changes listed here are not final.
 - Listviews: implement Emerald style
 - Top menu: implement Emerald style
 - Updated package dependencies.
+- User roles: further restricted capabilities on some roles
 
 ### Deprecated
 - Minor changes around upcoming functionality change in Twitter.
