@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 This is an alpha version! The changes listed here are not final.
 
+### Added
+- PHPCompatibility: Adding additional rules based on new PHP added in the Automations project.
+
 ### Changed
 - CRM: buttons and colors to Emerald style
 - Dashboard: implement Emerald style
