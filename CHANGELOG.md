@@ -21,6 +21,7 @@ This is an alpha version! The changes listed here are not final.
 - Top menu: implement Emerald style
 - Updated package dependencies.
 - User roles: further restricted capabilities on some roles
+- Use sha256 instead of md5 for gravatar images
 
 ### Deprecated
 - Minor changes around upcoming functionality change in Twitter.
