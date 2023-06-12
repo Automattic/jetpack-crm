@@ -33,6 +33,8 @@ This is an alpha version! The changes listed here are not final.
 - CRM: page layout now has a max width of 1551px
 - Extensions: catch PHP notice if offline
 - Invoices: show assigned contact/company link
+- Listview: per-page settings no longer reset
+  Listview: PHP notice no longer shows when saving settings
 - Quotes: sort by status now works
 
 ## [5.8.0] - 2023-05-18
