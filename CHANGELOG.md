@@ -36,6 +36,7 @@ This is an alpha version! The changes listed here are not final.
 - Listview: per-page settings no longer reset
   Listview: PHP notice no longer shows when saving settings
 - Quotes: sort by status now works
+- White label: JPCRM support and resources pages no longer show
 
 ## [5.8.0] - 2023-05-18
 ### Added
