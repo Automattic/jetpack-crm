@@ -525,3 +525,7 @@ i.zbs-hide-longdesc {
 .jpcrm-pinned-logs .jpcrm-pinned-log .jpcrm-pinned-log-author-date-meta {
   text-align: left;
 }
+
+#do-not-email {
+  cursor: pointer;
+}
