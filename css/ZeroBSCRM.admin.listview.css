@@ -37274,15 +37274,6 @@ body.pushable > .pusher {
   color: #FFF;
 }
 
-.ui.menu .ui.dropdown .menu > .item:hover {
-  background: #3f4347 !important;
-  color: white !important;
-}
-
-#learn {
-  margin-right: 0;
-}
-
 .zero-bs-crm_page_manage-companies-crm .zbs-co-img img {
   width: 30px;
   height: auto;

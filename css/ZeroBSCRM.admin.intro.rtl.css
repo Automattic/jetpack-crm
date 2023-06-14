@@ -7,18 +7,6 @@
  * Date: 1 Mar 2019
  * 
  */
-.admin_page_zerobscrm-plugin jpcrm-top-menu {
-  display: none;
-}
-.admin_page_zerobscrm-plugin .top-bar-welcome {
-  height: 5px;
-  background: #17b0fb;
-  margin-right: -20px;
-}
-.admin_page_zerobscrm-plugin #zbs-welcome {
-  color: #555;
-  padding-top: 110px;
-}
 .admin_page_zerobscrm-plugin #zbs-welcome .container {
   margin: 0 auto;
   max-width: 720px;

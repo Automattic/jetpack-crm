@@ -614,13 +614,16 @@ textarea.form-control {
   font-weight: 400;
 }
 
-.zbs-tel-wrap .form-control.zbs-tel {
-  display: inline-block;
+.zbs-tel-wrap {
+  display: flex;
+  flex-wrap: wrap;
 }
-
-.zbs-tel-wrap a {
-  margin-top: 3px !important;
-  margin-right: 10px !important;
+.zbs-tel-wrap input {
+  flex: 1 0 200px;
+}
+.zbs-tel-wrap a.button {
+  margin-right: 10px;
+  padding-top: 2px;
 }
 
 .ui.segment.zbscentral {
@@ -4388,39 +4391,6 @@ button.close {
   text-align: center;
 }
 
-#sgpBody {
-  margin: 20px 5px 5px 25px;
-}
-
-#icon-sb {
-  background: url(../i/icon-32.png) no-repeat;
-  display: inline-block;
-  width: 64px;
-  height: 64px;
-  float: right;
-  margin-left: 10px;
-  margin-top: -10px;
-}
-
-.floatingButton {
-  width: 108px;
-  height: 50px;
-  margin: 10px;
-  margin-top: 0;
-  float: right;
-  text-align: center;
-}
-
-.floatingButton input {
-  margin-top: 7px;
-}
-
-.clearfix:before, .clearfix:after {
-  display: table;
-  content: "";
-  line-height: 0;
-}
-
 #ZeroBSCRMAdminPage table {
   max-width: 100%;
   background-color: transparent;
@@ -5242,10 +5212,6 @@ th.column-ID {
   margin-top: 18px;
 }
 
-#sgpBody .wrap h2 {
-  line-height: 14px !important;
-}
-
 .whclpActionMsg, .lle580 {
   background: #FFF;
   text-align: center;
@@ -5720,12 +5686,7 @@ div.calendar-table .table-condensed > tbody > tr > td, div.calendar-table .table
   color: #8bc63f !important;
 }
 
-#wpcontent {
-  /* Removed  !important 3.0.12 as was conflicting with calypsoify, avoid using these without testing */
-  margin-right: 160px;
-  margin-top: 0px;
-}
-
+/* Full-screen mode */
 body.zbs-fullscreen #wpcontent, body.zbs-fullscreen #wpfooter {
   margin-right: 0px !important;
   margin-top: -32px !important;
@@ -6355,116 +6316,6 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
   margin-top: 5px;
 }
 
-#zbs-add-new-compay-modal .tiny {
-  font-size: 11px;
-  font-style: italic;
-}
-
-#zbsExtensionsPage {
-  width: 100%;
-  padding-left: 1em;
-}
-#zbsExtensionsPage h2 i.fa {
-  color: green;
-}
-#zbsExtensionsPage .zbsExtensionGroup {
-  margin: 14px;
-  background: #FFF;
-  padding: 20px;
-  border-radius: 4px;
-}
-#zbsExtensionsPage .zbsExtensionGroup h2 {
-  margin-top: -10px;
-  color: #428bca;
-}
-#zbsExtensionsPage .zbsExtensionGroup p {
-  font-size: 16px;
-}
-#zbsExtensionsPage .zbsExtensionGroup .zbsExtensionList {
-  position: relative;
-  width: 100%;
-  clear: both;
-}
-#zbsExtensionsPage .zbsExtensionGroup .zbsExtensionList .zbsFreeExtension .zbsExtensionImg {
-  text-align: center;
-  background: green;
-  padding: 20px 40px;
-  border-top-right-radius: 4px;
-  border-top-left-radius: 4px;
-}
-#zbsExtensionsPage .zbsExtensionGroup .zbsExtensionList .zbsFreeExtension .zbsExtensionImg i.fa {
-  font-size: 68px;
-  color: #FFF;
-}
-#zbsExtensionsPage .zbsExtensionGroup .zbsExtensionList .zbsFreeExtension .zbsExtensionImg img {
-  max-width: 100%;
-}
-#zbsExtensionsPage .zbsExtensionGroup .zbsExtensionList .zbsPaidExtension .zbsExtensionImg {
-  text-align: center;
-}
-#zbsExtensionsPage .zbsExtensionGroup .zbsExtensionList .zbsPaidExtension .zbsExtensionImg img {
-  max-width: 100%;
-}
-#zbsExtensionsPage .zbsExtensionGroup .zbsExtensionList .zbsPaidExtension .zbsExtensionImg i.fa {
-  font-size: 68px;
-  color: #FFF;
-}
-#zbsExtensionsPage .zbsExtensionGroup .zbsExtensionList .zbsExtension {
-  position: relative;
-  text-align: center;
-  width: 23%;
-  float: right;
-  margin: 10px;
-  border-radius: 4px;
-  border: 1px solid #f1f1f1;
-  padding-bottom: 12px;
-  -webkit-box-shadow: 0px 2px 24px -6px gray;
-  -moz-box-shadow: 0px 2px 24px -6px gray;
-  box-shadow: 0px 2px 24px -6px gray;
-}
-#zbsExtensionsPage .zbsExtensionGroup .zbsExtensionList .zbsExtension h3 {
-  text-align: center;
-}
-#zbsExtensionsPage .zbsExtensionGroup .zbsExtensionList .zbsExtension p {
-  text-align: center;
-  padding: 0px 8px;
-  min-height: 48px;
-  margin-bottom: 44px;
-}
-#zbsExtensionsPage .zbsExtensionGroup .zbsExtensionList .zbsExtension .zbsExtensionButton {
-  position: absolute;
-  bottom: 16px;
-  right: 0;
-  width: 100%;
-  text-align: center;
-  line-height: 30px;
-  font-size: 16px;
-}
-#zbsExtensionsPage .zbsExtensionGroup .zbsExtensionList .zbsExtension .zbsExtensionButton button {
-  text-align: center;
-}
-#zbsExtensionsPage .zbsExtensionGroup .zbsExtensionList .zbsExtension .zbsExtensionButton strong {
-  color: green;
-}
-#zbsExtensionsPage .zbsExtensionGroup .zbsExtensionList .zbsExtension.zbsFreeExtension {
-  width: 20%;
-  max-width: 250px;
-  min-width: 150px;
-  min-height: 266px;
-}
-#zbsExtensionsPage .zbsExtensionGroup .zbsExtensionList .zbsExtension.zbsFreeExtension .zbsExtensionImg {
-  opacity: 0.6;
-}
-#zbsExtensionsPage .zbsExtensionGroup .zbsExtensionList .zbsExtension.zbsFreeExtension .zbsExtensionImg i.fa {
-  font-size: 56px;
-}
-#zbsExtensionsPage .zbsExtensionGroup .zbsExtensionList .zbsExtension.zbsFreeExtension h3 {
-  font-size: 20px;
-}
-#zbsExtensionsPage .zbsExtensionGroup .zbsExtensionList .zbsExtension.zbsFreeExtension p {
-  font-size: 15px;
-}
-
 #zbsDeletionPage {
   position: relative;
   width: 100%;
@@ -6496,106 +6347,6 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
 }
 #zbsDeletionPage #zbsDeletionMsgWrap .zbsDeletionAction button {
   font-size: 16px;
-}
-
-.zbs-account-connector {
-  padding: 20px;
-}
-.zbs-account-connector .loadingAlert {
-  display: none;
-  text-align: center;
-  float: none !important;
-  border: 0px solid white !important;
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-.zbs-account-connector .loadingAlert .spinner {
-  background-size: 16px 16px;
-  opacity: 0.7;
-  filter: alpha(opacity=70);
-  width: 16px;
-  height: 16px;
-  margin: 5px 5px 0;
-}
-.zbs-account-connector .zbs-extensions {
-  display: inline-block;
-  padding: 10px;
-  text-align: center;
-  width: 100%;
-  margin-bottom: 10px;
-  border: 1px dashed #ccc;
-  background: #f9f9f9;
-}
-.zbs-account-connector .zbs-extensions .Active, .zbs-account-connector .zbs-extensions .active {
-  margin-right: 10px;
-  padding: 5px;
-  color: white !important;
-  background: #18c518;
-  border-radius: 5px;
-}
-.zbs-account-connector .zbs-extensions .Cancelled, .zbs-account-connector .zbs-extensions .cancelled {
-  margin-right: 10px;
-  padding: 5px;
-  color: white !important;
-  background: #b54141;
-  border-radius: 5px;
-}
-.zbs-account-connector .zbs-extensions div {
-  line-height: 35px;
-}
-.zbs-account-connector #zbs-extensions-manager-unlink-wrap {
-  text-align: center;
-  margin-bottom: 3em;
-}
-.zbs-account-connector .connect-account-form {
-  display: none;
-  max-width: 500px;
-  margin-right: auto !important;
-  margin-left: auto !important;
-}
-.zbs-account-connector .connect-account-button {
-  margin-bottom: 3em;
-  text-align: center;
-  margin-top: 2em;
-}
-.zbs-account-connector .connect-account {
-  margin: 50px;
-  background: white;
-  padding: 20px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-.zbs-account-connector .installed-zbs-plugins {
-  max-width: 700px;
-  margin-right: auto;
-  margin-left: auto;
-}
-.zbs-account-connector .zbs-no-premium {
-  max-width: 400px;
-  text-align: center;
-  padding: 2em;
-  margin-right: auto !important;
-  margin-left: auto !important;
-}
-.zbs-account-connector label {
-  margin-top: 10px;
-}
-.zbs-account-connector .green, .zbs-account-connector .red, .zbs-account-connector .black {
-  font-weight: 800;
-  font-size: 14px;
-}
-.zbs-account-connector .green {
-  color: green;
-}
-.zbs-account-connector .red {
-  color: red;
-}
-.zbs-account-connector .black {
-  color: black;
-}
-.zbs-account-connector .no-account {
-  text-align: center;
-  margin-top: 10px;
 }
 
 .zbs-settings_page_zerobscrm-plugin-settings .wfieldname {
@@ -6687,15 +6438,6 @@ div.ui.learn.button .jpcrm-info-gridicon {
   margin-right: 4px;
 }
 
-.sales-overview {
-  background: #3f4347 !important;
-  margin-right: -25px;
-  padding-right: 25px;
-}
-.sales-overview h3 {
-  color: white !important;
-}
-
 .item:focus {
   outline: none;
   box-shadow: none !important;
@@ -6725,15 +6467,6 @@ div.ui.learn.button .jpcrm-info-gridicon {
   background: none !important;
 }
 
-.learn-h3 {
-  font-weight: 900;
-  font-size: 20px;
-}
-
-#learn-pop {
-  z-index: 9999999999;
-}
-
 #zbs-team-user-table .dn {
   line-height: 30px;
   float: right;
@@ -6754,10 +6487,6 @@ div.ui.learn.button .jpcrm-info-gridicon {
 
 .clear {
   clear: both;
-}
-
-.zbs-inner-segment {
-  margin-left: 25px !important;
 }
 
 .zbs-cp-file-edit-page {

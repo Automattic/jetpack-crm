@@ -65,10 +65,6 @@
 body.jpcrm-admin {
   background: var(--jp-white-off);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen-Sans", "Ubuntu", "Cantarell", "Helvetica Neue", sans-serif;
-  /* Shows weird arrow if using an input with a list attribute */
-}
-body.jpcrm-admin ::-webkit-calendar-picker-indicator {
-  display: none !important;
 }
 body.jpcrm-admin #wpcontent {
   padding-right: 0;
@@ -83,6 +79,11 @@ body.jpcrm-admin .alternating-colors tr:nth-child(even) {
   background-color: var(--jp-gray-0);
 }
 
+@media screen and (max-width: 600px) {
+  body.jpcrm-admin #wpbody {
+    padding-top: 0;
+  }
+}
 jpcrm-top-menu#jpcrm-top-menu {
   padding: 20px 20px 0px 20px;
   display: block;
@@ -113,6 +114,7 @@ jpcrm-top-menu#jpcrm-top-menu .logo-cube .cube-side.side1 {
 }
 jpcrm-top-menu#jpcrm-top-menu .logo-cube .cube-side.side1 img {
   max-width: 100%;
+  max-height: 40px;
 }
 jpcrm-top-menu#jpcrm-top-menu .logo-cube .cube-side.side2 {
   font-size: 40px;
@@ -135,6 +137,7 @@ jpcrm-top-menu#jpcrm-top-menu menu-bar menu-section .item {
   color: var(--jp-black);
   padding: 1em;
   line-height: 1;
+  white-space: nowrap;
 }
 jpcrm-top-menu#jpcrm-top-menu menu-bar menu-section .item.current_menu_item {
   border-bottom: 2px solid var(--jp-black);
@@ -289,9 +292,12 @@ jpcrm-dashcount {
   box-sizing: content-box;
   margin: 10px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, 300px);
+  grid-template-columns: repeat(auto-fit, 250px);
   counter-reset: grid-items;
   grid-gap: 10px 20px;
+}
+jpcrm-dashcount.wide-cards {
+  grid-template-columns: repeat(auto-fit, 300px);
 }
 jpcrm-dashcount jpcrm-dashcount-card {
   display: flex;
