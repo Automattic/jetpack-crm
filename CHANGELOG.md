@@ -28,6 +28,7 @@ This is an alpha version! The changes listed here are not final.
 - Minor changes around upcoming functionality change in Twitter.
 
 ### Fixed
+- Client Portal: Fix a fatal error initializing endpoints and shortcodes.
 - CRM: edit pages changed to match Jetpack Emerald style
 - CRM: Fix new lines display in quote templates
 - CRM: fix whitelabel bug with full menu layout
