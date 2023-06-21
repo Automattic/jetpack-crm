@@ -5,7 +5,7 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [5.9.0-alpha] - unreleased
+## [6.0.0-alpha] - unreleased
 
 This is an alpha version! The changes listed here are not final.
 
@@ -16,6 +16,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Changed
 - CRM: buttons and colors to Emerald style
+- CRM: Change version to 6.0.0
 - Dashboard: implement Emerald style
 - Learn menu: implement Emerald style
 - Listview: use Emerald style on totals table
@@ -202,7 +203,7 @@ This is an alpha version! The changes listed here are not final.
 - Improved: Added a migration to remove outdated AKA lines
 
 [5.5.4-a.1]: https://github.com/Automattic/jetpack-crm/compare/v5.5.3...v5.5.4-a.1
-[5.9.0-alpha]: https://github.com/Automattic/jetpack-crm/compare/5.8.0...5.9.0-alpha
+[6.0.0-alpha]: https://github.com/Automattic/jetpack-crm/compare/5.8.0...6.0.0-alpha
 [5.8.0]: https://github.com/Automattic/jetpack-crm/compare/5.7.0...5.8.0
 [5.7.0]: https://github.com/Automattic/jetpack-crm/compare/v5.6.0...v5.7.0
 [5.6.0]: https://github.com/Automattic/jetpack-crm/compare/v5.5.4-a.1...v5.6.0
