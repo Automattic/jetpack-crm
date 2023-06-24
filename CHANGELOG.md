@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 This is an alpha version! The changes listed here are not final.
 
+### Fixed
+- Contacts: Fix Filter options not available on the main contacts listing
+
 ## [6.0.0] - 2023-06-21
 ### Added
 - CRM: Revamped CRM User Interface - Merge the sleek aesthetics of Jetpack’s style, bringing a new level of sophistication and seamless navigation to your CRM experience [#30916]
