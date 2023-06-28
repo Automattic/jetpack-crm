@@ -11,6 +11,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Fixed
 - Contacts: Fix Filter options not available on the main contacts listing
+- File Uploads: Fix bug that prevented file uploads from working in environments where the PHP finfo_open function was not available
 
 ## [6.0.0] - 2023-06-21
 ### Added
