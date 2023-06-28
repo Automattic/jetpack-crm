@@ -46,6 +46,18 @@ return array(
 		'version' => '2.11.21.0',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/ManifestGenerator.php'
 	),
+	'Automattic\\Jetpack\\CRM\\REST_API\\V4\\REST_Base_Controller' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/rest-api/v4/class-rest-base-controller.php'
+	),
+	'Automattic\\Jetpack\\CRM\\REST_API\\V4\\REST_Base_Objects_Controller' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/rest-api/v4/class-rest-base-objects-controller.php'
+	),
+	'Automattic\\Jetpack\\CRM\\REST_API\\V4\\REST_Contacts_Controller' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/rest-api/v4/class-rest-contacts-controller.php'
+	),
 	'Automattic\\Jetpack\\Composer\\Manager' => array(
 		'version' => '1.1.11.0',
 		'path'    => $vendorDir . '/automattic/jetpack-composer-plugin/src/class-manager.php'
