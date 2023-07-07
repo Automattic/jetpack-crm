@@ -132,3 +132,8 @@
   max-width: 25%;
   color: #CCC;
 }
+
+#zbs-segment-edit-act-save i {
+  height: unset;
+  margin-left: 5px;
+}
