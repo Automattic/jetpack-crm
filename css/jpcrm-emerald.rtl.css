@@ -137,7 +137,6 @@ jpcrm-top-menu#jpcrm-top-menu menu-bar menu-section .item {
   color: var(--jp-black);
   padding: 1em;
   line-height: 1;
-  white-space: nowrap;
 }
 jpcrm-top-menu#jpcrm-top-menu menu-bar menu-section .item.current_menu_item {
   border-bottom: 2px solid var(--jp-black);
@@ -150,7 +149,22 @@ jpcrm-top-menu#jpcrm-top-menu menu-bar menu-section #jpcrm-user-menu {
   min-width: 580px;
 }
 jpcrm-top-menu#jpcrm-top-menu menu-bar menu-section #jpcrm-user-menu i.icon {
-  margin-left: 5px;
+  margin-left: 8px;
+}
+jpcrm-top-menu#jpcrm-top-menu menu-bar menu-section .jpcrm-user-menu-link {
+  display: flex;
+  align-items: flex-start;
+}
+jpcrm-top-menu#jpcrm-top-menu menu-bar menu-section .jpcrm-user-menu-link .item {
+  display: flex;
+  align-items: center;
+}
+jpcrm-top-menu#jpcrm-top-menu menu-bar menu-section .jpcrm-user-menu-link .item i {
+  margin-left: 10px;
+  color: rgba(0, 0, 0, 0.4);
+}
+jpcrm-top-menu#jpcrm-top-menu menu-bar menu-section .jpcrm-user-menu-link:hover .item i {
+  color: rgba(0, 0, 0, 0.87);
 }
 
 .jpcrm-button {
