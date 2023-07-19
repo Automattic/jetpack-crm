@@ -59,7 +59,7 @@ function render_initial_state() {
 	/**
 	 * Allow external plugins to modify Automations UI hydration data.
 	 *
-	 * @since 6.0.1-alpha
+	 * @since 6.1.0-alpha
 	 *
 	 * @param array {
 	 *     Array of default data we need to render our React UI.

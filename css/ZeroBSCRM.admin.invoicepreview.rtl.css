@@ -6427,6 +6427,9 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
 .jpcrm-learn-menu-container .jpcrm-learn-menu .ui.popup {
   max-width: 800px !important;
 }
+.jpcrm-learn-menu-container.jpcrm-full-width {
+  max-width: none;
+}
 
 div.ui.learn.button {
   background: transparent;
