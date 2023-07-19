@@ -21,6 +21,7 @@ This is an alpha version! The changes listed here are not final.
 - Contacts: Fix Filter options not available on the main contacts listing
 - File Uploads: Fix bug that prevented file uploads from working in environments where the PHP finfo_open function was not available
 - Menu: Improved alignment for items in the menu
+- OAuth/Gmail fix to allow send links and images in the email content, supporting text/plain.
 - Segments: Fix bug that prevented dates to be saved in some environments
 
 ## [6.0.0] - 2023-06-21
