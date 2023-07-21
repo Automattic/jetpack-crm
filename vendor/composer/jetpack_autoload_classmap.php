@@ -59,11 +59,11 @@ return array(
 		'path'    => $baseDir . '/src/rest-api/v4/class-rest-contacts-controller.php'
 	),
 	'Automattic\\Jetpack\\Composer\\Manager' => array(
-		'version' => '1.1.11.0',
+		'version' => '1.1.12.0-alpha1689966284',
 		'path'    => $vendorDir . '/automattic/jetpack-composer-plugin/src/class-manager.php'
 	),
 	'Automattic\\Jetpack\\Composer\\Plugin' => array(
-		'version' => '1.1.11.0',
+		'version' => '1.1.12.0-alpha1689966284',
 		'path'    => $vendorDir . '/automattic/jetpack-composer-plugin/src/class-plugin.php'
 	),
 	'Automattic\\Jetpack\\Constants' => array(
