@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 This is an alpha version! The changes listed here are not final.
 
 ### Added
+- Allow to retrieve only logs with notes from the Cron Log System.
 - Listing pages: Add a new setting that allows listing pages to utilize the full width of the screen
 
 ### Changed
