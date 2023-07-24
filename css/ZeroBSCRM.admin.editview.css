@@ -152,7 +152,7 @@
 
 @media (min-width: 1500px) {
   .zbs-hide,
-tr.zbs-field-group-tr .zbs-field-group.zbs-hide {
+  tr.zbs-field-group-tr .zbs-field-group.zbs-hide {
     display: none !important;
   }
 }

@@ -1728,27 +1728,23 @@ html:lang(he-il) .rtl #wpadminbar * {
 
 @media screen and (max-width: 782px) {
   #wpadminbar ul#wp-admin-bar-root-default > li,
-.network-admin #wpadminbar ul#wp-admin-bar-top-secondary > li#wp-admin-bar-my-account {
+  .network-admin #wpadminbar ul#wp-admin-bar-top-secondary > li#wp-admin-bar-my-account {
     margin-right: 0;
   }
-
   html #wpadminbar {
     height: 46px;
     min-width: 300px;
   }
-
   #wpadminbar * {
     font: 400 14px/32px "Open Sans", sans-serif;
   }
-
   #wpadminbar .quicklinks .ab-empty-item,
-#wpadminbar .quicklinks > ul > li > a {
+  #wpadminbar .quicklinks > ul > li > a {
     padding: 0;
     height: 46px;
     line-height: 46px;
     width: auto;
   }
-
   #wpadminbar .ab-icon {
     font: 40px/1 dashicons !important;
     margin: 0;
@@ -1757,57 +1753,45 @@ html:lang(he-il) .rtl #wpadminbar * {
     height: 46px;
     text-align: center;
   }
-
   #wpadminbar .ab-icon:before {
     text-align: center;
   }
-
   #wpadminbar .ab-submenu {
     padding: 0;
   }
-
   #wpadminbar #wp-admin-bar-my-account a.ab-item,
-#wpadminbar #wp-admin-bar-my-sites a.ab-item,
-#wpadminbar #wp-admin-bar-site-name a.ab-item {
+  #wpadminbar #wp-admin-bar-my-sites a.ab-item,
+  #wpadminbar #wp-admin-bar-site-name a.ab-item {
     text-overflow: clip;
   }
-
   #wpadminbar .ab-label {
     display: none;
   }
-
   #wpadminbar .menupop li.hover > .ab-sub-wrapper,
-#wpadminbar .menupop li:hover > .ab-sub-wrapper {
+  #wpadminbar .menupop li:hover > .ab-sub-wrapper {
     margin-top: -46px;
   }
-
   #wpadminbar #wp-admin-bar-comments .ab-icon,
-#wpadminbar #wp-admin-bar-my-account.with-avatar #wp-admin-bar-user-actions > li {
+  #wpadminbar #wp-admin-bar-my-account.with-avatar #wp-admin-bar-user-actions > li {
     margin: 0;
   }
-
   #wpadminbar .ab-top-menu .menupop .ab-sub-wrapper .menupop > .ab-item {
     padding-right: 30px;
   }
-
   #wpadminbar .menupop .menupop > .ab-item:before {
     top: 10px;
     right: 6px;
   }
-
   #wpadminbar .ab-top-menu > .menupop > .ab-sub-wrapper .ab-item {
     font-size: 16px;
     padding: 8px 16px;
   }
-
   #wpadminbar .ab-top-menu > .menupop > .ab-sub-wrapper a:empty {
     display: none;
   }
-
   #wpadminbar #wp-admin-bar-wp-logo > .ab-item {
     padding: 0;
   }
-
   #wpadminbar #wp-admin-bar-wp-logo > .ab-item .ab-icon {
     padding: 0;
     width: 52px;
@@ -1815,22 +1799,19 @@ html:lang(he-il) .rtl #wpadminbar * {
     text-align: center;
     vertical-align: top;
   }
-
   #wpadminbar #wp-admin-bar-wp-logo > .ab-item .ab-icon:before {
     font: 28px/1 dashicons !important;
     top: -3px;
   }
-
   #wpadminbar .ab-icon,
-#wpadminbar .ab-item:before {
+  #wpadminbar .ab-item:before {
     padding: 0;
   }
-
   #wpadminbar #wp-admin-bar-customize > .ab-item,
-#wpadminbar #wp-admin-bar-edit > .ab-item,
-#wpadminbar #wp-admin-bar-my-account > .ab-item,
-#wpadminbar #wp-admin-bar-my-sites > .ab-item,
-#wpadminbar #wp-admin-bar-site-name > .ab-item {
+  #wpadminbar #wp-admin-bar-edit > .ab-item,
+  #wpadminbar #wp-admin-bar-my-account > .ab-item,
+  #wpadminbar #wp-admin-bar-my-sites > .ab-item,
+  #wpadminbar #wp-admin-bar-site-name > .ab-item {
     text-indent: 100%;
     white-space: nowrap;
     overflow: hidden;
@@ -1839,19 +1820,17 @@ html:lang(he-il) .rtl #wpadminbar * {
     color: #a0a5aa;
     position: relative;
   }
-
   #wpadminbar .ab-icon,
-#wpadminbar .ab-item:before,
-#wpadminbar > #wp-toolbar > #wp-admin-bar-root-default .ab-icon {
+  #wpadminbar .ab-item:before,
+  #wpadminbar > #wp-toolbar > #wp-admin-bar-root-default .ab-icon {
     padding: 0;
     margin-right: 0;
   }
-
   #wpadminbar #wp-admin-bar-customize > .ab-item:before,
-#wpadminbar #wp-admin-bar-edit > .ab-item:before,
-#wpadminbar #wp-admin-bar-my-account > .ab-item:before,
-#wpadminbar #wp-admin-bar-my-sites > .ab-item:before,
-#wpadminbar #wp-admin-bar-site-name > .ab-item:before {
+  #wpadminbar #wp-admin-bar-edit > .ab-item:before,
+  #wpadminbar #wp-admin-bar-my-account > .ab-item:before,
+  #wpadminbar #wp-admin-bar-my-sites > .ab-item:before,
+  #wpadminbar #wp-admin-bar-site-name > .ab-item:before {
     display: block;
     text-indent: 0;
     font: 400 32px/1 dashicons;
@@ -1862,19 +1841,15 @@ html:lang(he-il) .rtl #wpadminbar * {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-
   #wpadminbar #wp-admin-bar-appearance {
     margin-top: 0;
   }
-
   #wpadminbar .quicklinks li .blavatar:before {
     display: none;
   }
-
   #wpadminbar #wp-admin-bar-search {
     display: none;
   }
-
   #wpadminbar #wp-admin-bar-new-content .ab-icon:before {
     top: 0;
     line-height: 53px;
@@ -1883,15 +1858,12 @@ html:lang(he-il) .rtl #wpadminbar * {
     width: 52px;
     display: block;
   }
-
   #wpadminbar #wp-admin-bar-updates {
     text-align: center;
   }
-
   #wpadminbar #wp-admin-bar-updates .ab-icon:before {
     top: 3px;
   }
-
   #wpadminbar #wp-admin-bar-comments .ab-icon:before {
     display: block;
     font-size: 34px;
@@ -1899,12 +1871,10 @@ html:lang(he-il) .rtl #wpadminbar * {
     line-height: 47px;
     top: 0;
   }
-
   #wp-toolbar > ul > li,
-#wpadminbar #wp-admin-bar-user-actions.ab-submenu img.avatar {
+  #wpadminbar #wp-admin-bar-user-actions.ab-submenu img.avatar {
     display: none;
   }
-
   #wpadminbar #wp-admin-bar-my-account > a {
     position: relative;
     white-space: nowrap;
@@ -1913,7 +1883,6 @@ html:lang(he-il) .rtl #wpadminbar * {
     padding: 0 10px;
     overflow: hidden;
   }
-
   #wpadminbar .quicklinks li#wp-admin-bar-my-account.with-avatar > a img {
     position: absolute;
     top: 13px;
@@ -1921,69 +1890,59 @@ html:lang(he-il) .rtl #wpadminbar * {
     width: 26px;
     height: 26px;
   }
-
   #wpadminbar #wp-admin-bar-user-actions.ab-submenu {
     padding: 0;
   }
-
   #wpadminbar #wp-admin-bar-user-info .display-name {
     height: auto;
     font-size: 16px;
     line-height: 24px;
     color: #eee;
   }
-
   #wpadminbar #wp-admin-bar-user-info a {
     padding-top: 4px;
   }
-
   #wpadminbar #wp-admin-bar-user-info .username {
     line-height: 0.8 !important;
     margin-bottom: -2px;
   }
-
   #wpadminbar li#wp-admin-bar-comments,
-#wpadminbar li#wp-admin-bar-customize,
-#wpadminbar li#wp-admin-bar-edit,
-#wpadminbar li#wp-admin-bar-menu-toggle,
-#wpadminbar li#wp-admin-bar-my-account,
-#wpadminbar li#wp-admin-bar-my-sites,
-#wpadminbar li#wp-admin-bar-new-content,
-#wpadminbar li#wp-admin-bar-site-name,
-#wpadminbar li#wp-admin-bar-updates,
-#wpadminbar li#wp-admin-bar-wp-logo {
+  #wpadminbar li#wp-admin-bar-customize,
+  #wpadminbar li#wp-admin-bar-edit,
+  #wpadminbar li#wp-admin-bar-menu-toggle,
+  #wpadminbar li#wp-admin-bar-my-account,
+  #wpadminbar li#wp-admin-bar-my-sites,
+  #wpadminbar li#wp-admin-bar-new-content,
+  #wpadminbar li#wp-admin-bar-site-name,
+  #wpadminbar li#wp-admin-bar-updates,
+  #wpadminbar li#wp-admin-bar-wp-logo {
     display: block;
   }
-
   #wpadminbar li.hover ul li,
-#wpadminbar li:hover ul li,
-#wpadminbar li:hover ul li:hover ul li {
+  #wpadminbar li:hover ul li,
+  #wpadminbar li:hover ul li:hover ul li {
     display: list-item;
   }
-
   #wpadminbar .ab-top-menu > .menupop > .ab-sub-wrapper {
     min-width: -webkit-fit-content;
     min-width: -moz-fit-content;
     min-width: fit-content;
   }
-
   #wpadminbar #wp-admin-bar-comments,
-#wpadminbar #wp-admin-bar-edit,
-#wpadminbar #wp-admin-bar-my-account,
-#wpadminbar #wp-admin-bar-my-sites,
-#wpadminbar #wp-admin-bar-new-content,
-#wpadminbar #wp-admin-bar-site-name,
-#wpadminbar #wp-admin-bar-updates,
-#wpadminbar #wp-admin-bar-wp-logo,
-#wpadminbar .ab-top-menu,
-#wpadminbar .ab-top-secondary {
+  #wpadminbar #wp-admin-bar-edit,
+  #wpadminbar #wp-admin-bar-my-account,
+  #wpadminbar #wp-admin-bar-my-sites,
+  #wpadminbar #wp-admin-bar-new-content,
+  #wpadminbar #wp-admin-bar-site-name,
+  #wpadminbar #wp-admin-bar-updates,
+  #wpadminbar #wp-admin-bar-wp-logo,
+  #wpadminbar .ab-top-menu,
+  #wpadminbar .ab-top-secondary {
     position: static;
   }
-
   #wpadminbar #wp-admin-bar-my-account {
     float: right;
   }
-
   #wpadminbar .ab-top-secondary .menupop .menupop > .ab-item:before {
     top: 10px;
     left: 0;
@@ -1993,7 +1952,6 @@ html:lang(he-il) .rtl #wpadminbar * {
   #wpadminbar {
     position: absolute;
   }
-
   #wp-responsive-overlay {
     position: fixed;
     top: 0;
@@ -2002,20 +1960,16 @@ html:lang(he-il) .rtl #wpadminbar * {
     height: 100%;
     z-index: 400;
   }
-
   #wpadminbar .ab-top-menu > .menupop > .ab-sub-wrapper {
     width: 100%;
     left: 0;
   }
-
   #wpadminbar .menupop .menupop > .ab-item:before {
     display: none;
   }
-
   #wpadminbar #wp-admin-bar-wp-logo.menupop .ab-sub-wrapper {
     margin-left: 0;
   }
-
   #wpadminbar .ab-top-menu > .menupop li > .ab-sub-wrapper {
     margin: 0;
     width: 100%;
@@ -2025,18 +1979,15 @@ html:lang(he-il) .rtl #wpadminbar * {
     -webkit-box-shadow: none;
     box-shadow: none;
   }
-
   #wpadminbar .ab-top-menu > .menupop li > .ab-sub-wrapper .ab-item {
     font-size: 16px;
     padding: 6px 15px 19px 30px;
   }
-
   #wpadminbar li:hover ul li ul li {
     display: list-item;
   }
-
   #wpadminbar li#wp-admin-bar-updates,
-#wpadminbar li#wp-admin-bar-wp-logo {
+  #wpadminbar li#wp-admin-bar-wp-logo {
     display: none;
   }
 }
@@ -2312,11 +2263,11 @@ html:lang(he-il) .rtl #wpadminbar * {
 
 @media screen and (max-width: 782px) {
   .wp-core-ui .button,
-.wp-core-ui .button.button-large,
-.wp-core-ui .button.button-small,
-a.preview,
-input#publish,
-input#save-post {
+  .wp-core-ui .button.button-large,
+  .wp-core-ui .button.button-small,
+  a.preview,
+  input#publish,
+  input#save-post {
     padding: 6px 14px;
     line-height: normal;
     font-size: 14px;
@@ -2324,23 +2275,19 @@ input#save-post {
     height: auto;
     margin-bottom: 4px;
   }
-
   #media-upload.wp-core-ui .button {
     padding: 0 10px 1px;
     height: 24px;
     line-height: 22px;
     font-size: 13px;
   }
-
   .media-frame.mode-grid .bulk-select .button {
     margin-bottom: 0;
   }
-
   .wp-core-ui .save-post-status.button {
     position: relative;
     margin: 0 14px 0 10px;
   }
-
   .wp-core-ui.wp-customizer .button {
     padding: 0 10px 1px;
     font-size: 13px;
@@ -2349,7 +2296,6 @@ input#save-post {
     margin: 0;
     vertical-align: inherit;
   }
-
   .interim-login .button.button-large {
     height: 30px;
     line-height: 28px;
@@ -2714,7 +2660,6 @@ body.rtl {
   body {
     margin-top: 115px;
   }
-
   #logo a {
     margin: -125px auto 30px;
   }
@@ -2723,36 +2668,31 @@ body.rtl {
   .form-table {
     margin-top: 0;
   }
-
   .form-table td,
-.form-table th {
+  .form-table th {
     display: block;
     width: auto;
     vertical-align: middle;
   }
-
   .form-table th {
     padding: 20px 0 0;
   }
-
   .form-table td {
     padding: 5px 0;
     border: 0;
     margin: 0;
   }
-
   input,
-textarea {
+  textarea {
     font-size: 16px;
   }
-
   .form-table span.description,
-.form-table td input[type=text],
-.form-table td input[type=email],
-.form-table td input[type=url],
-.form-table td input[type=password],
-.form-table td select,
-.form-table td textarea {
+  .form-table td input[type=text],
+  .form-table td input[type=email],
+  .form-table td input[type=url],
+  .form-table td input[type=password],
+  .form-table td select,
+  .form-table td textarea {
     width: 100%;
     font-size: 16px;
     line-height: 1.5;
@@ -8547,77 +8487,66 @@ table.bar_chart tbody td.bars span.alt span {
   #order_data .order_data_column {
     width: 48%;
   }
-
   #order_data .order_data_column:first-child {
     width: 100%;
   }
-
   .woocommerce_options_panel .description {
     display: block;
     clear: both;
     margin-left: 0;
   }
-
   .woocommerce_options_panel .dimensions_field .wrap,
-.woocommerce_options_panel .short,
-.woocommerce_options_panel input[type=text].short,
-.woocommerce_options_panel input[type=number].short,
-.woocommerce_options_panel input[type=email].short,
-.woocommerce_options_panel input[type=password].short {
+  .woocommerce_options_panel .short,
+  .woocommerce_options_panel input[type=text].short,
+  .woocommerce_options_panel input[type=number].short,
+  .woocommerce_options_panel input[type=email].short,
+  .woocommerce_options_panel input[type=password].short {
     width: 80%;
   }
-
   .woocommerce_options_panel .downloadable_files,
-.woocommerce_variations .downloadable_files {
+  .woocommerce_variations .downloadable_files {
     padding: 0;
     clear: both;
   }
-
   .woocommerce_options_panel .downloadable_files label,
-.woocommerce_variations .downloadable_files label {
+  .woocommerce_variations .downloadable_files label {
     position: static;
   }
-
   .woocommerce_options_panel .downloadable_files table,
-.woocommerce_variations .downloadable_files table {
+  .woocommerce_variations .downloadable_files table {
     margin: 0 12px 24px;
     width: 94%;
   }
-
   .woocommerce_options_panel .downloadable_files table .sort,
-.woocommerce_variations .downloadable_files table .sort {
+  .woocommerce_variations .downloadable_files table .sort {
     visibility: hidden;
   }
-
   .woocommerce_options_panel .woocommerce_variable_attributes .downloadable_files table,
-.woocommerce_variations .woocommerce_variable_attributes .downloadable_files table {
+  .woocommerce_variations .woocommerce_variable_attributes .downloadable_files table {
     margin: 0 0 1em;
     width: 100%;
   }
 }
 @media only screen and (max-width: 900px) {
   #woocommerce-coupon-data ul.coupon_data_tabs,
-#woocommerce-product-data .wc-tabs-back,
-#woocommerce-product-data ul.product_data_tabs {
+  #woocommerce-product-data .wc-tabs-back,
+  #woocommerce-product-data ul.product_data_tabs {
     width: 10%;
   }
-
   #woocommerce-coupon-data .wc-metaboxes-wrapper,
-#woocommerce-coupon-data .woocommerce_options_panel,
-#woocommerce-product-data .wc-metaboxes-wrapper,
-#woocommerce-product-data .woocommerce_options_panel {
+  #woocommerce-coupon-data .woocommerce_options_panel,
+  #woocommerce-product-data .wc-metaboxes-wrapper,
+  #woocommerce-product-data .woocommerce_options_panel {
     width: 90%;
   }
-
   #woocommerce-coupon-data ul.coupon_data_tabs li a,
-#woocommerce-product-data ul.product_data_tabs li a {
+  #woocommerce-product-data ul.product_data_tabs li a {
     position: relative;
     text-indent: -999px;
     padding: 10px;
   }
-
   #woocommerce-coupon-data ul.coupon_data_tabs li a:before,
-#woocommerce-product-data ul.product_data_tabs li a:before {
+  #woocommerce-product-data ul.product_data_tabs li a:before {
     position: absolute;
     top: 0;
     right: 0;
@@ -8637,105 +8566,86 @@ table.bar_chart tbody td.bars span.alt span {
     height: 39px;
     padding: 0 20px 0 15px;
   }
-
   #wp-excerpt-editor-tools {
     padding-top: 20px;
     padding-right: 15px;
     overflow: hidden;
     margin-bottom: -1px;
   }
-
   .post-type-product .wp-list-table .is-expanded td:not(.hidden),
-.post-type-shop_order .wp-list-table .is-expanded td:not(.hidden) {
+  .post-type-shop_order .wp-list-table .is-expanded td:not(.hidden) {
     overflow: visible;
   }
-
   #woocommerce-product-data .checkbox {
     width: 25px;
   }
-
   .variations-pagenav {
     float: none;
     text-align: center;
     font-size: 18px;
   }
-
   .variations-pagenav .displaying-num {
     font-size: 16px;
   }
-
   .variations-pagenav a {
     padding: 8px 20px 11px;
     font-size: 18px;
   }
-
   .variations-pagenav select {
     padding: 0 20px;
   }
-
   .variations-defaults {
     float: none;
     text-align: center;
     margin-top: 10px;
   }
-
   .post-type-product .wp-list-table .column-thumb {
     display: none;
     text-align: left;
     padding-bottom: 0;
   }
-
   .post-type-product .wp-list-table .column-thumb:before {
     display: none !important;
   }
-
   .post-type-product .wp-list-table .column-thumb img {
     max-width: 32px;
   }
-
   .post-type-product .wp-list-table .toggle-row {
     top: -28px;
   }
-
   .post-type-shop_order .wp-list-table .column-order_status {
     display: none;
     text-align: left;
     padding-bottom: 0;
   }
-
   .post-type-shop_order .wp-list-table .column-order_status mark {
     margin: 0;
   }
-
   .post-type-shop_order .wp-list-table .column-order_status:before {
     display: none !important;
   }
-
   .post-type-shop_order .wp-list-table .column-customer_message,
-.post-type-shop_order .wp-list-table .column-order_notes {
+  .post-type-shop_order .wp-list-table .column-order_notes {
     text-align: inherit;
   }
-
   .post-type-shop_order .wp-list-table .column-order_notes .note-on {
     font-size: 1.3em;
     margin: 0;
   }
-
   .post-type-shop_order .wp-list-table .toggle-row {
     top: -15px;
   }
 }
 @media only screen and (max-width: 500px) {
   .woocommerce_options_panel label,
-.woocommerce_options_panel legend {
+  .woocommerce_options_panel legend {
     float: none;
     width: auto;
     display: block;
     margin: 0;
   }
-
   .woocommerce_options_panel fieldset.form-field,
-.woocommerce_options_panel p.form-field {
+  .woocommerce_options_panel p.form-field {
     padding: 5px 20px !important;
   }
 }

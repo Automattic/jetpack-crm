@@ -867,73 +867,56 @@ td, th {
     background: transparent !important;
     box-shadow: none !important;
   }
-
   a, a:visited {
     text-decoration: underline;
   }
-
   a[href]:after {
     content: " (" attr(href) ")";
   }
-
   abbr[title]:after {
     content: " (" attr(title) ")";
   }
-
   a[href^="javascript:"]:after, a[href^="#"]:after {
     content: "";
   }
-
   blockquote, pre {
     border: 1px solid #999;
     page-break-inside: avoid;
   }
-
   thead {
     display: table-header-group;
   }
-
   img, tr {
     page-break-inside: avoid;
   }
-
   img {
     max-width: 100% !important;
   }
-
   h2, h3, p {
     orphans: 3;
     widows: 3;
   }
-
   h2, h3 {
     page-break-after: avoid;
   }
-
   select {
     background: #fff !important;
   }
-
   .navbar {
     display: none;
   }
-
   .table td, .table th {
     background-color: #fff !important;
   }
-
   .btn > .caret, .dropup > .btn > .caret {
     border-top-color: #000 !important;
   }
-
   .label {
     border: 1px solid #000;
   }
-
   .table {
     border-collapse: collapse !important;
   }
-
   .table-bordered td, .table-bordered th {
     border: 1px solid #ddd !important;
   }
@@ -1171,16 +1154,13 @@ dd {
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-
   .dl-horizontal dd {
     margin-left: 180px;
   }
-
   .dl-horizontal dd:after, .dl-horizontal dd:before {
     content: " ";
     display: table;
   }
-
   .dl-horizontal dd:after {
     clear: both;
   }
@@ -1363,27 +1343,21 @@ table td[class*=col-], table th[class*=col-] {
     border: 1px solid #ddd;
     -webkit-overflow-scrolling: touch;
   }
-
   .table-responsive > .table {
     margin-bottom: 0;
   }
-
   .table-responsive > .table > tbody > tr > td, .table-responsive > .table > tbody > tr > th, .table-responsive > .table > tfoot > tr > td, .table-responsive > .table > tfoot > tr > th, .table-responsive > .table > thead > tr > td, .table-responsive > .table > thead > tr > th {
     white-space: nowrap;
   }
-
   .table-responsive > .table-bordered {
     border: 0;
   }
-
   .table-responsive > .table-bordered > tbody > tr > td:first-child, .table-responsive > .table-bordered > tbody > tr > th:first-child, .table-responsive > .table-bordered > tfoot > tr > td:first-child, .table-responsive > .table-bordered > tfoot > tr > th:first-child, .table-responsive > .table-bordered > thead > tr > td:first-child, .table-responsive > .table-bordered > thead > tr > th:first-child {
     border-left: 0;
   }
-
   .table-responsive > .table-bordered > tbody > tr > td:last-child, .table-responsive > .table-bordered > tbody > tr > th:last-child, .table-responsive > .table-bordered > tfoot > tr > td:last-child, .table-responsive > .table-bordered > tfoot > tr > th:last-child, .table-responsive > .table-bordered > thead > tr > td:last-child, .table-responsive > .table-bordered > thead > tr > th:last-child {
     border-right: 0;
   }
-
   .table-responsive > .table-bordered > tbody > tr:last-child > td, .table-responsive > .table-bordered > tbody > tr:last-child > th, .table-responsive > .table-bordered > tfoot > tr:last-child > td, .table-responsive > .table-bordered > tfoot > tr:last-child > th {
     border-bottom: 0;
   }
@@ -1700,18 +1674,15 @@ input[type=date] {
     margin-bottom: 0;
     vertical-align: middle;
   }
-
   .form-inline .form-control, .navbar-form .form-control {
     display: inline-block;
     width: auto;
     vertical-align: middle;
   }
-
   .form-inline .control-label, .navbar-form .control-label {
     margin-bottom: 0;
     vertical-align: middle;
   }
-
   .form-inline .checkbox, .form-inline .radio, .navbar-form .checkbox, .navbar-form .radio {
     display: inline-block;
     margin-top: 0;
@@ -1719,12 +1690,10 @@ input[type=date] {
     padding-left: 0;
     vertical-align: middle;
   }
-
   .form-inline .checkbox input[type=checkbox], .form-inline .radio input[type=radio], .navbar-form .checkbox input[type=checkbox], .navbar-form .radio input[type=radio] {
     float: none;
     margin-left: 0;
   }
-
   .form-inline .has-feedback .form-control-feedback, .navbar-form .has-feedback .form-control-feedback {
     top: 0;
   }
@@ -2194,7 +2163,6 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
     right: 0;
     left: auto;
   }
-
   .navbar-right .dropdown-menu-left {
     left: 0;
     right: auto;
@@ -2632,7 +2600,6 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
     display: table-cell;
     width: 1%;
   }
-
   .nav-justified > li > a, .nav-tabs.nav-justified > li > a {
     margin-bottom: 0;
   }
@@ -2655,7 +2622,6 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
     border-bottom: 1px solid #ddd;
     border-radius: 4px 4px 0 0;
   }
-
   .nav-tabs-justified > .active > a, .nav-tabs-justified > .active > a:focus, .nav-tabs-justified > .active > a:hover, .nav-tabs.nav-justified > .active > a, .nav-tabs.nav-justified > .active > a:focus, .nav-tabs.nav-justified > .active > a:hover {
     border-bottom-color: #fff;
   }
@@ -2738,18 +2704,15 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
     border-top: 0;
     box-shadow: none;
   }
-
   .navbar-collapse.collapse {
     display: block !important;
     height: auto !important;
     padding-bottom: 0;
     overflow: visible !important;
   }
-
   .navbar-collapse.in {
     overflow-y: visible;
   }
-
   .navbar-fixed-bottom .navbar-collapse, .navbar-fixed-top .navbar-collapse, .navbar-static-top .navbar-collapse {
     padding-left: 0;
     padding-right: 0;
@@ -2869,15 +2832,12 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
     border: 0;
     box-shadow: none;
   }
-
   .navbar-nav .open .dropdown-menu .dropdown-header, .navbar-nav .open .dropdown-menu > li > a {
     padding: 5px 15px 5px 25px;
   }
-
   .navbar-nav .open .dropdown-menu > li > a {
     line-height: 20px;
   }
-
   .navbar-nav .open .dropdown-menu > li > a:focus, .navbar-nav .open .dropdown-menu > li > a:hover {
     background-image: none;
   }
@@ -2887,16 +2847,13 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
     float: left;
     margin: 0;
   }
-
   .navbar-nav > li {
     float: left;
   }
-
   .navbar-nav > li > a {
     padding-top: 15px;
     padding-bottom: 15px;
   }
-
   .navbar-nav.navbar-right:last-child {
     margin-right: -15px;
   }
@@ -2905,7 +2862,6 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
   .navbar-left {
     float: left !important;
   }
-
   .navbar-right {
     float: right !important;
   }
@@ -2938,7 +2894,6 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
     -webkit-box-shadow: none;
     box-shadow: none;
   }
-
   .navbar-form.navbar-right:last-child {
     margin-right: -15px;
   }
@@ -2980,7 +2935,6 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
     margin-left: 15px;
     margin-right: 15px;
   }
-
   .navbar-text.navbar-right:last-child {
     margin-right: 0;
   }
@@ -3043,17 +2997,14 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
   .navbar-default .navbar-nav .open .dropdown-menu > li > a {
     color: #777;
   }
-
   .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus, .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover {
     color: #333;
     background-color: transparent;
   }
-
   .navbar-default .navbar-nav .open .dropdown-menu > .active > a, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover {
     color: #555;
     background-color: #e7e7e7;
   }
-
   .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a, .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a:focus, .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a:hover {
     color: #ccc;
     background-color: transparent;
@@ -3125,25 +3076,20 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
   .navbar-inverse .navbar-nav .open .dropdown-menu > .dropdown-header {
     border-color: #090909;
   }
-
   .navbar-inverse .navbar-nav .open .dropdown-menu .divider {
     background-color: #090909;
   }
-
   .navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
     color: #999;
   }
-
   .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:focus, .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover {
     color: #fff;
     background-color: transparent;
   }
-
   .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a, .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a:focus, .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a:hover {
     color: #fff;
     background-color: #090909;
   }
-
   .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a, .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a:focus, .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a:hover {
     color: #444;
     background-color: transparent;
@@ -4123,16 +4069,13 @@ button.close {
     width: 600px;
     margin: 30px auto;
   }
-
   .modal-content {
     -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
   }
-
   .modal-sm {
     width: 300px;
   }
-
   .modal-lg {
     width: 900px;
   }
@@ -5881,21 +5824,17 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
     border-left: 3px solid var(--jp-gray-20) !important;
     padding-left: 2% !important;
   }
-
   tr.zbs-field-group-tr label.zbs-field-group-label {
     font-weight: 800 !important;
     margin-top: 12px !important;
   }
-
   tr.zbs-field-group-tr table.wh-metatab {
     min-width: 100% !important;
     width: 100% !important;
   }
-
   tr.wh-large.zbs-field-group-tr th, tr.wh-large.zbs-field-group-tr td {
     padding: 6px 16px !important;
   }
-
   tr.zbs-field-group-tr .form-table th {
     width: auto !important;
   }
@@ -6118,7 +6057,7 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
 }
 #wptbpMetaBoxLogs .zbsLogOut.jpcrm-pinned {
   border: 1px solid rgba(236, 209, 161, 0.15);
-  background: #ff871f42;
+  background: rgba(255, 135, 31, 0.2588235294);
 }
 #wptbpMetaBoxLogs .zbsLogOut.jpcrm-pinned .jpcrm_log_pin {
   display: none;

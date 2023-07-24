@@ -1,4 +1,5 @@
 @charset "UTF-8";
+/* JP vars */
 :root {
   --font-title-large: 36px;
   --font-title-small: 24px;
@@ -61,6 +62,7 @@
   	"Cantarell", "Helvetica Neue", sans-serif;
 }
 
+/* base file */
 /* Remove left padding from WP page content */
 body.jpcrm-admin {
   background: var(--jp-white-off);
@@ -88,6 +90,7 @@ body.jpcrm-admin.jpcrm-full-width #wpcontent #wpbody {
     padding-top: 0;
   }
 }
+/* top menu */
 #jpcrm-top-menu {
   padding: 20px 20px 0px 20px;
   display: block;
@@ -104,8 +107,7 @@ body.jpcrm-admin.jpcrm-full-width #wpcontent #wpbody {
 }
 #jpcrm-top-menu .logo-cube:hover {
   -webkit-transform: rotateX(90deg);
-  transform: rotateX(90deg);
-  /* Text bleed at 90º */
+  transform: rotateX(90deg); /* Text bleed at 90º */
 }
 #jpcrm-top-menu .logo-cube .cube-side {
   height: 40px;
@@ -171,6 +173,7 @@ body.jpcrm-admin.jpcrm-full-width #wpcontent #wpbody {
   color: rgba(0, 0, 0, 0.87);
 }
 
+/* components */
 .jpcrm-button {
   padding: 8px 24px;
   text-decoration: none;
@@ -405,7 +408,6 @@ jpcrm-dashcount jpcrm-dashcount-card a {
   .jpcrm-form-grid {
     grid-template-columns: 1fr 1fr;
   }
-
   .jpcrm-form-group-span-2 {
     grid-column: span 2;
   }
@@ -414,7 +416,6 @@ jpcrm-dashcount jpcrm-dashcount-card a {
   .jpcrm-form-grid {
     grid-template-columns: 1fr;
   }
-
   .jpcrm-empty-form-group {
     display: none;
   }
@@ -449,8 +450,7 @@ jpcrm-dashcount jpcrm-dashcount-card a {
   gap: 10px;
 }
 .jpcrm-learn-menu-subdiv-25 > *:first-child {
-  margin-left: 16px;
-  /* keep the gap between the divs when subdiv-25 is shrunk down */
+  margin-left: 16px; /* keep the gap between the divs when subdiv-25 is shrunk down */
 }
 
 .jpcrm-learn-page-title {
@@ -482,18 +482,16 @@ jpcrm-dashcount jpcrm-dashcount-card a {
   .jpcrm-learn-menu {
     flex-wrap: wrap;
   }
-
   .jpcrm-learn-menu-subdiv-75,
-.jpcrm-learn-menu-subdiv-25 {
+  .jpcrm-learn-menu-subdiv-25 {
     flex-grow: 1;
     flex-wrap: wrap;
     flex-direction: column;
     width: 100%;
   }
   .jpcrm-learn-menu-subdiv-75 > *:first-child,
-.jpcrm-learn-menu-subdiv-25 > *:first-child {
-    margin-left: 0px;
-    /* gap not needed anymore as the divs are centered */
+  .jpcrm-learn-menu-subdiv-25 > *:first-child {
+    margin-left: 0px; /* gap not needed anymore as the divs are centered */
   }
 }
 .jpcrm-listview {
@@ -654,8 +652,3 @@ jpcrm-pagination a.active:hover {
 jpcrm-pagination .ellipsis {
   padding: 0 3px;
 }
-
-/* JP vars */
-/* base file */
-/* top menu */
-/* components */
