@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit06c775433a83ed276f0a1d8ac25f93ba_crmⓥ6_1_1_alpha
+class ComposerStaticInit06c775433a83ed276f0a1d8ac25f93ba_crmⓥ6_2_0_alpha
 {
     public static $files = array (
         '3773ef3f09c37da5478d578e32b03a4b' => __DIR__ . '/../..' . '/jetpack_vendor/automattic/jetpack-assets/actions.php',
@@ -74,6 +74,40 @@ class ComposerStaticInit06c775433a83ed276f0a1d8ac25f93ba_crmⓥ6_1_1_alpha
         'Automattic\\Jetpack\\Autoloader\\AutoloadProcessor' => __DIR__ . '/..' . '/automattic/jetpack-autoloader/src/AutoloadProcessor.php',
         'Automattic\\Jetpack\\Autoloader\\CustomAutoloaderPlugin' => __DIR__ . '/..' . '/automattic/jetpack-autoloader/src/CustomAutoloaderPlugin.php',
         'Automattic\\Jetpack\\Autoloader\\ManifestGenerator' => __DIR__ . '/..' . '/automattic/jetpack-autoloader/src/ManifestGenerator.php',
+        'Automattic\\Jetpack\\CRM\\Automation\\Action' => __DIR__ . '/../..' . '/src/automation/interface-action.php',
+        'Automattic\\Jetpack\\CRM\\Automation\\Actions\\Add_Contact_Log' => __DIR__ . '/../..' . '/src/automation/commons/actions/contacts/class-add-contact-log.php',
+        'Automattic\\Jetpack\\CRM\\Automation\\Actions\\Add_Remove_Contact_Tag' => __DIR__ . '/../..' . '/src/automation/commons/actions/contacts/class-add-remove-contact-tag.php',
+        'Automattic\\Jetpack\\CRM\\Automation\\Actions\\Delete_Contact' => __DIR__ . '/../..' . '/src/automation/commons/actions/contacts/class-delete-contact.php',
+        'Automattic\\Jetpack\\CRM\\Automation\\Actions\\New_Contact' => __DIR__ . '/../..' . '/src/automation/commons/actions/contacts/class-new-contact.php',
+        'Automattic\\Jetpack\\CRM\\Automation\\Actions\\Update_Contact' => __DIR__ . '/../..' . '/src/automation/commons/actions/contacts/class-update-contact.php',
+        'Automattic\\Jetpack\\CRM\\Automation\\Actions\\Update_Contact_Status' => __DIR__ . '/../..' . '/src/automation/commons/actions/contacts/class-update-contact-status.php',
+        'Automattic\\Jetpack\\CRM\\Automation\\Automation_Engine' => __DIR__ . '/../..' . '/src/automation/class-automation-engine.php',
+        'Automattic\\Jetpack\\CRM\\Automation\\Automation_Exception' => __DIR__ . '/../..' . '/src/automation/class-automation-exception.php',
+        'Automattic\\Jetpack\\CRM\\Automation\\Automation_Logger' => __DIR__ . '/../..' . '/src/automation/class-automation-logger.php',
+        'Automattic\\Jetpack\\CRM\\Automation\\Automation_Workflow' => __DIR__ . '/../..' . '/src/automation/class-automation-workflow.php',
+        'Automattic\\Jetpack\\CRM\\Automation\\Base_Action' => __DIR__ . '/../..' . '/src/automation/class-base-action.php',
+        'Automattic\\Jetpack\\CRM\\Automation\\Base_Condition' => __DIR__ . '/../..' . '/src/automation/class-base-condition.php',
+        'Automattic\\Jetpack\\CRM\\Automation\\Base_Step' => __DIR__ . '/../..' . '/src/automation/class-base-step.php',
+        'Automattic\\Jetpack\\CRM\\Automation\\Base_Trigger' => __DIR__ . '/../..' . '/src/automation/class-base-trigger.php',
+        'Automattic\\Jetpack\\CRM\\Automation\\Condition' => __DIR__ . '/../..' . '/src/automation/interface-condition.php',
+        'Automattic\\Jetpack\\CRM\\Automation\\Step' => __DIR__ . '/../..' . '/src/automation/interface-step.php',
+        'Automattic\\Jetpack\\CRM\\Automation\\Step_Exception' => __DIR__ . '/../..' . '/src/automation/class-step-exception.php',
+        'Automattic\\Jetpack\\CRM\\Automation\\Trigger' => __DIR__ . '/../..' . '/src/automation/interface-trigger.php',
+        'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Company_Deleted' => __DIR__ . '/../..' . '/src/automation/commons/triggers/companies/class-company-deleted.php',
+        'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Company_New' => __DIR__ . '/../..' . '/src/automation/commons/triggers/companies/class-company-new.php',
+        'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Company_Status_Updated' => __DIR__ . '/../..' . '/src/automation/commons/triggers/companies/class-company-status-updated.php',
+        'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Company_Updated' => __DIR__ . '/../..' . '/src/automation/commons/triggers/companies/class-company-updated.php',
+        'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Contact_Before_Deleted' => __DIR__ . '/../..' . '/src/automation/commons/triggers/contacts/class-contact-before-deleted.php',
+        'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Contact_Deleted' => __DIR__ . '/../..' . '/src/automation/commons/triggers/contacts/class-contact-deleted.php',
+        'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Contact_Email_Updated' => __DIR__ . '/../..' . '/src/automation/commons/triggers/contacts/class-contact-email-updated.php',
+        'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Contact_New' => __DIR__ . '/../..' . '/src/automation/commons/triggers/contacts/class-contact-new.php',
+        'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Contact_Status_Updated' => __DIR__ . '/../..' . '/src/automation/commons/triggers/contacts/class-contact-status-updated.php',
+        'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Contact_Updated' => __DIR__ . '/../..' . '/src/automation/commons/triggers/contacts/class-contact-updated.php',
+        'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Invoice_Deleted' => __DIR__ . '/../..' . '/src/automation/commons/triggers/invoices/class-invoice-deleted.php',
+        'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Invoice_New' => __DIR__ . '/../..' . '/src/automation/commons/triggers/invoices/class-invoice-new.php',
+        'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Invoice_Status_Updated' => __DIR__ . '/../..' . '/src/automation/commons/triggers/invoices/class-invoice-status-updated.php',
+        'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Invoice_Updated' => __DIR__ . '/../..' . '/src/automation/commons/triggers/invoices/class-invoice-updated.php',
+        'Automattic\\Jetpack\\CRM\\Automation\\Workflow_Exception' => __DIR__ . '/../..' . '/src/automation/class-workflow-exception.php',
         'Automattic\\Jetpack\\CRM\\REST_API\\V4\\REST_Base_Controller' => __DIR__ . '/../..' . '/src/rest-api/v4/class-rest-base-controller.php',
         'Automattic\\Jetpack\\CRM\\REST_API\\V4\\REST_Base_Objects_Controller' => __DIR__ . '/../..' . '/src/rest-api/v4/class-rest-base-objects-controller.php',
         'Automattic\\Jetpack\\CRM\\REST_API\\V4\\REST_Contacts_Controller' => __DIR__ . '/../..' . '/src/rest-api/v4/class-rest-contacts-controller.php',
@@ -287,9 +321,9 @@ class ComposerStaticInit06c775433a83ed276f0a1d8ac25f93ba_crmⓥ6_1_1_alpha
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit06c775433a83ed276f0a1d8ac25f93ba_crmⓥ6_1_1_alpha::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit06c775433a83ed276f0a1d8ac25f93ba_crmⓥ6_1_1_alpha::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit06c775433a83ed276f0a1d8ac25f93ba_crmⓥ6_1_1_alpha::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit06c775433a83ed276f0a1d8ac25f93ba_crmⓥ6_2_0_alpha::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit06c775433a83ed276f0a1d8ac25f93ba_crmⓥ6_2_0_alpha::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit06c775433a83ed276f0a1d8ac25f93ba_crmⓥ6_2_0_alpha::$classMap;
 
         }, null, ClassLoader::class);
     }

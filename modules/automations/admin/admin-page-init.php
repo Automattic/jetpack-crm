@@ -8,30 +8,36 @@
  * @package automattic/jetpack-crm
  */
 
-namespace Automattic\Jetpack_CRM\Automations;
+namespace Automattic\Jetpack_CRM\Modules\Automations;
 
 use Automattic\Jetpack\Assets;
 
 /**
  * The main initializing function.
  *
+ * @since 6.2.0-alpha
+ *
  * @return void
  */
 function initialize_admin_page() {
-	add_action( 'load-jetpack-crm_page_jpcrm-automations', 'Automattic\Jetpack_CRM\Automations\admin_init' );
+	add_action( 'load-jetpack-crm_page_jpcrm-automations', __NAMESPACE__ . '\admin_init' );
 }
 
 /**
  * Actions to run on admin init
  *
+ * @since 6.2.0-alpha
+ *
  * @return void
  */
 function admin_init() {
-	add_action( 'admin_enqueue_scripts', 'Automattic\Jetpack_CRM\Automations\enqueue_admin_scripts' );
+	add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\enqueue_admin_scripts' );
 }
 
 /**
  * Enqueues the React app bundle.
+ *
+ * @since 6.2.0-alpha
  *
  * @return void
  */
@@ -52,6 +58,8 @@ function enqueue_admin_scripts() {
 
 /**
  * Initial state to be served with the React app.
+ *
+ * @since 6.2.0-alpha
  *
  * @return string
  */

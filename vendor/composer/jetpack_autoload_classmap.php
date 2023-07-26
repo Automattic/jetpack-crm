@@ -46,6 +46,142 @@ return array(
 		'version' => '2.11.21.0',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/ManifestGenerator.php'
 	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Action' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/interface-action.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Actions\\Add_Contact_Log' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/actions/contacts/class-add-contact-log.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Actions\\Add_Remove_Contact_Tag' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/actions/contacts/class-add-remove-contact-tag.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Actions\\Delete_Contact' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/actions/contacts/class-delete-contact.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Actions\\New_Contact' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/actions/contacts/class-new-contact.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Actions\\Update_Contact' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/actions/contacts/class-update-contact.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Actions\\Update_Contact_Status' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/actions/contacts/class-update-contact-status.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Automation_Engine' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/class-automation-engine.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Automation_Exception' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/class-automation-exception.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Automation_Logger' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/class-automation-logger.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Automation_Workflow' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/class-automation-workflow.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Base_Action' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/class-base-action.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Base_Condition' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/class-base-condition.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Base_Step' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/class-base-step.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Base_Trigger' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/class-base-trigger.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Condition' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/interface-condition.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Step' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/interface-step.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Step_Exception' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/class-step-exception.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Trigger' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/interface-trigger.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Company_Deleted' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/triggers/companies/class-company-deleted.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Company_New' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/triggers/companies/class-company-new.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Company_Status_Updated' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/triggers/companies/class-company-status-updated.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Company_Updated' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/triggers/companies/class-company-updated.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Contact_Before_Deleted' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/triggers/contacts/class-contact-before-deleted.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Contact_Deleted' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/triggers/contacts/class-contact-deleted.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Contact_Email_Updated' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/triggers/contacts/class-contact-email-updated.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Contact_New' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/triggers/contacts/class-contact-new.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Contact_Status_Updated' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/triggers/contacts/class-contact-status-updated.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Contact_Updated' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/triggers/contacts/class-contact-updated.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Invoice_Deleted' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/triggers/invoices/class-invoice-deleted.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Invoice_New' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/triggers/invoices/class-invoice-new.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Invoice_Status_Updated' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/triggers/invoices/class-invoice-status-updated.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Invoice_Updated' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/triggers/invoices/class-invoice-updated.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Workflow_Exception' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/class-workflow-exception.php'
+	),
 	'Automattic\\Jetpack\\CRM\\REST_API\\V4\\REST_Base_Controller' => array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/rest-api/v4/class-rest-base-controller.php'
