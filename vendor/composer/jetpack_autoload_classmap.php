@@ -178,6 +178,26 @@ return array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/commons/triggers/invoices/class-invoice-updated.php'
 	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Quote_Accepted' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/triggers/quotes/class-quote-accepted.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Quote_Deleted' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/triggers/quotes/class-quote-deleted.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Quote_New' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/triggers/quotes/class-quote-new.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Quote_Status_Updated' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/triggers/quotes/class-quote-status-updated.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Quote_Updated' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/triggers/quotes/class-quote-updated.php'
+	),
 	'Automattic\\Jetpack\\CRM\\Automation\\Workflow_Exception' => array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/class-workflow-exception.php'
