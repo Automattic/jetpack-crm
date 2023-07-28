@@ -162,6 +162,14 @@ return array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/commons/triggers/contacts/class-contact-updated.php'
 	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Event_Deleted' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/triggers/events/class-event-deleted.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Event_New' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/triggers/events/class-event-new.php'
+	),
 	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Invoice_Deleted' => array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/commons/triggers/invoices/class-invoice-deleted.php'

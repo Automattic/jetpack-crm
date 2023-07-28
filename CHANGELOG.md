@@ -12,6 +12,7 @@ This is an alpha version! The changes listed here are not final.
 ### Added
 - Add the new Automation System
 - Automation: Added contact triggers
+- Automation: Added event triggers for new and deleted
 - Automation: Added quote triggers
 - Automations: Added company triggers
 

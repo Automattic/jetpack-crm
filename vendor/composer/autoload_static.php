@@ -103,6 +103,8 @@ class ComposerStaticInit06c775433a83ed276f0a1d8ac25f93ba_crmⓥ6_2_0_alpha
         'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Contact_New' => __DIR__ . '/../..' . '/src/automation/commons/triggers/contacts/class-contact-new.php',
         'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Contact_Status_Updated' => __DIR__ . '/../..' . '/src/automation/commons/triggers/contacts/class-contact-status-updated.php',
         'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Contact_Updated' => __DIR__ . '/../..' . '/src/automation/commons/triggers/contacts/class-contact-updated.php',
+        'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Event_Deleted' => __DIR__ . '/../..' . '/src/automation/commons/triggers/events/class-event-deleted.php',
+        'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Event_New' => __DIR__ . '/../..' . '/src/automation/commons/triggers/events/class-event-new.php',
         'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Invoice_Deleted' => __DIR__ . '/../..' . '/src/automation/commons/triggers/invoices/class-invoice-deleted.php',
         'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Invoice_New' => __DIR__ . '/../..' . '/src/automation/commons/triggers/invoices/class-invoice-new.php',
         'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Invoice_Status_Updated' => __DIR__ . '/../..' . '/src/automation/commons/triggers/invoices/class-invoice-status-updated.php',

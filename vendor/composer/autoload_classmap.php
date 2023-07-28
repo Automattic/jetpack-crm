@@ -42,6 +42,8 @@ return array(
     'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Contact_New' => $baseDir . '/src/automation/commons/triggers/contacts/class-contact-new.php',
     'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Contact_Status_Updated' => $baseDir . '/src/automation/commons/triggers/contacts/class-contact-status-updated.php',
     'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Contact_Updated' => $baseDir . '/src/automation/commons/triggers/contacts/class-contact-updated.php',
+    'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Event_Deleted' => $baseDir . '/src/automation/commons/triggers/events/class-event-deleted.php',
+    'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Event_New' => $baseDir . '/src/automation/commons/triggers/events/class-event-new.php',
     'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Invoice_Deleted' => $baseDir . '/src/automation/commons/triggers/invoices/class-invoice-deleted.php',
     'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Invoice_New' => $baseDir . '/src/automation/commons/triggers/invoices/class-invoice-new.php',
     'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Invoice_Status_Updated' => $baseDir . '/src/automation/commons/triggers/invoices/class-invoice-status-updated.php',
