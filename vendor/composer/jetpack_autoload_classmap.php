@@ -122,13 +122,13 @@ return array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/interface-trigger.php'
 	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Company_Created' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/triggers/companies/class-company-created.php'
+	),
 	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Company_Deleted' => array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/commons/triggers/companies/class-company-deleted.php'
-	),
-	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Company_New' => array(
-		'version' => 'dev-trunk',
-		'path'    => $baseDir . '/src/automation/commons/triggers/companies/class-company-new.php'
 	),
 	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Company_Status_Updated' => array(
 		'version' => 'dev-trunk',
@@ -142,6 +142,10 @@ return array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/commons/triggers/contacts/class-contact-before-deleted.php'
 	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Contact_Created' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/triggers/contacts/class-contact-created.php'
+	),
 	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Contact_Deleted' => array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/commons/triggers/contacts/class-contact-deleted.php'
@@ -149,10 +153,6 @@ return array(
 	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Contact_Email_Updated' => array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/commons/triggers/contacts/class-contact-email-updated.php'
-	),
-	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Contact_New' => array(
-		'version' => 'dev-trunk',
-		'path'    => $baseDir . '/src/automation/commons/triggers/contacts/class-contact-new.php'
 	),
 	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Contact_Status_Updated' => array(
 		'version' => 'dev-trunk',
@@ -162,21 +162,21 @@ return array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/commons/triggers/contacts/class-contact-updated.php'
 	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Event_Created' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/triggers/events/class-event-created.php'
+	),
 	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Event_Deleted' => array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/commons/triggers/events/class-event-deleted.php'
 	),
-	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Event_New' => array(
+	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Invoice_Created' => array(
 		'version' => 'dev-trunk',
-		'path'    => $baseDir . '/src/automation/commons/triggers/events/class-event-new.php'
+		'path'    => $baseDir . '/src/automation/commons/triggers/invoices/class-invoice-created.php'
 	),
 	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Invoice_Deleted' => array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/commons/triggers/invoices/class-invoice-deleted.php'
-	),
-	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Invoice_New' => array(
-		'version' => 'dev-trunk',
-		'path'    => $baseDir . '/src/automation/commons/triggers/invoices/class-invoice-new.php'
 	),
 	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Invoice_Status_Updated' => array(
 		'version' => 'dev-trunk',
@@ -190,13 +190,13 @@ return array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/commons/triggers/quotes/class-quote-accepted.php'
 	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Quote_Created' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/triggers/quotes/class-quote-created.php'
+	),
 	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Quote_Deleted' => array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/commons/triggers/quotes/class-quote-deleted.php'
-	),
-	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Quote_New' => array(
-		'version' => 'dev-trunk',
-		'path'    => $baseDir . '/src/automation/commons/triggers/quotes/class-quote-new.php'
 	),
 	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Quote_Status_Updated' => array(
 		'version' => 'dev-trunk',
