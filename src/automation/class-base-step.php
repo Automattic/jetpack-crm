@@ -2,29 +2,40 @@
 /**
  * Base Step
  *
- * @package Automattic\Jetpack\CRM\Automation
+ * @package automattic/jetpack-crm
+ * @since 6.2.0-alpha
  */
 
 namespace Automattic\Jetpack\CRM\Automation;
 
 /**
- * Base Step
+ * Base Step.
  *
- * @inheritDoc
+ * @since 6.2.0-alpha
+ * {@inheritDoc}
  */
 abstract class Base_Step implements Step {
 
 	/**
-	 * @var array Step attributes
+	 * Step attributes.
+	 *
+	 * @since 6.2.0-alpha
+	 * @var array
 	 */
 	protected $attributes;
+
 	/**
-	 * @var array|null Next linked step.
+	 * Next linked step.
+	 *
+	 * @since 6.2.0-alpha
+	 * @var array|null
 	 */
 	protected $next_step;
 
 	/**
 	 * Base_Step constructor.
+	 *
+	 * @since 6.2.0-alpha
 	 *
 	 * @param array $step_data An array of data for the current step.
 	 */
@@ -33,16 +44,20 @@ abstract class Base_Step implements Step {
 	}
 
 	/**
-	 * Get the data of the step
+	 * Get the data of the step.
 	 *
-	 * @return array
+	 * @since 6.2.0-alpha
+	 *
+	 * @return array The step data.
 	 */
 	public function get_attributes(): array {
 		return $this->attributes;
 	}
 
 	/**
-	 * Set attributes of the step
+	 * Set attributes of the step.
+	 *
+	 * @since 6.2.0-alpha
 	 *
 	 * @param array $attributes The attributes to set.
 	 */
@@ -51,7 +66,9 @@ abstract class Base_Step implements Step {
 	}
 
 	/**
-	 * Set the next step
+	 * Set the next step.
+	 *
+	 * @since 6.2.0-alpha
 	 *
 	 * @param array $step_data The next linked step.
 	 */
@@ -60,60 +77,76 @@ abstract class Base_Step implements Step {
 	}
 
 	/**
-	 * Get the next step
+	 * Get the next step.
 	 *
-	 * @return array|null
+	 * @since 6.2.0-alpha
+	 *
+	 * @return array|null The next linked step.
 	 */
 	public function get_next_step(): ?array {
 		return $this->next_step;
 	}
 
 	/**
-	 * Execute the step
+	 * Execute the step.
+	 *
+	 * @since 6.2.0-alpha
 	 *
 	 * @param array $data Data passed from the trigger.
 	 */
 	abstract public function execute( array $data );
 
 	/**
-	 * Get the slug name of the step
+	 * Get the slug name of the step.
 	 *
-	 * @return string
+	 * @since 6.2.0-alpha
+	 *
+	 * @return string The slug name of the step.
 	 */
 	abstract public static function get_slug(): string;
 
 	/**
-	 * Get the title of the step
+	 * Get the title of the step.
 	 *
-	 * @return string
+	 * @since 6.2.0-alpha
+	 *
+	 * @return string|null The title of the step.
 	 */
 	abstract public static function get_title(): ?string;
 
 	/**
-	 * Get the description of the step
+	 * Get the description of the step.
 	 *
-	 * @return string
+	 * @since 6.2.0-alpha
+	 *
+	 * @return string|null The description of the step.
 	 */
 	abstract public static function get_description(): ?string;
 
 	/**
-	 * Get the type of the step
+	 * Get the type of the step.
 	 *
-	 * @return string
+	 * @since 6.2.0-alpha
+	 *
+	 * @return string The type of the step.
 	 */
 	abstract public static function get_type(): string;
 
 	/**
-	 * Get the category of the step
+	 * Get the category of the step.
 	 *
-	 * @return string
+	 * @since 6.2.0-alpha
+	 *
+	 * @return string|null The category of the step.
 	 */
 	abstract public static function get_category(): ?string;
 
 	/**
-	 * Get the allowed triggers
+	 * Get the allowed triggers.
 	 *
-	 * @return array
+	 * @since 6.2.0-alpha
+	 *
+	 * @return array|null The allowed triggers.
 	 */
 	abstract public static function get_allowed_triggers(): ?array;
 }

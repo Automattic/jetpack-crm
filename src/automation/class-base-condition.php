@@ -3,26 +3,47 @@
  * Base Condition implementation
  *
  * @package automattic/jetpack-crm
+ * @since 6.2.0-alpha
  */
 
 namespace Automattic\Jetpack\CRM\Automation;
 
 /**
- * Base Condition Step
+ * Base Condition Step.
  *
- * @inheritDoc
+ * @since 6.2.0-alpha
+ * {@inheritDoc}
  */
 abstract class Base_Condition extends Base_Step implements Condition {
 
-	/** @var array|null Next step data if it meets the condition  */
+	/**
+	 * The next step if the condition is met.
+	 *
+	 * @since 6.2.0-alpha
+	 * @var array|null
+	 */
 	protected $next_step_true = null;
-	/** @var array|null Next step data if it does not meet the condition */
+
+	/**
+	 * The next step if the condition is not met.
+	 *
+	 * @since 6.2.0-alpha
+	 * @var array|null
+	 */
 	protected $next_step_false = null;
-	/** @var bool If the condition is met or not */
+
+	/**
+	 * If the condition is met or not.
+	 *
+	 * @since 6.2.0-alpha
+	 * @var bool If the condition is met or not.
+	 */
 	protected $condition_met = false;
 
 	/**
 	 * Base_Condition constructor.
+	 *
+	 * @since 6.2.0-alpha
 	 *
 	 * @param array $step_data The step data.
 	 */
@@ -34,9 +55,11 @@ abstract class Base_Condition extends Base_Step implements Condition {
 	}
 
 	/**
-	 * Get the next step
+	 * Get the next step.
 	 *
-	 * @return array|null
+	 * @since 6.2.0-alpha
+	 *
+	 * @return array|null The next step data.
 	 */
 	public function get_next_step(): ?array {
 		return ( $this->condition_met ? $this->next_step_true : $this->next_step_false );
@@ -45,9 +68,12 @@ abstract class Base_Condition extends Base_Step implements Condition {
 	/**
 	 *  Met the condition?
 	 *
-	 * @return bool
+	 * @since 6.2.0-alpha
+	 *
+	 * @return bool If the condition is met or not.
 	 */
 	public function condition_met(): bool {
 		return $this->condition_met;
 	}
+
 }

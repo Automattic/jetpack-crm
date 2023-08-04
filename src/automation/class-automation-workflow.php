@@ -3,49 +3,102 @@
  * Defines the Jetpack CRM Automation workflow base.
  *
  * @package automattic/jetpack-crm
+ * @since 6.2.0-alpha
  */
 
 namespace Automattic\Jetpack\CRM\Automation;
 
 /**
  * Adds the Automation_Workflow class.
+ *
+ * @since 6.2.0-alpha
  */
 class Automation_Workflow {
 
-	/** @var int */
+	/**
+	 * The workflow id.
+	 *
+	 * @since 6.2.0-alpha
+	 * @var int|string
+	 */
 	private $id;
 
-	/** @var string */
+	/**
+	 * The workflow name.
+	 *
+	 * @since 6.2.0-alpha
+	 * @var string
+	 */
 	public $name;
 
-	/** @var string */
+	/**
+	 * The workflow description.
+	 *
+	 * @since 6.2.0-alpha
+	 * @var string
+	 */
 	public $description;
 
-	/** @var string */
+	/**
+	 * The workflow category.
+	 *
+	 * @since 6.2.0-alpha
+	 * @var string
+	 */
 	public $category;
 
-	/** @var array */
+	/**
+	 * The workflow triggers.
+	 *
+	 * @since 6.2.0-alpha
+	 * @var string[]
+	 */
 	public $triggers;
 
-	/** @var array */
+	/**
+	 * The workflow initial step.
+	 *
+	 * @since 6.2.0-alpha
+	 * @var array
+	 */
 	public $initial_step;
 
-	/** @var bool */
+	/**
+	 * The workflow active status.
+	 *
+	 * @since 6.2.0-alpha
+	 * @var bool
+	 */
 	public $active;
 
 	/**
-	 * @var int The version of the workflow.
+	 * The version of the workflow.
+	 *
+	 * @since 6.2.0-alpha
+	 * @var int
 	 */
 	public $version = 1;
 
-	/** @var Automation_Engine */
+	/**
+	 * The automation engine.
+	 *
+	 * @since 6.2.0-alpha
+	 * @var Automation_Engine
+	 */
 	private $automation_engine;
 
-	/** @var Automation_Logger */
+	/**
+	 * The automation logger.
+	 *
+	 * @since 6.2.0-alpha
+	 * @var Automation_Logger
+	 */
 	private $logger;
 
 	/**
 	 * Automation_Workflow constructor.
+	 *
+	 * @since 6.2.0-alpha
 	 *
 	 * @param array             $workflow_data The workflow data to be constructed.
 	 * @param Automation_Engine $automation_engine An instance of the Automation_Engine class.
@@ -64,34 +117,43 @@ class Automation_Workflow {
 	}
 
 	/**
-	 * Get the id of this workflow
+	 * Get the id of this workflow.
 	 *
-	 * @return int
+	 * @since 6.2.0-alpha
+	 *
+	 * @return int|string The workflow id.
 	 */
-	public function get_id(): int {
+	public function get_id() {
 		return $this->id;
 	}
 
 	/**
 	 * Set the triggers within the workflow given an array of triggers.
 	 *
-	 * @param array $triggers An array of triggers to be set.
+	 * @since 6.2.0-alpha
+	 *
+	 * @param string[] $triggers An array of triggers to be set.
 	 */
 	public function set_triggers( array $triggers ) {
 		$this->triggers = $triggers;
 	}
 
 	/**
-	 * Get the trigger names of this workflow
+	 * Get the trigger names of this workflow.
 	 *
-	 * @return array
+	 * @since 6.2.0-alpha
+	 *
+	 * @return string[] The workflow trigger names.
 	 */
 	public function get_triggers(): array {
 		return $this->triggers;
 	}
 
 	/**
-	 * Instance the triggers of this workflow
+	 * Instance the triggers of this workflow.
+	 *
+	 * @since 6.2.0-alpha
+	 *
 	 * @throws Workflow_Exception Throws an exception if there is an issue initializing the trigger.
 	 */
 	public function init_triggers() {
@@ -119,7 +181,10 @@ class Automation_Workflow {
 	}
 
 	/**
-	 * Set initial step of this workflow
+	 * Set initial step of this workflow.
+	 *
+	 * @since 6.2.0-alpha
+	 *
 	 * @param array $step_data The data for the step to be set as the initial step.
 	 */
 	public function set_initial_step( array $step_data ) {
@@ -127,12 +192,14 @@ class Automation_Workflow {
 	}
 
 	/**
-	 * Get the workflow as an array
-	 * @return array
+	 * Get the workflow as an array to be stored or send as JSON.
+	 *
+	 * @since 6.2.0-alpha
+	 *
+	 * @return array The workflow as an array.
 	 */
-	public function get_workflow_array() {
-
-		$workflow = array(
+	public function get_workflow_array(): array {
+		return array(
 			'name'         => $this->name,
 			'description'  => $this->description,
 			'category'     => $this->category,
@@ -140,12 +207,12 @@ class Automation_Workflow {
 			'triggers'     => $this->triggers,
 			'initial_step' => $this->initial_step,
 		);
-
-		return $workflow;
 	}
 
 	/**
-	 * Get the initial step of this workflow
+	 * Get the initial step of this workflow.
+	 *
+	 * @since 6.2.0-alpha
 	 *
 	 * @return array
 	 */
@@ -154,11 +221,14 @@ class Automation_Workflow {
 	}
 
 	/**
-	 * Start the workflow execution once a trigger is activated
+	 * Start the workflow execution once a trigger is activated.
+	 *
+	 * @since 6.2.0-alpha
 	 *
 	 * @param Trigger $trigger An instance of the Trigger class.
 	 * @param array   $data All relevant object data to be passed through the workflow.
-	 * @return bool
+	 * @return bool Whether the workflow was executed successfully.
+	 *
 	 * @throws Automation_Exception Throws an exception if the step class does not exist, or there is an error executing the workflow.
 	 */
 	public function execute( Trigger $trigger, array $data ): bool {
@@ -211,9 +281,13 @@ class Automation_Workflow {
 	}
 
 	/**
-	 * Get the step classname based on the step type
+	 * Get the step classname based on the step type.
+	 *
+	 * @since 6.2.0-alpha
+	 *
 	 * @param array $step_data The step data with which to check the step type.
-	 * @return string
+	 * @return string The step classname.
+	 *
 	 * @throws Automation_Exception Throws an exception if the step class does not exist.
 	 */
 	private function get_step_class( array $step_data ): string {
@@ -223,29 +297,39 @@ class Automation_Workflow {
 	}
 
 	/**
-	 * Turn on the workflow
+	 * Turn on the workflow.
+	 *
+	 * @since 6.2.0-alpha
 	 */
 	public function turn_on() {
 		$this->active = true;
 	}
 
 	/**
-	 * Turn off the workflow
+	 * Turn off the workflow.
+	 *
+	 * @since 6.2.0-alpha
 	 */
 	public function turn_off() {
 		$this->active = false;
 	}
 
 	/**
-	 * Check if the workflow is active
-	 * @return bool
+	 * Check if the workflow is active.
+	 *
+	 * @since 6.2.0-alpha
+	 *
+	 * @return bool Whether the workflow is active.
 	 */
 	public function is_active(): bool {
 		return $this->active;
 	}
 
 	/**
-	 * Add a trigger to this workflow
+	 * Add a trigger to this workflow.
+	 *
+	 * @since 6.2.0-alpha
+	 *
 	 * @param string $string The name of the trigger to add.
 	 */
 	public function add_trigger( string $string ) {
@@ -253,7 +337,10 @@ class Automation_Workflow {
 	}
 
 	/**
-	 * Set Automation Logger
+	 * Set Automation Logger.
+	 *
+	 * @since 6.2.0-alpha
+	 *
 	 * @param Automation_Logger $logger An instance of the Automation_Logger class.
 	 */
 	public function set_automation_logger( Automation_Logger $logger ) {
@@ -261,10 +348,14 @@ class Automation_Workflow {
 	}
 
 	/**
-	 * Set Automation Engine
+	 * Set Automation Engine.
+	 *
+	 * @since 6.2.0-alpha
+	 *
 	 * @param Automation_Engine $automation_engine An instance of the Automation_Engine class.
 	 */
 	public function set_automation_engine( Automation_Engine $automation_engine ) {
 		$this->automation_engine = $automation_engine;
 	}
+
 }
