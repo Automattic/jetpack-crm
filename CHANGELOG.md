@@ -14,6 +14,7 @@ This is an alpha version! The changes listed here are not final.
 - Automation: Added condition for contact status changed
 - Automation: Added condition for invoice status changed
 - Automation: Added contact triggers
+- Automation: Added event trigger for updated
 - Automation: Added event triggers for new and deleted
 - Automation: Added quote triggers
 - Automation: Added transaction triggers for new and updated

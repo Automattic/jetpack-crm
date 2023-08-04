@@ -46,6 +46,7 @@ return array(
     'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Contact_Updated' => $baseDir . '/src/automation/commons/triggers/contacts/class-contact-updated.php',
     'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Event_Created' => $baseDir . '/src/automation/commons/triggers/events/class-event-created.php',
     'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Event_Deleted' => $baseDir . '/src/automation/commons/triggers/events/class-event-deleted.php',
+    'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Event_Updated' => $baseDir . '/src/automation/commons/triggers/events/class-event-updated.php',
     'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Invoice_Created' => $baseDir . '/src/automation/commons/triggers/invoices/class-invoice-created.php',
     'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Invoice_Deleted' => $baseDir . '/src/automation/commons/triggers/invoices/class-invoice-deleted.php',
     'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Invoice_Status_Updated' => $baseDir . '/src/automation/commons/triggers/invoices/class-invoice-status-updated.php',

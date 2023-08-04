@@ -178,6 +178,10 @@ return array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/commons/triggers/events/class-event-deleted.php'
 	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Event_Updated' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/triggers/events/class-event-updated.php'
+	),
 	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Invoice_Created' => array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/commons/triggers/invoices/class-invoice-created.php'
