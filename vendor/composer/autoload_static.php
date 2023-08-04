@@ -116,6 +116,8 @@ class ComposerStaticInit06c775433a83ed276f0a1d8ac25f93ba_crmⓥ6_2_0_alpha
         'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Quote_Deleted' => __DIR__ . '/../..' . '/src/automation/commons/triggers/quotes/class-quote-deleted.php',
         'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Quote_Status_Updated' => __DIR__ . '/../..' . '/src/automation/commons/triggers/quotes/class-quote-status-updated.php',
         'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Quote_Updated' => __DIR__ . '/../..' . '/src/automation/commons/triggers/quotes/class-quote-updated.php',
+        'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Transaction_Created' => __DIR__ . '/../..' . '/src/automation/commons/triggers/transactions/class-transaction-created.php',
+        'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Transaction_Updated' => __DIR__ . '/../..' . '/src/automation/commons/triggers/transactions/class-transaction-updated.php',
         'Automattic\\Jetpack\\CRM\\Automation\\Workflow_Exception' => __DIR__ . '/../..' . '/src/automation/class-workflow-exception.php',
         'Automattic\\Jetpack\\CRM\\REST_API\\V4\\REST_Base_Controller' => __DIR__ . '/../..' . '/src/rest-api/v4/class-rest-base-controller.php',
         'Automattic\\Jetpack\\CRM\\REST_API\\V4\\REST_Base_Objects_Controller' => __DIR__ . '/../..' . '/src/rest-api/v4/class-rest-base-objects-controller.php',

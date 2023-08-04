@@ -214,6 +214,14 @@ return array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/commons/triggers/quotes/class-quote-updated.php'
 	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Transaction_Created' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/triggers/transactions/class-transaction-created.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Transaction_Updated' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/triggers/transactions/class-transaction-updated.php'
+	),
 	'Automattic\\Jetpack\\CRM\\Automation\\Workflow_Exception' => array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/class-workflow-exception.php'
