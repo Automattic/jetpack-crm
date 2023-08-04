@@ -29,6 +29,7 @@ return array(
     'Automattic\\Jetpack\\CRM\\Automation\\Base_Step' => $baseDir . '/src/automation/class-base-step.php',
     'Automattic\\Jetpack\\CRM\\Automation\\Base_Trigger' => $baseDir . '/src/automation/class-base-trigger.php',
     'Automattic\\Jetpack\\CRM\\Automation\\Condition' => $baseDir . '/src/automation/interface-condition.php',
+    'Automattic\\Jetpack\\CRM\\Automation\\Conditions\\Invoice_Status_Changed' => $baseDir . '/src/automation/commons/conditions/class-invoice-status-changed.php',
     'Automattic\\Jetpack\\CRM\\Automation\\Step' => $baseDir . '/src/automation/interface-step.php',
     'Automattic\\Jetpack\\CRM\\Automation\\Step_Exception' => $baseDir . '/src/automation/class-step-exception.php',
     'Automattic\\Jetpack\\CRM\\Automation\\Trigger' => $baseDir . '/src/automation/interface-trigger.php',
