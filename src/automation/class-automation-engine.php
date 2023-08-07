@@ -43,9 +43,9 @@ class Automation_Engine {
 	 * The Automation logger.
 	 *
 	 * @since 6.2.0-alpha
-	 * @var Automation_Logger
+	 * @var ?Automation_Logger
 	 */
-	private $automation_logger;
+	private $automation_logger = null;
 
 	/**
 	 * The list of registered workflows.
@@ -289,10 +289,10 @@ class Automation_Engine {
 	 *
 	 * @since 6.2.0-alpha
 	 *
-	 * @return Automation_Logger
+	 * @return Automation_Logger Return an instance of the Automation_Logger class.
 	 */
-	public function get_logger(): ?Automation_Logger {
-		return $this->automation_logger;
+	public function get_logger(): Automation_Logger {
+		return $this->automation_logger ?? Automation_Logger::instance();
 	}
 
 	/**

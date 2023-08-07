@@ -81,6 +81,7 @@ class ComposerStaticInit06c775433a83ed276f0a1d8ac25f93ba_crmⓥ6_2_0_alpha
         'Automattic\\Jetpack\\CRM\\Automation\\Actions\\New_Contact' => __DIR__ . '/../..' . '/src/automation/commons/actions/contacts/class-new-contact.php',
         'Automattic\\Jetpack\\CRM\\Automation\\Actions\\Update_Contact' => __DIR__ . '/../..' . '/src/automation/commons/actions/contacts/class-update-contact.php',
         'Automattic\\Jetpack\\CRM\\Automation\\Actions\\Update_Contact_Status' => __DIR__ . '/../..' . '/src/automation/commons/actions/contacts/class-update-contact-status.php',
+        'Automattic\\Jetpack\\CRM\\Automation\\Automation_Boostrap' => __DIR__ . '/../..' . '/src/automation/class-automation-boostrap.php',
         'Automattic\\Jetpack\\CRM\\Automation\\Automation_Engine' => __DIR__ . '/../..' . '/src/automation/class-automation-engine.php',
         'Automattic\\Jetpack\\CRM\\Automation\\Automation_Exception' => __DIR__ . '/../..' . '/src/automation/class-automation-exception.php',
         'Automattic\\Jetpack\\CRM\\Automation\\Automation_Logger' => __DIR__ . '/../..' . '/src/automation/class-automation-logger.php',
