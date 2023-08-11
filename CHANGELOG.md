@@ -24,6 +24,9 @@ This is an alpha version! The changes listed here are not final.
 ### Changed
 - Updated package dependencies.
 
+### Fixed
+- Introduced a phpcs:ignore directive to unblock pull requests from being merged temporarily.
+
 ## [6.1.0] - 2023-07-24
 ### Added
 - Listing pages: Add a new setting that allows listing pages to utilize the full width of the screen [#31904]
