@@ -118,6 +118,10 @@ return array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/commons/conditions/contacts/class-contact-field-changed.php'
 	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Conditions\\Contact_Transitional_Status' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/conditions/contacts/class-contact-transitional-status.php'
+	),
 	'Automattic\\Jetpack\\CRM\\Automation\\Conditions\\Invoice_Status_Changed' => array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/commons/conditions/class-invoice-status-changed.php'

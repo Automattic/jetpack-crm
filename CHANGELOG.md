@@ -12,6 +12,7 @@ This is an alpha version! The changes listed here are not final.
 ### Added
 - Add the new Automation System
 - Add the new JPCRM Event Manager to notify events via WP hooks
+- Automation:  Added a condition to detect changes in status from a specified initial value to a designated target one
 - Automation: Added condition for contact status changed
 - Automation: Added condition for invoice status changed
 - Automation: Added contact triggers
