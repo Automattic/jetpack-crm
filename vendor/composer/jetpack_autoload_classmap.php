@@ -130,6 +130,10 @@ return array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/commons/conditions/invoices/class-invoice-status-changed.php'
 	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Conditions\\Transaction_Field' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/conditions/transactions/class-transaction-field.php'
+	),
 	'Automattic\\Jetpack\\CRM\\Automation\\Step' => array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/interface-step.php'
