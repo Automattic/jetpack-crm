@@ -122,9 +122,13 @@ return array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/commons/conditions/contacts/class-contact-transitional-status.php'
 	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Conditions\\Invoice_Field_Contains' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/conditions/invoices/class-invoice-field-contains.php'
+	),
 	'Automattic\\Jetpack\\CRM\\Automation\\Conditions\\Invoice_Status_Changed' => array(
 		'version' => 'dev-trunk',
-		'path'    => $baseDir . '/src/automation/commons/conditions/class-invoice-status-changed.php'
+		'path'    => $baseDir . '/src/automation/commons/conditions/invoices/class-invoice-status-changed.php'
 	),
 	'Automattic\\Jetpack\\CRM\\Automation\\Step' => array(
 		'version' => 'dev-trunk',

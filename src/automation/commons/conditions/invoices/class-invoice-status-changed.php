@@ -1,6 +1,6 @@
 <?php
 /**
- * Jetpack CRM Automation Contact_Transitional_Status condition.
+ * Jetpack CRM Automation Invoice_Status_Changed condition.
  *
  * @package automattic/jetpack-crm
  */
@@ -11,11 +11,12 @@ use Automattic\Jetpack\CRM\Automation\Automation_Exception;
 use Automattic\Jetpack\CRM\Automation\Base_Condition;
 
 /**
- * Contact_Transitional_Status condition class.
+ * Invoice_Status_Changed condition class.
  *
  * @since 6.2.0-alpha
  */
-class Contact_Transitional_Status extends Base_Condition {
+class Invoice_Status_Changed extends Base_Condition {
+
 	/**
 	 * All valid operators for this condition.
 	 *
@@ -23,7 +24,8 @@ class Contact_Transitional_Status extends Base_Condition {
 	 * @var string[] $valid_operators Valid operators.
 	 */
 	protected $valid_operators = array(
-		'from_to',
+		'is',
+		'is_not',
 	);
 
 	/**
@@ -33,8 +35,8 @@ class Contact_Transitional_Status extends Base_Condition {
 	 * @var string[] $valid_operators Valid attributes.
 	 */
 	private $valid_attributes = array(
-		'previous_status_was',
-		'new_status_is',
+		'operator',
+		'value',
 	);
 
 	/**
@@ -45,27 +47,30 @@ class Contact_Transitional_Status extends Base_Condition {
 	 *
 	 * @param array $data The data this condition has to evaluate.
 	 * @return void
-	 *
 	 * @throws Automation_Exception If an invalid operator is encountered.
 	 */
 	public function execute( array $data ) {
-		if ( ! $this->is_valid_contact_status_transitional_data( $data ) ) {
-			$this->logger->log( 'Invalid contact status transitional data', $data );
+		if ( ! $this->is_valid_invoice_status_changed_data( $data ) ) {
+			$this->logger->log( 'Invalid invoice status changed data', $data );
 			$this->condition_met = false;
-
 			return;
 		}
 
-		$operator   = $this->get_attributes()['operator'];
-		$status_was = $this->get_attributes()['previous_status_was'];
-		$status_is  = $this->get_attributes()['new_status_is'];
+		$field    = 'status';
+		$operator = $this->get_attributes()['operator'];
+		$value    = $this->get_attributes()['value'];
 
 		$this->check_for_valid_operator( $operator );
-		$this->logger->log( 'Condition: Contact_Transitional_Status ' . $operator . ' ' . $status_was . ' => ' . $status_is );
+		$this->logger->log( 'Condition: ' . $field . ' ' . $operator . ' ' . $value . ' => ' . $data['data'][ $field ] );
 
 		switch ( $operator ) {
-			case 'from_to':
-				$this->condition_met = ( $data['old_status_value'] === $status_was ) && ( $data['contact']['data']['status'] === $status_is );
+			case 'is':
+				$this->condition_met = ( $data['data'][ $field ] === $value );
+				$this->logger->log( 'Condition met?: ' . ( $this->condition_met ? 'true' : 'false' ) );
+
+				return;
+			case 'is_not':
+				$this->condition_met = ( $data['data'][ $field ] !== $value );
 				$this->logger->log( 'Condition met?: ' . ( $this->condition_met ? 'true' : 'false' ) );
 
 				return;
@@ -80,53 +85,53 @@ class Contact_Transitional_Status extends Base_Condition {
 	}
 
 	/**
-	 * Checks if the contact has at least the necessary keys to detect a transitional
-	 * status condition.
+	 * Checks if the invoice has at least the necessary keys to detect a status
+	 * change.
 	 *
 	 * @since 6.2.0-alpha
 	 *
-	 * @param array $data The event data.
-	 * @return bool True if the data is valid to detect a transitional status change, false otherwise.
+	 * @param array $invoice_data The invoice data.
+	 * @return bool True if the data is valid to detect a status change, false otherwise
 	 */
-	private function is_valid_contact_status_transitional_data( array $data ): bool {
-		return isset( $data['contact'] ) && isset( $data['old_status_value'] ) && isset( $data['contact']['data']['status'] );
+	private function is_valid_invoice_status_changed_data( array $invoice_data ): bool {
+		return isset( $invoice_data['id'] ) && isset( $invoice_data['data'] ) && isset( $invoice_data['data']['status'] );
 	}
 
 	/**
-	 * Get the slug for the contact transitional status condition.
+	 * Get the slug for the invoice status changed condition.
 	 *
 	 * @since 6.2.0-alpha
 	 *
-	 * @return string The slug 'contact_status_transitional'.
+	 * @return string The slug 'invoice_status_changed'.
 	 */
 	public static function get_slug(): string {
-		return 'jpcrm/condition/contact_status_transitional';
+		return 'jpcrm/condition/invoice_status_changed';
 	}
 
 	/**
-	 * Get the title for the contact transitional status condition.
+	 * Get the title for the invoice status changed condition.
 	 *
 	 * @since 6.2.0-alpha
 	 *
-	 * @return string The title 'Contact Transitional Status'.
+	 * @return string The title 'Invoice Status Changed'.
 	 */
 	public static function get_title(): string {
-		return __( 'Contact Transitional Status', 'zero-bs-crm' );
+		return __( 'Invoice Status Changed', 'zero-bs-crm' );
 	}
 
 	/**
-	 * Get the description for the contact transitional status condition.
+	 * Get the description for the invoice status changed condition.
 	 *
 	 * @since 6.2.0-alpha
 	 *
 	 * @return string The description for the condition.
 	 */
 	public static function get_description(): string {
-		return __( 'Checks if a contact status changes from a specified initial value to a designated target one', 'zero-bs-crm' );
+		return __( 'Checks if a invoice status change matches an expected value', 'zero-bs-crm' );
 	}
 
 	/**
-	 * Get the type of the contact transitional status condition.
+	 * Get the type of the invoice status changed condition.
 	 *
 	 * @since 6.2.0-alpha
 	 *
@@ -137,27 +142,29 @@ class Contact_Transitional_Status extends Base_Condition {
 	}
 
 	/**
-	 * Get the category of the contact transitional status condition.
+	 * Get the category of the invoice status changed condition.
 	 *
 	 * @since 6.2.0-alpha
 	 *
-	 * @return string The category 'contact'.
+	 * @return string The category 'jpcrm/invoice_condition'.
 	 */
 	public static function get_category(): string {
-		return 'contact';
+		return __( 'invoice', 'zero-bs-crm' );
 	}
 
 	/**
-	 * Get the allowed triggers for the contact transitional status condition.
+	 * Get the allowed triggers for the invoice status changed condition.
 	 *
 	 * @since 6.2.0-alpha
 	 *
 	 * @return string[] An array of allowed triggers:
-	 *               - 'jpcrm/contact_status_updated'
+	 *               - 'jpcrm/invoice_status_updated'
+	 *               - 'jpcrm/invoice_updated'
 	 */
 	public static function get_allowed_triggers(): array {
 		return array(
-			'jpcrm/contact_status_updated',
+			'jpcrm/invoice_status_updated',
+			'jpcrm/invoice_updated',
 		);
 	}
 }
