@@ -34,6 +34,7 @@ return array(
     'Automattic\\Jetpack\\CRM\\Automation\\Conditions\\Contact_Transitional_Status' => $baseDir . '/src/automation/commons/conditions/contacts/class-contact-transitional-status.php',
     'Automattic\\Jetpack\\CRM\\Automation\\Conditions\\Invoice_Field_Contains' => $baseDir . '/src/automation/commons/conditions/invoices/class-invoice-field-contains.php',
     'Automattic\\Jetpack\\CRM\\Automation\\Conditions\\Invoice_Status_Changed' => $baseDir . '/src/automation/commons/conditions/invoices/class-invoice-status-changed.php',
+    'Automattic\\Jetpack\\CRM\\Automation\\Conditions\\Quote_Status_Changed' => $baseDir . '/src/automation/commons/conditions/quotes/class-quote-status-changed.php',
     'Automattic\\Jetpack\\CRM\\Automation\\Conditions\\Transaction_Field' => $baseDir . '/src/automation/commons/conditions/transactions/class-transaction-field.php',
     'Automattic\\Jetpack\\CRM\\Automation\\Step' => $baseDir . '/src/automation/interface-step.php',
     'Automattic\\Jetpack\\CRM\\Automation\\Step_Exception' => $baseDir . '/src/automation/class-step-exception.php',
