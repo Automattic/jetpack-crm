@@ -30,6 +30,7 @@ This is an alpha version! The changes listed here are not final.
 ### Fixed
 - Introduced a phpcs:ignore directive to unblock pull requests from being merged temporarily.
 - Segments: Fixed error 219 occurring when using date ranges
+- Tasks: Corrected placeholders for contacts and companies in the task reminder email
 
 ## [6.1.0] - 2023-07-24
 ### Added
