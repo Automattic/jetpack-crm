@@ -52,13 +52,22 @@ interface Trigger {
 	public static function get_category(): ?string;
 
 	/**
+	 * Get the trigger's data type.
+	 *
+	 * @since 6.2.0-alpha
+	 *
+	 * @return string the trigger's data type.
+	 */
+	public static function get_data_type(): string;
+
+	/**
 	 * Execute the workflow.
 	 *
 	 * @since 6.2.0-alpha
 	 *
-	 * @param array|null $data The data to pass to the workflow.
+	 * @param mixed $data The data to pass to the workflow.
 	 */
-	public function execute_workflow( array $data = null );
+	public function execute_workflow( $data = null );
 
 	/**
 	 * Set the workflow to execute by this trigger.
