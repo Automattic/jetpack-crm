@@ -74,6 +74,10 @@ return array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/commons/actions/contacts/class-update-contact-status.php'
 	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Attribute_Definition' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/class-attribute-definition.php'
+	),
 	'Automattic\\Jetpack\\CRM\\Automation\\Automation_Boostrap' => array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/class-automation-boostrap.php'
