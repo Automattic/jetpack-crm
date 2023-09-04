@@ -52,7 +52,7 @@
 		}
 	},
 	"require": {
-		"automattic/jetpack-assets": "^1.18.10-alpha",
+		"automattic/jetpack-assets": "^1.18.10",
 		"automattic/jetpack-autoloader": "^2.11.22",
 		"automattic/jetpack-composer-plugin": "^1.1.13",
 		"automattic/woocommerce": "^3.0",
