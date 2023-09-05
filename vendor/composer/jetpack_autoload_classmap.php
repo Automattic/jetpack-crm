@@ -310,6 +310,10 @@ return array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/event-manager/class-events-manager.php'
 	),
+	'Automattic\\Jetpack\\CRM\\REST_API\\V4\\REST_Automation_Controller' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/rest-api/v4/class-rest-automation-controller.php'
+	),
 	'Automattic\\Jetpack\\CRM\\REST_API\\V4\\REST_Base_Controller' => array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/rest-api/v4/class-rest-base-controller.php'

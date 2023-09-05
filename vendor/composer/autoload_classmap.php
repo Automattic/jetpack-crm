@@ -79,6 +79,7 @@ return array(
     'Automattic\\Jetpack\\CRM\\Event_Manager\\Contact_Event' => $baseDir . '/src/event-manager/managers/class-contact-event.php',
     'Automattic\\Jetpack\\CRM\\Event_Manager\\Event' => $baseDir . '/src/event-manager/interface-event.php',
     'Automattic\\Jetpack\\CRM\\Event_Manager\\Events_Manager' => $baseDir . '/src/event-manager/class-events-manager.php',
+    'Automattic\\Jetpack\\CRM\\REST_API\\V4\\REST_Automation_Controller' => $baseDir . '/src/rest-api/v4/class-rest-automation-controller.php',
     'Automattic\\Jetpack\\CRM\\REST_API\\V4\\REST_Base_Controller' => $baseDir . '/src/rest-api/v4/class-rest-base-controller.php',
     'Automattic\\Jetpack\\CRM\\REST_API\\V4\\REST_Base_Objects_Controller' => $baseDir . '/src/rest-api/v4/class-rest-base-objects-controller.php',
     'Automattic\\Jetpack\\CRM\\REST_API\\V4\\REST_Contacts_Controller' => $baseDir . '/src/rest-api/v4/class-rest-contacts-controller.php',
