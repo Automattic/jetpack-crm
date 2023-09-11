@@ -33,6 +33,7 @@ This is an alpha version! The changes listed here are not final.
 - API: rewrite rules are now flushed after enabling module
 - CRM Forms: Removed reference to old branding
 - Introduced a phpcs:ignore directive to unblock pull requests from being merged temporarily.
+- Quotes: could be accepted by admin users.
 - Segments: Fixed error 219 occurring when using date ranges
 - Tasks: Corrected placeholders for contacts and companies in the task reminder email
 
