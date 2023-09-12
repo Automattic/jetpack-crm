@@ -27,6 +27,7 @@ This is an alpha version! The changes listed here are not final.
 - Automations: Added company triggers
 
 ### Changed
+- Requires PHP 7.3 or higher
 - Updated package dependencies.
 
 ### Fixed
