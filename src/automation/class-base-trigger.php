@@ -105,5 +105,4 @@ abstract class Base_Trigger implements Trigger {
 	 * @since 6.2.0-alpha
 	 */
 	abstract protected function listen_to_event();
-
 }
