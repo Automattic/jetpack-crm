@@ -78,9 +78,9 @@ return array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/class-attribute-definition.php'
 	),
-	'Automattic\\Jetpack\\CRM\\Automation\\Automation_Boostrap' => array(
+	'Automattic\\Jetpack\\CRM\\Automation\\Automation_Bootstrap' => array(
 		'version' => 'dev-trunk',
-		'path'    => $baseDir . '/src/automation/class-automation-boostrap.php'
+		'path'    => $baseDir . '/src/automation/class-automation-bootstrap.php'
 	),
 	'Automattic\\Jetpack\\CRM\\Automation\\Automation_Engine' => array(
 		'version' => 'dev-trunk',

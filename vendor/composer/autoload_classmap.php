@@ -21,7 +21,7 @@ return array(
     'Automattic\\Jetpack\\CRM\\Automation\\Actions\\Update_Contact' => $baseDir . '/src/automation/commons/actions/contacts/class-update-contact.php',
     'Automattic\\Jetpack\\CRM\\Automation\\Actions\\Update_Contact_Status' => $baseDir . '/src/automation/commons/actions/contacts/class-update-contact-status.php',
     'Automattic\\Jetpack\\CRM\\Automation\\Attribute_Definition' => $baseDir . '/src/automation/class-attribute-definition.php',
-    'Automattic\\Jetpack\\CRM\\Automation\\Automation_Boostrap' => $baseDir . '/src/automation/class-automation-boostrap.php',
+    'Automattic\\Jetpack\\CRM\\Automation\\Automation_Bootstrap' => $baseDir . '/src/automation/class-automation-bootstrap.php',
     'Automattic\\Jetpack\\CRM\\Automation\\Automation_Engine' => $baseDir . '/src/automation/class-automation-engine.php',
     'Automattic\\Jetpack\\CRM\\Automation\\Automation_Exception' => $baseDir . '/src/automation/class-automation-exception.php',
     'Automattic\\Jetpack\\CRM\\Automation\\Automation_Logger' => $baseDir . '/src/automation/class-automation-logger.php',
