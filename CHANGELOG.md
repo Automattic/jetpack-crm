@@ -19,6 +19,7 @@ This is an alpha version! The changes listed here are not final.
 - Automation: Added condition for invoice status changed
 - Automation: Added condition for quote status changed
 - Automation: Added condition for transaction field changed and field contains
+- Automation: Added conditions for contact tags
 - Automation: Added contact triggers
 - Automation: Added event trigger for updated
 - Automation: Added event triggers for new and deleted

@@ -32,6 +32,7 @@ return array(
     'Automattic\\Jetpack\\CRM\\Automation\\Base_Trigger' => $baseDir . '/src/automation/class-base-trigger.php',
     'Automattic\\Jetpack\\CRM\\Automation\\Condition' => $baseDir . '/src/automation/interface-condition.php',
     'Automattic\\Jetpack\\CRM\\Automation\\Conditions\\Contact_Field_Changed' => $baseDir . '/src/automation/commons/conditions/contacts/class-contact-field-changed.php',
+    'Automattic\\Jetpack\\CRM\\Automation\\Conditions\\Contact_Tag' => $baseDir . '/src/automation/commons/conditions/contacts/class-contact-tag.php',
     'Automattic\\Jetpack\\CRM\\Automation\\Conditions\\Contact_Transitional_Status' => $baseDir . '/src/automation/commons/conditions/contacts/class-contact-transitional-status.php',
     'Automattic\\Jetpack\\CRM\\Automation\\Conditions\\Invoice_Field_Contains' => $baseDir . '/src/automation/commons/conditions/invoices/class-invoice-field-contains.php',
     'Automattic\\Jetpack\\CRM\\Automation\\Conditions\\Invoice_Status_Changed' => $baseDir . '/src/automation/commons/conditions/invoices/class-invoice-status-changed.php',

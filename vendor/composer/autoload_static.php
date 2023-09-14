@@ -93,6 +93,7 @@ class ComposerStaticInit06c775433a83ed276f0a1d8ac25f93ba_crmⓥ6_2_0_alpha
         'Automattic\\Jetpack\\CRM\\Automation\\Base_Trigger' => __DIR__ . '/../..' . '/src/automation/class-base-trigger.php',
         'Automattic\\Jetpack\\CRM\\Automation\\Condition' => __DIR__ . '/../..' . '/src/automation/interface-condition.php',
         'Automattic\\Jetpack\\CRM\\Automation\\Conditions\\Contact_Field_Changed' => __DIR__ . '/../..' . '/src/automation/commons/conditions/contacts/class-contact-field-changed.php',
+        'Automattic\\Jetpack\\CRM\\Automation\\Conditions\\Contact_Tag' => __DIR__ . '/../..' . '/src/automation/commons/conditions/contacts/class-contact-tag.php',
         'Automattic\\Jetpack\\CRM\\Automation\\Conditions\\Contact_Transitional_Status' => __DIR__ . '/../..' . '/src/automation/commons/conditions/contacts/class-contact-transitional-status.php',
         'Automattic\\Jetpack\\CRM\\Automation\\Conditions\\Invoice_Field_Contains' => __DIR__ . '/../..' . '/src/automation/commons/conditions/invoices/class-invoice-field-contains.php',
         'Automattic\\Jetpack\\CRM\\Automation\\Conditions\\Invoice_Status_Changed' => __DIR__ . '/../..' . '/src/automation/commons/conditions/invoices/class-invoice-status-changed.php',
