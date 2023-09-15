@@ -37,6 +37,8 @@ This is an alpha version! The changes listed here are not final.
 - Introduced a phpcs:ignore directive to unblock pull requests from being merged temporarily.
 - Quotes: could be accepted by admin users.
 - Segments: Fixed error 219 occurring when using date ranges
+- Tags: prevent duplicate slugs
+  Tags: more robust slug fallback support
 - Tasks: Corrected placeholders for contacts and companies in the task reminder email
 
 ## [6.1.0] - 2023-07-24
