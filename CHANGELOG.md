@@ -40,6 +40,8 @@ This is an alpha version! The changes listed here are not final.
 - Invoices: Handle status translations consistently
 - Quotes: could be accepted by admin users.
 - Segments: Fixed error 219 occurring when using date ranges
+- Tags: better slug generation
+  Tags: added tag slug migration
 - Tags: prevent duplicate slugs
   Tags: more robust slug fallback support
 - Tasks: Corrected placeholders for contacts and companies in the task reminder email
