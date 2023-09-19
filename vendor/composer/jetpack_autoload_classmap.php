@@ -302,6 +302,10 @@ return array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/class-workflow-exception.php'
 	),
+	'Automattic\\Jetpack\\CRM\\Entities\\Company' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/entities/class-company.php'
+	),
 	'Automattic\\Jetpack\\CRM\\Entities\\Invoice' => array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/entities/class-invoice.php'
@@ -309,6 +313,10 @@ return array(
 	'Automattic\\Jetpack\\CRM\\Entities\\Quote' => array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/entities/class-quote.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Entities\\Tag' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/entities/class-tag.php'
 	),
 	'Automattic\\Jetpack\\CRM\\Entities\\Transaction' => array(
 		'version' => 'dev-trunk',
