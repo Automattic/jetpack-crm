@@ -30,18 +30,18 @@ interface Step {
 	 *
 	 * @since 6.2.0-alpha
 	 *
-	 * @return array|null The next linked step.
+	 * @return int|string|null The next linked step.
 	 */
-	public function get_next_step(): ?array;
+	public function get_next_step_id();
 
 	/**
 	 * Set the next step.
 	 *
 	 * @since 6.2.0-alpha
 	 *
-	 * @param array $step_data The next linked step.
+	 * @param int|string|null $step_id The next linked step.
 	 */
-	public function set_next_step( array $step_data );
+	public function set_next_step( $step_id );
 
 	/**
 	 * Get the step attribute definitions.

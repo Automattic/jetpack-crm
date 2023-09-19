@@ -28,6 +28,7 @@ This is an alpha version! The changes listed here are not final.
 - Automations: Added company triggers
 
 ### Changed
+- Internal workflow schema update. Adding pointers to the steps inside of a workflow.
 - Requires PHP 7.3 or higher
 - Updated package dependencies.
 
