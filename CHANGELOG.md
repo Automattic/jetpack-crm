@@ -26,6 +26,7 @@ This is an alpha version! The changes listed here are not final.
 - Automation: Added quote triggers
 - Automation: Added transaction triggers for new and updated
 - Automations: Added company triggers
+- Automations: Adding the invoice entity class
 
 ### Changed
 - Internal workflow schema update. Adding pointers to the steps inside of a workflow.
