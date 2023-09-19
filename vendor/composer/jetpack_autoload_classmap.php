@@ -302,10 +302,6 @@ return array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/class-workflow-exception.php'
 	),
-	'Automattic\\Jetpack\\CRM\\Entities\\Company' => array(
-		'version' => 'dev-trunk',
-		'path'    => $baseDir . '/src/entities/class-company.php'
-	),
 	'Automattic\\Jetpack\\CRM\\Entities\\Invoice' => array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/entities/class-invoice.php'

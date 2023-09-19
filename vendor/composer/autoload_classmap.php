@@ -77,7 +77,6 @@ return array(
     'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Transaction_Created' => $baseDir . '/src/automation/commons/triggers/transactions/class-transaction-created.php',
     'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Transaction_Updated' => $baseDir . '/src/automation/commons/triggers/transactions/class-transaction-updated.php',
     'Automattic\\Jetpack\\CRM\\Automation\\Workflow_Exception' => $baseDir . '/src/automation/class-workflow-exception.php',
-    'Automattic\\Jetpack\\CRM\\Entities\\Company' => $baseDir . '/src/entities/class-company.php',
     'Automattic\\Jetpack\\CRM\\Entities\\Invoice' => $baseDir . '/src/entities/class-invoice.php',
     'Automattic\\Jetpack\\CRM\\Entities\\Quote' => $baseDir . '/src/entities/class-quote.php',
     'Automattic\\Jetpack\\CRM\\Entities\\Transaction' => $baseDir . '/src/entities/class-transaction.php',

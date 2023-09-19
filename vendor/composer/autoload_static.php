@@ -138,7 +138,6 @@ class ComposerStaticInit06c775433a83ed276f0a1d8ac25f93ba_crmⓥ6_2_0_alpha
         'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Transaction_Created' => __DIR__ . '/../..' . '/src/automation/commons/triggers/transactions/class-transaction-created.php',
         'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Transaction_Updated' => __DIR__ . '/../..' . '/src/automation/commons/triggers/transactions/class-transaction-updated.php',
         'Automattic\\Jetpack\\CRM\\Automation\\Workflow_Exception' => __DIR__ . '/../..' . '/src/automation/class-workflow-exception.php',
-        'Automattic\\Jetpack\\CRM\\Entities\\Company' => __DIR__ . '/../..' . '/src/entities/class-company.php',
         'Automattic\\Jetpack\\CRM\\Entities\\Invoice' => __DIR__ . '/../..' . '/src/entities/class-invoice.php',
         'Automattic\\Jetpack\\CRM\\Entities\\Quote' => __DIR__ . '/../..' . '/src/entities/class-quote.php',
         'Automattic\\Jetpack\\CRM\\Entities\\Transaction' => __DIR__ . '/../..' . '/src/entities/class-transaction.php',
