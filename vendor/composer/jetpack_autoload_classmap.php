@@ -66,6 +66,10 @@ return array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/commons/actions/contacts/class-new-contact.php'
 	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Actions\\Set_Invoice_Status' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/actions/invoice/class-set-invoice-status.php'
+	),
 	'Automattic\\Jetpack\\CRM\\Automation\\Actions\\Update_Contact' => array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/commons/actions/contacts/class-update-contact.php'
@@ -333,6 +337,10 @@ return array(
 	'Automattic\\Jetpack\\CRM\\Event_Manager\\Events_Manager' => array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/event-manager/class-events-manager.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Event_Manager\\Invoice_Event' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/event-manager/managers/class-invoice-event.php'
 	),
 	'Automattic\\Jetpack\\CRM\\REST_API\\V4\\REST_Automation_Controller' => array(
 		'version' => 'dev-trunk',
