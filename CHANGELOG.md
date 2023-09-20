@@ -38,6 +38,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Fixed
 - API: rewrite rules are now flushed after enabling module
+- API: task reminder param is no longer ignored
 - CRM Forms: Removed reference to old branding
 - CSV Importer: Fixed assignment to companies by name
 - Custom Fields: Corrected bug that prevented new address custom fields from being shown
