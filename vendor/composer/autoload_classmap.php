@@ -83,6 +83,7 @@ return array(
     'Automattic\\Jetpack\\CRM\\Entities\\Invoice' => $baseDir . '/src/entities/class-invoice.php',
     'Automattic\\Jetpack\\CRM\\Entities\\Quote' => $baseDir . '/src/entities/class-quote.php',
     'Automattic\\Jetpack\\CRM\\Entities\\Tag' => $baseDir . '/src/entities/class-tag.php',
+    'Automattic\\Jetpack\\CRM\\Entities\\Task' => $baseDir . '/src/entities/class-task.php',
     'Automattic\\Jetpack\\CRM\\Entities\\Transaction' => $baseDir . '/src/entities/class-transaction.php',
     'Automattic\\Jetpack\\CRM\\Event_Manager\\Contact_Event' => $baseDir . '/src/event-manager/managers/class-contact-event.php',
     'Automattic\\Jetpack\\CRM\\Event_Manager\\Event' => $baseDir . '/src/event-manager/interface-event.php',

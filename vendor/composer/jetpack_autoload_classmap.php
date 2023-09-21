@@ -326,6 +326,10 @@ return array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/entities/class-tag.php'
 	),
+	'Automattic\\Jetpack\\CRM\\Entities\\Task' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/entities/class-task.php'
+	),
 	'Automattic\\Jetpack\\CRM\\Entities\\Transaction' => array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/entities/class-transaction.php'

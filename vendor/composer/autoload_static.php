@@ -144,6 +144,7 @@ class ComposerStaticInit06c775433a83ed276f0a1d8ac25f93ba_crmⓥ6_2_0_alpha
         'Automattic\\Jetpack\\CRM\\Entities\\Invoice' => __DIR__ . '/../..' . '/src/entities/class-invoice.php',
         'Automattic\\Jetpack\\CRM\\Entities\\Quote' => __DIR__ . '/../..' . '/src/entities/class-quote.php',
         'Automattic\\Jetpack\\CRM\\Entities\\Tag' => __DIR__ . '/../..' . '/src/entities/class-tag.php',
+        'Automattic\\Jetpack\\CRM\\Entities\\Task' => __DIR__ . '/../..' . '/src/entities/class-task.php',
         'Automattic\\Jetpack\\CRM\\Entities\\Transaction' => __DIR__ . '/../..' . '/src/entities/class-transaction.php',
         'Automattic\\Jetpack\\CRM\\Event_Manager\\Contact_Event' => __DIR__ . '/../..' . '/src/event-manager/managers/class-contact-event.php',
         'Automattic\\Jetpack\\CRM\\Event_Manager\\Event' => __DIR__ . '/../..' . '/src/event-manager/interface-event.php',
