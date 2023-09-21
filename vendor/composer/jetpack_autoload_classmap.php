@@ -310,6 +310,10 @@ return array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/entities/class-company.php'
 	),
+	'Automattic\\Jetpack\\CRM\\Entities\\Contact' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/entities/class-contact.php'
+	),
 	'Automattic\\Jetpack\\CRM\\Entities\\Invoice' => array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/entities/class-invoice.php'
