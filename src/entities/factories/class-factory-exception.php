@@ -3,6 +3,7 @@
  * Factory Exception.
  *
  * @package automattic/jetpack-crm
+ * @since 6.2.0-alpha
  */
 
 namespace Automattic\Jetpack\CRM\Entities\Factories;

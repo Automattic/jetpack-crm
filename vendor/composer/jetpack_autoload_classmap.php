@@ -322,6 +322,10 @@ return array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/entities/class-contact.php'
 	),
+	'Automattic\\Jetpack\\CRM\\Entities\\Factories\\Company_Factory' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/entities/factories/class-company-factory.php'
+	),
 	'Automattic\\Jetpack\\CRM\\Entities\\Factories\\Contact_Factory' => array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/entities/factories/class-contact-factory.php'
@@ -333,6 +337,22 @@ return array(
 	'Automattic\\Jetpack\\CRM\\Entities\\Factories\\Factory_Exception' => array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/entities/factories/class-factory-exception.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Entities\\Factories\\Invoice_Factory' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/entities/factories/class-invoice-factory.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Entities\\Factories\\Quote_Factory' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/entities/factories/class-quote-factory.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Entities\\Factories\\Task_Factory' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/entities/factories/class-task-factory.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Entities\\Factories\\Transaction_Factory' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/entities/factories/class-transaction-factory.php'
 	),
 	'Automattic\\Jetpack\\CRM\\Entities\\Invoice' => array(
 		'version' => 'dev-trunk',
