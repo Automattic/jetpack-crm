@@ -322,6 +322,18 @@ return array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/entities/class-contact.php'
 	),
+	'Automattic\\Jetpack\\CRM\\Entities\\Factories\\Contact_Factory' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/entities/factories/class-contact-factory.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Entities\\Factories\\Entity_Factory' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/entities/factories/class-entity-factory.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Entities\\Factories\\Factory_Exception' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/entities/factories/class-factory-exception.php'
+	),
 	'Automattic\\Jetpack\\CRM\\Entities\\Invoice' => array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/entities/class-invoice.php'
