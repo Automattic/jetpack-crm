@@ -326,8 +326,9 @@ class Automation_Workflow {
 	 * @since 6.2.0-alpha
 	 *
 	 * @param int|string|null $step_id The initial step id.
+	 * @return void
 	 */
-	public function set_initial_step( $step_id ) {
+	public function set_initial_step( $step_id ): void {
 		$this->initial_step = $step_id;
 	}
 
@@ -386,9 +387,9 @@ class Automation_Workflow {
 	 *
 	 * @since 6.2.0-alpha
 	 *
-	 * @return int The index key for the next step of the workflow.
+	 * @return int|string|null The index key for the next step of the workflow.
 	 */
-	public function get_initial_step_index(): int {
+	public function get_initial_step_index() {
 		return $this->initial_step;
 	}
 
@@ -587,5 +588,15 @@ class Automation_Workflow {
 	 */
 	public function set_id( $id ): void {
 		$this->id = $id;
+	}
+
+	/**
+	 * Set the workflow category.
+	 *
+	 * @param string $category The workflow category.
+	 * @return void
+	 */
+	public function set_category( string $category ): void {
+		$this->category = $category;
 	}
 }
