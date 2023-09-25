@@ -306,6 +306,10 @@ return array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/commons/triggers/transactions/class-transaction-updated.php'
 	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Workflow\\Workflow_Repository' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/workflow/class-workflow-repository.php'
+	),
 	'Automattic\\Jetpack\\CRM\\Automation\\Workflow_Exception' => array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/class-workflow-exception.php'
