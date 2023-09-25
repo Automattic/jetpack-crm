@@ -25,6 +25,7 @@ This is an alpha version! The changes listed here are not final.
 - Automation: Added event triggers for new and deleted
 - Automation: Added invoice set status action
 - Automation: Added quote triggers
+- Automation: Added transaction set status action
 - Automation: Added transaction triggers for new and updated
 - Automations: Added company triggers
 - Automations: Adding the company entity class
