@@ -7,7 +7,7 @@
             "dist": {
                 "type": "path",
                 "url": "/tmp/jetpack-build/Automattic/jetpack-assets",
-                "reference": "f50aebdaabae0ff94c26ba447389d27e04a6ef90"
+                "reference": "4a4382a22bd81452bf3e659188e28aac9e822309"
             },
             "require": {
                 "automattic/jetpack-constants": "^1.6.23"
@@ -70,12 +70,12 @@
         },
         {
             "name": "automattic/jetpack-autoloader",
-            "version": "2.11.23",
-            "version_normalized": "2.11.23.0",
+            "version": "2.12.0-alpha.1695741144",
+            "version_normalized": "2.12.0.0-alpha1695741144",
             "dist": {
                 "type": "path",
                 "url": "/tmp/jetpack-build/Automattic/jetpack-autoloader",
-                "reference": "913ab4b1d61986b953ed0c39b81299ef44a7b0a3"
+                "reference": "4a9c971757fbbe81f556d5524479daed88e303be"
             },
             "require": {
                 "composer-plugin-api": "^1.1 || ^2.0"
@@ -92,8 +92,11 @@
                 "changelogger": {
                     "link-template": "https://github.com/Automattic/jetpack-autoloader/compare/v${old}...v${new}"
                 },
+                "version-constants": {
+                    "::VERSION": "src/AutoloadGenerator.php"
+                },
                 "branch-alias": {
-                    "dev-trunk": "2.11.x-dev"
+                    "dev-trunk": "2.12.x-dev"
                 }
             },
             "installation-source": "dist",
@@ -137,7 +140,7 @@
             "dist": {
                 "type": "path",
                 "url": "/tmp/jetpack-build/Automattic/jetpack-composer-plugin",
-                "reference": "59bd9db6d70be12633eca2f84168e2035262e522"
+                "reference": "d70c1afbdeef306eb594b58461d254944b8630b4"
             },
             "require": {
                 "composer-plugin-api": "^2.1.0"
@@ -196,7 +199,7 @@
             "dist": {
                 "type": "path",
                 "url": "/tmp/jetpack-build/Automattic/jetpack-constants",
-                "reference": "18da6aa1060d694ca2d1d357793353d6e0f30835"
+                "reference": "2e2aedafb2d9316a7f27c674bf1813406eaf56a5"
             },
             "require-dev": {
                 "automattic/jetpack-changelogger": "^3.3.10",
