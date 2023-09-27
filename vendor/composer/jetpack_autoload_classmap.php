@@ -170,33 +170,37 @@ return array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/class-data-type-exception.php'
 	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Data_Types\\Company_Data' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/data-types/class-company-data.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Data_Types\\Contact_Data' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/data-types/class-contact-data.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Data_Types\\Data_Type' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/data-types/interface-data-type.php'
+	),
 	'Automattic\\Jetpack\\CRM\\Automation\\Data_Types\\Data_Type_Base' => array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/data-types/class-data-type-base.php'
 	),
-	'Automattic\\Jetpack\\CRM\\Automation\\Data_Types\\Data_Type_Company' => array(
+	'Automattic\\Jetpack\\CRM\\Automation\\Data_Types\\Invoice_Data' => array(
 		'version' => 'dev-trunk',
-		'path'    => $baseDir . '/src/automation/data-types/class-data-type-company.php'
+		'path'    => $baseDir . '/src/automation/data-types/class-invoice-data.php'
 	),
-	'Automattic\\Jetpack\\CRM\\Automation\\Data_Types\\Data_Type_Contact' => array(
+	'Automattic\\Jetpack\\CRM\\Automation\\Data_Types\\Quote_Data' => array(
 		'version' => 'dev-trunk',
-		'path'    => $baseDir . '/src/automation/data-types/class-data-type-contact.php'
+		'path'    => $baseDir . '/src/automation/data-types/class-quote-data.php'
 	),
-	'Automattic\\Jetpack\\CRM\\Automation\\Data_Types\\Data_Type_Event' => array(
+	'Automattic\\Jetpack\\CRM\\Automation\\Data_Types\\Task_Data' => array(
 		'version' => 'dev-trunk',
-		'path'    => $baseDir . '/src/automation/data-types/class-data-type-event.php'
+		'path'    => $baseDir . '/src/automation/data-types/class-task-data.php'
 	),
-	'Automattic\\Jetpack\\CRM\\Automation\\Data_Types\\Data_Type_Invoice' => array(
+	'Automattic\\Jetpack\\CRM\\Automation\\Data_Types\\Transaction_Data' => array(
 		'version' => 'dev-trunk',
-		'path'    => $baseDir . '/src/automation/data-types/class-data-type-invoice.php'
-	),
-	'Automattic\\Jetpack\\CRM\\Automation\\Data_Types\\Data_Type_Quote' => array(
-		'version' => 'dev-trunk',
-		'path'    => $baseDir . '/src/automation/data-types/class-data-type-quote.php'
-	),
-	'Automattic\\Jetpack\\CRM\\Automation\\Data_Types\\Data_Type_Transaction' => array(
-		'version' => 'dev-trunk',
-		'path'    => $baseDir . '/src/automation/data-types/class-data-type-transaction.php'
+		'path'    => $baseDir . '/src/automation/data-types/class-transaction-data.php'
 	),
 	'Automattic\\Jetpack\\CRM\\Automation\\Step' => array(
 		'version' => 'dev-trunk',
