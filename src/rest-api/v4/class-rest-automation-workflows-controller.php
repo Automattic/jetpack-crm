@@ -94,6 +94,12 @@ final class REST_Automation_Workflows_Controller extends REST_Base_Controller {
 						),
 					),
 				),
+				array(
+					'methods'             => WP_REST_Server::CREATABLE,
+					'callback'            => array( $this, 'create_item' ),
+					'permission_callback' => array( $this, 'get_item_permissions_check' ),
+					'args'                => $this->create_update_args( true ),
+				),
 			)
 		);
 
@@ -117,6 +123,11 @@ final class REST_Automation_Workflows_Controller extends REST_Base_Controller {
 					'callback'            => array( $this, 'update_item' ),
 					'permission_callback' => array( $this, 'get_item_permissions_check' ),
 					'args'                => $this->create_update_args( false ),
+				),
+				array(
+					'methods'             => WP_REST_Server::DELETABLE,
+					'callback'            => array( $this, 'delete_item' ),
+					'permission_callback' => array( $this, 'get_item_permissions_check' ),
 				),
 			)
 		);
@@ -188,6 +199,78 @@ final class REST_Automation_Workflows_Controller extends REST_Base_Controller {
 	 * @return WP_Error|WP_REST_Response
 	 */
 	public function update_item( $request ) {
+		try {
+			$workflow = $this->prepare_item_for_database( $request );
+
+			if ( is_wp_error( $workflow ) ) {
+				return $workflow;
+			}
+
+			$this->workflow_repository->persist( $workflow );
+		} catch ( Workflow_Exception $e ) {
+			return new WP_Error(
+				'rest_workflow_exception',
+				$e->getMessage(),
+				array( 'status' => 500 )
+			);
+		} catch ( Exception $e ) {
+			return new WP_Error(
+				'rest_unknown_error',
+				$e->getMessage(),
+				array( 'status' => 500 )
+			);
+		}
+
+		return rest_ensure_response( $this->prepare_item_for_response( $workflow, $request ) );
+	}
+
+	/**
+	 * Delete workflow.
+	 *
+	 * @since 6.2.0-alpha
+	 *
+	 * @param WP_REST_Request $request The request object.
+	 * @return WP_Error|WP_REST_Response
+	 */
+	public function delete_item( $request ) {
+		try {
+			$workflow = $this->workflow_repository->find( $request->get_param( 'id' ) );
+
+			if ( ! $workflow instanceof Automation_Workflow ) {
+				return new WP_Error(
+					'rest_invalid_workflow_id',
+					__( 'Invalid workflow ID.', 'zero-bs-crm' ),
+					array( 'status' => 404 )
+				);
+			}
+
+			$this->workflow_repository->delete( $workflow );
+		} catch ( Workflow_Exception $e ) {
+			return new WP_Error(
+				'rest_workflow_exception',
+				$e->getMessage(),
+				array( 'status' => 500 )
+			);
+		} catch ( Exception $e ) {
+			return new WP_Error(
+				'rest_unknown_error',
+				$e->getMessage(),
+				array( 'status' => 500 )
+			);
+		}
+
+		return new WP_REST_Response( null, 204 );
+	}
+
+	/**
+	 * Create workflow.
+	 *
+	 * @since 6.2.0-alpha
+	 *
+	 * @param WP_REST_Request $request The request object.
+	 * @return WP_Error|WP_REST_Response
+	 */
+	public function create_item( $request ) {
 		try {
 			$workflow = $this->prepare_item_for_database( $request );
 
