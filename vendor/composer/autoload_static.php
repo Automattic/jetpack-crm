@@ -162,7 +162,7 @@ class ComposerStaticInit06c775433a83ed276f0a1d8ac25f93ba_crmⓥ6_2_0_alpha
         'Automattic\\Jetpack\\CRM\\Event_Manager\\Events_Manager' => __DIR__ . '/../..' . '/src/event-manager/class-events-manager.php',
         'Automattic\\Jetpack\\CRM\\Event_Manager\\Invoice_Event' => __DIR__ . '/../..' . '/src/event-manager/managers/class-invoice-event.php',
         'Automattic\\Jetpack\\CRM\\Event_Manager\\Transaction_Event' => __DIR__ . '/../..' . '/src/event-manager/managers/class-transaction-event.php',
-        'Automattic\\Jetpack\\CRM\\REST_API\\V4\\REST_Automation_Controller' => __DIR__ . '/../..' . '/src/rest-api/v4/class-rest-automation-controller.php',
+        'Automattic\\Jetpack\\CRM\\REST_API\\V4\\REST_Automation_Workflows_Controller' => __DIR__ . '/../..' . '/src/rest-api/v4/class-rest-automation-workflows-controller.php',
         'Automattic\\Jetpack\\CRM\\REST_API\\V4\\REST_Base_Controller' => __DIR__ . '/../..' . '/src/rest-api/v4/class-rest-base-controller.php',
         'Automattic\\Jetpack\\CRM\\REST_API\\V4\\REST_Base_Objects_Controller' => __DIR__ . '/../..' . '/src/rest-api/v4/class-rest-base-objects-controller.php',
         'Automattic\\Jetpack\\CRM\\REST_API\\V4\\REST_Contacts_Controller' => __DIR__ . '/../..' . '/src/rest-api/v4/class-rest-contacts-controller.php',
