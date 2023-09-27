@@ -9,76 +9,78 @@
 namespace Automattic\Jetpack\CRM\Automation;
 
 /**
- * Step Attribute.
+ * Attribute Definition.
  *
- * The Step Attribute represents
+ * An attribute represents how a step is configured. For example, a step that
+ * sends an email to a contact may have an attribute that represents the email
+ * subject, another attribute that represents the email body, and so on.
  *
  * @since 6.2.0-alpha
  */
 class Attribute_Definition {
 
 	/**
-	* Represents a dropdown selection input.
-	*
-	* @since 6.2.0-alpha
-	* @var string
-	*/
+	 * Represents a dropdown selection input.
+	 *
+	 * @since 6.2.0-alpha
+	 * @var string
+	 */
 	const SELECT = 'select';
 
 	/**
-	* Represents a checkbox input.
-	*
-	* @since 6.2.0-alpha
-	* @var string
-	*/
+	 * Represents a checkbox input.
+	 *
+	 * @since 6.2.0-alpha
+	 * @var string
+	 */
 	const CHECKBOX = 'checkbox';
 
 	/**
-	* Represents a textarea input.
-	*
-	* @since 6.2.0-alpha
-	* @var string
-	*/
+	 * Represents a textarea input.
+	 *
+	 * @since 6.2.0-alpha
+	 * @var string
+	 */
 	const TEXTAREA = 'textarea';
 
 	/**
-	* Represents a text input.
-	*
-	* @since 6.2.0-alpha
-	* @var string
-	*/
+	 * Represents a text input.
+	 *
+	 * @since 6.2.0-alpha
+	 * @var string
+	 */
 	const TEXT = 'text';
 
 	/**
-	* Represents a date input.
-	*
-	* @since 6.2.0-alpha
-	* @var string
-	*/
+	 * Represents a date input.
+	 *
+	 * @since 6.2.0-alpha
+	 * @var string
+	 */
 	const DATE = 'date';
 
 	/**
-	* Represents a date and time input.
-	*
-	* @since 6.2.0-alpha
-	* @var string
-	*/
+	 * Represents a date and time input.
+	 *
+	 * @since 6.2.0-alpha
+	 * @var string
+	 */
 	const DATETIME = 'datetime';
 
 	/**
-	* Represents a numerical input.
-	*
-	* @since 6.2.0-alpha
-	* @var string
-	*/
+	 * Represents a numerical input.
+	 *
+	 * @since 6.2.0-alpha
+	 * @var string
+	 */
 	const NUMBER = 'number';
 
 	/**
-	* Represents a password input.
-	*
-	* @since 6.2.0-alpha
-	* @var string
-	*/
+	 * Represents a password input.
+	 *
+	 * @since 6.2.0-alpha
+	 * @var string
+	 */
 	const PASSWORD = 'password';
 
 	/**
@@ -107,7 +109,7 @@ class Attribute_Definition {
 
 	/**
 	 * Attribute type (is it a select? an input?). The const values of this class
-	 * should be used here (e.g. Step_Attribute::NUMBER).
+	 * should be used here (e.g. Attribute_Definition::NUMBER).
 	 *
 	 * @since 6.2.0-alpha
 	 * @var string
@@ -127,11 +129,11 @@ class Attribute_Definition {
 	 *
 	 * @since 6.2.0-alpha
 	 *
-	 * @param string     $slug        The slug (key) that identifies this attribute.
-	 * @param string     $title       The title (label) for this attribute.
+	 * @param string     $slug The slug (key) that identifies this attribute.
+	 * @param string     $title The title (label) for this attribute.
 	 * @param string     $description The description for this attribute.
-	 * @param string     $type        Attribute type.
-	 * @param array|null $data        Data needed by this attribute.
+	 * @param string     $type Attribute type.
+	 * @param array|null $data Data needed by this attribute.
 	 */
 	public function __construct( $slug, $title, $description, $type, $data = null ) {
 		$this->slug        = $slug;
