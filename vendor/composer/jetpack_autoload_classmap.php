@@ -222,6 +222,10 @@ return array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/data-types/class-transaction-data.php'
 	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Data_Types\\WP_User_Data' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/data-types/class-wp-user-data.php'
+	),
 	'Automattic\\Jetpack\\CRM\\Automation\\Step' => array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/interface-step.php'
@@ -329,6 +333,10 @@ return array(
 	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Transaction_Updated' => array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/commons/triggers/transactions/class-transaction-updated.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\WP_User_Created' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/triggers/wordpress/class-wp-user-created.php'
 	),
 	'Automattic\\Jetpack\\CRM\\Automation\\Workflow\\Workflow_Repository' => array(
 		'version' => 'dev-trunk',
