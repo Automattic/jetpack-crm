@@ -1,6 +1,6 @@
 <?php
 /**
- * Contact Data Type.
+ * Tag_List Data Type.
  *
  * @package automattic/jetpack-crm
  * @since 6.2.0-alpha
@@ -8,14 +8,14 @@
 
 namespace Automattic\Jetpack\CRM\Automation\Data_Types;
 
-use Automattic\Jetpack\CRM\Entities\Contact;
+use Automattic\Jetpack\CRM\Automation\Data_Type_Exception;
 
 /**
- * Contact Data Type.
+ * Tag_List Data Type.
  *
  * @since 6.2.0-alpha
  */
-class Contact_Data extends Data_Type_Base implements Entity_Data {
+class Tag_List_Data extends Data_Type_Base {
 
 	/**
 	 * Validate the data.
@@ -27,16 +27,16 @@ class Contact_Data extends Data_Type_Base implements Entity_Data {
 	 *
 	 * @param mixed $data The data to validate.
 	 * @return bool Whether the data is valid.
+	 * @throws Data_Type_Exception If the tag list is not valid.
 	 */
 	public function validate_data( $data ): bool {
-		return $data instanceof Contact;
-	}
+		if ( ! is_array( $data ) ) {
+			throw new Data_Type_Exception(
+				sprintf( 'Invalid tag list' ),
+				Data_Type_Exception::INVALID_DATA
+			);
+		}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function get_tags(): array {
-		global $zbs;
-		return $zbs->DAL->contacts->getContactTags( $this->get_data()->id ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+		return true;
 	}
 }

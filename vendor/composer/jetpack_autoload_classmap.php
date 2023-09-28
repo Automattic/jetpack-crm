@@ -138,6 +138,10 @@ return array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/commons/conditions/contacts/class-contact-transitional-status.php'
 	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Conditions\\Entity_Tag' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/conditions/tags/class-entity-tag.php'
+	),
 	'Automattic\\Jetpack\\CRM\\Automation\\Conditions\\Invoice_Field_Contains' => array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/commons/conditions/invoices/class-invoice-field-contains.php'
@@ -161,6 +165,10 @@ return array(
 	'Automattic\\Jetpack\\CRM\\Automation\\Data_Transformers\\Data_Transformer_Base' => array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/data-transformers/class-data-transformer-base.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Data_Transformers\\Data_Transformer_Entity_To_Tag_List' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/data-transformers/class-data-transformer-entity-to-tag-list.php'
 	),
 	'Automattic\\Jetpack\\CRM\\Automation\\Data_Transformers\\Data_Transformer_Invoice_To_Contact' => array(
 		'version' => 'dev-trunk',
@@ -186,6 +194,10 @@ return array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/data-types/class-data-type-base.php'
 	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Data_Types\\Entity_Data' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/data-types/interface-entity-data.php'
+	),
 	'Automattic\\Jetpack\\CRM\\Automation\\Data_Types\\Invoice_Data' => array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/data-types/class-invoice-data.php'
@@ -193,6 +205,14 @@ return array(
 	'Automattic\\Jetpack\\CRM\\Automation\\Data_Types\\Quote_Data' => array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/data-types/class-quote-data.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Data_Types\\Tag_Data' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/data-types/class-tag-data.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Data_Types\\Tag_List_Data' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/data-types/class-tag-list-data.php'
 	),
 	'Automattic\\Jetpack\\CRM\\Automation\\Data_Types\\Task_Data' => array(
 		'version' => 'dev-trunk',

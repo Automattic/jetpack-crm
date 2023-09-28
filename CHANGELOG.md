@@ -29,6 +29,7 @@ This is an alpha version! The changes listed here are not final.
 - Automation: Added transaction triggers for new and updated
 - Automations: Added company triggers
 - Automations: Adding factory classes for entities
+- Automations: Adding Tag List data type and transformer plus Tag condition
 - Automations: Adding the company entity class
 - Automations: Adding the contact entity class
 - Automations: Adding the invoice entity class
