@@ -6449,7 +6449,7 @@ div.ui.learn.button .jpcrm-info-gridicon {
 #zbs-quote-learn-nav,
 #zbs-invoice-learn-nav,
 #zbs-transaction-learn-nav,
-#zbs-event-learn-nav {
+#jpcrm-task-learn-nav {
   display: flex;
 }
 
@@ -6558,20 +6558,6 @@ table#zbsFilesTable td {
 }
 
 ul#adminmenu #toplevel_page_zerobscrm-dash a.wp-has-current-submenu:after, ul#adminmenu #toplevel_page_zerobscrm-dash ul#adminmenu > li.current > a.current:after,
-ul#adminmenu #menu-posts-zerobs_company a.wp-has-current-submenu:after,
-ul#adminmenu #menu-posts-zerobs_company ul#adminmenu > li.current > a.current:after,
-ul#adminmenu #menu-posts-zerobs_customer a.wp-has-current-submenu:after,
-ul#adminmenu #menu-posts-zerobs_customer ul#adminmenu > li.current > a.current:after,
-ul#adminmenu #menu-posts-zerobs_event a.wp-has-current-submenu:after,
-ul#adminmenu #menu-posts-zerobs_event ul#adminmenu > li.current > a.current:after,
-ul#adminmenu #menu-posts-zerobs_quote a.wp-has-current-submenu:after,
-ul#adminmenu #menu-posts-zerobs_quote ul#adminmenu > li.current > a.current:after,
-ul#adminmenu #menu-posts-zerobs_invoice a.wp-has-current-submenu:after,
-ul#adminmenu #menu-posts-zerobs_invoice ul#adminmenu > li.current > a.current:after,
-ul#adminmenu #menu-posts-zerobs_transaction a.wp-has-current-submenu:after,
-ul#adminmenu #menu-posts-zerobs_transaction ul#adminmenu > li.current > a.current:after,
-ul#adminmenu #menu-posts-zerobs_form a.wp-has-current-submenu:after,
-ul#adminmenu #menu-posts-zerobs_form ul#adminmenu > li.current > a.current:after,
 ul#adminmenu #toplevel_page_zerobscrm-datatools a.wp-has-current-submenu:after,
 ul#adminmenu #toplevel_page_zerobscrm-datatools ul#adminmenu > li.current > a.current:after,
 ul#adminmenu #admin_page_zerobscrm-plugin a.wp-has-current-submenu:after,

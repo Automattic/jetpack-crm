@@ -1,9 +1,8 @@
 <?php
 /**
- * Jetpack CRM Automation Event_Deleted trigger.
+ * Jetpack CRM Automation Task_Updated trigger.
  *
  * @package automattic/jetpack-crm
- * @since 6.2.0-alpha
  */
 
 namespace Automattic\Jetpack\CRM\Automation\Triggers;
@@ -12,21 +11,21 @@ use Automattic\Jetpack\CRM\Automation\Base_Trigger;
 use Automattic\Jetpack\CRM\Automation\Data_Types\Task_Data;
 
 /**
- * Adds the Event_Deleted class.
+ * Adds the Task_Updated class.
  *
  * @since 6.2.0-alpha
  */
-class Event_Deleted extends Base_Trigger {
+class Task_Updated extends Base_Trigger {
 
 	/**
 	 * Get the slug name of the trigger.
 	 *
 	 * @since 6.2.0-alpha
 	 *
-	 * @return string The slug name of the trigger.
+	 * @return string The trigger slug.
 	 */
 	public static function get_slug(): string {
-		return 'jpcrm/event_deleted';
+		return 'jpcrm/task_updated';
 	}
 
 	/**
@@ -34,10 +33,10 @@ class Event_Deleted extends Base_Trigger {
 	 *
 	 * @since 6.2.0-alpha
 	 *
-	 * @return string The title of the trigger.
+	 * @return string The title.
 	 */
 	public static function get_title(): string {
-		return __( 'Event Deleted', 'zero-bs-crm' );
+		return __( 'Task Updated', 'zero-bs-crm' );
 	}
 
 	/**
@@ -45,10 +44,10 @@ class Event_Deleted extends Base_Trigger {
 	 *
 	 * @since 6.2.0-alpha
 	 *
-	 * @return string The description of the trigger.
+	 * @return string The description.
 	 */
 	public static function get_description(): string {
-		return __( 'Triggered when an event is deleted', 'zero-bs-crm' );
+		return __( 'Triggered when a task is updated', 'zero-bs-crm' );
 	}
 
 	/**
@@ -56,10 +55,10 @@ class Event_Deleted extends Base_Trigger {
 	 *
 	 * @since 6.2.0-alpha
 	 *
-	 * @return string The category of the trigger.
+	 * @return string The category.
 	 */
 	public static function get_category(): string {
-		return __( 'Event', 'zero-bs-crm' );
+		return __( 'Task', 'zero-bs-crm' );
 	}
 
 	/**
@@ -75,10 +74,12 @@ class Event_Deleted extends Base_Trigger {
 	 * Listen to this trigger's target event.
 	 *
 	 * @since 6.2.0-alpha
+	 *
+	 * @return void
 	 */
 	protected function listen_to_event() {
 		add_action(
-			'jpcrm_event_delete',
+			'jpcrm_task_updated',
 			array( $this, 'execute_workflow' )
 		);
 	}

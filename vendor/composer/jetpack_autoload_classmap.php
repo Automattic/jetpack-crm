@@ -278,18 +278,6 @@ return array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/commons/triggers/contacts/class-contact-updated.php'
 	),
-	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Event_Created' => array(
-		'version' => 'dev-trunk',
-		'path'    => $baseDir . '/src/automation/commons/triggers/events/class-event-created.php'
-	),
-	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Event_Deleted' => array(
-		'version' => 'dev-trunk',
-		'path'    => $baseDir . '/src/automation/commons/triggers/events/class-event-deleted.php'
-	),
-	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Event_Updated' => array(
-		'version' => 'dev-trunk',
-		'path'    => $baseDir . '/src/automation/commons/triggers/events/class-event-updated.php'
-	),
 	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Invoice_Created' => array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/commons/triggers/invoices/class-invoice-created.php'
@@ -325,6 +313,18 @@ return array(
 	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Quote_Updated' => array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/commons/triggers/quotes/class-quote-updated.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Task_Created' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/triggers/tasks/class-task-created.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Task_Deleted' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/triggers/tasks/class-task-deleted.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Task_Updated' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/triggers/tasks/class-task-updated.php'
 	),
 	'Automattic\\Jetpack\\CRM\\Automation\\Triggers\\Transaction_Created' => array(
 		'version' => 'dev-trunk',
