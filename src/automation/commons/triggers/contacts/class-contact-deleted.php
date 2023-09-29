@@ -84,11 +84,10 @@ class Contact_Deleted extends Base_Trigger {
 	 * Listen to the desired event.
 	 *
 	 * @since 6.2.0-alpha
+	 *
+	 * @return void
 	 */
-	protected function listen_to_event() {
-		add_action(
-			'jpcrm_contact_deleted',
-			array( $this, 'execute_workflow' )
-		);
+	protected function listen_to_event(): void {
+		$this->listen_to_wp_action( 'jpcrm_contact_deleted' );
 	}
 }
