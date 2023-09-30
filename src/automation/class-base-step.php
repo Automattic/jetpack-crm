@@ -86,6 +86,32 @@ abstract class Base_Step implements Step {
 	}
 
 	/**
+	 * Get attribute value.
+	 *
+	 * @since 6.2.0-alpha
+	 *
+	 * @param string $attribute The attribute to get.
+	 * @param mixed  $default The default value to return if the attribute is not set.
+	 * @return mixed The attribute value.
+	 */
+	public function get_attribute( string $attribute, $default = null ) {
+		return $this->attributes[ $attribute ] ?? $default;
+	}
+
+	/**
+	 * Set attribute value.
+	 *
+	 * @since 6.2.0-alpha
+	 *
+	 * @param string $attribute The attribute key.
+	 * @param mixed  $value The default value.
+	 * @return void
+	 */
+	public function set_attribute( string $attribute, $value ): void {
+		$this->attributes[ $attribute ] = $value;
+	}
+
+	/**
 	 * Get the step attribute definitions.
 	 *
 	 * @since 6.2.0-alpha
