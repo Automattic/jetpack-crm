@@ -39,6 +39,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Changed
 - Internal workflow schema update. Adding pointers to the steps inside of a workflow.
+- Removed not necessary en. subdomain for gravatar urls
 - Requires PHP 7.3 or higher
 - Tasks: use consistent language in code
 - Updated package dependencies.
