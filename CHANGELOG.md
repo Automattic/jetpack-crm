@@ -11,6 +11,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Added
 - Add mock globals for testing
+- Add Send_Email automation Action.
 - Add the new Automation System
 - Add the new JPCRM Event Manager to notify events via WP hooks
 - Automation:  Added a condition to detect changes in status from a specified initial value to a designated target one

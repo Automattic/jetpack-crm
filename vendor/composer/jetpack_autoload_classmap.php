@@ -58,6 +58,10 @@ return array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/commons/actions/contacts/class-add-remove-contact-tag.php'
 	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Actions\\Base_Send_Email' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/actions/email/class-base-send-email.php'
+	),
 	'Automattic\\Jetpack\\CRM\\Automation\\Actions\\Delete_Contact' => array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/commons/actions/contacts/class-delete-contact.php'
@@ -65,6 +69,10 @@ return array(
 	'Automattic\\Jetpack\\CRM\\Automation\\Actions\\New_Contact' => array(
 		'version' => 'dev-trunk',
 		'path'    => $baseDir . '/src/automation/commons/actions/contacts/class-new-contact.php'
+	),
+	'Automattic\\Jetpack\\CRM\\Automation\\Actions\\Send_Contact_Email' => array(
+		'version' => 'dev-trunk',
+		'path'    => $baseDir . '/src/automation/commons/actions/email/class-send-contact-email.php'
 	),
 	'Automattic\\Jetpack\\CRM\\Automation\\Actions\\Set_Invoice_Status' => array(
 		'version' => 'dev-trunk',
