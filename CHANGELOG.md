@@ -61,6 +61,7 @@ This is an alpha version! The changes listed here are not final.
 - Tags: prevent duplicate slugs
   Tags: more robust slug fallback support
 - Tasks: Corrected placeholders for contacts and companies in the task reminder email
+- Transactions: filters now work for custom statuses
 
 ## [6.1.0] - 2023-07-24
 ### Added
