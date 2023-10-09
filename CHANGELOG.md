@@ -50,6 +50,7 @@ This is an alpha version! The changes listed here are not final.
 - API: task reminder param is no longer ignored
 - Automations: Fix an issue (only in development) with the automations workflow table creation
 - Automations: Fixed a development issueaffecting workflow database creation.
+- Better PHP 8.2 support
 - CRM Forms: Removed reference to old branding
 - CSV Importer: Fixed assignment to companies by name
 - Custom Fields: Corrected bug that prevented new address custom fields from being shown
