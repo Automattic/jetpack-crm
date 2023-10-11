@@ -232,7 +232,7 @@ class zbsDAL_transactions extends zbsDAL_ObjectLayer {
 		/**
 		 * Events_Manager instance. Manages CRM events.
 		 *
-		 * @since 6.2.0-alpha
+		 * @since 6.2.0
 		 *
 		 * @var Events_Manager
 		 */
