@@ -15,7 +15,7 @@ use Automattic\Jetpack\Assets;
 /**
  * The main initializing function.
  *
- * @since 6.2.0-alpha
+ * @since 6.2.0
  *
  * @return void
  */
@@ -26,7 +26,7 @@ function initialize_admin_page() {
 /**
  * Actions to run on admin init
  *
- * @since 6.2.0-alpha
+ * @since 6.2.0
  *
  * @return void
  */
@@ -37,7 +37,7 @@ function admin_init() {
 /**
  * Enqueues the React app bundle.
  *
- * @since 6.2.0-alpha
+ * @since 6.2.0
  *
  * @return void
  */
@@ -59,7 +59,7 @@ function enqueue_admin_scripts() {
 /**
  * Initial state to be served with the React app.
  *
- * @since 6.2.0-alpha
+ * @since 6.2.0
  *
  * @return string
  */

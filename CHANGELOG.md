@@ -5,65 +5,30 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [6.2.0-alpha] - unreleased
-
-This is an alpha version! The changes listed here are not final.
-
+## [6.2.0] - 2023-10-11
 ### Added
-- Add mock globals for testing
-- Add Send_Email automation Action.
-- Add the new Automation System
-- Add the new JPCRM Event Manager to notify events via WP hooks
-- Automation:  Added a condition to detect changes in status from a specified initial value to a designated target one
-- Automation: Added condition for contact status changed
-- Automation: Added condition for invoice field contains
-- Automation: Added condition for invoice status changed
-- Automation: Added condition for quote status changed
-- Automation: Added condition for transaction field changed and field contains
-- Automation: Added conditions for contact tags
-- Automation: Added contact triggers
-- Automation: Added event trigger for updated
-- Automation: Added event triggers for new and deleted
-- Automation: Added invoice set status action
-- Automation: Added quote triggers
-- Automation: Added transaction set status action
-- Automation: Added transaction triggers for new and updated
-- Automations: Added a clientwpuser trigger, data type and tests.
-- Automations: Added company triggers
-- Automations: Adding factory classes for entities
-- Automations: Adding Tag List data type and transformer plus Tag condition
-- Automations: Adding the company entity class
-- Automations: Adding the contact entity class
-- Automations: Adding the invoice entity class
-- Automations: Adding the quote entity class
-- Automations: Adding the transaction entity class
+- Tests: Add mock globals for testing. [#32755]
+- Automations: Add new backend in preparation for future release.
 
 ### Changed
-- Internal workflow schema update. Adding pointers to the steps inside of a workflow.
-- Removed not necessary en. subdomain for gravatar urls
-- Requires PHP 7.3 or higher
-- Tasks: use consistent language in code
+- Quotes: Allow admin users to accept quotes. [#32738]
+- Tasks: Use consistent language in code. [#33221]
+- Increase PHP required version to 7.3. [#33003]
 - Updated package dependencies.
 
 ### Fixed
-- API: rewrite rules are now flushed after enabling module
-- API: task reminder param is no longer ignored
-- Automations: Fix an issue (only in development) with the automations workflow table creation
-- Automations: Fixed a development issueaffecting workflow database creation.
-- Better PHP 8.2 support
-- CRM Forms: Removed reference to old branding
-- CSV Importer: Fixed assignment to companies by name
-- Custom Fields: Corrected bug that prevented new address custom fields from being shown
-- Introduced a phpcs:ignore directive to unblock pull requests from being merged temporarily.
-- Invoices: Handle status translations consistently
-- Quotes: could be accepted by admin users.
-- Segments: Fixed error 219 occurring when using date ranges
-- Tags: better slug generation
-  Tags: added tag slug migration
-- Tags: prevent duplicate slugs
-  Tags: more robust slug fallback support
-- Tasks: Corrected placeholders for contacts and companies in the task reminder email
-- Transactions: filters now work for custom statuses
+- API: Rewrite rules are now flushed after enabling module. [#32901]
+- API: Task reminder param is no longer ignored. [#33194]
+- Better PHP 8.2 support. [#33421]
+- CRM Forms: Removed reference to old branding. [#32903]
+- CSV Importer: Fixed assignment to companies by name. [#33097]
+- Custom Fields: Corrected bug that prevented new address custom fields from being shown. [#33056]
+- Invoices: Handle status translations consistently. [#32909]
+- Segments: Fixed error 219 occurring when using date ranges. [#32379]
+- Tags: Better slug generation and added tag slug migration. [#33121]
+- Tags: Prevent duplicate slugs, and adding more robust slug fallback support. [#33096]
+- Tasks: Corrected placeholders for contacts and companies in the task reminder email. [#32375]
+- Transactions: Filters now work for custom statuses. [#33476]
 
 ## [6.1.0] - 2023-07-24
 ### Added
@@ -264,7 +229,7 @@ This is an alpha version! The changes listed here are not final.
 - Improved: Added a migration to remove outdated AKA lines
 
 [5.5.4-a.1]: https://github.com/Automattic/jetpack-crm/compare/v5.5.3...v5.5.4-a.1
-[6.2.0-alpha]: https://github.com/Automattic/jetpack-crm/compare/6.1.0...6.2.0-alpha
+[6.2.0]: https://github.com/Automattic/jetpack-crm/compare/6.1.0...6.2.0
 [6.1.0]: https://github.com/Automattic/jetpack-crm/compare/6.0.0...6.1.0
 [6.0.0]: https://github.com/Automattic/jetpack-crm/compare/5.8.0...6.0.0
 [5.8.0]: https://github.com/Automattic/jetpack-crm/compare/5.7.0...5.8.0
