@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 This is an alpha version! The changes listed here are not final.
 
+### Fixed
+- Fixed lock file
+
 ## [6.2.0] - 2023-10-11
 ### Added
 - Tests: Add mock globals for testing. [#32755]
