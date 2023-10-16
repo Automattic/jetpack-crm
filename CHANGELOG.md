@@ -11,6 +11,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Fixed
 - Fixed lock file
+- Quote templates: Make sure quote titles with apostrophes do not have backslashes added when rendered.
 
 ## [6.2.0] - 2023-10-11
 ### Added
