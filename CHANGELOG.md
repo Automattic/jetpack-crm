@@ -15,6 +15,7 @@ This is an alpha version! The changes listed here are not final.
 ### Fixed
 - Fix Creating Event API Endpoint
 - Fixed lock file
+- Listview: remove legacy code
 - Prevent error if OpenSSL functions aren't available in PHP.
 - Quote Templates: Fix issue with notes field rendering HTML entities in some cases
 - Quote templates: Make sure quote titles with apostrophes do not have backslashes added when rendered.
