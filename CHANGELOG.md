@@ -20,6 +20,7 @@ This is an alpha version! The changes listed here are not final.
 - Quote Templates: Fix issue with notes field rendering HTML entities in some cases
 - Quote templates: Make sure quote titles with apostrophes do not have backslashes added when rendered.
 - Styles: Changing how styles are added to the page on several stand-alone pages to prevent WordPress 6.4 compatibility issues.
+- WooSync: contacts can now be assigned to existing companies
 
 ## [6.2.0] - 2023-10-11
 ### Added
