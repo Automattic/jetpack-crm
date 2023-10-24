@@ -13,6 +13,7 @@ This is an alpha version! The changes listed here are not final.
 - Add support to the API for creating transactions with custom fields
 
 ### Fixed
+- Client Portal: Better PHP 8.2 support.
 - Fix Creating Event API Endpoint
 - Fixed lock file
 - Listview: remove legacy code
