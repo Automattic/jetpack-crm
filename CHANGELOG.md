@@ -21,6 +21,7 @@ This is an alpha version! The changes listed here are not final.
 ### Fixed
 - Client Portal: Better PHP 8.2 support.
 - Fix Creating Event API Endpoint
+- Fixed display issues on the Add and Edit pages that occurred when moving fields
 - Fixed lock file
 - Listview: remove legacy code
 - Prevent error if OpenSSL functions aren't available in PHP.
