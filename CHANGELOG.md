@@ -12,6 +12,9 @@ This is an alpha version! The changes listed here are not final.
 ### Added
 - Add support to the API for creating transactions with custom fields
 
+### Changed
+- General: indicate full compatibility with the latest version of WordPress, 6.4.
+
 ### Fixed
 - Client Portal: Better PHP 8.2 support.
 - Fix Creating Event API Endpoint
