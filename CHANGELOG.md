@@ -17,6 +17,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Changed
 - General: indicate full compatibility with the latest version of WordPress, 6.4.
+- Requires WordPress 6.0 or higher.
 
 ### Fixed
 - Client Portal: Better PHP 8.2 support.
