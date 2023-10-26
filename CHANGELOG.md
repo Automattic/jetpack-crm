@@ -20,6 +20,7 @@ This is an alpha version! The changes listed here are not final.
 - Requires WordPress 6.0 or higher.
 
 ### Fixed
+- API: allow events endpoint to be filtered by owner
 - Client Portal: Better PHP 8.2 support.
 - Fix Creating Event API Endpoint
 - Fixed display issues on the Add and Edit pages that occurred when moving fields
