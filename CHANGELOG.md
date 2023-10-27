@@ -17,6 +17,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Changed
 - General: indicate full compatibility with the latest version of WordPress, 6.4.
+- Mail delivery: Removed usage of deprecated function utf8_encode
 - Requires PHP 7.4 or higher.
 - Requires WordPress 6.0 or higher.
 
