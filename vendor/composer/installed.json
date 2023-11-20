@@ -2,15 +2,16 @@
     "packages": [
         {
             "name": "automattic/jetpack-assets",
-            "version": "1.18.16-alpha.1700072541",
-            "version_normalized": "1.18.16.0-alpha1700072541",
+            "version": "2.0.0-alpha.1700485793",
+            "version_normalized": "2.0.0.0-alpha1700485793",
             "dist": {
                 "type": "path",
                 "url": "/tmp/jetpack-build/Automattic/jetpack-assets",
-                "reference": "2205471797a87f9ab70122d1b9b674bcfdc5165c"
+                "reference": "c2c3a1dfbdd4ffc916b0137fa660763e2ec29034"
             },
             "require": {
-                "automattic/jetpack-constants": "^1.6.23"
+                "automattic/jetpack-constants": "^2.0.0-alpha",
+                "php": ">=7.0"
             },
             "require-dev": {
                 "automattic/jetpack-changelogger": "^4.0.0-alpha",
@@ -30,7 +31,7 @@
                     "link-template": "https://github.com/Automattic/jetpack-assets/compare/v${old}...v${new}"
                 },
                 "branch-alias": {
-                    "dev-trunk": "1.18.x-dev"
+                    "dev-trunk": "2.0.x-dev"
                 }
             },
             "installation-source": "dist",
@@ -70,15 +71,16 @@
         },
         {
             "name": "automattic/jetpack-autoloader",
-            "version": "2.12.0",
-            "version_normalized": "2.12.0.0",
+            "version": "3.0.0-alpha.1700485793",
+            "version_normalized": "3.0.0.0-alpha1700485793",
             "dist": {
                 "type": "path",
                 "url": "/tmp/jetpack-build/Automattic/jetpack-autoloader",
-                "reference": "957929ba2dafb1f1ad356c1271b98833a2a90fb9"
+                "reference": "289d7780251447b85f9787e89d267be84e1bd1f4"
             },
             "require": {
-                "composer-plugin-api": "^1.1 || ^2.0"
+                "composer-plugin-api": "^1.1 || ^2.0",
+                "php": ">=7.0"
             },
             "require-dev": {
                 "automattic/jetpack-changelogger": "^4.0.0-alpha",
@@ -96,7 +98,7 @@
                     "::VERSION": "src/AutoloadGenerator.php"
                 },
                 "branch-alias": {
-                    "dev-trunk": "2.12.x-dev"
+                    "dev-trunk": "3.0.x-dev"
                 }
             },
             "installation-source": "dist",
@@ -135,15 +137,16 @@
         },
         {
             "name": "automattic/jetpack-composer-plugin",
-            "version": "1.1.14",
-            "version_normalized": "1.1.14.0",
+            "version": "2.0.0-alpha.1700485793",
+            "version_normalized": "2.0.0.0-alpha1700485793",
             "dist": {
                 "type": "path",
                 "url": "/tmp/jetpack-build/Automattic/jetpack-composer-plugin",
-                "reference": "c54c6cfe7415a31660d0d5d7d1aae31766568457"
+                "reference": "625b376dc0280ce08ea478bdeac8e22c1733cfa8"
             },
             "require": {
-                "composer-plugin-api": "^2.1.0"
+                "composer-plugin-api": "^2.1.0",
+                "php": ">=7.0"
             },
             "require-dev": {
                 "automattic/jetpack-changelogger": "^4.0.0-alpha",
@@ -160,7 +163,7 @@
                 },
                 "autotagger": true,
                 "branch-alias": {
-                    "dev-trunk": "1.1.x-dev"
+                    "dev-trunk": "2.0.x-dev"
                 }
             },
             "installation-source": "dist",
@@ -194,12 +197,15 @@
         },
         {
             "name": "automattic/jetpack-constants",
-            "version": "1.6.23",
-            "version_normalized": "1.6.23.0",
+            "version": "2.0.0-alpha.1700485793",
+            "version_normalized": "2.0.0.0-alpha1700485793",
             "dist": {
                 "type": "path",
                 "url": "/tmp/jetpack-build/Automattic/jetpack-constants",
-                "reference": "e4995b9e79f190a88599f697b2a14797bb4a168f"
+                "reference": "5e3aa3ad211d787ff0efdef780641f0328e4732b"
+            },
+            "require": {
+                "php": ">=7.0"
             },
             "require-dev": {
                 "automattic/jetpack-changelogger": "^4.0.0-alpha",
@@ -217,7 +223,7 @@
                     "link-template": "https://github.com/Automattic/jetpack-constants/compare/v${old}...v${new}"
                 },
                 "branch-alias": {
-                    "dev-trunk": "1.6.x-dev"
+                    "dev-trunk": "2.0.x-dev"
                 }
             },
             "installation-source": "dist",
