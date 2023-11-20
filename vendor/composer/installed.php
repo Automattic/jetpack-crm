@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'automattic/jetpack-assets' => array(
-            'pretty_version' => '2.0.0-alpha.1700485793',
-            'version' => '2.0.0.0-alpha1700485793',
-            'reference' => 'c2c3a1dfbdd4ffc916b0137fa660763e2ec29034',
+            'pretty_version' => '2.0.0-alpha.1700493473',
+            'version' => '2.0.0.0-alpha1700493473',
+            'reference' => 'd77c550f279a9ae9a4998bec7d969913918d66c0',
             'type' => 'jetpack-library',
             'install_path' => __DIR__ . '/../../jetpack_vendor/automattic/jetpack-assets',
             'aliases' => array(),
@@ -22,7 +22,7 @@
         'automattic/jetpack-autoloader' => array(
             'pretty_version' => '3.0.0-alpha.1700485793',
             'version' => '3.0.0.0-alpha1700485793',
-            'reference' => '289d7780251447b85f9787e89d267be84e1bd1f4',
+            'reference' => '409c4a4307dc2a2cd5da65d50bd1d4b3e0fe9a27',
             'type' => 'composer-plugin',
             'install_path' => __DIR__ . '/../automattic/jetpack-autoloader',
             'aliases' => array(),
@@ -31,7 +31,7 @@
         'automattic/jetpack-composer-plugin' => array(
             'pretty_version' => '2.0.0-alpha.1700485793',
             'version' => '2.0.0.0-alpha1700485793',
-            'reference' => '625b376dc0280ce08ea478bdeac8e22c1733cfa8',
+            'reference' => '467c92932aad9fefacb67207689e4937aa92eaa9',
             'type' => 'composer-plugin',
             'install_path' => __DIR__ . '/../automattic/jetpack-composer-plugin',
             'aliases' => array(),
@@ -40,7 +40,7 @@
         'automattic/jetpack-constants' => array(
             'pretty_version' => '2.0.0-alpha.1700485793',
             'version' => '2.0.0.0-alpha1700485793',
-            'reference' => '5e3aa3ad211d787ff0efdef780641f0328e4732b',
+            'reference' => '94362606987a176b627b185f9a68285f0f25d01e',
             'type' => 'jetpack-library',
             'install_path' => __DIR__ . '/../../jetpack_vendor/automattic/jetpack-constants',
             'aliases' => array(),
