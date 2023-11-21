@@ -14,6 +14,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Changed
 - General: updated PHP requirement to PHP 7.0+
+- Updated package dependencies.
 
 ## [6.3.0] - 2023-11-15
 ### Added
