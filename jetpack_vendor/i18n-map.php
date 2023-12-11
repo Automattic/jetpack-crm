@@ -6,7 +6,7 @@ return array(
   'packages' => array(
     'jetpack-assets' => array(
       'path' => 'jetpack_vendor/automattic/jetpack-assets',
-      'ver' => '2.0.3-alpha1701883615',
+      'ver' => '2.0.3',
     ),
   ),
 );
