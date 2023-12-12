@@ -19,6 +19,11 @@ This is an alpha version! The changes listed here are not final.
 - General: updated PHP requirement to PHP 7.0+
 - Updated package dependencies.
 
+### Fixed
+- Placeholders: Fixing quote placeholders on the quote template, client portal, pdf and emails.
+- Quotes: Consistent rendering of dates in placeholders.
+- Quotes: Consistent rendering of values and currency in placeholders.
+
 ## [6.3.0] - 2023-11-15
 ### Added
 - API: Add support for creating transactions with custom fields. [#33645]
