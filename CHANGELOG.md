@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 This is an alpha version! The changes listed here are not final.
 
+### Security
+- Bulk actions: stricter permissions checks
+
 ### Added
 - WooSync: New `jpcrm_woo_sync_order_data` hook
 
