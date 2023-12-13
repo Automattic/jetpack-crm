@@ -20,6 +20,7 @@ This is an alpha version! The changes listed here are not final.
 - Updated package dependencies.
 
 ### Fixed
+- OAuth Connection: updated typo to remove plural connection"s", and removed doc reference for whitelabel builds.
 - Placeholders: Fixing quote placeholders on the quote template, client portal, pdf and emails.
 - Quotes: Consistent rendering of dates in placeholders.
 - Quotes: Consistent rendering of values and currency in placeholders.
