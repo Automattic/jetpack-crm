@@ -5,25 +5,16 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [7.0.0-alpha] - unreleased
-
-This is an alpha version! The changes listed here are not final.
-
-### Security
-- Bulk actions: stricter permissions checks
-
+## [6.3.1] - 2023-12-14
 ### Added
-- WooSync: New `jpcrm_woo_sync_order_data` hook
-
-### Changed
-- General: updated PHP requirement to PHP 7.0+
-- Updated package dependencies.
+- WooSync: New `jpcrm_woo_sync_order_data` hook. [#34212]
 
 ### Fixed
-- OAuth Connection: updated typo to remove plural connection"s", and removed doc reference for whitelabel builds.
-- Placeholders: Fixing quote placeholders on the quote template, client portal, pdf and emails.
-- Quotes: Consistent rendering of dates in placeholders.
-- Quotes: Consistent rendering of values and currency in placeholders.
+- Bulk actions: Stricter permissions checks. [#34586]
+- OAuth Connection: Updated typo to remove plural connection"s", and removed doc reference for whitelabel builds. [#34446]
+- Placeholders: Fixing quote placeholders on the quote template, client portal, pdf and emails. [#34490]
+- Quotes: Consistent rendering of dates in placeholders. [#34490]
+- Quotes: Consistent rendering of values and currency in placeholders. [#34490]
 
 ## [6.3.0] - 2023-11-15
 ### Added
@@ -272,7 +263,7 @@ This is an alpha version! The changes listed here are not final.
 - Improved: Added a migration to remove outdated AKA lines
 
 [5.5.4-a.1]: https://github.com/Automattic/jetpack-crm/compare/v5.5.3...v5.5.4-a.1
-[7.0.0-alpha]: https://github.com/Automattic/jetpack-crm/compare/6.3.0...7.0.0-alpha
+[6.3.1]: https://github.com/Automattic/jetpack-crm/compare/6.3.0...6.3.1
 [6.3.0]: https://github.com/Automattic/jetpack-crm/compare/6.2.0...6.3.0
 [6.2.0]: https://github.com/Automattic/jetpack-crm/compare/6.1.0...6.2.0
 [6.1.0]: https://github.com/Automattic/jetpack-crm/compare/6.0.0...6.1.0
