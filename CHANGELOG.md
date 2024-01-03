@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 This is an alpha version! The changes listed here are not final.
 
+### Changed
+- Updated package dependencies.
+
 ## [6.3.2] - 2023-12-19
 ### Changed
 - Settings: Make support document links more consistent. [#34695]
