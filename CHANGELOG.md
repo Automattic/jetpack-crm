@@ -12,6 +12,9 @@ This is an alpha version! The changes listed here are not final.
 ### Changed
 - Updated package dependencies.
 
+### Fixed
+- Backend: Add fallback for dev site detection.
+
 ## [6.3.2] - 2023-12-19
 ### Changed
 - Settings: Make support document links more consistent. [#34695]
