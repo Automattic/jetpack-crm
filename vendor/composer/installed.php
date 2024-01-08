@@ -92,9 +92,9 @@
             'dev_requirement' => false,
         ),
         'phenx/php-svg-lib' => array(
-            'pretty_version' => '0.5.0',
-            'version' => '0.5.0.0',
-            'reference' => '76876c6cf3080bcb6f249d7d59705108166a6685',
+            'pretty_version' => '0.5.1',
+            'version' => '0.5.1.0',
+            'reference' => '8a8a1ebcf6aea861ef30197999f096f7bd4b4456',
             'type' => 'library',
             'install_path' => __DIR__ . '/../phenx/php-svg-lib',
             'aliases' => array(),
