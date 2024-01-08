@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 This is an alpha version! The changes listed here are not final.
 
+### Added
+- Database: Added preliminary support for SQLite.
+
 ### Changed
 - Updated package dependencies.
 
@@ -17,6 +20,7 @@ This is an alpha version! The changes listed here are not final.
 - Database: Ensure logs table is initiated with all columns.
 - System Assistant: Fix broken links on some tasks.
   Migrations: task_offset_fix migration would not mark as complete on some timezones
+- Transactions: Better support for SQLite.
 
 ## [6.3.2] - 2023-12-19
 ### Changed
