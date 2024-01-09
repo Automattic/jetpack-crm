@@ -17,6 +17,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Fixed
 - Backend: Add fallback for dev site detection.
+- Contacts: Updated default statuses.
 - Database: Ensure logs table is initiated with all columns.
 - System Assistant: Fix broken links on some tasks.
   Migrations: task_offset_fix migration would not mark as complete on some timezones
