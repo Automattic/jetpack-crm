@@ -23,6 +23,7 @@ This is an alpha version! The changes listed here are not final.
   Custom fields: Gracefully handle invalid date field data.
 - System Assistant: Fix broken links on some tasks.
   Migrations: task_offset_fix migration would not mark as complete on some timezones
+- Templates: Ensure file paths are valid before trying to load.
 - Transactions: Better support for SQLite.
 
 ## [6.3.2] - 2023-12-19
