@@ -21,6 +21,7 @@ This is an alpha version! The changes listed here are not final.
 - Database: Ensure logs table is initiated with all columns.
 - Jetpack Forms: Detect and process custom date fields correctly.
   Custom fields: Gracefully handle invalid date field data.
+- Listview: Better output escaping in listviews.
 - System Assistant: Fix broken links on some tasks.
   Migrations: task_offset_fix migration would not mark as complete on some timezones
 - Templates: Ensure file paths are valid before trying to load.
