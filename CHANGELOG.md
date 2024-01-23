@@ -5,33 +5,27 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [6.4.0-alpha] - unreleased
-
-This is an alpha version! The changes listed here are not final.
-
+## [6.4.0] - 2024-01-23
 ### Added
-- Database: Added preliminary support for SQLite.
-- Settings: Add setting to fine tune the Total Value field calculation for contacts and companies.
-
-### Changed
-- Updated package dependencies.
+- Database: Added preliminary support for SQLite. [#34868]
+- Settings: Add setting to fine tune the Total Value field calculation for contacts and companies. [#34957]
 
 ### Fixed
-- Backend: Add fallback for dev site detection.
-- Contacts: Updated default statuses.
-- Custom fields: More robust fallbacks for slug creation.
+- Backend: Add fallback for dev site detection. [#34867]
+- Contacts: Updated default statuses. [#34892]
+- Custom fields: More robust fallbacks for slug creation. [#35175]
 - Dashboard: Adjust queries for SQLite compatibility.
-  REST API: Allow calls when not using pretty permalinks.
-- Database: Ensure logs table is initiated with all columns.
-- Fixed: Escape output in typeaheads.
-- Invoices: Fixed total amount in preview and pdf when refunds or credit notes are applied.
+- REST API: Allow calls when not using pretty permalinks. [#35201]
+- Database: Ensure logs table is initiated with all columns. [#34871]
+- Fixed: Escape output in typeaheads. [#35171]
+- Invoices: Fixed total amount in preview and pdf when refunds or credit notes are applied. [#34211]
 - Jetpack Forms: Detect and process custom date fields correctly.
-  Custom fields: Gracefully handle invalid date field data.
-- Listview: Better output escaping in listviews.
+- Custom fields: Gracefully handle invalid date field data. [#34890]
+- Listview: Better output escaping in listviews. [#35140]
 - System Assistant: Fix broken links on some tasks.
-  Migrations: task_offset_fix migration would not mark as complete on some timezones
-- Templates: Ensure file paths are valid before trying to load.
-- Transactions: Better support for SQLite.
+- Migrations: Fix issue where task_offset_fix migration would not mark as complete on some timezones. [#34873]
+- Templates: Ensure file paths are valid before trying to load. [#34949]
+- Transactions: Better support for SQLite. [#34868]
 
 ## [6.3.2] - 2023-12-19
 ### Changed
@@ -298,7 +292,7 @@ This is an alpha version! The changes listed here are not final.
 - Improved: Added a migration to remove outdated AKA lines
 
 [5.5.4-a.1]: https://github.com/Automattic/jetpack-crm/compare/v5.5.3...v5.5.4-a.1
-[6.4.0-alpha]: https://github.com/Automattic/jetpack-crm/compare/6.3.2...6.4.0-alpha
+[6.4.0]: https://github.com/Automattic/jetpack-crm/compare/6.3.2...6.4.0
 [6.3.2]: https://github.com/Automattic/jetpack-crm/compare/6.3.1...6.3.2
 [6.3.1]: https://github.com/Automattic/jetpack-crm/compare/6.3.0...6.3.1
 [6.3.0]: https://github.com/Automattic/jetpack-crm/compare/6.2.0...6.3.0
