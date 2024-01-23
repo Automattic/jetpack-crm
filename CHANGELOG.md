@@ -18,6 +18,7 @@ This is an alpha version! The changes listed here are not final.
 ### Fixed
 - Backend: Add fallback for dev site detection.
 - Contacts: Updated default statuses.
+- Custom fields: More robust fallbacks for slug creation.
 - Database: Ensure logs table is initiated with all columns.
 - Jetpack Forms: Detect and process custom date fields correctly.
   Custom fields: Gracefully handle invalid date field data.
