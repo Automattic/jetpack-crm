@@ -20,6 +20,8 @@ This is an alpha version! The changes listed here are not final.
 - Backend: Add fallback for dev site detection.
 - Contacts: Updated default statuses.
 - Custom fields: More robust fallbacks for slug creation.
+- Dashboard: Adjust queries for SQLite compatibility.
+  REST API: Allow calls when not using pretty permalinks.
 - Database: Ensure logs table is initiated with all columns.
 - Fixed: Escape output in typeaheads.
 - Invoices: Fixed total amount in preview and pdf when refunds or credit notes are applied.
