@@ -5,12 +5,13 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [6.3.3-alpha] - unreleased
+## [6.4.0-alpha] - unreleased
 
 This is an alpha version! The changes listed here are not final.
 
 ### Added
 - Database: Added preliminary support for SQLite.
+- Settings: Add setting to fine tune the Total Value field calculation for contacts and companies.
 
 ### Changed
 - Updated package dependencies.
@@ -295,7 +296,7 @@ This is an alpha version! The changes listed here are not final.
 - Improved: Added a migration to remove outdated AKA lines
 
 [5.5.4-a.1]: https://github.com/Automattic/jetpack-crm/compare/v5.5.3...v5.5.4-a.1
-[6.3.3-alpha]: https://github.com/Automattic/jetpack-crm/compare/6.3.2...6.3.3-alpha
+[6.4.0-alpha]: https://github.com/Automattic/jetpack-crm/compare/6.3.2...6.4.0-alpha
 [6.3.2]: https://github.com/Automattic/jetpack-crm/compare/6.3.1...6.3.2
 [6.3.1]: https://github.com/Automattic/jetpack-crm/compare/6.3.0...6.3.1
 [6.3.0]: https://github.com/Automattic/jetpack-crm/compare/6.2.0...6.3.0
