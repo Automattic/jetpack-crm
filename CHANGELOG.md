@@ -21,6 +21,7 @@ This is an alpha version! The changes listed here are not final.
 - Custom fields: More robust fallbacks for slug creation.
 - Database: Ensure logs table is initiated with all columns.
 - Fixed: Escape output in typeaheads.
+- Invoices: Fixed total amount in preview and pdf when refunds or credit notes are applied.
 - Jetpack Forms: Detect and process custom date fields correctly.
   Custom fields: Gracefully handle invalid date field data.
 - Listview: Better output escaping in listviews.
