@@ -13,6 +13,10 @@ This is an alpha version! The changes listed here are not final.
 - Invoices: Changing total amount calculation in preview and pdf when refunds or credit notes are applied, back to pre 6.4.0 implementation.
 - Updated package dependencies.
 
+### Fixed
+- WooSync: Remove broken link from settings page.
+  WooSync: Prevent addition of the same site more than once.
+
 ## [6.4.0] - 2024-01-23
 ### Added
 - Database: Added preliminary support for SQLite. [#34868]
