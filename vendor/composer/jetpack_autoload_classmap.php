@@ -779,147 +779,155 @@ return array(
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Renderer/Text.php'
 	),
 	'FontLib\\AdobeFontMetrics' => array(
-		'version' => '0.5.4.0',
+		'version' => '0.5.6.0',
 		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/AdobeFontMetrics.php'
 	),
-	'FontLib\\Autoloader' => array(
-		'version' => '0.5.4.0',
-		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Autoloader.php'
-	),
 	'FontLib\\BinaryStream' => array(
-		'version' => '0.5.4.0',
+		'version' => '0.5.6.0',
 		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/BinaryStream.php'
 	),
 	'FontLib\\EOT\\File' => array(
-		'version' => '0.5.4.0',
+		'version' => '0.5.6.0',
 		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/EOT/File.php'
 	),
 	'FontLib\\EOT\\Header' => array(
-		'version' => '0.5.4.0',
+		'version' => '0.5.6.0',
 		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/EOT/Header.php'
 	),
 	'FontLib\\EncodingMap' => array(
-		'version' => '0.5.4.0',
+		'version' => '0.5.6.0',
 		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/EncodingMap.php'
 	),
 	'FontLib\\Exception\\FontNotFoundException' => array(
-		'version' => '0.5.4.0',
+		'version' => '0.5.6.0',
 		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Exception/FontNotFoundException.php'
 	),
 	'FontLib\\Font' => array(
-		'version' => '0.5.4.0',
+		'version' => '0.5.6.0',
 		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Font.php'
 	),
 	'FontLib\\Glyph\\Outline' => array(
-		'version' => '0.5.4.0',
+		'version' => '0.5.6.0',
 		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Glyph/Outline.php'
 	),
 	'FontLib\\Glyph\\OutlineComponent' => array(
-		'version' => '0.5.4.0',
+		'version' => '0.5.6.0',
 		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Glyph/OutlineComponent.php'
 	),
 	'FontLib\\Glyph\\OutlineComposite' => array(
-		'version' => '0.5.4.0',
+		'version' => '0.5.6.0',
 		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Glyph/OutlineComposite.php'
 	),
 	'FontLib\\Glyph\\OutlineSimple' => array(
-		'version' => '0.5.4.0',
+		'version' => '0.5.6.0',
 		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Glyph/OutlineSimple.php'
 	),
 	'FontLib\\Header' => array(
-		'version' => '0.5.4.0',
+		'version' => '0.5.6.0',
 		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Header.php'
 	),
 	'FontLib\\OpenType\\File' => array(
-		'version' => '0.5.4.0',
+		'version' => '0.5.6.0',
 		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/OpenType/File.php'
 	),
 	'FontLib\\OpenType\\TableDirectoryEntry' => array(
-		'version' => '0.5.4.0',
+		'version' => '0.5.6.0',
 		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/OpenType/TableDirectoryEntry.php'
 	),
 	'FontLib\\Table\\DirectoryEntry' => array(
-		'version' => '0.5.4.0',
+		'version' => '0.5.6.0',
 		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Table/DirectoryEntry.php'
 	),
 	'FontLib\\Table\\Table' => array(
-		'version' => '0.5.4.0',
+		'version' => '0.5.6.0',
 		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Table/Table.php'
 	),
 	'FontLib\\Table\\Type\\cmap' => array(
-		'version' => '0.5.4.0',
+		'version' => '0.5.6.0',
 		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Table/Type/cmap.php'
 	),
+	'FontLib\\Table\\Type\\cvt' => array(
+		'version' => '0.5.6.0',
+		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Table/Type/cvt.php'
+	),
+	'FontLib\\Table\\Type\\fpgm' => array(
+		'version' => '0.5.6.0',
+		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Table/Type/fpgm.php'
+	),
 	'FontLib\\Table\\Type\\glyf' => array(
-		'version' => '0.5.4.0',
+		'version' => '0.5.6.0',
 		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Table/Type/glyf.php'
 	),
 	'FontLib\\Table\\Type\\head' => array(
-		'version' => '0.5.4.0',
+		'version' => '0.5.6.0',
 		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Table/Type/head.php'
 	),
 	'FontLib\\Table\\Type\\hhea' => array(
-		'version' => '0.5.4.0',
+		'version' => '0.5.6.0',
 		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Table/Type/hhea.php'
 	),
 	'FontLib\\Table\\Type\\hmtx' => array(
-		'version' => '0.5.4.0',
+		'version' => '0.5.6.0',
 		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Table/Type/hmtx.php'
 	),
 	'FontLib\\Table\\Type\\kern' => array(
-		'version' => '0.5.4.0',
+		'version' => '0.5.6.0',
 		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Table/Type/kern.php'
 	),
 	'FontLib\\Table\\Type\\loca' => array(
-		'version' => '0.5.4.0',
+		'version' => '0.5.6.0',
 		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Table/Type/loca.php'
 	),
 	'FontLib\\Table\\Type\\maxp' => array(
-		'version' => '0.5.4.0',
+		'version' => '0.5.6.0',
 		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Table/Type/maxp.php'
 	),
 	'FontLib\\Table\\Type\\name' => array(
-		'version' => '0.5.4.0',
+		'version' => '0.5.6.0',
 		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Table/Type/name.php'
 	),
 	'FontLib\\Table\\Type\\nameRecord' => array(
-		'version' => '0.5.4.0',
+		'version' => '0.5.6.0',
 		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Table/Type/nameRecord.php'
 	),
 	'FontLib\\Table\\Type\\os2' => array(
-		'version' => '0.5.4.0',
+		'version' => '0.5.6.0',
 		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Table/Type/os2.php'
 	),
 	'FontLib\\Table\\Type\\post' => array(
-		'version' => '0.5.4.0',
+		'version' => '0.5.6.0',
 		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Table/Type/post.php'
 	),
+	'FontLib\\Table\\Type\\prep' => array(
+		'version' => '0.5.6.0',
+		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Table/Type/prep.php'
+	),
 	'FontLib\\TrueType\\Collection' => array(
-		'version' => '0.5.4.0',
+		'version' => '0.5.6.0',
 		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/TrueType/Collection.php'
 	),
 	'FontLib\\TrueType\\File' => array(
-		'version' => '0.5.4.0',
+		'version' => '0.5.6.0',
 		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/TrueType/File.php'
 	),
 	'FontLib\\TrueType\\Header' => array(
-		'version' => '0.5.4.0',
+		'version' => '0.5.6.0',
 		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/TrueType/Header.php'
 	),
 	'FontLib\\TrueType\\TableDirectoryEntry' => array(
-		'version' => '0.5.4.0',
+		'version' => '0.5.6.0',
 		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/TrueType/TableDirectoryEntry.php'
 	),
 	'FontLib\\WOFF\\File' => array(
-		'version' => '0.5.4.0',
+		'version' => '0.5.6.0',
 		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/WOFF/File.php'
 	),
 	'FontLib\\WOFF\\Header' => array(
-		'version' => '0.5.4.0',
+		'version' => '0.5.6.0',
 		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/WOFF/Header.php'
 	),
 	'FontLib\\WOFF\\TableDirectoryEntry' => array(
-		'version' => '0.5.4.0',
+		'version' => '0.5.6.0',
 		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/WOFF/TableDirectoryEntry.php'
 	),
 	'Hook_Manager' => array(
@@ -1031,159 +1039,163 @@ return array(
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-plugins-handler.php'
 	),
 	'Sabberworm\\CSS\\CSSList\\AtRuleBlockList' => array(
-		'version' => '8.4.0.0',
+		'version' => '8.5.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/CSSList/AtRuleBlockList.php'
 	),
 	'Sabberworm\\CSS\\CSSList\\CSSBlockList' => array(
-		'version' => '8.4.0.0',
+		'version' => '8.5.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/CSSList/CSSBlockList.php'
 	),
 	'Sabberworm\\CSS\\CSSList\\CSSList' => array(
-		'version' => '8.4.0.0',
+		'version' => '8.5.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/CSSList/CSSList.php'
 	),
 	'Sabberworm\\CSS\\CSSList\\Document' => array(
-		'version' => '8.4.0.0',
+		'version' => '8.5.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/CSSList/Document.php'
 	),
 	'Sabberworm\\CSS\\CSSList\\KeyFrame' => array(
-		'version' => '8.4.0.0',
+		'version' => '8.5.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/CSSList/KeyFrame.php'
 	),
 	'Sabberworm\\CSS\\Comment\\Comment' => array(
-		'version' => '8.4.0.0',
+		'version' => '8.5.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Comment/Comment.php'
 	),
 	'Sabberworm\\CSS\\Comment\\Commentable' => array(
-		'version' => '8.4.0.0',
+		'version' => '8.5.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Comment/Commentable.php'
 	),
 	'Sabberworm\\CSS\\OutputFormat' => array(
-		'version' => '8.4.0.0',
+		'version' => '8.5.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/OutputFormat.php'
 	),
 	'Sabberworm\\CSS\\OutputFormatter' => array(
-		'version' => '8.4.0.0',
+		'version' => '8.5.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/OutputFormatter.php'
 	),
 	'Sabberworm\\CSS\\Parser' => array(
-		'version' => '8.4.0.0',
+		'version' => '8.5.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Parser.php'
 	),
+	'Sabberworm\\CSS\\Parsing\\Anchor' => array(
+		'version' => '8.5.0.0',
+		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Parsing/Anchor.php'
+	),
 	'Sabberworm\\CSS\\Parsing\\OutputException' => array(
-		'version' => '8.4.0.0',
+		'version' => '8.5.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Parsing/OutputException.php'
 	),
 	'Sabberworm\\CSS\\Parsing\\ParserState' => array(
-		'version' => '8.4.0.0',
+		'version' => '8.5.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Parsing/ParserState.php'
 	),
 	'Sabberworm\\CSS\\Parsing\\SourceException' => array(
-		'version' => '8.4.0.0',
+		'version' => '8.5.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Parsing/SourceException.php'
 	),
 	'Sabberworm\\CSS\\Parsing\\UnexpectedEOFException' => array(
-		'version' => '8.4.0.0',
+		'version' => '8.5.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Parsing/UnexpectedEOFException.php'
 	),
 	'Sabberworm\\CSS\\Parsing\\UnexpectedTokenException' => array(
-		'version' => '8.4.0.0',
+		'version' => '8.5.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Parsing/UnexpectedTokenException.php'
 	),
 	'Sabberworm\\CSS\\Property\\AtRule' => array(
-		'version' => '8.4.0.0',
+		'version' => '8.5.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Property/AtRule.php'
 	),
 	'Sabberworm\\CSS\\Property\\CSSNamespace' => array(
-		'version' => '8.4.0.0',
+		'version' => '8.5.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Property/CSSNamespace.php'
 	),
 	'Sabberworm\\CSS\\Property\\Charset' => array(
-		'version' => '8.4.0.0',
+		'version' => '8.5.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Property/Charset.php'
 	),
 	'Sabberworm\\CSS\\Property\\Import' => array(
-		'version' => '8.4.0.0',
+		'version' => '8.5.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Property/Import.php'
 	),
 	'Sabberworm\\CSS\\Property\\KeyframeSelector' => array(
-		'version' => '8.4.0.0',
+		'version' => '8.5.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Property/KeyframeSelector.php'
 	),
 	'Sabberworm\\CSS\\Property\\Selector' => array(
-		'version' => '8.4.0.0',
+		'version' => '8.5.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Property/Selector.php'
 	),
 	'Sabberworm\\CSS\\Renderable' => array(
-		'version' => '8.4.0.0',
+		'version' => '8.5.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Renderable.php'
 	),
 	'Sabberworm\\CSS\\RuleSet\\AtRuleSet' => array(
-		'version' => '8.4.0.0',
+		'version' => '8.5.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/RuleSet/AtRuleSet.php'
 	),
 	'Sabberworm\\CSS\\RuleSet\\DeclarationBlock' => array(
-		'version' => '8.4.0.0',
+		'version' => '8.5.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/RuleSet/DeclarationBlock.php'
 	),
 	'Sabberworm\\CSS\\RuleSet\\RuleSet' => array(
-		'version' => '8.4.0.0',
+		'version' => '8.5.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/RuleSet/RuleSet.php'
 	),
 	'Sabberworm\\CSS\\Rule\\Rule' => array(
-		'version' => '8.4.0.0',
+		'version' => '8.5.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Rule/Rule.php'
 	),
 	'Sabberworm\\CSS\\Settings' => array(
-		'version' => '8.4.0.0',
+		'version' => '8.5.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Settings.php'
 	),
 	'Sabberworm\\CSS\\Value\\CSSFunction' => array(
-		'version' => '8.4.0.0',
+		'version' => '8.5.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Value/CSSFunction.php'
 	),
 	'Sabberworm\\CSS\\Value\\CSSString' => array(
-		'version' => '8.4.0.0',
+		'version' => '8.5.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Value/CSSString.php'
 	),
 	'Sabberworm\\CSS\\Value\\CalcFunction' => array(
-		'version' => '8.4.0.0',
+		'version' => '8.5.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Value/CalcFunction.php'
 	),
 	'Sabberworm\\CSS\\Value\\CalcRuleValueList' => array(
-		'version' => '8.4.0.0',
+		'version' => '8.5.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Value/CalcRuleValueList.php'
 	),
 	'Sabberworm\\CSS\\Value\\Color' => array(
-		'version' => '8.4.0.0',
+		'version' => '8.5.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Value/Color.php'
 	),
 	'Sabberworm\\CSS\\Value\\LineName' => array(
-		'version' => '8.4.0.0',
+		'version' => '8.5.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Value/LineName.php'
 	),
 	'Sabberworm\\CSS\\Value\\PrimitiveValue' => array(
-		'version' => '8.4.0.0',
+		'version' => '8.5.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Value/PrimitiveValue.php'
 	),
 	'Sabberworm\\CSS\\Value\\RuleValueList' => array(
-		'version' => '8.4.0.0',
+		'version' => '8.5.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Value/RuleValueList.php'
 	),
 	'Sabberworm\\CSS\\Value\\Size' => array(
-		'version' => '8.4.0.0',
+		'version' => '8.5.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Value/Size.php'
 	),
 	'Sabberworm\\CSS\\Value\\URL' => array(
-		'version' => '8.4.0.0',
+		'version' => '8.5.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Value/URL.php'
 	),
 	'Sabberworm\\CSS\\Value\\Value' => array(
-		'version' => '8.4.0.0',
+		'version' => '8.5.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Value/Value.php'
 	),
 	'Sabberworm\\CSS\\Value\\ValueList' => array(
-		'version' => '8.4.0.0',
+		'version' => '8.5.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Value/ValueList.php'
 	),
 	'Shutdown_Handler' => array(
@@ -1191,115 +1203,115 @@ return array(
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-shutdown-handler.php'
 	),
 	'Svg\\CssLength' => array(
-		'version' => '0.5.1.0',
+		'version' => '0.5.2.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/CssLength.php'
 	),
 	'Svg\\DefaultStyle' => array(
-		'version' => '0.5.1.0',
+		'version' => '0.5.2.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/DefaultStyle.php'
 	),
 	'Svg\\Document' => array(
-		'version' => '0.5.1.0',
+		'version' => '0.5.2.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Document.php'
 	),
 	'Svg\\Gradient\\Stop' => array(
-		'version' => '0.5.1.0',
+		'version' => '0.5.2.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Gradient/Stop.php'
 	),
 	'Svg\\Style' => array(
-		'version' => '0.5.1.0',
+		'version' => '0.5.2.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Style.php'
 	),
 	'Svg\\Surface\\CPdf' => array(
-		'version' => '0.5.1.0',
+		'version' => '0.5.2.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Surface/CPdf.php'
 	),
 	'Svg\\Surface\\SurfaceCpdf' => array(
-		'version' => '0.5.1.0',
+		'version' => '0.5.2.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Surface/SurfaceCpdf.php'
 	),
 	'Svg\\Surface\\SurfaceInterface' => array(
-		'version' => '0.5.1.0',
+		'version' => '0.5.2.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Surface/SurfaceInterface.php'
 	),
 	'Svg\\Surface\\SurfacePDFLib' => array(
-		'version' => '0.5.1.0',
+		'version' => '0.5.2.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Surface/SurfacePDFLib.php'
 	),
 	'Svg\\Tag\\AbstractTag' => array(
-		'version' => '0.5.1.0',
+		'version' => '0.5.2.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/AbstractTag.php'
 	),
 	'Svg\\Tag\\Anchor' => array(
-		'version' => '0.5.1.0',
+		'version' => '0.5.2.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Anchor.php'
 	),
 	'Svg\\Tag\\Circle' => array(
-		'version' => '0.5.1.0',
+		'version' => '0.5.2.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Circle.php'
 	),
 	'Svg\\Tag\\ClipPath' => array(
-		'version' => '0.5.1.0',
+		'version' => '0.5.2.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/ClipPath.php'
 	),
 	'Svg\\Tag\\Ellipse' => array(
-		'version' => '0.5.1.0',
+		'version' => '0.5.2.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Ellipse.php'
 	),
 	'Svg\\Tag\\Group' => array(
-		'version' => '0.5.1.0',
+		'version' => '0.5.2.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Group.php'
 	),
 	'Svg\\Tag\\Image' => array(
-		'version' => '0.5.1.0',
+		'version' => '0.5.2.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Image.php'
 	),
 	'Svg\\Tag\\Line' => array(
-		'version' => '0.5.1.0',
+		'version' => '0.5.2.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Line.php'
 	),
 	'Svg\\Tag\\LinearGradient' => array(
-		'version' => '0.5.1.0',
+		'version' => '0.5.2.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/LinearGradient.php'
 	),
 	'Svg\\Tag\\Path' => array(
-		'version' => '0.5.1.0',
+		'version' => '0.5.2.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Path.php'
 	),
 	'Svg\\Tag\\Polygon' => array(
-		'version' => '0.5.1.0',
+		'version' => '0.5.2.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Polygon.php'
 	),
 	'Svg\\Tag\\Polyline' => array(
-		'version' => '0.5.1.0',
+		'version' => '0.5.2.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Polyline.php'
 	),
 	'Svg\\Tag\\RadialGradient' => array(
-		'version' => '0.5.1.0',
+		'version' => '0.5.2.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/RadialGradient.php'
 	),
 	'Svg\\Tag\\Rect' => array(
-		'version' => '0.5.1.0',
+		'version' => '0.5.2.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Rect.php'
 	),
 	'Svg\\Tag\\Shape' => array(
-		'version' => '0.5.1.0',
+		'version' => '0.5.2.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Shape.php'
 	),
 	'Svg\\Tag\\Stop' => array(
-		'version' => '0.5.1.0',
+		'version' => '0.5.2.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Stop.php'
 	),
 	'Svg\\Tag\\StyleTag' => array(
-		'version' => '0.5.1.0',
+		'version' => '0.5.2.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/StyleTag.php'
 	),
 	'Svg\\Tag\\Text' => array(
-		'version' => '0.5.1.0',
+		'version' => '0.5.2.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Text.php'
 	),
 	'Svg\\Tag\\UseTag' => array(
-		'version' => '0.5.1.0',
+		'version' => '0.5.2.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/UseTag.php'
 	),
 	'Version_Loader' => array(
