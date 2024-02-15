@@ -16,6 +16,8 @@ This is an alpha version! The changes listed here are not final.
 ### Fixed
 - Client Portal: Admin banners are now more consistent across screens.
 - Client Portal: Catch error if Woo order associated with invoice is deleted.
+- Invoices: Standardize line item code.
+  Invoices: Allow long line item descriptions in email.
 - WooSync: Remove broken link from settings page.
   WooSync: Prevent addition of the same site more than once.
 

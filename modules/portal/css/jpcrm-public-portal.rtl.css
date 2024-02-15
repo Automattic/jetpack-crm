@@ -840,3 +840,29 @@ i.icon.child:before {
 .jpcrm-client-portal-admin-banner a:hover, .jpcrm-client-portal-admin-banner a:focus, .jpcrm-client-portal-admin-banner a:visited:hover, .jpcrm-client-portal-admin-banner a:visited:focus, .jpcrm-client-portal-admin-banner a:active:hover, .jpcrm-client-portal-admin-banner a:active:focus {
   color: var(--jp-gray-80);
 }
+
+.jpcrm-invoice-lineitem-description {
+  text-align: right;
+}
+
+.jpcrm-invoice-lineitem-quantity,
+.jpcrm-invoice-lineitem-price,
+.jpcrm-invoice-lineitem-amount {
+  text-align: left;
+}
+
+#jpcrm-invoice-lineitems .jpcrm-invoice-lineitem-description {
+  width: 50%;
+}
+#jpcrm-invoice-lineitems .jpcrm-invoice-lineitem-description .title {
+  font-weight: bold;
+}
+#jpcrm-invoice-lineitems .jpcrm-invoice-lineitem-description .subtitle {
+  font-size: 13px;
+  font-style: italic;
+}
+#jpcrm-invoice-lineitems .jpcrm-invoice-lineitem-quantity,
+#jpcrm-invoice-lineitems .jpcrm-invoice-lineitem-price,
+#jpcrm-invoice-lineitems .jpcrm-invoice-lineitem-amount {
+  width: 15%;
+}
