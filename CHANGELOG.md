@@ -15,6 +15,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Fixed
 - Client Portal: Admin banners are now more consistent across screens.
+- Client Portal: Catch error if Woo order associated with invoice is deleted.
 - WooSync: Remove broken link from settings page.
   WooSync: Prevent addition of the same site more than once.
 
