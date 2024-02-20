@@ -18,6 +18,7 @@ This is an alpha version! The changes listed here are not final.
 - Client Portal: Catch error if Woo order associated with invoice is deleted.
 - Invoices: Standardize line item code.
   Invoices: Allow long line item descriptions in email.
+- Tags: Use existing tags if possible when using helper functions to create objects.
 - WooSync: Remove broken link from settings page.
   WooSync: Prevent addition of the same site more than once.
 
