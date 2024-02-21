@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 This is an alpha version! The changes listed here are not final.
 
 ### Changed
+- General: indicate compatibility with the upcoming version of WordPress, 6.5.
 - Invoices: Changing total amount calculation in preview and pdf when refunds or credit notes are applied, back to pre 6.4.0 implementation.
 - Updated package dependencies.
 
