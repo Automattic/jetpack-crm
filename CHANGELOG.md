@@ -19,6 +19,9 @@ This is an alpha version! The changes listed here are not final.
 - Client Portal: Catch error if Woo order associated with invoice is deleted.
 - Invoices: Standardize line item code.
   Invoices: Allow long line item descriptions in email.
+- Listviews: Object status filters now correctly reflect current status options.
+  Listviews: Overhaul of listview filter logic.
+  Quotes: Add Draft listview filter.
 - Tags: Use existing tags if possible when using helper functions to create objects.
 - WooSync: Catch PHP error if order has empty fee value.
 - WooSync: Detect and support WooCommerce HPOS configuration.
