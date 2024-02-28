@@ -25,6 +25,9 @@ This is an alpha version! The changes listed here are not final.
 - Tags: Use existing tags if possible when using helper functions to create objects.
 - WooSync: Catch PHP error if order has empty fee value.
 - WooSync: Detect and support WooCommerce HPOS configuration.
+- WooSync: No longer shows today as renewal date if subscription has no renewal date set.
+  WooSync: Modernize code.
+  Segments: Fix output if segment has an error.
 - WooSync: Remove broken link from settings page.
   WooSync: Prevent addition of the same site more than once.
 
