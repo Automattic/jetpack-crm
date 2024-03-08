@@ -16,6 +16,7 @@ This is an alpha version! The changes listed here are not final.
 - Updated package dependencies.
 
 ### Fixed
+- Data Tools: Cleanup of page logic.
 - Listviews: Status filters are now case-sensitive.
 - Users: Make sure assigned users are not removed from contacts upon edit.
 
