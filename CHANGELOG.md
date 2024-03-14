@@ -18,6 +18,7 @@ This is an alpha version! The changes listed here are not final.
 ### Fixed
 - Data Tools: Cleanup of page logic.
 - Listviews: Status filters are now case-sensitive.
+- Permissions: Allowing users assigned to contacts to view linked objects even if assign ownership is unchecked
 - Users: Make sure assigned users are not removed from contacts upon edit.
 
 ## [6.4.1] - 2024-02-29
