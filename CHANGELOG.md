@@ -13,6 +13,7 @@ This is an alpha version! The changes listed here are not final.
 - Dashboard: Sales Funnel now links to contact list view.
 
 ### Changed
+- Only show installation errors on plugins page
 - Updated package dependencies.
 
 ### Fixed
