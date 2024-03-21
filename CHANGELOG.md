@@ -11,6 +11,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Added
 - Dashboard: Sales Funnel now links to contact list view.
+- Hook into red bubble notification when bad installation is detected
 
 ### Changed
 - Only show installation errors on plugins page
