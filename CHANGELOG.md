@@ -15,6 +15,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Changed
 - Only show installation errors on plugins page
+- Segments: Increased performance.
 - Updated package dependencies.
 
 ### Fixed
