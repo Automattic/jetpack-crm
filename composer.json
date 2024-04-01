@@ -50,6 +50,7 @@
 		}
 	},
 	"require": {
+		"php": ">=7.4",
 		"automattic/jetpack-assets": "^2.1.6",
 		"automattic/jetpack-autoloader": "^3.0.4",
 		"automattic/jetpack-composer-plugin": "^2.0.1",
