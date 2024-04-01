@@ -503,279 +503,279 @@ return array(
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-container.php'
 	),
 	'Dompdf\\Adapter\\CPDF' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Adapter/CPDF.php'
 	),
 	'Dompdf\\Adapter\\GD' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Adapter/GD.php'
 	),
 	'Dompdf\\Adapter\\PDFLib' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Adapter/PDFLib.php'
 	),
 	'Dompdf\\Canvas' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Canvas.php'
 	),
 	'Dompdf\\CanvasFactory' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/CanvasFactory.php'
 	),
 	'Dompdf\\Cellmap' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Cellmap.php'
 	),
 	'Dompdf\\Cpdf' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/lib/Cpdf.php'
 	),
 	'Dompdf\\Css\\AttributeTranslator' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Css/AttributeTranslator.php'
 	),
 	'Dompdf\\Css\\Color' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Css/Color.php'
 	),
 	'Dompdf\\Css\\Style' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Css/Style.php'
 	),
 	'Dompdf\\Css\\Stylesheet' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Css/Stylesheet.php'
 	),
 	'Dompdf\\Dompdf' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Dompdf.php'
 	),
 	'Dompdf\\Exception' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Exception.php'
 	),
 	'Dompdf\\Exception\\ImageException' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Exception/ImageException.php'
 	),
 	'Dompdf\\FontMetrics' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FontMetrics.php'
 	),
 	'Dompdf\\Frame' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Frame.php'
 	),
 	'Dompdf\\FrameDecorator\\AbstractFrameDecorator' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameDecorator/AbstractFrameDecorator.php'
 	),
 	'Dompdf\\FrameDecorator\\Block' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameDecorator/Block.php'
 	),
 	'Dompdf\\FrameDecorator\\Image' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameDecorator/Image.php'
 	),
 	'Dompdf\\FrameDecorator\\Inline' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameDecorator/Inline.php'
 	),
 	'Dompdf\\FrameDecorator\\ListBullet' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameDecorator/ListBullet.php'
 	),
 	'Dompdf\\FrameDecorator\\ListBulletImage' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameDecorator/ListBulletImage.php'
 	),
 	'Dompdf\\FrameDecorator\\NullFrameDecorator' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameDecorator/NullFrameDecorator.php'
 	),
 	'Dompdf\\FrameDecorator\\Page' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameDecorator/Page.php'
 	),
 	'Dompdf\\FrameDecorator\\Table' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameDecorator/Table.php'
 	),
 	'Dompdf\\FrameDecorator\\TableCell' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameDecorator/TableCell.php'
 	),
 	'Dompdf\\FrameDecorator\\TableRow' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameDecorator/TableRow.php'
 	),
 	'Dompdf\\FrameDecorator\\TableRowGroup' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameDecorator/TableRowGroup.php'
 	),
 	'Dompdf\\FrameDecorator\\Text' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameDecorator/Text.php'
 	),
 	'Dompdf\\FrameReflower\\AbstractFrameReflower' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameReflower/AbstractFrameReflower.php'
 	),
 	'Dompdf\\FrameReflower\\Block' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameReflower/Block.php'
 	),
 	'Dompdf\\FrameReflower\\Image' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameReflower/Image.php'
 	),
 	'Dompdf\\FrameReflower\\Inline' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameReflower/Inline.php'
 	),
 	'Dompdf\\FrameReflower\\ListBullet' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameReflower/ListBullet.php'
 	),
 	'Dompdf\\FrameReflower\\NullFrameReflower' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameReflower/NullFrameReflower.php'
 	),
 	'Dompdf\\FrameReflower\\Page' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameReflower/Page.php'
 	),
 	'Dompdf\\FrameReflower\\Table' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameReflower/Table.php'
 	),
 	'Dompdf\\FrameReflower\\TableCell' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameReflower/TableCell.php'
 	),
 	'Dompdf\\FrameReflower\\TableRow' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameReflower/TableRow.php'
 	),
 	'Dompdf\\FrameReflower\\TableRowGroup' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameReflower/TableRowGroup.php'
 	),
 	'Dompdf\\FrameReflower\\Text' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameReflower/Text.php'
 	),
 	'Dompdf\\Frame\\Factory' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Frame/Factory.php'
 	),
 	'Dompdf\\Frame\\FrameListIterator' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Frame/FrameListIterator.php'
 	),
 	'Dompdf\\Frame\\FrameTree' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Frame/FrameTree.php'
 	),
 	'Dompdf\\Frame\\FrameTreeIterator' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Frame/FrameTreeIterator.php'
 	),
 	'Dompdf\\Helpers' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Helpers.php'
 	),
 	'Dompdf\\Image\\Cache' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Image/Cache.php'
 	),
 	'Dompdf\\JavascriptEmbedder' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/JavascriptEmbedder.php'
 	),
 	'Dompdf\\LineBox' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/LineBox.php'
 	),
 	'Dompdf\\Options' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Options.php'
 	),
 	'Dompdf\\PhpEvaluator' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/PhpEvaluator.php'
 	),
 	'Dompdf\\Positioner\\Absolute' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Positioner/Absolute.php'
 	),
 	'Dompdf\\Positioner\\AbstractPositioner' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Positioner/AbstractPositioner.php'
 	),
 	'Dompdf\\Positioner\\Block' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Positioner/Block.php'
 	),
 	'Dompdf\\Positioner\\Fixed' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Positioner/Fixed.php'
 	),
 	'Dompdf\\Positioner\\Inline' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Positioner/Inline.php'
 	),
 	'Dompdf\\Positioner\\ListBullet' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Positioner/ListBullet.php'
 	),
 	'Dompdf\\Positioner\\NullPositioner' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Positioner/NullPositioner.php'
 	),
 	'Dompdf\\Positioner\\TableCell' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Positioner/TableCell.php'
 	),
 	'Dompdf\\Positioner\\TableRow' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Positioner/TableRow.php'
 	),
 	'Dompdf\\Renderer' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Renderer.php'
 	),
 	'Dompdf\\Renderer\\AbstractRenderer' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Renderer/AbstractRenderer.php'
 	),
 	'Dompdf\\Renderer\\Block' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Renderer/Block.php'
 	),
 	'Dompdf\\Renderer\\Image' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Renderer/Image.php'
 	),
 	'Dompdf\\Renderer\\Inline' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Renderer/Inline.php'
 	),
 	'Dompdf\\Renderer\\ListBullet' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Renderer/ListBullet.php'
 	),
 	'Dompdf\\Renderer\\TableCell' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Renderer/TableCell.php'
 	),
 	'Dompdf\\Renderer\\TableRowGroup' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Renderer/TableRowGroup.php'
 	),
 	'Dompdf\\Renderer\\Text' => array(
-		'version' => '2.0.3.0',
+		'version' => '2.0.4.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Renderer/Text.php'
 	),
 	'FontLib\\AdobeFontMetrics' => array(
@@ -1203,115 +1203,119 @@ return array(
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-shutdown-handler.php'
 	),
 	'Svg\\CssLength' => array(
-		'version' => '0.5.2.0',
+		'version' => '0.5.3.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/CssLength.php'
 	),
 	'Svg\\DefaultStyle' => array(
-		'version' => '0.5.2.0',
+		'version' => '0.5.3.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/DefaultStyle.php'
 	),
 	'Svg\\Document' => array(
-		'version' => '0.5.2.0',
+		'version' => '0.5.3.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Document.php'
 	),
 	'Svg\\Gradient\\Stop' => array(
-		'version' => '0.5.2.0',
+		'version' => '0.5.3.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Gradient/Stop.php'
 	),
 	'Svg\\Style' => array(
-		'version' => '0.5.2.0',
+		'version' => '0.5.3.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Style.php'
 	),
 	'Svg\\Surface\\CPdf' => array(
-		'version' => '0.5.2.0',
+		'version' => '0.5.3.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Surface/CPdf.php'
 	),
 	'Svg\\Surface\\SurfaceCpdf' => array(
-		'version' => '0.5.2.0',
+		'version' => '0.5.3.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Surface/SurfaceCpdf.php'
 	),
 	'Svg\\Surface\\SurfaceInterface' => array(
-		'version' => '0.5.2.0',
+		'version' => '0.5.3.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Surface/SurfaceInterface.php'
 	),
 	'Svg\\Surface\\SurfacePDFLib' => array(
-		'version' => '0.5.2.0',
+		'version' => '0.5.3.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Surface/SurfacePDFLib.php'
 	),
 	'Svg\\Tag\\AbstractTag' => array(
-		'version' => '0.5.2.0',
+		'version' => '0.5.3.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/AbstractTag.php'
 	),
 	'Svg\\Tag\\Anchor' => array(
-		'version' => '0.5.2.0',
+		'version' => '0.5.3.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Anchor.php'
 	),
 	'Svg\\Tag\\Circle' => array(
-		'version' => '0.5.2.0',
+		'version' => '0.5.3.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Circle.php'
 	),
 	'Svg\\Tag\\ClipPath' => array(
-		'version' => '0.5.2.0',
+		'version' => '0.5.3.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/ClipPath.php'
 	),
 	'Svg\\Tag\\Ellipse' => array(
-		'version' => '0.5.2.0',
+		'version' => '0.5.3.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Ellipse.php'
 	),
 	'Svg\\Tag\\Group' => array(
-		'version' => '0.5.2.0',
+		'version' => '0.5.3.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Group.php'
 	),
 	'Svg\\Tag\\Image' => array(
-		'version' => '0.5.2.0',
+		'version' => '0.5.3.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Image.php'
 	),
 	'Svg\\Tag\\Line' => array(
-		'version' => '0.5.2.0',
+		'version' => '0.5.3.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Line.php'
 	),
 	'Svg\\Tag\\LinearGradient' => array(
-		'version' => '0.5.2.0',
+		'version' => '0.5.3.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/LinearGradient.php'
 	),
 	'Svg\\Tag\\Path' => array(
-		'version' => '0.5.2.0',
+		'version' => '0.5.3.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Path.php'
 	),
 	'Svg\\Tag\\Polygon' => array(
-		'version' => '0.5.2.0',
+		'version' => '0.5.3.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Polygon.php'
 	),
 	'Svg\\Tag\\Polyline' => array(
-		'version' => '0.5.2.0',
+		'version' => '0.5.3.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Polyline.php'
 	),
 	'Svg\\Tag\\RadialGradient' => array(
-		'version' => '0.5.2.0',
+		'version' => '0.5.3.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/RadialGradient.php'
 	),
 	'Svg\\Tag\\Rect' => array(
-		'version' => '0.5.2.0',
+		'version' => '0.5.3.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Rect.php'
 	),
 	'Svg\\Tag\\Shape' => array(
-		'version' => '0.5.2.0',
+		'version' => '0.5.3.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Shape.php'
 	),
 	'Svg\\Tag\\Stop' => array(
-		'version' => '0.5.2.0',
+		'version' => '0.5.3.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Stop.php'
 	),
 	'Svg\\Tag\\StyleTag' => array(
-		'version' => '0.5.2.0',
+		'version' => '0.5.3.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/StyleTag.php'
 	),
+	'Svg\\Tag\\Symbol' => array(
+		'version' => '0.5.3.0',
+		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Symbol.php'
+	),
 	'Svg\\Tag\\Text' => array(
-		'version' => '0.5.2.0',
+		'version' => '0.5.3.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Text.php'
 	),
 	'Svg\\Tag\\UseTag' => array(
-		'version' => '0.5.2.0',
+		'version' => '0.5.3.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/UseTag.php'
 	),
 	'Version_Loader' => array(

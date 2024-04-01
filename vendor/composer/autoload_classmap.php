@@ -320,6 +320,7 @@ return array(
     'Svg\\Tag\\Shape' => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Shape.php',
     'Svg\\Tag\\Stop' => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Stop.php',
     'Svg\\Tag\\StyleTag' => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/StyleTag.php',
+    'Svg\\Tag\\Symbol' => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Symbol.php',
     'Svg\\Tag\\Text' => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Text.php',
     'Svg\\Tag\\UseTag' => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/UseTag.php',
 );
