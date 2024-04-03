@@ -20,6 +20,8 @@ This is an alpha version! The changes listed here are not final.
 
 ### Fixed
 - Data Tools: Cleanup of page logic.
+- Invoices: Fixed display issues for statements with long invoice lists.
+  Invoices: Enhanced the PDF generation for statements.
 - Listviews: Status filters are now case-sensitive.
 - PDF: Improved font reinstallation.
 - Permissions: Allowing users assigned to contacts to view linked objects even if assign ownership is unchecked
