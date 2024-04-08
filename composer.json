@@ -42,7 +42,7 @@
 		]
 	},
 	"config": {
-		"autoloader-suffix": "06c775433a83ed276f0a1d8ac25f93ba_crmⓥ6_4_2_alpha",
+		"autoloader-suffix": "06c775433a83ed276f0a1d8ac25f93ba_crmⓥ6_4_2",
 		"allow-plugins": {
 			"automattic/jetpack-autoloader": true,
 			"automattic/jetpack-composer-plugin": true,
@@ -51,7 +51,7 @@
 	},
 	"require": {
 		"php": ">=7.4",
-		"automattic/jetpack-assets": "^2.1.7-alpha",
+		"automattic/jetpack-assets": "^2.1.7",
 		"automattic/jetpack-autoloader": "^3.0.4",
 		"automattic/jetpack-composer-plugin": "^2.0.1",
 		"automattic/woocommerce": "^3.0",
