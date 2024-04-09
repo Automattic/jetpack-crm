@@ -7,7 +7,7 @@
             "dist": {
                 "type": "path",
                 "url": "/tmp/jetpack-build/Automattic/jetpack-assets",
-                "reference": "cacbb2bb59e4364fbb62c99d1048cfabd5baf18f"
+                "reference": "f67b31d1b95b69a175bdd643c7b2ace5d8e6070d"
             },
             "require": {
                 "automattic/jetpack-constants": "^2.0.1",
@@ -71,12 +71,12 @@
         },
         {
             "name": "automattic/jetpack-autoloader",
-            "version": "3.0.4",
-            "version_normalized": "3.0.4.0",
+            "version": "3.0.5-alpha.1712661581",
+            "version_normalized": "3.0.5.0-alpha1712661581",
             "dist": {
                 "type": "path",
                 "url": "/tmp/jetpack-build/Automattic/jetpack-autoloader",
-                "reference": "2fe7782447966b0f05ab97818c6af20f79a00cd3"
+                "reference": "8318fc40cecf17590f9518600d508d49d3144e28"
             },
             "require": {
                 "composer-plugin-api": "^1.1 || ^2.0",
@@ -84,6 +84,7 @@
             },
             "require-dev": {
                 "automattic/jetpack-changelogger": "^4.1.2",
+                "composer/composer": "^1.1 || ^2.0",
                 "yoast/phpunit-polyfills": "1.1.0"
             },
             "type": "composer-plugin",
@@ -142,7 +143,7 @@
             "dist": {
                 "type": "path",
                 "url": "/tmp/jetpack-build/Automattic/jetpack-composer-plugin",
-                "reference": "5c78748cbf8bbffe8215725450ed66bef1b52a3a"
+                "reference": "9c0c782ec7e10b3e37451938551aca94cef6990f"
             },
             "require": {
                 "composer-plugin-api": "^2.1.0",
@@ -202,7 +203,7 @@
             "dist": {
                 "type": "path",
                 "url": "/tmp/jetpack-build/Automattic/jetpack-constants",
-                "reference": "c01897c932fcb4c0fb8613a9d2c3ee1e848f802c"
+                "reference": "001b1487dfc341153d433ad540ef779e7411c223"
             },
             "require": {
                 "php": ">=7.0"
