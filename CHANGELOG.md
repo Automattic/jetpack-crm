@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 This is an alpha version! The changes listed here are not final.
 
+### Added
+- Readme: Adding information on how to contribute to Jetpack CRM
+
 ### Changed
 - Updated package dependencies.
 
