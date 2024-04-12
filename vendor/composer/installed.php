@@ -13,7 +13,7 @@
         'automattic/jetpack-assets' => array(
             'pretty_version' => '2.1.7',
             'version' => '2.1.7.0',
-            'reference' => '199071f43fa18d442ee06d6476cba4a2c0ee114e',
+            'reference' => 'a01e396b2c8960233c597cc54921306f83c90d1e',
             'type' => 'jetpack-library',
             'install_path' => __DIR__ . '/../../jetpack_vendor/automattic/jetpack-assets',
             'aliases' => array(),
@@ -22,7 +22,7 @@
         'automattic/jetpack-autoloader' => array(
             'pretty_version' => '3.0.5',
             'version' => '3.0.5.0',
-            'reference' => '8e7d40fb2f3812bd9b6b7abb0780c49002ac43a1',
+            'reference' => 'ec699b6f97f95c92a05bf9564c3a1b115dcc9e09',
             'type' => 'composer-plugin',
             'install_path' => __DIR__ . '/../automattic/jetpack-autoloader',
             'aliases' => array(),
@@ -31,7 +31,7 @@
         'automattic/jetpack-composer-plugin' => array(
             'pretty_version' => '2.0.1',
             'version' => '2.0.1.0',
-            'reference' => 'b2af49f7d731f97a3f7c0b1c8a63d3f685c7546d',
+            'reference' => '3556457dfa1d8b9750b604a300c07a5b13d3fb4b',
             'type' => 'composer-plugin',
             'install_path' => __DIR__ . '/../automattic/jetpack-composer-plugin',
             'aliases' => array(),
@@ -40,7 +40,7 @@
         'automattic/jetpack-constants' => array(
             'pretty_version' => '2.0.1',
             'version' => '2.0.1.0',
-            'reference' => '8328091ccfe4fd9ce78ea39a290c4fb925a76a45',
+            'reference' => '969cbda5ff1d67151fbc625d1770f79832f0896a',
             'type' => 'jetpack-library',
             'install_path' => __DIR__ . '/../../jetpack_vendor/automattic/jetpack-constants',
             'aliases' => array(),
