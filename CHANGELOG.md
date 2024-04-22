@@ -11,6 +11,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Added
 - Currency: Added several new currencies to the currency dropdown.
+- Fonts: Updated core Noto Sans, and added new CJK fonts
 - Readme: Adding information on how to contribute to Jetpack CRM
 
 ### Changed
