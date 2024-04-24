@@ -17,6 +17,9 @@ This is an alpha version! The changes listed here are not final.
 ### Changed
 - Updated package dependencies.
 
+### Fixed
+- Listviews: Invoice quick filter status fix to prevent filters not working
+
 ## [6.4.2] - 2024-04-08
 ### Added
 - Dashboard: Sales Funnel now links to contact list view. [#36272]
