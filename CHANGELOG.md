@@ -15,6 +15,7 @@ This is an alpha version! The changes listed here are not final.
 - Readme: Adding information on how to contribute to Jetpack CRM
 
 ### Changed
+- General: use wp_admin_notice function introduced in WP 6.4 to display notices.
 - Updated package dependencies.
 
 ### Fixed
