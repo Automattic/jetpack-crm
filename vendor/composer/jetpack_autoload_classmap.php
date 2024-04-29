@@ -459,7 +459,7 @@ return array(
 		'path'    => $vendorDir . '/automattic/jetpack-composer-plugin/src/class-plugin.php'
 	),
 	'Automattic\\Jetpack\\Constants' => array(
-		'version' => '2.0.1.0',
+		'version' => '2.0.2.0-alpha1714401957',
 		'path'    => $baseDir . '/jetpack_vendor/automattic/jetpack-constants/src/class-constants.php'
 	),
 	'Automattic\\Jetpack_CRM\\Onboarding_Wizard\\Bootstrap' => array(
