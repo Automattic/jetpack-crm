@@ -11,18 +11,18 @@
     ),
     'versions' => array(
         'automattic/jetpack-assets' => array(
-            'pretty_version' => '2.1.9-alpha.1714585396',
-            'version' => '2.1.9.0-alpha1714585396',
-            'reference' => '26a76e5600ea9a54287bbbe45224eb2ba18cace6',
+            'pretty_version' => '2.1.9',
+            'version' => '2.1.9.0',
+            'reference' => 'dc9023a7ee48fdc3766f361e01b6f077a51ade9d',
             'type' => 'jetpack-library',
             'install_path' => __DIR__ . '/../../jetpack_vendor/automattic/jetpack-assets',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
         'automattic/jetpack-autoloader' => array(
-            'pretty_version' => '3.0.7-alpha.1714641327',
-            'version' => '3.0.7.0-alpha1714641327',
-            'reference' => 'ff2f9ad41071219713303999f1cf285e09cfb1a0',
+            'pretty_version' => '3.0.7',
+            'version' => '3.0.7.0',
+            'reference' => '8c365ef2765c83e490747924605ad7f32ae8e84a',
             'type' => 'composer-plugin',
             'install_path' => __DIR__ . '/../automattic/jetpack-autoloader',
             'aliases' => array(),
@@ -31,7 +31,7 @@
         'automattic/jetpack-composer-plugin' => array(
             'pretty_version' => '2.0.1',
             'version' => '2.0.1.0',
-            'reference' => '128d1bee999de33906aecdf389672eab0ce9498b',
+            'reference' => '63dcadc655fd74decf4a7f0ec4f26d078d2d72cf',
             'type' => 'composer-plugin',
             'install_path' => __DIR__ . '/../automattic/jetpack-composer-plugin',
             'aliases' => array(),
@@ -40,7 +40,7 @@
         'automattic/jetpack-constants' => array(
             'pretty_version' => '2.0.2',
             'version' => '2.0.2.0',
-            'reference' => '9e29c34d36718399f3e11317b73f3bec56a73d11',
+            'reference' => '54b6bbd26bdf6f3be3140bbc8417e3217eb217ef',
             'type' => 'jetpack-library',
             'install_path' => __DIR__ . '/../../jetpack_vendor/automattic/jetpack-constants',
             'aliases' => array(),
