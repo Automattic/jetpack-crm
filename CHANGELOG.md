@@ -18,6 +18,9 @@ This is an alpha version! The changes listed here are not final.
 - General: use wp_admin_notice function introduced in WP 6.4 to display notices.
 - Updated package dependencies.
 
+### Removed
+- Contact Form: Updated a comment reference to Grunion_Contact_Form_Plugin to be Contact_Form_Plugin.
+
 ### Fixed
 - Listviews: Invoice quick filter status fix to prevent filters not working
 
