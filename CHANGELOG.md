@@ -13,6 +13,7 @@ This is an alpha version! The changes listed here are not final.
 - Currency: Added several new currencies to the currency dropdown.
 - Fonts: Updated core Noto Sans, and added new CJK fonts
 - Readme: Adding information on how to contribute to Jetpack CRM
+- WooSync: Added new status mapping to avoid creating invoices and transactions from WooCommerce to Jetpack CRM
 
 ### Changed
 - General: use wp_admin_notice function introduced in WP 6.4 to display notices.
