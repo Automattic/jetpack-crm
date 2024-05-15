@@ -1203,119 +1203,119 @@ return array(
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-shutdown-handler.php'
 	),
 	'Svg\\CssLength' => array(
-		'version' => '0.5.3.0',
+		'version' => '0.5.4.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/CssLength.php'
 	),
 	'Svg\\DefaultStyle' => array(
-		'version' => '0.5.3.0',
+		'version' => '0.5.4.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/DefaultStyle.php'
 	),
 	'Svg\\Document' => array(
-		'version' => '0.5.3.0',
+		'version' => '0.5.4.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Document.php'
 	),
 	'Svg\\Gradient\\Stop' => array(
-		'version' => '0.5.3.0',
+		'version' => '0.5.4.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Gradient/Stop.php'
 	),
 	'Svg\\Style' => array(
-		'version' => '0.5.3.0',
+		'version' => '0.5.4.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Style.php'
 	),
 	'Svg\\Surface\\CPdf' => array(
-		'version' => '0.5.3.0',
+		'version' => '0.5.4.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Surface/CPdf.php'
 	),
 	'Svg\\Surface\\SurfaceCpdf' => array(
-		'version' => '0.5.3.0',
+		'version' => '0.5.4.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Surface/SurfaceCpdf.php'
 	),
 	'Svg\\Surface\\SurfaceInterface' => array(
-		'version' => '0.5.3.0',
+		'version' => '0.5.4.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Surface/SurfaceInterface.php'
 	),
 	'Svg\\Surface\\SurfacePDFLib' => array(
-		'version' => '0.5.3.0',
+		'version' => '0.5.4.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Surface/SurfacePDFLib.php'
 	),
 	'Svg\\Tag\\AbstractTag' => array(
-		'version' => '0.5.3.0',
+		'version' => '0.5.4.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/AbstractTag.php'
 	),
 	'Svg\\Tag\\Anchor' => array(
-		'version' => '0.5.3.0',
+		'version' => '0.5.4.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Anchor.php'
 	),
 	'Svg\\Tag\\Circle' => array(
-		'version' => '0.5.3.0',
+		'version' => '0.5.4.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Circle.php'
 	),
 	'Svg\\Tag\\ClipPath' => array(
-		'version' => '0.5.3.0',
+		'version' => '0.5.4.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/ClipPath.php'
 	),
 	'Svg\\Tag\\Ellipse' => array(
-		'version' => '0.5.3.0',
+		'version' => '0.5.4.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Ellipse.php'
 	),
 	'Svg\\Tag\\Group' => array(
-		'version' => '0.5.3.0',
+		'version' => '0.5.4.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Group.php'
 	),
 	'Svg\\Tag\\Image' => array(
-		'version' => '0.5.3.0',
+		'version' => '0.5.4.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Image.php'
 	),
 	'Svg\\Tag\\Line' => array(
-		'version' => '0.5.3.0',
+		'version' => '0.5.4.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Line.php'
 	),
 	'Svg\\Tag\\LinearGradient' => array(
-		'version' => '0.5.3.0',
+		'version' => '0.5.4.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/LinearGradient.php'
 	),
 	'Svg\\Tag\\Path' => array(
-		'version' => '0.5.3.0',
+		'version' => '0.5.4.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Path.php'
 	),
 	'Svg\\Tag\\Polygon' => array(
-		'version' => '0.5.3.0',
+		'version' => '0.5.4.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Polygon.php'
 	),
 	'Svg\\Tag\\Polyline' => array(
-		'version' => '0.5.3.0',
+		'version' => '0.5.4.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Polyline.php'
 	),
 	'Svg\\Tag\\RadialGradient' => array(
-		'version' => '0.5.3.0',
+		'version' => '0.5.4.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/RadialGradient.php'
 	),
 	'Svg\\Tag\\Rect' => array(
-		'version' => '0.5.3.0',
+		'version' => '0.5.4.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Rect.php'
 	),
 	'Svg\\Tag\\Shape' => array(
-		'version' => '0.5.3.0',
+		'version' => '0.5.4.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Shape.php'
 	),
 	'Svg\\Tag\\Stop' => array(
-		'version' => '0.5.3.0',
+		'version' => '0.5.4.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Stop.php'
 	),
 	'Svg\\Tag\\StyleTag' => array(
-		'version' => '0.5.3.0',
+		'version' => '0.5.4.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/StyleTag.php'
 	),
 	'Svg\\Tag\\Symbol' => array(
-		'version' => '0.5.3.0',
+		'version' => '0.5.4.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Symbol.php'
 	),
 	'Svg\\Tag\\Text' => array(
-		'version' => '0.5.3.0',
+		'version' => '0.5.4.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Text.php'
 	),
 	'Svg\\Tag\\UseTag' => array(
-		'version' => '0.5.3.0',
+		'version' => '0.5.4.0',
 		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/UseTag.php'
 	),
 	'Version_Loader' => array(
