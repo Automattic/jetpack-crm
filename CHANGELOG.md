@@ -24,6 +24,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Fixed
 - Invoices: Fix the logo, image not found, issue in the PDF invoices.
+- Invoices: Remove the blank line below the contact name.
 - Listviews: Invoice quick filter status fix to prevent filters not working
 
 ## [6.4.2] - 2024-04-08
