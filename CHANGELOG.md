@@ -23,6 +23,8 @@ This is an alpha version! The changes listed here are not final.
 - Contact Form: Updated a comment reference to Grunion_Contact_Form_Plugin to be Contact_Form_Plugin.
 
 ### Fixed
+- Companies: Increased city field size from 100 to 200
+- Contacts: Increased city field size from 100 to 200
 - Invoices: Fix the logo, image not found, issue in the PDF invoices.
 - Invoices: Remove the blank line below the contact name.
 - Listviews: Invoice quick filter status fix to prevent filters not working
