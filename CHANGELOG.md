@@ -28,6 +28,7 @@ This is an alpha version! The changes listed here are not final.
 - Invoices: Fix the logo, image not found, issue in the PDF invoices.
 - Invoices: Remove the blank line below the contact name.
 - Listviews: Invoice quick filter status fix to prevent filters not working
+- MailPoet Sync: Fixed the percentage difference issue calculating the pending pages to proces.
 
 ## [6.4.2] - 2024-04-08
 ### Added
