@@ -13,6 +13,9 @@ This is an alpha version! The changes listed here are not final.
 - Change codebase to use clsx instead of classnames.
 - Updated package dependencies.
 
+### Removed
+- Remove obsolete PHP version check in `tests/action-skip-test-php.sh`. No change to the plugin itself.
+
 ## [6.4.3] - 2024-05-23
 ### Added
 - Currency: Added several new currencies to the currency dropdown. [#36897]
