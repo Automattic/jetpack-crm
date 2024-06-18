@@ -1,10 +1,6 @@
 /*!
  * Jetpack CRM
  * https://jetpackcrm.com
- *
- * Copyright 2018, ZeroBSCRM.com
- *
- * Date: 24/08/18
  */
 .zbs-tasks-field, .zbs-task-desc textarea, .no-owner, .no-task-date, .task-reminders, .no-contact, .show-on-calendar, .remind_task, #zbs-task-title {
   line-height: 1em;

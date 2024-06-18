@@ -1,12 +1,7 @@
 @charset "UTF-8";
 /*!
  * Jetpack CRM
- * http://www.zerobscrm.com
- * V1.0
- *
- * Copyright 2020 Automattic
- *
- * Date: 02/06/16
+ * https://jetpackcrm.com
  */
 .zbs-admin-label, .zbs-crm-customerfilters-wrap .zbs-crm-customerfilter label {
   font-weight: 800;
@@ -470,12 +465,7 @@
 
 /*!
  * Jetpack CRM
- * http://www.zerobscrm.com
- * V1.1.18
- *
- * Copyright 2020 Automattic
- *
- * Date: 11/10/16
+ * https://jetpackcrm.com
  */
 .users-php .zerobs_customer {
   background: none !important;
@@ -689,15 +679,9 @@ textarea.form-control {
 
 /*!
  * Jetpack CRM
- * http://www.zerobscrm.com
- * V1.0
+ * https://jetpackcrm.com
  *
- * Copyright 2020 Automattic
- *
- * Date: 16/03/16
-
-    This was copied from previous CSS :)
-
+ * This was copied from previous CSS :)
  */
 html {
   font-family: sans-serif;
@@ -5596,12 +5580,7 @@ th.column-ID {
 }
 /*!
  * Jetpack CRM
- * http://www.zerobscrm.com
- * V1.1.18
- *
- * Copyright 2020 Automattic
- *
- * Date: 11/10/16
+ * https://jetpackcrm.com
  */
 div.calendar-table .table-condensed > tbody > tr > td, div.calendar-table .table-condensed > tbody > tr > th, div.calendar-table .table-condensed > tfoot > tr > td, div.calendar-table .table-condensed > tfoot > tr > th, div.calendar-table .table-condensed > thead > tr > td, div.calendar-table .table-condensed > thead > tr > th {
   padding: 0;
@@ -5609,12 +5588,7 @@ div.calendar-table .table-condensed > tbody > tr > td, div.calendar-table .table
 
 /*!
  * Jetpack CRM
- * http://www.zerobscrm.com
- * V1.0
- *
- * Copyright 2020 Automattic
- *
- * Date: 27/06/16
+ * https://jetpackcrm.com
  */
 .mobile #zbscrm-wpadminbar {
   display: none;
@@ -5640,12 +5614,7 @@ body.zbs-fullscreen #wpadminbar, body.zbs-fullscreen #adminmenuback, body.zbs-fu
 
 /*!
  * Jetpack CRM
- * http://www.zerobscrm.com
- * V1.0
- *
- * Copyright 2020 Automattic
- *
- * Date: 02/06/16
+ * https://jetpackcrm.com
  */
 .zbs-crm-customerfilters-wrap {
   background: #f3f3f7;
@@ -5744,12 +5713,7 @@ body.zbs-fullscreen #wpadminbar, body.zbs-fullscreen #adminmenuback, body.zbs-fu
 
 /*!
  * Jetpack CRM
- * http://www.zerobscrm.com
- * V1.0
- *
- * Copyright 2020 Automattic
- *
- * Date: 27/06/16
+ * https://jetpackcrm.com
  */
 /*
 	Global styles for form elements
@@ -5888,12 +5852,7 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
 
 /*!
  * Jetpack CRM
- * http://www.zerobscrm.com
- * V1.1.12
- *
- * Copyright 2020 Automattic
- *
- * Date: 24/07/16
+ * https://jetpackcrm.com
  */
 #wptbpMetaBoxLogs h2 {
   margin: 0;
@@ -6073,12 +6032,7 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
 
 /*!
  * Jetpack CRM
- * http://www.zerobscrm.com
- * V1.0
- *
- * Copyright 2020 Automattic
- *
- * Date: 27/06/16
+ * https://jetpackcrm.com
  */
 .zbstypeaheadwrap {
   position: relative;
@@ -6190,12 +6144,7 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
 
 /*!
  * Jetpack CRM
- * http://www.zerobscrm.com
- * V1.1.18
- *
- * Copyright 2020 Automattic
- *
- * Date: 11/10/16
+ * https://jetpackcrm.com
  */
 .zbsSpinnerBlocker {
   position: absolute;
@@ -6233,12 +6182,7 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
 
 /*!
  * Jetpack CRM
- * http://www.zerobscrm.com
- * V1.0
- *
- * Copyright 2020 Automattic
- *
- * Date: 27/06/16
+ * https://jetpackcrm.com
  */
 .zbs-hide {
   display: none !important;
@@ -6540,12 +6484,7 @@ table#zbsFilesTable td {
 
 /*!
  * Jetpack CRM
- * http://www.zerobscrm.com
- * V1.1.18
- *
- * Copyright 2020 Automattic
- *
- * Date: 11/10/16
+ * https://jetpackcrm.com
  */
 .post-type-zerobs_customer #misc-publishing-actions, .post-type-zerobs_customer #minor-publishing, .post-type-zerobs_company #misc-publishing-actions, .post-type-zerobs_company #minor-publishing, .post-type-zerobs_quote #misc-publishing-actions, .post-type-zerobs_quote #minor-publishing, .post-type-zerobs_invoice #misc-publishing-actions, .post-type-zerobs_invoice #minor-publishing, .post-type-zerobs_transaction #misc-publishing-actions, .post-type-zerobs_transaction #minor-publishing, .post-type-zerobs_quo_template #misc-publishing-actions, .post-type-zerobs_quo_template #minor-publishing {
   display: none;
