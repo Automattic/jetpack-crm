@@ -1039,163 +1039,163 @@ return array(
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-plugins-handler.php'
 	),
 	'Sabberworm\\CSS\\CSSList\\AtRuleBlockList' => array(
-		'version' => '8.5.1.0',
+		'version' => '8.6.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/CSSList/AtRuleBlockList.php'
 	),
 	'Sabberworm\\CSS\\CSSList\\CSSBlockList' => array(
-		'version' => '8.5.1.0',
+		'version' => '8.6.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/CSSList/CSSBlockList.php'
 	),
 	'Sabberworm\\CSS\\CSSList\\CSSList' => array(
-		'version' => '8.5.1.0',
+		'version' => '8.6.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/CSSList/CSSList.php'
 	),
 	'Sabberworm\\CSS\\CSSList\\Document' => array(
-		'version' => '8.5.1.0',
+		'version' => '8.6.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/CSSList/Document.php'
 	),
 	'Sabberworm\\CSS\\CSSList\\KeyFrame' => array(
-		'version' => '8.5.1.0',
+		'version' => '8.6.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/CSSList/KeyFrame.php'
 	),
 	'Sabberworm\\CSS\\Comment\\Comment' => array(
-		'version' => '8.5.1.0',
+		'version' => '8.6.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Comment/Comment.php'
 	),
 	'Sabberworm\\CSS\\Comment\\Commentable' => array(
-		'version' => '8.5.1.0',
+		'version' => '8.6.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Comment/Commentable.php'
 	),
 	'Sabberworm\\CSS\\OutputFormat' => array(
-		'version' => '8.5.1.0',
+		'version' => '8.6.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/OutputFormat.php'
 	),
 	'Sabberworm\\CSS\\OutputFormatter' => array(
-		'version' => '8.5.1.0',
+		'version' => '8.6.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/OutputFormatter.php'
 	),
 	'Sabberworm\\CSS\\Parser' => array(
-		'version' => '8.5.1.0',
+		'version' => '8.6.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Parser.php'
 	),
 	'Sabberworm\\CSS\\Parsing\\Anchor' => array(
-		'version' => '8.5.1.0',
+		'version' => '8.6.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Parsing/Anchor.php'
 	),
 	'Sabberworm\\CSS\\Parsing\\OutputException' => array(
-		'version' => '8.5.1.0',
+		'version' => '8.6.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Parsing/OutputException.php'
 	),
 	'Sabberworm\\CSS\\Parsing\\ParserState' => array(
-		'version' => '8.5.1.0',
+		'version' => '8.6.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Parsing/ParserState.php'
 	),
 	'Sabberworm\\CSS\\Parsing\\SourceException' => array(
-		'version' => '8.5.1.0',
+		'version' => '8.6.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Parsing/SourceException.php'
 	),
 	'Sabberworm\\CSS\\Parsing\\UnexpectedEOFException' => array(
-		'version' => '8.5.1.0',
+		'version' => '8.6.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Parsing/UnexpectedEOFException.php'
 	),
 	'Sabberworm\\CSS\\Parsing\\UnexpectedTokenException' => array(
-		'version' => '8.5.1.0',
+		'version' => '8.6.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Parsing/UnexpectedTokenException.php'
 	),
 	'Sabberworm\\CSS\\Property\\AtRule' => array(
-		'version' => '8.5.1.0',
+		'version' => '8.6.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Property/AtRule.php'
 	),
 	'Sabberworm\\CSS\\Property\\CSSNamespace' => array(
-		'version' => '8.5.1.0',
+		'version' => '8.6.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Property/CSSNamespace.php'
 	),
 	'Sabberworm\\CSS\\Property\\Charset' => array(
-		'version' => '8.5.1.0',
+		'version' => '8.6.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Property/Charset.php'
 	),
 	'Sabberworm\\CSS\\Property\\Import' => array(
-		'version' => '8.5.1.0',
+		'version' => '8.6.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Property/Import.php'
 	),
 	'Sabberworm\\CSS\\Property\\KeyframeSelector' => array(
-		'version' => '8.5.1.0',
+		'version' => '8.6.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Property/KeyframeSelector.php'
 	),
 	'Sabberworm\\CSS\\Property\\Selector' => array(
-		'version' => '8.5.1.0',
+		'version' => '8.6.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Property/Selector.php'
 	),
 	'Sabberworm\\CSS\\Renderable' => array(
-		'version' => '8.5.1.0',
+		'version' => '8.6.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Renderable.php'
 	),
 	'Sabberworm\\CSS\\RuleSet\\AtRuleSet' => array(
-		'version' => '8.5.1.0',
+		'version' => '8.6.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/RuleSet/AtRuleSet.php'
 	),
 	'Sabberworm\\CSS\\RuleSet\\DeclarationBlock' => array(
-		'version' => '8.5.1.0',
+		'version' => '8.6.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/RuleSet/DeclarationBlock.php'
 	),
 	'Sabberworm\\CSS\\RuleSet\\RuleSet' => array(
-		'version' => '8.5.1.0',
+		'version' => '8.6.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/RuleSet/RuleSet.php'
 	),
 	'Sabberworm\\CSS\\Rule\\Rule' => array(
-		'version' => '8.5.1.0',
+		'version' => '8.6.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Rule/Rule.php'
 	),
 	'Sabberworm\\CSS\\Settings' => array(
-		'version' => '8.5.1.0',
+		'version' => '8.6.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Settings.php'
 	),
 	'Sabberworm\\CSS\\Value\\CSSFunction' => array(
-		'version' => '8.5.1.0',
+		'version' => '8.6.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Value/CSSFunction.php'
 	),
 	'Sabberworm\\CSS\\Value\\CSSString' => array(
-		'version' => '8.5.1.0',
+		'version' => '8.6.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Value/CSSString.php'
 	),
 	'Sabberworm\\CSS\\Value\\CalcFunction' => array(
-		'version' => '8.5.1.0',
+		'version' => '8.6.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Value/CalcFunction.php'
 	),
 	'Sabberworm\\CSS\\Value\\CalcRuleValueList' => array(
-		'version' => '8.5.1.0',
+		'version' => '8.6.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Value/CalcRuleValueList.php'
 	),
 	'Sabberworm\\CSS\\Value\\Color' => array(
-		'version' => '8.5.1.0',
+		'version' => '8.6.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Value/Color.php'
 	),
 	'Sabberworm\\CSS\\Value\\LineName' => array(
-		'version' => '8.5.1.0',
+		'version' => '8.6.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Value/LineName.php'
 	),
 	'Sabberworm\\CSS\\Value\\PrimitiveValue' => array(
-		'version' => '8.5.1.0',
+		'version' => '8.6.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Value/PrimitiveValue.php'
 	),
 	'Sabberworm\\CSS\\Value\\RuleValueList' => array(
-		'version' => '8.5.1.0',
+		'version' => '8.6.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Value/RuleValueList.php'
 	),
 	'Sabberworm\\CSS\\Value\\Size' => array(
-		'version' => '8.5.1.0',
+		'version' => '8.6.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Value/Size.php'
 	),
 	'Sabberworm\\CSS\\Value\\URL' => array(
-		'version' => '8.5.1.0',
+		'version' => '8.6.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Value/URL.php'
 	),
 	'Sabberworm\\CSS\\Value\\Value' => array(
-		'version' => '8.5.1.0',
+		'version' => '8.6.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Value/Value.php'
 	),
 	'Sabberworm\\CSS\\Value\\ValueList' => array(
-		'version' => '8.5.1.0',
+		'version' => '8.6.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Value/ValueList.php'
 	),
 	'Shutdown_Handler' => array(
