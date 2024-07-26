@@ -19,6 +19,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Removed
 - Remove obsolete PHP version check in `tests/action-skip-test-php.sh`. No change to the plugin itself.
+- Remove unused MailPoet use statements.
 
 ### Fixed
 - Bump version provided via API
