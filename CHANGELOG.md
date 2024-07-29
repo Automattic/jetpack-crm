@@ -23,6 +23,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Fixed
 - Bump version provided via API
+- WooSync: Fix a warning message on sync and fatal error when a fee value is not a number
 
 ## [6.4.3] - 2024-05-23
 ### Added
