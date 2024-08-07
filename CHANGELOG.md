@@ -5,26 +5,13 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [6.4.4-alpha] - unreleased
-
-This is an alpha version! The changes listed here are not final.
-
-### Added
-- Consolidate and expand changelog history
-
-### Changed
-- Change codebase to use clsx instead of classnames.
-- General: indicate compatibility with the upcoming version of WordPress - 6.6.
-- Updated package dependencies.
+## [6.4.4] - 2024-08-07
 
 ### Removed
-- Remove obsolete PHP version check in `tests/action-skip-test-php.sh`. No change to the plugin itself.
-- Remove unused MailPoet use statements.
+- MailPoet: Remove unused MailPoet use statements. [#38453]
 
 ### Fixed
-- Bump version provided via API
-- Lossless image optimization of images in projects/plugins [subdirectories from a* through social]
-- WooSync: Fix a warning message on sync and fatal error when a fee value is not a number
+- WooSync: Fix a warning message on sync and fatal error when a fee value is not a number [#38570]
 
 ## [6.4.3] - 2024-05-23
 ### Added
@@ -3614,7 +3601,7 @@ This is an alpha version! The changes listed here are not final.
 - Tested with extensions: WooCommerce CRM Sync, PayPal CRM Sync, CSV Importer, ZBS CRM Mail Campaigns, and CRM Sales Dashboard
 
 [5.5.4-a.1]: https://github.com/Automattic/jetpack-crm/compare/v5.5.3...v5.5.4-a.1
-[6.4.4-alpha]: https://github.com/Automattic/jetpack-crm/compare/6.4.3...6.4.4-alpha
+[6.4.4]: https://github.com/Automattic/jetpack-crm/compare/6.4.3...6.4.4
 [6.4.3]: https://github.com/Automattic/jetpack-crm/compare/6.4.2...6.4.3
 [6.4.2]: https://github.com/Automattic/jetpack-crm/compare/6.4.1...6.4.2
 [6.4.1]: https://github.com/Automattic/jetpack-crm/compare/6.4.0...6.4.1
