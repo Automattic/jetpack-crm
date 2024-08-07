@@ -117,6 +117,7 @@ return array(
     'Automattic\\Jetpack\\Composer\\Manager' => $vendorDir . '/automattic/jetpack-composer-plugin/src/class-manager.php',
     'Automattic\\Jetpack\\Composer\\Plugin' => $vendorDir . '/automattic/jetpack-composer-plugin/src/class-plugin.php',
     'Automattic\\Jetpack\\Constants' => $baseDir . '/jetpack_vendor/automattic/jetpack-constants/src/class-constants.php',
+    'Automattic\\Jetpack\\Script_Data' => $baseDir . '/jetpack_vendor/automattic/jetpack-assets/src/class-script-data.php',
     'Automattic\\Jetpack_CRM\\Onboarding_Wizard\\Bootstrap' => $baseDir . '/src/onboarding-wizard/class-bootstrap.php',
     'Automattic\\WooCommerce\\Client' => $vendorDir . '/automattic/woocommerce/src/WooCommerce/Client.php',
     'Automattic\\WooCommerce\\HttpClient\\BasicAuth' => $vendorDir . '/automattic/woocommerce/src/WooCommerce/HttpClient/BasicAuth.php',

@@ -2,12 +2,12 @@
     "packages": [
         {
             "name": "automattic/jetpack-assets",
-            "version": "2.2.0",
-            "version_normalized": "2.2.0.0",
+            "version": "2.3.0-alpha.1723037547",
+            "version_normalized": "2.3.0.0-alpha1723037547",
             "dist": {
                 "type": "path",
                 "url": "/tmp/jetpack-build/Automattic/jetpack-assets",
-                "reference": "b2e4486838340873674f46f40e4fcfdf4b69ea99"
+                "reference": "56b1ed6be171890fdbd4e76fbfaadb790b2a6e1b"
             },
             "require": {
                 "automattic/jetpack-constants": "^2.0.3",
@@ -31,7 +31,7 @@
                     "link-template": "https://github.com/Automattic/jetpack-assets/compare/v${old}...v${new}"
                 },
                 "branch-alias": {
-                    "dev-trunk": "2.2.x-dev"
+                    "dev-trunk": "2.3.x-dev"
                 }
             },
             "installation-source": "dist",
@@ -76,7 +76,7 @@
             "dist": {
                 "type": "path",
                 "url": "/tmp/jetpack-build/Automattic/jetpack-autoloader",
-                "reference": "5853f348dbd213aec560d3fd5005964bb58693e4"
+                "reference": "086adb617770c5fe9570d9a3c8fa969a089468be"
             },
             "require": {
                 "composer-plugin-api": "^1.1 || ^2.0",
@@ -143,7 +143,7 @@
             "dist": {
                 "type": "path",
                 "url": "/tmp/jetpack-build/Automattic/jetpack-composer-plugin",
-                "reference": "099916255c43848ec088b9f5f14b3f45c115bfcb"
+                "reference": "4f44a0e43d644ae9280f68797b51cb01f1b33a47"
             },
             "require": {
                 "composer-plugin-api": "^2.1.0",
@@ -203,7 +203,7 @@
             "dist": {
                 "type": "path",
                 "url": "/tmp/jetpack-build/Automattic/jetpack-constants",
-                "reference": "6cb41f000b402f0794944847bf3c6f8160a707b0"
+                "reference": "e97b966dbf7ec847c763dc17f432e3b0991901dd"
             },
             "require": {
                 "php": ">=7.0"
