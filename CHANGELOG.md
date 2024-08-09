@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 This is an alpha version! The changes listed here are not final.
 
+### Removed
+- Tests: Removed react-test-renderer.
+
 ## [6.4.4] - 2024-08-07
 ### Removed
 - MailPoet: Remove unused MailPoet use statements. [#38453]
