@@ -19,11 +19,15 @@ return array(
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-autoloader-locator.php'
 	),
 	'Automattic\\Jetpack\\Assets' => array(
-		'version' => '2.3.0.0',
+		'version' => '2.3.1.0-alpha1723460403',
 		'path'    => $baseDir . '/jetpack_vendor/automattic/jetpack-assets/src/class-assets.php'
 	),
+	'Automattic\\Jetpack\\Assets\\Script_Data' => array(
+		'version' => '2.3.1.0-alpha1723460403',
+		'path'    => $baseDir . '/jetpack_vendor/automattic/jetpack-assets/src/class-script-data.php'
+	),
 	'Automattic\\Jetpack\\Assets\\Semver' => array(
-		'version' => '2.3.0.0',
+		'version' => '2.3.1.0-alpha1723460403',
 		'path'    => $baseDir . '/jetpack_vendor/automattic/jetpack-assets/src/class-semver.php'
 	),
 	'Automattic\\Jetpack\\Autoloader\\AutoloadFileWriter' => array(
@@ -461,10 +465,6 @@ return array(
 	'Automattic\\Jetpack\\Constants' => array(
 		'version' => '2.0.3.0',
 		'path'    => $baseDir . '/jetpack_vendor/automattic/jetpack-constants/src/class-constants.php'
-	),
-	'Automattic\\Jetpack\\Script_Data' => array(
-		'version' => '2.3.0.0',
-		'path'    => $baseDir . '/jetpack_vendor/automattic/jetpack-assets/src/class-script-data.php'
 	),
 	'Automattic\\Jetpack_CRM\\Onboarding_Wizard\\Bootstrap' => array(
 		'version' => 'dev-trunk',
