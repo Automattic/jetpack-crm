@@ -15,6 +15,9 @@ This is an alpha version! The changes listed here are not final.
 ### Removed
 - Tests: Removed react-test-renderer.
 
+### Fixed
+- Lossless image optimization for images (should improve performance with no visible changes).
+
 ## [6.4.4] - 2024-08-07
 ### Removed
 - MailPoet: Remove unused MailPoet use statements. [#38453]
