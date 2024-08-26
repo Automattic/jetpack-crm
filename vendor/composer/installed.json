@@ -7,7 +7,7 @@
             "dist": {
                 "type": "path",
                 "url": "/tmp/jetpack-build/Automattic/jetpack-assets",
-                "reference": "929e3c3e875c830e42376739ce8c25a0a708dada"
+                "reference": "559b3dca5d87d2ad7b0460309e2b34773202d913"
             },
             "require": {
                 "automattic/jetpack-constants": "^2.0.4",
@@ -71,12 +71,12 @@
         },
         {
             "name": "automattic/jetpack-autoloader",
-            "version": "3.0.10-alpha.1724273335",
-            "version_normalized": "3.0.10.0-alpha1724273335",
+            "version": "3.0.10",
+            "version_normalized": "3.0.10.0",
             "dist": {
                 "type": "path",
                 "url": "/tmp/jetpack-build/Automattic/jetpack-autoloader",
-                "reference": "7a0ff628e1f932773b0a7d9e11d073854e86bb4e"
+                "reference": "b39c2ab2f8a724c0675221c88ad2eb98c34a06cd"
             },
             "require": {
                 "composer-plugin-api": "^1.1 || ^2.0",
@@ -138,12 +138,12 @@
         },
         {
             "name": "automattic/jetpack-composer-plugin",
-            "version": "2.0.3-alpha.1724273335",
-            "version_normalized": "2.0.3.0-alpha1724273335",
+            "version": "2.0.3",
+            "version_normalized": "2.0.3.0",
             "dist": {
                 "type": "path",
                 "url": "/tmp/jetpack-build/Automattic/jetpack-composer-plugin",
-                "reference": "21a51f279c556709468ac71d1bfe2089ac81b081"
+                "reference": "e4f7de226ab02ee245061d90b7afffd314241f11"
             },
             "require": {
                 "composer-plugin-api": "^2.1.0",
@@ -203,7 +203,7 @@
             "dist": {
                 "type": "path",
                 "url": "/tmp/jetpack-build/Automattic/jetpack-constants",
-                "reference": "3444722ffa01306716e2ee0b8a0b32c7f7d59007"
+                "reference": "42b79768b1365ab56506ce20e197e2933fbe4aab"
             },
             "require": {
                 "php": ">=7.0"
