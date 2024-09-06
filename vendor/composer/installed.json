@@ -7,7 +7,7 @@
             "dist": {
                 "type": "path",
                 "url": "/tmp/jetpack-build/Automattic/jetpack-assets",
-                "reference": "536d6391fce0cda4f35bc7b886d554ef7e5136e9"
+                "reference": "c4feb1cfdcb86d518ec7baa2f3a67df1e6946afd"
             },
             "require": {
                 "automattic/jetpack-constants": "^2.0.4",
@@ -71,12 +71,12 @@
         },
         {
             "name": "automattic/jetpack-autoloader",
-            "version": "3.0.10",
-            "version_normalized": "3.0.10.0",
+            "version": "3.1.0-alpha.1725630980",
+            "version_normalized": "3.1.0.0-alpha1725630980",
             "dist": {
                 "type": "path",
                 "url": "/tmp/jetpack-build/Automattic/jetpack-autoloader",
-                "reference": "d88e699c53fe05f0ae0b6136e35d046e7ceaffdf"
+                "reference": "f3e2ba0688934772115ee05038cda48dbad3c3e4"
             },
             "require": {
                 "composer-plugin-api": "^1.1 || ^2.0",
@@ -99,7 +99,7 @@
                     "::VERSION": "src/AutoloadGenerator.php"
                 },
                 "branch-alias": {
-                    "dev-trunk": "3.0.x-dev"
+                    "dev-trunk": "3.1.x-dev"
                 }
             },
             "installation-source": "dist",
@@ -143,7 +143,7 @@
             "dist": {
                 "type": "path",
                 "url": "/tmp/jetpack-build/Automattic/jetpack-composer-plugin",
-                "reference": "31f09ae9a703ed5d9c8406da35a7cf3758b597ea"
+                "reference": "99605094aed456e8dd63b5187da85605a9198c92"
             },
             "require": {
                 "composer-plugin-api": "^2.1.0",
@@ -203,7 +203,7 @@
             "dist": {
                 "type": "path",
                 "url": "/tmp/jetpack-build/Automattic/jetpack-constants",
-                "reference": "c2a735575a1dd075dfb14be1e9b50bd6674b8c06"
+                "reference": "c7d7410581ea34d42287bf0e702bb5352aba2209"
             },
             "require": {
                 "php": ">=7.0"
