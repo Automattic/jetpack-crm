@@ -5,7 +5,7 @@
  * @package automattic/jetpack-autoloader
  */
 
-namespace Automattic\Jetpack\Autoloader\jp06c775433a83ed276f0a1d8ac25f93ba_crmⓥ6_4_5_alpha\al3_1_0;
+namespace Automattic\Jetpack\Autoloader\jp06c775433a83ed276f0a1d8ac25f93ba_crmⓥ6_4_5_alpha\al3_1_1_alpha;
 
  // phpcs:ignore
 
@@ -143,7 +143,7 @@ class Version_Loader {
 	 * @return array|null $data The version and path path to the file if found, null otherwise.
 	 */
 	private function find_psr4_file( $class_name ) {
-		if ( ! isset( $this->psr4_map ) ) {
+		if ( empty( $this->psr4_map ) ) {
 			return null;
 		}
 
