@@ -11,6 +11,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Changed
 - Improve spec compliance of CSV output: `\"` sequences will now be correctly escaped by doubling the `"`.
+- Only include `wp-polyfill` as a script dependency when needed.
 - Updated package dependencies.
 
 ### Removed
