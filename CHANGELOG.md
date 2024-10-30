@@ -19,6 +19,7 @@ This is an alpha version! The changes listed here are not final.
 - Tests: Removed react-test-renderer.
 
 ### Fixed
+- Fixed a fatal error that occurred when exporting contacts with a custom field that had the same name as a linked field (e.g., 'company').
 - Lossless image optimization for images (should improve performance with no visible changes).
 - Migrations: Improve WP Playground compatibility.
 - Revert recent SVG image optimizations.
