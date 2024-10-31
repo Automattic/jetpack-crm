@@ -5,12 +5,12 @@
 	"license": "GPL-2.0-or-later",
 	"require": {
 		"php": ">=7.0",
-		"automattic/jetpack-constants": "^2.0.4"
+		"automattic/jetpack-constants": "^2.0.5-alpha"
 	},
 	"require-dev": {
 		"brain/monkey": "2.6.1",
 		"yoast/phpunit-polyfills": "^1.1.1",
-		"automattic/jetpack-changelogger": "^4.2.7",
+		"automattic/jetpack-changelogger": "^4.2.8-alpha",
 		"wikimedia/testing-access-wrapper": "^1.0 || ^2.0 || ^3.0"
 	},
 	"suggest": {
@@ -33,6 +33,10 @@
 		],
 		"phpunit": [
 			"./vendor/phpunit/phpunit/phpunit --colors=always"
+		],
+		"test-coverage": [
+			"php -dpcov.directory=. ./vendor/bin/phpunit --coverage-clover \"$COVERAGE_DIR/php/clover.xml\"",
+			"pnpm run test-coverage"
 		],
 		"test-js": [
 			"pnpm run test"
