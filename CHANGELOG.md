@@ -24,6 +24,7 @@ This is an alpha version! The changes listed here are not final.
 ### Fixed
 - Dashboard: Fixed an issue where the CRM contacts graph displayed incorrect values in some instances
 - Fixed a fatal error that occurred when exporting contacts with a custom field that had the same name as a linked field (e.g., 'company').
+- Fix PHPUnit coverage warnings.
 - Lossless image optimization for images (should improve performance with no visible changes).
 - Migrations: Improve WP Playground compatibility.
 - Revert recent SVG image optimizations.
