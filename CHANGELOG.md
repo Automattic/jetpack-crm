@@ -19,6 +19,7 @@ This is an alpha version! The changes listed here are not final.
 - Updated package dependencies.
 
 ### Removed
+- General: Remove unused legacy code.
 - General: Update minimum WordPress version to 6.6.
 - Tests: Removed react-test-renderer.
 
