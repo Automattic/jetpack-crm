@@ -26,6 +26,7 @@ This is an alpha version! The changes listed here are not final.
 ### Fixed
 - Code: Ensure we use Jetpack Autoloader throughout the codebase.
 - Dashboard: Fixed an issue where the CRM contacts graph displayed incorrect values in some instances
+- Dashboard: Show correct avatar for recent activity.
 - Fixed a fatal error that occurred when exporting contacts with a custom field that had the same name as a linked field (e.g., 'company').
 - Fix PHPUnit coverage warnings.
 - Lossless image optimization for images (should improve performance with no visible changes).
