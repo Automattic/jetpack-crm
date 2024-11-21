@@ -16,6 +16,7 @@ This is an alpha version! The changes listed here are not final.
 - General: indicate compatibility with the upcoming version of WordPress - 6.7.
 - Improve spec compliance of CSV output: `\"` sequences will now be correctly escaped by doubling the `"`.
 - Only include `wp-polyfill` as a script dependency when needed.
+- Updated dependencies.
 - Updated package dependencies.
 
 ### Removed

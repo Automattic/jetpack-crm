@@ -65,9 +65,9 @@
             'dev_requirement' => false,
         ),
         'dompdf/dompdf' => array(
-            'pretty_version' => 'v2.0.4',
-            'version' => '2.0.4.0',
-            'reference' => '093f2d9739cec57428e39ddadedfd4f3ae862c0f',
+            'pretty_version' => 'v2.0.8',
+            'version' => '2.0.8.0',
+            'reference' => 'c20247574601700e1f7c8dab39310fca1964dc52',
             'type' => 'library',
             'install_path' => __DIR__ . '/../dompdf/dompdf',
             'aliases' => array(),
