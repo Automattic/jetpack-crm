@@ -455,11 +455,11 @@ return array(
 		'path'    => $baseDir . '/src/rest-api/v4/class-rest-contacts-controller.php'
 	),
 	'Automattic\\Jetpack\\Composer\\Manager' => array(
-		'version' => '3.0.0.0',
+		'version' => '4.0.0.0-alpha1732548032',
 		'path'    => $vendorDir . '/automattic/jetpack-composer-plugin/src/class-manager.php'
 	),
 	'Automattic\\Jetpack\\Composer\\Plugin' => array(
-		'version' => '3.0.0.0',
+		'version' => '4.0.0.0-alpha1732548032',
 		'path'    => $vendorDir . '/automattic/jetpack-composer-plugin/src/class-plugin.php'
 	),
 	'Automattic\\Jetpack\\Constants' => array(
