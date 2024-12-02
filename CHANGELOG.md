@@ -13,6 +13,7 @@ This is an alpha version! The changes listed here are not final.
 - Enable test coverage.
 
 ### Changed
+- General: Enable JavaScript linting.
 - General: indicate compatibility with the upcoming version of WordPress - 6.7.
 - Improve spec compliance of CSV output: `\"` sequences will now be correctly escaped by doubling the `"`.
 - Only include `wp-polyfill` as a script dependency when needed.
@@ -22,6 +23,8 @@ This is an alpha version! The changes listed here are not final.
 ### Removed
 - General: Remove unused legacy code.
 - General: Update minimum WordPress version to 6.6.
+- Removed legacy beta feedback code.
+- Removed old build file.
 - Tests: Removed react-test-renderer.
 
 ### Fixed

@@ -1,0 +1,9 @@
+/*!
+ * Jetpack CRM
+ * https://jetpackcrm.com
+ * V1.0
+ *
+ * Copyright 2020 Automattic
+ *
+ * Date: 17/06/2016
+ */
