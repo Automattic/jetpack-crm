@@ -13,6 +13,7 @@ This is an alpha version! The changes listed here are not final.
 - Enable test coverage.
 
 ### Changed
+- API-events: Add the pagination result sort/order capability to the endpoint.
 - fixes some issues with the white label
 - General: Enable JavaScript linting.
 - General: indicate compatibility with the upcoming version of WordPress - 6.7.
