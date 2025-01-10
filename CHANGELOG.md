@@ -5,42 +5,23 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [7.0.0-alpha] - unreleased
-
-This is an alpha version! The changes listed here are not final.
-
-### Added
-- Enable test coverage.
-
-### Changed
-- API-events: Add the pagination result sort/order capability to the endpoint.
-- fixes some issues with the white label
-- General: Enable JavaScript linting.
-- General: indicate compatibility with the upcoming version of WordPress - 6.7.
-- Improve spec compliance of CSV output: `\"` sequences will now be correctly escaped by doubling the `"`.
-- Only include `wp-polyfill` as a script dependency when needed.
-- Updated dependencies.
-- Updated package dependencies.
+## [6.5.0] - 2025-01-10
 
 ### Removed
-- General: Remove unused legacy code.
-- General: Update minimum WordPress version to 6.6.
-- Removed legacy beta feedback code.
-- Removed old build file.
-- Tests: Removed react-test-renderer.
+- General: Remove unused legacy code. [#40267]
+
+### Changed
+- General: Update minimum WordPress version to 6.6. [#40146]
+- API: Allow sort order in endpoints. [#38838]
 
 ### Fixed
-- Code: Ensure we use Jetpack Autoloader throughout the codebase.
-- CRM: Fix bug which caused duplicated queries to run.
-- Dashboard: Fixed an issue where the CRM contacts graph displayed incorrect values in some instances
-- Dashboard: Show correct avatar for recent activity.
-- Fixed a fatal error that occurred when exporting contacts with a custom field that had the same name as a linked field (e.g., 'company').
-- Fixed lints following ESLint rule changes for TS
-- Fixing bugs in the default PDF template and other fixes. Created a new template to maintain backwards compatibility
-- Fix PHPUnit coverage warnings.
-- Lossless image optimization for images (should improve performance with no visible changes).
-- Migrations: Improve WP Playground compatibility.
-- Revert recent SVG image optimizations.
+- CRM: Fix bug which caused duplicated queries to run. [#40711]
+- CRM: Fix a fatal error that occurred when exporting contacts with a custom field that had the same name as a linked field (e.g., 'company'). [#38851]
+- Dashboard: Fix an issue where the CRM contacts graph displayed incorrect values in some instances. [#38316]
+- Dashboard: Show correct avatar for recent activity. [#40280]
+- Invoices: Fix bugs in the default PDF template and other fixes. Created a new template to maintain backwards compatibility. [#40514]
+- Code: Ensure we use Jetpack Autoloader throughout the codebase. [#40061]
+- Migrations: Improve WP Playground compatibility. [#39956]
 
 ## [6.4.4] - 2024-08-07
 ### Removed
@@ -3637,7 +3618,7 @@ This is an alpha version! The changes listed here are not final.
 - Tested with extensions: WooCommerce CRM Sync, PayPal CRM Sync, CSV Importer, ZBS CRM Mail Campaigns, and CRM Sales Dashboard
 
 [5.5.4-a.1]: https://github.com/Automattic/jetpack-crm/compare/v5.5.3...v5.5.4-a.1
-[7.0.0-alpha]: https://github.com/Automattic/jetpack-crm/compare/6.4.4...7.0.0-alpha
+[6.5.0]: https://github.com/Automattic/jetpack-crm/compare/6.4.4...6.5.0
 [6.4.4]: https://github.com/Automattic/jetpack-crm/compare/6.4.3...6.4.4
 [6.4.3]: https://github.com/Automattic/jetpack-crm/compare/6.4.2...6.4.3
 [6.4.2]: https://github.com/Automattic/jetpack-crm/compare/6.4.1...6.4.2
