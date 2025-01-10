@@ -135,7 +135,7 @@
 #zerobs-invoice-edit-box #zbs-invoice-partial-payments .partial-row .invoice-discount-total,
 #zerobs-invoice-edit-box #zbs-invoice-partial-payments .due-row .invoice-discount-total,
 #zerobs-invoice-edit-box #zbs-invoice-partial-payments .partial-row-tab .invoice-discount-total {
-  margin-top: -6px;
+  margin-top: -9px;
 }
 .post-type-zerobs_invoice .invoice-grand-total-wrapper .partial-row #invoice_discount_total, .post-type-zerobs_invoice .invoice-grand-total-wrapper .due-row #invoice_discount_total, .post-type-zerobs_invoice .invoice-grand-total-wrapper .partial-row-tab #invoice_discount_total, .post-type-zerobs_invoice #zbs-invoice-partial-payments .partial-row #invoice_discount_total, .post-type-zerobs_invoice #zbs-invoice-partial-payments .due-row #invoice_discount_total, .post-type-zerobs_invoice #zbs-invoice-partial-payments .partial-row-tab #invoice_discount_total,
 #zerobs-invoice-edit-box .invoice-grand-total-wrapper .partial-row #invoice_discount_total,
@@ -145,6 +145,17 @@
 #zerobs-invoice-edit-box #zbs-invoice-partial-payments .due-row #invoice_discount_total,
 #zerobs-invoice-edit-box #zbs-invoice-partial-payments .partial-row-tab #invoice_discount_total {
   float: left;
+  width: 32% !important;
+}
+.post-type-zerobs_invoice .invoice-grand-total-wrapper .partial-row #invoice_postage_total, .post-type-zerobs_invoice .invoice-grand-total-wrapper .due-row #invoice_postage_total, .post-type-zerobs_invoice .invoice-grand-total-wrapper .partial-row-tab #invoice_postage_total, .post-type-zerobs_invoice #zbs-invoice-partial-payments .partial-row #invoice_postage_total, .post-type-zerobs_invoice #zbs-invoice-partial-payments .due-row #invoice_postage_total, .post-type-zerobs_invoice #zbs-invoice-partial-payments .partial-row-tab #invoice_postage_total,
+#zerobs-invoice-edit-box .invoice-grand-total-wrapper .partial-row #invoice_postage_total,
+#zerobs-invoice-edit-box .invoice-grand-total-wrapper .due-row #invoice_postage_total,
+#zerobs-invoice-edit-box .invoice-grand-total-wrapper .partial-row-tab #invoice_postage_total,
+#zerobs-invoice-edit-box #zbs-invoice-partial-payments .partial-row #invoice_postage_total,
+#zerobs-invoice-edit-box #zbs-invoice-partial-payments .due-row #invoice_postage_total,
+#zerobs-invoice-edit-box #zbs-invoice-partial-payments .partial-row-tab #invoice_postage_total {
+  width: 32%;
+  float: right;
 }
 .post-type-zerobs_invoice .invoice-grand-total-wrapper .partial-row .half, .post-type-zerobs_invoice .invoice-grand-total-wrapper .due-row .half, .post-type-zerobs_invoice .invoice-grand-total-wrapper .partial-row-tab .half, .post-type-zerobs_invoice #zbs-invoice-partial-payments .partial-row .half, .post-type-zerobs_invoice #zbs-invoice-partial-payments .due-row .half, .post-type-zerobs_invoice #zbs-invoice-partial-payments .partial-row-tab .half,
 #zerobs-invoice-edit-box .invoice-grand-total-wrapper .partial-row .half,
@@ -256,12 +267,19 @@
 .post-type-zerobs_invoice .invoice-grand-total-wrapper .inv-totals .total-row .invoice-discount-total, .post-type-zerobs_invoice #zbs-invoice-partial-payments .inv-totals .total-row .invoice-discount-total,
 #zerobs-invoice-edit-box .invoice-grand-total-wrapper .inv-totals .total-row .invoice-discount-total,
 #zerobs-invoice-edit-box #zbs-invoice-partial-payments .inv-totals .total-row .invoice-discount-total {
-  margin-top: -6px;
+  margin-top: -9px;
 }
 .post-type-zerobs_invoice .invoice-grand-total-wrapper .inv-totals .total-row #invoice_discount_total, .post-type-zerobs_invoice #zbs-invoice-partial-payments .inv-totals .total-row #invoice_discount_total,
 #zerobs-invoice-edit-box .invoice-grand-total-wrapper .inv-totals .total-row #invoice_discount_total,
 #zerobs-invoice-edit-box #zbs-invoice-partial-payments .inv-totals .total-row #invoice_discount_total {
   float: left;
+  width: 32% !important;
+}
+.post-type-zerobs_invoice .invoice-grand-total-wrapper .inv-totals .total-row #invoice_postage_total, .post-type-zerobs_invoice #zbs-invoice-partial-payments .inv-totals .total-row #invoice_postage_total,
+#zerobs-invoice-edit-box .invoice-grand-total-wrapper .inv-totals .total-row #invoice_postage_total,
+#zerobs-invoice-edit-box #zbs-invoice-partial-payments .inv-totals .total-row #invoice_postage_total {
+  width: 32%;
+  float: right;
 }
 .post-type-zerobs_invoice .invoice-grand-total-wrapper .inv-totals .total-row .half, .post-type-zerobs_invoice #zbs-invoice-partial-payments .inv-totals .total-row .half,
 #zerobs-invoice-edit-box .invoice-grand-total-wrapper .inv-totals .total-row .half,

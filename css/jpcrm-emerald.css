@@ -593,6 +593,15 @@ jpcrm-listview-header#jpcrm-listview-header input[type=search] {
   text-align: left;
   padding: 10px;
 }
+.jpcrm-listview-table-container .jpcrm-listview-table .name {
+  font-weight: 500;
+  font-size: 14px;
+}
+.jpcrm-listview-table-container .jpcrm-listview-table .email {
+  color: #3C434A;
+  font-weight: 400;
+  font-size: 12px;
+}
 .jpcrm-listview-table-container .jpcrm-listview-table th:not(:first-child), .jpcrm-listview-table-container .jpcrm-listview-table td:not(:first-child) {
   min-width: 120px;
 }

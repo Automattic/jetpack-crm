@@ -35,6 +35,7 @@ This is an alpha version! The changes listed here are not final.
 - Dashboard: Show correct avatar for recent activity.
 - Fixed a fatal error that occurred when exporting contacts with a custom field that had the same name as a linked field (e.g., 'company').
 - Fixed lints following ESLint rule changes for TS
+- Fixing bugs in the default PDF template and other fixes. Created a new template to maintain backwards compatibility
 - Fix PHPUnit coverage warnings.
 - Lossless image optimization for images (should improve performance with no visible changes).
 - Migrations: Improve WP Playground compatibility.

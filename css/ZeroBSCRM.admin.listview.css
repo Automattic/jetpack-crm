@@ -37061,3 +37061,7 @@ body.pushable > .pusher {
   text-align: right;
   margin-bottom: 10px;
 }
+
+.jpcrm-listview-table-container .jpcrm-listview-table a.name {
+  font-weight: 700;
+}
