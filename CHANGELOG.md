@@ -13,6 +13,7 @@ This is an alpha version! The changes listed here are not final.
 - Enable test coverage.
 
 ### Changed
+- fixes some issues with the white label
 - General: Enable JavaScript linting.
 - General: indicate compatibility with the upcoming version of WordPress - 6.7.
 - Improve spec compliance of CSV output: `\"` sequences will now be correctly escaped by doubling the `"`.
