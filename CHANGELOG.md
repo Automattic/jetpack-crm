@@ -12,6 +12,9 @@ This is an alpha version! The changes listed here are not final.
 ### Changed
 - Updated package dependencies.
 
+### Fixed
+- Invoices: Fix bug introduced in 6.5.0 that prevented email invoices from being sent.
+
 ## [6.5.0] - 2025-01-10
 ### Removed
 - General: Remove unused legacy code. [#40267]
