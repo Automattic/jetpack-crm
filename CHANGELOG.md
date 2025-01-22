@@ -13,6 +13,9 @@ This is an alpha version! The changes listed here are not final.
 - Code: Use function-style exit() and die() with a default status code of 0.
 - Updated package dependencies.
 
+### Removed
+- Remove legacy Groove code.
+
 ### Fixed
 - Invoices: Fix bug introduced in 6.5.0 that prevented email invoices from being sent.
 
