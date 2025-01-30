@@ -12,6 +12,9 @@ This is an alpha version! The changes listed here are not final.
 ### Changed
 - Updated package dependencies.
 
+### Fixed
+- Small fix to welcome wizard
+
 ## [6.5.1] - 2025-01-22
 ### Changed
 - Code: Use function-style exit() and die() with a default status code of 0. [#41167]
