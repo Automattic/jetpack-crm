@@ -14,6 +14,7 @@ This is an alpha version! The changes listed here are not final.
 - Updated package dependencies.
 
 ### Fixed
+- Code: Remove extra params on function calls.
 - Small fix to welcome wizard
 
 ## [6.5.1] - 2025-01-22
