@@ -24,7 +24,7 @@ final class ZeroBSCRM {
 	 *
 	 * @var string
 	 */
-	const VERSION = '6.5.2-alpha';
+	const VERSION = '6.6.0-alpha';
 
 	/**
 	 * Jetpack CRM version (used in various extensions as of January 2025).
