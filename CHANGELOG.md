@@ -17,6 +17,9 @@ This is an alpha version! The changes listed here are not final.
 - External Media: Move the GooglePhotosMedia, OpenverseMedia, PexelsMedia to @automattic/jetpack-shared-extension-utils
 - Updated package dependencies.
 
+### Removed
+- Code: Removed unused function and images.
+
 ### Fixed
 - Code: Prevent dynamic class properties.
 - Code: Remove extra params on function calls.
