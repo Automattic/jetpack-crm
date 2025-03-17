@@ -2,12 +2,12 @@
     "packages": [
         {
             "name": "automattic/jetpack-assets",
-            "version": "4.0.11",
-            "version_normalized": "4.0.11.0",
+            "version": "4.0.12-alpha.1742222219",
+            "version_normalized": "4.0.12.0-alpha1742222219",
             "dist": {
                 "type": "path",
                 "url": "/tmp/jetpack-build/Automattic/jetpack-assets",
-                "reference": "714401a7c82be86fada4fd16973c2e0a17f4f421"
+                "reference": "209f36dc189d6c6af7e793465cadfc0e0551b83d"
             },
             "require": {
                 "automattic/jetpack-constants": "^3.0.4",
@@ -75,12 +75,12 @@
         },
         {
             "name": "automattic/jetpack-autoloader",
-            "version": "5.0.3",
-            "version_normalized": "5.0.3.0",
+            "version": "5.0.4-alpha.1742222219",
+            "version_normalized": "5.0.4.0-alpha1742222219",
             "dist": {
                 "type": "path",
                 "url": "/tmp/jetpack-build/Automattic/jetpack-autoloader",
-                "reference": "6479fd8ffbb52769d34c1e95211394f42010af27"
+                "reference": "324f634dd80efcde05cd331e769c2b0475d66390"
             },
             "require": {
                 "composer-plugin-api": "^2.2",
@@ -152,7 +152,7 @@
             "dist": {
                 "type": "path",
                 "url": "/tmp/jetpack-build/Automattic/jetpack-composer-plugin",
-                "reference": "c85a6de12c39641225b831ce20be898b8f0ff628"
+                "reference": "bc1d3e5a1dd227fdb88cb2f761dd16c7e95d16b1"
             },
             "require": {
                 "composer-plugin-api": "^2.2",
@@ -216,7 +216,7 @@
             "dist": {
                 "type": "path",
                 "url": "/tmp/jetpack-build/Automattic/jetpack-constants",
-                "reference": "6cd784b6d147d34b2a7a0c3e97b6c279f1d74220"
+                "reference": "57f391a125e2eed0a02e99700906eb2cf3428e72"
             },
             "require": {
                 "php": ">=7.2"
