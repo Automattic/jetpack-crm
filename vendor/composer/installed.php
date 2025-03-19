@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'automattic/jetpack-assets' => array(
-            'pretty_version' => '4.0.14-alpha.1742415897',
-            'version' => '4.0.14.0-alpha1742415897',
-            'reference' => '30f60d6931db25869a7c1d6e002af9d3213caf8d',
+            'pretty_version' => '4.0.14-alpha.1742417137',
+            'version' => '4.0.14.0-alpha1742417137',
+            'reference' => 'e970aa2022ab1a236a6b360c82b09dbb4bc9ff7c',
             'type' => 'jetpack-library',
             'install_path' => __DIR__ . '/../../jetpack_vendor/automattic/jetpack-assets',
             'aliases' => array(),
@@ -22,7 +22,7 @@
         'automattic/jetpack-autoloader' => array(
             'pretty_version' => '5.0.5-alpha.1742415897',
             'version' => '5.0.5.0-alpha1742415897',
-            'reference' => 'dc6ed5abe1957177f74460339779916f7467c296',
+            'reference' => '809ce424f8033aaabb21654bc2d6cb0b2cf47e37',
             'type' => 'composer-plugin',
             'install_path' => __DIR__ . '/../automattic/jetpack-autoloader',
             'aliases' => array(),
@@ -31,7 +31,7 @@
         'automattic/jetpack-composer-plugin' => array(
             'pretty_version' => '4.0.4-alpha.1742415897',
             'version' => '4.0.4.0-alpha1742415897',
-            'reference' => 'fadcf5238300c955673b5f967b678c810af2982b',
+            'reference' => 'e7141630c6cfa619ef704735d490afa24c95376f',
             'type' => 'composer-plugin',
             'install_path' => __DIR__ . '/../automattic/jetpack-composer-plugin',
             'aliases' => array(),
@@ -40,7 +40,7 @@
         'automattic/jetpack-constants' => array(
             'pretty_version' => '3.0.5-alpha.1742415897',
             'version' => '3.0.5.0-alpha1742415897',
-            'reference' => '6778831f8d903a9787c55a853e28e74e84679887',
+            'reference' => '9cfe1223165df0b24803422f8c708151be0ceb52',
             'type' => 'jetpack-library',
             'install_path' => __DIR__ . '/../../jetpack_vendor/automattic/jetpack-constants',
             'aliases' => array(),
