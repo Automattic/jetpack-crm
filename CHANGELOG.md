@@ -13,6 +13,7 @@ This is an alpha version! The changes listed here are not final.
 - Connection: Disconnecting a connection owner account will disconnect all other users first.
 
 ### Changed
+- Code: First pass of style coding standards.
 - Code: Introduce version constant in main plugin class.
 - External Media: Move the GooglePhotosMedia, OpenverseMedia, PexelsMedia to @automattic/jetpack-shared-extension-utils
 - General: indicate compatibility with the upcoming version of WordPress - 6.8.
