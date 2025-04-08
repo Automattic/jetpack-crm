@@ -7,6 +7,6 @@
   text-transform: capitalize !important;
 }
 .woo-sync-subs .active, .woo-sync-subs .paid, .woo-sync-subs .completed, .woo-sync-mem .active, .woo-sync-mem .paid, .woo-sync-mem .completed, .woo-sync-book .active, .woo-sync-book .paid, .woo-sync-book .completed {
-  color: white !important;
+  color: #fff !important;
   background: #21ba46 !important;
 }

@@ -56,7 +56,7 @@
   width: 15px;
 }
 .zbs-timeline-marker:before {
-  background: #000000;
+  background: #000;
   border: 3px solid transparent;
   border-radius: 100%;
   content: "";
@@ -118,7 +118,7 @@
   width: 15px;
 }
 .zbs-timeline-item-contd .zbs-timeline-marker:before {
-  background: #000000;
+  background: #000;
   border: 1px solid transparent;
   border-radius: 100%;
   content: "";
@@ -293,10 +293,10 @@
 ----------------------------------------------*/
 .marker-outline .zbs-timeline-marker:before {
   background: transparent;
-  border-color: #000000;
+  border-color: #000;
 }
 .marker-outline .zbs-timeline-item:hover .zbs-timeline-marker:before {
-  background: #000000;
+  background: #000;
 }
 
 #wpwrap .update-nag {
@@ -452,7 +452,7 @@ i.zbs-hide-longdesc {
 }
 
 .zbs-social-buttons a {
-  color: white;
+  color: #fff;
 }
 
 .zbs-social-buttons .zbs-social-acc {
@@ -463,7 +463,7 @@ i.zbs-hide-longdesc {
 
 .zbs-social-buttons .icon {
   margin: 0px !important;
-  color: white;
+  color: #fff;
   font-size: 14px;
 }
 

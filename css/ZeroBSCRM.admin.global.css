@@ -40,12 +40,12 @@ tr.wh-large input[type=radio] {
 
 tr.wh-large th, tr.wh-large td {
   padding: 6px 20px;
-  color: black;
+  color: #000;
 }
 
 table.wh-metatab tr th label {
   padding: 6px 20px;
-  color: black;
+  color: #000;
 }
 
 table.wh-metatab tr.wh-large th label, table.wh-metatab tr.wh-large td label {
@@ -77,7 +77,7 @@ span.wh-info {
 
 .zbs-prominent {
   font-size: 14px;
-  color: green;
+  color: #008000;
 }
 
 .widetext {
@@ -152,7 +152,7 @@ textarea.form-control {
 
 .wh-large label {
   font-size: 15px;
-  color: black;
+  color: #000;
   font-weight: 400;
 }
 
@@ -180,7 +180,7 @@ textarea.form-control {
 
 .zbs-field-id {
   font-size: 14px !important;
-  color: black !important;
+  color: #000 !important;
   vertical-align: top !important;
 }
 
@@ -2742,7 +2742,7 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 }
 
 .label-default[href]:focus, .label-default[href]:hover {
-  background-color: gray;
+  background-color: #808080;
 }
 
 .label-primary {
@@ -5304,13 +5304,13 @@ body.zbs-fullscreen #wpadminbar, body.zbs-fullscreen #adminmenuback, body.zbs-fu
   text-align: left;
 }
 .zbs-infobox-detail div.greenhighlight {
-  color: green;
+  color: #008000;
   padding: 4px 10px;
 }
 
 input.zbs-prominent {
   font-size: 14px !important;
-  color: green !important;
+  color: #008000 !important;
   line-height: 1.4em;
   height: 38px !important;
 }
@@ -5711,7 +5711,7 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
   opacity: 0.6;
 }
 .zbsSpinnerBlocker .zbsSpinnerIco {
-  color: green;
+  color: #008000;
   z-index: 101;
   position: relative;
   top: 50%;
@@ -5867,7 +5867,7 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
 }
 #zbsDeletionPage #zbsDeletionMsgWrap #zbsDeletionIco .fa {
   font-size: 80px;
-  color: green;
+  color: #008000;
   margin-bottom: 8px;
 }
 #zbsDeletionPage #zbsDeletionMsgWrap .zbsDeletionMsg {
@@ -5912,7 +5912,7 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
 }
 #zbsNoAccessPage #zbsNoAccessMsgWrap #zbsNoAccessIco .fa {
   font-size: 80px;
-  color: green;
+  color: #008000;
   margin-bottom: 8px;
 }
 #zbsNoAccessPage #zbsNoAccessMsgWrap .zbsNoAccessMsg {
@@ -5928,8 +5928,8 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
 }
 
 .zbs-upgrade-banner {
-  background: black;
-  color: white;
+  background: #000;
+  color: #fff;
   padding: 20px;
   text-align: center;
 }
@@ -5948,7 +5948,7 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
   margin-top: 20px;
   margin-bottom: 20px;
   padding: 10px;
-  color: white;
+  color: #fff;
   background: #1a6ecc;
 }
 
@@ -5984,11 +5984,11 @@ div.ui.learn.button .jpcrm-info-gridicon {
   left: 25px !important;
   margin-top: -11px;
   border-left-width: 0;
-  border-right-color: white !important;
+  border-right-color: #fff !important;
 }
 
 .popover.bottom .arrow {
-  border-bottom-color: white !important;
+  border-bottom-color: #fff !important;
 }
 
 .popover.right .arrow:after {
@@ -6567,10 +6567,10 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
   left: 0px;
   right: 0px;
   z-index: 10;
-  background: red;
+  background: #f00;
   padding: 15px;
   padding-left: 180px;
-  color: white;
+  color: #fff;
   font-size: 16px;
   font-weight: 900;
   border-top: 5px solid #de1b1b;
@@ -6585,7 +6585,7 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
   width: 100%;
   height: 100%;
   z-index: 100000;
-  color: white;
+  color: #fff;
   text-align: center;
   font-size: 20px;
   background: rgba(0, 0, 0, 0.85);
@@ -6598,11 +6598,11 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
 }
 
 .close_nag_modal a {
-  color: white;
+  color: #fff;
 }
 
 .zbs-message h3 {
-  color: white;
+  color: #fff;
 }
 
 .zbs_overlay p {
@@ -6610,7 +6610,7 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
 }
 
 .zbs_overlay p a {
-  color: orange;
+  color: #ffa500;
   text-decoration: underline;
 }
 
@@ -6638,7 +6638,7 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
   position: absolute;
   right: 5px;
   top: 10px;
-  color: black;
+  color: #000;
   font-weight: 500;
   margin-top: 5px;
 }
@@ -6660,7 +6660,7 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
  * https://jetpackcrm.com
  */
 #learn-pop {
-  background: #FFFFFF;
+  background: #FFF;
   box-shadow: 0px 4px 44px rgba(0, 0, 0, 0.35);
   border-radius: 8px;
   padding: 10px 12px;
@@ -6723,7 +6723,7 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
   font-size: 14px;
   font-weight: 700;
   line-height: 20px;
-  color: #000000;
+  color: #000;
 }
 #learn-pop .jpcrm-learn-container .jpcrm-learn-sidebar .sidebar-content .jpcrm-learn-popup-video .jpcrm-learn-popup-video-cta {
   margin-top: 52px;
@@ -6735,7 +6735,7 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
   display: flex;
   align-items: center;
   text-decoration: underline;
-  color: #000000;
+  color: #000;
 }
 #learn-pop .jpcrm-learn-container .jpcrm-learn-sidebar .sidebar-content .jpcrm-learn-popup-video .jpcrm-learn-popup-video-cta a img {
   margin-right: 8px;
@@ -6749,7 +6749,7 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
   font-size: 14px;
   font-weight: 700;
   line-height: 20px;
-  color: #000000;
+  color: #000;
 }
 #learn-pop .jpcrm-learn-container .jpcrm-learn-sidebar .sidebar-content .jpcrm-learn-popup-image .jpcrm-learn-popup-image-cta {
   margin-top: 52px;
@@ -6761,7 +6761,7 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
   display: flex;
   align-items: center;
   text-decoration: underline;
-  color: #000000;
+  color: #000;
 }
 #learn-pop .jpcrm-learn-container .jpcrm-learn-sidebar .sidebar-content .jpcrm-learn-popup-image .jpcrm-learn-popup-image-cta a .jpcrm-learn-popup-external-link {
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAPFBMVEVHcEwgICAgICAgICAgICAgICAdHR0gICAeHh4eHh4eHh4eHh4fHx8eHh4fHx8fHx8eHh4fHx8eHh4eHh5RbYuhAAAAE3RSTlMAECAwQFBgcICQn6CvsL/P39/v/NsjgAAAAMVJREFUeNrtlNkOgyAQRXGctmAXwfn/fy0uhaQXHNImTR+8D8SM5wCijjnyddh7STm3CJHbE9iu4TaB0/I21YjmsZ8Wob68zdXEoxDnn9y2JeDDAwSOVdqukacrCFbE1XlTFGydVwTkzV3kpAuZN/GhWREyrwvIm8sw9IqQ+RwUkN8XkG8XunHl27fU3d55/Vh/JxAzKQLeO4RPBVcT3CJgH5uo8t78/LtBgoh3thA3f+j7nRrDxd4eanh48djui2Fz5O/yBKbPGFFy+BxMAAAAAElFTkSuQmCC);
@@ -6830,7 +6830,7 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
 .dops-button.is-primary {
   background: #007cba;
   border-color: #007cba;
-  color: white;
+  color: #fff;
 }
 
 #zbs-settings-menu .branding.item img {
@@ -6838,10 +6838,10 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
 }
 
 .inbox-nav {
-  background: white !important;
+  background: #fff !important;
   border-right: 1px solid rgba(221, 221, 221, 0.8666666667) !important;
 }
 .inbox-nav .item {
   border-bottom: 1px solid #e2e2e2;
-  color: black !important;
+  color: #000 !important;
 }

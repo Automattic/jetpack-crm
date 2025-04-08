@@ -32,7 +32,7 @@
   margin-bottom: 10px;
   border: 1px solid #ccc;
   padding: 10px;
-  background: white;
+  background: #fff;
   font-size: 13px;
 }
 .zbs-invoice-preview .zbs-invoice-topper .form-table {
@@ -120,9 +120,9 @@
 }
 .post-type-zerobs_invoice #zbs_invoice_alerts #zbs_success {
   display: none;
-  background: green;
+  background: #008000;
   padding: 10px;
-  color: white;
+  color: #fff;
   font-weight: 100;
   font-size: 14px;
 }
@@ -202,7 +202,7 @@
 }
 .post-type-zerobs_invoice #invoice_totals .zbs_grand_total .bord, .post-type-zerobs_invoice #partials .zbs_grand_total .bord {
   background: #f5f5f5;
-  color: black;
+  color: #000;
   font-weight: 800;
   border-bottom: 2px solid #ccc;
 }
@@ -231,7 +231,7 @@
   border: 1px solid #ccc;
 }
 .post-type-zerobs_invoice #invoice_totals .row-amount, .post-type-zerobs_invoice #partials .row-amount {
-  color: black;
+  color: #000;
   font-weight: 400;
   height: 20px;
   text-align: left;
@@ -266,7 +266,7 @@
   text-align: center;
 }
 .post-type-zerobs_invoice #zbs-invoice-items .row-amount {
-  color: black;
+  color: #000;
   font-weight: 400;
   text-align: left;
 }
@@ -314,7 +314,7 @@
 .post-type-zerobs_invoice #zbs_invoice_actions .zbs-invoice-status .draft {
   background-color: #ddd;
   text-transform: uppercase;
-  color: white;
+  color: #fff;
   padding: 7px;
   font-weight: 900;
   font-size: 25px;
@@ -322,15 +322,15 @@
 .post-type-zerobs_invoice #zbs_invoice_actions .zbs-invoice-status .unpaid {
   background-color: #ffd800;
   text-transform: uppercase;
-  color: white;
+  color: #fff;
   padding: 7px;
   font-weight: 900;
   font-size: 25px;
 }
 .post-type-zerobs_invoice #zbs_invoice_actions .zbs-invoice-status .paid {
-  background-color: green;
+  background-color: #008000;
   text-transform: uppercase;
-  color: white;
+  color: #fff;
   padding: 7px;
   font-weight: 900;
   font-size: 25px;
@@ -442,7 +442,7 @@
   margin-top: 20px;
   padding: 30px;
   width: 100%;
-  background: aliceblue;
+  background: #f0f8ff;
   margin-bottom: 20px;
   border-radius: 11px;
   border: 1px solid #428bca;
@@ -488,12 +488,12 @@ tr.wh-large input[type=radio] {
 
 tr.wh-large th, tr.wh-large td {
   padding: 6px 20px;
-  color: black;
+  color: #000;
 }
 
 table.wh-metatab tr th label {
   padding: 6px 20px;
-  color: black;
+  color: #000;
 }
 
 table.wh-metatab tr.wh-large th label, table.wh-metatab tr.wh-large td label {
@@ -525,7 +525,7 @@ span.wh-info {
 
 .zbs-prominent {
   font-size: 14px;
-  color: green;
+  color: #008000;
 }
 
 .widetext {
@@ -600,7 +600,7 @@ textarea.form-control {
 
 .wh-large label {
   font-size: 15px;
-  color: black;
+  color: #000;
   font-weight: 400;
 }
 
@@ -628,7 +628,7 @@ textarea.form-control {
 
 .zbs-field-id {
   font-size: 14px !important;
-  color: black !important;
+  color: #000 !important;
   vertical-align: top !important;
 }
 
@@ -3190,7 +3190,7 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 }
 
 .label-default[href]:focus, .label-default[href]:hover {
-  background-color: gray;
+  background-color: #808080;
 }
 
 .label-primary {
@@ -5752,13 +5752,13 @@ body.zbs-fullscreen #wpadminbar, body.zbs-fullscreen #adminmenuback, body.zbs-fu
   text-align: right;
 }
 .zbs-infobox-detail div.greenhighlight {
-  color: green;
+  color: #008000;
   padding: 4px 10px;
 }
 
 input.zbs-prominent {
   font-size: 14px !important;
-  color: green !important;
+  color: #008000 !important;
   line-height: 1.4em;
   height: 38px !important;
 }
@@ -6159,7 +6159,7 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
   opacity: 0.6;
 }
 .zbsSpinnerBlocker .zbsSpinnerIco {
-  color: green;
+  color: #008000;
   z-index: 101;
   position: relative;
   top: 50%;
@@ -6210,7 +6210,7 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
 }
 #zbsDeletionPage #zbsDeletionMsgWrap #zbsDeletionIco .fa {
   font-size: 80px;
-  color: green;
+  color: #008000;
   margin-bottom: 8px;
 }
 #zbsDeletionPage #zbsDeletionMsgWrap .zbsDeletionMsg {
@@ -6255,7 +6255,7 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
 }
 #zbsNoAccessPage #zbsNoAccessMsgWrap #zbsNoAccessIco .fa {
   font-size: 80px;
-  color: green;
+  color: #008000;
   margin-bottom: 8px;
 }
 #zbsNoAccessPage #zbsNoAccessMsgWrap .zbsNoAccessMsg {
@@ -6271,8 +6271,8 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
 }
 
 .zbs-upgrade-banner {
-  background: black;
-  color: white;
+  background: #000;
+  color: #fff;
   padding: 20px;
   text-align: center;
 }
@@ -6291,7 +6291,7 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
   margin-top: 20px;
   margin-bottom: 20px;
   padding: 10px;
-  color: white;
+  color: #fff;
   background: #1a6ecc;
 }
 
@@ -6327,11 +6327,11 @@ div.ui.learn.button .jpcrm-info-gridicon {
   right: 25px !important;
   margin-top: -11px;
   border-right-width: 0;
-  border-left-color: white !important;
+  border-left-color: #fff !important;
 }
 
 .popover.bottom .arrow {
-  border-bottom-color: white !important;
+  border-bottom-color: #fff !important;
 }
 
 .popover.right .arrow:after {

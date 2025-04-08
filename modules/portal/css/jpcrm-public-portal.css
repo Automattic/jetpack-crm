@@ -136,9 +136,9 @@
   --font-title-small: 24px;
   --font-body: 16px;
   --font-label: 12px;
-  --jp-black: #000000;
+  --jp-black: #000;
   --jp-black-80: #2c3338;
-  --jp-white: #ffffff;
+  --jp-white: #fff;
   --jp-white-off: #f9f9f6;
   --jp-gray: #dcdcde;
   --jp-gray-0: #F6F7F7;
@@ -261,7 +261,7 @@
   font-size: 0.7em;
 }
 .zbs-client-portal-pro-note .small span {
-  color: blue;
+  color: #00f;
 }
 .zbs-client-portal-pro-note .small span:hover {
   cursor: pointer;
@@ -270,7 +270,7 @@
 .zbs_alert {
   padding: 10px;
   background: #8BC34A;
-  color: white;
+  color: #fff;
   display: block;
   text-align: center;
 }
@@ -329,26 +329,26 @@
   border-radius: 2px;
 }
 .zbs-portal-invoices-list .paid {
-  background: green;
-  color: white;
+  background: #008000;
+  color: #fff;
   font-weight: 700;
   line-height: 21px;
 }
 .zbs-portal-invoices-list .unpaid {
   background: #d0d012;
-  color: white;
+  color: #fff;
   font-weight: 700;
   line-height: 21px;
 }
 .zbs-portal-invoices-list .draft {
   background: #999;
-  color: white;
+  color: #fff;
   font-weight: 700;
   line-height: 21px;
 }
 .zbs-portal-invoices-list .overdue {
-  background: red;
-  color: white;
+  background: #f00;
+  color: #fff;
   font-weight: 700;
   line-height: 21px;
 }
@@ -435,7 +435,7 @@
 }
 .zbs-single-invoice-portal .zbs-invoice-portal-inner .zbs-invoice-box .zbs-portal-label {
   background: #546273;
-  color: white;
+  color: #fff;
   display: inline;
   padding: 5px;
   border-radius: 4px;
@@ -581,7 +581,7 @@
 .zbs-client-portal-wrap #zbs-nav-tabs li a:hover {
   box-shadow: none;
   background: #000;
-  color: white;
+  color: #fff;
 }
 .zbs-client-portal-wrap #zbs-nav-tabs a {
   color: #ccc;

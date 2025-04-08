@@ -543,20 +543,20 @@ table td[class*=col-], table th[class*=col-] {
 }
 
 .zbs-invoice-list .paid {
-  background: green;
+  background: #008000;
 }
 .zbs-invoice-list .draft {
   background: #999;
 }
 .zbs-invoice-list .overdue {
-  background: red;
+  background: #f00;
 }
 .zbs-invoice-list .unpaid {
   background: #d0d012;
 }
 .zbs-invoice-list .status {
   padding: 5px;
-  color: white;
+  color: #fff;
   font-weight: 700;
 }
 .zbs-invoice-list .tools .fa {
@@ -567,7 +567,7 @@ table td[class*=col-], table th[class*=col-] {
   padding: 50px;
   border: 1px solid #ddd;
   margin-bottom: 15px;
-  background: white;
+  background: #fff;
   position: relative;
 }
 .zbs-invoice-box .zbs-portal-label {
@@ -576,7 +576,7 @@ table td[class*=col-], table th[class*=col-] {
 }
 .zbs-invoice-box .zbs-portal-value {
   font-size: 40px;
-  color: black;
+  color: #000;
   font-weight: 900;
 }
 .zbs-invoice-box .zbs-invoice-paid {
@@ -599,7 +599,7 @@ table td[class*=col-], table th[class*=col-] {
 .zbs-invoice-box .pay-to-name {
   font-size: 22px;
   font-weight: 800;
-  color: black;
+  color: #000;
 }
 .zbs-invoice-box #zbs-business-info-wrapper, .zbs-invoice-box .zbs-invoice-pull-left {
   width: 50%;

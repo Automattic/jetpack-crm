@@ -34,7 +34,7 @@ a:focus {
 }
 
 body ::-webkit-scrollbar-track {
-  background: white;
+  background: #fff;
 }
 
 .day-or-month div.button {

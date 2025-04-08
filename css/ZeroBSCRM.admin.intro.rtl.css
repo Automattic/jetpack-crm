@@ -70,7 +70,7 @@
 }
 .admin_page_zerobscrm-plugin #action-buttons {
   padding: 20px;
-  background: white;
+  background: #fff;
   min-height: 175px;
   border-right: 2px solid #e1e1e1;
   border-left: 2px solid #e1e1e1;
@@ -222,7 +222,7 @@
   background: #00b2ff;
   margin-right: 5px;
   padding: 2px;
-  color: white;
+  color: #fff;
   border-radius: 2px;
 }
 .admin_page_zerobscrm-plugin .pro-elite {
@@ -230,7 +230,7 @@
   background: #21BA45;
   margin-right: 5px;
   padding: 2px;
-  color: white;
+  color: #fff;
   border-radius: 2px;
 }
 .admin_page_zerobscrm-plugin .go-elite {
@@ -250,7 +250,7 @@
   font-weight: 500;
 }
 .admin_page_zerobscrm-plugin .elite-package:hover {
-  color: white;
+  color: #fff;
 }
 .admin_page_zerobscrm-plugin .testimonial-block img {
   border-radius: 50%;
@@ -269,10 +269,10 @@
   color: #868686;
 }
 .admin_page_zerobscrm-plugin .who {
-  color: black !important;
+  color: #000 !important;
 }
 .admin_page_zerobscrm-plugin .final-block {
-  background: #eeeeee;
+  background: #eee;
   min-height: 140px;
   border: 2px solid #e1e1e1;
   padding: 40px;

@@ -27,6 +27,7 @@ This is an alpha version! The changes listed here are not final.
 - Client Portal: Removed top margin from quotes to ensure the top of the quote is visible.
 - Code: Prevent dynamic class properties.
 - Code: Remove extra params on function calls.
+- Code: Update stylesheets to use hex instead of named colors.
 - Code: Update stylesheets to use WordPress font styles.
 - Small fix to welcome wizard
 

@@ -9,7 +9,7 @@
  * Date: 29/05/16
  */
 .zbs-upgrade-label {
-  background: green;
+  background: #008000;
   color: #FFF;
   padding: 4px 8px;
   border-radius: 3px;
@@ -190,5 +190,5 @@
   background: #FFF;
 }
 .zbscrm-csvimport-wrap .zbscrm-final-stage .zbscrm-import-log .zbscrm-import-log-line i.fa, .zbscrm-csvimport-wrap .zbscrm-final-stage .zbscrm-import-log .zbscrm-import-log-line span {
-  color: green;
+  color: #008000;
 }

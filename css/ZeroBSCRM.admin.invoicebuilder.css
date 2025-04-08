@@ -71,7 +71,7 @@
 #zerobs-invoice-edit-box #zbs-add-new-row {
   padding: 8px;
   background: #f5f5f5;
-  color: black;
+  color: #000;
   cursor: pointer;
   text-align: center;
   border: 1px solid #ddd;
@@ -334,7 +334,7 @@
 #zerobs-invoice-edit-box .zbs-invoice-row .remove-row {
   font-size: 15px;
   margin-top: 10px;
-  color: black;
+  color: #000;
 }
 .post-type-zerobs_invoice .zbs-invoice-row .third,
 #zerobs-invoice-edit-box .zbs-invoice-row .third {
@@ -377,9 +377,9 @@
 .post-type-zerobs_invoice .mark-as-paid,
 #zerobs-invoice-edit-box .mark-as-paid {
   margin-left: 10px;
-  background-color: green;
+  background-color: #008000;
   text-transform: uppercase;
-  color: white;
+  color: #fff;
   padding: 7px;
   font-weight: 900;
   font-size: 25px;
@@ -459,9 +459,9 @@
 .post-type-zerobs_invoice #zbs_invoice_alerts #zbs_success,
 #zerobs-invoice-edit-box #zbs_invoice_alerts #zbs_success {
   display: none;
-  background: green;
+  background: #008000;
   padding: 10px;
-  color: white;
+  color: #fff;
   font-weight: 100;
   font-size: 14px;
 }
@@ -482,9 +482,9 @@
 #zerobs-invoice-edit-box #zbs_invoice_test_alerts #zbs_success,
 #zerobs-invoice-edit-box #zbs_invoice_test_alerts #zbs_test_success {
   display: none;
-  background: green;
+  background: #008000;
   padding: 10px;
-  color: white;
+  color: #fff;
   font-weight: 100;
   font-size: 14px;
 }
@@ -584,7 +584,7 @@
 #zerobs-invoice-edit-box #invoice_totals .zbs_grand_total .bord,
 #zerobs-invoice-edit-box #partials .zbs_grand_total .bord {
   background: #f5f5f5;
-  color: black;
+  color: #000;
   font-weight: 800;
   border-bottom: 2px solid #ccc;
 }
@@ -630,7 +630,7 @@
 #zerobs-invoice-edit-box #invoice_totals .row-amount,
 #zerobs-invoice-edit-box #partials .row-amount {
   background: #f5f5f5;
-  color: black;
+  color: #000;
   font-weight: 400;
   height: 20px;
   text-align: right;
@@ -682,7 +682,7 @@
 .post-type-zerobs_invoice #zbs-invoice-items .row-amount,
 #zerobs-invoice-edit-box #zbs-invoice-items .row-amount {
   background: #f5f5f5;
-  color: black;
+  color: #000;
   font-weight: 800;
   text-align: right;
   height: 35px;
@@ -734,11 +734,11 @@
 #zerobs-invoice-edit-box #zbs-invoice-items .table > tfoot > tr > th,
 #zerobs-invoice-edit-box #zbs-invoice-items .table > thead > tr > td,
 #zerobs-invoice-edit-box #zbs-invoice-items .table > thead > tr > th {
-  border-top: 0px solid white !important;
+  border-top: 0px solid #fff !important;
 }
 .post-type-zerobs_invoice #zbs-invoice-items .add-row,
 #zerobs-invoice-edit-box #zbs-invoice-items .add-row {
-  border-left: 0px solid white;
+  border-left: 0px solid #fff;
 }
 .post-type-zerobs_invoice #zbs-invoice-items .zbs-row-actions,
 #zerobs-invoice-edit-box #zbs-invoice-items .zbs-row-actions {
@@ -768,7 +768,7 @@
 #zerobs-invoice-edit-box #zbs_invoice_actions .zbs-invoice-status .draft {
   background-color: #ddd;
   text-transform: uppercase;
-  color: white;
+  color: #fff;
   padding: 7px;
   font-weight: 900;
   font-size: 25px;
@@ -777,25 +777,25 @@
 #zerobs-invoice-edit-box #zbs_invoice_actions .zbs-invoice-status .unpaid {
   background-color: #ffd800;
   text-transform: uppercase;
-  color: white;
+  color: #fff;
   padding: 7px;
   font-weight: 900;
   font-size: 25px;
 }
 .post-type-zerobs_invoice #zbs_invoice_actions .zbs-invoice-status .paid,
 #zerobs-invoice-edit-box #zbs_invoice_actions .zbs-invoice-status .paid {
-  background-color: green;
+  background-color: #008000;
   text-transform: uppercase;
-  color: white;
+  color: #fff;
   padding: 7px;
   font-weight: 900;
   font-size: 25px;
 }
 .post-type-zerobs_invoice #zbs_invoice_actions .zbs-invoice-status .overdue,
 #zerobs-invoice-edit-box #zbs_invoice_actions .zbs-invoice-status .overdue {
-  background-color: red;
+  background-color: #f00;
   text-transform: uppercase;
-  color: white;
+  color: #fff;
   padding: 7px;
   font-weight: 900;
   font-size: 25px;
@@ -851,7 +851,7 @@
 .post-type-zerobs_invoice #submitdiv .handlediv,
 #zerobs-invoice-edit-box #submitdiv .handlediv {
   display: none;
-  border-bottom: 0px solid white;
+  border-bottom: 0px solid #fff;
 }
 .post-type-zerobs_invoice #postbox-container-1,
 #zerobs-invoice-edit-box #postbox-container-1 {
@@ -950,7 +950,7 @@
 }
 .post-type-zerobs_invoice .wh-logo .fa,
 #zerobs-invoice-edit-box .wh-logo .fa {
-  color: black;
+  color: #000;
   margin-right: 5px;
   margin-bottom: 10px;
   font-size: 40px;
@@ -959,7 +959,7 @@
 .post-type-zerobs_invoice .wh-logo .wh-logo-text,
 #zerobs-invoice-edit-box .wh-logo .wh-logo-text {
   font-weight: 300;
-  color: black;
+  color: #000;
   font-size: 18px;
   margin-left: 20px;
   position: absolute;
@@ -1007,7 +1007,7 @@
 }
 #zbswhPDFNotice .zbsCloseThisAndLog:hover {
   cursor: pointer;
-  color: green;
+  color: #008000;
 }
 
 .zbs-invoice-actions-bottom {
