@@ -645,7 +645,7 @@ textarea.form-control {
 .zbs-field-checkbox-wrap .ui.checkbox label, .zbs-field-checkbox-wrap .ui.checkbox + label {
   font-size: 16px !important;
   color: #555;
-  font-weight: normal;
+  font-weight: 400;
 }
 .zbs-field-checkbox-wrap input[type=checkbox] {
   display: none;
@@ -674,7 +674,7 @@ textarea.form-control {
 .zbs-field-radio-wrap .zbs-radio label {
   font-size: 16px !important;
   color: #555;
-  font-weight: normal;
+  font-weight: 400;
 }
 
 /*!
@@ -774,6 +774,7 @@ pre {
 }
 
 code, kbd, pre, samp {
+  /* stylelint-disable-next-line font-family-no-duplicate-names -- this is a known rendering hack to force proportional font sizes. */
   font-family: monospace, monospace;
   font-size: 1em;
 }
@@ -4589,14 +4590,6 @@ table [class*=span], .row-fluid table [class*=span] {
   background-color: #c4e3f3;
 }
 
-#ZeroBSCRMAdminPage .hide-text {
-  font: 0/0 a;
-  color: transparent;
-  text-shadow: none;
-  background-color: transparent;
-  border: 0;
-}
-
 #ZeroBSCRMAdminPage .input-block-level {
   display: block;
   width: 100%;
@@ -5751,7 +5744,7 @@ body.zbs-fullscreen #wpadminbar, body.zbs-fullscreen #adminmenuback, body.zbs-fu
   overflow-x: hidden;
   overflow-y: auto;
   font-size: 14px;
-  font-weight: normal;
+  font-weight: 400;
   background: #FFF;
   border: 1px solid #CCC;
   border-radius: 5px;

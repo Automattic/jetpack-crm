@@ -101,7 +101,7 @@ i.alternate {
   outline: none;
   border: none;
   vertical-align: baseline;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen-Sans", "Ubuntu", "Cantarell", "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   margin: 0em 0em 0em 0.25em;
   padding: 0.78571429em 1.5em 0.78571429em;
   text-transform: none;
@@ -169,7 +169,7 @@ i.alternate {
 }
 .ui.modals.page .jpcrm-modal-body .jpcrm-modal-cta-group .jpcrm-modal-title {
   font-size: 36px;
-  font-weight: bold;
+  font-weight: 700;
   line-height: 40px;
   margin-bottom: 16px;
 }
@@ -217,7 +217,7 @@ i.alternate {
   display: flex;
   align-items: center;
   font-size: 16px;
-  font-weight: bold;
+  font-weight: 700;
   line-height: 24px;
   margin-bottom: 8px;
 }
@@ -247,7 +247,7 @@ i.alternate {
 }
 .ui.modals.page .jpcrm-modal-footer .jpcrm-modal-learn-footer-videos .jpcrm-modal-learn-footer-video a {
   font-size: 14px;
-  font-weight: bold;
+  font-weight: 700;
   line-height: 20px;
   color: #000;
 }
@@ -307,7 +307,7 @@ i.alternate {
   }
   #jpcrm-modal-cta-group .jpcrm-modal-title {
     font-size: 24px;
-    font-weight: bold;
+    font-weight: 700;
     line-height: 32px;
     text-align: center;
     margin-top: 32px;
@@ -334,7 +334,7 @@ i.alternate {
   }
   .jpcrm-modal-mobile-watch-videos-link a {
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 700;
     line-height: 20px;
     color: #000;
   }

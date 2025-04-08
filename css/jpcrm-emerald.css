@@ -66,7 +66,7 @@
 /* Remove left padding from WP page content */
 body.jpcrm-admin {
   background: var(--jp-white-off);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen-Sans", "Ubuntu", "Cantarell", "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 body.jpcrm-admin #wpcontent {
   padding-left: 0;
@@ -135,7 +135,7 @@ body.jpcrm-admin.jpcrm-full-width #wpcontent #wpbody {
 }
 #jpcrm-top-menu menu-bar menu-section {
   font-size: 14px;
-  font-family: "Lato", "Helvetica Neue", Arial, Helvetica, sans-serif;
+  font-family: Lato, "Helvetica Neue", Arial, Helvetica, sans-serif;
   display: flex;
   align-items: center;
 }
@@ -262,7 +262,7 @@ body.jpcrm-admin.jpcrm-full-width #wpcontent #wpbody {
   width: 25px;
 }
 .jpcrm-dashcard .jpcrm-listview-table th {
-  font-weight: bold;
+  font-weight: 700;
   min-width: unset;
 }
 .jpcrm-dashcard .jpcrm-listview-table td {
@@ -379,7 +379,7 @@ jpcrm-dashcount jpcrm-dashcount-card a {
 
 .jpcrm-form-label {
   display: block;
-  font-weight: normal;
+  font-weight: 400;
   line-height: 1.4;
   margin-bottom: 8px;
   padding: 0px;

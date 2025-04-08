@@ -242,7 +242,7 @@
   color: #FFF;
   padding: 1em;
   margin: 2em;
-  font-family: helvetica;
+  font-family: helvetica, sans-serif;
   border-radius: 0.5em;
 }
 .zbs-client-portal-pro-note img, .zbs-client-portal-pro-note a img {
@@ -522,7 +522,7 @@
 }
 .zbs-portal-wrapper .zbs-field-checkbox-wrap .zbs-cf-checkbox label, .zbs-portal-wrapper .zbs-field-checkbox-wrap .zbs-cf-checkbox + label {
   font-size: 16px !important;
-  font-weight: normal;
+  font-weight: 400;
 }
 .zbs-portal-wrapper .zbs-field-radio-wrap {
   text-align: left;
@@ -540,7 +540,7 @@
   line-height: 17px;
   min-width: 17px;
   font-size: 16px !important;
-  font-weight: normal;
+  font-weight: 400;
 }
 
 .entry-title {
@@ -671,7 +671,7 @@
   max-width: unset !important;
 }
 .zbs-portal-grid .zbs-field-group-label {
-  font-weight: bold;
+  font-weight: 700;
   font-size: 110%;
 }
 .zbs-portal-grid .zbs-portal-nav {
@@ -850,7 +850,7 @@ i.icon.child:before {
   width: 50%;
 }
 #jpcrm-invoice-lineitems .jpcrm-invoice-lineitem-description .title {
-  font-weight: bold;
+  font-weight: 700;
 }
 #jpcrm-invoice-lineitems .jpcrm-invoice-lineitem-description .subtitle {
   font-size: 13px;
