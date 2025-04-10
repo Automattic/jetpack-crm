@@ -137,6 +137,7 @@ i.alternate {
     padding: 6px 12px !important;
     line-height: 1.42857 !important;
 } */
+/* stylelint-disable-next-line no-invalid-position-at-import-rule -- this is an intentional override */
 /*!
  * Jetpack CRM: Modal style overrides
  */

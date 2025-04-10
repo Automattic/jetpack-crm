@@ -808,7 +808,6 @@
 #zerobs-invoice-edit-box #zbs_invoice_actions .btn-primary {
   color: #fff;
   background-color: #428bca;
-  border-color: #428bca;
   border: 1px solid #428bca;
   border-width: 0px;
   font-size: 15px;
@@ -819,7 +818,6 @@
 .post-type-zerobs_invoice #zbs_invoice_actions .btn-secondary,
 #zerobs-invoice-edit-box #zbs_invoice_actions .btn-secondary {
   background: #ddd;
-  border-color: #ddd;
   border: 1px solid #ddd;
   border-width: 0px;
   font-size: 15px;

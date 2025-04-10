@@ -29,6 +29,7 @@ This is an alpha version! The changes listed here are not final.
 - Code: Remove extra params on function calls.
 - Code: Update stylesheets to use hex instead of named colors.
 - Code: Update stylesheets to use WordPress font styles.
+- Linting: Clean up various Styleline violations.
 - Small fix to welcome wizard
 
 ## [6.5.1] - 2025-01-22

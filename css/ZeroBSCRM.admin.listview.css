@@ -133,6 +133,7 @@ i.alternate {
     padding: 6px 12px !important;
     line-height: 1.42857 !important;
 } */
+/* stylelint-disable-next-line no-invalid-position-at-import-rule -- this is an intentional override */
 /*!
  * Jetpack CRM: Modal style overrides
  */
@@ -36938,6 +36939,10 @@ body.pushable > .pusher {
   border: 0 !important;
 }
 
+/*!
+ * Jetpack CRM
+ * https://jetpackcrm.com
+ */
 .ui.dropdown .menu .left.menu {
   left: auto !important;
   right: 100%;
@@ -36959,10 +36964,6 @@ body.pushable > .pusher {
   margin-right: 5px;
 }
 
-/*!
- * Jetpack CRM
- * https://jetpackcrm.com
- */
 #zbs-list-col-editor {
   margin-bottom: 46px;
   margin-top: 16px;
