@@ -30,7 +30,7 @@
   padding-top: 0 !important;
 }
 
-ul#adminmenu a.wp-has-current-submenu:after, ul#adminmenu > li.current > a.current:after {
+ul#adminmenu a.wp-has-current-submenu::after, ul#adminmenu > li.current > a.current::after {
   border-right-color: none !important;
 }
 
@@ -56,7 +56,7 @@ i.card {
   background: rgba(245, 237, 237, 0.3) !important;
 }
 
-.ui.zbsclear:after {
+.ui.zbsclear::after {
   clear: both;
   content: ".";
   display: block;

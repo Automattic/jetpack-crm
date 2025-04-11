@@ -14,13 +14,13 @@
   background: #f2f4ff;
   cursor: move;
 }
-.zbsSortableFieldList ul li:before {
+.zbsSortableFieldList ul li::before {
   font-family: FontAwesome;
   content: "\f0c9";
   margin: 0 0 0 10px;
   color: #ddd;
 }
-.zbsSortableFieldList ul li.ui-sortable-helper:before {
+.zbsSortableFieldList ul li.ui-sortable-helper::before {
   font-family: FontAwesome;
   content: "\f0c9";
   margin: 0 0 0 10px;

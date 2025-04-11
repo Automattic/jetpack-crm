@@ -536,7 +536,7 @@ jpcrm-listview-header#jpcrm-listview-header header-item button {
   font: inherit;
   cursor: pointer;
 }
-jpcrm-listview-header#jpcrm-listview-header header-item button.dashicons:before {
+jpcrm-listview-header#jpcrm-listview-header header-item button.dashicons::before {
   font-family: dashicons;
   font-size: inherit;
   display: flex;

@@ -55,7 +55,7 @@
   left: 0;
   width: 15px;
 }
-.zbs-timeline-marker:before {
+.zbs-timeline-marker::before {
   background: #000;
   border: 3px solid transparent;
   border-radius: 100%;
@@ -68,7 +68,7 @@
   width: 15px;
   transition: background 0.3s ease-in-out, border 0.3s ease-in-out;
 }
-.zbs-timeline-marker:after {
+.zbs-timeline-marker::after {
   content: "";
   width: 3px;
   background: #d7d7d8;
@@ -78,7 +78,7 @@
   bottom: 0;
   left: 6px;
 }
-.zbs-timeline-item:last-child .zbs-timeline-marker:after {
+.zbs-timeline-item:last-child .zbs-timeline-marker::after {
   content: none;
 }
 
@@ -117,7 +117,7 @@
   left: 0;
   width: 15px;
 }
-.zbs-timeline-item-contd .zbs-timeline-marker:before {
+.zbs-timeline-item-contd .zbs-timeline-marker::before {
   background: #000;
   border: 1px solid transparent;
   border-radius: 100%;
@@ -131,7 +131,7 @@
   transition: background 0.3s ease-in-out, border 0.3s ease-in-out;
   z-index: 10000;
 }
-.zbs-timeline-item-contd .zbs-timeline-marker:after {
+.zbs-timeline-item-contd .zbs-timeline-marker::after {
   content: "";
   width: 3px;
   background: #d7d7d8;
@@ -141,7 +141,7 @@
   bottom: 0;
   left: 6px;
 }
-.zbs-timeline-item:last-child .zbs-timeline-item-contd .zbs-timeline-marker:after {
+.zbs-timeline-item:last-child .zbs-timeline-item-contd .zbs-timeline-marker::after {
   content: none;
 }
 .zbs-timeline-item-notitle {
@@ -163,7 +163,7 @@
 .period .zbs-timeline-info {
   display: none;
 }
-.period .zbs-timeline-marker:before {
+.period .zbs-timeline-marker::before {
   background: transparent;
   content: "";
   width: 15px;
@@ -176,7 +176,7 @@
   border-top: 3px solid #CCD5DB;
   border-bottom: 3px solid #CCD5DB;
 }
-.period .zbs-timeline-marker:after {
+.period .zbs-timeline-marker::after {
   content: "";
   height: 32px;
   top: auto;
@@ -278,7 +278,7 @@
   .zbs-timeline-centered .zbs-timeline-item.period {
     padding: 50px 0 90px;
   }
-  .zbs-timeline-centered .period .zbs-timeline-marker:after {
+  .zbs-timeline-centered .period .zbs-timeline-marker::after {
     height: 30px;
     bottom: 0;
     top: auto;
@@ -291,11 +291,11 @@
 /*----------------------------------------------
     MOD: MARKER OUTLINE
 ----------------------------------------------*/
-.marker-outline .zbs-timeline-marker:before {
+.marker-outline .zbs-timeline-marker::before {
   background: transparent;
   border-color: #000;
 }
-.marker-outline .zbs-timeline-item:hover .zbs-timeline-marker:before {
+.marker-outline .zbs-timeline-item:hover .zbs-timeline-marker::before {
   background: #000;
 }
 
