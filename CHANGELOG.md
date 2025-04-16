@@ -25,6 +25,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Fixed
 - Client Portal: Removed top margin from quotes to ensure the top of the quote is visible.
+- Client Portal: Show success message when quote is accepted.
 - Code: Prevent dynamic class properties.
 - Code: Remove extra params on function calls.
 - Code: Update stylesheets to use hex instead of named colors.
