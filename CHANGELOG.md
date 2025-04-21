@@ -33,6 +33,7 @@ This is an alpha version! The changes listed here are not final.
 - Linting: Clean up various Stylelint violations.
 - Linting: Format SCSS imports consistently.
 - Linting: Use double colon notation for pseudo-element selectors.
+- Remove unused legacy code.
 - Small fix to welcome wizard
 
 ## [6.5.1] - 2025-01-22
