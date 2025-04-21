@@ -30,7 +30,7 @@ This is an alpha version! The changes listed here are not final.
 - Code: Remove extra params on function calls.
 - Code: Update stylesheets to use hex instead of named colors.
 - Code: Update stylesheets to use WordPress font styles.
-- Linting: Clean up various Styleline violations.
+- Linting: Clean up various Stylelint violations.
 - Linting: Format SCSS imports consistently.
 - Linting: Use double colon notation for pseudo-element selectors.
 - Small fix to welcome wizard
