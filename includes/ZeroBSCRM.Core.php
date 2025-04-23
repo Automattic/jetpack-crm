@@ -24,7 +24,7 @@ final class ZeroBSCRM {
 	 *
 	 * @var string
 	 */
-	const VERSION = '6.6.0-alpha';
+	const VERSION = '7.0.0-alpha';
 
 	/**
 	 * Jetpack CRM version (used in various extensions as of January 2025).
@@ -39,7 +39,7 @@ final class ZeroBSCRM {
 	 *
 	 * @var string
 	 */
-	public $wp_tested = '6.7';
+	public $wp_tested = '6.8';
 
 	/**
 	 * WordPress update API version.

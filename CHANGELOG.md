@@ -5,7 +5,7 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [6.6.0-alpha] - unreleased
+## [7.0.0-alpha] - unreleased
 
 This is an alpha version! The changes listed here are not final.
 
@@ -22,6 +22,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Removed
 - Code: Removed unused function and images.
+- General: Update minimum WordPress version to 6.7.
 
 ### Fixed
 - Client Portal: Removed top margin from quotes to ensure the top of the quote is visible.
@@ -3657,7 +3658,7 @@ This is an alpha version! The changes listed here are not final.
 - Tested across 4 common web hosts
 - Tested with extensions: WooCommerce CRM Sync, PayPal CRM Sync, CSV Importer, ZBS CRM Mail Campaigns, and CRM Sales Dashboard
 
-[6.6.0-alpha]: https://github.com/Automattic/jetpack-crm/compare/6.5.1...6.6.0-alpha
+[7.0.0-alpha]: https://github.com/Automattic/jetpack-crm/compare/6.5.1...7.0.0-alpha
 [6.5.1]: https://github.com/Automattic/jetpack-crm/compare/6.5.0...6.5.1
 [6.5.0]: https://github.com/Automattic/jetpack-crm/compare/6.4.4...6.5.0
 [6.4.4]: https://github.com/Automattic/jetpack-crm/compare/6.4.3...6.4.4
