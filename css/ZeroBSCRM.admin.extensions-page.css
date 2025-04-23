@@ -16,7 +16,7 @@
   padding: 20px;
 }
 .zbs-extensions-manager .zbs-page-wrap .segment {
-  padding: 0px;
+  padding: 0;
 }
 .zbs-extensions-manager .bullie {
   background: #fff;
@@ -45,7 +45,7 @@
 }
 .zbs-extensions-manager .premium-box {
   margin-top: 10px !important;
-  border-bottom: 0px !important;
+  border-bottom: 0 !important;
 }
 .zbs-extensions-manager .upgrade-bullie-box {
   float: right;
@@ -69,8 +69,8 @@
 }
 .zbs-extensions-manager .hover {
   position: absolute;
-  top: 0px;
-  left: 0px;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   text-align: center;
@@ -82,8 +82,8 @@
 }
 .zbs-extensions-manager .hover-link {
   position: absolute;
-  top: 0px;
-  left: 0px;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   text-align: center;

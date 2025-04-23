@@ -581,8 +581,8 @@ table td[class*=col-], table th[class*=col-] {
 }
 .zbs-invoice-box .zbs-invoice-paid {
   position: absolute;
-  right: 0px;
-  top: 0px;
+  right: 0;
+  top: 0;
   padding: 30px;
   margin-right: 10px;
   color: #038d24;

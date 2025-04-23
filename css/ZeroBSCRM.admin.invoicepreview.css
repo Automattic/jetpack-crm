@@ -48,7 +48,7 @@
   text-align: right;
 }
 .zbs-invoice-preview .tapad {
-  padding: 0px 0px 0px 7px;
+  padding: 0 0 0 7px;
 }
 .zbs-invoice-preview thead {
   border: 1px solid #ccc;
@@ -58,7 +58,7 @@
   padding: 8px;
   line-height: 1.42857;
   vertical-align: top;
-  border-top: 0px solid #ddd;
+  border-top: 0 solid #ddd;
 }
 .zbs-invoice-preview .bottom-row {
   height: 30px;
@@ -164,8 +164,8 @@
   padding-top: 20px;
 }
 .post-type-zerobs_invoice #zbs-business-info-wrapper .business-info .zbs-table td {
-  border: 0px;
-  padding: 0px;
+  border: 0;
+  padding: 0;
 }
 .post-type-zerobs_invoice #zbs-business-info-wrapper .business-info .edit-or-add {
   font-weight: 100;
@@ -249,15 +249,15 @@
 .post-type-zerobs_invoice #zbs-invoice-items .zbs-item-block textarea {
   width: 100%;
   height: 30px;
-  border: 0px;
+  border: 0;
   box-shadow: none;
-  padding: 0px;
-  margin: 0px;
+  padding: 0;
+  margin: 0;
   vertical-align: middle;
   margin-top: 10px;
 }
 .post-type-zerobs_invoice #zbs-invoice-items .zbs-item-block .tapad {
-  padding: 0px 0px 0px 10px;
+  padding: 0 0 0 10px;
 }
 .post-type-zerobs_invoice #zbs-invoice-items .zbs-item-block input[type=number] {
   height: 28px;
@@ -282,7 +282,7 @@
 .post-type-zerobs_invoice #zbs-invoice-items .zbs-item-name {
   width: 100%;
   height: 28px;
-  border: 0px;
+  border: 0;
   box-shadow: none;
 }
 .post-type-zerobs_invoice #zbs-invoice-items .bottom-row, .post-type-zerobs_invoice #zbs-invoice-items .row-amount {
@@ -342,7 +342,7 @@
   color: #fff;
   background-color: #428bca;
   border: 1px solid #428bca;
-  border-width: 0px;
+  border-width: 0;
   font-size: 15px;
   padding: 7px;
   font-weight: 300;
@@ -351,7 +351,7 @@
 .post-type-zerobs_invoice #zbs_invoice_actions .btn-secondary {
   background: #ddd;
   border: 1px solid #ddd;
-  border-width: 0px;
+  border-width: 0;
   font-size: 15px;
   padding: 7px;
   font-weight: 300;
@@ -505,7 +505,7 @@ table.wh-metatab {
 }
 
 table.wh-metatab tr.wh-hr td {
-  padding: 0px 20px;
+  padding: 0 20px;
 }
 
 table.wh-metatab tr.wh-hr hr {
@@ -5185,9 +5185,9 @@ th.column-ID {
   background: #c8fbe9;
   text-align: center;
   border-radius: 5px;
-  -webkit-box-shadow: 0px 2px 17px -4px rgba(0, 0, 0, 0.52);
-  -moz-box-shadow: 0px 2px 17px -4px rgba(0, 0, 0, 0.52);
-  box-shadow: 0px 2px 17px -4px rgba(0, 0, 0, 0.52);
+  -webkit-box-shadow: 0 2px 17px -4px rgba(0, 0, 0, 0.52);
+  -moz-box-shadow: 0 2px 17px -4px rgba(0, 0, 0, 0.52);
+  box-shadow: 0 2px 17px -4px rgba(0, 0, 0, 0.52);
 }
 #zbs-co-contacts .zbs-co-contact .zbs-co-img {
   width: 50px;
@@ -5595,7 +5595,7 @@ div.calendar-table .table-condensed > tbody > tr > td, div.calendar-table .table
 
 /* Full-screen mode */
 body.zbs-fullscreen #wpcontent, body.zbs-fullscreen #wpfooter {
-  margin-left: 0px !important;
+  margin-left: 0 !important;
   margin-top: -32px !important;
 }
 body.zbs-fullscreen #wpadminbar, body.zbs-fullscreen #adminmenuback, body.zbs-fullscreen #adminmenuwrap {
@@ -6468,7 +6468,7 @@ table#zbsFilesTable td {
   width: 1em;
   height: 1em;
   vertical-align: middle;
-  margin: 0px;
+  margin: 0;
   margin-left: 4px;
 }
 
@@ -6480,7 +6480,7 @@ table#zbsFilesTable td {
   display: none;
 }
 .post-type-zerobs_customer #postbox-container-2, .post-type-zerobs_company #postbox-container-2, .post-type-zerobs_quote #postbox-container-2, .post-type-zerobs_invoice #postbox-container-2, .post-type-zerobs_transaction #postbox-container-2, .post-type-zerobs_quo_template #postbox-container-2 {
-  margin-top: 0px;
+  margin-top: 0;
 }
 .post-type-zerobs_customer #postimagediv .inside p, .post-type-zerobs_company #postimagediv .inside p, .post-type-zerobs_quote #postimagediv .inside p, .post-type-zerobs_invoice #postimagediv .inside p, .post-type-zerobs_transaction #postimagediv .inside p, .post-type-zerobs_quo_template #postimagediv .inside p {
   text-align: center;

@@ -10,7 +10,7 @@ body[class*=zbs] .swal2-title {
 body[class*=zbs] p.jpcrm-export-success,
 body[class*=zbs] p.jpcrm-export-complete {
   max-width: 21rem;
-  margin: 0rem auto 2rem;
+  margin: 0 auto 2rem;
 }
 
 .jpcrm-export-progress {
@@ -29,5 +29,5 @@ body[class*=zbs] p.jpcrm-export-complete {
   left: 0;
   z-index: 0;
   display: block;
-  top: 0px;
+  top: 0;
 }

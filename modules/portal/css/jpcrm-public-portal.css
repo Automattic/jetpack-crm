@@ -283,7 +283,7 @@
   box-sizing: border-box !important;
 }
 .zbs-portal-wrapper h1 {
-  margin-top: 0px;
+  margin-top: 0;
 }
 
 .zbs-portal-wrapper-sin {
@@ -294,7 +294,7 @@
 }
 
 .zbs-portal-wrapper-sin h1 {
-  margin-top: 0px;
+  margin-top: 0;
 }
 
 .zbs-alert-danger {
@@ -418,8 +418,8 @@
 }
 .zbs-single-invoice-portal .zbs-invoice-portal-inner .zbs-invoice-box .zbs-invoice-paid {
   position: absolute;
-  right: 0px;
-  top: 0px;
+  right: 0;
+  top: 0;
   padding: 30px;
   margin-right: 50px;
   color: #038d24;
@@ -536,7 +536,6 @@
   vertical-align: baseline;
   font-style: normal;
   min-height: 17px;
-  font-size: 1rem;
   line-height: 17px;
   min-width: 17px;
   font-size: 16px !important;
@@ -557,22 +556,22 @@
 .zbs-client-portal-wrap .zbs-portal-wrapper {
   padding: 20px;
   box-shadow: 1px 1px 1px 1px #ccc;
-  border-radius: 0px 7px 7px 0px;
+  border-radius: 0 7px 7px 0;
   min-height: 650px !important;
   position: relative;
   flex: 1;
   flex-grow: 3;
 }
 .zbs-client-portal-wrap #zbs-nav-tabs {
-  margin: 0px;
-  padding-left: 0px;
-  box-shadow: 0px 1px 0px 1px #ccc;
-  border-radius: 7px 0px 0px 7px;
+  margin: 0;
+  padding-left: 0;
+  box-shadow: 0 1px 0 1px #ccc;
+  border-radius: 7px 0 0 7px;
   padding-top: 7px;
   flex: 1;
 }
 .zbs-client-portal-wrap #zbs-nav-tabs li {
-  padding: 0px;
+  padding: 0;
 }
 .zbs-client-portal-wrap #zbs-nav-tabs li a {
   padding: 10px;
@@ -678,7 +677,7 @@
   max-width: 58rem;
 }
 .zbs-portal-grid #zbs-nav-tabs {
-  padding: 0px;
+  padding: 0;
 }
 .zbs-portal-grid #zbs-nav-tabs li {
   list-style: none;
@@ -717,7 +716,7 @@
 }
 .zbs-portal-grid label {
   display: block;
-  margin: 0px;
+  margin: 0;
 }
 .zbs-portal-grid .zbs-radio label, .zbs-portal-grid .zbs-cf-checkbox label {
   white-space: nowrap !important;

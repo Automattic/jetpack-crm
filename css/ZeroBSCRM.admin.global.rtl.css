@@ -58,7 +58,7 @@ table.wh-metatab {
 }
 
 table.wh-metatab tr.wh-hr td {
-  padding: 0px 20px;
+  padding: 0 20px;
 }
 
 table.wh-metatab tr.wh-hr hr {
@@ -4738,9 +4738,9 @@ th.column-ID {
   background: #c8fbe9;
   text-align: center;
   border-radius: 5px;
-  -webkit-box-shadow: 0px 2px 17px -4px rgba(0, 0, 0, 0.52);
-  -moz-box-shadow: 0px 2px 17px -4px rgba(0, 0, 0, 0.52);
-  box-shadow: 0px 2px 17px -4px rgba(0, 0, 0, 0.52);
+  -webkit-box-shadow: 0 2px 17px -4px rgba(0, 0, 0, 0.52);
+  -moz-box-shadow: 0 2px 17px -4px rgba(0, 0, 0, 0.52);
+  box-shadow: 0 2px 17px -4px rgba(0, 0, 0, 0.52);
 }
 #zbs-co-contacts .zbs-co-contact .zbs-co-img {
   width: 50px;
@@ -5148,7 +5148,7 @@ div.calendar-table .table-condensed > tbody > tr > td, div.calendar-table .table
 
 /* Full-screen mode */
 body.zbs-fullscreen #wpcontent, body.zbs-fullscreen #wpfooter {
-  margin-right: 0px !important;
+  margin-right: 0 !important;
   margin-top: -32px !important;
 }
 body.zbs-fullscreen #wpadminbar, body.zbs-fullscreen #adminmenuback, body.zbs-fullscreen #adminmenuwrap {
@@ -6126,7 +6126,7 @@ table#zbsFilesTable td {
   width: 1em;
   height: 1em;
   vertical-align: middle;
-  margin: 0px;
+  margin: 0;
   margin-right: 4px;
 }
 
@@ -6138,7 +6138,7 @@ table#zbsFilesTable td {
   display: none;
 }
 .post-type-zerobs_customer #postbox-container-2, .post-type-zerobs_company #postbox-container-2, .post-type-zerobs_quote #postbox-container-2, .post-type-zerobs_invoice #postbox-container-2, .post-type-zerobs_transaction #postbox-container-2, .post-type-zerobs_quo_template #postbox-container-2 {
-  margin-top: 0px;
+  margin-top: 0;
 }
 .post-type-zerobs_customer #postimagediv .inside p, .post-type-zerobs_company #postimagediv .inside p, .post-type-zerobs_quote #postimagediv .inside p, .post-type-zerobs_invoice #postimagediv .inside p, .post-type-zerobs_transaction #postimagediv .inside p, .post-type-zerobs_quo_template #postimagediv .inside p {
   text-align: center;
@@ -6324,7 +6324,7 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
     overflow-x: scroll;
   }
   #zbs-doc-menu .bottom ::-webkit-scrollbar {
-    width: 0px; /* remove scrollbar space */
+    width: 0; /* remove scrollbar space */
     background: transparent; /* optional: just make scrollbar invisible */
   }
   #wpcontent .label {
@@ -6371,7 +6371,7 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
     width: 100% !important;
   }
   #wpcontent #zbs-customer-panel {
-    padding-left: 0px;
+    padding-left: 0;
   }
   #wpcontent #zbs-customer-panel .three.wide.column img {
     max-width: 100%;
@@ -6388,7 +6388,7 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
     overflow: hidden;
   }
   .ui.divided.grid:not([class*="vertically divided"]) > .column:not(.row), .ui.divided.grid:not([class*="vertically divided"]) > .row > .column {
-    box-shadow: 0px;
+    box-shadow: 0;
   }
   #back-to-list {
     display: none;
@@ -6460,7 +6460,7 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
     width: 100% !important;
   }
   #wpcontent #zbs-customer-panel {
-    padding-left: 0px;
+    padding-left: 0;
   }
   #wpcontent #email-template-submenu-admin a {
     font-size: 12px;
@@ -6473,7 +6473,7 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
     overflow: hidden;
   }
   .ui.divided.grid:not([class*="vertically divided"]) > .column:not(.row), .ui.divided.grid:not([class*="vertically divided"]) > .row > .column {
-    box-shadow: 0px;
+    box-shadow: 0;
   }
   #back-to-list {
     display: none;
@@ -6560,10 +6560,10 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
 */
 .zbs_nf {
   position: fixed;
-  bottom: 0px;
+  bottom: 0;
   width: 100%;
-  right: 0px;
-  left: 0px;
+  right: 0;
+  left: 0;
   z-index: 10;
   background: #f00;
   padding: 15px;
@@ -6576,10 +6576,10 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
 
 .zbs_overlay {
   position: fixed;
-  top: 0px;
-  right: 0px;
-  left: 0px;
-  bottom: 0px;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
   width: 100%;
   height: 100%;
   z-index: 100000;
@@ -6659,7 +6659,7 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
  */
 #learn-pop {
   background: #FFF;
-  box-shadow: 0px 4px 44px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 4px 44px rgba(0, 0, 0, 0.35);
   border-radius: 8px;
   padding: 10px 12px;
 }
@@ -6812,7 +6812,6 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
   margin: 0;
   outline: 0;
   overflow: hidden;
-  font-size: 14px;
   text-overflow: ellipsis;
   text-decoration: none;
   vertical-align: top;

@@ -31,7 +31,7 @@
   top: 4px;
   display: inline-block;
   color: #000;
-  border: 0px;
+  border: 0;
   box-shadow: none;
 }
 
@@ -61,7 +61,6 @@
 }
 
 .fc-event {
-  border: 0px;
   background: #fff;
   border: 1px solid #ddd;
 }
@@ -92,7 +91,7 @@
 }
 
 .fc-toolbar .fc-state-active, .fc-toolbar .ui-state-active {
-  z-index: 0px !important;
+  z-index: 0 !important;
 }
 
 #zbs-add-task-ui {
@@ -129,7 +128,7 @@
 }
 
 .fc-event {
-  border: 0px solid;
+  border: 0 solid;
   background: transparent;
 }
 
@@ -212,7 +211,7 @@
 }
 
 .ui.segment {
-  margin-top: 0px;
+  margin-top: 0;
 }
 
 .no-owner .dn {
@@ -230,7 +229,7 @@
 }
 
 .no-task-date #daterange {
-  border: 0px;
+  border: 0;
   box-shadow: none;
 }
 
@@ -244,11 +243,11 @@
   position: absolute !important;
   top: 11px;
   left: 44px;
-  border: 0px;
+  border: 0;
 }
 
 .select2-container--default .select2-selection--single {
-  border: 0px solid !important;
+  border: 0 solid !important;
   font-size: 20px;
 }
 
@@ -285,21 +284,21 @@
   z-index: 2;
   font-weight: 900;
   line-height: 11px !important;
-  margin-right: 0px !important;
+  margin-right: 0 !important;
   padding: 3px !important;
 }
 
 .zbs-cal-complete-list {
   width: 13px;
   height: 13px;
-  margin-left: 0px;
-  margin-top: 0px;
+  margin-left: 0;
+  margin-top: 0;
   min-width: 13px !important;
   min-height: 13px !important;
 }
 
 .zbs-cal-complete .icon {
-  margin: 0px !important;
+  margin: 0 !important;
 }
 
 .zbs-comp-1 {
@@ -332,7 +331,7 @@
 .zbs-task-for-company {
   width: 80%;
   float: left;
-  padding: 0px;
+  padding: 0;
   margin-top: -11px;
   position: relative;
 }
@@ -353,7 +352,7 @@
   position: relative;
   clear: both;
   padding-top: 10px;
-  padding-bottom: 0px;
+  padding-bottom: 0;
 }
 
 .zbs-task-for-who {
