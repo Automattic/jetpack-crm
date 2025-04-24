@@ -106,7 +106,6 @@ body.jpcrm-admin.jpcrm-full-width #wpcontent #wpbody {
   transform-style: preserve-3d;
 }
 #jpcrm-top-menu .logo-cube:hover {
-  -webkit-transform: rotateX(90deg);
   transform: rotateX(90deg); /* Text bleed at 90º */
 }
 #jpcrm-top-menu .logo-cube .cube-side {
@@ -115,7 +114,6 @@ body.jpcrm-admin.jpcrm-full-width #wpcontent #wpbody {
   text-align: center;
 }
 #jpcrm-top-menu .logo-cube .cube-side.side1 {
-  -webkit-transform: translateZ(20px);
   transform: translateZ(20px);
 }
 #jpcrm-top-menu .logo-cube .cube-side.side1 img {
@@ -124,7 +122,6 @@ body.jpcrm-admin.jpcrm-full-width #wpcontent #wpbody {
 }
 #jpcrm-top-menu .logo-cube .cube-side.side2 {
   font-size: 40px;
-  -webkit-transform: rotateX(-90deg) translateZ(-20px);
   transform: rotateX(-90deg) translateZ(-20px);
 }
 #jpcrm-top-menu menu-bar {
