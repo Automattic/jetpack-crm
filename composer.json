@@ -10,7 +10,7 @@
 		"codeception/module-db": "^2.0 || 3.1.0 || ^3.1.2",
 		"codeception/module-filesystem": "^2.0 || ^3.0",
 		"codeception/util-universalframework": "^1.0",
-		"yoast/phpunit-polyfills": "^3.0.0",
+		"yoast/phpunit-polyfills": "^4.0.0",
 		"automattic/phpunit-select-config": "^1.0.3-alpha"
 	},
 	"scripts": {
@@ -57,7 +57,7 @@
 		"php": ">=7.4",
 		"automattic/jetpack-assets": "^4.0.19-alpha",
 		"automattic/jetpack-autoloader": "^5.0.7-alpha",
-		"automattic/jetpack-composer-plugin": "^4.0.4",
+		"automattic/jetpack-composer-plugin": "^4.0.5-alpha",
 		"automattic/woocommerce": "^3.1",
 		"dompdf/dompdf": "^2.0"
 	},
