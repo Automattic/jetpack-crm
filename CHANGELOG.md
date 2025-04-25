@@ -32,6 +32,7 @@ This is an alpha version! The changes listed here are not final.
 - Code: Remove unneeded `data:` URI components.
 - Code: Update stylesheets to use hex instead of named colors.
 - Code: Update stylesheets to use WordPress font styles.
+- Contacts: Prevent a PHP warning when adding a new contact when a custom file field exists.
 - Linting: Clean up various Stylelint violations.
 - Linting: Fix more Stylelint violations.
 - Linting: Format SCSS imports consistently.
