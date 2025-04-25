@@ -2,15 +2,16 @@
     "packages": [
         {
             "name": "automattic/jetpack-assets",
-            "version": "4.0.19-alpha.1745512883",
-            "version_normalized": "4.0.19.0-alpha1745512883",
+            "version": "4.0.19-alpha.1745587468",
+            "version_normalized": "4.0.19.0-alpha1745587468",
             "dist": {
                 "type": "path",
                 "url": "/tmp/jetpack-build/Automattic/jetpack-assets",
-                "reference": "1bee51e240de0c16644faade136265cfe2657e85"
+                "reference": "a454fdc06ec4d5d5ade176ce07cf35ee0675651e"
             },
             "require": {
                 "automattic/jetpack-constants": "^3.0.8-alpha",
+                "automattic/jetpack-status": "^5.1.4-alpha",
                 "php": ">=7.2"
             },
             "require-dev": {
@@ -80,7 +81,7 @@
             "dist": {
                 "type": "path",
                 "url": "/tmp/jetpack-build/Automattic/jetpack-autoloader",
-                "reference": "ebf07ec1dc1eca27af99514fa4be4bd8718c6da5"
+                "reference": "da3e878d8767c3445ecd401c9cc7062277f27565"
             },
             "require": {
                 "composer-plugin-api": "^2.2",
@@ -152,7 +153,7 @@
             "dist": {
                 "type": "path",
                 "url": "/tmp/jetpack-build/Automattic/jetpack-composer-plugin",
-                "reference": "148523ff6dc2e39462ffbd2035b21fdc0f99d461"
+                "reference": "0d9df9ae8a43c78f2e4766b360a72c6ec33405f6"
             },
             "require": {
                 "composer-plugin-api": "^2.2",
@@ -216,7 +217,7 @@
             "dist": {
                 "type": "path",
                 "url": "/tmp/jetpack-build/Automattic/jetpack-constants",
-                "reference": "931dc94f4039ea46708d9cecdbb7e008b9e3aa48"
+                "reference": "4ea26da80d2015741c32a55425f31c192ab78338"
             },
             "require": {
                 "php": ">=7.2"
@@ -266,6 +267,74 @@
                 "relative": false
             },
             "install-path": "../../jetpack_vendor/automattic/jetpack-constants"
+        },
+        {
+            "name": "automattic/jetpack-status",
+            "version": "5.1.4-alpha.1745512883",
+            "version_normalized": "5.1.4.0-alpha1745512883",
+            "dist": {
+                "type": "path",
+                "url": "/tmp/jetpack-build/Automattic/jetpack-status",
+                "reference": "f04b7e0c10be488b83121ba3537b450753ee5cdd"
+            },
+            "require": {
+                "automattic/jetpack-constants": "^3.0.8-alpha",
+                "php": ">=7.2"
+            },
+            "require-dev": {
+                "automattic/jetpack-changelogger": "^6.0.5-alpha",
+                "automattic/jetpack-connection": "@dev",
+                "automattic/jetpack-ip": "^0.4.9-alpha",
+                "automattic/jetpack-plans": "@dev",
+                "automattic/phpunit-select-config": "^1.0.3-alpha",
+                "brain/monkey": "^2.6.2",
+                "yoast/phpunit-polyfills": "^4.0.0"
+            },
+            "suggest": {
+                "automattic/jetpack-autoloader": "Allow for better interoperability with other plugins that use this package."
+            },
+            "type": "jetpack-library",
+            "extra": {
+                "autotagger": true,
+                "mirror-repo": "Automattic/jetpack-status",
+                "changelogger": {
+                    "link-template": "https://github.com/Automattic/jetpack-status/compare/v${old}...v${new}"
+                },
+                "branch-alias": {
+                    "dev-trunk": "5.1.x-dev"
+                },
+                "dependencies": {
+                    "test-only": [
+                        "packages/connection",
+                        "packages/plans"
+                    ]
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "scripts": {
+                "phpunit": [
+                    "phpunit-select-config phpunit.#.xml.dist --colors=always"
+                ],
+                "test-coverage": [
+                    "php -dpcov.directory=. ./vendor/bin/phpunit-select-config phpunit.#.xml.dist --coverage-php \"$COVERAGE_DIR/php.cov\""
+                ],
+                "test-php": [
+                    "@composer phpunit"
+                ]
+            },
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "description": "Used to retrieve information about the current status of Jetpack and the site overall.",
+            "transport-options": {
+                "relative": false
+            },
+            "install-path": "../../jetpack_vendor/automattic/jetpack-status"
         },
         {
             "name": "automattic/woocommerce",
