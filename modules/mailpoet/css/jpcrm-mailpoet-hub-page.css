@@ -54,7 +54,7 @@
   margin-left: 0.5em;
 }
 #jpcrm-mailpoet-hub-page #jpcrm-mailpoet-page-body .jpcrm-mailpoet-stats-header .jpcrm-mailpoet-stats-url {
-  line-height: 0.8em;
+  line-height: 0.8;
 }
 #jpcrm-mailpoet-hub-page #jpcrm-mailpoet-page-body h2.ui.header {
   margin: 1em;
@@ -83,7 +83,7 @@
 #jpcrm-mailpoet-hub-page #jpcrm-mailpoet-page-body #jpcrm-mailpoet-debug-output {
   background: #f1e9e9;
   color: #000;
-  line-height: 2em;
+  line-height: 2;
   overflow-x: scroll;
   padding: 0.5em 1em;
 }

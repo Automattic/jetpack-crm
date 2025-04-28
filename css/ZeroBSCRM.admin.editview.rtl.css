@@ -52,7 +52,7 @@
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   margin: 0 0 0 0.25em;
   padding: 0.78571429em 1.5em 0.78571429em;
-  line-height: 1em;
+  line-height: 1;
   font-style: normal;
   text-align: center;
   text-decoration: none;
@@ -161,7 +161,7 @@ table#zbs-tag-manager td, table#zbs-tag-manager td .label, #zbs-tags-wrap span, 
 }
 .zbs-social-acc .zbs-social-acc-input {
   font-size: 14px !important;
-  line-height: 1.4em !important;
+  line-height: 1.4 !important;
   height: 36px !important;
   max-width: 100%;
   width: 75%;
@@ -193,7 +193,7 @@ table#zbs-tag-manager td, table#zbs-tag-manager td .label, #zbs-tags-wrap span, 
 
 .zbs-aka-alias-input {
   font-size: 14px !important;
-  line-height: 1.4em !important;
+  line-height: 1.4 !important;
   height: 36px !important;
   max-width: 100%;
   width: 100%;

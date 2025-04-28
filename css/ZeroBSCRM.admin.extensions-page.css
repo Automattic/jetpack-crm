@@ -46,6 +46,7 @@
 .zbs-extensions-manager .premium-box {
   margin-top: 10px !important;
   border-bottom: 0 !important;
+  height: 52px;
 }
 .zbs-extensions-manager .upgrade-bullie-box {
   float: right;
@@ -190,9 +191,6 @@
 }
 .zbs-extensions-manager .guides {
   float: right;
-}
-.zbs-extensions-manager .premium-box {
-  height: 52px;
 }
 .zbs-extensions-manager .actions-block {
   float: right;

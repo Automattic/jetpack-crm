@@ -54,7 +54,7 @@
   margin-right: 0.5em;
 }
 #jpcrm-woosync-hub-page #jpcrm-woosync-page-body .jpcrm-woosync-stats-header .jpcrm-woosync-stats-url {
-  line-height: 0.8em;
+  line-height: 0.8;
 }
 #jpcrm-woosync-hub-page #jpcrm-woosync-page-body h2.ui.header {
   margin: 1em;
@@ -102,12 +102,12 @@
 #jpcrm-woosync-hub-page #jpcrm-woosync-page-body #jpcrm-woosync-stats-container .jpcrm-woosync-stat div.jpcrm-woosync-stat-container div.jpcrm-woosync-stat-label {
   font-size: 0.5em;
   margin-top: 1em;
-  line-height: 1.2em;
+  line-height: 1.2;
 }
 #jpcrm-woosync-hub-page #jpcrm-woosync-page-body #jpcrm-woosync-debug-output {
   background: #f1e9e9;
   color: #000;
-  line-height: 2em;
+  line-height: 2;
   overflow-x: scroll;
   padding: 0.5em 1em;
 }

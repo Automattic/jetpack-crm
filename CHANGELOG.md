@@ -35,6 +35,7 @@ This is an alpha version! The changes listed here are not final.
 - Code: Update stylesheets to use WordPress font styles.
 - Contacts: Prevent a PHP warning when adding a new contact when a custom file field exists.
 - Linting: Clean up various Stylelint violations.
+- Linting: Do additional stylesheet cleanup.
 - Linting: Fix more Stylelint violations.
 - Linting: Format SCSS imports consistently.
 - Linting: Remove outdated vendor prefixes in stylesheets.

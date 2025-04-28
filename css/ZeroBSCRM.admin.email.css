@@ -91,6 +91,8 @@ html, body {
   padding-top: 10px !important;
   padding-bottom: 10px;
   position: relative;
+  border-top: 0 solid #fff !important;
+  border-bottom: 1px solid #dededf;
 }
 
 .zbs-email-list .item {
@@ -118,6 +120,9 @@ html, body {
 .zbs-contact {
   width: 100%;
   height: 30px;
+}
+.zbs-contact .zbs-open {
+  float: right;
 }
 
 .the_content {
@@ -162,17 +167,13 @@ html, body {
 
 .spinner-gif {
   display: none;
+  margin-top: -55px;
 }
 
 .click-email-to-load {
   color: #ccc;
   font-size: 18px;
   margin-top: -50px;
-}
-
-.zbs-email-list-item {
-  border-top: 0 solid #fff !important;
-  border-bottom: 1px solid #dededf;
 }
 
 .zbs-click-email-icon {
@@ -184,10 +185,6 @@ html, body {
 .click-email {
   font-size: 20px;
   margin-top: -10px;
-}
-
-.spinner-gif {
-  margin-top: -55px;
 }
 
 .zbs-email-list::-webkit-scrollbar, #zbs-email-body::-webkit-scrollbar {
@@ -333,6 +330,7 @@ html, body {
   color: #000;
   margin-top: 0;
   font-weight: 900;
+  display: none;
 }
 #zbs-email-body .zbs-email-body-content {
   font-size: 15px;
@@ -365,9 +363,8 @@ html, body {
 #zbs-email-body .zbs-email-actions .icon {
   cursor: pointer;
 }
-
-.zbs-contact .zbs-open {
-  float: right;
+#zbs-email-body .em-sub-0 {
+  display: block;
 }
 
 .zbs-email-thread .zbs-message {
@@ -458,13 +455,6 @@ html, body {
   font-size: 18px;
   margin-top: 6px;
   color: #ccc;
-}
-
-#zbs-email-body .zbs-email-subject {
-  display: none;
-}
-#zbs-email-body .em-sub-0 {
-  display: block;
 }
 
 .zbs-email-body-content ul {

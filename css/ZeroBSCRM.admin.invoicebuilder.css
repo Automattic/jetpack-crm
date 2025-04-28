@@ -38,6 +38,7 @@
 .post-type-zerobs_invoice #billing-to,
 #zerobs-invoice-edit-box #billing-to {
   width: 90% !important;
+  float: left;
 }
 .post-type-zerobs_invoice #billing-to .inv-to-form,
 #zerobs-invoice-edit-box #billing-to .inv-to-form {
@@ -66,6 +67,12 @@
 #zerobs-invoice-edit-box #billing-to .wh-large input,
 #zerobs-invoice-edit-box #billing-to input.typeahead {
   max-width: 100%;
+}
+.post-type-zerobs_invoice #billing-to th,
+#zerobs-invoice-edit-box #billing-to th {
+  vertical-align: middle;
+  font-size: 18px;
+  font-weight: 100;
 }
 .post-type-zerobs_invoice #zbs-add-new-row,
 #zerobs-invoice-edit-box #zbs-add-new-row {
@@ -417,17 +424,6 @@
 #zerobs-invoice-edit-box #zbs_invoice_send_test2:focus {
   outline: 0 !important;
 }
-.post-type-zerobs_invoice #billing-to,
-#zerobs-invoice-edit-box #billing-to {
-  width: 50%;
-  float: left;
-}
-.post-type-zerobs_invoice #billing-to th,
-#zerobs-invoice-edit-box #billing-to th {
-  vertical-align: middle;
-  font-size: 18px;
-  font-weight: 100;
-}
 .post-type-zerobs_invoice #assign-to,
 #zerobs-invoice-edit-box #assign-to {
   width: 50%;
@@ -617,6 +613,7 @@
 #zerobs-invoice-edit-box #invoice_totals .bord-l,
 #zerobs-invoice-edit-box #partials .bord-l {
   text-align: right;
+  border-left: 2px solid #ccc !important;
 }
 .post-type-zerobs_invoice #invoice_totals td.bord, .post-type-zerobs_invoice #partials td.bord,
 #zerobs-invoice-edit-box #invoice_totals td.bord,
@@ -633,11 +630,6 @@
   height: 20px;
   text-align: right;
   border-right: 2px solid #ccc !important;
-}
-.post-type-zerobs_invoice #invoice_totals .bord-l, .post-type-zerobs_invoice #partials .bord-l,
-#zerobs-invoice-edit-box #invoice_totals .bord-l,
-#zerobs-invoice-edit-box #partials .bord-l {
-  border-left: 2px solid #ccc !important;
 }
 .post-type-zerobs_invoice #zbs-invoice-items .first,
 #zerobs-invoice-edit-box #zbs-invoice-items .first {
@@ -688,6 +680,11 @@
 .post-type-zerobs_invoice #zbs-invoice-items .zbs-row-actions,
 #zerobs-invoice-edit-box #zbs-invoice-items .zbs-row-actions {
   cursor: pointer;
+  border: 1px solid #ccc;
+  color: #999;
+  font-size: 13px;
+  font-weight: 100;
+  text-align: center;
 }
 .post-type-zerobs_invoice #zbs-invoice-items .padding,
 #zerobs-invoice-edit-box #zbs-invoice-items .padding {
@@ -737,14 +734,6 @@
 .post-type-zerobs_invoice #zbs-invoice-items .add-row,
 #zerobs-invoice-edit-box #zbs-invoice-items .add-row {
   border-left: 0 solid #fff;
-}
-.post-type-zerobs_invoice #zbs-invoice-items .zbs-row-actions,
-#zerobs-invoice-edit-box #zbs-invoice-items .zbs-row-actions {
-  border: 1px solid #ccc;
-  color: #999;
-  font-size: 13px;
-  font-weight: 100;
-  text-align: center;
 }
 .post-type-zerobs_invoice #zbs_invoice_actions,
 #zerobs-invoice-edit-box #zbs_invoice_actions {
@@ -898,6 +887,9 @@
   width: 100%;
   position: relative;
   display: none;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 12px;
 }
 .post-type-zerobs_invoice .wh-logo-set .zbs-remove, .post-type-zerobs_invoice .wh-logo-set .zbs-update,
 #zerobs-invoice-edit-box .wh-logo-set .zbs-remove,
@@ -922,12 +914,6 @@
   border-radius: 2px;
   margin: 3px;
   padding: 2px 4px;
-}
-.post-type-zerobs_invoice .wh-logo-set,
-#zerobs-invoice-edit-box .wh-logo-set {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  margin-left: 12px;
 }
 .post-type-zerobs_invoice .wh-logo-set:hover .zbs-logo-options,
 #zerobs-invoice-edit-box .wh-logo-set:hover .zbs-logo-options {
@@ -1068,7 +1054,7 @@
 .zbs-invoice-email-modal-field input[type=checkbox] {
   margin-right: 0.7em;
   vertical-align: middle;
-  line-height: 1em;
+  line-height: 1;
 }
 .zbs-invoice-email-modal-field label {
   margin-bottom: 0;

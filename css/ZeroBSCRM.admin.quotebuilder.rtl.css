@@ -54,7 +54,7 @@
 .jpcrm-send-email-modal-field input[type=checkbox] {
   margin-left: 0.7em;
   vertical-align: middle;
-  line-height: 1em;
+  line-height: 1;
 }
 .jpcrm-send-email-modal-field label {
   margin-bottom: 0;

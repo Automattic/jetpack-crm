@@ -367,15 +367,12 @@ div.calendar-table .table-condensed > tbody > tr > td, div.calendar-table .table
 table {
   border-collapse: collapse;
   border-spacing: 0;
+  max-width: 100%;
+  background-color: transparent;
 }
 
 td, th {
   padding: 0;
-}
-
-table {
-  max-width: 100%;
-  background-color: transparent;
 }
 
 th {
@@ -528,7 +525,7 @@ table td[class*=col-], table th[class*=col-] {
   margin: 2px 0 0;
   list-style: none;
   font-size: 14px !important;
-  line-height: 1.4em;
+  line-height: 1.4;
   background-color: #fff;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 4px;

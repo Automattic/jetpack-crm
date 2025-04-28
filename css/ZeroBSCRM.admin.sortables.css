@@ -30,7 +30,7 @@
 .zbsSortableFieldList li .zbs-showhide-field {
   float: right;
   text-align: right;
-  line-height: 1em;
+  line-height: 1;
   margin-top: -7px;
 }
 .zbsSortableFieldList li .zbs-showhide-field label {
@@ -39,7 +39,7 @@
   padding-right: 6px;
 }
 .zbsSortableFieldList li .zbs-showhide-field input {
-  line-height: 1em;
+  line-height: 1;
   display: inline-block;
   vertical-align: middle;
 }
