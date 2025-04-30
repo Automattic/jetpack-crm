@@ -42,6 +42,7 @@ This is an alpha version! The changes listed here are not final.
 - Linting: Use double colon notation for pseudo-element selectors.
 - Remove unused legacy code.
 - Small fix to welcome wizard
+- Welcome Tour: Hide upsell prompts when one has a valid license.
 
 ## [6.5.1] - 2025-01-22
 ### Changed
