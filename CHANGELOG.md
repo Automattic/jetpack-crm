@@ -34,6 +34,7 @@ This is an alpha version! The changes listed here are not final.
 - Code: Update stylesheets to use hex instead of named colors.
 - Code: Update stylesheets to use WordPress font styles.
 - Contacts: Prevent a PHP warning when adding a new contact when a custom file field exists.
+- Linting: Address final rules in WordPress Stylelint config.
 - Linting: Clean up various Stylelint violations.
 - Linting: Do additional stylesheet cleanup.
 - Linting: Fix more Stylelint violations.
