@@ -42,6 +42,7 @@ This is an alpha version! The changes listed here are not final.
 - Linting: Format SCSS imports consistently.
 - Linting: Remove outdated vendor prefixes in stylesheets.
 - Linting: Use double colon notation for pseudo-element selectors.
+- Phan: Exclude generated file from analysis.
 - Remove unused legacy code.
 - Small fix to welcome wizard
 - Welcome Tour: Hide upsell prompts when one has a valid license.
