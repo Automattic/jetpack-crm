@@ -20,6 +20,7 @@ This is an alpha version! The changes listed here are not final.
 - jetpack-assets now requires jetpack-status so updating composer lock files.
 - Updated package dependencies.
 - Update package dependencies.
+- Update to `@tanstack/react-query` v5.
 
 ### Removed
 - Code: Removed unused function and images.
