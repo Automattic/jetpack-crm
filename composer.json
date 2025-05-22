@@ -55,7 +55,7 @@
 	},
 	"require": {
 		"php": ">=7.4",
-		"automattic/jetpack-assets": "^4.0.20",
+		"automattic/jetpack-assets": "^4.0.21",
 		"automattic/jetpack-autoloader": "^5.0.7",
 		"automattic/jetpack-composer-plugin": "^4.0.5",
 		"automattic/woocommerce": "^3.1",
