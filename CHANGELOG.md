@@ -21,6 +21,8 @@ This is an alpha version! The changes listed here are not final.
 - Updated package dependencies.
 - Update package dependencies.
 - Update to `@tanstack/react-query` v5.
+- Use @automattic/color-studio as a pnpm dependency.
+- Use font-awesome as a composer dependency.
 
 ### Removed
 - Code: Removed unused function and images.
