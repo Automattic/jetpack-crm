@@ -34,11 +34,13 @@ This is an alpha version! The changes listed here are not final.
 - Code: Prevent dynamic class properties.
 - Code: Remove extra params on function calls.
 - Code: Remove unneeded `data:` URI components.
+- Code: Update package annotations.
 - Code: Update stylesheets to use hex instead of named colors.
 - Code: Update stylesheets to use WordPress font styles.
 - Contacts: Prevent a PHP warning when adding a new contact when a custom file field exists.
 - JS Packages: Decrease CSS priority of global styles to prevent them from applying within the editor
 - Linting: Address final rules in WordPress Stylelint config.
+- Linting: Clean up various Client Portal files.
 - Linting: Clean up various Stylelint violations.
 - Linting: Do additional stylesheet cleanup.
 - Linting: Fix more Stylelint violations.
