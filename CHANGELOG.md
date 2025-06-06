@@ -19,6 +19,7 @@ This is an alpha version! The changes listed here are not final.
 - External Media: Move the GooglePhotosMedia, OpenverseMedia, PexelsMedia to @automattic/jetpack-shared-extension-utils
 - General: indicate compatibility with the upcoming version of WordPress - 6.8.
 - jetpack-assets now requires jetpack-status so updating composer lock files.
+- Load Semantic UI from build dir.
 - Updated package dependencies.
 - Update package dependencies.
 - Update to `@tanstack/react-query` v5.

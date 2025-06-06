@@ -137,7 +137,7 @@ body.jpcrm-admin.jpcrm-full-width #wpcontent #wpbody {
   align-items: center;
 }
 #jpcrm-top-menu menu-bar menu-section .item {
-  color: var(--jp-black);
+  color: var(--jp-black) !important;
   padding: 1em;
   line-height: 1;
 }
