@@ -140,6 +140,7 @@ i.alternate {
 .ui.modals.page {
   z-index: 999999;
 }
+
 .ui.modals.page .modal, .ui.modals.page .ui.modal {
   /* max-width: 500px; */
   max-width: 1400px !important;
@@ -148,9 +149,11 @@ i.alternate {
   border-radius: 8px !important;
   overflow-y: auto !important;
 }
+
 .ui.modals.page .jpcrm-modal-mobile-only {
   display: none;
 }
+
 .ui.modals.page .jpcrm-modal-close {
   z-index: 100000;
   width: 24px;
@@ -161,28 +164,34 @@ i.alternate {
   top: 10px;
   left: 10px;
 }
+
 .ui.modals.page .jpcrm-modal-close:hover {
   cursor: pointer;
 }
+
 .ui.modals.page .jpcrm-modal-body .jpcrm-modal-cta-group {
   padding-right: 80px;
   padding-left: 50px;
 }
+
 .ui.modals.page .jpcrm-modal-body .jpcrm-modal-cta-group .jpcrm-modal-title {
   font-size: 36px;
   font-weight: 700;
   line-height: 40px;
   margin-bottom: 16px;
 }
+
 .ui.modals.page .jpcrm-modal-body .jpcrm-modal-cta-group .jpcrm-modal-paragraph {
   font-size: 16px;
   line-height: 24px;
   margin-bottom: 12px;
 }
+
 .ui.modals.page .jpcrm-modal-body .jpcrm-modal-cta-group .jpcrm-modal-actions .ui.button {
   margin-top: 12px;
   margin-left: 24px;
 }
+
 .ui.modals.page .jpcrm-modal-body .jpcrm-modal-illustration img {
   /*
 
@@ -202,6 +211,7 @@ i.alternate {
   vertical-align: middle;
   margin: 15px 0 10px 0;
 }
+
 .ui.modals.page .jpcrm-modal-footer {
   position: fixed;
   bottom: 0;
@@ -210,10 +220,12 @@ i.alternate {
   padding-top: 50px;
   padding-bottom: 50px;
 }
+
 .ui.modals.page .jpcrm-modal-footer .jpcrm-modal-learn-footer {
   padding-right: 80px;
   padding-left: 50px;
 }
+
 .ui.modals.page .jpcrm-modal-footer .jpcrm-modal-learn-footer .jpcrm-modal-learn-footer-title {
   display: flex;
   align-items: center;
@@ -222,16 +234,19 @@ i.alternate {
   line-height: 24px;
   margin-bottom: 8px;
 }
+
 .ui.modals.page .jpcrm-modal-footer .jpcrm-modal-learn-footer .jpcrm-modal-learn-footer-title img {
   width: 30px;
   height: 30px;
   border-radius: 50%;
 }
+
 .ui.modals.page .jpcrm-modal-footer .jpcrm-modal-learn-footer .jpcrm-modal-learn-footer-paragraph {
   margin-bottom: 16px;
   font-size: 14px;
   line-height: 24px;
 }
+
 .ui.modals.page .jpcrm-modal-footer .jpcrm-modal-learn-footer .jpcrm-modal-learn-footer-actions a {
   display: flex;
   align-items: center;
@@ -239,13 +254,16 @@ i.alternate {
   color: #000;
   text-decoration: underline;
 }
+
 .ui.modals.page .jpcrm-modal-footer .jpcrm-modal-learn-footer .jpcrm-modal-learn-footer-actions a img {
   margin-left: 8px;
 }
+
 .ui.modals.page .jpcrm-modal-footer .jpcrm-modal-learn-footer-videos .jpcrm-modal-learn-footer-video img {
   max-width: 100%;
   border-radius: 4px;
 }
+
 .ui.modals.page .jpcrm-modal-footer .jpcrm-modal-learn-footer-videos .jpcrm-modal-learn-footer-video a {
   font-size: 14px;
   font-weight: 700;
