@@ -42,6 +42,8 @@ This is an alpha version! The changes listed here are not final.
 - Code: Update stylesheets to use hex instead of named colors.
 - Code: Update stylesheets to use WordPress font styles.
 - Contacts: Prevent a PHP warning when adding a new contact when a custom file field exists.
+- fixed a bug where tax names appended From WooCommerce
+- Invoice line items now import the product short descritpion if set. If not set just the item name.
 - JS Packages: Decrease CSS priority of global styles to prevent them from applying within the editor
 - Linting: Address final rules in WordPress Stylelint config.
 - Linting: Clean up various Client Portal files.
