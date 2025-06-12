@@ -27,6 +27,7 @@ This is an alpha version! The changes listed here are not final.
 - Use @automattic/color-studio as a pnpm dependency.
 - Use font-awesome as a composer dependency.
 - Use font-awesome from pnpm instead of composer.
+- Use FullCalendar as pnpm dependency.
 
 ### Removed
 - Code: Removed unused function and images.
