@@ -11,6 +11,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Added
 - Connection: Disconnecting a connection owner account will disconnect all other users first.
+- Tasks: Show completion checkmark in week and day views.
 
 ### Changed
 - Code: First pass of style coding standards.
@@ -58,6 +59,11 @@ This is an alpha version! The changes listed here are not final.
 - Phan: Exclude generated file from analysis.
 - Remove unused legacy code.
 - Small fix to welcome wizard
+- Tasks: Allow translation of task status after status change.
+- Tasks: Ensure task status is consistently toggled.
+- Tasks: Make it more clear what the current status of a task is.
+- Tasks: Minor style adjustments on mobile.
+- Tasks: Prevent status toggle when pressing enter.
 - Welcome Tour: Hide upsell prompts when one has a valid license.
 - Welcome tour: Restore missing images.
 
