@@ -34,6 +34,7 @@ This is an alpha version! The changes listed here are not final.
 - Code: Removed unused function and images.
 - General: Update minimum WordPress version to 6.7.
 - Remove Bootstrap dependency.
+- Remove Onboarding React prototype.
 
 ### Fixed
 - Client Portal: Removed top margin from quotes to ensure the top of the quote is visible.

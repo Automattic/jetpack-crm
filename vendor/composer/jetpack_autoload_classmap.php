@@ -506,10 +506,6 @@ return array(
 		'version' => '5.2.0.0',
 		'path'    => $baseDir . '/jetpack_vendor/automattic/jetpack-status/src/class-visitor.php'
 	),
-	'Automattic\\Jetpack_CRM\\Onboarding_Wizard\\Bootstrap' => array(
-		'version' => 'dev-trunk',
-		'path'    => $baseDir . '/src/onboarding-wizard/class-bootstrap.php'
-	),
 	'Automattic\\WooCommerce\\Client' => array(
 		'version' => '3.1.0.0',
 		'path'    => $vendorDir . '/automattic/woocommerce/src/WooCommerce/Client.php'

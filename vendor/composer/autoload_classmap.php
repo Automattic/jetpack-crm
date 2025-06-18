@@ -128,7 +128,6 @@ return array(
     'Automattic\\Jetpack\\Status\\Host' => $baseDir . '/jetpack_vendor/automattic/jetpack-status/src/class-host.php',
     'Automattic\\Jetpack\\Status\\Request' => $baseDir . '/jetpack_vendor/automattic/jetpack-status/src/class-request.php',
     'Automattic\\Jetpack\\Status\\Visitor' => $baseDir . '/jetpack_vendor/automattic/jetpack-status/src/class-visitor.php',
-    'Automattic\\Jetpack_CRM\\Onboarding_Wizard\\Bootstrap' => $baseDir . '/src/onboarding-wizard/class-bootstrap.php',
     'Automattic\\WooCommerce\\Client' => $vendorDir . '/automattic/woocommerce/src/WooCommerce/Client.php',
     'Automattic\\WooCommerce\\HttpClient\\BasicAuth' => $vendorDir . '/automattic/woocommerce/src/WooCommerce/HttpClient/BasicAuth.php',
     'Automattic\\WooCommerce\\HttpClient\\HttpClient' => $vendorDir . '/automattic/woocommerce/src/WooCommerce/HttpClient/HttpClient.php',
