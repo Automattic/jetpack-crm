@@ -232,7 +232,6 @@ body.jpcrm-admin.jpcrm-full-width #wpcontent #wpbody {
   padding: 0;
 }
 .jpcrm-dashcard .jpcrm-dashcard-header {
-  flex: 1 1 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
