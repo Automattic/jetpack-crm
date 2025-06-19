@@ -22,6 +22,7 @@ This is an alpha version! The changes listed here are not final.
 - Improved settings so partial payments can be disabled
 - jetpack-assets now requires jetpack-status so updating composer lock files.
 - Load Semantic UI from build dir.
+- Tasks: Update FullCalendar to latest version.
 - Updated package dependencies.
 - Update package dependencies.
 - Update to `@tanstack/react-query` v5.
