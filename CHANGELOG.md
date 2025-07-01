@@ -23,6 +23,7 @@ This is an alpha version! The changes listed here are not final.
 - jetpack-assets now requires jetpack-status so updating composer lock files.
 - Load Semantic UI from build dir.
 - Tasks: Update FullCalendar to latest version.
+- Update daterangepicker to 3.1.0.
 - Updated package dependencies.
 - Update package dependencies.
 - Update to `@tanstack/react-query` v5.
