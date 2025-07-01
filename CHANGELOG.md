@@ -38,6 +38,7 @@ This is an alpha version! The changes listed here are not final.
 - Remove Onboarding React prototype.
 
 ### Fixed
+- API: Fix `companies` endpoint param mapping.
 - Client Portal: Removed top margin from quotes to ensure the top of the quote is visible.
 - Client Portal: Show success message when quote is accepted.
 - Code: Prevent dynamic class properties.
