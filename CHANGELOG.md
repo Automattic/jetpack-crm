@@ -63,6 +63,7 @@ This is an alpha version! The changes listed here are not final.
 - Phan: Exclude generated file from analysis.
 - Remove unused legacy code.
 - Small fix to welcome wizard
+- special characters were not displayed correctly
 - Tasks: Allow translation of task status after status change.
 - Tasks: Ensure task status is consistently toggled.
 - Tasks: Make it more clear what the current status of a task is.
