@@ -5,73 +5,53 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [7.0.0-alpha] - unreleased
-
-This is an alpha version! The changes listed here are not final.
-
+## [6.6.0] - 2025-07-08
 ### Added
-- Connection: Disconnecting a connection owner account will disconnect all other users first.
-- Tasks: Show completion checkmark in week and day views.
+- Tasks: Show completion checkmark in week and day views. [#43940]
 
 ### Changed
-- Code: First pass of style coding standards.
-- Code: Introduce version constant in main plugin class.
-- Code: Load third-party dependencies from build folder.
-- External Media: Move the GooglePhotosMedia, OpenverseMedia, PexelsMedia to @automattic/jetpack-shared-extension-utils
-- General: indicate compatibility with the upcoming version of WordPress - 6.8.
-- Improved settings so partial payments can be disabled
-- jetpack-assets now requires jetpack-status so updating composer lock files.
-- Load Semantic UI from build dir.
-- Tasks: Update FullCalendar to latest version.
-- Update daterangepicker to 3.1.0.
-- Updated package dependencies.
-- Update package dependencies.
-- Update to `@tanstack/react-query` v5.
-- Use @automattic/color-studio as a pnpm dependency.
-- Use font-awesome as a composer dependency.
-- Use font-awesome from pnpm instead of composer.
-- Use FullCalendar as pnpm dependency.
+- Code: First pass of style coding standards. [#42734]
+- Code: Introduce version constant in main plugin class. [#41408]
+- Code: Load third-party dependencies from build folder. [#43563] [#43778]
+- General: Indicate compatibility with WordPress 6.8. [#42701]
+- General: Update minimum WordPress version to 6.7. [#43192]
+- Improve settings so partial payments can be disabled. [#43316]
+- Tasks: Update FullCalendar to latest version. [#43970]
+- Update daterangepicker to 3.1.0. [#44016]
+- Update package dependencies. [#41286] [#41491] [#41577] [#41659] [#42163] [#42180] [#42384] [#42511] [#42762] [#42809] [#42815] [#43320] [#43326] [#43349] [#43355] [#43356] [#43398] [#43400] [#43425] [#43578] [#43718] [#43734] [#43766] [#43839] [#43892] [#43914] [#43951] [#43990] [#44020] [#44040] [#44148] [#44151] [#44206] [#44215] [#44217]
 
 ### Removed
-- Code: Removed unused function and images.
-- General: Update minimum WordPress version to 6.7.
-- Remove Bootstrap dependency.
-- Remove Onboarding React prototype.
+- Code: Remove unused function and images. [#42116]
+- Remove Bootstrap dependency. [#43584]
+- Remove Onboarding React prototype. [#43577]
+- Remove unused legacy code. [#43116]
 
 ### Fixed
-- API: Fix `companies` endpoint param mapping.
-- Client Portal: Removed top margin from quotes to ensure the top of the quote is visible.
-- Client Portal: Show success message when quote is accepted.
-- Code: Prevent dynamic class properties.
-- Code: Remove extra params on function calls.
-- Code: Remove unneeded `data:` URI components.
-- Code: Update package annotations.
-- Code: Update stylesheets to use hex instead of named colors.
-- Code: Update stylesheets to use WordPress font styles.
-- Contacts: Prevent a PHP warning when adding a new contact when a custom file field exists.
-- fixed a bug where tax names appended From WooCommerce
-- fixes warning for php notices on translation
-- Invoice line items now import the product short descritpion if set. If not set just the item name.
-- JS Packages: Decrease CSS priority of global styles to prevent them from applying within the editor
-- Linting: Address final rules in WordPress Stylelint config.
-- Linting: Clean up various Client Portal files.
-- Linting: Clean up various Stylelint violations.
-- Linting: Do additional stylesheet cleanup.
-- Linting: Fix more Stylelint violations.
-- Linting: Format SCSS imports consistently.
-- Linting: Remove outdated vendor prefixes in stylesheets.
-- Linting: Use double colon notation for pseudo-element selectors.
-- Phan: Exclude generated file from analysis.
-- Remove unused legacy code.
-- Small fix to welcome wizard
-- special characters were not displayed correctly
-- Tasks: Allow translation of task status after status change.
-- Tasks: Ensure task status is consistently toggled.
-- Tasks: Make it more clear what the current status of a task is.
-- Tasks: Minor style adjustments on mobile.
-- Tasks: Prevent status toggle when pressing enter.
-- Welcome Tour: Hide upsell prompts when one has a valid license.
-- Welcome tour: Restore missing images.
+- API: Fix `companies` endpoint param mapping. [#41508]
+- Client Portal: Remove top margin from quotes to ensure the top of the quote is visible. [#41974]
+- Client Portal: Show success message when quote is accepted. [#43074]
+- Code: Prevent dynamic class properties. [#41857]
+- Code: Remove extra params on function calls. [#41263]
+- Code: Remove unneeded `data:` URI components. [#43227]
+- Code: Update package annotations. [#43322]
+- Code: Update stylesheets to use hex instead of named colors. [#42920]
+- Code: Update stylesheets to use WordPress font styles. [#42928]
+- Contacts: Prevent a PHP warning when adding a new contact when a custom file field exists. [#43234]
+- Fix a bug where tax names appended from WooCommerce. [#43306]
+- Fix warning for PHP notices on translation. [#44109]
+- Invoice line items now import the product short description if set. [#43328]
+- JS Packages: Decrease CSS priority of global styles to prevent them from applying within the editor. [#43035]
+- Linting: Clean up Stylelint violations. [#43296] [#43322] [#43166] [#43247] [#43213] [#43018] [#43219] [#43019]
+- Phan: Exclude generated file from analysis. [#43383]
+- Ensure special characters in tasks are displayed correctly. [#44157]
+- Tasks: Allow translation of task status after status change. [#43940]
+- Tasks: Ensure task status is consistently toggled. [#43940]
+- Tasks: Make it more clear what the current status of a task is. [#43940]
+- Tasks: Adjust styles on mobile. [#43940]
+- Tasks: Prevent status toggle when pressing enter. [#43940]
+- Welcome Tour: Hide upsell prompts when one has a valid license. [#43285]
+- Welcome Tour: Restore missing images. [#43804]
+- Welcome Wizard: Fix regression in JS. [#41437]
 
 ## [6.5.1] - 2025-01-22
 ### Changed
@@ -3694,7 +3674,7 @@ This is an alpha version! The changes listed here are not final.
 - Tested across 4 common web hosts
 - Tested with extensions: WooCommerce CRM Sync, PayPal CRM Sync, CSV Importer, ZBS CRM Mail Campaigns, and CRM Sales Dashboard
 
-[7.0.0-alpha]: https://github.com/Automattic/jetpack-crm/compare/6.5.1...7.0.0-alpha
+[6.6.0]: https://github.com/Automattic/jetpack-crm/compare/6.5.1...6.6.0
 [6.5.1]: https://github.com/Automattic/jetpack-crm/compare/6.5.0...6.5.1
 [6.5.0]: https://github.com/Automattic/jetpack-crm/compare/6.4.4...6.5.0
 [6.4.4]: https://github.com/Automattic/jetpack-crm/compare/6.4.3...6.4.4
