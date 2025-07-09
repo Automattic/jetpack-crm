@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 This is an alpha version! The changes listed here are not final.
 
+### Fixed
+- Quote Templates: Fix code editor display.
+
 ## [6.6.0] - 2025-07-08
 ### Added
 - Tasks: Show completion checkmark in week and day views. [#43940]
