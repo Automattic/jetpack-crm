@@ -5,13 +5,10 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [6.6.1-alpha] - unreleased
-
-This is an alpha version! The changes listed here are not final.
-
+## [6.6.1] - 2025-07-10
 ### Fixed
-- install functions running every pageload.
-- Quote Templates: Clean up link when creating a new quote template.
+- Address regression that caused excess queries. [#44267]
+- Quote Templates: Clean up link when creating a new quote template. [#44251]
 
 ## [6.6.0] - 2025-07-09
 ### Added
@@ -3683,7 +3680,7 @@ This is an alpha version! The changes listed here are not final.
 - Tested across 4 common web hosts
 - Tested with extensions: WooCommerce CRM Sync, PayPal CRM Sync, CSV Importer, ZBS CRM Mail Campaigns, and CRM Sales Dashboard
 
-[6.6.1-alpha]: https://github.com/Automattic/jetpack-crm/compare/6.6.0...6.6.1-alpha
+[6.6.1]: https://github.com/Automattic/jetpack-crm/compare/6.6.0...6.6.1
 [6.6.0]: https://github.com/Automattic/jetpack-crm/compare/6.5.1...6.6.0
 [6.5.1]: https://github.com/Automattic/jetpack-crm/compare/6.5.0...6.5.1
 [6.5.0]: https://github.com/Automattic/jetpack-crm/compare/6.4.4...6.5.0
