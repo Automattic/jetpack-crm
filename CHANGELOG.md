@@ -11,6 +11,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Fixed
 - install functions running every pageload.
+- Quote Templates: Clean up link when creating a new quote template.
 
 ## [6.6.0] - 2025-07-09
 ### Added
