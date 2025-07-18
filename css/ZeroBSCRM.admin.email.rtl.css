@@ -147,9 +147,9 @@ html, body {
 .push-down {
   bottom: 0;
   /* wh fix to put at bottom even when not fullscreen
-  position:fixed !important;
-  left: 0;
-  width:15%; */
+    position:fixed !important;
+    left: 0;
+    width:15%; */
   position: absolute !important;
   right: 0;
   width: 100%;

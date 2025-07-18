@@ -11,7 +11,7 @@
     TIMELINE
 ==================================*/
 /*-- GENERAL STYLES
-------------------------------*/
+    ------------------------------*/
 .zbs-timeline {
   line-height: 1.4;
   list-style: none;
@@ -189,8 +189,8 @@
 }
 
 /*----------------------------------------------
-    MOD: TIMELINE SPLIT
-----------------------------------------------*/
+        MOD: TIMELINE SPLIT
+    ----------------------------------------------*/
 @media (min-width: 768px) {
   .zbs-timeline-centered .zbs-timeline {
     display: table;
@@ -221,8 +221,8 @@
 }
 
 /*----------------------------------------------
-    MOD: TIMELINE CENTERED
-----------------------------------------------*/
+        MOD: TIMELINE CENTERED
+    ----------------------------------------------*/
 @media (min-width: 992px) {
   .zbs-timeline-centered,
   .zbs-timeline-centered .zbs-timeline-item,
@@ -286,8 +286,8 @@
 }
 
 /*----------------------------------------------
-    MOD: MARKER OUTLINE
-----------------------------------------------*/
+        MOD: MARKER OUTLINE
+    ----------------------------------------------*/
 .marker-outline .zbs-timeline-marker::before {
   background: transparent;
   border-color: #000;

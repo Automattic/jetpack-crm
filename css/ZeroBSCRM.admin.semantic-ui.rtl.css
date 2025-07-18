@@ -195,17 +195,17 @@ i.alternate {
 .ui.modals.page .jpcrm-modal-body .jpcrm-modal-illustration img {
   /*
 
-  original:
-  max-width: 1094px;
-  max-height: 1029px;
+      original:
+      max-width: 1094px;
+      max-height: 1029px;
 
-  1/2
-  max-width: 515px;
-  max-height: 515px;
+      1/2
+      max-width: 515px;
+      max-height: 515px;
 
-  40%
+      40%
 
-  */
+      */
   max-width: 438px;
   max-height: 412px;
   vertical-align: middle;
