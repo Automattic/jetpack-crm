@@ -12,7 +12,8 @@
   width: 90%;
 }
 
-#zeroBSCRM-transaction-meta-box #zbs-transaction-assignment-wrap input.zbstypeahead, #zeroBSCRM-transaction-meta-box #zbs-transaction-assignment-wrap .twitter-typeahead {
+#zeroBSCRM-transaction-meta-box #zbs-transaction-assignment-wrap input.zbstypeahead,
+#zeroBSCRM-transaction-meta-box #zbs-transaction-assignment-wrap .twitter-typeahead {
   width: 100%;
 }
 

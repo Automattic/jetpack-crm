@@ -212,7 +212,9 @@
 .zbs-extensions-manager .docs-url {
   margin-top: 10px;
 }
-.zbs-extensions-manager .back a:focus, .zbs-extensions-manager .docs-url:focus, .zbs-extensions-manager .by-url:focus {
+.zbs-extensions-manager .back a:focus,
+.zbs-extensions-manager .docs-url:focus,
+.zbs-extensions-manager .by-url:focus {
   outline: none;
   box-shadow: none;
 }

@@ -10,11 +10,15 @@
  * Jetpack CRM
  * https://jetpackcrm.com
  */
-.wp-core-ui .button, .wp-core-ui .button-primary, .wp-core-ui .button-secondary {
+.wp-core-ui .button,
+.wp-core-ui .button-primary,
+.wp-core-ui .button-secondary {
   height: auto;
 }
 
-#adminmenu ul li, #adminmenu ul li a, #adminmenu div {
+#adminmenu ul li,
+#adminmenu ul li a,
+#adminmenu div {
   font-family: sans-serif;
 }
 
@@ -24,7 +28,8 @@
   margin-top: 2em;
 }
 
-.quicktags.icon, .search.icon {
+.quicktags.icon,
+.search.icon {
   background-color: transparent !important;
 }
 
@@ -32,7 +37,8 @@
   padding-top: 0 !important;
 }
 
-ul#adminmenu a.wp-has-current-submenu::after, ul#adminmenu > li.current > a.current::after {
+ul#adminmenu a.wp-has-current-submenu::after,
+ul#adminmenu > li.current > a.current::after {
   border-left-color: none !important;
 }
 
@@ -83,7 +89,9 @@ div [class*="right floated"] {
   margin-left: 0.25em;
 }
 
-.button-primary.right, .button-secondary.right, .button.right {
+.button-primary.right,
+.button-secondary.right,
+.button.right {
   float: none;
 }
 
@@ -124,7 +132,8 @@ i.alternate {
   height: auto;
 }
 
-.ui[class*="right labeled"].input input, .ui.fluid.input > input {
+.ui[class*="right labeled"].input input,
+.ui.fluid.input > input {
   height: auto !important;
 }
 
@@ -141,7 +150,8 @@ i.alternate {
   z-index: 999999;
 }
 
-.ui.modals.page .modal, .ui.modals.page .ui.modal {
+.ui.modals.page .modal,
+.ui.modals.page .ui.modal {
   /* max-width: 500px; */
   max-width: 1400px !important;
   padding: 0 !important;
@@ -417,7 +427,8 @@ div.hopscotch-bubble.tour-zbs-welcome-tour {
   right: auto !important;
 }
 
-.ui.inverted.menu .active.item, .ui.inverted.menu .active.item:hover {
+.ui.inverted.menu .active.item,
+.ui.inverted.menu .active.item:hover {
   color: #000 !important;
 }
 

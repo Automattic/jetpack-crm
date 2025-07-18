@@ -50,7 +50,8 @@
   padding-top: 1em;
   padding-bottom: 1em;
 }
-#zbs-segment-editor .ui.centralsimple select, #zbs-segment-editor .ui.centralsimple input {
+#zbs-segment-editor .ui.centralsimple select,
+#zbs-segment-editor .ui.centralsimple input {
   margin-right: 0.8em;
   font-size: 14px;
   line-height: 2;
@@ -82,12 +83,14 @@
   text-align: center;
   margin-top: 1em;
 }
-#zbs-segment-editor .ui.centralsimple .zbs-segment-edit-condition select, #zbs-segment-editor .ui.centralsimple .zbs-segment-edit-condition input {
+#zbs-segment-editor .ui.centralsimple .zbs-segment-edit-condition select,
+#zbs-segment-editor .ui.centralsimple .zbs-segment-edit-condition input {
   display: inline-block;
   width: auto;
   margin-right: 0.6em;
 }
-#zbs-segment-editor .ui.centralsimple .zbs-segment-edit-condition .zbs-segment-edit-condition-remove:hover, #zbs-segment-editor .ui.centralsimple .zbs-segment-edit-condition .zbs-segment-edit-condition-remove i:hover {
+#zbs-segment-editor .ui.centralsimple .zbs-segment-edit-condition .zbs-segment-edit-condition-remove:hover,
+#zbs-segment-editor .ui.centralsimple .zbs-segment-edit-condition .zbs-segment-edit-condition-remove i:hover {
   cursor: pointer;
 }
 #zbs-segment-editor .ui.centralsimple .zbs-segment-edit-condition input.zbs-segment-pair-input {
@@ -104,7 +107,8 @@
 #zbs-segment-editor .ui.centralsimple .zbs-segment-edit-condition .hidden {
   display: none;
 }
-#zbs-segment-editor .ui.centralsimple .zbs-segment-edit-condition .jpcrm-expand-info:hover, #zbs-segment-editor .ui.centralsimple .zbs-segment-edit-condition .jpcrm-hide-info:hover {
+#zbs-segment-editor .ui.centralsimple .zbs-segment-edit-condition .jpcrm-expand-info:hover,
+#zbs-segment-editor .ui.centralsimple .zbs-segment-edit-condition .jpcrm-hide-info:hover {
   cursor: pointer;
 }
 #zbs-segment-editor .ui.centralsimple .zbs-segment-edit-condition .jpcrm-condition-info {

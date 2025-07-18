@@ -456,11 +456,13 @@
   font-weight: 800;
   color: #000;
 }
-.zbs-invoice-box #zbs-business-info-wrapper, .zbs-invoice-box .zbs-invoice-pull-left {
+.zbs-invoice-box #zbs-business-info-wrapper,
+.zbs-invoice-box .zbs-invoice-pull-left {
   width: 50%;
   float: right;
 }
-.zbs-invoice-box #zbs-customer-info-wrapper, .zbs-invoice-box .zbs-invoice-pull-right {
+.zbs-invoice-box #zbs-customer-info-wrapper,
+.zbs-invoice-box .zbs-invoice-pull-right {
   width: 50%;
   float: left;
   text-align: left;

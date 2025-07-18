@@ -189,6 +189,7 @@
   border-radius: 5px;
   background: #FFF;
 }
-.zbscrm-csvimport-wrap .zbscrm-final-stage .zbscrm-import-log .zbscrm-import-log-line i.fa, .zbscrm-csvimport-wrap .zbscrm-final-stage .zbscrm-import-log .zbscrm-import-log-line span {
+.zbscrm-csvimport-wrap .zbscrm-final-stage .zbscrm-import-log .zbscrm-import-log-line i.fa,
+.zbscrm-csvimport-wrap .zbscrm-final-stage .zbscrm-import-log .zbscrm-import-log-line span {
   color: #008000;
 }

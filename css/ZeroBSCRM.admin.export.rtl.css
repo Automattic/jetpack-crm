@@ -12,10 +12,12 @@
   margin-left: 1em;
   padding: 0 40px;
 }
-#zbs-export-wrap #zbs-export-fields-wrap, #zbs-export-wrap #zbs-export-filetype-wrap {
+#zbs-export-wrap #zbs-export-fields-wrap,
+#zbs-export-wrap #zbs-export-filetype-wrap {
   max-width: 300px;
 }
-#zbs-export-wrap #zbs-export-fields-wrap #zbs-export-fields input, #zbs-export-wrap #zbs-export-fields-wrap #zbs-export-fields label {
+#zbs-export-wrap #zbs-export-fields-wrap #zbs-export-fields input,
+#zbs-export-wrap #zbs-export-fields-wrap #zbs-export-fields label {
   margin-top: 0;
   margin-bottom: 0;
 }

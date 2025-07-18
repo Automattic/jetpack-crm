@@ -12,8 +12,10 @@
   padding: 0 12px !important;
 }
 
-#zerobs-quote-content-edit, #zerobs-quote-nextstep,
-#wpzbscsub_quotecontent, #wpzbscsub_quoteactions {
+#zerobs-quote-content-edit,
+#zerobs-quote-nextstep,
+#wpzbscsub_quotecontent,
+#wpzbscsub_quoteactions {
   display: none;
 }
 

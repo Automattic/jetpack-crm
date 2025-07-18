@@ -19,7 +19,12 @@
   padding: 0;
   width: 100%;
 }
-.zbs-timeline h1, .zbs-timeline h2, .zbs-timeline h3, .zbs-timeline h4, .zbs-timeline h5, .zbs-timeline h6 {
+.zbs-timeline h1,
+.zbs-timeline h2,
+.zbs-timeline h3,
+.zbs-timeline h4,
+.zbs-timeline h5,
+.zbs-timeline h6 {
   line-height: inherit;
 }
 
@@ -387,7 +392,8 @@
   margin-bottom: 2em;
 }
 
-.ui.menu, .ui.menu .menu {
+.ui.menu,
+.ui.menu .menu {
   opacity: 1;
   z-index: 1;
 }

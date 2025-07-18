@@ -91,7 +91,8 @@
 #support-page .license-status .label {
   margin-right: 5px;
 }
-#support-page .license-status b, #support-page .license-status span {
+#support-page .license-status b,
+#support-page .license-status span {
   vertical-align: middle;
 }
 #support-page .license-status .license {
