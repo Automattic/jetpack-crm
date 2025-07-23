@@ -142,7 +142,8 @@ i.alternate {
     padding: 6px 12px !important;
     line-height: 1.42857 !important;
 } */
-/* stylelint-disable-next-line no-invalid-position-at-import-rule -- this is an intentional override */
+/* stylelint-disable-next-line no-invalid-position-at-import-rule
+-- this is an intentional override */
 /*!
  * Jetpack CRM: Modal style overrides
  */
@@ -226,7 +227,7 @@ i.alternate {
   position: fixed;
   bottom: 0;
   right: 0;
-  background-color: #F9F9F6;
+  background-color: #f9f9f6;
   padding-top: 50px;
   padding-bottom: 50px;
 }
@@ -289,7 +290,6 @@ i.alternate {
   overflow-x: hidden;
 }
 
-/* Fix an apparent bug in Semantic UI CSS, which had the width larger than the screen min-width */
 @media only screen and (min-width: 768px) and (max-width: 1199px) {
   #jpcrm-first-use-dash.ui.large.modal {
     height: 720px;
@@ -433,7 +433,7 @@ div.hopscotch-bubble.tour-zbs-welcome-tour {
 }
 
 .ui.button.white {
-  background: #FFF !important;
+  background: #fff !important;
   border: 1px solid #000 !important;
   color: #000 !important;
 }
@@ -445,7 +445,7 @@ div.hopscotch-bubble.tour-zbs-welcome-tour {
 
 .ui.button.woopink {
   background: #674399 !important;
-  color: #FFF !important;
+  color: #fff !important;
   border: 0 !important;
 }
 

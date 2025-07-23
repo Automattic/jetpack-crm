@@ -70,7 +70,7 @@ table.wh-metatab tr.wh-hr td {
 }
 
 table.wh-metatab tr.wh-hr hr {
-  border-top: 1px solid #D4DBF0;
+  border-top: 1px solid #d4dbf0;
   border-bottom: 0;
 }
 
@@ -79,7 +79,7 @@ span.wh-info {
   font-size: 12px;
   padding: 4px 9px;
   color: #000;
-  background: #CBE3EF;
+  background: #cbe3ef;
   border-radius: 3px;
 }
 
@@ -369,7 +369,8 @@ code,
 kbd,
 pre,
 samp {
-  /* stylelint-disable-next-line font-family-no-duplicate-names -- this is a known rendering hack to force proportional font sizes. */
+  /* stylelint-disable-next-line font-family-no-duplicate-names
+  -- this is a known rendering hack to force proportional font sizes. */
   font-family: monospace, monospace;
   font-size: 1em;
 }
@@ -5288,7 +5289,7 @@ th.column-ID {
 .sbhomep {
   text-align: center;
   padding: 10px;
-  background: #FFF;
+  background: #fff;
   border-radius: 10px;
   margin-bottom: 10px;
   font-size: 18px;
@@ -5408,7 +5409,7 @@ th.column-ID {
 }
 
 #ZeroBSCRMAdminPage .sbActionMsg {
-  background: #FFF;
+  background: #fff;
   padding: 10px 20px;
   text-align: center;
   border-radius: 14px;
@@ -5417,12 +5418,12 @@ th.column-ID {
 }
 
 #ZeroBSCRMAdminPage .wtab tr.sbopt.ui-sortable-helper {
-  background: #FFF;
+  background: #fff;
   border: 1px solid #ddd;
 }
 
 #ZeroBSCRMAdminPage .wtab tr.sbopt {
-  background: #FFF;
+  background: #fff;
   width: 659px;
   height: 54px;
 }
@@ -5434,7 +5435,7 @@ th.column-ID {
 
 .whclpActionMsg,
 .lle580 {
-  background: #FFF;
+  background: #fff;
   text-align: center;
   border-radius: 14px;
   max-width: 580px;
@@ -5470,7 +5471,7 @@ th.column-ID {
   padding: 10px 14px;
   font-size: 20px;
   line-height: 24px;
-  background: #FFF;
+  background: #fff;
   border-radius: 5px;
 }
 
@@ -5499,7 +5500,7 @@ th.column-ID {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
-  background: #FFF;
+  background: #fff;
   border-radius: 25px;
   overflow: hidden;
 }
@@ -6026,7 +6027,7 @@ body.zbs-fullscreen #adminmenuwrap {
   padding: 10px;
   margin: 8px;
   border-radius: 4px;
-  background: #FFF;
+  background: #fff;
   border: 1px solid #dedee3;
   width: auto;
 }
@@ -6102,8 +6103,8 @@ body.zbs-fullscreen #adminmenuwrap {
   overflow-y: auto;
   font-size: 14px;
   font-weight: 400;
-  background: #FFF;
-  border: 1px solid #CCC;
+  background: #fff;
+  border: 1px solid #ccc;
   border-radius: 5px;
   padding: 8px 10px;
   text-align: left;
@@ -6347,7 +6348,7 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
   height: 24px;
   line-height: 24px;
   border-radius: 3px;
-  background: #FFF;
+  background: #fff;
 }
 
 #wptbpMetaBoxLogs .zbsLogOut .zbsLogOutTitle .zbsLogOutEdits .fa {
@@ -6549,7 +6550,7 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
   left: 0;
   width: 100%;
   height: 100%;
-  background: #FFF;
+  background: #fff;
   z-index: 100;
   opacity: 0.6;
 }
@@ -6618,7 +6619,7 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
   font-size: 1.5em;
   text-align: center;
   text-shadow: 1px 1px 9px #848ca5;
-  background: #FFF;
+  background: #fff;
 }
 
 .zbs-metabox .zbs-metabox-block .icon {
@@ -6662,7 +6663,7 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
 
 .zbs-metabox-head .zbs-metabox-minimise .caret.icon:hover {
   cursor: pointer;
-  color: #FFF;
+  color: #fff;
   border-radius: 2px;
   background: #000;
 }
@@ -7094,7 +7095,7 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
  * https://jetpackcrm.com
  */
 /*
-	Global styles for ZBS Mobile and Tablet layouts. 
+	Global styles for ZBS Mobile and Tablet layouts.
 */
 /* Semantic UI has these classes, however they're only applicable to*/
 /* grids, containers, rows and columns.*/
@@ -7525,7 +7526,7 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
   align-items: center;
   position: relative;
   margin-right: 20px;
-  border-left: 5px solid #069E09;
+  border-left: 5px solid #069e09;
 }
 
 .jpcrm-promo.ui.segment #jpcrm-dismiss {
@@ -7556,7 +7557,7 @@ ul#adminmenu #toplevel_page_zerobscrm-logout ul#adminmenu > li.current > a.curre
  * https://jetpackcrm.com
  */
 #learn-pop {
-  background: #FFF;
+  background: #fff;
   box-shadow: 0 4px 44px rgba(0, 0, 0, 0.35);
   border-radius: 8px;
   padding: 10px 12px;

@@ -470,7 +470,8 @@
   top: 63px;
 }
 
-/* stylelint-disable no-invalid-position-at-import-rule -- these are intentional overrides */
+/* stylelint-disable no-invalid-position-at-import-rule
+-- these are intentional overrides */
 /*!
  * Jetpack CRM
  * https://jetpackcrm.com
@@ -521,7 +522,7 @@ table.wh-metatab tr.wh-hr td {
 }
 
 table.wh-metatab tr.wh-hr hr {
-  border-top: 1px solid #D4DBF0;
+  border-top: 1px solid #d4dbf0;
   border-bottom: 0;
 }
 
@@ -530,7 +531,7 @@ span.wh-info {
   font-size: 12px;
   padding: 4px 9px;
   color: #000;
-  background: #CBE3EF;
+  background: #cbe3ef;
   border-radius: 3px;
 }
 
@@ -820,7 +821,8 @@ code,
 kbd,
 pre,
 samp {
-  /* stylelint-disable-next-line font-family-no-duplicate-names -- this is a known rendering hack to force proportional font sizes. */
+  /* stylelint-disable-next-line font-family-no-duplicate-names
+  -- this is a known rendering hack to force proportional font sizes. */
   font-family: monospace, monospace;
   font-size: 1em;
 }
@@ -5739,7 +5741,7 @@ th.column-ID {
 .sbhomep {
   text-align: center;
   padding: 10px;
-  background: #FFF;
+  background: #fff;
   border-radius: 10px;
   margin-bottom: 10px;
   font-size: 18px;
@@ -5859,7 +5861,7 @@ th.column-ID {
 }
 
 #ZeroBSCRMAdminPage .sbActionMsg {
-  background: #FFF;
+  background: #fff;
   padding: 10px 20px;
   text-align: center;
   border-radius: 14px;
@@ -5868,12 +5870,12 @@ th.column-ID {
 }
 
 #ZeroBSCRMAdminPage .wtab tr.sbopt.ui-sortable-helper {
-  background: #FFF;
+  background: #fff;
   border: 1px solid #ddd;
 }
 
 #ZeroBSCRMAdminPage .wtab tr.sbopt {
-  background: #FFF;
+  background: #fff;
   width: 659px;
   height: 54px;
 }
@@ -5885,7 +5887,7 @@ th.column-ID {
 
 .whclpActionMsg,
 .lle580 {
-  background: #FFF;
+  background: #fff;
   text-align: center;
   border-radius: 14px;
   max-width: 580px;
@@ -5921,7 +5923,7 @@ th.column-ID {
   padding: 10px 14px;
   font-size: 20px;
   line-height: 24px;
-  background: #FFF;
+  background: #fff;
   border-radius: 5px;
 }
 
@@ -5950,7 +5952,7 @@ th.column-ID {
   margin-right: auto;
   margin-left: auto;
   text-align: center;
-  background: #FFF;
+  background: #fff;
   border-radius: 25px;
   overflow: hidden;
 }
@@ -6477,7 +6479,7 @@ body.zbs-fullscreen #adminmenuwrap {
   padding: 10px;
   margin: 8px;
   border-radius: 4px;
-  background: #FFF;
+  background: #fff;
   border: 1px solid #dedee3;
   width: auto;
 }
@@ -6553,8 +6555,8 @@ body.zbs-fullscreen #adminmenuwrap {
   overflow-y: auto;
   font-size: 14px;
   font-weight: 400;
-  background: #FFF;
-  border: 1px solid #CCC;
+  background: #fff;
+  border: 1px solid #ccc;
   border-radius: 5px;
   padding: 8px 10px;
   text-align: right;
@@ -6798,7 +6800,7 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
   height: 24px;
   line-height: 24px;
   border-radius: 3px;
-  background: #FFF;
+  background: #fff;
 }
 
 #wptbpMetaBoxLogs .zbsLogOut .zbsLogOutTitle .zbsLogOutEdits .fa {
@@ -7000,7 +7002,7 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
   right: 0;
   width: 100%;
   height: 100%;
-  background: #FFF;
+  background: #fff;
   z-index: 100;
   opacity: 0.6;
 }

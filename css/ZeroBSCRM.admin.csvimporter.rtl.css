@@ -10,7 +10,7 @@
  */
 .zbs-upgrade-label {
   background: #008000;
-  color: #FFF;
+  color: #fff;
   padding: 4px 8px;
   border-radius: 3px;
 }
@@ -19,8 +19,8 @@
   width: 40%;
   min-width: 400px;
   max-width: 700px;
-  background: #FFF;
-  border: 1px solid #CCC;
+  background: #fff;
+  border: 1px solid #ccc;
   padding: 10px 30px;
   border-radius: 3px;
   margin-right: auto;
@@ -80,9 +80,9 @@
   max-width: 500px;
   padding: 7px 10px;
   margin: 10px;
-  border: 1px solid #E0DEE6;
+  border: 1px solid #e0dee6;
   border-radius: 5px;
-  background: #FFF;
+  background: #fff;
   margin-right: auto;
   margin-left: auto;
   text-align: right;
@@ -94,15 +94,15 @@
   max-width: 500px;
   padding: 7px 10px;
   margin: 10px;
-  border: 1px solid #E0DEE6;
+  border: 1px solid #e0dee6;
   border-radius: 5px;
-  background: #FFF;
+  background: #fff;
   margin-right: auto;
   margin-left: auto;
 }
 .zbscrm-csvimport-wrap .zbscrm-csv-map .zbscrm-csv-map-form .zbscrm-csv-map-field span {
   padding: 0 0 0 9px;
-  color: #C1C0C0;
+  color: #c1c0c0;
   font-size: 16px;
   line-height: 34px;
   height: 34px;
@@ -142,9 +142,9 @@
   width: 440px;
   padding: 7px 10px;
   margin: 10px;
-  border: 1px solid #E0DEE6;
+  border: 1px solid #e0dee6;
   border-radius: 5px;
-  background: #FFF;
+  background: #fff;
   margin-right: auto;
   margin-left: auto;
 }
@@ -179,15 +179,15 @@
   display: inline-block;
   font-weight: 800;
   text-align: center;
-  color: #CCC;
+  color: #ccc;
 }
 .zbscrm-csvimport-wrap .zbscrm-final-stage .zbscrm-import-log {
   width: 600px;
   padding: 7px 10px;
   margin: 10px;
-  border: 1px solid #E0DEE6;
+  border: 1px solid #e0dee6;
   border-radius: 5px;
-  background: #FFF;
+  background: #fff;
 }
 .zbscrm-csvimport-wrap .zbscrm-final-stage .zbscrm-import-log .zbscrm-import-log-line i.fa,
 .zbscrm-csvimport-wrap .zbscrm-final-stage .zbscrm-import-log .zbscrm-import-log-line span {

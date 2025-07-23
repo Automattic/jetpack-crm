@@ -1,4 +1,5 @@
-/* stylelint-disable no-duplicate-selectors -- Disabled due to copied styles from Bootstrap. */
+/* stylelint-disable no-duplicate-selectors
+-- Disabled due to copied styles from Bootstrap. */
 /* Copied from Bootstrap 3.4.1 and distilled */
 * {
   box-sizing: border-box;
@@ -115,13 +116,13 @@ img {
 
 /* End copy from Bootstrap */
 html {
-  background: #E5E5E5;
+  background: #e5e5e5;
 }
 
 body {
   margin: 60px auto 24px;
   box-shadow: none;
-  background: #E5E5E5;
+  background: #e5e5e5;
   padding: 0;
 }
 
@@ -134,7 +135,7 @@ body {
 }
 
 .btn-jetpack {
-  background: #069E08;
+  background: #069e08;
   color: #fff;
   font-size: 16px;
 }
@@ -182,20 +183,20 @@ body {
 }
 
 .stepwizard-step .btn-default {
-  color: #069E08 !important;
-  border-color: #069E08;
+  color: #069e08 !important;
+  border-color: #069e08;
   background: #fff;
   opacity: 1;
 }
 
 .stepwizard-step .btn-primary {
   color: #fff !important;
-  background: #069E08 !important;
-  border-color: #069E08;
+  background: #069e08 !important;
+  border-color: #069e08;
 }
 
 .form-control:focus {
-  border-color: #069E08;
+  border-color: #069e08;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #2780e3;
 }
 
@@ -205,8 +206,8 @@ body {
 
 .btn-primary {
   color: #fff;
-  background-color: #069E08;
-  border-color: #069E08;
+  background-color: #069e08;
+  border-color: #069e08;
 }
 
 .btn-primary:hover {
@@ -332,7 +333,7 @@ input[type=radio] {
   margin: 0;
   padding: 11px 0;
   font-size: 18px;
-  background: #069E08;
+  background: #069e08;
   border-radius: 3px; /* border radius */
   cursor: pointer;
   border: none;
@@ -426,7 +427,7 @@ input[type=radio] {
 .setup-content label {
   margin-top: 8px;
   font-size: 18px;
-  color: #069E08;
+  color: #069e08;
 }
 
 .setup-content h3 {
@@ -472,7 +473,7 @@ p.sbhomep {
   display: block !important;
 }
 
-/* .slideThree from https://codepen.io/bbodine1/pen/novBm 
+/* .slideThree from https://codepen.io/bbodine1/pen/novBm
   had to make most of it important tho!
 */
 /* $activeColor: #c0392b; //red */
@@ -485,7 +486,7 @@ p.sbhomep {
 }
 #switchBox .switchBoxLabel {
   font-size: 16px;
-  color: #069E08;
+  color: #069e08;
 }
 
 .switchCheckbox {
@@ -595,7 +596,7 @@ p.sbhomep {
 }
 
 #zbs-lead-header {
-  color: #CCC;
+  color: #ccc;
 }
 
 p.lead {
@@ -612,7 +613,7 @@ p.lead {
 
 .zbs-sync-wrap {
   padding: 12px;
-  background: #F0F2EB;
+  background: #f0f2eb;
   border-radius: 4px;
   color: #000;
   display: inline-block;
@@ -659,7 +660,7 @@ p.lead {
 }
 
 .zbs-extra a {
-  border-bottom: 2px #FFF dotted;
+  border-bottom: 2px #fff dotted;
 }
 
 .switchbox-right {

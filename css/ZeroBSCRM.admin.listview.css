@@ -55,7 +55,7 @@
 }
 
 .zbs-select-tag.ui.label.blue .ui.checkbox label {
-  color: #FFF;
+  color: #fff;
 }
 
 .zero-bs-crm_page_manage-companies-crm .zbs-co-img img {
@@ -103,7 +103,7 @@
   min-height: 2em;
 }
 
-/* 
+/*
 		INLINE Editing
 */
 .jpcrm-listview-table td.zbs-inline-edit:hover {
