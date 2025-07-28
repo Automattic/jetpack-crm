@@ -56,7 +56,7 @@
 	"require": {
 		"php": ">=7.4",
 		"automattic/jetpack-assets": "^4.3.0",
-		"automattic/jetpack-autoloader": "^5.0.9-alpha",
+		"automattic/jetpack-autoloader": "^5.0.9",
 		"automattic/jetpack-composer-plugin": "^4.0.5",
 		"automattic/woocommerce": "^3.1",
 		"dompdf/dompdf": "^2.0"
