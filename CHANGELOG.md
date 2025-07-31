@@ -5,11 +5,12 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [6.6.2-alpha] - unreleased
+## [6.7.0-alpha] - unreleased
 
 This is an alpha version! The changes listed here are not final.
 
 ### Changed
+- My Jetpack: Unify the user connection flow with a unified screen.
 - Update dependencies.
 - Update package dependencies.
 
@@ -3688,7 +3689,7 @@ This is an alpha version! The changes listed here are not final.
 - Tested across 4 common web hosts
 - Tested with extensions: WooCommerce CRM Sync, PayPal CRM Sync, CSV Importer, ZBS CRM Mail Campaigns, and CRM Sales Dashboard
 
-[6.6.2-alpha]: https://github.com/Automattic/jetpack-crm/compare/6.6.1...6.6.2-alpha
+[6.7.0-alpha]: https://github.com/Automattic/jetpack-crm/compare/6.6.1...6.7.0-alpha
 [6.6.1]: https://github.com/Automattic/jetpack-crm/compare/6.6.0...6.6.1
 [6.6.0]: https://github.com/Automattic/jetpack-crm/compare/6.5.1...6.6.0
 [6.5.1]: https://github.com/Automattic/jetpack-crm/compare/6.5.0...6.5.1
