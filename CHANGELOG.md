@@ -14,6 +14,9 @@ This is an alpha version! The changes listed here are not final.
 - Update dependencies.
 - Update package dependencies.
 
+### Fixed
+- Settings: Ensure notice appears when settings are saved.
+
 ## [6.6.1] - 2025-07-10
 ### Fixed
 - Address regression that caused excess queries. [#44267]
