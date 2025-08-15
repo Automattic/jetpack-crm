@@ -15,6 +15,7 @@ This is an alpha version! The changes listed here are not final.
 - Update package dependencies.
 
 ### Fixed
+- API: Prevent PHP error when updating companies through undocumented endpoint.
 - Settings: Ensure notice appears when settings are saved.
 
 ## [6.6.1] - 2025-07-10
