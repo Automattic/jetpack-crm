@@ -19,6 +19,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Fixed
 - API: Prevent PHP error when updating companies through undocumented endpoint.
+- Code: Clean up legacy PHPCS config files.
 - Settings: Ensure notice appears when settings are saved.
 
 ## [6.6.1] - 2025-07-10
