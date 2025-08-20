@@ -6875,25 +6875,73 @@ div.ui.learn.button .jpcrm-info-gridicon {
   background: none !important;
 }
 
-#zbs-team-user-table .dn {
-  line-height: 30px;
-  float: left;
+#jpcrm-team-mechanics {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 10px;
 }
 
-#zbs-team-user-table img {
+#jpcrm-team-mechanics #jpcrm-users-search {
+  max-width: 300px;
+  width: 100%;
+}
+
+#jpcrm-team-mechanics #jpcrm-search-wp-users {
+  cursor: pointer;
+  pointer-events: all;
+}
+
+#jpcrm-team-mechanics .ui.button {
+  white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+  #jpcrm-team-mechanics {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  #jpcrm-team-mechanics #zbs-users-search {
+    max-width: 100%; /* full width on small screens */
+  }
+}
+#jpcrm-team-user-table {
+  display: grid;
+  grid-template-columns: auto 1fr 1fr 1fr auto;
+  line-height: 30px;
+}
+
+#jpcrm-team-user-table > div {
+  border: 1px solid rgba(34, 36, 38, 0.1);
+  padding: 0.75rem;
+}
+
+#jpcrm-team-user-table > div:nth-child(-n+5) {
+  font-weight: 700;
+}
+
+#jpcrm-team-user-table .fit-col {
+  white-space: nowrap;
+}
+
+#jpcrm-team-user-table img {
   border-radius: 50%;
   margin-right: 5px;
   float: left;
 }
 
-#zbs-team-mechanics {
-  padding: 10px;
+@media (max-width: 767px) {
+  #jpcrm-team-user-table {
+    grid-template-columns: auto 1fr 1fr auto;
+  }
+  #jpcrm-team-user-table > div:nth-child(5n-1) {
+    display: none;
+  }
 }
-
-#zbs-team-mechanics::after {
-  clear: both;
-}
-
 .clear {
   clear: both;
 }
