@@ -20,6 +20,7 @@ This is an alpha version! The changes listed here are not final.
 ### Fixed
 - API: Prevent PHP error when updating companies through undocumented endpoint.
 - Code: Clean up legacy PHPCS config files.
+- Code: Resolve PhanImpossibleCondition violations.
 - Settings: Ensure notice appears when settings are saved.
 - Team: Account for longer WP user IDs.
 - Team: Fix search button.
