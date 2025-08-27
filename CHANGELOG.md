@@ -16,6 +16,7 @@ This is an alpha version! The changes listed here are not final.
 - My Jetpack: Unify the user connection flow with a unified screen.
 - Update dependencies.
 - Update package dependencies.
+- Use wp_rand() instead of rand() and mt_rand().
 
 ### Fixed
 - API: Prevent PHP error when updating companies through undocumented endpoint.
