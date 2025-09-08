@@ -13,7 +13,7 @@
 		"automattic/jetpack-changelogger": "^6.0.6",
 		"automattic/jetpack-connection": "@dev",
 		"automattic/jetpack-plans": "@dev",
-		"automattic/jetpack-ip": "^0.4.10-alpha",
+		"automattic/jetpack-ip": "^0.4.10",
 		"automattic/phpunit-select-config": "^1.0.3"
 	},
 	"suggest": {
