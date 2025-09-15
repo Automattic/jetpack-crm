@@ -26,6 +26,7 @@ This is an alpha version! The changes listed here are not final.
 - Settings: Ensure notice appears when settings are saved.
 - Team: Account for longer WP user IDs.
 - Team: Fix search button.
+- Transactions: Disable UI for unimplemented line items feature.
 
 ## [6.6.1] - 2025-07-10
 ### Fixed
