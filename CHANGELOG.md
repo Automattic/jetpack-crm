@@ -24,6 +24,7 @@ This is an alpha version! The changes listed here are not final.
 - Code: Clean up legacy PHPCS config files.
 - Code: Resolve PhanImpossibleCondition violations.
 - fixes issue where more than 2 decimal places would result in multiple tax rates being added
+- Fix to create the notifications table on activation
 - Improvement so decimals in tax rates do not allow duplicates
 - Settings: Ensure notice appears when settings are saved.
 - Team: Account for longer WP user IDs.
