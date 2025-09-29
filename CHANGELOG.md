@@ -13,6 +13,7 @@ This is an alpha version! The changes listed here are not final.
 - Added typecheck placeholder to implement it later.
 
 ### Changed
+- Allows admins or CRM quote managers to accept a quote from the front end
 - My Jetpack: Unify the user connection flow with a unified screen.
 - Send JSON with built-in WordPress functions.
 - Update dependencies.
