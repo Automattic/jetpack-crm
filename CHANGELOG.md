@@ -11,6 +11,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Added
 - Added typecheck placeholder to implement it later.
+- Tested up to WordPress 6.9
 
 ### Changed
 - Allows admins or CRM quote managers to accept a quote from the front end
