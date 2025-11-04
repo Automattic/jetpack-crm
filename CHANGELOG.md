@@ -17,6 +17,7 @@ This is an alpha version! The changes listed here are not final.
 - Allows admins or CRM quote managers to accept a quote from the front end
 - My Jetpack: Unify the user connection flow with a unified screen.
 - Send JSON with built-in WordPress functions.
+- Tests: Disable tests on PHP 8.5 due to dependency constraints.
 - Update dependencies.
 - Update package dependencies.
 - Use wp_rand() instead of rand() and mt_rand().
