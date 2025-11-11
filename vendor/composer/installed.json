@@ -2,12 +2,12 @@
     "packages": [
         {
             "name": "automattic/jetpack-assets",
-            "version": "4.3.12-alpha.1762436462",
-            "version_normalized": "4.3.12.0-alpha1762436462",
+            "version": "4.3.12",
+            "version_normalized": "4.3.12.0",
             "dist": {
                 "type": "path",
                 "url": "/tmp/jetpack-build/Automattic/jetpack-assets",
-                "reference": "ba3474a5ee6813130e3a28e1ec965a10cf1feadf"
+                "reference": "18f6cb66a3800fffcfd2ba10677d605fd4ec3b37"
             },
             "require": {
                 "automattic/jetpack-constants": "^3.0.8",
@@ -15,7 +15,7 @@
                 "php": ">=7.2"
             },
             "require-dev": {
-                "automattic/jetpack-changelogger": "^6.0.8-alpha",
+                "automattic/jetpack-changelogger": "^6.0.8",
                 "automattic/phpunit-select-config": "^1.0.3",
                 "brain/monkey": "^2.6.2",
                 "wikimedia/testing-access-wrapper": "^1.0 || ^2.0 || ^3.0",
@@ -76,19 +76,19 @@
         },
         {
             "name": "automattic/jetpack-autoloader",
-            "version": "5.0.12-alpha.1762798047",
-            "version_normalized": "5.0.12.0-alpha1762798047",
+            "version": "5.0.12",
+            "version_normalized": "5.0.12.0",
             "dist": {
                 "type": "path",
                 "url": "/tmp/jetpack-build/Automattic/jetpack-autoloader",
-                "reference": "07816a3d7fe7fe21a874e6df8c3800b141bc76ce"
+                "reference": "eda70bbd4e5ca771bff7847dc8e7ccf7e212a185"
             },
             "require": {
                 "composer-plugin-api": "^2.2",
                 "php": ">=7.2"
             },
             "require-dev": {
-                "automattic/jetpack-changelogger": "^6.0.8-alpha",
+                "automattic/jetpack-changelogger": "^6.0.8",
                 "automattic/phpunit-select-config": "^1.0.3",
                 "composer/composer": "^2.2",
                 "yoast/phpunit-polyfills": "^4.0.0"
@@ -153,14 +153,14 @@
             "dist": {
                 "type": "path",
                 "url": "/tmp/jetpack-build/Automattic/jetpack-composer-plugin",
-                "reference": "214c7c48401ede8fcd22b3baa3c836cf176024cc"
+                "reference": "470310ffc0dc00f4aac1628ac2df07a124d8c99e"
             },
             "require": {
                 "composer-plugin-api": "^2.2",
                 "php": ">=7.2"
             },
             "require-dev": {
-                "automattic/jetpack-changelogger": "^6.0.8-alpha",
+                "automattic/jetpack-changelogger": "^6.0.8",
                 "automattic/phpunit-select-config": "^1.0.3",
                 "composer/composer": "^2.2",
                 "yoast/phpunit-polyfills": "^4.0.0"
@@ -217,13 +217,13 @@
             "dist": {
                 "type": "path",
                 "url": "/tmp/jetpack-build/Automattic/jetpack-constants",
-                "reference": "977df41c9097abad52a4e30d5bbfaedea27b3a4d"
+                "reference": "fc042d0caa2975a284baabaf3d3880b8ee6bb8b0"
             },
             "require": {
                 "php": ">=7.2"
             },
             "require-dev": {
-                "automattic/jetpack-changelogger": "^6.0.8-alpha",
+                "automattic/jetpack-changelogger": "^6.0.8",
                 "automattic/phpunit-select-config": "^1.0.3",
                 "brain/monkey": "^2.6.2",
                 "yoast/phpunit-polyfills": "^4.0.0"
@@ -275,14 +275,14 @@
             "dist": {
                 "type": "path",
                 "url": "/tmp/jetpack-build/Automattic/jetpack-status",
-                "reference": "7620b17018dbcdfe255b05539857c933159dacba"
+                "reference": "50870b68421d4e79a788a4dc6be40e46c10c58fd"
             },
             "require": {
                 "automattic/jetpack-constants": "^3.0.8",
                 "php": ">=7.2"
             },
             "require-dev": {
-                "automattic/jetpack-changelogger": "^6.0.8-alpha",
+                "automattic/jetpack-changelogger": "^6.0.8",
                 "automattic/jetpack-connection": "@dev",
                 "automattic/jetpack-ip": "^0.4.10",
                 "automattic/jetpack-plans": "@dev",
