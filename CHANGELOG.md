@@ -34,6 +34,7 @@ This is an alpha version! The changes listed here are not final.
 - Team: Account for longer WP user IDs.
 - Team: Fix search button.
 - Transactions: Disable UI for unimplemented line items feature.
+- WooSync: Improve invalid URL detection.
 
 ## [6.6.1] - 2025-07-10
 ### Fixed
