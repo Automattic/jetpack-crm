@@ -30,6 +30,7 @@ This is an alpha version! The changes listed here are not final.
 - Fix to create the notifications table on activation
 - Improvement so decimals in tax rates do not allow duplicates
 - Invoices: Ensure object owner is properly set.
+- Jetpack: remove getIconColor functions for block icons
 - Settings: Ensure notice appears when settings are saved.
 - Team: Account for longer WP user IDs.
 - Team: Fix search button.
