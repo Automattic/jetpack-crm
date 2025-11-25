@@ -12,6 +12,9 @@ This is an alpha version! The changes listed here are not final.
 ### Changed
 - Update package dependencies.
 
+### Fixed
+- WooSync: Prevent PHP warnings when order status does not have a mapping.
+
 ## [6.7.0] - 2025-11-20
 ### Added
 - Add `typecheck` placeholder script (to be implemented). [#44795]
