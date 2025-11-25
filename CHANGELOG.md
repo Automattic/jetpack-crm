@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 This is an alpha version! The changes listed here are not final.
 
+### Changed
+- Update package dependencies.
+
 ## [6.7.0] - 2025-11-20
 ### Added
 - Add `typecheck` placeholder script (to be implemented). [#44795]
