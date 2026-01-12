@@ -137,10 +137,12 @@ body {
 .btn-jetpack {
   background: #069e08;
   color: #fff;
-  font-size: 16px;
 }
 .btn-jetpack:hover {
   color: #fff;
+}
+.btn-jetpack {
+  font-size: 16px;
 }
 
 .stepwizard {

@@ -583,7 +583,6 @@ jpcrm-listview-header#jpcrm-listview-header input[type=search] {
   min-width: 100%;
   overflow-x: scroll;
   border-collapse: collapse;
-  /* min-width except for checkbox column */
 }
 .jpcrm-listview-table-container .jpcrm-listview-table thead th {
   font-weight: 400;
@@ -607,6 +606,9 @@ jpcrm-listview-header#jpcrm-listview-header input[type=search] {
   color: #3c434a;
   font-weight: 400;
   font-size: 12px;
+}
+.jpcrm-listview-table-container .jpcrm-listview-table {
+  /* min-width except for checkbox column */
 }
 .jpcrm-listview-table-container .jpcrm-listview-table th:not(:first-child),
 .jpcrm-listview-table-container .jpcrm-listview-table td:not(:first-child) {

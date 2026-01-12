@@ -32,10 +32,12 @@
 .zbs-timeline-item {
   padding-left: 40px;
   position: relative;
-  margin-bottom: 0 !important;
 }
 .zbs-timeline-item:last-child {
   padding-bottom: 0;
+}
+.zbs-timeline-item {
+  margin-bottom: 0 !important;
 }
 .zbs-timeline-item h3 {
   font-size: 20px;
@@ -106,14 +108,18 @@
 .zbs-timeline-item-contd {
   padding-left: 40px;
   position: relative;
-  margin-bottom: 0 !important;
-  /*----- TIMELINE CONTINUED MARKER -----*/
 }
 .zbs-timeline-item-contd:last-child {
   padding-bottom: 0;
 }
+.zbs-timeline-item-contd {
+  margin-bottom: 0 !important;
+}
 .zbs-timeline-item-contd h3 {
   font-size: 20px;
+}
+.zbs-timeline-item-contd {
+  /*----- TIMELINE CONTINUED MARKER -----*/
 }
 .zbs-timeline-item-contd .zbs-timeline-marker {
   position: absolute;

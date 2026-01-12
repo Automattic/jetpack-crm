@@ -149,8 +149,6 @@
 .zbscrmFrontEndForm .third .cgrab,
 .zbs-edit-wrap-form .third .cgrab {
   position: relative;
-  padding: 10px;
-  min-height: 100px;
 }
 .post-type-zerobs_form .third .cgrab .blobby p,
 .zbscrmFrontEndForm .third .cgrab .blobby p,
@@ -247,12 +245,16 @@
   color: #999;
   padding: 10px;
 }
+.post-type-zerobs_form .third .cgrab,
+.zbscrmFrontEndForm .third .cgrab,
+.zbs-edit-wrap-form .third .cgrab {
+  padding: 10px;
+  min-height: 100px;
+}
 .post-type-zerobs_form .third .simple,
 .zbscrmFrontEndForm .third .simple,
 .zbs-edit-wrap-form .third .simple {
   position: relative;
-  padding: 10px;
-  min-height: 100px;
 }
 .post-type-zerobs_form .third .simple .blobby p,
 .zbscrmFrontEndForm .third .simple .blobby p,
@@ -334,12 +336,16 @@
   color: #999;
   padding: 10px;
 }
+.post-type-zerobs_form .third .simple,
+.zbscrmFrontEndForm .third .simple,
+.zbs-edit-wrap-form .third .simple {
+  padding: 10px;
+  min-height: 100px;
+}
 .post-type-zerobs_form .third .naked,
 .zbscrmFrontEndForm .third .naked,
 .zbs-edit-wrap-form .third .naked {
   position: relative;
-  padding: 10px;
-  min-height: 100px;
 }
 .post-type-zerobs_form .third .naked .blobby p,
 .zbscrmFrontEndForm .third .naked .blobby p,
@@ -390,6 +396,12 @@
   text-align: center;
   line-height: 30px;
 }
+.post-type-zerobs_form .third .naked,
+.zbscrmFrontEndForm .third .naked,
+.zbs-edit-wrap-form .third .naked {
+  padding: 10px;
+  min-height: 100px;
+}
 .post-type-zerobs_form iframe,
 .zbscrmFrontEndForm iframe,
 .zbs-edit-wrap-form iframe {
@@ -425,8 +437,6 @@
 .zbscrmFrontEndForm .embed .simple,
 .zbs-edit-wrap-form .embed .simple {
   position: relative;
-  padding: 10px;
-  min-height: 100px;
 }
 .post-type-zerobs_form .embed .simple .blobby p,
 .zbscrmFrontEndForm .embed .simple .blobby p,
@@ -516,12 +526,16 @@
   color: #999;
   padding: 10px;
 }
+.post-type-zerobs_form .embed .simple,
+.zbscrmFrontEndForm .embed .simple,
+.zbs-edit-wrap-form .embed .simple {
+  padding: 10px;
+  min-height: 100px;
+}
 .post-type-zerobs_form .embed .cgrab,
 .zbscrmFrontEndForm .embed .cgrab,
 .zbs-edit-wrap-form .embed .cgrab {
   position: relative;
-  padding: 10px;
-  min-height: 100px;
 }
 .post-type-zerobs_form .embed .cgrab .blobby p,
 .zbscrmFrontEndForm .embed .cgrab .blobby p,
@@ -620,10 +634,9 @@
   color: #999;
   padding: 10px;
 }
-.post-type-zerobs_form .embed .naked,
-.zbscrmFrontEndForm .embed .naked,
-.zbs-edit-wrap-form .embed .naked {
-  position: relative;
+.post-type-zerobs_form .embed .cgrab,
+.zbscrmFrontEndForm .embed .cgrab,
+.zbs-edit-wrap-form .embed .cgrab {
   padding: 10px;
   min-height: 100px;
 }
@@ -640,6 +653,11 @@
   text-align: center;
   margin-top: 10px;
   font-size: 14px;
+}
+.post-type-zerobs_form .embed .naked,
+.zbscrmFrontEndForm .embed .naked,
+.zbs-edit-wrap-form .embed .naked {
+  position: relative;
 }
 .post-type-zerobs_form .embed .naked .blobby p,
 .zbscrmFrontEndForm .embed .naked .blobby p,
@@ -692,6 +710,12 @@
   text-align: center;
   line-height: 12px;
   border: 0;
+}
+.post-type-zerobs_form .embed .naked,
+.zbscrmFrontEndForm .embed .naked,
+.zbs-edit-wrap-form .embed .naked {
+  padding: 10px;
+  min-height: 100px;
 }
 .post-type-zerobs_form .clear,
 .zbscrmFrontEndForm .clear,

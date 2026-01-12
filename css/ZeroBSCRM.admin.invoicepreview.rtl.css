@@ -6709,14 +6709,14 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
   vertical-align: top;
 }
 
-#wptbpMetaBoxLogs #zbsAddLogForm div#zbsAddLogActions {
-  text-align: left;
-}
-
 #wptbpMetaBoxLogs #zbsAddLogForm div#zbsAddLogActions div#zbsAddLogUpdateMsg {
   float: right;
   text-align: right;
   margin-top: 10px;
+}
+
+#wptbpMetaBoxLogs #zbsAddLogForm div#zbsAddLogActions {
+  text-align: left;
 }
 
 #wptbpMetaBoxLogs #zbsAddLogForm div#zbsAddLogActions button {
@@ -6759,14 +6759,14 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
   vertical-align: top;
 }
 
-#wptbpMetaBoxLogs #zbsEditLogForm div#zbsEditLogActions {
-  text-align: left;
-}
-
 #wptbpMetaBoxLogs #zbsEditLogForm div#zbsEditLogActions div#zbsEditLogUpdateMsg {
   float: right;
   text-align: right;
   margin-top: 10px;
+}
+
+#wptbpMetaBoxLogs #zbsEditLogForm div#zbsEditLogActions {
+  text-align: left;
 }
 
 #wptbpMetaBoxLogs #zbsEditLogForm div#zbsEditLogActions button {
