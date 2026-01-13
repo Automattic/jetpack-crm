@@ -13,6 +13,9 @@ This is an alpha version! The changes listed here are not final.
 - Replace use of confusing `esc_js` with `wp_json_encode`.
 - Update package dependencies.
 
+### Removed
+- =
+
 ### Fixed
 - WooSync: Prevent PHP warnings when order status does not have a mapping.
 
