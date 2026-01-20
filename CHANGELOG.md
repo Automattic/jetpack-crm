@@ -5,7 +5,7 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [6.7.1-alpha] - unreleased
+## [6.7.2-alpha] - unreleased
 
 This is an alpha version! The changes listed here are not final.
 
@@ -15,6 +15,10 @@ This is an alpha version! The changes listed here are not final.
 
 ### Fixed
 - WooSync: Prevent PHP warnings when order status does not have a mapping.
+
+## [6.7.1] - 2026-01-20
+### Security
+- Security: Various security updates in settings page navigation.
 
 ## [6.7.0] - 2025-11-20
 ### Added
@@ -503,7 +507,7 @@ This is an alpha version! The changes listed here are not final.
 - Improved: Files for companies, invoices, and quotes are now stored in separate folders
 - Improved: Security around Email viewing
 - Improved: contact profile activity timeline properly renders newlines
-- Improved: custom date fields now have additional _DATETIME_STR and _DATE_STR placeholders
+- Improved: custom date fields now have additional \_DATETIME_STR and \_DATE_STR placeholders
 - Improved: default fonts are now bundled with the core plugin
 - Improved: Hardened security around CRM client portal account privileges
 - Improved: Hardened security against admin-side file uploading
@@ -589,7 +593,7 @@ This is an alpha version! The changes listed here are not final.
 - Added: Segment condition type: Variable date windows (e.g. within the past _ days, or in the next _ days)
 - Added: Segment condition type: Numeric >=
 - Added: Segment condition type: Numeric <=
-- Added: Segment condition type: String "Does not contain (!*)"
+- Added: Segment condition type: String "Does not contain (!\*)"
 - Added: Segment condition type: Date >=
 - Added: Segment condition type: Date <=
 
@@ -634,7 +638,7 @@ This is an alpha version! The changes listed here are not final.
 - Improved: better API error handling
 - Improved: prevent exporting an object type if there are no objects to export
 - Improved: API secret is now hashed upon generation for better security
-- Improved: new API credentials have "jpcrm_" prefix
+- Improved: new API credentials have "jpcrm\_" prefix
 - Improved: CRM-only menu choice during welcome wizard no longer enables full WP override setting
 - Improved: better messaging when generating a WP user fails
 - Improved: prevent saving an invalid email to a contact
@@ -706,7 +710,7 @@ This is an alpha version! The changes listed here are not final.
 - Improved: WooSync Hub stats automatically update during AJAX sync
 - Improved: The transaction listing in the Client Portal now shows the transaction status
 - Added: WooSync Hub now supports syncing orders that have a custom number structure
-- Added: new _DATETIME_STR and _DATE_STR placeholders based on unix timestamp values
+- Added: new \_DATETIME_STR and \_DATE_STR placeholders based on unix timestamp values
 
 ## 5.0.1 - 2022-06-05
 
@@ -1023,7 +1027,7 @@ This is an alpha version! The changes listed here are not final.
 - Improved: Contact prefixes and countries can be unset
 - Improved: better handling of very long tags
 - Improved: CRM deprecation notices are now logged
-- Improved: Wrapped some missed strings in __() for translation
+- Improved: Wrapped some missed strings in \_\_() for translation
 - Improved: Blank custom fields now show correctly when viewing a contact profile
 - Improved: Search by phone will ignore spaces and common punctuation
 - Improved: Typeahead limit has been raised from 5 to 10
@@ -1820,7 +1824,7 @@ This is an alpha version! The changes listed here are not final.
 ## 2.98.6 - 2019-03-18
 
 - Fixed: Issue where other SMTP plugins were overriding wp_mail in non-standard way, resulting in our text/html workaround causing send artifacts
-- Fixed: Proper respect is paid to main email template (previously was mis-linked in settings page) is now _responsivewrap.html & editable
+- Fixed: Proper respect is paid to main email template (previously was mis-linked in settings page) is now \_responsivewrap.html & editable
 - Fixed: php notice
 - Improved: Added better learn menu to settings page
 - Improved: Refined main mail template formatting
@@ -2857,7 +2861,7 @@ This is an alpha version! The changes listed here are not final.
 - Fixed: Localisation bug where language labels where breaking list views
 - Added: Log out tab on the Client Portal Navigation
 - Added: Forgot Password Link on Client Portal Login Page
-- Improved: Language leak moved into _e
+- Improved: Language leak moved into \_e
 
 ## 2.51.2 - 2018-02-20
 
@@ -3319,7 +3323,7 @@ This is an alpha version! The changes listed here are not final.
 - Added: From and To on PDF Invoices to show customer information
 - Added: do_action for new customer creation added (do_action('zbs_new_customer'))
 - Added: do_action prep for other objects
-- Added: *BETA* feature: Advanced Search (Activity/Customers)
+- Added: _BETA_ feature: Advanced Search (Activity/Customers)
 - Fixed: Bug in Invoice Tax calculation when discount was applied
 - Fixed: Contact Form 7 settings tab removed if extension active (no settings needed)
 - Fixed: Support links point to knowledgebase
@@ -3535,7 +3539,7 @@ This is an alpha version! The changes listed here are not final.
 - Added: New Menu Layout Options (1=Full, 2=Slimline, 3=CRM Only)
 - Added: New CRM Dashboard
 - Added: Country Code Support
-- Added: Customer/Contact Search *BETA*
+- Added: Customer/Contact Search _BETA_
 - Added: Filtered exports from the new Customer Search
 - Added: Filter customers by Tag (in Customer Search)
 - Added: Autologging of new transactions (optionally) against customer
@@ -3564,7 +3568,7 @@ This is an alpha version! The changes listed here are not final.
 ## 1.1.19 - 2016-10-25
 
 - Added: Sortable field orders (re-arrange your customer/company etc. edit pages!)
-- Added: BETA* Basic templating for addresses (via custom fields)
+- Added: BETA\* Basic templating for addresses (via custom fields)
 - Added: System Status page (pre-cursor to better support and future features)
 - Added: Pre-cursors for global address formatting
 - Added: First fix of Transaction list view
@@ -3717,7 +3721,8 @@ This is an alpha version! The changes listed here are not final.
 - Tested across 4 common web hosts
 - Tested with extensions: WooCommerce CRM Sync, PayPal CRM Sync, CSV Importer, ZBS CRM Mail Campaigns, and CRM Sales Dashboard
 
-[6.7.1-alpha]: https://github.com/Automattic/jetpack-crm/compare/6.7.0...6.7.1-alpha
+[6.7.2-alpha]: https://github.com/Automattic/jetpack-crm/compare/6.7.1...6.7.2-alpha
+[6.7.1]: https://github.com/Automattic/jetpack-crm/compare/6.7.0...6.7.1
 [6.7.0]: https://github.com/Automattic/jetpack-crm/compare/6.6.1...6.7.0
 [6.6.1]: https://github.com/Automattic/jetpack-crm/compare/6.6.0...6.6.1
 [6.6.0]: https://github.com/Automattic/jetpack-crm/compare/6.5.1...6.6.0
