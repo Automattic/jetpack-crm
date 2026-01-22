@@ -14,6 +14,7 @@ This is an alpha version! The changes listed here are not final.
 - Update package dependencies.
 
 ### Fixed
+- WooSync: Fix CRM contact identification on orders where customer used a different billing email.
 - WooSync: Prevent PHP warnings when order status does not have a mapping.
 
 ## [6.7.1] - 2026-01-20
