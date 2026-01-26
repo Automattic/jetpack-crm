@@ -14,6 +14,7 @@ This is an alpha version! The changes listed here are not final.
 - Update package dependencies.
 
 ### Fixed
+- CSV Importer: Fix path separator issue causing import failures on Windows servers.
 - WooSync: Fix CRM contact identification on orders where customer used a different billing email.
 - WooSync: Prevent PHP warnings when order status does not have a mapping.
 
