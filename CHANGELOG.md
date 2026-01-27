@@ -5,18 +5,15 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [6.7.2-alpha] - unreleased
-
-This is an alpha version! The changes listed here are not final.
-
+## [6.7.2-beta] - 2026-01-27
 ### Changed
-- Replace use of confusing `esc_js` with `wp_json_encode`.
-- Update package dependencies.
+- Replace use of confusing `esc_js` with `wp_json_encode`. [#46229]
+- Update package dependencies. [#46072] [#46143] [#46456] [#46512] [#46552] [#46647]
 
 ### Fixed
-- CSV Importer: Fix path separator issue causing import failures on Windows servers.
-- WooSync: Fix CRM contact identification on orders where customer used a different billing email.
-- WooSync: Prevent PHP warnings when order status does not have a mapping.
+- CSV Importer: Fix path separator issue causing import failures on Windows servers. [#46684]
+- WooSync: Fix CRM contact identification on orders where customer used a different billing email. [#46667]
+- WooSync: Prevent PHP warnings when order status does not have a mapping. [#46087]
 
 ## [6.7.1] - 2026-01-20
 ### Security
@@ -3723,7 +3720,7 @@ This is an alpha version! The changes listed here are not final.
 - Tested across 4 common web hosts
 - Tested with extensions: WooCommerce CRM Sync, PayPal CRM Sync, CSV Importer, ZBS CRM Mail Campaigns, and CRM Sales Dashboard
 
-[6.7.2-alpha]: https://github.com/Automattic/jetpack-crm/compare/6.7.1...6.7.2-alpha
+[6.7.2-beta]: https://github.com/Automattic/jetpack-crm/compare/6.7.1...6.7.2-beta
 [6.7.1]: https://github.com/Automattic/jetpack-crm/compare/6.7.0...6.7.1
 [6.7.0]: https://github.com/Automattic/jetpack-crm/compare/6.6.1...6.7.0
 [6.6.1]: https://github.com/Automattic/jetpack-crm/compare/6.6.0...6.6.1
