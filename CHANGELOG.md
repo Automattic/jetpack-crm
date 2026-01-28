@@ -5,6 +5,13 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.7.3-alpha] - unreleased
+
+This is an alpha version! The changes listed here are not final.
+
+### Changed
+- Update package dependencies.
+
 ## [6.7.2-beta] - 2026-01-27
 ### Changed
 - Replace use of confusing `esc_js` with `wp_json_encode`. [#46229]
@@ -3720,6 +3727,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Tested across 4 common web hosts
 - Tested with extensions: WooCommerce CRM Sync, PayPal CRM Sync, CSV Importer, ZBS CRM Mail Campaigns, and CRM Sales Dashboard
 
+[6.7.3-alpha]: https://github.com/Automattic/jetpack-crm/compare/6.7.2-beta...6.7.3-alpha
 [6.7.2-beta]: https://github.com/Automattic/jetpack-crm/compare/6.7.1...6.7.2-beta
 [6.7.1]: https://github.com/Automattic/jetpack-crm/compare/6.7.0...6.7.1
 [6.7.0]: https://github.com/Automattic/jetpack-crm/compare/6.6.1...6.7.0
