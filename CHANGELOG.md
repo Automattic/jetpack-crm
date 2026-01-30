@@ -12,6 +12,9 @@ This is an alpha version! The changes listed here are not final.
 ### Changed
 - Update package dependencies.
 
+### Fixed
+- Contacts: fix Transactions Total column showing $0.00 in list view.
+
 ## [6.7.2-beta] - 2026-01-27
 ### Changed
 - Replace use of confusing `esc_js` with `wp_json_encode`. [#46229]
