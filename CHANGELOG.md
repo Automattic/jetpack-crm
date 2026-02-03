@@ -14,6 +14,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Fixed
 - Contacts: fix Transactions Total column showing $0.00 in list view.
+- Fixed a small bug causing the contact panel on the email view to show 0 values.
 
 ## [6.7.2] - 2026-02-03
 ### Changed
