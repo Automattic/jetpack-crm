@@ -15,14 +15,18 @@
     "WooCommerce"
   ],
   "require": {
-    "php": ">= 7.1.0",
+    "php": ">= 7.4.0",
     "ext-curl": "*",
     "ext-json": "*"
   },
   "require-dev": {
-    "phpunit/phpunit": "^8",
+    "phpunit/phpunit": "^9.5.0",
     "squizlabs/php_codesniffer": "3.*",
-    "overtrue/phplint": "7.4.x-dev"
+    "doctrine/instantiator": "^1.5.0"
+  },
+  "scripts": {
+    "phpcs": "vendor/bin/phpcs --colors --standard=phpcs.xml",
+    "phpcbf": "vendor/bin/phpcbf --colors --standard=phpcs.xml"
   },
   "autoload": {
     "psr-4": {

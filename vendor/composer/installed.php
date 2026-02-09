@@ -65,9 +65,9 @@
             'dev_requirement' => false,
         ),
         'automattic/woocommerce' => array(
-            'pretty_version' => '3.1.0',
-            'version' => '3.1.0.0',
-            'reference' => 'd3b292f04c0b3b21dced691ebad8be073a83b4ad',
+            'pretty_version' => '3.1.1',
+            'version' => '3.1.1.0',
+            'reference' => 'e378120df655b7dacbeff4756e23b41b66fe9688',
             'type' => 'library',
             'install_path' => __DIR__ . '/../automattic/woocommerce',
             'aliases' => array(),

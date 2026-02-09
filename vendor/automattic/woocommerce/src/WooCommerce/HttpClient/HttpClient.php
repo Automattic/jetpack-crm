@@ -27,7 +27,7 @@ class HttpClient
     /**
      * cURL handle.
      *
-     * @var resource
+     * @var resource|\CurlHandle
      */
     protected $ch;
 
@@ -143,9 +143,9 @@ class HttpClient
     {
         if (!empty($parameters)) {
             if (false !== strpos($url, '?')) {
-                $url .= '&' . \http_build_query($parameters);
+                $url .= '&' . \http_build_query($parameters, '', '&');
             } else {
-                $url .= '?' . \http_build_query($parameters);
+                $url .= '?' . \http_build_query($parameters, '', '&');
             }
         }
 
@@ -372,7 +372,7 @@ class HttpClient
             $errorMessage = '';
             $errorCode = '';
 
-            if (is_array($errors)) {
+            if (is_array($errors) && $errors) {
                 $errorMessage = $errors[0]->message;
                 $errorCode    = $errors[0]->code;
             } elseif (isset($errors->message, $errors->code)) {
@@ -392,7 +392,7 @@ class HttpClient
     /**
      * Process response.
      *
-     * @return \stdClass
+     * @return \stdClass|array
      */
     protected function processResponse()
     {
@@ -429,7 +429,7 @@ class HttpClient
      * @param array  $data       Request data.
      * @param array  $parameters Request parameters.
      *
-     * @return \stdClass
+     * @return \stdClass|array
      */
     public function request($endpoint, $method, $data = [], $parameters = [])
     {
@@ -450,7 +450,10 @@ class HttpClient
             throw new HttpClientException('cURL Error: ' . \curl_error($this->ch), 0, $request, $response);
         }
 
-        \curl_close($this->ch);
+        // we have to call curl_close only for PHP < 8
+        if (\is_resource($this->ch)) {
+            \curl_close($this->ch);
+        }
 
         return $this->processResponse();
     }

@@ -507,35 +507,35 @@ return array(
 		'path'    => $baseDir . '/jetpack_vendor/automattic/jetpack-status/src/class-visitor.php'
 	),
 	'Automattic\\WooCommerce\\Client' => array(
-		'version' => '3.1.0.0',
+		'version' => '3.1.1.0',
 		'path'    => $vendorDir . '/automattic/woocommerce/src/WooCommerce/Client.php'
 	),
 	'Automattic\\WooCommerce\\HttpClient\\BasicAuth' => array(
-		'version' => '3.1.0.0',
+		'version' => '3.1.1.0',
 		'path'    => $vendorDir . '/automattic/woocommerce/src/WooCommerce/HttpClient/BasicAuth.php'
 	),
 	'Automattic\\WooCommerce\\HttpClient\\HttpClient' => array(
-		'version' => '3.1.0.0',
+		'version' => '3.1.1.0',
 		'path'    => $vendorDir . '/automattic/woocommerce/src/WooCommerce/HttpClient/HttpClient.php'
 	),
 	'Automattic\\WooCommerce\\HttpClient\\HttpClientException' => array(
-		'version' => '3.1.0.0',
+		'version' => '3.1.1.0',
 		'path'    => $vendorDir . '/automattic/woocommerce/src/WooCommerce/HttpClient/HttpClientException.php'
 	),
 	'Automattic\\WooCommerce\\HttpClient\\OAuth' => array(
-		'version' => '3.1.0.0',
+		'version' => '3.1.1.0',
 		'path'    => $vendorDir . '/automattic/woocommerce/src/WooCommerce/HttpClient/OAuth.php'
 	),
 	'Automattic\\WooCommerce\\HttpClient\\Options' => array(
-		'version' => '3.1.0.0',
+		'version' => '3.1.1.0',
 		'path'    => $vendorDir . '/automattic/woocommerce/src/WooCommerce/HttpClient/Options.php'
 	),
 	'Automattic\\WooCommerce\\HttpClient\\Request' => array(
-		'version' => '3.1.0.0',
+		'version' => '3.1.1.0',
 		'path'    => $vendorDir . '/automattic/woocommerce/src/WooCommerce/HttpClient/Request.php'
 	),
 	'Automattic\\WooCommerce\\HttpClient\\Response' => array(
-		'version' => '3.1.0.0',
+		'version' => '3.1.1.0',
 		'path'    => $vendorDir . '/automattic/woocommerce/src/WooCommerce/HttpClient/Response.php'
 	),
 	'Container' => array(
