@@ -369,8 +369,7 @@ code,
 kbd,
 pre,
 samp {
-  /* stylelint-disable-next-line font-family-no-duplicate-names
-  -- this is a known rendering hack to force proportional font sizes. */
+  /* stylelint-disable-next-line font-family-no-duplicate-names -- this is a known rendering hack to force proportional font sizes. */
   font-family: monospace, monospace;
   font-size: 1em;
 }
@@ -484,14 +483,14 @@ th {
   blockquote,
   pre {
     border: 1px solid #999;
-    page-break-inside: avoid;
+    break-inside: avoid;
   }
   thead {
     display: table-header-group;
   }
   img,
   tr {
-    page-break-inside: avoid;
+    break-inside: avoid;
   }
   img {
     max-width: 100% !important;
@@ -504,7 +503,7 @@ th {
   }
   h2,
   h3 {
-    page-break-after: avoid;
+    break-after: avoid;
   }
   select {
     background: #fff !important;
@@ -7035,7 +7034,7 @@ div.ui.learn.button .jpcrm-info-gridicon {
 
 /* allow for long file titles and descriptions */
 table#zbsFilesTable td {
-  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .jpcrm-custom-field-builder span.ui.label:hover {
