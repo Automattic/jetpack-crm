@@ -14,6 +14,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Changed
 - Code Quality: fix whitespace, indentation, and comment formatting throughout codebase.
+- Remove header border-bottom from the admin page for a cleaner unified header appearance.
 - Update package dependencies.
 
 ### Fixed
