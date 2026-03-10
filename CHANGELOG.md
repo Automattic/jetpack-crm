@@ -22,6 +22,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Fixed
 - Admin Page: Restore border on header component.
+- Client Portal: Harden quote acceptance checks.
 - Compatibility: Clean up deprecated CSS.
 - Contacts: fix Transactions Total column showing $0.00 in list view.
 - Fixed a small bug causing the contact panel on the email view to show 0 values.
