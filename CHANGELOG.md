@@ -25,6 +25,7 @@ This is an alpha version! The changes listed here are not final.
 - Client Portal: Harden quote acceptance checks.
 - Compatibility: Clean up deprecated CSS.
 - Contacts: fix Transactions Total column showing $0.00 in list view.
+- Fix double dash typo that was incorrectly converted into a comparison operator in DAL3 ObjectLayer.
 - Fixed a small bug causing the contact panel on the email view to show 0 values.
 - Fix JavaScript syntax error in list view caused by newline before PHP tag.
 - Fix PHP warning when used with the new 'Modern' admin UI color scheme.
