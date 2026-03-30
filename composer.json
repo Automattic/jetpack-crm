@@ -11,7 +11,7 @@
 		"codeception/module-filesystem": "^2.0 || ^3.0",
 		"codeception/util-universalframework": "^1.0 || ^2.0",
 		"yoast/phpunit-polyfills": "^4.0.0",
-		"automattic/phpunit-select-config": "^1.0.4-alpha"
+		"automattic/phpunit-select-config": "^1.0.4"
 	},
 	"scripts": {
 		"build-development": [
@@ -54,7 +54,7 @@
 	},
 	"require": {
 		"php": ">=7.4",
-		"automattic/jetpack-assets": "^4.3.30-alpha",
+		"automattic/jetpack-assets": "^4.3.30",
 		"automattic/jetpack-autoloader": "^5.0.16",
 		"automattic/jetpack-composer-plugin": "^4.0.5",
 		"automattic/woocommerce": "^3.1",
