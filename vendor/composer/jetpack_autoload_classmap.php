@@ -543,432 +543,476 @@ return array(
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-container.php'
 	),
 	'Dompdf\\Adapter\\CPDF' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Adapter/CPDF.php'
 	),
 	'Dompdf\\Adapter\\GD' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Adapter/GD.php'
 	),
 	'Dompdf\\Adapter\\PDFLib' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Adapter/PDFLib.php'
 	),
 	'Dompdf\\Canvas' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Canvas.php'
 	),
 	'Dompdf\\CanvasFactory' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/CanvasFactory.php'
 	),
 	'Dompdf\\Cellmap' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Cellmap.php'
 	),
 	'Dompdf\\Cpdf' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/lib/Cpdf.php'
 	),
 	'Dompdf\\Css\\AttributeTranslator' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Css/AttributeTranslator.php'
 	),
 	'Dompdf\\Css\\Color' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Css/Color.php'
 	),
+	'Dompdf\\Css\\Content\\Attr' => array(
+		'version' => '3.1.5.0',
+		'path'    => $vendorDir . '/dompdf/dompdf/src/Css/Content/Attr.php'
+	),
+	'Dompdf\\Css\\Content\\CloseQuote' => array(
+		'version' => '3.1.5.0',
+		'path'    => $vendorDir . '/dompdf/dompdf/src/Css/Content/CloseQuote.php'
+	),
+	'Dompdf\\Css\\Content\\ContentPart' => array(
+		'version' => '3.1.5.0',
+		'path'    => $vendorDir . '/dompdf/dompdf/src/Css/Content/ContentPart.php'
+	),
+	'Dompdf\\Css\\Content\\Counter' => array(
+		'version' => '3.1.5.0',
+		'path'    => $vendorDir . '/dompdf/dompdf/src/Css/Content/Counter.php'
+	),
+	'Dompdf\\Css\\Content\\Counters' => array(
+		'version' => '3.1.5.0',
+		'path'    => $vendorDir . '/dompdf/dompdf/src/Css/Content/Counters.php'
+	),
+	'Dompdf\\Css\\Content\\NoCloseQuote' => array(
+		'version' => '3.1.5.0',
+		'path'    => $vendorDir . '/dompdf/dompdf/src/Css/Content/NoCloseQuote.php'
+	),
+	'Dompdf\\Css\\Content\\NoOpenQuote' => array(
+		'version' => '3.1.5.0',
+		'path'    => $vendorDir . '/dompdf/dompdf/src/Css/Content/NoOpenQuote.php'
+	),
+	'Dompdf\\Css\\Content\\OpenQuote' => array(
+		'version' => '3.1.5.0',
+		'path'    => $vendorDir . '/dompdf/dompdf/src/Css/Content/OpenQuote.php'
+	),
+	'Dompdf\\Css\\Content\\StringPart' => array(
+		'version' => '3.1.5.0',
+		'path'    => $vendorDir . '/dompdf/dompdf/src/Css/Content/StringPart.php'
+	),
+	'Dompdf\\Css\\Content\\Url' => array(
+		'version' => '3.1.5.0',
+		'path'    => $vendorDir . '/dompdf/dompdf/src/Css/Content/Url.php'
+	),
 	'Dompdf\\Css\\Style' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Css/Style.php'
 	),
 	'Dompdf\\Css\\Stylesheet' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Css/Stylesheet.php'
 	),
 	'Dompdf\\Dompdf' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Dompdf.php'
 	),
 	'Dompdf\\Exception' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Exception.php'
 	),
 	'Dompdf\\Exception\\ImageException' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Exception/ImageException.php'
 	),
 	'Dompdf\\FontMetrics' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FontMetrics.php'
 	),
 	'Dompdf\\Frame' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Frame.php'
 	),
 	'Dompdf\\FrameDecorator\\AbstractFrameDecorator' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameDecorator/AbstractFrameDecorator.php'
 	),
 	'Dompdf\\FrameDecorator\\Block' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameDecorator/Block.php'
 	),
 	'Dompdf\\FrameDecorator\\Image' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameDecorator/Image.php'
 	),
 	'Dompdf\\FrameDecorator\\Inline' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameDecorator/Inline.php'
 	),
 	'Dompdf\\FrameDecorator\\ListBullet' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameDecorator/ListBullet.php'
 	),
 	'Dompdf\\FrameDecorator\\ListBulletImage' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameDecorator/ListBulletImage.php'
 	),
 	'Dompdf\\FrameDecorator\\NullFrameDecorator' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameDecorator/NullFrameDecorator.php'
 	),
 	'Dompdf\\FrameDecorator\\Page' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameDecorator/Page.php'
 	),
 	'Dompdf\\FrameDecorator\\Table' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameDecorator/Table.php'
 	),
 	'Dompdf\\FrameDecorator\\TableCell' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameDecorator/TableCell.php'
 	),
 	'Dompdf\\FrameDecorator\\TableRow' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameDecorator/TableRow.php'
 	),
 	'Dompdf\\FrameDecorator\\TableRowGroup' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameDecorator/TableRowGroup.php'
 	),
 	'Dompdf\\FrameDecorator\\Text' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameDecorator/Text.php'
 	),
 	'Dompdf\\FrameReflower\\AbstractFrameReflower' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameReflower/AbstractFrameReflower.php'
 	),
 	'Dompdf\\FrameReflower\\Block' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameReflower/Block.php'
 	),
 	'Dompdf\\FrameReflower\\Image' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameReflower/Image.php'
 	),
 	'Dompdf\\FrameReflower\\Inline' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameReflower/Inline.php'
 	),
 	'Dompdf\\FrameReflower\\ListBullet' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameReflower/ListBullet.php'
 	),
 	'Dompdf\\FrameReflower\\NullFrameReflower' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameReflower/NullFrameReflower.php'
 	),
 	'Dompdf\\FrameReflower\\Page' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameReflower/Page.php'
 	),
 	'Dompdf\\FrameReflower\\Table' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameReflower/Table.php'
 	),
 	'Dompdf\\FrameReflower\\TableCell' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameReflower/TableCell.php'
 	),
 	'Dompdf\\FrameReflower\\TableRow' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameReflower/TableRow.php'
 	),
 	'Dompdf\\FrameReflower\\TableRowGroup' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameReflower/TableRowGroup.php'
 	),
 	'Dompdf\\FrameReflower\\Text' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/FrameReflower/Text.php'
 	),
 	'Dompdf\\Frame\\Factory' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Frame/Factory.php'
 	),
 	'Dompdf\\Frame\\FrameListIterator' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Frame/FrameListIterator.php'
 	),
 	'Dompdf\\Frame\\FrameTree' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Frame/FrameTree.php'
 	),
 	'Dompdf\\Frame\\FrameTreeIterator' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Frame/FrameTreeIterator.php'
 	),
 	'Dompdf\\Helpers' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Helpers.php'
 	),
 	'Dompdf\\Image\\Cache' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Image/Cache.php'
 	),
 	'Dompdf\\JavascriptEmbedder' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/JavascriptEmbedder.php'
 	),
 	'Dompdf\\LineBox' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/LineBox.php'
 	),
 	'Dompdf\\Options' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Options.php'
 	),
 	'Dompdf\\PhpEvaluator' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/PhpEvaluator.php'
 	),
 	'Dompdf\\Positioner\\Absolute' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Positioner/Absolute.php'
 	),
 	'Dompdf\\Positioner\\AbstractPositioner' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Positioner/AbstractPositioner.php'
 	),
 	'Dompdf\\Positioner\\Block' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Positioner/Block.php'
 	),
 	'Dompdf\\Positioner\\Fixed' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Positioner/Fixed.php'
 	),
 	'Dompdf\\Positioner\\Inline' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Positioner/Inline.php'
 	),
 	'Dompdf\\Positioner\\ListBullet' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Positioner/ListBullet.php'
 	),
 	'Dompdf\\Positioner\\NullPositioner' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Positioner/NullPositioner.php'
 	),
 	'Dompdf\\Positioner\\TableCell' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Positioner/TableCell.php'
 	),
 	'Dompdf\\Positioner\\TableRow' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Positioner/TableRow.php'
 	),
 	'Dompdf\\Renderer' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Renderer.php'
 	),
 	'Dompdf\\Renderer\\AbstractRenderer' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Renderer/AbstractRenderer.php'
 	),
 	'Dompdf\\Renderer\\Block' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Renderer/Block.php'
 	),
 	'Dompdf\\Renderer\\Image' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Renderer/Image.php'
 	),
 	'Dompdf\\Renderer\\Inline' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Renderer/Inline.php'
 	),
 	'Dompdf\\Renderer\\ListBullet' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Renderer/ListBullet.php'
 	),
 	'Dompdf\\Renderer\\TableCell' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Renderer/TableCell.php'
 	),
+	'Dompdf\\Renderer\\TableRow' => array(
+		'version' => '3.1.5.0',
+		'path'    => $vendorDir . '/dompdf/dompdf/src/Renderer/TableRow.php'
+	),
 	'Dompdf\\Renderer\\TableRowGroup' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Renderer/TableRowGroup.php'
 	),
 	'Dompdf\\Renderer\\Text' => array(
-		'version' => '2.0.8.0',
+		'version' => '3.1.5.0',
 		'path'    => $vendorDir . '/dompdf/dompdf/src/Renderer/Text.php'
 	),
 	'FontLib\\AdobeFontMetrics' => array(
-		'version' => '0.5.6.0',
-		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/AdobeFontMetrics.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-font-lib/src/FontLib/AdobeFontMetrics.php'
 	),
 	'FontLib\\BinaryStream' => array(
-		'version' => '0.5.6.0',
-		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/BinaryStream.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-font-lib/src/FontLib/BinaryStream.php'
 	),
 	'FontLib\\EOT\\File' => array(
-		'version' => '0.5.6.0',
-		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/EOT/File.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-font-lib/src/FontLib/EOT/File.php'
 	),
 	'FontLib\\EOT\\Header' => array(
-		'version' => '0.5.6.0',
-		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/EOT/Header.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-font-lib/src/FontLib/EOT/Header.php'
 	),
 	'FontLib\\EncodingMap' => array(
-		'version' => '0.5.6.0',
-		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/EncodingMap.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-font-lib/src/FontLib/EncodingMap.php'
 	),
 	'FontLib\\Exception\\FontNotFoundException' => array(
-		'version' => '0.5.6.0',
-		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Exception/FontNotFoundException.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-font-lib/src/FontLib/Exception/FontNotFoundException.php'
 	),
 	'FontLib\\Font' => array(
-		'version' => '0.5.6.0',
-		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Font.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-font-lib/src/FontLib/Font.php'
 	),
 	'FontLib\\Glyph\\Outline' => array(
-		'version' => '0.5.6.0',
-		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Glyph/Outline.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-font-lib/src/FontLib/Glyph/Outline.php'
 	),
 	'FontLib\\Glyph\\OutlineComponent' => array(
-		'version' => '0.5.6.0',
-		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Glyph/OutlineComponent.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-font-lib/src/FontLib/Glyph/OutlineComponent.php'
 	),
 	'FontLib\\Glyph\\OutlineComposite' => array(
-		'version' => '0.5.6.0',
-		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Glyph/OutlineComposite.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-font-lib/src/FontLib/Glyph/OutlineComposite.php'
 	),
 	'FontLib\\Glyph\\OutlineSimple' => array(
-		'version' => '0.5.6.0',
-		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Glyph/OutlineSimple.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-font-lib/src/FontLib/Glyph/OutlineSimple.php'
 	),
 	'FontLib\\Header' => array(
-		'version' => '0.5.6.0',
-		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Header.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-font-lib/src/FontLib/Header.php'
 	),
 	'FontLib\\OpenType\\File' => array(
-		'version' => '0.5.6.0',
-		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/OpenType/File.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-font-lib/src/FontLib/OpenType/File.php'
 	),
 	'FontLib\\OpenType\\TableDirectoryEntry' => array(
-		'version' => '0.5.6.0',
-		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/OpenType/TableDirectoryEntry.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-font-lib/src/FontLib/OpenType/TableDirectoryEntry.php'
 	),
 	'FontLib\\Table\\DirectoryEntry' => array(
-		'version' => '0.5.6.0',
-		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Table/DirectoryEntry.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-font-lib/src/FontLib/Table/DirectoryEntry.php'
 	),
 	'FontLib\\Table\\Table' => array(
-		'version' => '0.5.6.0',
-		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Table/Table.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-font-lib/src/FontLib/Table/Table.php'
 	),
 	'FontLib\\Table\\Type\\cmap' => array(
-		'version' => '0.5.6.0',
-		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Table/Type/cmap.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-font-lib/src/FontLib/Table/Type/cmap.php'
 	),
 	'FontLib\\Table\\Type\\cvt' => array(
-		'version' => '0.5.6.0',
-		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Table/Type/cvt.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-font-lib/src/FontLib/Table/Type/cvt.php'
 	),
 	'FontLib\\Table\\Type\\fpgm' => array(
-		'version' => '0.5.6.0',
-		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Table/Type/fpgm.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-font-lib/src/FontLib/Table/Type/fpgm.php'
 	),
 	'FontLib\\Table\\Type\\glyf' => array(
-		'version' => '0.5.6.0',
-		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Table/Type/glyf.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-font-lib/src/FontLib/Table/Type/glyf.php'
 	),
 	'FontLib\\Table\\Type\\head' => array(
-		'version' => '0.5.6.0',
-		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Table/Type/head.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-font-lib/src/FontLib/Table/Type/head.php'
 	),
 	'FontLib\\Table\\Type\\hhea' => array(
-		'version' => '0.5.6.0',
-		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Table/Type/hhea.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-font-lib/src/FontLib/Table/Type/hhea.php'
 	),
 	'FontLib\\Table\\Type\\hmtx' => array(
-		'version' => '0.5.6.0',
-		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Table/Type/hmtx.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-font-lib/src/FontLib/Table/Type/hmtx.php'
 	),
 	'FontLib\\Table\\Type\\kern' => array(
-		'version' => '0.5.6.0',
-		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Table/Type/kern.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-font-lib/src/FontLib/Table/Type/kern.php'
 	),
 	'FontLib\\Table\\Type\\loca' => array(
-		'version' => '0.5.6.0',
-		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Table/Type/loca.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-font-lib/src/FontLib/Table/Type/loca.php'
 	),
 	'FontLib\\Table\\Type\\maxp' => array(
-		'version' => '0.5.6.0',
-		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Table/Type/maxp.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-font-lib/src/FontLib/Table/Type/maxp.php'
 	),
 	'FontLib\\Table\\Type\\name' => array(
-		'version' => '0.5.6.0',
-		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Table/Type/name.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-font-lib/src/FontLib/Table/Type/name.php'
 	),
 	'FontLib\\Table\\Type\\nameRecord' => array(
-		'version' => '0.5.6.0',
-		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Table/Type/nameRecord.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-font-lib/src/FontLib/Table/Type/nameRecord.php'
 	),
 	'FontLib\\Table\\Type\\os2' => array(
-		'version' => '0.5.6.0',
-		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Table/Type/os2.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-font-lib/src/FontLib/Table/Type/os2.php'
 	),
 	'FontLib\\Table\\Type\\post' => array(
-		'version' => '0.5.6.0',
-		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Table/Type/post.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-font-lib/src/FontLib/Table/Type/post.php'
 	),
 	'FontLib\\Table\\Type\\prep' => array(
-		'version' => '0.5.6.0',
-		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/Table/Type/prep.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-font-lib/src/FontLib/Table/Type/prep.php'
 	),
 	'FontLib\\TrueType\\Collection' => array(
-		'version' => '0.5.6.0',
-		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/TrueType/Collection.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-font-lib/src/FontLib/TrueType/Collection.php'
 	),
 	'FontLib\\TrueType\\File' => array(
-		'version' => '0.5.6.0',
-		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/TrueType/File.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-font-lib/src/FontLib/TrueType/File.php'
 	),
 	'FontLib\\TrueType\\Header' => array(
-		'version' => '0.5.6.0',
-		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/TrueType/Header.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-font-lib/src/FontLib/TrueType/Header.php'
 	),
 	'FontLib\\TrueType\\TableDirectoryEntry' => array(
-		'version' => '0.5.6.0',
-		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/TrueType/TableDirectoryEntry.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-font-lib/src/FontLib/TrueType/TableDirectoryEntry.php'
 	),
 	'FontLib\\WOFF\\File' => array(
-		'version' => '0.5.6.0',
-		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/WOFF/File.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-font-lib/src/FontLib/WOFF/File.php'
 	),
 	'FontLib\\WOFF\\Header' => array(
-		'version' => '0.5.6.0',
-		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/WOFF/Header.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-font-lib/src/FontLib/WOFF/Header.php'
 	),
 	'FontLib\\WOFF\\TableDirectoryEntry' => array(
-		'version' => '0.5.6.0',
-		'path'    => $vendorDir . '/phenx/php-font-lib/src/FontLib/WOFF/TableDirectoryEntry.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-font-lib/src/FontLib/WOFF/TableDirectoryEntry.php'
 	),
 	'Hook_Manager' => array(
 		'version' => '5.0.16',
@@ -1079,296 +1123,696 @@ return array(
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-plugins-handler.php'
 	),
 	'Sabberworm\\CSS\\CSSElement' => array(
-		'version' => '8.9.0.0',
+		'version' => '9.3.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/CSSElement.php'
 	),
 	'Sabberworm\\CSS\\CSSList\\AtRuleBlockList' => array(
-		'version' => '8.9.0.0',
+		'version' => '9.3.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/CSSList/AtRuleBlockList.php'
 	),
 	'Sabberworm\\CSS\\CSSList\\CSSBlockList' => array(
-		'version' => '8.9.0.0',
+		'version' => '9.3.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/CSSList/CSSBlockList.php'
 	),
 	'Sabberworm\\CSS\\CSSList\\CSSList' => array(
-		'version' => '8.9.0.0',
+		'version' => '9.3.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/CSSList/CSSList.php'
 	),
+	'Sabberworm\\CSS\\CSSList\\CSSListItem' => array(
+		'version' => '9.3.0.0',
+		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/CSSList/CSSListItem.php'
+	),
 	'Sabberworm\\CSS\\CSSList\\Document' => array(
-		'version' => '8.9.0.0',
+		'version' => '9.3.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/CSSList/Document.php'
 	),
 	'Sabberworm\\CSS\\CSSList\\KeyFrame' => array(
-		'version' => '8.9.0.0',
+		'version' => '9.3.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/CSSList/KeyFrame.php'
 	),
 	'Sabberworm\\CSS\\Comment\\Comment' => array(
-		'version' => '8.9.0.0',
+		'version' => '9.3.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Comment/Comment.php'
 	),
+	'Sabberworm\\CSS\\Comment\\CommentContainer' => array(
+		'version' => '9.3.0.0',
+		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Comment/CommentContainer.php'
+	),
 	'Sabberworm\\CSS\\Comment\\Commentable' => array(
-		'version' => '8.9.0.0',
+		'version' => '9.3.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Comment/Commentable.php'
 	),
 	'Sabberworm\\CSS\\OutputFormat' => array(
-		'version' => '8.9.0.0',
+		'version' => '9.3.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/OutputFormat.php'
 	),
 	'Sabberworm\\CSS\\OutputFormatter' => array(
-		'version' => '8.9.0.0',
+		'version' => '9.3.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/OutputFormatter.php'
 	),
 	'Sabberworm\\CSS\\Parser' => array(
-		'version' => '8.9.0.0',
+		'version' => '9.3.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Parser.php'
 	),
 	'Sabberworm\\CSS\\Parsing\\Anchor' => array(
-		'version' => '8.9.0.0',
+		'version' => '9.3.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Parsing/Anchor.php'
 	),
 	'Sabberworm\\CSS\\Parsing\\OutputException' => array(
-		'version' => '8.9.0.0',
+		'version' => '9.3.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Parsing/OutputException.php'
 	),
 	'Sabberworm\\CSS\\Parsing\\ParserState' => array(
-		'version' => '8.9.0.0',
+		'version' => '9.3.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Parsing/ParserState.php'
 	),
 	'Sabberworm\\CSS\\Parsing\\SourceException' => array(
-		'version' => '8.9.0.0',
+		'version' => '9.3.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Parsing/SourceException.php'
 	),
 	'Sabberworm\\CSS\\Parsing\\UnexpectedEOFException' => array(
-		'version' => '8.9.0.0',
+		'version' => '9.3.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Parsing/UnexpectedEOFException.php'
 	),
 	'Sabberworm\\CSS\\Parsing\\UnexpectedTokenException' => array(
-		'version' => '8.9.0.0',
+		'version' => '9.3.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Parsing/UnexpectedTokenException.php'
 	),
 	'Sabberworm\\CSS\\Position\\Position' => array(
-		'version' => '8.9.0.0',
+		'version' => '9.3.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Position/Position.php'
 	),
 	'Sabberworm\\CSS\\Position\\Positionable' => array(
-		'version' => '8.9.0.0',
+		'version' => '9.3.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Position/Positionable.php'
 	),
 	'Sabberworm\\CSS\\Property\\AtRule' => array(
-		'version' => '8.9.0.0',
+		'version' => '9.3.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Property/AtRule.php'
 	),
 	'Sabberworm\\CSS\\Property\\CSSNamespace' => array(
-		'version' => '8.9.0.0',
+		'version' => '9.3.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Property/CSSNamespace.php'
 	),
 	'Sabberworm\\CSS\\Property\\Charset' => array(
-		'version' => '8.9.0.0',
+		'version' => '9.3.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Property/Charset.php'
 	),
+	'Sabberworm\\CSS\\Property\\Declaration' => array(
+		'version' => '9.3.0.0',
+		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Property/Declaration.php'
+	),
 	'Sabberworm\\CSS\\Property\\Import' => array(
-		'version' => '8.9.0.0',
+		'version' => '9.3.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Property/Import.php'
 	),
 	'Sabberworm\\CSS\\Property\\KeyframeSelector' => array(
-		'version' => '8.9.0.0',
+		'version' => '9.3.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Property/KeyframeSelector.php'
 	),
 	'Sabberworm\\CSS\\Property\\Selector' => array(
-		'version' => '8.9.0.0',
+		'version' => '9.3.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Property/Selector.php'
 	),
+	'Sabberworm\\CSS\\Property\\Selector\\Combinator' => array(
+		'version' => '9.3.0.0',
+		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Property/Selector/Combinator.php'
+	),
+	'Sabberworm\\CSS\\Property\\Selector\\Component' => array(
+		'version' => '9.3.0.0',
+		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Property/Selector/Component.php'
+	),
+	'Sabberworm\\CSS\\Property\\Selector\\CompoundSelector' => array(
+		'version' => '9.3.0.0',
+		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Property/Selector/CompoundSelector.php'
+	),
+	'Sabberworm\\CSS\\Property\\Selector\\SpecificityCalculator' => array(
+		'version' => '9.3.0.0',
+		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Property/Selector/SpecificityCalculator.php'
+	),
 	'Sabberworm\\CSS\\Renderable' => array(
-		'version' => '8.9.0.0',
+		'version' => '9.3.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Renderable.php'
 	),
 	'Sabberworm\\CSS\\RuleSet\\AtRuleSet' => array(
-		'version' => '8.9.0.0',
+		'version' => '9.3.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/RuleSet/AtRuleSet.php'
 	),
 	'Sabberworm\\CSS\\RuleSet\\DeclarationBlock' => array(
-		'version' => '8.9.0.0',
+		'version' => '9.3.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/RuleSet/DeclarationBlock.php'
 	),
+	'Sabberworm\\CSS\\RuleSet\\DeclarationList' => array(
+		'version' => '9.3.0.0',
+		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/RuleSet/DeclarationList.php'
+	),
+	'Sabberworm\\CSS\\RuleSet\\LegacyDeclarationListMethods' => array(
+		'version' => '9.3.0.0',
+		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/RuleSet/LegacyDeclarationListMethods.php'
+	),
 	'Sabberworm\\CSS\\RuleSet\\RuleSet' => array(
-		'version' => '8.9.0.0',
+		'version' => '9.3.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/RuleSet/RuleSet.php'
 	),
-	'Sabberworm\\CSS\\Rule\\Rule' => array(
-		'version' => '8.9.0.0',
-		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Rule/Rule.php'
-	),
 	'Sabberworm\\CSS\\Settings' => array(
-		'version' => '8.9.0.0',
+		'version' => '9.3.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Settings.php'
 	),
+	'Sabberworm\\CSS\\ShortClassNameProvider' => array(
+		'version' => '9.3.0.0',
+		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/ShortClassNameProvider.php'
+	),
 	'Sabberworm\\CSS\\Value\\CSSFunction' => array(
-		'version' => '8.9.0.0',
+		'version' => '9.3.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Value/CSSFunction.php'
 	),
 	'Sabberworm\\CSS\\Value\\CSSString' => array(
-		'version' => '8.9.0.0',
+		'version' => '9.3.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Value/CSSString.php'
 	),
 	'Sabberworm\\CSS\\Value\\CalcFunction' => array(
-		'version' => '8.9.0.0',
+		'version' => '9.3.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Value/CalcFunction.php'
 	),
 	'Sabberworm\\CSS\\Value\\CalcRuleValueList' => array(
-		'version' => '8.9.0.0',
+		'version' => '9.3.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Value/CalcRuleValueList.php'
 	),
 	'Sabberworm\\CSS\\Value\\Color' => array(
-		'version' => '8.9.0.0',
+		'version' => '9.3.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Value/Color.php'
 	),
 	'Sabberworm\\CSS\\Value\\LineName' => array(
-		'version' => '8.9.0.0',
+		'version' => '9.3.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Value/LineName.php'
 	),
 	'Sabberworm\\CSS\\Value\\PrimitiveValue' => array(
-		'version' => '8.9.0.0',
+		'version' => '9.3.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Value/PrimitiveValue.php'
 	),
 	'Sabberworm\\CSS\\Value\\RuleValueList' => array(
-		'version' => '8.9.0.0',
+		'version' => '9.3.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Value/RuleValueList.php'
 	),
 	'Sabberworm\\CSS\\Value\\Size' => array(
-		'version' => '8.9.0.0',
+		'version' => '9.3.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Value/Size.php'
 	),
 	'Sabberworm\\CSS\\Value\\URL' => array(
-		'version' => '8.9.0.0',
+		'version' => '9.3.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Value/URL.php'
 	),
 	'Sabberworm\\CSS\\Value\\Value' => array(
-		'version' => '8.9.0.0',
+		'version' => '9.3.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Value/Value.php'
 	),
 	'Sabberworm\\CSS\\Value\\ValueList' => array(
-		'version' => '8.9.0.0',
+		'version' => '9.3.0.0',
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/Value/ValueList.php'
+	),
+	'Safe\\DateTime' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/lib/DateTime.php'
+	),
+	'Safe\\DateTimeImmutable' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/lib/DateTimeImmutable.php'
+	),
+	'Safe\\Exceptions\\ApacheException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/ApacheException.php'
+	),
+	'Safe\\Exceptions\\ApcException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/deprecated/Exceptions/ApcException.php'
+	),
+	'Safe\\Exceptions\\ApcuException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/ApcuException.php'
+	),
+	'Safe\\Exceptions\\ArrayException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/ArrayException.php'
+	),
+	'Safe\\Exceptions\\Bzip2Exception' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/Bzip2Exception.php'
+	),
+	'Safe\\Exceptions\\CalendarException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/CalendarException.php'
+	),
+	'Safe\\Exceptions\\ClassobjException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/ClassobjException.php'
+	),
+	'Safe\\Exceptions\\ComException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/ComException.php'
+	),
+	'Safe\\Exceptions\\CubridException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/CubridException.php'
+	),
+	'Safe\\Exceptions\\CurlException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/lib/Exceptions/CurlException.php'
+	),
+	'Safe\\Exceptions\\DatetimeException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/DatetimeException.php'
+	),
+	'Safe\\Exceptions\\DirException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/DirException.php'
+	),
+	'Safe\\Exceptions\\EioException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/EioException.php'
+	),
+	'Safe\\Exceptions\\ErrorfuncException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/ErrorfuncException.php'
+	),
+	'Safe\\Exceptions\\ExecException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/ExecException.php'
+	),
+	'Safe\\Exceptions\\FileinfoException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/FileinfoException.php'
+	),
+	'Safe\\Exceptions\\FilesystemException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/FilesystemException.php'
+	),
+	'Safe\\Exceptions\\FilterException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/FilterException.php'
+	),
+	'Safe\\Exceptions\\FpmException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/FpmException.php'
+	),
+	'Safe\\Exceptions\\FtpException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/FtpException.php'
+	),
+	'Safe\\Exceptions\\FunchandException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/FunchandException.php'
+	),
+	'Safe\\Exceptions\\GmpException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/GmpException.php'
+	),
+	'Safe\\Exceptions\\GnupgException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/GnupgException.php'
+	),
+	'Safe\\Exceptions\\HashException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/HashException.php'
+	),
+	'Safe\\Exceptions\\IbaseException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/IbaseException.php'
+	),
+	'Safe\\Exceptions\\IbmDb2Exception' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/IbmDb2Exception.php'
+	),
+	'Safe\\Exceptions\\IconvException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/IconvException.php'
+	),
+	'Safe\\Exceptions\\ImageException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/ImageException.php'
+	),
+	'Safe\\Exceptions\\ImapException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/ImapException.php'
+	),
+	'Safe\\Exceptions\\InfoException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/InfoException.php'
+	),
+	'Safe\\Exceptions\\IngresiiException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/IngresiiException.php'
+	),
+	'Safe\\Exceptions\\InotifyException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/InotifyException.php'
+	),
+	'Safe\\Exceptions\\JsonException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/lib/Exceptions/JsonException.php'
+	),
+	'Safe\\Exceptions\\LdapException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/LdapException.php'
+	),
+	'Safe\\Exceptions\\LibeventException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/deprecated/Exceptions/LibeventException.php'
+	),
+	'Safe\\Exceptions\\LibxmlException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/LibxmlException.php'
+	),
+	'Safe\\Exceptions\\LzfException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/LzfException.php'
+	),
+	'Safe\\Exceptions\\MailparseException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/MailparseException.php'
+	),
+	'Safe\\Exceptions\\MbstringException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/MbstringException.php'
+	),
+	'Safe\\Exceptions\\MiscException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/MiscException.php'
+	),
+	'Safe\\Exceptions\\MsqlException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/MsqlException.php'
+	),
+	'Safe\\Exceptions\\MssqlException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/deprecated/Exceptions/MssqlException.php'
+	),
+	'Safe\\Exceptions\\MysqlException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/MysqlException.php'
+	),
+	'Safe\\Exceptions\\MysqliException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/MysqliException.php'
+	),
+	'Safe\\Exceptions\\MysqlndMsException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/MysqlndMsException.php'
+	),
+	'Safe\\Exceptions\\MysqlndQcException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/MysqlndQcException.php'
+	),
+	'Safe\\Exceptions\\NetworkException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/NetworkException.php'
+	),
+	'Safe\\Exceptions\\Oci8Exception' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/Oci8Exception.php'
+	),
+	'Safe\\Exceptions\\OpcacheException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/OpcacheException.php'
+	),
+	'Safe\\Exceptions\\OpensslException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/lib/Exceptions/OpensslException.php'
+	),
+	'Safe\\Exceptions\\OutcontrolException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/OutcontrolException.php'
+	),
+	'Safe\\Exceptions\\PasswordException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/PasswordException.php'
+	),
+	'Safe\\Exceptions\\PcntlException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/PcntlException.php'
+	),
+	'Safe\\Exceptions\\PcreException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/lib/Exceptions/PcreException.php'
+	),
+	'Safe\\Exceptions\\PdfException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/PdfException.php'
+	),
+	'Safe\\Exceptions\\PgsqlException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/PgsqlException.php'
+	),
+	'Safe\\Exceptions\\PosixException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/PosixException.php'
+	),
+	'Safe\\Exceptions\\PsException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/PsException.php'
+	),
+	'Safe\\Exceptions\\PspellException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/PspellException.php'
+	),
+	'Safe\\Exceptions\\ReadlineException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/ReadlineException.php'
+	),
+	'Safe\\Exceptions\\RpminfoException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/RpminfoException.php'
+	),
+	'Safe\\Exceptions\\RrdException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/RrdException.php'
+	),
+	'Safe\\Exceptions\\SafeExceptionInterface' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/lib/Exceptions/SafeExceptionInterface.php'
+	),
+	'Safe\\Exceptions\\SemException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/SemException.php'
+	),
+	'Safe\\Exceptions\\SessionException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/SessionException.php'
+	),
+	'Safe\\Exceptions\\ShmopException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/ShmopException.php'
+	),
+	'Safe\\Exceptions\\SimplexmlException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/SimplexmlException.php'
+	),
+	'Safe\\Exceptions\\SocketsException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/SocketsException.php'
+	),
+	'Safe\\Exceptions\\SodiumException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/SodiumException.php'
+	),
+	'Safe\\Exceptions\\SolrException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/SolrException.php'
+	),
+	'Safe\\Exceptions\\SplException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/SplException.php'
+	),
+	'Safe\\Exceptions\\SqlsrvException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/SqlsrvException.php'
+	),
+	'Safe\\Exceptions\\SsdeepException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/SsdeepException.php'
+	),
+	'Safe\\Exceptions\\Ssh2Exception' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/Ssh2Exception.php'
+	),
+	'Safe\\Exceptions\\StatsException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/deprecated/Exceptions/StatsException.php'
+	),
+	'Safe\\Exceptions\\StreamException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/StreamException.php'
+	),
+	'Safe\\Exceptions\\StringsException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/StringsException.php'
+	),
+	'Safe\\Exceptions\\SwooleException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/SwooleException.php'
+	),
+	'Safe\\Exceptions\\UodbcException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/UodbcException.php'
+	),
+	'Safe\\Exceptions\\UopzException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/UopzException.php'
+	),
+	'Safe\\Exceptions\\UrlException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/UrlException.php'
+	),
+	'Safe\\Exceptions\\VarException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/VarException.php'
+	),
+	'Safe\\Exceptions\\XdiffException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/XdiffException.php'
+	),
+	'Safe\\Exceptions\\XmlException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/XmlException.php'
+	),
+	'Safe\\Exceptions\\XmlrpcException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/XmlrpcException.php'
+	),
+	'Safe\\Exceptions\\YamlException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/YamlException.php'
+	),
+	'Safe\\Exceptions\\YazException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/YazException.php'
+	),
+	'Safe\\Exceptions\\ZipException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/ZipException.php'
+	),
+	'Safe\\Exceptions\\ZlibException' => array(
+		'version' => '1.3.3.0',
+		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/ZlibException.php'
 	),
 	'Shutdown_Handler' => array(
 		'version' => '5.0.16',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-shutdown-handler.php'
 	),
 	'Svg\\CssLength' => array(
-		'version' => '0.5.4.0',
-		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/CssLength.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-svg-lib/src/Svg/CssLength.php'
 	),
 	'Svg\\DefaultStyle' => array(
-		'version' => '0.5.4.0',
-		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/DefaultStyle.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-svg-lib/src/Svg/DefaultStyle.php'
 	),
 	'Svg\\Document' => array(
-		'version' => '0.5.4.0',
-		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Document.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-svg-lib/src/Svg/Document.php'
 	),
 	'Svg\\Gradient\\Stop' => array(
-		'version' => '0.5.4.0',
-		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Gradient/Stop.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-svg-lib/src/Svg/Gradient/Stop.php'
 	),
 	'Svg\\Style' => array(
-		'version' => '0.5.4.0',
-		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Style.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-svg-lib/src/Svg/Style.php'
 	),
 	'Svg\\Surface\\CPdf' => array(
-		'version' => '0.5.4.0',
-		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Surface/CPdf.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-svg-lib/src/Svg/Surface/CPdf.php'
 	),
 	'Svg\\Surface\\SurfaceCpdf' => array(
-		'version' => '0.5.4.0',
-		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Surface/SurfaceCpdf.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-svg-lib/src/Svg/Surface/SurfaceCpdf.php'
 	),
 	'Svg\\Surface\\SurfaceInterface' => array(
-		'version' => '0.5.4.0',
-		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Surface/SurfaceInterface.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-svg-lib/src/Svg/Surface/SurfaceInterface.php'
 	),
 	'Svg\\Surface\\SurfacePDFLib' => array(
-		'version' => '0.5.4.0',
-		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Surface/SurfacePDFLib.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-svg-lib/src/Svg/Surface/SurfacePDFLib.php'
 	),
 	'Svg\\Tag\\AbstractTag' => array(
-		'version' => '0.5.4.0',
-		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/AbstractTag.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-svg-lib/src/Svg/Tag/AbstractTag.php'
 	),
 	'Svg\\Tag\\Anchor' => array(
-		'version' => '0.5.4.0',
-		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Anchor.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-svg-lib/src/Svg/Tag/Anchor.php'
 	),
 	'Svg\\Tag\\Circle' => array(
-		'version' => '0.5.4.0',
-		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Circle.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-svg-lib/src/Svg/Tag/Circle.php'
 	),
 	'Svg\\Tag\\ClipPath' => array(
-		'version' => '0.5.4.0',
-		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/ClipPath.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-svg-lib/src/Svg/Tag/ClipPath.php'
 	),
 	'Svg\\Tag\\Ellipse' => array(
-		'version' => '0.5.4.0',
-		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Ellipse.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-svg-lib/src/Svg/Tag/Ellipse.php'
 	),
 	'Svg\\Tag\\Group' => array(
-		'version' => '0.5.4.0',
-		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Group.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-svg-lib/src/Svg/Tag/Group.php'
 	),
 	'Svg\\Tag\\Image' => array(
-		'version' => '0.5.4.0',
-		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Image.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-svg-lib/src/Svg/Tag/Image.php'
 	),
 	'Svg\\Tag\\Line' => array(
-		'version' => '0.5.4.0',
-		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Line.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-svg-lib/src/Svg/Tag/Line.php'
 	),
 	'Svg\\Tag\\LinearGradient' => array(
-		'version' => '0.5.4.0',
-		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/LinearGradient.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-svg-lib/src/Svg/Tag/LinearGradient.php'
 	),
 	'Svg\\Tag\\Path' => array(
-		'version' => '0.5.4.0',
-		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Path.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-svg-lib/src/Svg/Tag/Path.php'
 	),
 	'Svg\\Tag\\Polygon' => array(
-		'version' => '0.5.4.0',
-		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Polygon.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-svg-lib/src/Svg/Tag/Polygon.php'
 	),
 	'Svg\\Tag\\Polyline' => array(
-		'version' => '0.5.4.0',
-		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Polyline.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-svg-lib/src/Svg/Tag/Polyline.php'
 	),
 	'Svg\\Tag\\RadialGradient' => array(
-		'version' => '0.5.4.0',
-		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/RadialGradient.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-svg-lib/src/Svg/Tag/RadialGradient.php'
 	),
 	'Svg\\Tag\\Rect' => array(
-		'version' => '0.5.4.0',
-		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Rect.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-svg-lib/src/Svg/Tag/Rect.php'
 	),
 	'Svg\\Tag\\Shape' => array(
-		'version' => '0.5.4.0',
-		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Shape.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-svg-lib/src/Svg/Tag/Shape.php'
 	),
 	'Svg\\Tag\\Stop' => array(
-		'version' => '0.5.4.0',
-		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Stop.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-svg-lib/src/Svg/Tag/Stop.php'
 	),
 	'Svg\\Tag\\StyleTag' => array(
-		'version' => '0.5.4.0',
-		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/StyleTag.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-svg-lib/src/Svg/Tag/StyleTag.php'
 	),
 	'Svg\\Tag\\Symbol' => array(
-		'version' => '0.5.4.0',
-		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Symbol.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-svg-lib/src/Svg/Tag/Symbol.php'
 	),
 	'Svg\\Tag\\Text' => array(
-		'version' => '0.5.4.0',
-		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/Text.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-svg-lib/src/Svg/Tag/Text.php'
 	),
 	'Svg\\Tag\\UseTag' => array(
-		'version' => '0.5.4.0',
-		'path'    => $vendorDir . '/phenx/php-svg-lib/src/Svg/Tag/UseTag.php'
+		'version' => '1.0.2.0',
+		'path'    => $vendorDir . '/dompdf/php-svg-lib/src/Svg/Tag/UseTag.php'
 	),
 	'Version_Loader' => array(
 		'version' => '5.0.16',
