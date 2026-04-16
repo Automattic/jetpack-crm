@@ -20,6 +20,7 @@ This is an alpha version! The changes listed here are not final.
 - Replace header logo with Jetpack bolt icon and "CRM" text to match the unified admin page header pattern. Adjust spacing, add border below tabs, and preserve fullscreen toggle and white-label support.
 - Settings: Update general settings section header.
 - Switch to Native TypeScript compiler based on Go.
+- Tested up to WordPress 7.0.
 - Update dependencies.
 - Update package dependencies.
 
