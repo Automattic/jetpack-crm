@@ -371,7 +371,7 @@ return array(
 		'path'    => $vendorDir . '/sabberworm/php-css-parser/src/RuleSet/RuleContainer.php'
 	),
 	'3773ef3f09c37da5478d578e32b03a4b' => array(
-		'version' => '4.3.33.0-alpha1776429876',
+		'version' => '4.3.33.0',
 		'path'    => $baseDir . '/jetpack_vendor/automattic/jetpack-assets/actions.php'
 	),
 );
