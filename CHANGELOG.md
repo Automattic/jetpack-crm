@@ -13,6 +13,9 @@ This is an alpha version! The changes listed here are not final.
 - CRM: Escape DOM-sourced values.
 - Fix SQL injection vulnerability in list view request.
 
+### Added
+- Add new jpcrm_perms_manage_options() function.
+
 ### Changed
 - Code Quality: fix whitespace, indentation, and comment formatting throughout codebase.
 - Improve PHP 8.5 compatibility.
@@ -24,6 +27,9 @@ This is an alpha version! The changes listed here are not final.
 - Tested up to WordPress 7.0.
 - Update dependencies.
 - Update package dependencies.
+
+### Removed
+- Remove unused legacy code.
 
 ### Fixed
 - Admin Page: Restore border on header component.
