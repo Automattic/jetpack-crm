@@ -15,6 +15,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Added
 - Add new jpcrm_perms_manage_options() function.
+- Add tags as an exportable field for contacts, companies, quotes, invoices, and transactions.
 
 ### Changed
 - Code Quality: fix whitespace, indentation, and comment formatting throughout codebase.
