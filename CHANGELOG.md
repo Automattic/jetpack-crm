@@ -12,6 +12,7 @@ This is an alpha version! The changes listed here are not final.
 ### Security
 - CRM: Escape DOM-sourced values.
 - Fix SQL injection vulnerability in list view request.
+- Mail Delivery: Harden setting permissions.
 
 ### Added
 - Add new jpcrm_perms_manage_options() function.
