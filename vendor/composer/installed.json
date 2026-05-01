@@ -271,16 +271,14 @@
             "dist": {
                 "type": "path",
                 "url": "/tmp/jetpack-build/Automattic/jetpack-status",
-                "reference": "453590f5541d24be648ca089b3ecb04aaf065687"
+                "reference": "43a96531a126ed7a5efb523c06aceed721d5d966"
             },
             "require": {
                 "automattic/jetpack-constants": "^3.0.9-alpha",
                 "php": ">=7.2"
             },
             "require-dev": {
-                "automattic/jetpack-connection": "@dev",
                 "automattic/jetpack-ip": "^0.4.11-alpha",
-                "automattic/jetpack-plans": "@dev",
                 "automattic/phpunit-select-config": "^1.0.5-alpha",
                 "brain/monkey": "^2.6.2",
                 "yoast/phpunit-polyfills": "^4.0.0"
