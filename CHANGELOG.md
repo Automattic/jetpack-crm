@@ -33,6 +33,7 @@ This is an alpha version! The changes listed here are not final.
 - Update package dependencies.
 
 ### Removed
+- Remove experimental automations module.
 - Remove unused legacy code.
 
 ### Fixed
