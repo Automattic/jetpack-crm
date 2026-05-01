@@ -12,6 +12,7 @@ This is an alpha version! The changes listed here are not final.
 ### Security
 - Client Portal: Restrict various contact functions to admins.
 - CRM: Escape DOM-sourced values.
+- File Uploads: Clean up upload logic.
 - Fix SQL injection vulnerability in list view request.
 - Mail Delivery: Harden setting permissions.
 
