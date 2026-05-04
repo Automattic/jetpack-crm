@@ -14,6 +14,7 @@ This is an alpha version! The changes listed here are not final.
 - CRM: Escape DOM-sourced values.
 - File Uploads: Clean up upload logic.
 - Fix SQL injection vulnerability in list view request.
+- Improve sanitization and escaping of strings.
 - Mail Delivery: Harden setting permissions.
 
 ### Added
