@@ -7,47 +7,47 @@ $baseDir   = dirname($vendorDir);
 
 return array(
 	'Autoloader' => array(
-		'version' => '5.0.17-alpha',
+		'version' => '5.0.17',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-autoloader.php'
 	),
 	'Autoloader_Handler' => array(
-		'version' => '5.0.17-alpha',
+		'version' => '5.0.17',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-autoloader-handler.php'
 	),
 	'Autoloader_Locator' => array(
-		'version' => '5.0.17-alpha',
+		'version' => '5.0.17',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-autoloader-locator.php'
 	),
 	'Automattic\\Jetpack\\Assets' => array(
-		'version' => '4.3.34.0-alpha1777322605',
+		'version' => '4.3.34.0',
 		'path'    => $baseDir . '/jetpack_vendor/automattic/jetpack-assets/src/class-assets.php'
 	),
 	'Automattic\\Jetpack\\Assets\\Script_Data' => array(
-		'version' => '4.3.34.0-alpha1777322605',
+		'version' => '4.3.34.0',
 		'path'    => $baseDir . '/jetpack_vendor/automattic/jetpack-assets/src/class-script-data.php'
 	),
 	'Automattic\\Jetpack\\Assets\\Semver' => array(
-		'version' => '4.3.34.0-alpha1777322605',
+		'version' => '4.3.34.0',
 		'path'    => $baseDir . '/jetpack_vendor/automattic/jetpack-assets/src/class-semver.php'
 	),
 	'Automattic\\Jetpack\\Autoloader\\AutoloadFileWriter' => array(
-		'version' => '5.0.17-alpha',
+		'version' => '5.0.17',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/AutoloadFileWriter.php'
 	),
 	'Automattic\\Jetpack\\Autoloader\\AutoloadGenerator' => array(
-		'version' => '5.0.17-alpha',
+		'version' => '5.0.17',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/AutoloadGenerator.php'
 	),
 	'Automattic\\Jetpack\\Autoloader\\AutoloadProcessor' => array(
-		'version' => '5.0.17-alpha',
+		'version' => '5.0.17',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/AutoloadProcessor.php'
 	),
 	'Automattic\\Jetpack\\Autoloader\\CustomAutoloaderPlugin' => array(
-		'version' => '5.0.17-alpha',
+		'version' => '5.0.17',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/CustomAutoloaderPlugin.php'
 	),
 	'Automattic\\Jetpack\\Autoloader\\ManifestGenerator' => array(
-		'version' => '5.0.17-alpha',
+		'version' => '5.0.17',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/ManifestGenerator.php'
 	),
 	'Automattic\\Jetpack\\CRM\\Entities\\Company' => array(
@@ -143,55 +143,55 @@ return array(
 		'path'    => $baseDir . '/src/rest-api/v4/class-rest-contacts-controller.php'
 	),
 	'Automattic\\Jetpack\\Composer\\Manager' => array(
-		'version' => '4.0.6.0-alpha1777322605',
+		'version' => '4.0.6.0',
 		'path'    => $vendorDir . '/automattic/jetpack-composer-plugin/src/class-manager.php'
 	),
 	'Automattic\\Jetpack\\Composer\\Plugin' => array(
-		'version' => '4.0.6.0-alpha1777322605',
+		'version' => '4.0.6.0',
 		'path'    => $vendorDir . '/automattic/jetpack-composer-plugin/src/class-plugin.php'
 	),
 	'Automattic\\Jetpack\\Constants' => array(
-		'version' => '3.0.9.0-alpha1777322605',
+		'version' => '3.0.9.0',
 		'path'    => $baseDir . '/jetpack_vendor/automattic/jetpack-constants/src/class-constants.php'
 	),
 	'Automattic\\Jetpack\\CookieState' => array(
-		'version' => '6.1.3.0-alpha1777322605',
+		'version' => '6.1.3.0',
 		'path'    => $baseDir . '/jetpack_vendor/automattic/jetpack-status/src/class-cookiestate.php'
 	),
 	'Automattic\\Jetpack\\Errors' => array(
-		'version' => '6.1.3.0-alpha1777322605',
+		'version' => '6.1.3.0',
 		'path'    => $baseDir . '/jetpack_vendor/automattic/jetpack-status/src/class-errors.php'
 	),
 	'Automattic\\Jetpack\\Files' => array(
-		'version' => '6.1.3.0-alpha1777322605',
+		'version' => '6.1.3.0',
 		'path'    => $baseDir . '/jetpack_vendor/automattic/jetpack-status/src/class-files.php'
 	),
 	'Automattic\\Jetpack\\Modules' => array(
-		'version' => '6.1.3.0-alpha1777322605',
+		'version' => '6.1.3.0',
 		'path'    => $baseDir . '/jetpack_vendor/automattic/jetpack-status/src/class-modules.php'
 	),
 	'Automattic\\Jetpack\\Paths' => array(
-		'version' => '6.1.3.0-alpha1777322605',
+		'version' => '6.1.3.0',
 		'path'    => $baseDir . '/jetpack_vendor/automattic/jetpack-status/src/class-paths.php'
 	),
 	'Automattic\\Jetpack\\Status' => array(
-		'version' => '6.1.3.0-alpha1777322605',
+		'version' => '6.1.3.0',
 		'path'    => $baseDir . '/jetpack_vendor/automattic/jetpack-status/src/class-status.php'
 	),
 	'Automattic\\Jetpack\\Status\\Cache' => array(
-		'version' => '6.1.3.0-alpha1777322605',
+		'version' => '6.1.3.0',
 		'path'    => $baseDir . '/jetpack_vendor/automattic/jetpack-status/src/class-cache.php'
 	),
 	'Automattic\\Jetpack\\Status\\Host' => array(
-		'version' => '6.1.3.0-alpha1777322605',
+		'version' => '6.1.3.0',
 		'path'    => $baseDir . '/jetpack_vendor/automattic/jetpack-status/src/class-host.php'
 	),
 	'Automattic\\Jetpack\\Status\\Request' => array(
-		'version' => '6.1.3.0-alpha1777322605',
+		'version' => '6.1.3.0',
 		'path'    => $baseDir . '/jetpack_vendor/automattic/jetpack-status/src/class-request.php'
 	),
 	'Automattic\\Jetpack\\Status\\Visitor' => array(
-		'version' => '6.1.3.0-alpha1777322605',
+		'version' => '6.1.3.0',
 		'path'    => $baseDir . '/jetpack_vendor/automattic/jetpack-status/src/class-visitor.php'
 	),
 	'Automattic\\WooCommerce\\Client' => array(
@@ -227,7 +227,7 @@ return array(
 		'path'    => $vendorDir . '/automattic/woocommerce/src/WooCommerce/HttpClient/Response.php'
 	),
 	'Container' => array(
-		'version' => '5.0.17-alpha',
+		'version' => '5.0.17',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-container.php'
 	),
 	'Dompdf\\Adapter\\CPDF' => array(
@@ -703,15 +703,15 @@ return array(
 		'path'    => $vendorDir . '/dompdf/php-font-lib/src/FontLib/WOFF/TableDirectoryEntry.php'
 	),
 	'Hook_Manager' => array(
-		'version' => '5.0.17-alpha',
+		'version' => '5.0.17',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-hook-manager.php'
 	),
 	'Latest_Autoloader_Guard' => array(
-		'version' => '5.0.17-alpha',
+		'version' => '5.0.17',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-latest-autoloader-guard.php'
 	),
 	'Manifest_Reader' => array(
-		'version' => '5.0.17-alpha',
+		'version' => '5.0.17',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-manifest-reader.php'
 	),
 	'Masterminds\\HTML5' => array(
@@ -795,19 +795,19 @@ return array(
 		'path'    => $vendorDir . '/masterminds/html5/src/HTML5/Serializer/Traverser.php'
 	),
 	'PHP_Autoloader' => array(
-		'version' => '5.0.17-alpha',
+		'version' => '5.0.17',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-php-autoloader.php'
 	),
 	'Path_Processor' => array(
-		'version' => '5.0.17-alpha',
+		'version' => '5.0.17',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-path-processor.php'
 	),
 	'Plugin_Locator' => array(
-		'version' => '5.0.17-alpha',
+		'version' => '5.0.17',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-plugin-locator.php'
 	),
 	'Plugins_Handler' => array(
-		'version' => '5.0.17-alpha',
+		'version' => '5.0.17',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-plugins-handler.php'
 	),
 	'Sabberworm\\CSS\\CSSElement' => array(
@@ -1383,7 +1383,7 @@ return array(
 		'path'    => $vendorDir . '/thecodingmachine/safe/generated/Exceptions/ZlibException.php'
 	),
 	'Shutdown_Handler' => array(
-		'version' => '5.0.17-alpha',
+		'version' => '5.0.17',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-shutdown-handler.php'
 	),
 	'Svg\\CssLength' => array(
@@ -1503,11 +1503,11 @@ return array(
 		'path'    => $vendorDir . '/dompdf/php-svg-lib/src/Svg/Tag/UseTag.php'
 	),
 	'Version_Loader' => array(
-		'version' => '5.0.17-alpha',
+		'version' => '5.0.17',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-version-loader.php'
 	),
 	'Version_Selector' => array(
-		'version' => '5.0.17-alpha',
+		'version' => '5.0.17',
 		'path'    => $vendorDir . '/automattic/jetpack-autoloader/src/class-version-selector.php'
 	),
 );
