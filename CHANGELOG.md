@@ -51,6 +51,7 @@ This is an alpha version! The changes listed here are not final.
 - Fix JavaScript syntax error in list view caused by newline before PHP tag.
 - Fix PHP warning when used with the new 'Modern' admin UI color scheme.
 - Listview: Fix "Showing X of Y items" text.
+- Listview: Handle out-of-range page requests gracefully.
 - Remove redundant esc_html__() wrapper from export heading to prevent double escaping and ensure proper string rendering.
 - Use proper escaping functions on strings.
 - WooSync: Skip tag insertion if there are no tags to insert.
