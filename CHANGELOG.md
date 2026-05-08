@@ -20,6 +20,7 @@ This is an alpha version! The changes listed here are not final.
 ### Added
 - Add new jpcrm_perms_manage_options() function.
 - Add tags as an exportable field for contacts, companies, quotes, invoices, and transactions.
+- Click 2 Call: Add `sip:` prefix.
 
 ### Changed
 - Code Quality: fix whitespace, indentation, and comment formatting throughout codebase.
@@ -40,6 +41,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Fixed
 - Admin Page: Restore border on header component.
+- Click 2 Call: Catch JS error when creating links.
 - Client Portal: Harden quote acceptance checks.
 - Compatibility: Clean up deprecated CSS.
 - Contacts: fix Transactions Total column showing $0.00 in list view.
