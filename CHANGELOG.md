@@ -25,6 +25,7 @@ This is an alpha version! The changes listed here are not final.
 - Code Quality: fix whitespace, indentation, and comment formatting throughout codebase.
 - Improve PHP 8.5 compatibility.
 - Internal: No longer require automattic/jetpack-changelogger as a per-project dev dependency.
+- Listview: Add docs link when no objects are found.
 - Remove header border-bottom from the admin page for a cleaner unified header appearance.
 - Replace header logo with Jetpack bolt icon and "CRM" text to match the unified admin page header pattern. Adjust spacing, add border below tabs, and preserve fullscreen toggle and white-label support.
 - Settings: Update general settings section header.

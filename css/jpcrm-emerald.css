@@ -822,6 +822,9 @@ jpcrm-listview-header#jpcrm-listview-header input[type=search] {
   text-decoration: none;
   color: var(--jp-grey-80);
 }
+.jpcrm-listview-table-container .jpcrm-listview-table #zbs-no-results-wrap a {
+  color: #2271b1;
+}
 .jpcrm-listview-table-container .jpcrm-listview-table th,
 .jpcrm-listview-table-container .jpcrm-listview-table td {
   text-align: left;
@@ -852,6 +855,9 @@ jpcrm-listview-header#jpcrm-listview-header input[type=search] {
 }
 .jpcrm-listview-table-container .jpcrm-listview-table tbody tr:hover {
   background-color: var(--jp-gray-0);
+}
+.jpcrm-listview-table-container .jpcrm-listview-table tbody tr:has(#zbs-no-results-wrap):hover {
+  background-color: transparent;
 }
 
 jpcrm-pagination {
