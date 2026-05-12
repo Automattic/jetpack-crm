@@ -56,6 +56,7 @@ This is an alpha version! The changes listed here are not final.
 - Listview: Handle out-of-range page requests gracefully.
 - Remove redundant esc_html__() wrapper from export heading to prevent double escaping and ensure proper string rendering.
 - Storage: Prevent PHP errors when storage dir is not writable.
+- System Status: Update messaging when assets dir is not correctly configured.
 - Use proper escaping functions on strings.
 - WooSync: Skip tag insertion if there are no tags to insert.
 
