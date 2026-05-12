@@ -52,6 +52,7 @@ This is an alpha version! The changes listed here are not final.
 - Fixed a small bug causing the contact panel on the email view to show 0 values.
 - Fix JavaScript syntax error in list view caused by newline before PHP tag.
 - Fix PHP warning when used with the new 'Modern' admin UI color scheme.
+- Fix various PHP warnings.
 - Listview: Fix "Showing X of Y items" text.
 - Listview: Handle out-of-range page requests gracefully.
 - Remove redundant esc_html__() wrapper from export heading to prevent double escaping and ensure proper string rendering.
