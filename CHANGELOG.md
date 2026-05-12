@@ -45,6 +45,7 @@ This is an alpha version! The changes listed here are not final.
 - Client Portal: Harden quote acceptance checks.
 - Compatibility: Clean up deprecated CSS.
 - Contacts: fix Transactions Total column showing $0.00 in list view.
+- CRM: Fix week 53 appearing at end of dashboard contact chart when using weekly view.
 - Ensure proper flags are used with `json_encode()`.
 - Fix double dash typo that was incorrectly converted into a comparison operator in DAL3 ObjectLayer.
 - Fixed a small bug causing the contact panel on the email view to show 0 values.
