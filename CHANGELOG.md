@@ -42,6 +42,7 @@ This is an alpha version! The changes listed here are not final.
 
 ### Fixed
 - Admin Page: Restore border on header component.
+- API: Fix object and tag retrieval.
 - Click 2 Call: Catch JS error when creating links.
 - Client Portal: Harden quote acceptance checks.
 - Compatibility: Clean up deprecated CSS.
