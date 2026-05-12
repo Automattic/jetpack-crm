@@ -21,6 +21,7 @@ This is an alpha version! The changes listed here are not final.
 - Add new jpcrm_perms_manage_options() function.
 - Add tags as an exportable field for contacts, companies, quotes, invoices, and transactions.
 - Click 2 Call: Add `sip:` prefix.
+- Storage: Add new `jpcrm_storage_dir_info` filter.
 
 ### Changed
 - Code Quality: fix whitespace, indentation, and comment formatting throughout codebase.
@@ -54,6 +55,7 @@ This is an alpha version! The changes listed here are not final.
 - Listview: Fix "Showing X of Y items" text.
 - Listview: Handle out-of-range page requests gracefully.
 - Remove redundant esc_html__() wrapper from export heading to prevent double escaping and ensure proper string rendering.
+- Storage: Prevent PHP errors when storage dir is not writable.
 - Use proper escaping functions on strings.
 - WooSync: Skip tag insertion if there are no tags to insert.
 
