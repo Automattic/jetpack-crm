@@ -10,7 +10,7 @@
 		"codeception/module-filesystem": "^2.0 || ^3.0",
 		"codeception/util-universalframework": "^1.0 || ^2.0",
 		"yoast/phpunit-polyfills": "^4.0.0",
-		"automattic/phpunit-select-config": "^1.0.5"
+		"automattic/phpunit-select-config": "^1.0.6-alpha"
 	},
 	"scripts": {
 		"build-development": [
@@ -43,7 +43,7 @@
 		]
 	},
 	"config": {
-		"autoloader-suffix": "06c775433a83ed276f0a1d8ac25f93ba_crmⓥ6_8_0",
+		"autoloader-suffix": "06c775433a83ed276f0a1d8ac25f93ba_crmⓥ6_8_1_alpha",
 		"allow-plugins": {
 			"automattic/jetpack-autoloader": true,
 			"automattic/jetpack-composer-plugin": true,
@@ -52,9 +52,9 @@
 	},
 	"require": {
 		"php": ">=7.4",
-		"automattic/jetpack-assets": "^4.3.36",
-		"automattic/jetpack-autoloader": "^5.0.17",
-		"automattic/jetpack-composer-plugin": "^4.0.6",
+		"automattic/jetpack-assets": "^4.3.37-alpha",
+		"automattic/jetpack-autoloader": "^5.0.18-alpha",
+		"automattic/jetpack-composer-plugin": "^4.0.7-alpha",
 		"automattic/woocommerce": "^3.1",
 		"dompdf/dompdf": "^3.1",
 		"thecodingmachine/safe": "^1.3"

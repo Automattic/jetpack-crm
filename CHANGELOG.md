@@ -5,6 +5,10 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.8.1-alpha] - unreleased
+
+This is an alpha version! The changes listed here are not final.
+
 ## [6.8.0] - 2026-05-13
 ### Added
 - Exports: Add tags as an exportable field for contacts, companies, quotes, invoices, and transactions. [#48364]
@@ -3770,6 +3774,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Tested across 4 common web hosts
 - Tested with extensions: WooCommerce CRM Sync, PayPal CRM Sync, CSV Importer, ZBS CRM Mail Campaigns, and CRM Sales Dashboard
 
+[6.8.1-alpha]: https://github.com/Automattic/jetpack-crm/compare/6.8.0...6.8.1-alpha
 [6.8.0]: https://github.com/Automattic/jetpack-crm/compare/6.7.2...6.8.0
 [6.7.2]: https://github.com/Automattic/jetpack-crm/compare/6.7.1...6.7.2
 [6.7.1]: https://github.com/Automattic/jetpack-crm/compare/6.7.0...6.7.1
