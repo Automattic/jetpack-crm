@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 This is an alpha version! The changes listed here are not final.
 
+### Changed
+- Update package dependencies.
+
 ## [6.8.0] - 2026-05-13
 ### Added
 - Exports: Add tags as an exportable field for contacts, companies, quotes, invoices, and transactions. [#48364]
