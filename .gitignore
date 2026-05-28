@@ -1,0 +1,12 @@
+/jetpack_vendor/
+/vendor/
+/node_modules/
+/build/
+/.cache/
+/.phpunit.cache/
+**/css/**/*.css
+**/js/*.min.js
+**/js/*.min.js.LICENSE.txt
+/templates/**/.htaccess
+/templates/**/index.html
+/tests/codeception/acceptance.suite.yml
