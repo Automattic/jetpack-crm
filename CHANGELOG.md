@@ -13,6 +13,9 @@ This is an alpha version! The changes listed here are not final.
 - Remove unneeded development and documentation files from the published plugin.
 - Update package dependencies.
 
+### Fixed
+- Client Portal: Prevent PHP fatal when downloading PDFs.
+
 ## [6.8.0] - 2026-05-13
 ### Added
 - Exports: Add tags as an exportable field for contacts, companies, quotes, invoices, and transactions. [#48364]
