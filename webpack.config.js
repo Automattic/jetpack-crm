@@ -1,8 +1,15 @@
 const path = require( 'path' );
-const jetpackWebpackConfig = require( '@automattic/jetpack-webpack-config/webpack' );
 const RemoveAssetWebpackPlugin = require( '@automattic/remove-asset-webpack-plugin' );
 const CopyPlugin = require( 'copy-webpack-plugin' );
 const { glob } = require( 'glob' );
+const webpack = require( 'webpack' );
+const CssMinimizerWebpackPlugin = require( 'css-minimizer-webpack-plugin' );
+const DuplicatePackageCheckerWebpackPlugin = require( '@cerner/duplicate-package-checker-webpack-plugin' );
+const I18nCheckWebpackPlugin = require( '@automattic/i18n-check-webpack-plugin' );
+const MiniCssExtractWebpackPlugin = require( 'mini-css-extract-plugin' );
+const MiniCSSWithRTLWebpackPlugin = require( './tools/mini-css-with-rtl-webpack-plugin.js' );
+const TerserPlugin = require( './tools/terser-webpack-plugin.js' );
+const WebpackRTLWebpackPlugin = require( '@automattic/webpack-rtl-plugin' );
 const doNotMinify = false;
 const buildLibPath = path.resolve( __dirname, 'build/lib/' );
 
@@ -79,42 +86,105 @@ function getLegacyWelcomeZBSCSSEntries() {
 	return entries;
 }
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 const crmWebpackConfig = {
-	mode: jetpackWebpackConfig.mode,
+	mode: isProduction ? 'production' : 'development',
 	devtool: false,
 	output: {
-		...jetpackWebpackConfig.output,
+		filename: '[name].js',
+		chunkFilename: '[name].js?minify=false&ver=[contenthash]',
 		path: path.resolve( __dirname, '.' ),
 	},
 	optimization: {
-		...jetpackWebpackConfig.optimization,
+		minimize: isProduction,
+		minimizer: [ TerserPlugin(), new CssMinimizerWebpackPlugin() ],
 		mangleExports: false,
+		concatenateModules: false,
+		emitOnErrors: true,
 	},
 	resolve: {
-		...jetpackWebpackConfig.resolve,
+		extensions: [ '.js', '.jsx', '.ts', '.tsx', '...' ],
 	},
 	node: false,
 	plugins: [
-		...jetpackWebpackConfig.StandardPlugins( {
-			DependencyExtractionPlugin: false,
+		new webpack.DefinePlugin( {
+			'process.env.FORCE_REDUCED_MOTION': 'false',
+			global: 'window',
 		} ),
+		new DuplicatePackageCheckerWebpackPlugin(),
+		new MiniCssExtractWebpackPlugin( {
+			filename: '[name].css',
+			chunkFilename: '[name].css?minify=false&ver=[contenthash]',
+		} ),
+		new MiniCSSWithRTLWebpackPlugin(),
+		new webpack.IgnorePlugin( {
+			resourceRegExp: /^\.\/locale$/,
+			contextRegExp: /moment$/,
+		} ),
+		new WebpackRTLWebpackPlugin(),
+		...( isProduction ? [
+			new I18nCheckWebpackPlugin( {
+				expectDomain: 'zero-bs-crm',
+				extractorOptions: {
+					babelOptions: {
+						configFile: path.resolve( 'babel.config.js' ),
+					},
+				},
+			} ),
+		] : [] ),
 	],
 	module: {
 		strictExportPresence: true,
 		rules: [
 			// Transpile JavaScript.
-			jetpackWebpackConfig.TranspileRule( {
+			{
+				test: /\.(?:[jt]sx?|[cm]js)$/,
 				exclude: [ /node_modules\//, /vendor\//, /tests\// ],
-			} ),
+				use: [
+					{
+						loader: require.resolve( 'thread-loader' ),
+					},
+					{
+						loader: require.resolve( 'babel-loader' ),
+						options: {
+							babelrc: false,
+							cacheDirectory: path.resolve( '.cache/babel' ),
+							cacheCompression: true,
+							cacheIdentifier: 'babel-cache-development-false',
+							configFile: path.resolve( 'babel.config.js' ),
+						}
+					}
+				],
+			},
 
 			// Transpile @automattic/jetpack-* in node_modules too.
-			jetpackWebpackConfig.TranspileRule( {
-				includeNodeModules: [ '@automattic/jetpack-' ],
-			} ),
+			{
+				test: /\.(?:[jt]sx?|[cm]js)$/,
+				include: file => {
+					const modules = [ '@automattic/jetpack-' ];
+					const i = file.lastIndexOf( '/node_modules/' ) + 14;
+					return i >= 14 && modules.some( module => file.startsWith( module, i ) );
+				},
+				use: [
+					{
+						loader: require.resolve( 'thread-loader' ),
+					},
+					{
+						loader: require.resolve( 'babel-loader' ),
+						options: {
+							babelrc: false,
+							cacheDirectory: path.resolve( '.cache/babel' ),
+							cacheCompression: true,
+							cacheIdentifier: 'babel-cache-development-false',
+							configFile: path.resolve( 'babel.config.js' ),
+						}
+					}
+				]
+			}
 		],
 	},
 	externals: {
-		...jetpackWebpackConfig.externals,
 		jetpackConfig: JSON.stringify( {
 			consumer_slug: 'zero-bs-crm',
 		} ),
@@ -139,14 +209,14 @@ module.exports = [
 			...crmWebpackConfig.optimization,
 			minimize: true,
 			minimizer: [
-				jetpackWebpackConfig.TerserPlugin( {
+				TerserPlugin( {
 					terserOptions: {
 						mangle: {
 							keep_fnames: true,
 							keep_classnames: true,
 						},
 					},
-					extractComments: jetpackWebpackConfig.isProduction,
+					extractComments: isProduction,
 				} ),
 			],
 		},
@@ -159,13 +229,24 @@ module.exports = [
 			rules: [
 				...crmWebpackConfig.module.rules,
 				// Handle CSS.
-				jetpackWebpackConfig.CssRule( {
-					extensions: [ 'css', 'sass', 'scss' ],
-					extraLoaders: [ { loader: 'sass-loader', options: { api: 'modern-compiler' } } ],
-					CssLoader: {
-						url: false,
-					},
-				} ),
+				{
+					test: /\.(?:css|sass|scss)$/i,
+					sideEffects: true,
+					use: [
+						{
+							loader: require( 'mini-css-extract-plugin' ).loader,
+						},
+						{
+							loader: require.resolve( 'css-loader' ),
+							options: {
+								url: false,
+								modules: { auto: true, localIdentName: '[local]--[hash:base64:5]' },
+								importLoaders: 1
+							}
+						},
+						{ loader: 'sass-loader', options: { api: 'modern-compiler' } },
+					]
+				},
 			],
 		},
 		plugins: [
@@ -189,23 +270,24 @@ module.exports = [
 			rules: [
 				...crmWebpackConfig.module.rules,
 				// // Handle CSS.
-				jetpackWebpackConfig.CssRule( {
-					extensions: [ 'css', 'sass', 'scss' ],
-					extraLoaders: [
+				{
+					test: /\.(?:css|sass|scss)$/i,
+					sideEffects: true,
+					use: [
 						{
-							loader: 'sass-loader',
-							options: {
-								api: 'modern-compiler',
-								sassOptions: {
-									style: 'expanded',
-								},
-							},
+							loader: require( 'mini-css-extract-plugin' ).loader,
 						},
-					],
-					CssLoader: {
-						url: false,
-					},
-				} ),
+						{
+							loader: require.resolve( 'css-loader' ),
+							options: {
+								url: false,
+								modules: { auto: true, localIdentName: '[local]--[hash:base64:5]' },
+								importLoaders: 1
+							}
+						},
+						{ loader: 'sass-loader', options: { api: 'modern-compiler', sassOptions: { style: 'expanded' } } },
+					]
+				},
 			],
 		},
 		plugins: [
@@ -227,12 +309,23 @@ module.exports = [
 			rules: [
 				...crmWebpackConfig.module.rules,
 				// Handle CSS.
-				jetpackWebpackConfig.CssRule( {
-					extensions: [ 'css' ],
-					CssLoader: {
-						url: false,
-					},
-				} ),
+				{
+					test: /\.(?:css|sass|scss)$/i,
+					sideEffects: true,
+					use: [
+						{
+							loader: require( 'mini-css-extract-plugin' ).loader,
+						},
+						{
+							loader: require.resolve( 'css-loader' ),
+							options: {
+								url: false,
+								modules: { auto: true, localIdentName: '[local]--[hash:base64:5]' },
+								importLoaders: 0
+							}
+						},
+					]
+				},
 			],
 		},
 		plugins: [
