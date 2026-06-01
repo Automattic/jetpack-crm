@@ -29,8 +29,8 @@ class JPCRM_Activation_Cest {
 	public function test_single_plugin_activation_shows_wizard( AcceptanceTester $I ) {
 		$I->amOnPluginsPage();
 
-		$I->seePluginInstalled( 'jetpack-crm' );
-		$I->activatePlugin( 'jetpack-crm' );
+		$I->seePluginInstalled( 'zero-bs-crm' );
+		$I->activatePlugin( 'zero-bs-crm' );
 
 		// Check no activation errors and wizard is shown
 		$I->dontSeeElement( '#message.error' );
