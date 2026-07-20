@@ -1,0 +1,76 @@
+/*
+ * Jetpack CRM admin footer
+ *
+ * Restyles WordPress' #wpfooter on CRM admin pages to match the unified Jetpack
+ * admin-page footer: Jetpack logo + wordmark on the left, Automattic "by line"
+ * on the right. The footer contents are injected via the `admin_footer_text`
+ * (left) and `update_footer` (right) filters in ZeroBSCRM.AdminStyling.php.
+ *
+ * Note: WPDS custom properties (--wpds-*) are referenced with hardcoded
+ * fallbacks so this renders correctly whether or not the design tokens are
+ * present, mirroring the approach used by the top menu (_jpcrm_top_menu.scss).
+ */
+
+body.jpcrm-admin {
+
+	// Only restyle the footer when our branded footer content is present. When the
+	// "powered by" setting is off (or under white label) #wpfooter is left empty and
+	// keeps its default WordPress appearance.
+	#wpfooter:has( .jetpack-footer__logo ) {
+		align-items: center;
+		background-color: var(--wpds-color-background-surface-neutral, #fcfcfc);
+		border-top: var(--wpds-border-width-xs, 1px) solid var(--wpds-color-stroke-surface-neutral-weak, #e0e0e0);
+		box-sizing: border-box;
+		display: flex;
+		flex-wrap: wrap;
+		font-size: var(--wpds-typography-font-size-md, 13px);
+		gap: 8px 24px;
+		padding: var(--wpds-dimension-padding-xl, 16px) var(--wpds-dimension-padding-2xl, 24px);
+
+		// Undo WordPress' default float-based left/right layout; flex handles it.
+		p {
+			float: none;
+			line-height: 1;
+			margin: 0;
+			padding: 0;
+		}
+
+		// Push the Automattic by line to the far right.
+		#footer-upgrade {
+			margin-inline-start: auto;
+		}
+
+		.clear {
+			display: none;
+		}
+	}
+
+	// Left: Jetpack logo + wordmark.
+	.jetpack-footer__logo {
+		align-items: center;
+		display: inline-flex;
+		gap: 8px;
+
+		svg {
+			display: block;
+			flex-shrink: 0;
+		}
+	}
+
+	.jetpack-footer__logo-text {
+		color: var(--wpds-color-foreground-neutral-strong, #1e1e1e);
+		font-size: var(--wpds-typography-font-size-md, 13px);
+		line-height: 1;
+	}
+
+	// Right: Automattic "by line".
+	a.jetpack-footer__a8c {
+		align-items: center;
+		display: inline-flex;
+
+		svg {
+			display: block;
+			fill: var(--wpds-color-foreground-interactive-neutral-weak, #646970);
+		}
+	}
+}
