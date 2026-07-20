@@ -24,7 +24,7 @@ body.jpcrm-admin {
 		display: flex;
 		flex-wrap: wrap;
 		font-size: var(--wpds-typography-font-size-md, 13px);
-		gap: 8px 24px;
+		gap: var(--wpds-dimension-gap-xl, 24px);
 		padding: var(--wpds-dimension-padding-xl, 16px) var(--wpds-dimension-padding-2xl, 24px);
 
 		// Undo WordPress' default float-based left/right layout; flex handles it.
@@ -35,13 +35,41 @@ body.jpcrm-admin {
 			padding: 0;
 		}
 
-		// Push the Automattic by line to the far right.
+		// Wide footer: single row, Automattic by line pushed to the far right.
 		#footer-upgrade {
 			margin-inline-start: auto;
 		}
 
 		.clear {
 			display: none;
+		}
+	}
+
+	// On mobile WordPress moves the admin menu off-canvas, but on CRM's non-fluid
+	// pages it can leave the desktop left margin on #wpfooter, indenting it. Drop
+	// it so the footer sits flush with the screen edge.
+	@media ( max-width: 782px ) {
+
+		#wpfooter:has( .jetpack-footer__logo ) {
+			margin: 0;
+		}
+	}
+
+	// Phones: stack the logo and the Automattic by line onto their own left-aligned
+	// rows, matching the unified Jetpack footer. Unlike that footer we have no
+	// middle nav links to force the wrap, so we stack explicitly.
+	@media ( max-width: 480px ) {
+
+		#wpfooter:has( .jetpack-footer__logo ) {
+
+			#footer-left,
+			#footer-upgrade {
+				flex-basis: 100%;
+			}
+
+			#footer-upgrade {
+				margin-inline-start: 0;
+			}
 		}
 	}
 
