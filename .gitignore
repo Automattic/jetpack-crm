@@ -2,6 +2,7 @@
 /vendor/
 /node_modules/
 /build/
+/dist/
 /.cache/
 /.phpunit.cache/
 **/css/**/*.css

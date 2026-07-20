@@ -1,0 +1,28 @@
+# Files not needed in the release zip.
+#
+# The release build (scripts/build-plugin.sh) uses an explicit ship_paths
+# allow-list, so these export-ignore rules are belt-and-suspenders: they also
+# take effect if anyone runs a plain `git archive` without paths.
+/.git*                export-ignore
+.gitattributes        export-ignore
+.github/              export-ignore
+.wordpress-org/       export-ignore
+.wp-env.json          export-ignore
+release.config.json   export-ignore
+scripts/              export-ignore
+tools/                export-ignore
+tests/               export-ignore
+docs/                 export-ignore
+sass/                 export-ignore
+Makefile              export-ignore
+package.json          export-ignore
+composer.json         export-ignore
+composer.lock         export-ignore
+webpack.config.js     export-ignore
+babel.config.js       export-ignore
+codeception.dist.yml  export-ignore
+phpunit.*.xml.dist    export-ignore
+AGENTS.md             export-ignore
+CLAUDE.md             export-ignore
+README.md             export-ignore
+CHANGELOG.md          export-ignore
