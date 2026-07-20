@@ -1,16 +1,3 @@
-/*
- * Jetpack CRM admin footer
- *
- * Restyles WordPress' #wpfooter on CRM admin pages to match the unified Jetpack
- * admin-page footer: Jetpack logo + wordmark on the left, Automattic "by line"
- * on the right. The footer contents are injected via the `admin_footer_text`
- * (left) and `update_footer` (right) filters in ZeroBSCRM.AdminStyling.php.
- *
- * Note: WPDS custom properties (--wpds-*) are referenced with hardcoded
- * fallbacks so this renders correctly whether or not the design tokens are
- * present, mirroring the approach used by the top menu (_jpcrm_top_menu.scss).
- */
-
 body.jpcrm-admin {
 
 	// Only restyle the footer when our branded footer content is present. When the
@@ -27,19 +14,14 @@ body.jpcrm-admin {
 		gap: var(--wpds-dimension-gap-xl, 24px);
 		padding: var(--wpds-dimension-padding-xl, 16px) var(--wpds-dimension-padding-2xl, 24px);
 
-		// Undo WordPress' default float-based left/right layout; flex handles it.
-		p {
-			float: none;
-			line-height: 1;
-			margin: 0;
-			padding: 0;
-		}
-
 		// Wide footer: single row, Automattic by line pushed to the far right.
 		#footer-upgrade {
 			margin-inline-start: auto;
 		}
 
+		// WordPress core outputs an empty <div class="clear"> inside #wpfooter;
+		// as a flex item it would add a trailing gap that pushes the by line off
+		// the right edge, so drop it out of the layout.
 		.clear {
 			display: none;
 		}
