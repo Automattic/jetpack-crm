@@ -72,7 +72,9 @@ VE=$(sed 's/[&\\/]/\\&/g' <<<"$VERSION")
 
 cd "$BASE"
 EXIT=0
-for FILE in $(git ls-files); do
+# NUL-delimited and via process substitution (not a pipe) so filenames with
+# whitespace are safe and $EXIT is set in this shell rather than a subshell.
+while IFS= read -r -d '' FILE; do
 	[ "$FILE" == "scripts/replace-next-version-tag.sh" ] && continue;
 	grep -F -q '$$next-version$$' "$FILE" 2>/dev/null || continue
 	debug "Processing $FILE"
@@ -90,6 +92,6 @@ for FILE in $(git ls-files); do
 			fi
 		done < <( grep --line-number -F '$$next-version$$' "$FILE" || echo "" )
 	fi
-done
+done < <(git ls-files -z)
 
 exit $EXIT
