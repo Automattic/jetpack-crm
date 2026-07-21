@@ -75,11 +75,23 @@ EXIT=0
 # NUL-delimited and via process substitution (not a pipe) so filenames with
 # whitespace are safe and $EXIT is set in this shell rather than a subshell.
 while IFS= read -r -d '' FILE; do
-	[ "$FILE" == "scripts/replace-next-version-tag.sh" ] && continue;
+	# Skip the files that reference the token as an intentional literal (this
+	# replacer's own usage text, the placeholder linter, its workflow) rather than
+	# as a replaceable @since/@deprecated doc tag. Otherwise the leftover-token
+	# post-check below flags them and fails the release.
+	case "$FILE" in
+		scripts/replace-next-version-tag.sh | scripts/check-next-version-tag.sh | .github/workflows/lint-next-version.yml )
+			continue
+			;;
+	esac
 	grep -F -q '$$next-version$$' "$FILE" 2>/dev/null || continue
 	debug "Processing $FILE"
 
-	sed -i.bak -E -e 's!\$\$next-version\$\$!'"$VE"'!g' "$FILE"
+	# Only replace the token when it is anchored to a doc tag (@since/@deprecated)
+	# or a _deprecated_*() call — matching the canonical jetpack replacer. A blind
+	# global replace would also rewrite literal references to the token in prose.
+	sed -i.bak -E -e 's!(@since|@deprecated( +[sS]ince)?)( +)\$\$next-version\$\$!\1\3'"$VE"'!g' "$FILE"
+	sed -i.bak -E -e $'s!(^\t*_deprecated_(function|constructor|file|argument|hook)\\( .*, \'[^\']*)\\$\\$next-version\\$\\$\'!\\1'"$VE"$'\'!g' "$FILE"
 	rm "$FILE.bak" # We need a backup file because macOS requires it.
 
 	if grep -F -q '$$next-version$$' "$FILE"; then

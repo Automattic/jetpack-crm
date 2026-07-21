@@ -3,7 +3,7 @@
 	"slug": "zero-bs-crm",
 	"mainFile": "ZeroBSCRM.php",
 	"buildDir": "dist",
-	"versionConstant": null,
+	"versionConstant": "JPCRM_VERSION",
 	"readme": "readme.txt",
 	"bumpPackageJson": true,
 	"nextVersionPlaceholder": true
