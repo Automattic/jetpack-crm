@@ -1,0 +1,10 @@
+{
+	"repo": "Automattic/jetpack-crm",
+	"slug": "zero-bs-crm",
+	"mainFile": "ZeroBSCRM.php",
+	"buildDir": "dist",
+	"versionConstant": "JPCRM_VERSION",
+	"readme": "readme.txt",
+	"bumpPackageJson": true,
+	"nextVersionPlaceholder": true
+}

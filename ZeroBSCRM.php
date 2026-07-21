@@ -23,6 +23,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit( 0 );
 }
 
+// Plugin version. Single source of truth, bumped by the release tooling
+// (release.config.json "versionConstant"). ZeroBSCRM::VERSION reads from this,
+// so this define must be set before the autoloader loads that class below.
+define( 'JPCRM_VERSION', '6.8.1' );
+
 // Enabling THIS will start LOGGING PERFORMANCE TESTS
 // NOTE: This will do for EVERY page load, so just add temporarily else adds rolling DRAIN on sys
 // define( 'ZBSPERFTEST', 1 );

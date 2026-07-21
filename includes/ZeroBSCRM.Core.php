@@ -11,6 +11,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit( 0 ); // Exit if accessed directly.
 }
 
+// `VERSION` below reads JPCRM_VERSION, which the main plugin file (ZeroBSCRM.php)
+// defines before it includes this class. Guard against this class being loaded in
+// isolation (a test harness, or the autoloader pulling it in early) so the class
+// constant can't fatal on an undefined constant. In normal loading ZeroBSCRM.php
+// has already defined the real version, so this is a no-op.
+if ( ! defined( 'JPCRM_VERSION' ) ) {
+	define( 'JPCRM_VERSION', '0.0.0' );
+}
+
 /**
  * Main ZeroBSCRM Class.
  *
@@ -24,7 +33,7 @@ final class ZeroBSCRM {
 	 *
 	 * @var string
 	 */
-	const VERSION = '6.8.1';
+	const VERSION = JPCRM_VERSION;
 
 	/**
 	 * Jetpack CRM version (used in various extensions as of January 2025).
