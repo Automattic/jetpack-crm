@@ -81,9 +81,9 @@ description** in the browser before merging.
 Merging the release PR triggers `.github/workflows/create-release.yml`, which:
 
 1. writes the (edited) changelog from the PR body into `readme.txt`,
-2. tags the release and creates the GitHub release,
-3. builds `dist/zero-bs-crm.zip`, and
-4. deploys to WordPress.org.
+2. builds the plugin (`make build`),
+3. tags the release and creates the GitHub release (with the built `zero-bs-crm.zip` attached), and
+4. deploys the built plugin to WordPress.org.
 
 The WordPress.org deploy requires the `WORDPRESSORG_SVN_USERNAME` and
 `WORDPRESSORG_SVN_PASSWORD` repository secrets to be set.
