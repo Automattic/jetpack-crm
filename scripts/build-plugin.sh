@@ -21,8 +21,12 @@
 #   3. Assets (in the working tree): run `npm run build-production`, then copy
 #      the generated webpack `build/` tree and compiled CSS/JS into the staged
 #      plugin. npm/webpack must run at the repo root — it needs node_modules,
-#      webpack.config.js and the sass sources, none of which ship — but it is
-#      non-destructive, so building in-tree is safe.
+#      webpack.config.js and the sass sources, none of which ship.
+#      NOTE: this step rebuilds working-tree generated files in place — `npm ci`
+#      wipes and reinstalls node_modules, and the build's `npm run clean` deletes
+#      then regenerates the compiled build/ and *.min.css/*.min.js. It re-derives
+#      those generated files rather than preserving them, so any uncommitted edits
+#      to them are lost. Tracked sources and the working-tree vendor/ are untouched.
 #
 # STAGING DIR is `dist/`, NOT `build/`. `build/` is reserved: it is webpack's own
 # output directory (a runtime asset dir that ships) and `npm run clean` does

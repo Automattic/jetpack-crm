@@ -47,6 +47,14 @@ if ( ! /^\d+(\.\d+)+(-(a|alpha|beta)([-.]?\d+)?)?$/.test( version ) ) {
 	process.exit( 1 );
 }
 
+// A release must be cut from a clean tree. The branch is created from the
+// current HEAD and `replaceNextVersionPlaceholder()` stages with `git add -u`,
+// which would sweep any modified tracked files into the release commit. Scope
+// the check to tracked changes: untracked files are never staged by the release
+// steps, so blocking on them would be a false positive. Fail fast, before the
+// confirmation prompt or any branch creation.
+assertCleanWorkingTree();
+
 const ghPrs = `gh pr list -R ${ cfg.repo } --state merged --base ${ BASE_BRANCH } --limit 500 --search "milestone:${ version }"`;
 
 // Confirm release through CLI.
@@ -97,6 +105,23 @@ function readFileContents( filepath ) {
 		return fs.readFileSync( filepath, 'utf8' );
 	} catch ( err ) {
 		throw new Error( `File (${ filepath }) could not be read.` );
+	}
+}
+
+/**
+ * Abort unless the working tree has no uncommitted changes to tracked files.
+ *
+ * A dirty tree is unsafe for a release: the release branch is cut from the
+ * current HEAD and `replaceNextVersionPlaceholder()` runs `git add -u`, which
+ * stages every modified tracked file — so stray edits would land in the release
+ * PR. Untracked files are excluded because no release step stages them.
+ */
+function assertCleanWorkingTree() {
+	const status = execSync( 'git status --porcelain --untracked-files=no' ).toString().trim();
+	if ( status ) {
+		console.log( chalk.bold.red( 'Error: the working tree has uncommitted changes to tracked files. Commit, stash or discard them before preparing a release.' ) );
+		console.log( status );
+		process.exit( 1 );
 	}
 }
 
