@@ -61,7 +61,7 @@ release: ## Prepare a release PR. Usage: make release VERSION=x.y.z
 	@test -n "$(VERSION)" || { echo "Usage: make release VERSION=x.y.z"; exit 1; }
 	node scripts/prepare-release.mjs $(VERSION)
 
-build: ## Build dist/zero-bs-crm.zip from the current working tree
+build: ## Build dist/zero-bs-crm.zip (tracked source from HEAD; assets compiled fresh)
 	./scripts/build-plugin.sh
 
 clean: ## Remove the dist/ release staging directory
