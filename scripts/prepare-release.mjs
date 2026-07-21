@@ -347,6 +347,10 @@ function pushBranch() {
 /**
  * Revert the workspace to its original state.
  *
+ * Also deletes the release branch on the remote if it was already pushed (e.g.
+ * `createPR()` failed after `pushBranch()` succeeded) — otherwise the orphaned
+ * remote branch would block a retry, which recreates the same branch name.
+ *
  * @param {string} originalBranch The original branch name.
  * @param {string} branchToDelete The release branch to delete.
  */
@@ -355,4 +359,20 @@ function revertOnError( originalBranch, branchToDelete ) {
 	execSync( `git checkout . && git checkout ${ originalBranch }` );
 	console.log( `Deleting '${ branchToDelete }'....` );
 	execSync( `git branch -D ${ branchToDelete }` );
+
+	// Delete the remote branch too, but only if it exists. `git ls-remote
+	// --exit-code` exits non-zero when the branch isn't on the remote, so a
+	// throw here means "nothing to clean up".
+	try {
+		execSync( `git ls-remote --exit-code --heads ${ REMOTE } ${ branchToDelete }`, { stdio: 'ignore' } );
+	} catch {
+		return;
+	}
+	console.log( `Deleting '${ branchToDelete }' on ${ REMOTE }....` );
+	try {
+		execSync( `git push ${ REMOTE } --delete ${ branchToDelete }` );
+	} catch {
+		// Best-effort: don't let a failed remote cleanup mask the original error.
+		console.log( chalk.yellow( `Could not delete '${ branchToDelete }' on ${ REMOTE }; delete it manually before retrying.` ) );
+	}
 }
