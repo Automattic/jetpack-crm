@@ -447,12 +447,15 @@ function zeroBSCRM_invoicing_generateStatementHTML_v3( $contact_id = -1, $return
 
 		$statement_table = '';
 
-		// logo header
-		if ( ! empty( $logo_url ) ) {
+		// logo header — embed the logo as a data: URI so dompdf never fetches
+		// it remotely. Omit it entirely if the fetch fails or is blocked; never
+		// emit the remote URL.
+		$logo_data_uri = ! empty( $logo_url ) ? jpcrm_pdf_logo_data_uri( $logo_url ) : null;
+		if ( $logo_data_uri !== null ) {
 
 			$statement_table .= sprintf(
 				"<div class='header-image'><img src='%s' alt='%s'></div>",
-				esc_url( $logo_url ),
+				esc_attr( $logo_data_uri ),
 				esc_attr( $biz_name )
 			);
 		}
@@ -914,6 +917,21 @@ function zeroBSCRM_invoicing_generateInvoiceHTML( $invoice_id = -1, $template = 
 		$biz_info_class = 'biz-up';
 	}
 
+	// For PDF output only, embed the logo as a data: URI so dompdf never
+	// fetches it remotely. The portal template keeps the remote URL because
+	// the client's browser loads it, not the server.
+	if ( $template === 'pdf' && $logo_url !== '' ) {
+		$logo_data_uri = jpcrm_pdf_logo_data_uri( $logo_url );
+		if ( $logo_data_uri === null ) {
+			// Fetch failed or was blocked: omit the logo (matches the
+			// no-logo rendering) rather than fall back to a remote fetch.
+			$logo_class = '';
+			$logo_url   = '';
+		} else {
+			$logo_url = $logo_data_uri;
+		}
+	}
+
 	// Invoice Number or Reference
 	// Reference, falling back to ID
 	$inv_id_styles  = '';
@@ -1193,7 +1211,7 @@ function zeroBSCRM_invoicing_generateInvoiceHTML( $invoice_id = -1, $template = 
 		'invoice-title'               => __( 'Invoice', 'zero-bs-crm' ),
 		'css'                         => $css_url,
 		'logo-class'                  => $logo_class,
-		'logo-url'                    => esc_url( $logo_url ),
+		'logo-url'                    => ( $template === 'pdf' ) ? esc_attr( $logo_url ) : esc_url( $logo_url ),
 		'invoice-number'              => $inv_no_str,
 		'invoice-date'                => $inv_date_str,
 		'invoice-id-styles'           => $inv_id_styles,
