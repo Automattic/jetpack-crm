@@ -5,14 +5,14 @@ body.jpcrm-admin {
 	// keeps its default WordPress appearance.
 	#wpfooter:has( .jetpack-footer__logo ) {
 		align-items: center;
-		background-color: var(--wpds-color-background-surface-neutral, #fcfcfc);
-		border-top: var(--wpds-border-width-xs, 1px) solid var(--wpds-color-stroke-surface-neutral-weak, #e0e0e0);
+		background-color: var(--wpds-color-bg-surface-neutral, var(--wpds-color-background-surface-neutral, #fcfcfc));
+		border-top: var(--wpds-border-width-xs, 1px) solid var(--wpds-color-stroke-surface-neutral-weak, #e4e4e4);
 		box-sizing: border-box;
 		display: flex;
 		flex-wrap: wrap;
 		font-size: var(--wpds-typography-font-size-md, 13px);
 		gap: var(--wpds-dimension-gap-xl, 24px);
-		padding: var(--wpds-dimension-padding-xl, 16px) var(--wpds-dimension-padding-2xl, 24px);
+		padding: var(--wpds-dimension-padding-xl, 20px) var(--wpds-dimension-padding-2xl, 24px);
 
 		// Wide footer: single row, Automattic by line pushed to the far right.
 		#footer-upgrade {
@@ -27,9 +27,11 @@ body.jpcrm-admin {
 		}
 	}
 
-	// On mobile WordPress moves the admin menu off-canvas, but on CRM's non-fluid
-	// pages it can leave the desktop left margin on #wpfooter, indenting it. Drop
-	// it so the footer sits flush with the screen edge.
+	// Below 782px WordPress core hides #wpfooter (common.css), but the base rule
+	// above keeps it shown — specificity (1,2,1) vs core's (1,0,0), and no media
+	// query — which is why these mobile rules are reachable at all. Core's
+	// `.auto-fold #wpfooter` also leaves a 36px icon-menu margin here (admin-menu.css,
+	// @media max-width: 960px); drop it so the footer sits flush with the screen edge.
 	@media ( max-width: 782px ) {
 
 		#wpfooter:has( .jetpack-footer__logo ) {
@@ -68,7 +70,7 @@ body.jpcrm-admin {
 	}
 
 	.jetpack-footer__logo-text {
-		color: var(--wpds-color-foreground-neutral-strong, #1e1e1e);
+		color: var(--wpds-color-fg-content-neutral, var(--wpds-color-foreground-content-neutral, #1e1e1e));
 		font-size: var(--wpds-typography-font-size-md, 13px);
 		line-height: 1;
 	}
@@ -80,7 +82,7 @@ body.jpcrm-admin {
 
 		svg {
 			display: block;
-			fill: var(--wpds-color-foreground-interactive-neutral-weak, #646970);
+			fill: var(--wpds-color-fg-interactive-neutral-weak, var(--wpds-color-foreground-interactive-neutral-weak, #707070));
 		}
 	}
 }
