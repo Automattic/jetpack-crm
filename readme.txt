@@ -362,6 +362,9 @@ We offer a full, no-hassle refund within 14 days. You can read more about that, 
 
 
 == Changelog ==
+### 6.8.2 - 2026-07-27
+* Improve remote image handling in PDF generation (#10)
+
 ### 6.8.1 - 2026-05-28
 #### Changed
 - Remove unneeded development and documentation files from the published plugin.
@@ -369,4 +372,3 @@ We offer a full, no-hassle refund within 14 days. You can read more about that, 
 
 #### Fixed
 - Client Portal: Prevent PHP fatal when downloading PDFs.
-
