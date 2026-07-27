@@ -1104,21 +1104,158 @@ function jpcrm_dompdf_assist_validate_remote_uri( string $uri ) {
 
 	}
 
-	/*
-	if ( !$this->isRemoteEnabled ) {
+	// Same-site assets are always allowed (covers installs whose own site
+	// resolves to a private address). Compare the host exactly rather than using
+	// a string-prefix test, so a different host that merely begins with the site
+	// URL is not treated as same-site and falls through to the check below.
+	$site_host = strtolower( (string) wp_parse_url( site_url(), PHP_URL_HOST ) );
+	$uri_host  = strtolower( trim( (string) wp_parse_url( $uri, PHP_URL_HOST ), '[]' ) );
+	if ( '' !== $site_host && $uri_host === $site_host ) {
 
-		return [false, "Remote file requested, but remote file download is disabled."];
-
-	}
-	*/
-
-	if ( ! jpcrm_url_appears_to_match_site( $uri ) ) {
-
-		return array( false, 'Remote file requested, but remote file download is disabled.' );
+		return array( true, null );
 
 	}
 
-	return array( true, null );
+	// For any other host, permit only public destinations: reject private,
+	// loopback, link-local and reserved addresses, while still allowing public
+	// CDN assets such as Jetpack Boost.
+	if ( jpcrm_url_resolves_to_public_host( $uri ) ) {
+
+		return array( true, null );
+
+	}
+
+	return array( false, 'Remote file requested from a disallowed host.' );
+}
+
+/*
+ * Returns true only if the URI is an http(s) URL whose host resolves exclusively
+ * to public (globally-routable) IPs. Rejects hosts that resolve to any private,
+ * loopback, link-local or reserved address (IPv4 and IPv6), URIs with no host or
+ * a non-http(s) scheme, and hosts that fail to resolve (fail closed).
+ *
+ * Note: the host is validated at check time but dompdf re-resolves at fetch time,
+ * so results can differ if the hostname's DNS changes between the two lookups.
+ * This is a known limitation of hostname-based validation.
+ */
+function jpcrm_url_resolves_to_public_host( string $uri ) {
+
+	$host = wp_parse_url( $uri, PHP_URL_HOST );
+	if ( empty( $host ) ) {
+		return false;
+	}
+
+	$scheme = strtolower( (string) wp_parse_url( $uri, PHP_URL_SCHEME ) );
+	if ( ! in_array( $scheme, array( 'http', 'https' ), true ) ) {
+		return false;
+	}
+
+	// Strip IPv6 literal brackets, e.g. "[::1]".
+	$host = trim( $host, '[]' );
+
+	// Resolve to the set of IPs to check. A literal-IP host is checked directly;
+	// a hostname is resolved to all of its A / AAAA records.
+	$ips = array();
+	if ( filter_var( $host, FILTER_VALIDATE_IP ) ) {
+		$ips[] = $host;
+	} else {
+		$records = @dns_get_record( $host, DNS_A | DNS_AAAA );
+		if ( is_array( $records ) ) {
+			foreach ( $records as $record ) {
+				if ( ! empty( $record['ip'] ) ) {
+					$ips[] = $record['ip'];
+				} elseif ( ! empty( $record['ipv6'] ) ) {
+					$ips[] = $record['ipv6'];
+				}
+			}
+		}
+	}
+
+	// No resolvable address: reject (fail closed).
+	if ( empty( $ips ) ) {
+		return false;
+	}
+
+	foreach ( $ips as $ip ) {
+		// FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE returns false for
+		// private and reserved ranges (RFC 1918, loopback, link-local and other
+		// non-routable/reserved IPv4 and IPv6 addresses). Any such hit fails the
+		// whole URI closed.
+		if ( ! filter_var( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE ) ) {
+			return false;
+		}
+	}
+
+	return true;
+}
+
+/**
+ * Fetch a logo URL server-side and return it as a base64 data: URI, so dompdf
+ * can inline it into a PDF without fetching the URL itself.
+ *
+ * The fetch is gated by jpcrm_dompdf_assist_validate_remote_uri(), which allows
+ * same-site URLs (so a logo on the site's own domain works even on installs
+ * whose own host resolves to a private IP) and otherwise requires the host to
+ * resolve to a public address via jpcrm_url_resolves_to_public_host() —
+ * rejecting private, loopback, link-local, reserved and IPv6 hosts, checking
+ * every resolved A/AAAA record before any request is made. wp_safe_remote_get()
+ * is a second layer
+ * that re-validates redirects. The response body is confirmed to be a raster
+ * image (SVG and non-image content are rejected — SVG can carry script and
+ * expands dompdf's fetch surface). Returns null on any failure; callers must
+ * omit the logo rather than fall back to a remote URL.
+ *
+ * @param string $url Logo URL.
+ * @return string|null data:<mime>;base64,<data>, or null on failure.
+ */
+function jpcrm_pdf_logo_data_uri( string $url ): ?string {
+
+	if ( trim( $url ) === '' ) {
+		return null;
+	}
+
+	// Validate the host with the same allow-policy dompdf uses for remote assets:
+	// same-site URLs are allowed (so a logo on the site's own domain works even on
+	// installs that resolve to a private IP), and any other host must resolve to a
+	// public address — blocking private, loopback, link-local, IPv6 and reserved
+	// ranges that wp_safe_remote_get()/wp_http_validate_url() alone do not cover.
+	$host_validation = jpcrm_dompdf_assist_validate_remote_uri( $url );
+	if ( empty( $host_validation[0] ) ) {
+		return null;
+	}
+
+	$max_bytes = 2 * MB_IN_BYTES;
+
+	$response = wp_safe_remote_get(
+		$url,
+		array(
+			'timeout'             => 10,
+			'limit_response_size' => $max_bytes,
+		)
+	);
+
+	if ( is_wp_error( $response ) || wp_remote_retrieve_response_code( $response ) !== 200 ) {
+		return null;
+	}
+
+	$body = wp_remote_retrieve_body( $response );
+	if ( $body === '' || strlen( $body ) > $max_bytes ) {
+		return null;
+	}
+
+	// Confirm the bytes really are an image; do not trust headers or extension.
+	$info = @getimagesizefromstring( $body ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
+	if ( $info === false || empty( $info['mime'] ) ) {
+		return null;
+	}
+
+	$allowed_mimes = array( 'image/png', 'image/jpeg', 'image/gif', 'image/webp' );
+	if ( ! in_array( $info['mime'], $allowed_mimes, true ) ) {
+		// Rejects image/svg+xml and any non-raster or non-image content.
+		return null;
+	}
+
+	return 'data:' . $info['mime'] . ';base64,' . base64_encode( $body ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode
 }
 
 /*
