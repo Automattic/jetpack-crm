@@ -5,8 +5,8 @@ body.jpcrm-admin {
 	// keeps its default WordPress appearance.
 	#wpfooter:has( .jetpack-footer__logo ) {
 		align-items: center;
-		background-color: var(--wpds-color-bg-surface-neutral, var(--wpds-color-background-surface-neutral, #fcfcfc));
-		border-top: var(--wpds-border-width-xs, 1px) solid var(--wpds-color-stroke-surface-neutral-weak, #e4e4e4);
+		background-color: var(--wpds-color-background-surface-neutral, #fcfcfc);
+		border-top: var(--wpds-border-width-xs, 1px) solid var(--wpds-color-stroke-surface-neutral-weak, #f0f0f0);
 		box-sizing: border-box;
 		display: flex;
 		flex-wrap: wrap;
@@ -70,7 +70,7 @@ body.jpcrm-admin {
 	}
 
 	.jetpack-footer__logo-text {
-		color: var(--wpds-color-fg-content-neutral, var(--wpds-color-foreground-content-neutral, #1e1e1e));
+		color: var(--wpds-color-foreground-content-neutral, #1e1e1e);
 		font-size: var(--wpds-typography-font-size-md, 13px);
 		line-height: 1;
 	}
@@ -82,7 +82,7 @@ body.jpcrm-admin {
 
 		svg {
 			display: block;
-			fill: var(--wpds-color-fg-interactive-neutral-weak, var(--wpds-color-foreground-interactive-neutral-weak, #707070));
+			fill: var(--wpds-color-foreground-interactive-neutral-weak, #707070);
 		}
 	}
 }
