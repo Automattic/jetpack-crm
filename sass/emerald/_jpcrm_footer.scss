@@ -5,14 +5,14 @@ body.jpcrm-admin {
 	// keeps its default WordPress appearance.
 	#wpfooter:has( .jetpack-footer__logo ) {
 		align-items: center;
-		background-color: var(--wpds-color-background-surface-neutral, #fcfcfc);
-		border-top: var(--wpds-border-width-xs, 1px) solid var(--wpds-color-stroke-surface-neutral-weak, #f0f0f0);
+		background-color: var(--wpds-color-background-surface-neutral);
+		border-top: var(--wpds-border-width-xs) solid var(--wpds-color-stroke-surface-neutral-weak);
 		box-sizing: border-box;
 		display: flex;
 		flex-wrap: wrap;
-		font-size: var(--wpds-typography-font-size-md, 13px);
-		gap: var(--wpds-dimension-gap-xl, 24px);
-		padding: var(--wpds-dimension-padding-xl, 20px) var(--wpds-dimension-padding-2xl, 24px);
+		font-size: var(--wpds-typography-font-size-md);
+		gap: var(--wpds-dimension-gap-xl);
+		padding: var(--wpds-dimension-padding-xl) var(--wpds-dimension-padding-2xl);
 
 		// Wide footer: single row, Automattic by line pushed to the far right.
 		#footer-upgrade {
@@ -70,8 +70,8 @@ body.jpcrm-admin {
 	}
 
 	.jetpack-footer__logo-text {
-		color: var(--wpds-color-foreground-content-neutral, #1e1e1e);
-		font-size: var(--wpds-typography-font-size-md, 13px);
+		color: var(--wpds-color-foreground-content-neutral);
+		font-size: var(--wpds-typography-font-size-md);
 		line-height: 1;
 	}
 
@@ -82,7 +82,7 @@ body.jpcrm-admin {
 
 		svg {
 			display: block;
-			fill: var(--wpds-color-foreground-interactive-neutral-weak, #707070);
+			fill: var(--wpds-color-foreground-interactive-neutral-weak);
 		}
 	}
 }

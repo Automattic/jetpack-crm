@@ -56,6 +56,9 @@ lint: ## Run PHP CodeSniffer on changed files (vs trunk)
 lint-staged: ## Run PHP CodeSniffer on staged files
 	composer cs-staged
 
+lint-css: ## Check WPDS design token usage in the Sass sources
+	npm run lint:css
+
 ## Release
 release: ## Prepare a release PR. Usage: make release VERSION=x.y.z
 	@test -n "$(VERSION)" || { echo "Usage: make release VERSION=x.y.z"; exit 1; }
@@ -74,4 +77,4 @@ i18n: ## Regenerate translation files (no-op: JPCRM translations come from trans
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-16s\033[0m %s\n", $$1, $$2}'
 
-.PHONY: install install-hooks up down destroy logs cli wp test test-acceptance lint lint-staged release build clean i18n help
+.PHONY: install install-hooks up down destroy logs cli wp test test-acceptance lint lint-staged lint-css release build clean i18n help
