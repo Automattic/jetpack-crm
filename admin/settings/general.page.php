@@ -632,7 +632,7 @@ if ( ! $confirmAct ) {
 			<tr>
 				<td class="wfieldname">
 					<label for="jpcrm_showpoweredby_admin"><?php esc_html_e( 'Show admin credits', 'zero-bs-crm' ); ?>:</label><br />
-					<?php esc_html_e( 'Show "Powered by Jetpack CRM" footers on backend admin pages.', 'zero-bs-crm' ); ?>
+					<?php esc_html_e( 'Show the Jetpack and Automattic logos in the footer of backend admin pages.', 'zero-bs-crm' ); ?>
 				</td>
 				<td style="width:540px">
 					<input type="checkbox" class="winput form-control" name="jpcrm_showpoweredby_admin" id="jpcrm_showpoweredby_admin" value="1"<?php echo isset( $settings['showpoweredby_admin'] ) && $settings['showpoweredby_admin'] === 0 ? '' : ' checked="checked"'; ?> />
