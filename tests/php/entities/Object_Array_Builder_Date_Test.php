@@ -3,6 +3,7 @@
 namespace Automattic\Jetpack\CRM\Entities\Tests;
 
 use Automattic\Jetpack\CRM\Tests\JPCRM_Base_Integration_TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\TestDox;
 
 /**
@@ -91,6 +92,7 @@ class Object_Array_Builder_Date_Test extends JPCRM_Base_Integration_TestCase {
 	 *
 	 * @param int $obj_type Object type constant.
 	 */
+	#[DataProvider( 'object_type_provider' )]
 	#[TestDox( 'A date custom field survives the second normalisation pass.' )]
 	public function test_date_custom_field_survives_second_pass( $obj_type ) {
 		$expected = jpcrm_date_str_to_uts( '2026-07-23', '!Y-m-d', true );
@@ -108,6 +110,7 @@ class Object_Array_Builder_Date_Test extends JPCRM_Base_Integration_TestCase {
 	 *
 	 * @param int $obj_type Object type constant.
 	 */
+	#[DataProvider( 'object_type_provider' )]
 	#[TestDox( 'A datetime custom field survives the second normalisation pass.' )]
 	public function test_datetime_custom_field_survives_second_pass( $obj_type ) {
 		$first_pass = zeroBS_buildObjArr( array( 'signed-at' => '2026-07-23 14:30' ), array(), '', 'zbsc_', false, $obj_type, true );
@@ -135,6 +138,7 @@ class Object_Array_Builder_Date_Test extends JPCRM_Base_Integration_TestCase {
 
 		$result = $this->build_twice( array( 'contract-date' => '1950-01-01' ), ZBS_TYPE_CONTACT );
 
+		$this->assertArrayHasKey( 'contract-date', $result, 'The pre-1970 date custom field was stripped before reaching the DAL.' );
 		$this->assertSame( $expected, $result['contract-date'] );
 	}
 
@@ -148,6 +152,7 @@ class Object_Array_Builder_Date_Test extends JPCRM_Base_Integration_TestCase {
 		$once  = zeroBS_buildObjArr( $payload, array(), '', '', true, ZBS_TYPE_CONTACT, false );
 		$twice = zeroBS_buildObjArr( $once, array(), '', '', true, ZBS_TYPE_CONTACT, false );
 
+		$this->assertArrayHasKey( 'contract-date', $twice, 'The second pass stripped the date custom field.' );
 		$this->assertSame( $once['contract-date'], $twice['contract-date'] );
 	}
 
