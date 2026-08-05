@@ -598,6 +598,46 @@ function zeroBSCRM_permsObjType( $obj_type_id = -1 ) { // phpcs:ignore WordPress
 }
 
 /**
+ * Determine if the current user is allowed to view a given list view type.
+ *
+ * The list view type is supplied by the client, so every supported type needs
+ * an explicit view capability here. Anything unrecognised is denied.
+ *
+ * @param string $list_type List view type, as used by zeroBSCRM_list (e.g. 'customer', 'event').
+ *
+ * @return bool
+ */
+function jpcrm_perms_view_list_type( $list_type ) {
+
+	switch ( $list_type ) {
+
+		case 'customer':
+		case 'company':
+		case 'segment':
+			return zeroBSCRM_permsViewCustomers();
+
+		case 'quote':
+		case 'quotetemplate':
+			return zeroBSCRM_permsViewQuotes();
+
+		case 'invoice':
+			return zeroBSCRM_permsViewInvoices();
+
+		case 'transaction':
+			return zeroBSCRM_permsViewTransactions();
+
+		case 'event':
+			return jpcrm_perms_view_tasks();
+
+		case 'form':
+			return zeroBSCRM_permsForms();
+
+	}
+
+	return false;
+}
+
+/**
  * Determine if a user is allowed to manage contacts.
  *
  * @since 6.1.0
@@ -751,6 +791,21 @@ function zeroBSCRM_perms_tasks() {
 	}
 	return false;
 }
+
+/**
+ * Determine if the current user is allowed to view tasks (events).
+ *
+ * This mirrors the capability used by the Task Scheduler and Task List admin
+ * pages, which is separate from the task edit capability.
+ *
+ * @return bool
+ */
+function jpcrm_perms_view_tasks() {
+
+	$cu = wp_get_current_user();
+	return $cu->has_cap( 'admin_zerobs_view_events' );
+}
+
 function zeroBSCRM_permsNotify() {
 
 	$cu = wp_get_current_user();
