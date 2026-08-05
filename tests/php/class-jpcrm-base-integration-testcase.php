@@ -86,4 +86,45 @@ abstract class JPCRM_Base_Integration_TestCase extends JPCRM_Base_TestCase {
 
 		return wp_create_user( 'testuser', 'password', 'user@demo.com' );
 	}
+
+	/**
+	 * Register a custom field against one or more object types and rebuild the field globals.
+	 *
+	 * Custom fields are stored twice: once per object type for DAL3, and once in the legacy
+	 * `customfields` setting. zeroBSCRM_unpackCustomFields() gates the DAL3 overload on the
+	 * object key existing in the legacy setting, so both are needed before the field reaches
+	 * $zbsCustomerFields / $zbsCompanyFields.
+	 *
+	 * @param string $slug        Field slug, e.g. 'contract-date'.
+	 * @param string $type        Field type, e.g. 'date'. Must be in zeroBSCRM_customfields_acceptableCFTypes().
+	 * @param string $label       Human readable field name.
+	 * @param array  $object_keys Legacy object key => object type ID, e.g. array( 'customers' => ZBS_TYPE_CONTACT ).
+	 *
+	 * @return void
+	 */
+	public function register_custom_field( $slug, $type, $label, array $object_keys ) {
+		global $zbs;
+
+		$field_definition = array( $type, $label, '', $slug );
+
+		$legacy_setting = array();
+
+		foreach ( $object_keys as $object_key => $obj_type_id ) {
+			$zbs->DAL->updateActiveCustomFields( // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+				array(
+					'objtypeid' => $obj_type_id,
+					'fields'    => array( $slug => $field_definition ),
+				)
+			);
+
+			$legacy_setting[ $object_key ] = array( $field_definition );
+		}
+
+		$zbs->settings->update( 'customfields', $legacy_setting );
+
+		// Same order as ZeroBSCRM.Core.php: build the globals from the models, then overlay
+		// the custom fields.
+		zeroBSCRM_fields_initialise();
+		zeroBSCRM_unpackCustomFields();
+	}
 }
