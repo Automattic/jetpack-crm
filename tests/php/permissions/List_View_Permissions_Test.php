@@ -32,6 +32,10 @@ class List_View_Permissions_Test extends JPCRM_Base_TestCase {
 		}
 
 		wp_set_current_user( $user_id );
+
+		// These helpers memoise their answer in a global for the rest of the request,
+		// which outlives a single test. Clear them so each test sees its own user.
+		unset( $GLOBALS['zeroBSCRM_isZBSUser'], $GLOBALS['zeroBSCRM_isZBSBackendUser'] );
 	}
 
 	/**
@@ -155,5 +159,71 @@ class List_View_Permissions_Test extends JPCRM_Base_TestCase {
 
 		$this->assertFalse( jpcrm_perms_view_list_type( '' ) );
 		$this->assertFalse( jpcrm_perms_view_list_type( 'not-a-list-type' ) );
+	}
+
+	/**
+	 * A list type an extension is listening for is allowed through for CRM users.
+	 *
+	 * Extensions serve their own list views by hooking
+	 * `zerobs_ajax_list_view_{$list_type}`, and apply their own check when they do.
+	 * Denying every unrecognised type would take those list views offline.
+	 */
+	#[TestDox( 'A list type an extension is listening for is allowed through for CRM users.' )]
+	public function test_extension_list_types_are_allowed_for_crm_users() {
+
+		$callback = '__return_true';
+		add_action( 'zerobs_ajax_list_view_mailcampaign', $callback );
+
+		try {
+			// admin_zerobs_usr is granted to every CRM back end role.
+			$this->set_current_user_with_caps( array( 'admin_zerobs_usr', 'admin_zerobs_view_customers' ) );
+			$this->assertTrue( jpcrm_perms_view_list_type( 'mailcampaign' ) );
+
+			// Still nothing for a type nobody is listening for.
+			$this->assertFalse( jpcrm_perms_view_list_type( 'mailsequence' ) );
+		} finally {
+			remove_action( 'zerobs_ajax_list_view_mailcampaign', $callback );
+		}
+	}
+
+	/**
+	 * An extension list type is denied to users with no CRM access at all.
+	 */
+	#[TestDox( 'An extension list type is denied to users with no CRM access at all.' )]
+	public function test_extension_list_types_are_denied_to_non_crm_users() {
+
+		$callback = '__return_true';
+		add_action( 'zerobs_ajax_list_view_mailcampaign', $callback );
+
+		try {
+			$this->set_current_user_with_caps( array() );
+			$this->assertFalse( jpcrm_perms_view_list_type( 'mailcampaign' ) );
+		} finally {
+			remove_action( 'zerobs_ajax_list_view_mailcampaign', $callback );
+		}
+	}
+
+	/**
+	 * An extension can refuse its own list type through the filter.
+	 */
+	#[TestDox( 'An extension can refuse its own list type through the filter.' )]
+	public function test_extension_can_deny_its_own_list_type_via_filter() {
+
+		$callback = '__return_true';
+		$filter   = static function ( $allowed, $list_type ) {
+			return 'mailcampaign' === $list_type ? false : $allowed;
+		};
+
+		add_action( 'zerobs_ajax_list_view_mailcampaign', $callback );
+		add_filter( 'jpcrm_perms_view_list_type', $filter, 10, 2 );
+
+		try {
+			// admin_zerobs_usr is granted to every CRM back end role.
+			$this->set_current_user_with_caps( array( 'admin_zerobs_usr', 'admin_zerobs_view_customers' ) );
+			$this->assertFalse( jpcrm_perms_view_list_type( 'mailcampaign' ) );
+		} finally {
+			remove_filter( 'jpcrm_perms_view_list_type', $filter, 10 );
+			remove_action( 'zerobs_ajax_list_view_mailcampaign', $callback );
+		}
 	}
 }
