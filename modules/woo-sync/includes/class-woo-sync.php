@@ -1865,6 +1865,7 @@ class Woo_Sync {
 			'total_order_count'     => 0,
 			'total_customer_count'  => 0,
 			'first_import_complete' => false,
+			'first_import_started'  => 0,
 		);
 
 		// pause, if present
@@ -1906,9 +1907,10 @@ class Woo_Sync {
 			'total_order_count'      => 0,
 			'total_customer_count'   => 0,
 			'first_import_complete'  => false,
+			'first_import_started'   => 0, // timestamp the current first import began, 0 once it has finished
 
 			'paused'                 => false, // if set to non-false site will not sync (typically pass timestamp of time paused)
-			
+
 			// meta
 			'site_connection_errors' => 0, // counts how many connection errors since last good connection (allows for pausing on 3x errors)
 
@@ -1943,6 +1945,7 @@ class Woo_Sync {
 			'total_order_count'      => $total_order_count,
 			'total_customer_count'   => $total_customer_count,
 			'first_import_complete'  => $first_import_complete,
+			'first_import_started'   => $first_import_started,
 			'site_connection_errors' => $site_connection_errors,
 
 		);
