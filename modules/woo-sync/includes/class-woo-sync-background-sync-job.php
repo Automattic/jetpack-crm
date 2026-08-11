@@ -20,6 +20,12 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
 class Woo_Sync_Background_Sync_Job {
 
 	/**
+	 * Contact meta key marking a contact as one a first import created, holding the
+	 * key of the sync site whose import created it.
+	 */
+	private const IMPORT_CREATED_META_KEY = 'woosync_first_import_created';
+
+	/**
 	 * Site Key
 	 */
 	private $site_key = false;
@@ -333,9 +339,6 @@ class Woo_Sync_Background_Sync_Job {
 	private function import_page_of_orders( $page_no ) {
 
 		$this->debug( 'Fired `import_page_of_orders( ' . $page_no . ' )`, importing from ' . $this->import_mode( true ) . ' on site ' . $this->site_key . '.' );
-
-		// note when a first import began, so we can tell the contacts it creates apart from those already here
-		$this->mark_first_import_started();
 
 		// store/api switch
 		if ( $this->import_mode() === JPCRM_WOO_SYNC_MODE_API ) {
@@ -712,11 +715,6 @@ class Woo_Sync_Background_Sync_Job {
 		// set it
 		$this->woosync()->set_sync_site_attribute( $this->site_key, 'first_import_complete', $status_bool );
 
-		// clear the start time once an import finishes, so a restart takes a fresh one
-		if ( $status_bool ) {
-			$this->woosync()->set_sync_site_attribute( $this->site_key, 'first_import_started', 0 );
-		}
-
 		return $status_bool;
 	}
 
@@ -765,28 +763,88 @@ class Woo_Sync_Background_Sync_Job {
 	}
 
 	/**
-	 * Records when a first import began, so that contacts the import creates can be
-	 * told apart from contacts that were already in the CRM.
+	 * The contact an order's billing email would add to or update.
 	 *
-	 * Called at the top of every page of orders. Only the first call of an import
-	 * writes anything.
+	 * This is the same lookup `addUpdateContact()` makes to decide whether it is
+	 * inserting or updating, so it resolves to the same contact, aliases included.
+	 * Asking for the ID alone takes the faster of the two queries behind it.
+	 *
+	 * @param string $email Billing email address on the order.
+	 *
+	 * @return int Contact ID, or -1 where the address is not on record.
 	 */
-	private function mark_first_import_started() {
+	public function existing_contact_id( $email ) {
 
-		if ( $this->first_import_completed() ) {
-			return;
+		global $zbs;
+
+		if ( empty( $email ) ) {
+			return -1;
 		}
 
-		if ( (int) $this->woosync()->get_sync_site_attribute( $this->site_key, 'first_import_started', 0 ) > 0 ) {
-			return;
-		}
+		$contact_id = (int) $zbs->DAL->contacts->getContact(
+			-1,
+			array(
+				'email'       => $email,
+				'ignoreOwner' => 1,
+				'onlyID'      => 1,
+			)
+		);
 
-		$this->woosync()->set_sync_site_attribute( $this->site_key, 'first_import_started', time() );
+		return $contact_id > 0 ? $contact_id : -1;
 	}
 
 	/**
-	 * Whether the contact this order matches was already in the CRM before the current
-	 * first import started.
+	 * Records that this store's first import created a contact.
+	 *
+	 * Only ever written the moment a contact is created, so it says who made the
+	 * record rather than who has touched it since.
+	 *
+	 * @param int $contact_id Contact the import has just created.
+	 *
+	 * @return int|bool Meta line ID, or false.
+	 */
+	public function mark_contact_created_by_import( $contact_id ) {
+
+		global $zbs;
+
+		return $zbs->DAL->updateMeta( ZBS_TYPE_CONTACT, (int) $contact_id, self::IMPORT_CREATED_META_KEY, $this->site_key );
+	}
+
+	/**
+	 * Whether this store's first import created the contact.
+	 *
+	 * A contact another store's import created counts as one that was already here,
+	 * because it was already here when this store's import started.
+	 *
+	 * @param int $contact_id Contact to check.
+	 *
+	 * @return bool
+	 */
+	public function contact_created_by_import( $contact_id ) {
+
+		global $zbs;
+
+		// Without a site key there is nothing to match, and an unmarked contact would
+		// otherwise compare equal to one.
+		if ( empty( $this->site_key ) ) {
+			return false;
+		}
+
+		$created_by = $zbs->DAL->getMeta(
+			array(
+				'objtype' => ZBS_TYPE_CONTACT,
+				'objid'   => (int) $contact_id,
+				'key'     => self::IMPORT_CREATED_META_KEY,
+				'default' => '',
+			)
+		);
+
+		return (string) $created_by === (string) $this->site_key;
+	}
+
+	/**
+	 * Whether a contact an order matches was already in the CRM when this import
+	 * started, and so should keep its details.
 	 *
 	 * A first import works through order history oldest first, creating contacts as it
 	 * goes. Without this, the oldest order to mention an email address would fill in the
@@ -794,49 +852,24 @@ class Woo_Sync_Background_Sync_Job {
 	 * the address they had when they first ordered rather than the one they use now.
 	 *
 	 * Protecting a contact makes sense once somebody could have corrected it by hand. It
-	 * does not when the same import created it seconds earlier from an older order, so
-	 * during a first import we only protect records that were already there.
+	 * does not when the same import created it seconds earlier from an older order.
 	 *
-	 * Returns true outside a first import, where every contact predates it.
+	 * The contact's own creation time cannot answer this: a contact the import creates
+	 * is stamped with the date of the order that created it, so one made from a 2019
+	 * order reads as though it had been in the CRM since 2019. Hence the mark.
 	 *
-	 * @param array $crm_object_data Woo order data passed through `woocommerce_order_to_crm_objects`.
+	 * @param int $existing_contact_id Contact the order matches, -1 where there is none.
 	 *
 	 * @return bool
 	 */
-	private function contact_predates_first_import( $crm_object_data ) {
-
-		global $zbs;
-
-		if ( $this->first_import_completed() ) {
-			return true;
-		}
-
-		$import_started = (int) $this->woosync()->get_sync_site_attribute( $this->site_key, 'first_import_started', 0 );
-
-		// No import running that we know of, so nothing to make an exception for.
-		if ( $import_started < 1 ) {
-			return true;
-		}
-
-		if ( empty( $crm_object_data['contact']['email'] ) ) {
-			return true;
-		}
-
-		$existing_contact = $zbs->DAL->contacts->getContact(
-			-1,
-			array(
-				'email'            => $crm_object_data['contact']['email'],
-				'fields'           => array( 'ID', 'zbsc_created' ),
-				'withCustomFields' => false,
-			)
-		);
+	public function contact_predates_import( $existing_contact_id ) {
 
 		// Nothing on record, so this order is about to create it and there is nothing to protect.
-		if ( ! is_array( $existing_contact ) || empty( $existing_contact['created'] ) ) {
+		if ( (int) $existing_contact_id < 1 ) {
 			return false;
 		}
 
-		return (int) $existing_contact['created'] < $import_started;
+		return ! $this->contact_created_by_import( $existing_contact_id );
 	}
 
 	/**
@@ -852,21 +885,24 @@ class Woo_Sync_Background_Sync_Job {
 	 * on the contact are filled in either way, which is where most of the value of
 	 * syncing billing details lies.
 	 *
-	 * Contacts this import created itself are left alone too, see
-	 * `contact_predates_first_import()`.
+	 * A contact this import created from an older order is not protected from a later
+	 * one in the same run, see `contact_predates_import()`.
 	 *
-	 * @param array $crm_object_data Woo order data passed through `woocommerce_order_to_crm_objects`.
+	 * @param array $crm_object_data     Woo order data passed through `woocommerce_order_to_crm_objects`.
+	 * @param int   $existing_contact_id Contact the order matches, -1 where there is none.
 	 *
 	 * @return array Field keys to protect, empty where the order is free to overwrite.
 	 */
-	private function contact_fields_to_protect( $crm_object_data ) {
+	private function contact_fields_to_protect( $crm_object_data, $existing_contact_id ) {
 
 		// `wpid` is only set for orders with a WooCommerce customer account behind them.
 		$is_guest_order = empty( $crm_object_data['contact']['wpid'] );
 
 		$fields = array();
 
-		if ( $is_guest_order && $this->contact_predates_first_import( $crm_object_data ) ) {
+		// A first import is the only time a contact might have been made by the run in
+		// hand, so that is the only time the second test costs a lookup.
+		if ( $is_guest_order && ( $this->first_import_completed() || $this->contact_predates_import( $existing_contact_id ) ) ) {
 			$fields = array(
 				'fname',
 				'lname',
@@ -917,16 +953,24 @@ class Woo_Sync_Background_Sync_Job {
 		$contact_id = -1;
 		if ( isset( $crm_object_data['contact'] ) && isset( $crm_object_data['contact']['email'] ) ) {
 
+			// Whether this order is about to create the contact or update one already here.
+			$existing_contact_id = $this->existing_contact_id( $crm_object_data['contact']['email'] );
+
 			// Add the contact
 			$contact_id = $zbs->DAL->contacts->addUpdateContact(
 				array(
 					'data'                       => $crm_object_data['contact'],
 					'extraMeta'                  => $crm_object_data['contact_extra_meta'],
 					'do_not_update_blanks'       => true,
-					'do_not_overwrite_populated' => $this->contact_fields_to_protect( $crm_object_data ),
+					'do_not_overwrite_populated' => $this->contact_fields_to_protect( $crm_object_data, $existing_contact_id ),
 				)
 			);
 
+			// Note the contacts a first import creates, so a later order in the same run
+			// can replace the details an older one filled in.
+			if ( $contact_id > 0 && $existing_contact_id < 1 && ! $this->first_import_completed() ) {
+				$this->mark_contact_created_by_import( $contact_id );
+			}
 		}
 
 		// if contact: add logs, contact id relations to objects, and addupdate company
