@@ -2757,6 +2757,22 @@ class zbsDAL_contacts extends zbsDAL_ObjectLayer {
 
 			if ( is_array( $existing_contact ) ) {
 
+				/*
+				 * Until we add multi-address support, `getContact()` hands the second
+				 * address back under its old field names, so a field written as
+				 * `secaddr1` reads back as `secaddr_addr1`. Translate before looking a
+				 * protected field up on the record, or it never matches and the field is
+				 * replaced as though it had been left out of the list.
+				 */
+				$stored_field_names = array(
+					'secaddr1'    => 'secaddr_addr1',
+					'secaddr2'    => 'secaddr_addr2',
+					'seccity'     => 'secaddr_city',
+					'seccounty'   => 'secaddr_county',
+					'seccountry'  => 'secaddr_country',
+					'secpostcode' => 'secaddr_postcode',
+				);
+
 				foreach ( $do_not_overwrite_populated as $protected_field ) {
 
 					// Nothing to overwrite with.
@@ -2764,14 +2780,16 @@ class zbsDAL_contacts extends zbsDAL_ObjectLayer {
 						continue;
 					}
 
+					$stored_field = isset( $stored_field_names[ $protected_field ] ) ? $stored_field_names[ $protected_field ] : $protected_field;
+
 					// Nothing on record yet, so let it be filled in.
-					if ( ! isset( $existing_contact[ $protected_field ] ) || '' === $existing_contact[ $protected_field ] ) {
+					if ( ! isset( $existing_contact[ $stored_field ] ) || '' === $existing_contact[ $stored_field ] ) {
 						continue;
 					}
 
 					// Hold the stored value rather than unsetting the key, so this behaves the
 					// same way whether or not the caller also passed `do_not_update_blanks`.
-					$data[ $protected_field ] = $existing_contact[ $protected_field ];
+					$data[ $protected_field ] = $existing_contact[ $stored_field ];
 				}
 			}
 		}

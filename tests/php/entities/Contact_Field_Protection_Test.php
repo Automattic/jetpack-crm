@@ -43,6 +43,12 @@ class Contact_Field_Protection_Test extends JPCRM_Base_Integration_TestCase {
 		'postcode',
 		'country',
 		'hometel',
+		'secaddr1',
+		'secaddr2',
+		'seccity',
+		'seccounty',
+		'secpostcode',
+		'seccountry',
 	);
 
 	/**
@@ -64,12 +70,15 @@ class Contact_Field_Protection_Test extends JPCRM_Base_Integration_TestCase {
 		$data = $this->generate_contact_data(
 			array_merge(
 				array(
-					'email'    => self::CONTACT_EMAIL,
-					'fname'    => 'Alex',
-					'lname'    => 'Murphy',
-					'addr1'    => '19 Prospect Hill',
-					'hometel'  => '+353 21 427 0000',
-					'postcode' => 'T12 XY45',
+					'email'       => self::CONTACT_EMAIL,
+					'fname'       => 'Alex',
+					'lname'       => 'Murphy',
+					'addr1'       => '19 Prospect Hill',
+					'hometel'     => '+353 21 427 0000',
+					'postcode'    => 'T12 XY45',
+					'secaddr1'    => '4 Wellington Road',
+					'seccity'     => 'Cork',
+					'secpostcode' => 'T23 CD34',
 				),
 				$overrides
 			)
@@ -89,12 +98,15 @@ class Contact_Field_Protection_Test extends JPCRM_Base_Integration_TestCase {
 	 */
 	private function self_reported_data(): array {
 		return array(
-			'email'    => self::CONTACT_EMAIL,
-			'fname'    => 'alex',
-			'lname'    => 'murph',
-			'addr1'    => '66 Sundays Well Road',
-			'hometel'  => '+353 21 427 0001',
-			'postcode' => 'T23 AB12',
+			'email'       => self::CONTACT_EMAIL,
+			'fname'       => 'alex',
+			'lname'       => 'murph',
+			'addr1'       => '66 Sundays Well Road',
+			'hometel'     => '+353 21 427 0001',
+			'postcode'    => 'T23 AB12',
+			'secaddr1'    => '12 Blarney Street',
+			'seccity'     => 'Ballincollig',
+			'secpostcode' => 'P31 EF56',
 		);
 	}
 
@@ -125,6 +137,11 @@ class Contact_Field_Protection_Test extends JPCRM_Base_Integration_TestCase {
 		$this->assertSame( '19 Prospect Hill', $contact['addr1'], 'Address was replaced.' );
 		$this->assertSame( '+353 21 427 0000', $contact['hometel'], 'Telephone number was replaced.' );
 		$this->assertSame( 'T12 XY45', $contact['postcode'], 'Postcode was replaced.' );
+
+		// The second address is written as `secaddr1` and read back as `secaddr_addr1`.
+		$this->assertSame( '4 Wellington Road', $contact['secaddr_addr1'], 'Shipping address was replaced.' );
+		$this->assertSame( 'Cork', $contact['secaddr_city'], 'Shipping city was replaced.' );
+		$this->assertSame( 'T23 CD34', $contact['secaddr_postcode'], 'Shipping postcode was replaced.' );
 	}
 
 	/**
@@ -160,6 +177,37 @@ class Contact_Field_Protection_Test extends JPCRM_Base_Integration_TestCase {
 
 		$this->assertSame( 'Flat 4', $contact['addr2'], 'An empty field should still be filled in from an order or form.' );
 		$this->assertSame( 'Cork', $contact['city'], 'An empty field should still be filled in from an order or form.' );
+	}
+
+	/**
+	 * @testdox An empty second address is still filled in from a shipping address.
+	 */
+	#[TestDox( 'An empty second address is still filled in from a shipping address.' )]
+	public function test_empty_second_address_is_still_filled() {
+		global $zbs;
+
+		// Nothing on record for the second address.
+		$contact_id = $this->create_tidied_contact(
+			array(
+				'secaddr1'    => '',
+				'seccity'     => '',
+				'secpostcode' => '',
+			)
+		);
+
+		$zbs->DAL->contacts->addUpdateContact(
+			array(
+				'data'                       => $this->self_reported_data(),
+				'do_not_update_blanks'       => true,
+				'do_not_overwrite_populated' => self::PROTECTED_FIELDS,
+			)
+		);
+
+		$contact = $zbs->DAL->contacts->getContact( $contact_id );
+
+		$this->assertSame( '12 Blarney Street', $contact['secaddr_addr1'], 'An empty shipping address should still be filled in.' );
+		$this->assertSame( 'Ballincollig', $contact['secaddr_city'], 'An empty shipping city should still be filled in.' );
+		$this->assertSame( 'P31 EF56', $contact['secaddr_postcode'], 'An empty shipping postcode should still be filled in.' );
 	}
 
 	/**
