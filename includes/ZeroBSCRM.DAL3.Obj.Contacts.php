@@ -2522,6 +2522,10 @@ class zbsDAL_contacts extends zbsDAL_ObjectLayer {
 
 			'do_not_update_blanks' => false, // this allows you to not update fields if blank (same as fieldoverride for extsource -> in)
 
+			// Field keys (unprefixed) which may be filled in on an existing contact, but not replaced.
+			// For callers passing details self-reported through a checkout or form. See below.
+			'do_not_overwrite_populated' => array(),
+
 		);
 		foreach ( $defaultArgs as $argK => $argV ) {
 			$$argK = $argV;
@@ -2733,6 +2737,46 @@ class zbsDAL_contacts extends zbsDAL_ObjectLayer {
 		}
 
 		#} ========= / CHECK FIELDS ===========
+
+		// ========= SELF-REPORTED SOURCE (Deny overwrites of populated fields) ===========
+
+		/*
+		 * Contacts are matched by email address, so a caller which passes contact data
+		 * without an ID updates whichever contact already holds that email (see the email
+		 * lookup above). Where the details came from a CRM user, or from someone signed in
+		 * to an account, replacing what is on record is the right outcome.
+		 *
+		 * Details typed into a checkout or a form that anyone can fill in are weaker than
+		 * that: the email address was entered alongside everything else, and the contact it
+		 * matches may hold details a CRM user has since corrected. Callers handling those
+		 * name the fields here, and we fill them in when blank rather than replace them.
+		 */
+		if ( is_array( $do_not_overwrite_populated ) && count( $do_not_overwrite_populated ) > 0 && ! empty( $id ) && $id > 0 ) {
+
+			$existing_contact = $this->getContact( $id, array( 'withCustomFields' => false ) );
+
+			if ( is_array( $existing_contact ) ) {
+
+				foreach ( $do_not_overwrite_populated as $protected_field ) {
+
+					// Nothing to overwrite with.
+					if ( ! isset( $data[ $protected_field ] ) ) {
+						continue;
+					}
+
+					// Nothing on record yet, so let it be filled in.
+					if ( ! isset( $existing_contact[ $protected_field ] ) || '' === $existing_contact[ $protected_field ] ) {
+						continue;
+					}
+
+					// Hold the stored value rather than unsetting the key, so this behaves the
+					// same way whether or not the caller also passed `do_not_update_blanks`.
+					$data[ $protected_field ] = $existing_contact[ $protected_field ];
+				}
+			}
+		}
+
+		// ========= / SELF-REPORTED SOURCE ===========
 
 		#} ========= OVERRIDE SETTING (Deny blank overrides) ===========
 
