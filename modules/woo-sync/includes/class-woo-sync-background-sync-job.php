@@ -757,6 +757,62 @@ class Woo_Sync_Background_Sync_Job {
 	}
 
 	/**
+	 * Returns the contact fields an order is allowed to fill in but not replace.
+	 *
+	 * Billing details on a guest order are whatever was typed at the checkout. Because
+	 * contacts are matched on the billing email, an existing contact would otherwise take
+	 * on that name, address and telephone number, replacing details a CRM user may have
+	 * corrected by hand.
+	 *
+	 * Orders belonging to a logged-in WooCommerce customer are left alone: the account
+	 * tells us whose details these are, so they should still update freely. Blank fields
+	 * on the contact are filled in either way, which is where most of the value of
+	 * syncing billing details lies.
+	 *
+	 * @param array $crm_object_data Woo order data passed through `woocommerce_order_to_crm_objects`.
+	 *
+	 * @return array Field keys to protect, empty for orders from a logged-in customer.
+	 */
+	private function contact_fields_to_protect( $crm_object_data ) {
+
+		// `wpid` is only set for orders with a WooCommerce customer account behind them.
+		$is_guest_order = empty( $crm_object_data['contact']['wpid'] );
+
+		$fields = array();
+
+		if ( $is_guest_order ) {
+			$fields = array(
+				'fname',
+				'lname',
+				'addr1',
+				'addr2',
+				'city',
+				'county',
+				'postcode',
+				'country',
+				'hometel',
+				'secaddr1',
+				'secaddr2',
+				'seccity',
+				'seccounty',
+				'secpostcode',
+				'seccountry',
+			);
+		}
+
+		/**
+		 * Filters the contact fields a Woo order may fill in but not replace.
+		 *
+		 * Returning an empty array restores the previous behaviour, where an order
+		 * overwrote these fields on whichever contact held the billing email address.
+		 *
+		 * @param array $fields          Field keys to protect.
+		 * @param array $crm_object_data The order data being imported.
+		 */
+		return apply_filters( 'jpcrm_woosync_contact_fields_to_protect', $fields, $crm_object_data );
+	}
+
+	/**
 	 * Adds or updates crm objects related to a processed woocommerce order
 	 *  (requires that the $order_data has been passed through `woocommerce_order_to_crm_objects`)
 	 *  Previously `import_woocommerce_order_from_order_data`
@@ -778,9 +834,10 @@ class Woo_Sync_Background_Sync_Job {
 			// Add the contact
 			$contact_id = $zbs->DAL->contacts->addUpdateContact(
 				array(
-					'data'                 => $crm_object_data['contact'],
-					'extraMeta'            => $crm_object_data['contact_extra_meta'],
-					'do_not_update_blanks' => true,
+					'data'                       => $crm_object_data['contact'],
+					'extraMeta'                  => $crm_object_data['contact_extra_meta'],
+					'do_not_update_blanks'       => true,
+					'do_not_overwrite_populated' => $this->contact_fields_to_protect( $crm_object_data ),
 				)
 			);
 

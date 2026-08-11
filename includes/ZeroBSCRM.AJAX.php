@@ -1420,7 +1420,12 @@ function zbs_lead_form_capture() {
 						$fallBackLog,
 						false, // } Extra meta
 						// } Internal automator overrides - here we pass a "customer.create" note override (so we can pass it a custom str, else we let it fall back to "created by form")
-						$internalAutomatorOverride
+						$internalAutomatorOverride,
+						'update',
+						'zbsc_',
+						// } This endpoint takes submissions from anyone, against any email address,
+						// } so a submission must not reset the status of an existing contact.
+						array( 'status' )
 					);
 
 					// 2.97.7 - added this:
@@ -1478,7 +1483,12 @@ function zbs_lead_form_capture() {
 						$fallBackLog,
 						false, // } Extra meta
 						// } Internal automator overrides - here we pass a "customer.create" note override (so we can pass it a custom str, else we let it fall back to "created by form")
-						$internalAutomatorOverride
+						$internalAutomatorOverride,
+						'update',
+						'zbsc_',
+						// } This endpoint takes submissions from anyone, against any email address,
+						// } so a submission may fill these in on an existing contact but not replace them.
+						array( 'fname', 'status' )
 					);
 
 					break;
@@ -1521,7 +1531,12 @@ function zbs_lead_form_capture() {
 						$fallBackLog,
 						false, // } Extra meta
 						// } Internal automator overrides - here we pass a "customer.create" note override (so we can pass it a custom str, else we let it fall back to "created by form")
-						$internalAutomatorOverride
+						$internalAutomatorOverride,
+						'update',
+						'zbsc_',
+						// } This endpoint takes submissions from anyone, against any email address,
+						// } so a submission may fill these in on an existing contact but not replace them.
+						array( 'fname', 'lname', 'status' )
 					);
 
 					// 2.97.7 - added this:
