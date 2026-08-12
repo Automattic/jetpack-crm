@@ -5,6 +5,7 @@
 /dist/
 /.cache/
 /.phpunit.cache/
+/.claude/
 **/css/**/*.css
 **/js/*.min.js
 **/js/*.min.js.LICENSE.txt

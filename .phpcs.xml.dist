@@ -14,7 +14,11 @@
 		everything will bury you.
 	-->
 
-	<!-- Args to PHPCS: show (p)rogress, show (s)niff codes -->
+	<!--
+		Args to PHPCS: show (p)rogress, show (s)niff codes. Progress goes to stdout
+		ahead of the report, so anything asking for the JSON report needs -q with it
+		or the JSON will not parse. phpcs-changed passes -q itself.
+	-->
 	<arg value="ps"/>
 	<arg name="parallel" value="10"/>
 	<arg name="extensions" value="php"/>
@@ -25,30 +29,35 @@
 	<file>.</file>
 
 	<!--
-		Exclude patterns are matched, unanchored, against each file's absolute path.
-		`type="relative"` is supposed to match against the path from basepath
-		instead; it does nothing here, and a pattern written that way silently
-		excludes nothing, so do not reach for it.
+		Two kinds of exclude-pattern, and the difference matters.
 
-		The consequence is that a pattern cannot tell "this checkout's vendor/" from
-		"a checkout that happens to live under a vendor/". Fine for the directories
-		below, which we would never nest a checkout inside.
+		A plain pattern is matched, unanchored, against the file's absolute path. So
+		it cannot tell this checkout's `vendor/` from a checkout that happens to sit
+		under a `vendor/`. Fine for the five below, which we would never nest a
+		checkout inside, and it is the only form that works for a path handed to
+		phpcs on the command line, which is what phpcs-changed does.
+
+		`type="relative"` matches against the path relative to the scan root instead.
+		That only applies to a directory walk: for an explicit path the relative path
+		is empty and the pattern never fires. It is also discarded outright on a
+		rule-level exclude-pattern, where matching is always absolute.
+
+		`.claude/` needs the relative form and nothing else will do. It holds git
+		worktrees, which are whole second checkouts, so a walk from the repo root has
+		to skip them: without this the queue goes from 316 files to 1268 and phpcs
+		dies with "ran out of memory", while `phpcbf` quietly reformats another
+		branch's files. But an absolute pattern naming `.claude/` also matches every
+		file inside a worktree, because `.claude/` is in their paths too, and that is
+		how `make lint` came to report success there having examined nothing. The
+		relative form skips a nested `.claude/` without ever matching a worktree's
+		own source. Verified from both roots: 316 files either way.
 	-->
 	<exclude-pattern>*/vendor/*</exclude-pattern>
 	<exclude-pattern>*/jetpack_vendor/*</exclude-pattern>
 	<exclude-pattern>*/node_modules/*</exclude-pattern>
 	<exclude-pattern>*/build/*</exclude-pattern>
 	<exclude-pattern>*/dist/*</exclude-pattern>
-
-	<!--
-		There is deliberately no pattern for `.claude/`, which holds agent worktrees.
-		Those are whole second checkouts and a full-tree run should skip them, but a
-		worktree at `.claude/worktrees/x/` has `.claude/` in every path inside it, so
-		any pattern naming that directory excludes the worktree's own source too.
-		That is what happened: `make lint` in a worktree reported success having
-		linted nothing. A slow full-tree run is the better failure of the two, and
-		`git` never hands `.claude/` to phpcs-changed because it is untracked.
-	-->
+	<exclude-pattern type="relative">^\.claude/</exclude-pattern>
 
 	<rule ref="WordPress-Core">
 		<exclude name="WordPress.PHP.YodaConditions.NotYoda"/>
@@ -64,8 +73,9 @@
 	<rule ref="WordPress.Security"/>
 	<rule ref="WordPress.Security.EscapeOutput">
 		<properties>
+			<!-- Lowercase only. The sniff lowercases the function it is checking but not this list, so a camelCase entry never matches. -->
 			<property name="customAutoEscapedFunctions" type="array">
-				<element value="zbsLink"/>
+				<element value="zbslink"/>
 				<element value="jpcrm_esc_link"/>
 			</property>
 		</properties>
