@@ -19,29 +19,36 @@
 	<arg name="parallel" value="10"/>
 	<arg name="extensions" value="php"/>
 
-	<!--
-		Every exclude below is `type="relative"`, anchored, and paired with this
-		basepath. The default is to match the pattern against the file's absolute
-		path, which breaks as soon as the checkout itself sits under a directory
-		that a pattern names. A worktree in `.claude/worktrees/` has `.claude/` in
-		every path within it, so an unanchored `./.claude/*` excluded the entire
-		worktree and lint passed there while looking at no files at all.
-	-->
+	<!-- Report paths relative to the repo root rather than from /Users/... -->
 	<arg name="basepath" value="."/>
 
 	<file>.</file>
 
-	<!-- Dependencies and build output. -->
-	<exclude-pattern type="relative">^vendor/</exclude-pattern>
-	<exclude-pattern type="relative">^jetpack_vendor/</exclude-pattern>
-	<exclude-pattern type="relative">^node_modules/</exclude-pattern>
-	<exclude-pattern type="relative">^build/</exclude-pattern>
-	<exclude-pattern type="relative">^dist/</exclude-pattern>
+	<!--
+		Exclude patterns are matched, unanchored, against each file's absolute path.
+		`type="relative"` is supposed to match against the path from basepath
+		instead; it does nothing here, and a pattern written that way silently
+		excludes nothing, so do not reach for it.
 
-	<!-- Not source: agent worktrees are whole second checkouts of this repo. -->
-	<exclude-pattern type="relative">^\.claude/</exclude-pattern>
+		The consequence is that a pattern cannot tell "this checkout's vendor/" from
+		"a checkout that happens to live under a vendor/". Fine for the directories
+		below, which we would never nest a checkout inside.
+	-->
+	<exclude-pattern>*/vendor/*</exclude-pattern>
+	<exclude-pattern>*/jetpack_vendor/*</exclude-pattern>
+	<exclude-pattern>*/node_modules/*</exclude-pattern>
+	<exclude-pattern>*/build/*</exclude-pattern>
+	<exclude-pattern>*/dist/*</exclude-pattern>
 
-	<exclude-pattern type="relative">^tests/</exclude-pattern>
+	<!--
+		There is deliberately no pattern for `.claude/`, which holds agent worktrees.
+		Those are whole second checkouts and a full-tree run should skip them, but a
+		worktree at `.claude/worktrees/x/` has `.claude/` in every path inside it, so
+		any pattern naming that directory excludes the worktree's own source too.
+		That is what happened: `make lint` in a worktree reported success having
+		linted nothing. A slow full-tree run is the better failure of the two, and
+		`git` never hands `.claude/` to phpcs-changed because it is untracked.
+	-->
 
 	<rule ref="WordPress-Core">
 		<exclude name="WordPress.PHP.YodaConditions.NotYoda"/>
@@ -70,6 +77,42 @@
 				<element value="zero-bs-crm"/>
 			</property>
 		</properties>
+	</rule>
+
+	<!--
+		Test code is linted, but a handful of sniffs describe a plugin rather than a
+		test suite and would fail correct test code. Each one below is turned off for
+		`tests/` only, rather than dropping the whole tree the way this ruleset used
+		to. Everything else, docblocks included, applies there as it does anywhere.
+	-->
+
+	<!-- PHPUnit finds classes by file name: List_View_Permissions_Test.php, not class-*.php. -->
+	<rule ref="WordPress.Files.FileName">
+		<exclude-pattern>*/tests/*</exclude-pattern>
+	</rule>
+
+	<!-- The test cases we extend expose properties we do not name: WP_Ajax_UnitTestCase::$_last_response, $zbs->DAL. -->
+	<rule ref="WordPress.NamingConventions.ValidVariableName">
+		<exclude-pattern>*/tests/*</exclude-pattern>
+	</rule>
+
+	<!-- Nothing in a test renders to a browser, and an assertion message is not output. -->
+	<rule ref="WordPress.Security.EscapeOutput">
+		<exclude-pattern>*/tests/*</exclude-pattern>
+	</rule>
+
+	<!-- Codeception's own API is camelCase and underscore-prefixed: tryToTest(), _before(). -->
+	<rule ref="WordPress.NamingConventions.ValidFunctionName">
+		<exclude-pattern>*/tests/codeception/*</exclude-pattern>
+	</rule>
+
+	<!--
+		A test's docblock is still required, but `@testdox` is its description. The
+		sniff wants a short description above the tags, which alongside the tag and
+		the `#[TestDox]` attribute would be the same sentence written three times.
+	-->
+	<rule ref="Generic.Commenting.DocComment.MissingShort">
+		<exclude-pattern>*/tests/*</exclude-pattern>
 	</rule>
 
 	<!-- WPCS 3.0 dropped its own WordPress.CodeAnalysis.EmptyStatement wrapper. -->
