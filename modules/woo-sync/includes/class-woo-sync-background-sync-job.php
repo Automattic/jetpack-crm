@@ -960,8 +960,9 @@ class Woo_Sync_Background_Sync_Job {
 	 * on the contact are filled in either way, which is where most of the value of
 	 * syncing billing details lies.
 	 *
-	 * A contact this import created from an older order is not protected from a later
-	 * one in the same run, see `contact_predates_import()`.
+	 * A contact the history walk created from an older order is not protected from a
+	 * later one in the same run, see `contact_created_by_import_walk()`. That exemption
+	 * is the walk's alone; an order arriving on the site never gets it.
 	 *
 	 * @param array $crm_object_data     Woo order data passed through `woocommerce_order_to_crm_objects`.
 	 * @param int   $existing_contact_id Contact the order matches, -1 where there is none.

@@ -1982,6 +1982,11 @@ class Woo_Sync {
 		$this->set_sync_site_attribute( $site_key, 'first_import_complete', false );
 		$this->set_sync_site_attribute( $site_key, 'resume_from_page', 1 );
 
+		// The background sync only loads the job class once the 5.2 migration has run
+		// (`Woo_Sync_Background_Sync::verify_ready_mode()`), and the hub renders either
+		// way, so the class cannot be assumed here.
+		require_once JPCRM_WOO_SYNC_ROOT_PATH . 'includes/class-woo-sync-background-sync-job.php';
+
 		Woo_Sync_Background_Sync_Job::clear_first_import_marks( $site_key );
 	}
 
