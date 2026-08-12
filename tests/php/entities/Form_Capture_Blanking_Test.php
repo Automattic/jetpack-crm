@@ -174,6 +174,36 @@ class Form_Capture_Blanking_Test extends JPCRM_Base_Integration_TestCase {
 	}
 
 	/**
+	 * A full update writes every column, and the owner is one of them. Nothing
+	 * on this path ever supplies one, so it was written back as -1 on every
+	 * submission and the contact came away unassigned. A limited field update
+	 * does not touch the column.
+	 *
+	 * @testdox A form submission does not unassign the contact it matches.
+	 */
+	#[TestDox( 'A form submission does not unassign the contact it matches.' )]
+	public function test_submission_does_not_unassign_the_contact() {
+		global $zbs;
+
+		$owner_id = self::factory()->user->create( array( 'role' => 'administrator' ) );
+
+		$this->assertTrue( user_can( $owner_id, 'admin_zerobs_usr' ), 'The owner under test cannot own a contact.' );
+
+		$contact_id = $zbs->DAL->contacts->addUpdateContact(
+			array(
+				'owner' => $owner_id,
+				'data'  => $this->generate_contact_data( array( 'email' => self::CONTACT_EMAIL ) ),
+			)
+		);
+
+		$this->assertSame( $contact_id, $this->submit_lead_form( $this->cgrab_submission() ) );
+
+		$contact = $zbs->DAL->contacts->getContact( $contact_id );
+
+		$this->assertSame( $owner_id, (int) $contact['owner'], 'A form submission unassigned the contact.' );
+	}
+
+	/**
 	 * @testdox A form submission does not clear details the form never collected.
 	 */
 	#[TestDox( 'A form submission does not clear details the form never collected.' )]
