@@ -43,8 +43,14 @@ wp: $(WP_ENV_BIN) ## Run an arbitrary wp-cli command, e.g. `make wp CMD="plugin 
 	$(WP_ENV) run cli wp $(CMD)
 
 ## Test
-test: ## Run the PHPUnit unit suite
-	composer phpunit
+# The suite needs the WordPress test library, which only exists inside the
+# wp-env tests container (at /wordpress-phpunit). Running it on the host fails
+# with "Failed to automatically locate WordPress or wordpress-develop".
+# WORDPRESS_DEVELOP_DIR has to be set explicitly: the container's own WP_TESTS_DIR
+# is not the variable tests/php/bootstrap.php looks at.
+test: $(WP_ENV_BIN) ## Run the PHPUnit unit suite. Usage: make test [ARGS="--filter Foo"]
+	$(WP_ENV) run tests-cli --env-cwd=wp-content/plugins/$(notdir $(CURDIR)) \
+		bash -c 'WORDPRESS_DEVELOP_DIR=/wordpress-phpunit composer phpunit -- $(ARGS)'
 
 test-acceptance: ## Run the Codeception acceptance suite (needs a configured WP + browser)
 	composer tests
