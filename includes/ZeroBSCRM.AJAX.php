@@ -1185,6 +1185,41 @@ function zbs_lead_form_views() {
 	add_action( 'wp_ajax_nopriv_zbs_lead_form_views', 'zbs_lead_form_views' );
 	add_action( 'wp_ajax_zbs_lead_form_views', 'zbs_lead_form_views' );
 
+/**
+ * Whether a lead capture submission should leave blank fields alone.
+ *
+ * A lead capture form collects a name and an email address. It sends those to
+ * `addUpdateContact()` inside a full set of contact fields, everything else
+ * blank, so a submission matching an existing contact empties that contact's
+ * address, telephone numbers and social fields unless it is told not to.
+ *
+ * Nobody asked for that. The form has no input for any of those fields, so a
+ * blank arriving from it is an absence rather than an instruction, whoever
+ * submitted it. We always keep what is on record.
+ *
+ * This ignores the "Overwrite Option" setting, which otherwise decides this for
+ * every non-manual source. The setting still governs the API and the rest,
+ * where a caller sending a blank may well mean it. A public form is a different
+ * proposition: it takes submissions from anyone, against any email address.
+ *
+ * @param string $submitted_email The email address the form was submitted with.
+ *
+ * @return bool Whether blank fields should be left as they are.
+ */
+function jpcrm_form_capture_do_not_update_blanks( $submitted_email ) {
+
+	/**
+	 * Filters whether a lead capture submission leaves blank fields alone.
+	 *
+	 * Return false to let a submission clear the fields it did not send, which
+	 * is how this behaved on a site with "Overwrite Option" unticked.
+	 *
+	 * @param bool   $do_not_update_blanks Whether to leave blank fields as they are.
+	 * @param string $submitted_email      The email address the form was submitted with.
+	 */
+	return (bool) apply_filters( 'jpcrm_form_capture_do_not_update_blanks', true, $submitted_email );
+}
+
 	// } Handle form submissions interesting to see how this works cross domain...
 function zbs_lead_form_capture() {
 	/**
@@ -1425,7 +1460,8 @@ function zbs_lead_form_capture() {
 						'zbsc_',
 						// } This endpoint takes submissions from anyone, against any email address,
 						// } so a submission must not reset the status of an existing contact.
-						array( 'status' )
+						array( 'status' ),
+						jpcrm_form_capture_do_not_update_blanks( $zbs_email )
 					);
 
 					// 2.97.7 - added this:
@@ -1488,7 +1524,8 @@ function zbs_lead_form_capture() {
 						'zbsc_',
 						// } This endpoint takes submissions from anyone, against any email address,
 						// } so a submission may fill these in on an existing contact but not replace them.
-						array( 'fname', 'status' )
+						array( 'fname', 'status' ),
+						jpcrm_form_capture_do_not_update_blanks( $zbs_email )
 					);
 
 					break;
@@ -1536,7 +1573,8 @@ function zbs_lead_form_capture() {
 						'zbsc_',
 						// } This endpoint takes submissions from anyone, against any email address,
 						// } so a submission may fill these in on an existing contact but not replace them.
-						array( 'fname', 'lname', 'status' )
+						array( 'fname', 'lname', 'status' ),
+						jpcrm_form_capture_do_not_update_blanks( $zbs_email )
 					);
 
 					// 2.97.7 - added this:

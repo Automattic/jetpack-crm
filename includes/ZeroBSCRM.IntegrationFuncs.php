@@ -214,7 +214,7 @@ function zeroBS_integrations_getCustomer( $externalSource = '', $externalID = ''
 	|   False (boolean) (customer create/update failed)
 	|=======================================
 */
-function zeroBS_integrations_addOrUpdateCustomer( $externalSource = '', $externalID = '', $customerFields = array(), $customerDate = '', $fallbackLog = 'auto', $extraMeta = false, $automatorPassthroughArray = false, $emailAlreadyExistsAction = 'update', $fieldPrefix = 'zbsc_', $do_not_overwrite_populated = array() ) {
+function zeroBS_integrations_addOrUpdateCustomer( $externalSource = '', $externalID = '', $customerFields = array(), $customerDate = '', $fallbackLog = 'auto', $extraMeta = false, $automatorPassthroughArray = false, $emailAlreadyExistsAction = 'update', $fieldPrefix = 'zbsc_', $do_not_overwrite_populated = array(), $do_not_update_blanks = false ) {
 
 	#} leave this true and it'll run as normal.
 	$usualUpdate = true;
@@ -319,7 +319,7 @@ function zeroBS_integrations_addOrUpdateCustomer( $externalSource = '', $externa
 
 			#} Brutal add/update
 			#} MS - 3rd Jan 2019 - this (eventually) just calls the usual _addUpdateCustomer function
-			$customerID = zeroBS_addUpdateCustomer( $potentialCustomerID, $customerFields, $externalSource, $externalID, $customerDate, $fallbackLogToPass, $extraMeta, $automatorPassthrough, -1, $fieldPrefix, $do_not_overwrite_populated );
+			$customerID = zeroBS_addUpdateCustomer( $potentialCustomerID, $customerFields, $externalSource, $externalID, $customerDate, $fallbackLogToPass, $extraMeta, $automatorPassthrough, -1, $fieldPrefix, $do_not_overwrite_populated, $do_not_update_blanks );
 			return $customerID;
 
 		} #} / usual update
