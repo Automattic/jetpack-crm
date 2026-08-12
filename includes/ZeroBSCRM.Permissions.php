@@ -607,8 +607,9 @@ function zeroBSCRM_permsObjType( $obj_type_id = -1 ) { // phpcs:ignore WordPress
  *
  * Types we do not serve ourselves are handled by extensions, which hook
  * `zerobs_ajax_list_view_{$list_type}` in the list view handler. Those are
- * allowed through to any CRM back end user, and the extension applies its own
- * check. Anything with no listener is denied.
+ * allowed through to any CRM back end user, on the expectation that the
+ * extension applies its own check, either in the hook or through the
+ * `jpcrm_perms_view_list_type` filter below. Anything with no listener is denied.
  *
  * @param string $list_type List view type, as used by zeroBSCRM_list (e.g. 'customer', 'event').
  *
@@ -806,6 +807,14 @@ function zeroBSCRM_permsForms() {
 	return false;
 }
 
+/**
+ * Determine if the current user is allowed to edit tasks (events).
+ *
+ * This is the edit capability. For the task list views, use
+ * jpcrm_perms_view_tasks() below, which matches what the pages register.
+ *
+ * @return bool
+ */
 function zeroBSCRM_perms_tasks() {
 
 	$cu = wp_get_current_user();

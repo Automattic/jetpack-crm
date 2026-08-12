@@ -23,8 +23,8 @@ class List_View_Ajax_Permissions_Test extends WP_Ajax_UnitTestCase {
 	/**
 	 * Sign in as a user holding the given capabilities and prime the AJAX request.
 	 *
-	 * @param array  $caps      Capabilities to grant.
-	 * @param string $list_type List view type to request.
+	 * @param array $caps      Capabilities to grant.
+	 * @param mixed $list_type List view type to request, as it arrives on the request.
 	 *
 	 * @return void
 	 */
@@ -38,6 +38,10 @@ class List_View_Ajax_Permissions_Test extends WP_Ajax_UnitTestCase {
 		}
 
 		wp_set_current_user( $user_id );
+
+		// These helpers memoise their answer in a global for the rest of the request,
+		// which outlives a single test. Clear them so each test sees its own user.
+		unset( $GLOBALS['zeroBSCRM_isZBSUser'], $GLOBALS['zeroBSCRM_isZBSBackendUser'] );
 
 		$_POST = array(
 			'action' => 'retrieveListViewData',
@@ -177,6 +181,99 @@ class List_View_Ajax_Permissions_Test extends WP_Ajax_UnitTestCase {
 	public function test_unknown_list_type_is_refused() {
 
 		$this->prepare_request( array( 'admin_zerobs_view_events' ), 'not-a-list-type' );
+
+		$response = $this->fetch_list_view();
+
+		$this->assert_refused( $response );
+	}
+
+	/**
+	 * An arrayed list view type is refused rather than tripping over itself.
+	 *
+	 * sanitize_text_field() returns an empty string for an array, so the gate sees
+	 * a type it does not recognise. Pinning that, because it rests on a detail of
+	 * how WordPress sanitises and the alternative is a PHP error in the switch.
+	 *
+	 * @return void
+	 */
+	#[TestDox( 'An arrayed list view type is refused.' )]
+	public function test_arrayed_list_type_is_refused() {
+
+		$this->prepare_request( array( 'admin_zerobs_view_customers' ), array( 'customer' ) );
+
+		$response = $this->fetch_list_view();
+
+		$this->assert_refused( $response );
+	}
+
+	/**
+	 * A list type an extension is listening for reaches the extension.
+	 *
+	 * This is the case the permission gate nearly broke. The gate has to allow the
+	 * type through *and* the handler's default arm has to fire the action, so the
+	 * assertion is that the listener ran, not that the gate said yes.
+	 *
+	 * @return void
+	 */
+	#[TestDox( 'A list type an extension is listening for reaches the extension.' )]
+	public function test_extension_list_type_reaches_the_extension() {
+
+		$fired    = false;
+		$callback = static function () use ( &$fired ) {
+			$fired = true;
+		};
+
+		add_action( 'zerobs_ajax_list_view_mailcampaign', $callback );
+
+		try {
+			// admin_zerobs_usr is granted to every CRM back end role.
+			$this->prepare_request( array( 'admin_zerobs_usr', 'admin_zerobs_view_customers' ), 'mailcampaign' );
+
+			$response = $this->fetch_list_view();
+
+			$this->assertTrue( $fired, 'The extension list view action did not fire.' );
+			$this->assertArrayNotHasKey( 'no-action-or-rights', (array) $response );
+		} finally {
+			remove_action( 'zerobs_ajax_list_view_mailcampaign', $callback );
+		}
+	}
+
+	/**
+	 * An extension list type is refused to a user with no CRM access.
+	 *
+	 * @return void
+	 */
+	#[TestDox( 'An extension list type is refused to a user with no CRM access.' )]
+	public function test_extension_list_type_is_refused_to_non_crm_users() {
+
+		$fired    = false;
+		$callback = static function () use ( &$fired ) {
+			$fired = true;
+		};
+
+		add_action( 'zerobs_ajax_list_view_mailcampaign', $callback );
+
+		try {
+			$this->prepare_request( array(), 'mailcampaign' );
+
+			$response = $this->fetch_list_view();
+
+			$this->assert_refused( $response );
+			$this->assertFalse( $fired, 'The extension list view action fired for a user with no CRM access.' );
+		} finally {
+			remove_action( 'zerobs_ajax_list_view_mailcampaign', $callback );
+		}
+	}
+
+	/**
+	 * A list type nobody is listening for is refused, whoever asks.
+	 *
+	 * @return void
+	 */
+	#[TestDox( 'A list type nobody is listening for is refused.' )]
+	public function test_extension_list_type_with_no_listener_is_refused() {
+
+		$this->prepare_request( array( 'admin_zerobs_usr', 'admin_zerobs_view_customers' ), 'mailsequence' );
 
 		$response = $this->fetch_list_view();
 
