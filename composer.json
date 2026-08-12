@@ -14,16 +14,17 @@
 		"squizlabs/php_codesniffer": "^3.13",
 		"wp-coding-standards/wpcs": "^3.2",
 		"dealerdirect/phpcodesniffer-composer-installer": "^1.1",
-		"sirbrillig/phpcs-changed": "^2.11"
+		"sirbrillig/phpcs-changed": "^2.11",
+		"phpcompatibility/phpcompatibility-wp": "^2.1"
 	},
 	"scripts": {
 		"tests": "php -d auto_prepend_file=tests/suppress_php84_deprecations.php vendor/bin/codecept run acceptance --fail-fast",
 		"tests-debug": "php -d auto_prepend_file=tests/suppress_php84_deprecations.php vendor/bin/codecept run acceptance --fail-fast --debug",
 		"create-test": "php -d auto_prepend_file=tests/suppress_php84_deprecations.php vendor/bin/codecept generate:cest acceptance $1",
 		"build-tests": "php -d auto_prepend_file=tests/suppress_php84_deprecations.php vendor/bin/codecept build",
-		"cs": "files=$(git diff --diff-filter=d --name-only trunk HEAD -- '*.php'); if [ -z \"$files\" ]; then echo 'No PHP changes found.'; else php -d auto_prepend_file=tests/suppress_php84_deprecations.php vendor/bin/phpcs-changed -s --git --git-base trunk --phpcs-path scripts/phpcs.sh $files; fi",
-		"cs-staged": "files=$(git diff --diff-filter=d --name-only --cached -- '*.php'); if [ -z \"$files\" ]; then echo 'No PHP changes found.'; else php -d auto_prepend_file=tests/suppress_php84_deprecations.php vendor/bin/phpcs-changed -s --git --git-staged --phpcs-path scripts/phpcs.sh $files; fi",
-		"cs-unstaged": "files=$(git diff --diff-filter=d --name-only -- '*.php'); if [ -z \"$files\" ]; then echo 'No PHP changes found.'; else php -d auto_prepend_file=tests/suppress_php84_deprecations.php vendor/bin/phpcs-changed -s --git --git-unstaged --phpcs-path scripts/phpcs.sh $files; fi",
+		"cs": "if ! files=$(git diff --diff-filter=d --name-only trunk HEAD -- '*.php'); then echo 'Could not diff against trunk.' >&2; exit 1; fi; if [ -z \"$files\" ]; then echo 'No PHP changes found.'; else php -d auto_prepend_file=tests/suppress_php84_deprecations.php vendor/bin/phpcs-changed -s --git --git-base trunk --phpcs-path scripts/phpcs.sh $files; fi",
+		"cs-staged": "if ! files=$(git diff --diff-filter=d --name-only --cached -- '*.php'); then echo 'Could not read staged changes.' >&2; exit 1; fi; if [ -z \"$files\" ]; then echo 'No PHP changes found.'; else php -d auto_prepend_file=tests/suppress_php84_deprecations.php vendor/bin/phpcs-changed -s --git --git-staged --phpcs-path scripts/phpcs.sh $files; fi",
+		"cs-unstaged": "if ! files=$(git diff --diff-filter=d --name-only -- '*.php'); then echo 'Could not read unstaged changes.' >&2; exit 1; fi; if [ -z \"$files\" ]; then echo 'No PHP changes found.'; else php -d auto_prepend_file=tests/suppress_php84_deprecations.php vendor/bin/phpcs-changed -s --git --git-unstaged --phpcs-path scripts/phpcs.sh $files; fi",
 		"phpunit": [
 			"phpunit=\"php -d auto_prepend_file=tests/suppress_php84_deprecations.php vendor/bin/phpunit\"; config=\"phpunit.$($phpunit --version | sed -n 's/^PHPUnit \\([0-9][0-9]*\\).*/\\1/p').xml.dist\"; $phpunit -c \"$config\" --colors=always"
 		]

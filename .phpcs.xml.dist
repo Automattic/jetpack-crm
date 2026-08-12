@@ -19,25 +19,50 @@
 	<arg name="parallel" value="10"/>
 	<arg name="extensions" value="php"/>
 
+	<!--
+		Every exclude below is `type="relative"`, anchored, and paired with this
+		basepath. The default is to match the pattern against the file's absolute
+		path, which breaks as soon as the checkout itself sits under a directory
+		that a pattern names. A worktree in `.claude/worktrees/` has `.claude/` in
+		every path within it, so an unanchored `./.claude/*` excluded the entire
+		worktree and lint passed there while looking at no files at all.
+	-->
+	<arg name="basepath" value="."/>
+
 	<file>.</file>
 
 	<!-- Dependencies and build output. -->
-	<exclude-pattern>./vendor/*</exclude-pattern>
-	<exclude-pattern>./jetpack_vendor/*</exclude-pattern>
-	<exclude-pattern>./node_modules/*</exclude-pattern>
-	<exclude-pattern>./build/*</exclude-pattern>
-	<exclude-pattern>./dist/*</exclude-pattern>
+	<exclude-pattern type="relative">^vendor/</exclude-pattern>
+	<exclude-pattern type="relative">^jetpack_vendor/</exclude-pattern>
+	<exclude-pattern type="relative">^node_modules/</exclude-pattern>
+	<exclude-pattern type="relative">^build/</exclude-pattern>
+	<exclude-pattern type="relative">^dist/</exclude-pattern>
 
 	<!-- Not source: agent worktrees are whole second checkouts of this repo. -->
-	<exclude-pattern>./.claude/*</exclude-pattern>
+	<exclude-pattern type="relative">^\.claude/</exclude-pattern>
 
-	<exclude-pattern>./tests/*</exclude-pattern>
+	<exclude-pattern type="relative">^tests/</exclude-pattern>
 
 	<rule ref="WordPress-Core">
 		<exclude name="WordPress.PHP.YodaConditions.NotYoda"/>
 	</rule>
 
 	<rule ref="WordPress-Docs"/>
+
+	<!--
+		Restored from phpcs.security.xml.dist, the second ruleset 469d4320 dropped.
+		These sniffs live in WordPress-Extra rather than WordPress-Core, so nothing
+		above brings them in and unescaped output on a new line passed lint.
+	-->
+	<rule ref="WordPress.Security"/>
+	<rule ref="WordPress.Security.EscapeOutput">
+		<properties>
+			<property name="customAutoEscapedFunctions" type="array">
+				<element value="zbsLink"/>
+				<element value="jpcrm_esc_link"/>
+			</property>
+		</properties>
+	</rule>
 
 	<rule ref="WordPress.WP.I18n">
 		<properties>
@@ -51,5 +76,21 @@
 	<rule ref="Generic.CodeAnalysis.EmptyStatement"/>
 
 	<rule ref="PEAR.Functions.ValidDefaultValue.NotAtEnd"/>
+
+	<!--
+		Restored from .phpcs.dir.phpcompatibility.xml, the third ruleset 469d4320
+		dropped. The floor is the one the plugin advertises: `Requires PHP: 7.4` in
+		ZeroBSCRM.php and readme.txt, and `"php": ">=7.4"` in composer.json.
+
+		Know what this does not cover. php-compatibility's only released version is
+		9.3.5, from 2019, so its database stops at PHP 7.4. It catches the legacy
+		deprecations there are plenty of in here (`each()`, `create_function()`), and
+		it is blind to everything PHP 8.0 added. Write `str_contains()`, `match`, an
+		enum or `?->` and this will not say a word, though every one of them is a
+		fatal on the 7.4 we advertise. PHP 8 detection landed on the unreleased 10.x
+		branch. Until that ships, testing on 7.4 is the only thing that catches those.
+	-->
+	<config name="testVersion" value="7.4-"/>
+	<rule ref="PHPCompatibilityWP"/>
 
 </ruleset>
