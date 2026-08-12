@@ -12,12 +12,15 @@
 namespace Automattic\Jetpack\CRM\Entities\Tests;
 
 use Automattic\Jetpack\CRM\Tests\JPCRM_Base_Integration_TestCase;
+use Automattic\Jetpack\CRM\Tests\JPCRM_Lead_Capture_Form;
 use PHPUnit\Framework\Attributes\TestDox;
 
 /**
  * Test that a form submission does not empty fields it never collected.
  */
 class Form_Capture_Blanking_Test extends JPCRM_Base_Integration_TestCase {
+
+	use JPCRM_Lead_Capture_Form;
 
 	/**
 	 * The email address both sides of each test share.
@@ -61,29 +64,6 @@ class Form_Capture_Blanking_Test extends JPCRM_Base_Integration_TestCase {
 	}
 
 	/**
-	 * Submit through the same helper, with the same arguments, the lead capture
-	 * endpoint uses for a 'zbs_cgrab' form.
-	 *
-	 * @param array $fields Contact fields, `zbsc_` prefixed as the endpoint passes them.
-	 * @return int|false The contact ID.
-	 */
-	private function submit_lead_form( array $fields ) {
-		return zeroBS_integrations_addOrUpdateCustomer(
-			'form',
-			$fields['zbsc_email'],
-			$fields,
-			'',
-			'none',
-			false,
-			false,
-			'update',
-			'zbsc_',
-			array( 'fname', 'lname', 'status' ),
-			jpcrm_form_capture_do_not_update_blanks( $fields['zbsc_email'] )
-		);
-	}
-
-	/**
 	 * A submission carrying only what a 'zbs_cgrab' form collects.
 	 *
 	 * @return array
@@ -95,6 +75,102 @@ class Form_Capture_Blanking_Test extends JPCRM_Base_Integration_TestCase {
 			'zbsc_fname'  => 'Alex',
 			'zbsc_lname'  => 'Murphy',
 		);
+	}
+
+	/**
+	 * Post a submission to the endpoint in the given form style.
+	 *
+	 * Every style gets the whole payload. Each one reads the fields it collects
+	 * and ignores the rest, which is what a form of that style would send.
+	 *
+	 * @param string $style One of 'zbs_simple', 'zbs_naked', 'zbs_cgrab'.
+	 * @return array The decoded JSON response.
+	 */
+	private function submit_through_endpoint( string $style ): array {
+		return $this->submit_lead_capture_form(
+			array(
+				'zbs_form_id'    => (string) $this->create_lead_capture_form( $style ),
+				'zbs_form_style' => $style,
+				'zbs_email'      => self::CONTACT_EMAIL,
+				'zbs_fname'      => 'Alex',
+				'zbs_lname'      => 'Murphy',
+				'zbs_notes'      => 'Please get in touch.',
+			)
+		);
+	}
+
+	/**
+	 * Assert a submission through the endpoint left the contact's details alone.
+	 *
+	 * @param string $style One of 'zbs_simple', 'zbs_naked', 'zbs_cgrab'.
+	 * @return void
+	 */
+	private function assert_endpoint_keeps_unsent_fields( string $style ) {
+		global $zbs;
+
+		$contact_id = $this->create_contact_with_details();
+
+		$response = $this->submit_through_endpoint( $style );
+
+		$this->assertSame( 'success', $response['code'], 'The endpoint rejected the submission: ' . wp_json_encode( $response ) );
+
+		$contact = $zbs->DAL->contacts->getContact( $contact_id );
+
+		$this->assertSame( '19 Prospect Hill', $contact['addr1'], 'A submission emptied the address.' );
+		$this->assertSame( 'Cork', $contact['city'], 'A submission emptied the city.' );
+		$this->assertSame( 'T12 XY45', $contact['postcode'], 'A submission emptied the postcode.' );
+		$this->assertSame( '+353 87 000 0000', $contact['mobtel'], 'A submission emptied the mobile number.' );
+		$this->assertSame( '+353 21 427 0000', $contact['hometel'], 'A submission emptied the telephone number.' );
+	}
+
+	/**
+	 * Each form style passes its own arguments to the contacts DAL, so each one
+	 * has to be submitted for itself. These are the tests that would catch a
+	 * style added or edited without the option.
+	 *
+	 * @testdox A submission to the endpoint keeps unsent fields on a simple form.
+	 */
+	#[TestDox( 'A submission to the endpoint keeps unsent fields on a simple form.' )]
+	public function test_endpoint_keeps_unsent_fields_on_a_simple_form() {
+		$this->assert_endpoint_keeps_unsent_fields( 'zbs_simple' );
+	}
+
+	/**
+	 * @testdox A submission to the endpoint keeps unsent fields on a naked form.
+	 */
+	#[TestDox( 'A submission to the endpoint keeps unsent fields on a naked form.' )]
+	public function test_endpoint_keeps_unsent_fields_on_a_naked_form() {
+		$this->assert_endpoint_keeps_unsent_fields( 'zbs_naked' );
+	}
+
+	/**
+	 * @testdox A submission to the endpoint keeps unsent fields on a content grab form.
+	 */
+	#[TestDox( 'A submission to the endpoint keeps unsent fields on a content grab form.' )]
+	public function test_endpoint_keeps_unsent_fields_on_a_content_grab_form() {
+		$this->assert_endpoint_keeps_unsent_fields( 'zbs_cgrab' );
+	}
+
+	/**
+	 * Where a contact came from is recorded outside the fields, and a limited
+	 * field update used to skip it. Leaving blanks alone must not cost us the
+	 * record of the form that was filled in.
+	 *
+	 * @testdox A form submission still records the form as a source of the contact.
+	 */
+	#[TestDox( 'A form submission still records the form as a source of the contact.' )]
+	public function test_submission_records_the_form_as_a_source() {
+		global $zbs;
+
+		$contact_id = $this->create_contact_with_details();
+
+		$this->assertSame( $contact_id, $this->submit_lead_form( $this->cgrab_submission() ) );
+
+		$contact = $zbs->DAL->contacts->getContact( $contact_id, array( 'withExternalSources' => true ) );
+
+		$sources = wp_list_pluck( $contact['external_sources'], 'source' );
+
+		$this->assertContains( 'form', $sources, 'A form submission stopped recording where the contact came from.' );
 	}
 
 	/**

@@ -3055,6 +3055,23 @@ class zbsDAL_contacts extends zbsDAL_ObjectLayer {
 				)
 			) !== false ) {
 
+				// externalSources, outside the limitedFields check below.
+				//
+				// Where a contact came from is worth recording whether or not the caller
+				// sent a full set of fields, and a caller that sends none is the norm now
+				// that `do_not_update_blanks` converts a form submission to limitedFields.
+				// Skipping this here lost the 'form' source on every existing contact that
+				// filled a form in.
+				//
+				// Passing no sources is a no-op: this adds and updates, never removes.
+				$this->DAL()->addUpdateExternalSources(
+					array(
+						'obj_id'           => $id,
+						'obj_type_id'      => ZBS_TYPE_CONTACT,
+						'external_sources' => isset( $data['externalSources'] ) ? $data['externalSources'] : array(),
+					)
+				);
+
 				// if passing limitedFields instead of data, we ignore the following
 				// this doesn't work, because data is in args default as arr
 				// if (isset($data) && is_array($data)){
@@ -3073,15 +3090,6 @@ class zbsDAL_contacts extends zbsDAL_ObjectLayer {
 						);
 
 					}
-
-					// externalSources
-					$approvedExternalSource = $this->DAL()->addUpdateExternalSources(
-						array(
-							'obj_id'           => $id,
-							'obj_type_id'      => ZBS_TYPE_CONTACT,
-							'external_sources' => isset( $data['externalSources'] ) ? $data['externalSources'] : array(),
-						)
-					); // for IA below
 
 					// co's work?
 					// OBJ LINKS - to companies (1liner now as genericified)

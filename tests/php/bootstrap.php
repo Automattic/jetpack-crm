@@ -124,6 +124,7 @@ require $test_root . '/includes/bootstrap.php';
  */
 require_once JETPACK_CRM_TESTS_ROOT . '/class-jpcrm-base-testcase.php';
 require_once JETPACK_CRM_TESTS_ROOT . '/class-jpcrm-base-integration-testcase.php';
+require_once JETPACK_CRM_TESTS_ROOT . '/trait-jpcrm-lead-capture-form.php';
 
 /**
  * Load all feature flags, so they will be testable.
