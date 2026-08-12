@@ -2975,6 +2975,23 @@ class zbsDAL_contacts extends zbsDAL_ObjectLayer {
 				// is update
 				$update = true;
 
+				// Only write the owner when the caller named one.
+				//
+				// -1 is the default, and it means "not specified" rather than
+				// "unassign": nothing sets an owner through this path. Both
+				// setContactOwner() and the ownership box on the contact edit
+				// screen refuse anything below 1. But this path writes every
+				// column, so a caller updating a contact without naming an owner,
+				// which is most of them, cleared whoever the contact was assigned
+				// to. A lead capture submission and a client portal profile save
+				// both did it.
+				//
+				// An insert still writes it. A new contact needs the column set,
+				// and -1 is what an unowned contact holds.
+				if ( (int) $owner <= 0 ) {
+					unset( $dataArr['zbs_owner'] );
+					array_shift( $typeArr ); // the owner is the first type built above.
+				}
 			} else {
 
 				// INSERT (get's few extra :D)

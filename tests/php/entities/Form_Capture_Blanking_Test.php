@@ -174,15 +174,11 @@ class Form_Capture_Blanking_Test extends JPCRM_Base_Integration_TestCase {
 	}
 
 	/**
-	 * A full update writes every column, and the owner is one of them. Nothing
-	 * on this path ever supplies one, so it was written back as -1 on every
-	 * submission and the contact came away unassigned. A limited field update
-	 * does not touch the column.
+	 * Create a contact assigned to somebody who is allowed to own one.
 	 *
-	 * @testdox A form submission does not unassign the contact it matches.
+	 * @return int[] The owner's user ID and the new contact ID.
 	 */
-	#[TestDox( 'A form submission does not unassign the contact it matches.' )]
-	public function test_submission_does_not_unassign_the_contact() {
+	private function create_owned_contact(): array {
 		global $zbs;
 
 		$owner_id = self::factory()->user->create( array( 'role' => 'administrator' ) );
@@ -196,10 +192,53 @@ class Form_Capture_Blanking_Test extends JPCRM_Base_Integration_TestCase {
 			)
 		);
 
+		return array( $owner_id, $contact_id );
+	}
+
+	/**
+	 * Nothing on this path supplies an owner, and the full update path used to
+	 * write the -1 that stands for "not specified" into the column. So every
+	 * submission unassigned the contact it matched.
+	 *
+	 * @testdox A form submission does not unassign the contact it matches.
+	 */
+	#[TestDox( 'A form submission does not unassign the contact it matches.' )]
+	public function test_submission_does_not_unassign_the_contact() {
+		global $zbs;
+
+		list( $owner_id, $contact_id ) = $this->create_owned_contact();
+
 		$this->assertSame( $contact_id, $this->submit_lead_form( $this->cgrab_submission() ) );
 
 		$contact = $zbs->DAL->contacts->getContact( $contact_id );
 
+		$this->assertSame( $owner_id, (int) $contact['owner'], 'A form submission unassigned the contact.' );
+	}
+
+	/**
+	 * The filter is for a site that wants form blanks clearing fields again. It
+	 * is not for a site that wants its contacts unassigned, so the owner has to
+	 * survive the full update path the filter puts the submission back on.
+	 *
+	 * @testdox A form submission does not unassign the contact with the filter off.
+	 */
+	#[TestDox( 'A form submission does not unassign the contact with the filter off.' )]
+	public function test_submission_does_not_unassign_the_contact_with_the_filter_off() {
+		global $zbs;
+
+		list( $owner_id, $contact_id ) = $this->create_owned_contact();
+
+		add_filter( 'jpcrm_form_capture_do_not_update_blanks', '__return_false' );
+
+		try {
+			$this->assertSame( $contact_id, $this->submit_lead_form( $this->cgrab_submission() ) );
+		} finally {
+			remove_filter( 'jpcrm_form_capture_do_not_update_blanks', '__return_false' );
+		}
+
+		$contact = $zbs->DAL->contacts->getContact( $contact_id );
+
+		$this->assertSame( '', $contact['addr1'], 'The filter should still restore the blanking.' );
 		$this->assertSame( $owner_id, (int) $contact['owner'], 'A form submission unassigned the contact.' );
 	}
 

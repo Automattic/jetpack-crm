@@ -1214,6 +1214,9 @@ function jpcrm_form_capture_do_not_update_blanks( $submitted_email ) {
 	 * Return false to let a submission clear the fields it did not send, which
 	 * is how this behaved on a site with "Overwrite Option" unticked.
 	 *
+	 * It restores the blanking and nothing else. A submission still leaves the
+	 * contact assigned to whoever owns it.
+	 *
 	 * @param bool   $do_not_update_blanks Whether to leave blank fields as they are.
 	 * @param string $submitted_email      The email address the form was submitted with.
 	 */
