@@ -850,7 +850,7 @@ function zeroBSCRM_do_meta_box_html( $box, $page, $hidden, $object, $minimised, 
 		} */
 
 			// txt
-			echo '<div class="header item">' . esc_html( $box['title'] ) . '</div>' . $hideMinimiseMenu . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- This is hard-coded HTML with no vars.
+			echo '<div class="header item">' . wp_kses( $box['title'], array( 'i' => array( 'class' => true ) ) ) . '</div>' . $hideMinimiseMenu . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Title allows only the expected Semantic UI icon markup.
 
 			// right hand menu, if one
 			/*
