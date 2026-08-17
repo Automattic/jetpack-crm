@@ -11,6 +11,50 @@
 
 defined( 'ZEROBSCRM_PATH' ) || exit( 0 );
 
+/**
+ * Builds one show/hide column of the screen options metabox list.
+ *
+ * @param array  $metaboxes Metaboxes for one context, keyed by metabox ID.
+ * @param array  $hidden    IDs of the metaboxes the user has hidden.
+ * @param string $heading   Column heading, already translated.
+ * @return string
+ */
+function jpcrm_screen_options_metabox_list_html( $metaboxes, $hidden, $heading ) {
+
+	// One full-width column each. This was a ten/six wide split once.
+	$html = '<div class="sixteen wide column"><h4 class="ui header">' . esc_html( $heading ) . '</h4>';
+
+	foreach ( $metaboxes as $metabox_id => $metabox ) {
+
+		// Fall back to the ID, which is at least something to click.
+		$title = $metabox_id;
+		if ( is_array( $metabox ) && isset( $metabox['title'] ) ) {
+			$title = $metabox['title'];
+		}
+
+		$can_hide = true;
+		if ( isset( $metabox['capabilities']['can_hide'] ) && ! $metabox['capabilities']['can_hide'] ) {
+			$can_hide = false;
+		}
+
+		$label = jpcrm_metabox_icon_html( $metabox ) . esc_html( $title );
+
+		$html .= '<div class="ui checkbox zbs-metabox-checkbox"><input type="checkbox" id="zbs-mb-' . esc_attr( $metabox_id ) . '"';
+
+		if ( ! $can_hide ) {
+			$html .= ' checked="checked" disabled="disabled"';
+			// Cast, because PHP has already turned a numeric ID into an int on the
+			// way into the array key, and the stored screen option holds strings.
+		} elseif ( ! in_array( (string) $metabox_id, $hidden, true ) ) {
+			$html .= ' checked="checked"';
+		}
+
+		$html .= ' /><label for="zbs-mb-' . esc_attr( $metabox_id ) . '">' . $label . '</label></div>';
+	}
+
+	return $html . '</div>';
+}
+
 // outputs top of page screen options panel :)
 // (based on rights + pagekey)
 function zeroBSCRM_screenOptionsPanel() {
@@ -77,69 +121,13 @@ function zeroBSCRM_screenOptionsPanel() {
 				// show lists - normal
 			if ( isset( $options['metaboxes']['normal'] ) && is_array( $options['metaboxes']['normal'] ) && count( $options['metaboxes']['normal'] ) > 0 ) {
 
-				// for now, just doing lines $screenOptionsHTML .= '<div class="ten wide column">';
-				$screenOptionsHTML .= '<div class="sixteen wide column"><h4 class="ui header">' . __( 'Main Column', 'zero-bs-crm' ) . '</h4>';
-				foreach ( $options['metaboxes']['normal'] as $mbID => $mb ) {
-
-					$mbTitle = $mbID;
-					if ( is_array( $mb ) && isset( $mb['title'] ) ) {
-						$mbTitle = $mb['title'];
-					}
-
-					// if can hide
-					$canHide = true;
-					if ( isset( $mb['capabilities'] ) && isset( $mb['capabilities']['can_hide'] ) && $mb['capabilities']['can_hide'] == false ) {
-						$canHide = false;
-					}
-
-					if ( $canHide ) {
-
-						$screenOptionsHTML .= '<div class="ui checkbox zbs-metabox-checkbox"><input type="checkbox" id="zbs-mb-' . $mbID . '"';
-						if ( ! in_array( $mbID, $hidden ) ) {
-							$screenOptionsHTML .= ' checked="checked"';
-						}
-						$screenOptionsHTML .= ' /><label for="zbs-mb-' . $mbID . '">' . $mbTitle . '</label></div>';
-
-					} else {
-
-						$screenOptionsHTML .= '<div class="ui checkbox zbs-metabox-checkbox"><input type="checkbox" id="zbs-mb-' . $mbID . '" checked="checked" disabled="disabled"><label for="zbs-mb-' . $mbID . '">' . $mbTitle . '</label></div>';
-
-					}
-				}
-				$screenOptionsHTML .= '</div>';
+				$screenOptionsHTML .= jpcrm_screen_options_metabox_list_html( $options['metaboxes']['normal'], $hidden, __( 'Main Column', 'zero-bs-crm' ) ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase -- $screenOptionsHTML is a legacy variable name.
 
 			}
 				// show list - side
 			if ( isset( $options['metaboxes']['side'] ) && is_array( $options['metaboxes']['side'] ) && count( $options['metaboxes']['side'] ) > 0 ) {
 
-				// for now, just doing lines $screenOptionsHTML .= '<div class="six wide column">';
-				$screenOptionsHTML .= '<div class="sixteen wide column"><h4 class="ui header">' . __( 'Side', 'zero-bs-crm' ) . '</h4>';
-				foreach ( $options['metaboxes']['side'] as $mbID => $mb ) {
-
-					$mbTitle = $mbID;
-					if ( is_array( $mb ) && isset( $mb['title'] ) ) {
-						$mbTitle = $mb['title'];
-					}
-
-					// if can hide
-					$canHide = true;
-					if ( isset( $mb['capabilities'] ) && isset( $mb['capabilities']['can_hide'] ) && $mb['capabilities']['can_hide'] == false ) {
-						$canHide = false;
-					}
-
-					if ( $canHide ) {
-						$screenOptionsHTML .= '<div class="ui checkbox zbs-metabox-checkbox"><input type="checkbox" id="zbs-mb-' . $mbID . '"';
-						if ( ! in_array( $mbID, $hidden ) ) {
-							$screenOptionsHTML .= ' checked="checked"';
-						}
-						$screenOptionsHTML .= ' /><label for="zbs-mb-' . $mbID . '">' . $mbTitle . '</label></div>';
-					} else {
-
-						$screenOptionsHTML .= '<div class="ui checkbox zbs-metabox-checkbox"><input type="checkbox" id="zbs-mb-' . $mbID . '" checked="checked" disabled="disabled"><label for="zbs-mb-' . $mbID . '">' . $mbTitle . '</label></div>';
-
-					}
-				}
-				$screenOptionsHTML .= '</div>';
+				$screenOptionsHTML .= jpcrm_screen_options_metabox_list_html( $options['metaboxes']['side'], $hidden, __( 'Side', 'zero-bs-crm' ) ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase -- $screenOptionsHTML is a legacy variable name.
 
 			}
 
