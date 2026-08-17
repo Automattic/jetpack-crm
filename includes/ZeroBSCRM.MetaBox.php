@@ -68,11 +68,6 @@ class zeroBS__Metabox {
 
 		if ( $this->live ) {
 
-			// lazy hackaround for now, can be more classy later.
-			if ( ! empty( $this->metaboxIcon ) ) {
-				$this->metaboxTitle = '<i class="' . $this->metaboxIcon . ' icon" aria-hidden="true"></i> ' . $this->metaboxTitle;
-			}
-
 			// self::$instance = $this;
 
 			// Create on init, for zbs metaboxes, rather than: add_action( 'add_meta_boxes', array( $this, 'create_meta_box' ) );
@@ -114,7 +109,8 @@ class zeroBS__Metabox {
 						array(),
 						$this->headless,
 						$this->metaboxClasses,
-						$this->capabilities
+						$this->capabilities,
+						$this->metaboxIcon // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 					);
 
 				}
@@ -132,7 +128,8 @@ class zeroBS__Metabox {
 				array(),
 				$this->headless,
 				$this->metaboxClasses,
-				$this->capabilities
+				$this->capabilities,
+				$this->metaboxIcon // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 			);
 
 		}
@@ -293,9 +290,26 @@ class zeroBS__Metabox {
 	Global metabox helper funcs
 	====================================================== */
 
-// ZBS splintered version of add_meta_box (wholly our own from now on, do not assume can be swapped out directly, may need integration)
-// https://developer.wordpress.org/reference/functions/add_meta_box/
-function zeroBSCRM_add_meta_box( $id, $title, $callback, $screen = null, $context = 'advanced', $priority = 'default', $callback_args = null, $headless = false, $extraClasses = '', $capabilities = false ) {
+/**
+ * ZBS splintered version of add_meta_box.
+ *
+ * Wholly our own from now on, do not assume it can be swapped out directly, it may need integration.
+ * https://developer.wordpress.org/reference/functions/add_meta_box/
+ *
+ * @param string       $id            Metabox ID, unique per screen.
+ * @param string       $title         Title, as plain text. Escaped at render.
+ * @param callable     $callback      Prints the box body.
+ * @param string|array $screen        Screen ID, or an array of them to register the box against several.
+ * @param string       $context       Area of the screen: normal or side.
+ * @param string       $priority      high, core, default, low, or sorted.
+ * @param array        $callback_args Passed through to the callback.
+ * @param bool         $headless      Hides the header.
+ * @param string       $extraClasses  Extra classes for the wrappers.
+ * @param array|false  $capabilities  What the user may do with the box. False for the defaults.
+ * @param string       $icon          Semantic UI icon name, e.g. 'heartbeat'. Empty for no icon.
+ * @return void
+ */
+function zeroBSCRM_add_meta_box( $id, $title, $callback, $screen = null, $context = 'advanced', $priority = 'default', $callback_args = null, $headless = false, $extraClasses = '', $capabilities = false, $icon = '' ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid, WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase -- Legacy names, renaming them would break third-party callers.
 
 	// $id, $title, $callback,$headless
 	// echo 'zeroBSCRM_add_meta_box '.$id.':<pre>'; print_r(array('head'=>$headless)); echo '</pre>';
@@ -312,7 +326,7 @@ function zeroBSCRM_add_meta_box( $id, $title, $callback, $screen = null, $contex
 		$screen = convert_to_screen( $screen );
 	} elseif ( is_array( $screen ) ) {
 		foreach ( $screen as $single_screen ) {
-			zeroBSCRM_add_meta_box( $id, $title, $callback, $single_screen, $context, $priority, $callback_args, $headless, $extraClasses, $capabilities );
+			zeroBSCRM_add_meta_box( $id, $title, $callback, $single_screen, $context, $priority, $callback_args, $headless, $extraClasses, $capabilities, $icon ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase -- $extraClasses is a legacy parameter name.
 		}
 	}
 
@@ -369,6 +383,8 @@ function zeroBSCRM_add_meta_box( $id, $title, $callback, $screen = null, $contex
 				$headless      = $zbs->metaboxes[ $page ][ $a_context ][ $a_priority ][ $id ]['headless'];
 				$extraClasses  = $zbs->metaboxes[ $page ][ $a_context ][ $a_priority ][ $id ]['extraclasses'];
 				$capabilities  = $zbs->metaboxes[ $page ][ $a_context ][ $a_priority ][ $id ]['capabilities'];
+				// Unlike the six above, nothing registered before this change has an icon key.
+				$icon = $zbs->metaboxes[ $page ][ $a_context ][ $a_priority ][ $id ]['icon'] ?? '';
 			}
 			// An id can be in only one priority and one context.
 			if ( $priority != $a_priority || $context != $a_context ) {
@@ -402,6 +418,7 @@ function zeroBSCRM_add_meta_box( $id, $title, $callback, $screen = null, $contex
 	$zbs->metaboxes[ $page ][ $context ][ $priority ][ $id ] = array(
 		'id'           => $id,
 		'title'        => $title,
+		'icon'         => $icon,
 		'callback'     => $callback,
 		'args'         => $callback_args,
 		'headless'     => $headless,
@@ -689,6 +706,24 @@ function zeroBSCRM_applyScreenOptions( $screenOpts = false, $page = '', $context
 	}
 }
 
+/**
+ * Builds the leading icon for a metabox title, if the box has one.
+ *
+ * Decorative: the title beside it already says what the box is, so it is hidden
+ * from screen readers. Includes its own trailing space, so callers can
+ * concatenate it in front of an escaped title unconditionally.
+ *
+ * @param array $box A metabox as stored in $zbs->metaboxes.
+ * @return string Icon HTML, or an empty string if the box has no icon.
+ */
+function jpcrm_metabox_icon_html( $box ) {
+	if ( empty( $box['icon'] ) ) {
+		return '';
+	}
+
+	return '<i class="' . esc_attr( $box['icon'] ) . ' icon" aria-hidden="true"></i> ';
+}
+
 // https://semantic-ui.com/modules/tab.html#/examples
 function zeroBSCRM_do_meta_box_htmlTabHead( $tabsID = '', $tabs = false ) {
 
@@ -707,7 +742,7 @@ function zeroBSCRM_do_meta_box_htmlTabHead( $tabsID = '', $tabs = false ) {
 			if ( $indx == 0 ) {
 				echo ' active';
 			}
-			echo '" data-tab="' . esc_attr( $subbox['id'] ) . '">' . esc_html( $subbox['title'] ) . '</a>';
+			echo '" data-tab="' . esc_attr( $subbox['id'] ) . '">' . jpcrm_metabox_icon_html( $subbox ) . esc_html( $subbox['title'] ) . '</a>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- jpcrm_metabox_icon_html() escapes what it interpolates.
 			++$indx;
 
 		}
@@ -715,22 +750,6 @@ function zeroBSCRM_do_meta_box_htmlTabHead( $tabsID = '', $tabs = false ) {
 		echo '</div>';
 
 	}
-}
-
-/**
- * Markup permitted in a metabox title.
- *
- * Titles carry the Semantic UI icon markup that initMetabox() prepends, and nothing else.
- *
- * @return array Allowed HTML, in wp_kses() format.
- */
-function jpcrm_metabox_title_allowed_html() {
-	return array(
-		'i' => array(
-			'class'       => true,
-			'aria-hidden' => true,
-		),
-	);
 }
 
 function zeroBSCRM_do_meta_box_html( $box, $page, $hidden, $object, $minimised, $isTabPane = false, $isActiveTab = false ) {
@@ -866,7 +885,7 @@ function zeroBSCRM_do_meta_box_html( $box, $page, $hidden, $object, $minimised, 
 		} */
 
 			// txt
-			echo '<div class="header item">' . wp_kses( $box['title'], jpcrm_metabox_title_allowed_html() ) . '</div>' . $hideMinimiseMenu . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $hideMinimiseMenu is hard-coded markup; the title is escaped by wp_kses() above.
+			echo '<div class="header item">' . jpcrm_metabox_icon_html( $box ) . esc_html( $box['title'] ) . '</div>' . $hideMinimiseMenu . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped, WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase -- $hideMinimiseMenu is hard-coded markup, and jpcrm_metabox_icon_html() escapes what it interpolates.
 
 			// right hand menu, if one
 			/*
@@ -894,7 +913,7 @@ function zeroBSCRM_do_meta_box_html( $box, $page, $hidden, $object, $minimised, 
 			echo '<div id="' . esc_attr( $box['id'] ) . '-box" class="zbs-metabox-body ' . esc_attr( $htmlClasses ) . ' ' . esc_attr( $extraClasses ) . '">' . "\n"; // $hidden_class.
 				call_user_func( $box['callback'], $object, $box );
 			echo '</div>'; // /.zbs-metabox-body
-			echo '<div id="' . esc_attr( $box['id'] ) . '-block" class="zbs-metabox-block"><div>' . wp_kses( $box['title'], jpcrm_metabox_title_allowed_html() ) . '</div></div>'; // this is BLOCKER for drag-drop support -//<i class="arrows alternate icon"></i>
+			echo '<div id="' . esc_attr( $box['id'] ) . '-block" class="zbs-metabox-block"><div>' . jpcrm_metabox_icon_html( $box ) . esc_html( $box['title'] ) . '</div></div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- jpcrm_metabox_icon_html() escapes what it interpolates. This is the BLOCKER that covers the box during drag-drop.
 		echo "</div>\n";
 }
 
