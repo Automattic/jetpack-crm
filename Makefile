@@ -17,13 +17,11 @@ MAIN_ROOT := $(patsubst %/.git,%,$(abspath $(shell git rev-parse --git-common-di
 # main checkout matters: conflating them runs the main checkout's tests and
 # reports them as the worktree's.
 #
-# Done in awk rather than with make's $(filter) and $(patsubst), both of which
-# split their arguments on whitespace. A checkout path with a space in it
-# matched on its first word alone, and a worktree under it came out looking like
-# the main checkout, which is the conflation above. Keep the parens balanced:
-# make counts them inside $(shell ...) whatever the quoting, so a `case` arm
-# closes the call early.
-WORKTREE_REL := $(shell awk -v m="$(MAIN_ROOT)" -v r="$(WORKTREE_ROOT)" 'BEGIN { if (r == m) print ""; else if (substr(r, 1, length(m) + 1) == m "/") print substr(r, length(m) + 2); else print r }')
+# A checkout path containing a space is not supported here. $(filter) and
+# $(patsubst) below split on whitespace, as do $(abspath) and $(notdir) above
+# and either side, so such a path matches on its first word alone and a worktree
+# under it comes out looking like the main checkout.
+WORKTREE_REL := $(if $(filter $(MAIN_ROOT),$(WORKTREE_ROOT)),,$(patsubst $(MAIN_ROOT)/%,%,$(WORKTREE_ROOT)))
 
 # This checkout's path inside the container.
 ENV_CWD := wp-content/plugins/$(notdir $(MAIN_ROOT))$(if $(WORKTREE_REL),/$(WORKTREE_REL))
@@ -94,7 +92,7 @@ worktree-link: ## Symlink vendor/, jetpack_vendor/ and node_modules/ into this w
 					echo "Skipping $$d, it is a real directory."; \
 					continue; \
 				fi; \
-				ln -sfn "$$up/$$d" "$$d"; \
+				ln -sfn "$$up/$$d" "$$d" || exit 1; \
 				echo "Linked $$d -> $$up/$$d"; \
 			done; \
 			echo "Relative links, so they resolve inside the container too.";; \

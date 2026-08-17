@@ -63,6 +63,11 @@ while IFS= read -r file; do
 	[ -n "${file}" ] && file_list+=( "${file}" )
 done <<< "${files}"
 
+# Say how many files are being looked at. A clean run prints nothing at all
+# otherwise, which leaves silence meaning both "linted and found nothing" and
+# "linted nothing" -- the ambiguity this script exists to remove.
+echo "Linting ${#file_list[@]} changed PHP file(s)..."
+
 # display_errors=stderr for the same reason scripts/phpcs.sh sets it. Nothing
 # parses this process's stdout, so this one is only about legibility: a
 # deprecation printed into the middle of a report is noise you have to read
