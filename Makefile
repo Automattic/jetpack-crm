@@ -11,40 +11,39 @@ PLUGIN_NAME := zero-bs-crm
 WORKTREE_ROOT := $(shell git rev-parse --show-toplevel 2>/dev/null)
 MAIN_ROOT := $(patsubst %/.git,%,$(abspath $(shell git rev-parse --git-common-dir 2>/dev/null)))
 
-# Empty in the main checkout; the worktree's path below it otherwise. Stays
-# absolute (leading slash) when the worktree lives outside the main checkout,
-# where the container cannot reach it at all. Distinguishing that case from the
-# main checkout matters: conflating them runs the main checkout's tests and
-# reports them as the worktree's.
+# Empty in the main checkout; the worktree's path below it otherwise; and left
+# absolute, leading slash and all, when the worktree is not below it at all.
+# require_inside below is what acts on that third case.
 #
 # A checkout path containing a space is not supported here. $(filter) and
-# $(patsubst) below split on whitespace, as do $(abspath) and $(notdir) above
-# and either side, so such a path matches on its first word alone and a worktree
-# under it comes out looking like the main checkout.
+# $(patsubst) below split on whitespace, as do $(abspath) and $(notdir) either
+# side, so such a path matches on its first word alone and a worktree under it
+# comes out looking like the main checkout.
 WORKTREE_REL := $(if $(filter $(MAIN_ROOT),$(WORKTREE_ROOT)),,$(patsubst $(MAIN_ROOT)/%,%,$(WORKTREE_ROOT)))
 
 # This checkout's path inside the container.
 ENV_CWD := wp-content/plugins/$(notdir $(MAIN_ROOT))$(if $(WORKTREE_REL),/$(WORKTREE_REL))
 
 # The same guard on every target that needs vendor/, in one copy so the three
-# cannot drift apart. Takes the binary to look for, and works out which of the
-# three ways it can be missing you are actually in, since "run make install" is
-# no help when vendor/ is a symlink pointing at a main checkout that has none.
+# cannot drift apart. Composer installs into the main checkout whichever tree
+# you run it from, so that is where the advice points in every case.
 define require_vendor
 @if [ ! -e "$(1)" ]; then \
-	if [ -L vendor ] && [ ! -e vendor ]; then \
-		echo "Error: vendor/ here is a symlink into $(MAIN_ROOT), which has no vendor/ of its own." >&2; \
-		echo "Run 'make install' in $(MAIN_ROOT)." >&2; \
-	elif [ ! -e vendor ] && [ -n "$(WORKTREE_REL)" ]; then \
-		echo "Error: vendor/ is missing in $(WORKTREE_ROOT)." >&2; \
-		echo "Run 'make worktree-link' to link it from $(MAIN_ROOT)." >&2; \
-	elif [ -n "$(WORKTREE_REL)" ]; then \
-		echo "Error: $(1) is missing. Run 'make install' in $(MAIN_ROOT), which is where vendor/ points." >&2; \
-	else \
-		echo "Error: $(1) is missing. Run 'make install'." >&2; \
-	fi; \
+	echo "Error: $(1) is missing. Run 'make install' in $(MAIN_ROOT)." >&2; \
+	echo "In a worktree, 'make worktree-link' as well." >&2; \
 	exit 1; \
 fi
+endef
+
+# wp-env only mounts the main checkout. A worktree under it is visible to the
+# container; one anywhere else is not, and neither target can do anything useful
+# there. Refuse rather than fall back to the main checkout and report its results
+# as the worktree's.
+define require_inside
+@case "$(WORKTREE_REL)" in /*) \
+	echo "Error: $(WORKTREE_ROOT) is outside $(MAIN_ROOT), which is all wp-env mounts." >&2; \
+	echo "Create worktrees under .claude/worktrees/ to use them here." >&2; \
+	exit 1;; esac
 endef
 
 # Use the locally-installed @wordpress/env (a devDependency) rather than fetching
@@ -77,14 +76,10 @@ install-hooks: ## Install git hooks (fail-fast guard against direct pushes to tr
 # composer run in a worktree write into the main checkout's directories, the
 # same as they already did for vendor/. Install in the main checkout.
 worktree-link: ## Symlink vendor/, jetpack_vendor/ and node_modules/ into this worktree
+	$(call require_inside)
 	@case "$(WORKTREE_REL)" in \
 		"") \
 			echo "Not a worktree, nothing to link.";; \
-		/*) \
-			echo "Error: this worktree is outside $(MAIN_ROOT)." >&2; \
-			echo "wp-env only mounts the main checkout, so the container cannot see it." >&2; \
-			echo "Create worktrees under .claude/worktrees/ to run tests in them." >&2; \
-			exit 1;; \
 		*) \
 			up=$$(echo "$(WORKTREE_REL)" | sed 's#[^/][^/]*#..#g'); \
 			for d in vendor jetpack_vendor node_modules; do \
@@ -123,10 +118,7 @@ wp: $(WP_ENV_BIN) ## Run an arbitrary wp-cli command, e.g. `make wp CMD="plugin 
 # WORDPRESS_DEVELOP_DIR has to be set explicitly: the container's own WP_TESTS_DIR
 # is not the variable tests/php/bootstrap.php looks at.
 test: $(WP_ENV_BIN) ## Run the PHPUnit unit suite. Usage: make test [ARGS="--filter Foo"]
-	@case "$(WORKTREE_REL)" in /*) \
-		echo "Error: this worktree is outside $(MAIN_ROOT), so the container cannot see it." >&2; \
-		echo "Create worktrees under .claude/worktrees/ to run tests in them." >&2; \
-		exit 1;; esac
+	$(call require_inside)
 	$(call require_vendor,vendor/bin/phpunit)
 	@# A liveness probe, so a stopped environment says so rather than surfacing a
 	@# raw docker compose error. It has to be its own call: folding it into the
