@@ -70,7 +70,7 @@ class zeroBS__Metabox {
 
 			// lazy hackaround for now, can be more classy later.
 			if ( ! empty( $this->metaboxIcon ) ) {
-				$this->metaboxTitle = '<i class="' . $this->metaboxIcon . ' icon"></i> ' . $this->metaboxTitle;
+				$this->metaboxTitle = '<i class="' . $this->metaboxIcon . ' icon" aria-hidden="true"></i> ' . $this->metaboxTitle;
 			}
 
 			// self::$instance = $this;
@@ -717,6 +717,22 @@ function zeroBSCRM_do_meta_box_htmlTabHead( $tabsID = '', $tabs = false ) {
 	}
 }
 
+/**
+ * Markup permitted in a metabox title.
+ *
+ * Titles carry the Semantic UI icon markup that initMetabox() prepends, and nothing else.
+ *
+ * @return array Allowed HTML, in wp_kses() format.
+ */
+function jpcrm_metabox_title_allowed_html() {
+	return array(
+		'i' => array(
+			'class'       => true,
+			'aria-hidden' => true,
+		),
+	);
+}
+
 function zeroBSCRM_do_meta_box_html( $box, $page, $hidden, $object, $minimised, $isTabPane = false, $isActiveTab = false ) {
 
 		/*
@@ -850,7 +866,7 @@ function zeroBSCRM_do_meta_box_html( $box, $page, $hidden, $object, $minimised, 
 		} */
 
 			// txt
-			echo '<div class="header item">' . wp_kses( $box['title'], array( 'i' => array( 'class' => true ) ) ) . '</div>' . $hideMinimiseMenu . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Title allows only the expected Semantic UI icon markup.
+			echo '<div class="header item">' . wp_kses( $box['title'], jpcrm_metabox_title_allowed_html() ) . '</div>' . $hideMinimiseMenu . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Title allows only the expected Semantic UI icon markup.
 
 			// right hand menu, if one
 			/*
@@ -878,7 +894,7 @@ function zeroBSCRM_do_meta_box_html( $box, $page, $hidden, $object, $minimised, 
 			echo '<div id="' . esc_attr( $box['id'] ) . '-box" class="zbs-metabox-body ' . esc_attr( $htmlClasses ) . ' ' . esc_attr( $extraClasses ) . '">' . "\n"; // $hidden_class.
 				call_user_func( $box['callback'], $object, $box );
 			echo '</div>'; // /.zbs-metabox-body
-			echo '<div id="' . esc_attr( $box['id'] ) . '-block" class="zbs-metabox-block"><div>' . wp_kses( $box['title'], array( 'i' => array( 'class' => true ) ) ) . '</div></div>'; // this is BLOCKER for drag-drop support -//<i class="arrows alternate icon"></i>
+			echo '<div id="' . esc_attr( $box['id'] ) . '-block" class="zbs-metabox-block"><div>' . wp_kses( $box['title'], jpcrm_metabox_title_allowed_html() ) . '</div></div>'; // this is BLOCKER for drag-drop support -//<i class="arrows alternate icon"></i>
 		echo "</div>\n";
 }
 
