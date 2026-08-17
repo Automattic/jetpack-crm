@@ -16,10 +16,38 @@ MAIN_ROOT := $(patsubst %/.git,%,$(abspath $(shell git rev-parse --git-common-di
 # where the container cannot reach it at all. Distinguishing that case from the
 # main checkout matters: conflating them runs the main checkout's tests and
 # reports them as the worktree's.
-WORKTREE_REL := $(if $(filter $(MAIN_ROOT),$(WORKTREE_ROOT)),,$(patsubst $(MAIN_ROOT)/%,%,$(WORKTREE_ROOT)))
+#
+# Done in awk rather than with make's $(filter) and $(patsubst), both of which
+# split their arguments on whitespace. A checkout path with a space in it
+# matched on its first word alone, and a worktree under it came out looking like
+# the main checkout, which is the conflation above. Keep the parens balanced:
+# make counts them inside $(shell ...) whatever the quoting, so a `case` arm
+# closes the call early.
+WORKTREE_REL := $(shell awk -v m="$(MAIN_ROOT)" -v r="$(WORKTREE_ROOT)" 'BEGIN { if (r == m) print ""; else if (substr(r, 1, length(m) + 1) == m "/") print substr(r, length(m) + 2); else print r }')
 
 # This checkout's path inside the container.
 ENV_CWD := wp-content/plugins/$(notdir $(MAIN_ROOT))$(if $(WORKTREE_REL),/$(WORKTREE_REL))
+
+# The same guard on every target that needs vendor/, in one copy so the three
+# cannot drift apart. Takes the binary to look for, and works out which of the
+# three ways it can be missing you are actually in, since "run make install" is
+# no help when vendor/ is a symlink pointing at a main checkout that has none.
+define require_vendor
+@if [ ! -e "$(1)" ]; then \
+	if [ -L vendor ] && [ ! -e vendor ]; then \
+		echo "Error: vendor/ here is a symlink into $(MAIN_ROOT), which has no vendor/ of its own." >&2; \
+		echo "Run 'make install' in $(MAIN_ROOT)." >&2; \
+	elif [ ! -e vendor ] && [ -n "$(WORKTREE_REL)" ]; then \
+		echo "Error: vendor/ is missing in $(WORKTREE_ROOT)." >&2; \
+		echo "Run 'make worktree-link' to link it from $(MAIN_ROOT)." >&2; \
+	elif [ -n "$(WORKTREE_REL)" ]; then \
+		echo "Error: $(1) is missing. Run 'make install' in $(MAIN_ROOT), which is where vendor/ points." >&2; \
+	else \
+		echo "Error: $(1) is missing. Run 'make install'." >&2; \
+	fi; \
+	exit 1; \
+fi
+endef
 
 # Use the locally-installed @wordpress/env (a devDependency) rather than fetching
 # it via `npx --yes` on every call, which needs registry access on each run.
@@ -46,7 +74,11 @@ install-hooks: ## Install git hooks (fail-fast guard against direct pushes to tr
 
 # One shell for the whole recipe: each make recipe line gets its own shell, so an
 # `exit 0` on the first line would not stop the later ones from linking anyway.
-worktree-link: ## Symlink vendor/ and jetpack_vendor/ into this worktree from the main checkout
+#
+# node_modules is linked too, for `make lint-css`. Note what that means: npm and
+# composer run in a worktree write into the main checkout's directories, the
+# same as they already did for vendor/. Install in the main checkout.
+worktree-link: ## Symlink vendor/, jetpack_vendor/ and node_modules/ into this worktree
 	@case "$(WORKTREE_REL)" in \
 		"") \
 			echo "Not a worktree, nothing to link.";; \
@@ -57,7 +89,7 @@ worktree-link: ## Symlink vendor/ and jetpack_vendor/ into this worktree from th
 			exit 1;; \
 		*) \
 			up=$$(echo "$(WORKTREE_REL)" | sed 's#[^/][^/]*#..#g'); \
-			for d in vendor jetpack_vendor; do \
+			for d in vendor jetpack_vendor node_modules; do \
 				if [ -e "$$d" ] && [ ! -L "$$d" ]; then \
 					echo "Skipping $$d, it is a real directory."; \
 					continue; \
@@ -97,32 +129,35 @@ test: $(WP_ENV_BIN) ## Run the PHPUnit unit suite. Usage: make test [ARGS="--fil
 		echo "Error: this worktree is outside $(MAIN_ROOT), so the container cannot see it." >&2; \
 		echo "Create worktrees under .claude/worktrees/ to run tests in them." >&2; \
 		exit 1;; esac
-	@test -e vendor/bin/phpunit || { \
-		echo "Error: vendor/ is missing in $(WORKTREE_ROOT)." >&2; \
-		echo "Run 'make worktree-link' in a worktree, or 'make install' in a fresh clone." >&2; \
+	$(call require_vendor,vendor/bin/phpunit)
+	@# A liveness probe, so a stopped environment says so rather than surfacing a
+	@# raw docker compose error. It has to be its own call: folding it into the
+	@# run below would report a failing test suite as a stopped container.
+	@cd "$(MAIN_ROOT)" && $(WP_ENV) run tests-cli true >/dev/null 2>&1 || { \
+		echo "Error: the wp-env containers are not running. Run 'make up' first." >&2; \
 		exit 1; }
 	@# wp-env keys its state directory on the directory it is invoked from, so it
 	@# has to run from the main checkout. --env-cwd then points it at this one.
-	cd $(MAIN_ROOT) && $(WP_ENV) run tests-cli --env-cwd=$(ENV_CWD) \
-		bash -c 'WORDPRESS_DEVELOP_DIR=/wordpress-phpunit composer phpunit -- $(ARGS)'
+	@# ARGS goes in as positional parameters rather than into the single-quoted
+	@# script, so ARGS="--filter 'It works'" keeps its quoting.
+	cd "$(MAIN_ROOT)" && $(WP_ENV) run tests-cli --env-cwd="$(ENV_CWD)" \
+		bash -c 'WORDPRESS_DEVELOP_DIR=/wordpress-phpunit composer phpunit -- "$$@"' -- $(ARGS)
 
 test-acceptance: ## Run the Codeception acceptance suite (needs a configured WP + browser)
 	composer tests
 
 ## Lint
 lint: ## Run PHP CodeSniffer on changed files (vs trunk)
-	@test -e vendor/bin/phpcs-changed || { \
-		echo "Error: vendor/ is missing in $(WORKTREE_ROOT)." >&2; \
-		echo "Run 'make worktree-link' in a worktree, or 'make install' in a fresh clone." >&2; \
-		exit 1; }
+	$(call require_vendor,vendor/bin/phpcs-changed)
 	composer cs
 
 lint-staged: ## Run PHP CodeSniffer on staged files
-	@test -e vendor/bin/phpcs-changed || { \
-		echo "Error: vendor/ is missing in $(WORKTREE_ROOT)." >&2; \
-		echo "Run 'make worktree-link' in a worktree, or 'make install' in a fresh clone." >&2; \
-		exit 1; }
+	$(call require_vendor,vendor/bin/phpcs-changed)
 	composer cs-staged
+
+lint-unstaged: ## Run PHP CodeSniffer on unstaged working tree changes
+	$(call require_vendor,vendor/bin/phpcs-changed)
+	composer cs-unstaged
 
 lint-css: ## Check WPDS design token usage in the Sass sources
 	npm run lint:css
@@ -145,4 +180,4 @@ i18n: ## Regenerate translation files (no-op: JPCRM translations come from trans
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-16s\033[0m %s\n", $$1, $$2}'
 
-.PHONY: install install-hooks worktree-link up down destroy logs cli wp test test-acceptance lint lint-staged lint-css release build clean i18n help
+.PHONY: install install-hooks worktree-link up down destroy logs cli wp test test-acceptance lint lint-staged lint-unstaged lint-css release build clean i18n help

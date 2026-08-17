@@ -1,11 +1,14 @@
-/jetpack_vendor/
-/vendor/
-/node_modules/
+# No trailing slash on these three: `make worktree-link` puts a symlink here,
+# and a trailing slash matches directories only, so the links showed up as
+# untracked in every worktree.
+/jetpack_vendor
+/vendor
+/node_modules
 /build/
 /dist/
 /.cache/
 /.phpunit.cache/
-/.claude/
+/.claude/worktrees/
 **/css/**/*.css
 **/js/*.min.js
 **/js/*.min.js.LICENSE.txt
