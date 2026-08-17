@@ -29,34 +29,40 @@
 	<file>.</file>
 
 	<!--
-		Two kinds of exclude-pattern, and the difference matters.
+		Every pattern here is `type="relative"`, and that is deliberate.
 
-		A plain pattern is matched, unanchored, against the file's absolute path. So
-		it cannot tell this checkout's `vendor/` from a checkout that happens to sit
-		under a `vendor/`. Fine for the five below, which we would never nest a
-		checkout inside, and it is the only form that works for a path handed to
-		phpcs on the command line, which is what phpcs-changed does.
+		A pattern is an unanchored regex, and a plain one is matched against the
+		file's absolute path. So it cannot tell this checkout's `build/` from a
+		checkout that sits under a directory called that: clone this to `~/build/` or
+		`~/dist/` and the tree excludes itself, leaving `make lint` to report success
+		having examined nothing. `type="relative"` matches against the path relative
+		to the scan root, which can never contain the checkout's own ancestors.
 
-		`type="relative"` matches against the path relative to the scan root instead.
-		That only applies to a directory walk: for an explicit path the relative path
-		is empty and the pattern never fires. It is also discarded outright on a
-		rule-level exclude-pattern, where matching is always absolute.
+		Nothing is given up by that. These top-level patterns only ever apply to a
+		directory walk, i.e. running `vendor/bin/phpcs` over the tree: they are read
+		by Filters/Filter.php, and phpcs-changed never reaches it, because it feeds
+		each file in on stdin, naming it with `stdin-path`. The rule-level excludes
+		further down are a different mechanism, matched in Files/File.php, and those
+		do apply to it. The one behaviour that changes is naming a vendored file
+		explicitly on the command line, which now lints it rather than ignoring you.
 
-		`.claude/` needs the relative form and nothing else will do. It holds git
-		worktrees, which are whole second checkouts, so a walk from the repo root has
-		to skip them: without this the queue goes from 316 files to 1268 and phpcs
-		dies with "ran out of memory", while `phpcbf` quietly reformats another
-		branch's files. But an absolute pattern naming `.claude/` also matches every
-		file inside a worktree, because `.claude/` is in their paths too, and that is
-		how `make lint` came to report success there having examined nothing. The
-		relative form skips a nested `.claude/` without ever matching a worktree's
-		own source. Verified from both roots: 316 files either way.
+		The `(^|/)` prefix is what the anchoring costs: without it `vendor/*` would
+		also match a `livevendor/` or `my_vendor/` anywhere in the tree.
+
+		`.claude/` has a second reason to be relative. It holds git worktrees, which
+		are whole second checkouts, so a walk from the repo root has to skip them:
+		without this the queue goes from 316 files to 1268 and phpcs dies with "ran
+		out of memory", while `phpcbf` quietly reformats another branch's files. But
+		an absolute pattern naming `.claude/` also matches every file inside a
+		worktree, because `.claude/` is in their paths too, and that is how `make
+		lint` came to report success there having examined nothing. Verified from
+		both roots: 316 files either way.
 	-->
-	<exclude-pattern>*/vendor/*</exclude-pattern>
-	<exclude-pattern>*/jetpack_vendor/*</exclude-pattern>
-	<exclude-pattern>*/node_modules/*</exclude-pattern>
-	<exclude-pattern>*/build/*</exclude-pattern>
-	<exclude-pattern>*/dist/*</exclude-pattern>
+	<exclude-pattern type="relative">(^|/)vendor/*</exclude-pattern>
+	<exclude-pattern type="relative">(^|/)jetpack_vendor/*</exclude-pattern>
+	<exclude-pattern type="relative">(^|/)node_modules/*</exclude-pattern>
+	<exclude-pattern type="relative">(^|/)build/*</exclude-pattern>
+	<exclude-pattern type="relative">(^|/)dist/*</exclude-pattern>
 	<exclude-pattern type="relative">^\.claude/</exclude-pattern>
 
 	<rule ref="WordPress-Core">

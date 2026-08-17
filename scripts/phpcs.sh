@@ -21,6 +21,12 @@ set -euo pipefail
 
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
+# `display_errors=stderr` is the belt to that braces. The prepend file only
+# silences one known deprecation; anything else PHP has to say -- and
+# PHPCompatibility 9.3.5 is 2019 code running on PHP 8.5 -- would still land on
+# stdout and corrupt the JSON the same way. phpcs-changed captures stdout only,
+# so on stderr a diagnostic stays visible to you without breaking the parse.
 exec php \
+	-d display_errors=stderr \
 	-d auto_prepend_file="${repo_root}/tests/suppress_php84_deprecations.php" \
 	"${repo_root}/vendor/bin/phpcs" "$@"
