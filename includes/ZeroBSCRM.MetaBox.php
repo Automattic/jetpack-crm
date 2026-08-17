@@ -866,7 +866,7 @@ function zeroBSCRM_do_meta_box_html( $box, $page, $hidden, $object, $minimised, 
 		} */
 
 			// txt
-			echo '<div class="header item">' . wp_kses( $box['title'], jpcrm_metabox_title_allowed_html() ) . '</div>' . $hideMinimiseMenu . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Title allows only the expected Semantic UI icon markup.
+			echo '<div class="header item">' . wp_kses( $box['title'], jpcrm_metabox_title_allowed_html() ) . '</div>' . $hideMinimiseMenu . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $hideMinimiseMenu is hard-coded markup; the title is escaped by wp_kses() above.
 
 			// right hand menu, if one
 			/*
