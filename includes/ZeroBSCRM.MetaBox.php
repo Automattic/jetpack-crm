@@ -878,7 +878,7 @@ function zeroBSCRM_do_meta_box_html( $box, $page, $hidden, $object, $minimised, 
 			echo '<div id="' . esc_attr( $box['id'] ) . '-box" class="zbs-metabox-body ' . esc_attr( $htmlClasses ) . ' ' . esc_attr( $extraClasses ) . '">' . "\n"; // $hidden_class.
 				call_user_func( $box['callback'], $object, $box );
 			echo '</div>'; // /.zbs-metabox-body
-			echo '<div id="' . esc_attr( $box['id'] ) . '-block" class="zbs-metabox-block"><div>' . esc_html( $box['title'] ) . '</div></div>'; // this is BLOCKER for drag-drop support -//<i class="arrows alternate icon"></i>
+			echo '<div id="' . esc_attr( $box['id'] ) . '-block" class="zbs-metabox-block"><div>' . wp_kses( $box['title'], array( 'i' => array( 'class' => true ) ) ) . '</div></div>'; // this is BLOCKER for drag-drop support -//<i class="arrows alternate icon"></i>
 		echo "</div>\n";
 }
 
