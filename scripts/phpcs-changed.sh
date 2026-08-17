@@ -45,7 +45,11 @@ case "${1:-}" in
 		;;
 esac
 
-if ! files="$(git diff --diff-filter=d --name-only "${diff_args[@]}" -- '*.php')"; then
+# `${x[@]+"${x[@]}"}` rather than a plain `"${diff_args[@]}"`, because unstaged
+# passes no arguments and bash before 4.4 treats an empty array as unset under
+# `set -u`. macOS ships 3.2, where that aborts the script -- and the `if !` below
+# would have reported it as git failing to read your changes.
+if ! files="$(git diff --diff-filter=d --name-only ${diff_args[@]+"${diff_args[@]}"} -- '*.php')"; then
 	echo "${read_error}" >&2
 	exit 1
 fi

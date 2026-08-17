@@ -100,26 +100,41 @@
 		test suite and would fail correct test code. Each one below is turned off for
 		`tests/` only, rather than dropping the whole tree the way this ruleset used
 		to. Everything else, docblocks included, applies there as it does anywhere.
+
+		These carry the same `(^|/)` prefix as the top-level patterns, and here it is
+		load-bearing rather than tidiness. Files/File.php ignores the `type` attribute
+		outright and matches whatever path it was handed, and the two entry points
+		hand it different shapes: a directory walk gives an absolute path, while
+		phpcs-changed names each file with `stdin-path` and passes the output of `git
+		diff` through untouched, i.e. relative to the repo root. A leading `*/`
+		compiles to `.*/`, which needs a literal `/tests/` and so matches the walk but
+		never the day-to-day path. These five sniffs were firing on every test file
+		`make lint` looked at.
+
+		This does not anchor to the repo root, and cannot: an absolute path has to
+		match on the `/` branch, so a checkout under a directory called `tests` still
+		loses these five sniffs on a full-tree walk. Nothing here can tell that path
+		apart from a real one.
 	-->
 
 	<!-- PHPUnit finds classes by file name: List_View_Permissions_Test.php, not class-*.php. -->
 	<rule ref="WordPress.Files.FileName">
-		<exclude-pattern>*/tests/*</exclude-pattern>
+		<exclude-pattern>(^|/)tests/*</exclude-pattern>
 	</rule>
 
 	<!-- The test cases we extend expose properties we do not name: WP_Ajax_UnitTestCase::$_last_response, $zbs->DAL. -->
 	<rule ref="WordPress.NamingConventions.ValidVariableName">
-		<exclude-pattern>*/tests/*</exclude-pattern>
+		<exclude-pattern>(^|/)tests/*</exclude-pattern>
 	</rule>
 
 	<!-- Nothing in a test renders to a browser, and an assertion message is not output. -->
 	<rule ref="WordPress.Security.EscapeOutput">
-		<exclude-pattern>*/tests/*</exclude-pattern>
+		<exclude-pattern>(^|/)tests/*</exclude-pattern>
 	</rule>
 
 	<!-- Codeception's own API is camelCase and underscore-prefixed: tryToTest(), _before(). -->
 	<rule ref="WordPress.NamingConventions.ValidFunctionName">
-		<exclude-pattern>*/tests/codeception/*</exclude-pattern>
+		<exclude-pattern>(^|/)tests/codeception/*</exclude-pattern>
 	</rule>
 
 	<!--
@@ -128,7 +143,7 @@
 		the `#[TestDox]` attribute would be the same sentence written three times.
 	-->
 	<rule ref="Generic.Commenting.DocComment.MissingShort">
-		<exclude-pattern>*/tests/*</exclude-pattern>
+		<exclude-pattern>(^|/)tests/*</exclude-pattern>
 	</rule>
 
 	<!-- WPCS 3.0 dropped its own WordPress.CodeAnalysis.EmptyStatement wrapper. -->
