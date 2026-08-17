@@ -138,10 +138,16 @@ test: $(WP_ENV_BIN) ## Run the PHPUnit unit suite. Usage: make test [ARGS="--fil
 		exit 1; }
 	@# wp-env keys its state directory on the directory it is invoked from, so it
 	@# has to run from the main checkout. --env-cwd then points it at this one.
-	@# ARGS goes in as positional parameters rather than into the single-quoted
-	@# script, so ARGS="--filter 'It works'" keeps its quoting.
-	cd "$(MAIN_ROOT)" && $(WP_ENV) run tests-cli --env-cwd="$(ENV_CWD)" \
-		bash -c 'WORDPRESS_DEVELOP_DIR=/wordpress-phpunit composer phpunit -- "$$@"' -- $(ARGS)
+	@#
+	@# ARGS is re-quoted with %q and folded into the one string wp-env is given.
+	@# It cannot be passed as separate arguments after it: wp-env parses its own
+	@# argv, so anything looking like an option is eaten before the container
+	@# sees it, and `make test ARGS="--testsuite pdf"` arrives as just `pdf`.
+	@# Interpolating ARGS raw does not work either, since the recipe shell has
+	@# already stripped the quotes by then and ARGS="--filter 'It works'" splits.
+	cd "$(MAIN_ROOT)" && args=$$(printf '%q ' $(ARGS)) && \
+		$(WP_ENV) run tests-cli --env-cwd="$(ENV_CWD)" \
+		bash -c "WORDPRESS_DEVELOP_DIR=/wordpress-phpunit composer phpunit -- $$args"
 
 test-acceptance: ## Run the Codeception acceptance suite (needs a configured WP + browser)
 	composer tests
