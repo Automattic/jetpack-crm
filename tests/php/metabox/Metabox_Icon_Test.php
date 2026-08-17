@@ -155,6 +155,31 @@ class Metabox_Icon_Test extends JPCRM_Base_TestCase {
 		$this->assertSame( 'heartbeat', $zbs->metaboxes['zbs-view-company']['side']['high']['zbs-test-box']['icon'] );
 	}
 
+	/**
+	 * Re-registering at 'sorted' priority carries the icon over with the title.
+	 *
+	 * A 'sorted' caller passes no title, callback or icon: the box is being moved
+	 * to where the user dragged it, so those are read back off the existing
+	 * registration. Miss the icon there and a dragged box loses it. The only
+	 * caller is commented out today, which is exactly why this needs pinning.
+	 */
+	public function test_add_meta_box_keeps_the_icon_when_re_registering_as_sorted() {
+		global $zbs;
+
+		zeroBSCRM_add_meta_box( 'zbs-test-box', 'Activity', '__return_null', 'zbs-view-contact', 'side', 'high', array(), false, '', false, 'heartbeat' );
+
+		// The shape the sorted caller uses: id, screen, context and 'sorted', nothing else.
+		zeroBSCRM_add_meta_box( 'zbs-test-box', null, null, 'zbs-view-contact', 'side', 'sorted' );
+
+		$box = $zbs->metaboxes['zbs-view-contact']['side']['sorted']['zbs-test-box'];
+
+		$this->assertSame( 'heartbeat', $box['icon'] );
+		$this->assertSame( 'Activity', $box['title'] );
+
+		// The box moved priority rather than being duplicated.
+		$this->assertArrayNotHasKey( 'zbs-test-box', $zbs->metaboxes['zbs-view-contact']['side']['high'] );
+	}
+
 
 	/**
 	 * Init no longer prepends icon markup to the title.
