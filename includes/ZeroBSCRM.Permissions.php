@@ -612,6 +612,8 @@ function zeroBSCRM_permsObjType( $obj_type_id = -1 ) { // phpcs:ignore WordPress
  * through the `jpcrm_perms_view_list_type` filter below. Anything with no
  * listener is denied.
  *
+ * @since $$next-version$$
+ *
  * @param string $list_type List view type, as used by zeroBSCRM_list (e.g. 'customer', 'event').
  *
  * @return bool
@@ -663,6 +665,8 @@ function jpcrm_perms_view_list_type( $list_type ) {
 	 * can widen or narrow access to any list view. An extension registering
 	 * `zerobs_ajax_list_view_{$list_type}` is responsible for the capability check
 	 * for that list view, and can apply it here instead of in its hook callback.
+	 *
+	 * @since $$next-version$$
 	 *
 	 * @param bool   $allowed   Whether the user may view this list type.
 	 * @param string $list_type The list view type requested.
@@ -838,6 +842,8 @@ function zeroBSCRM_perms_tasks() {
  *
  * This mirrors the capability used by the Task Scheduler and Task List admin
  * pages, which is separate from the task edit capability.
+ *
+ * @since $$next-version$$
  *
  * @return bool
  */
