@@ -28,11 +28,17 @@
 		<testsuite name="entities">
 			<directory suffix="Test.php">tests/php/entities</directory>
 		</testsuite>
+		<testsuite name="dal">
+			<directory suffix="Test.php">tests/php/dal</directory>
+		</testsuite>
 		<testsuite name="pdf">
 			<directory suffix="Test.php">tests/php/pdf</directory>
 		</testsuite>
 		<testsuite name="permissions">
 			<directory suffix="Test.php">tests/php/permissions</directory>
+		</testsuite>
+		<testsuite name="ajax">
+			<directory suffix="Test.php">tests/php/ajax</directory>
 		</testsuite>
 	</testsuites>
 
