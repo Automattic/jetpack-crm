@@ -101,17 +101,16 @@
 		`tests/` only, rather than dropping the whole tree the way this ruleset used
 		to. Everything else, docblocks included, applies there as it does anywhere.
 
-		These carry the same `(^|/)` prefix as the top-level patterns, and here it is
-		load-bearing rather than tidiness. Files/File.php ignores the `type` attribute
-		outright and matches whatever path it was handed, and the two entry points
-		hand it different shapes: a directory walk gives an absolute path, while
-		phpcs-changed names each file with `stdin-path` and passes the output of `git
-		diff` through untouched, i.e. relative to the repo root. A leading `*/`
-		compiles to `.*/`, which needs a literal `/tests/` and so matches the walk but
-		never the day-to-day path. These five sniffs were firing on every test file
-		`make lint` looked at.
+		These carry the same `(^|/)` prefix as the top-level patterns, which here is
+		consistency rather than a fix. Files/File.php ignores the `type` attribute
+		outright and matches whatever path it was handed, but both entry points hand
+		it an absolute one: a walk by construction, and phpcs-changed because
+		Config.php realpaths the `stdin-path` argument (Config.php:1005) and keeps
+		the string it was given only when no such file exists. A leading `*/` matched
+		both, so the prefix widens these to a repo-relative path that in practice
+		never arrives.
 
-		This does not anchor to the repo root, and cannot: an absolute path has to
+		Neither shape anchors to the repo root, and cannot: an absolute path has to
 		match on the `/` branch, so a checkout under a directory called `tests` still
 		loses these five sniffs on a full-tree walk. Nothing here can tell that path
 		apart from a real one.
