@@ -613,7 +613,7 @@ function zeroBSCRM_permsObjType( $obj_type_id = -1 ) { // phpcs:ignore WordPress
  * Anything with no listener is denied, as is anything asked for by someone with
  * no CRM access at all.
  *
- * @since $$next-version$$
+ * @since 6.8.3
  *
  * @param string $list_type List view type, as used by zeroBSCRM_list (e.g. 'customer', 'event').
  *
@@ -670,7 +670,7 @@ function jpcrm_perms_view_list_type( $list_type ) {
 	 * Note that an extension type only reaches this filter as `true` for a user
 	 * who already has CRM backend access.
 	 *
-	 * @since $$next-version$$
+	 * @since 6.8.3
 	 *
 	 * @param bool   $allowed   Whether the user may view this list type.
 	 * @param string $list_type The list view type requested.
@@ -847,7 +847,7 @@ function zeroBSCRM_perms_tasks() {
  * This mirrors the capability used by the Task Scheduler and Task List admin
  * pages, which is separate from the task edit capability.
  *
- * @since $$next-version$$
+ * @since 6.8.3
  *
  * @return bool
  */
