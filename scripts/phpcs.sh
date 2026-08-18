@@ -6,9 +6,10 @@
 # thecodingmachine/safe's generated function files. On PHP 8.4 and up those
 # emit an implicit-nullable deprecation each, and the notices land on stdout
 # ahead of phpcs's own output. That is fatal for phpcs-changed, which parses
-# phpcs's JSON: it fails to decode, assumes the unmodified file had no errors,
-# and reports every pre-existing violation in the file as though you'd
-# introduced it.
+# phpcs's JSON: it aborts with `Failed to decode phpcs JSON` and exits 1. The
+# old `composer cs` one-liner sent that failure down its `|| echo 'No changes
+# found.'` branch, which is how a lint run that examined nothing came to report
+# success.
 #
 # So phpcs is never called directly. `composer cs` and friends point
 # phpcs-changed at this wrapper via --phpcs-path.
