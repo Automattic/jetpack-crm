@@ -606,10 +606,11 @@ function zeroBSCRM_permsObjType( $obj_type_id = -1 ) { // phpcs:ignore WordPress
  * source of truth for who can reach each list.
  *
  * Types we do not serve ourselves are handled by extensions, which hook
- * `zerobs_ajax_list_view_{$list_type}` in the list view handler. Those are
- * allowed through to any CRM back end user, on the expectation that the
- * extension applies its own check, either in the hook or through the
- * `jpcrm_perms_view_list_type` filter below. Anything with no listener is denied.
+ * `zerobs_ajax_list_view_{$list_type}` in the list view handler. Those reach the
+ * extension as they did before, and the extension is responsible for the
+ * capability check for the list views it serves, either in its hook callback or
+ * through the `jpcrm_perms_view_list_type` filter below. Anything with no
+ * listener is denied.
  *
  * @param string $list_type List view type, as used by zeroBSCRM_list (e.g. 'customer', 'event').
  *
@@ -648,9 +649,10 @@ function jpcrm_perms_view_list_type( $list_type ) {
 		/**
 		 * Filters whether the current user may view an extension supplied list view type.
 		 *
-		 * Only fires for list types Jetpack CRM does not serve itself. Extensions
-		 * registering `zerobs_ajax_list_view_{$list_type}` should use this to apply
-		 * their own capability check, rather than relying on the default.
+		 * Only fires for list types Jetpack CRM does not serve itself. An extension
+		 * registering `zerobs_ajax_list_view_{$list_type}` is responsible for the
+		 * capability check for that list view, and can apply it here instead of in
+		 * its hook callback.
 		 *
 		 * @param bool   $allowed   Whether the user may view this list type.
 		 * @param string $list_type The list view type requested.
