@@ -21,6 +21,30 @@ class List_View_Ajax_Permissions_Test extends WP_Ajax_UnitTestCase {
 	use \Automattic\Jetpack\PHPUnit\WP_UnitTestCase_Fix;
 
 	/**
+	 * The ZBS instance as it stood before the test ran.
+	 *
+	 * This class cannot extend JPCRM_Base_TestCase, which is where the rest of the
+	 * suite gets its clone and restore of $GLOBALS['zbs'], because driving the
+	 * endpoint needs WP_Ajax_UnitTestCase. It is also the one class that runs the
+	 * full CRM request path, so it does the same thing here by hand.
+	 *
+	 * @var ?\ZeroBSCRM
+	 */
+	private $original_zbs;
+
+	/**
+	 * Store the initial state of ZBS.
+	 *
+	 * @return void
+	 */
+	public function set_up(): void {
+		parent::set_up();
+
+		global $zbs;
+		$this->original_zbs = clone $zbs;
+	}
+
+	/**
 	 * Sign in as a user holding the given capabilities and prime the AJAX request.
 	 *
 	 * @param array $caps      Capabilities to grant.
@@ -65,11 +89,26 @@ class List_View_Ajax_Permissions_Test extends WP_Ajax_UnitTestCase {
 		// by the time the test runs, so PHP warns that headers were already sent.
 		// That is an artefact of running admin AJAX under the CLI test harness, so
 		// swallow just that warning and leave every other error to PHPUnit.
-		set_error_handler( // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_set_error_handler
-			static function ( $errno, $errstr ) {
-				return str_contains( $errstr, 'Cannot modify header information' );
-			},
-			E_WARNING
+		//
+		// Everything else has to be handed back to PHPUnit's handler by hand. PHP
+		// does not walk the handler stack: an error this handler declines, or one
+		// outside a level mask, goes to PHP's own handler rather than to the handler
+		// that was in place before. Either would leave failOnWarning, failOnNotice
+		// and failOnDeprecation inert for the whole of the endpoint call, and this
+		// is the only suite that drives the list view handler.
+		$previous = set_error_handler( // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_set_error_handler
+			static function ( $errno, $errstr, $errfile = '', $errline = 0 ) use ( &$previous ) {
+
+				if ( str_contains( $errstr, 'Cannot modify header information' ) ) {
+					return true;
+				}
+
+				if ( null === $previous ) {
+					return false;
+				}
+
+				return ( $previous )( $errno, $errstr, $errfile, $errline );
+			}
 		);
 
 		try {
@@ -105,7 +144,15 @@ class List_View_Ajax_Permissions_Test extends WP_Ajax_UnitTestCase {
 	public function tear_down(): void {
 		$_POST = array();
 
+		// Signing a user in memoises these for the rest of the request. Clear them
+		// on the way out as well as on the way in, so nothing is left behind for
+		// whatever suite runs next.
+		unset( $GLOBALS['zeroBSCRM_isZBSUser'], $GLOBALS['zeroBSCRM_isZBSBackendUser'] );
+
 		parent::tear_down();
+
+		global $zbs;
+		$zbs = $this->original_zbs;
 	}
 
 	/**

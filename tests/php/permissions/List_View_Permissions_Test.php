@@ -60,6 +60,8 @@ class List_View_Permissions_Test extends JPCRM_Base_TestCase {
 	/**
 	 * A user holding the matching capability can view the list type.
 	 *
+	 * @dataProvider list_type_capability_provider
+	 *
 	 * @param string $list_type  List view type.
 	 * @param string $capability Capability that should unlock it.
 	 *
@@ -76,6 +78,8 @@ class List_View_Permissions_Test extends JPCRM_Base_TestCase {
 
 	/**
 	 * A user holding every CRM view capability except the matching one is denied.
+	 *
+	 * @dataProvider list_type_capability_provider
 	 *
 	 * @param string $list_type  List view type.
 	 * @param string $capability Capability that should unlock it.
@@ -276,5 +280,17 @@ class List_View_Permissions_Test extends JPCRM_Base_TestCase {
 		} finally {
 			remove_filter( 'jpcrm_perms_view_list_type', $filter, 10 );
 		}
+	}
+
+	/**
+	 * Clear the memoised permission globals so they do not leak into the next test.
+	 *
+	 * @return void
+	 */
+	public function tear_down(): void {
+
+		unset( $GLOBALS['zeroBSCRM_isZBSUser'], $GLOBALS['zeroBSCRM_isZBSBackendUser'] );
+
+		parent::tear_down();
 	}
 }

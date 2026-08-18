@@ -607,10 +607,11 @@ function zeroBSCRM_permsObjType( $obj_type_id = -1 ) { // phpcs:ignore WordPress
  *
  * Types we do not serve ourselves are handled by extensions, which hook
  * `zerobs_ajax_list_view_{$list_type}` in the list view handler. Those reach the
- * extension as they did before, and the extension is responsible for the
- * capability check for the list views it serves, either in its hook callback or
- * through the `jpcrm_perms_view_list_type` filter below. Anything with no
- * listener is denied.
+ * extension if a CRM backend user asked for them, and the extension is
+ * responsible for the capability check for the list views it serves, either in
+ * its hook callback or through the `jpcrm_perms_view_list_type` filter below.
+ * Anything with no listener is denied, as is anything asked for by someone with
+ * no CRM access at all.
  *
  * @since $$next-version$$
  *
@@ -650,7 +651,8 @@ function jpcrm_perms_view_list_type( $list_type ) {
 			break;
 
 		default:
-			// Not one of ours. Only let it through if an extension is listening for it.
+			// Not one of ours. Only let it through if an extension is listening for
+			// it, and then only for a user with CRM access.
 			$allowed = ! empty( $list_type )
 				&& has_action( 'zerobs_ajax_list_view_' . $list_type )
 				&& zeroBSCRM_permsIsZBSBackendUser();
@@ -665,13 +667,15 @@ function jpcrm_perms_view_list_type( $list_type ) {
 	 * can widen or narrow access to any list view. An extension registering
 	 * `zerobs_ajax_list_view_{$list_type}` is responsible for the capability check
 	 * for that list view, and can apply it here instead of in its hook callback.
+	 * Note that an extension type only reaches this filter as `true` for a user
+	 * who already has CRM backend access.
 	 *
 	 * @since $$next-version$$
 	 *
 	 * @param bool   $allowed   Whether the user may view this list type.
 	 * @param string $list_type The list view type requested.
 	 */
-	return (bool) apply_filters( 'jpcrm_perms_view_list_type', (bool) $allowed, $list_type );
+	return (bool) apply_filters( 'jpcrm_perms_view_list_type', $allowed, $list_type );
 }
 
 /**
