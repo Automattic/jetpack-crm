@@ -114,9 +114,16 @@ class Invoice_Capability_Test extends JPCRM_Base_Integration_TestCase {
 	}
 
 	/**
-	 * Build an invoice attached to a contact.
+	 * Build an invoice attached to a contact, plus a second contact with an
+	 * invoice of its own.
 	 *
-	 * @return array{contact: int, invoice: int}
+	 * The second pair is what makes the assertions mean anything. The CRM tables
+	 * are truncated between tests, so with one invoice in the database "the
+	 * response carries the seeded ID" cannot be told apart from "the response
+	 * carries whatever invoice exists", and getinvs takes cid straight off the
+	 * request without scoping it to anything.
+	 *
+	 * @return array{contact: int, invoice: int, other_contact: int, other_invoice: int}
 	 */
 	private function seed_invoice(): array {
 		$contact_id = $this->add_contact();
@@ -127,9 +134,32 @@ class Invoice_Capability_Test extends JPCRM_Base_Integration_TestCase {
 			)
 		);
 
+		$other_contact_id = $this->add_contact(
+			array(
+				'fname' => 'Jane',
+				'lname' => 'Roe',
+				'email' => 'other@domain.null',
+			)
+		);
+		$other_invoice_id = $this->add_invoice(
+			array(
+				'id_override' => '2',
+				'contacts'    => array( $other_contact_id ),
+				'status'      => 'Unpaid',
+			)
+		);
+
+		$this->assertNotSame(
+			$contact_id,
+			$other_contact_id,
+			'the two seeded contacts collapsed into one, so nothing below is scoped'
+		);
+
 		return array(
-			'contact' => $contact_id,
-			'invoice' => $invoice_id,
+			'contact'       => $contact_id,
+			'invoice'       => $invoice_id,
+			'other_contact' => $other_contact_id,
+			'other_invoice' => $other_invoice_id,
 		);
 	}
 
@@ -212,6 +242,11 @@ class Invoice_Capability_Test extends JPCRM_Base_Integration_TestCase {
 			array_map( 'intval', wp_list_pluck( $control, 'id' ) ),
 			'the seeded invoice is not reachable at all, so the refusal above proves nothing'
 		);
+		$this->assertNotContains(
+			$seed['other_invoice'],
+			array_map( 'intval', wp_list_pluck( $control, 'id' ) ),
+			'getinvs returned another contact\'s invoice, so the control fetch is not scoped'
+		);
 	}
 
 	/**
@@ -225,10 +260,12 @@ class Invoice_Capability_Test extends JPCRM_Base_Integration_TestCase {
 
 		$response = $this->capture_json_response( 'zeroBSCRM_AJAX_getCustInvs' );
 
+		// Exactly one ID, not just a non-empty response: a second contact's invoice
+		// exists, so this fails if the handler ignores cid and returns everything.
 		$this->assertSame(
 			array( $seed['invoice'] ),
 			array_map( 'intval', wp_list_pluck( (array) $response, 'id' ) ),
-			"$role should get the contact's invoices"
+			"$role should get this contact's invoices and no others"
 		);
 	}
 
