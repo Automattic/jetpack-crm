@@ -1,0 +1,169 @@
+<?xml version="1.0"?>
+<ruleset name="JPCRM Coding Standards">
+	<description>Verifies JPCRM code is up to snuff</description>
+
+	<!--
+		Restored from the ruleset this plugin used in the Jetpack monorepo, which was
+		dropped in 469d4320 (April 2023) and never replaced. Without a ruleset PHPCS
+		falls back to the PEAR standard, which is the opposite of WordPress style
+		(spaces for indentation, no Yoda conditions), so every lint run was noise.
+
+		The whole tree does not pass this. That is expected and is why the day-to-day
+		entry points (`make lint`, `make lint-staged`) go through phpcs-changed, which
+		reports only on the lines you touched. Running `vendor/bin/phpcs` directly over
+		everything will bury you.
+	-->
+
+	<!--
+		Args to PHPCS: show (p)rogress, show (s)niff codes. Progress goes to stdout
+		ahead of the report, so anything asking for the JSON report needs -q with it
+		or the JSON will not parse. phpcs-changed passes -q itself.
+	-->
+	<arg value="ps"/>
+	<arg name="parallel" value="10"/>
+	<arg name="extensions" value="php"/>
+
+	<!-- Report paths relative to the repo root rather than from /Users/... -->
+	<arg name="basepath" value="."/>
+
+	<file>.</file>
+
+	<!--
+		Every pattern here is `type="relative"`, and that is deliberate.
+
+		A pattern is an unanchored regex, and a plain one is matched against the
+		file's absolute path. So it cannot tell this checkout's `build/` from a
+		checkout that sits under a directory called that: clone this to `~/build/` or
+		`~/dist/` and the tree excludes itself, leaving `make lint` to report success
+		having examined nothing. `type="relative"` matches against the path relative
+		to the scan root, which can never contain the checkout's own ancestors.
+
+		Nothing is given up by that. These top-level patterns only ever apply to a
+		directory walk, i.e. running `vendor/bin/phpcs` over the tree: they are read
+		by Filters/Filter.php, and phpcs-changed never reaches it, because it feeds
+		each file in on stdin, naming it with `stdin-path`. The rule-level excludes
+		further down are a different mechanism, matched in Files/File.php, and those
+		do apply to it. The one behaviour that changes is naming a vendored file
+		explicitly on the command line, which now lints it rather than ignoring you.
+
+		The `(^|/)` prefix is what the anchoring costs: without it `vendor/*` would
+		also match a `livevendor/` or `my_vendor/` anywhere in the tree.
+
+		`.claude/` has a second reason to be relative. It holds git worktrees, which
+		are whole second checkouts, so a walk from the repo root has to skip them:
+		without this the queue goes from 316 files to 1268 and phpcs dies with "ran
+		out of memory", while `phpcbf` quietly reformats another branch's files. But
+		an absolute pattern naming `.claude/` also matches every file inside a
+		worktree, because `.claude/` is in their paths too, and that is how `make
+		lint` came to report success there having examined nothing. Verified from
+		both roots: 316 files either way.
+	-->
+	<exclude-pattern type="relative">(^|/)vendor/*</exclude-pattern>
+	<exclude-pattern type="relative">(^|/)jetpack_vendor/*</exclude-pattern>
+	<exclude-pattern type="relative">(^|/)node_modules/*</exclude-pattern>
+	<exclude-pattern type="relative">(^|/)build/*</exclude-pattern>
+	<exclude-pattern type="relative">(^|/)dist/*</exclude-pattern>
+	<exclude-pattern type="relative">^\.claude/</exclude-pattern>
+
+	<rule ref="WordPress-Core">
+		<exclude name="WordPress.PHP.YodaConditions.NotYoda"/>
+	</rule>
+
+	<rule ref="WordPress-Docs"/>
+
+	<!--
+		Restored from phpcs.security.xml.dist, the second ruleset 469d4320 dropped.
+		These sniffs live in WordPress-Extra rather than WordPress-Core, so nothing
+		above brings them in and unescaped output on a new line passed lint.
+	-->
+	<rule ref="WordPress.Security"/>
+	<rule ref="WordPress.Security.EscapeOutput">
+		<properties>
+			<!-- Lowercase only. The sniff lowercases the function it is checking but not this list, so a camelCase entry never matches. -->
+			<property name="customAutoEscapedFunctions" type="array">
+				<element value="zbslink"/>
+				<element value="jpcrm_esc_link"/>
+			</property>
+		</properties>
+	</rule>
+
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array">
+				<element value="zero-bs-crm"/>
+			</property>
+		</properties>
+	</rule>
+
+	<!--
+		Test code is linted, but a handful of sniffs describe a plugin rather than a
+		test suite and would fail correct test code. Each one below is turned off for
+		`tests/` only, rather than dropping the whole tree the way this ruleset used
+		to. Everything else, docblocks included, applies there as it does anywhere.
+
+		These carry the same `(^|/)` prefix as the top-level patterns, which here is
+		consistency rather than a fix. Files/File.php ignores the `type` attribute
+		outright and matches whatever path it was handed, but both entry points hand
+		it an absolute one: a walk by construction, and phpcs-changed because
+		Config.php realpaths the `stdin-path` argument (Config.php:1005) and keeps
+		the string it was given only when no such file exists. A leading `*/` matched
+		both, so the prefix widens these to a repo-relative path that in practice
+		never arrives.
+
+		Neither shape anchors to the repo root, and cannot: an absolute path has to
+		match on the `/` branch, so a checkout under a directory called `tests` still
+		loses these five sniffs on a full-tree walk. Nothing here can tell that path
+		apart from a real one.
+	-->
+
+	<!-- PHPUnit finds classes by file name: List_View_Permissions_Test.php, not class-*.php. -->
+	<rule ref="WordPress.Files.FileName">
+		<exclude-pattern>(^|/)tests/*</exclude-pattern>
+	</rule>
+
+	<!-- The test cases we extend expose properties we do not name: WP_Ajax_UnitTestCase::$_last_response, $zbs->DAL. -->
+	<rule ref="WordPress.NamingConventions.ValidVariableName">
+		<exclude-pattern>(^|/)tests/*</exclude-pattern>
+	</rule>
+
+	<!-- Nothing in a test renders to a browser, and an assertion message is not output. -->
+	<rule ref="WordPress.Security.EscapeOutput">
+		<exclude-pattern>(^|/)tests/*</exclude-pattern>
+	</rule>
+
+	<!-- Codeception's own API is camelCase and underscore-prefixed: tryToTest(), _before(). -->
+	<rule ref="WordPress.NamingConventions.ValidFunctionName">
+		<exclude-pattern>(^|/)tests/codeception/*</exclude-pattern>
+	</rule>
+
+	<!--
+		A test's docblock is still required, but `@testdox` is its description. The
+		sniff wants a short description above the tags, which alongside the tag and
+		the `#[TestDox]` attribute would be the same sentence written three times.
+	-->
+	<rule ref="Generic.Commenting.DocComment.MissingShort">
+		<exclude-pattern>(^|/)tests/*</exclude-pattern>
+	</rule>
+
+	<!-- WPCS 3.0 dropped its own WordPress.CodeAnalysis.EmptyStatement wrapper. -->
+	<rule ref="Generic.CodeAnalysis.EmptyStatement"/>
+
+	<rule ref="PEAR.Functions.ValidDefaultValue.NotAtEnd"/>
+
+	<!--
+		Restored from .phpcs.dir.phpcompatibility.xml, the third ruleset 469d4320
+		dropped. The floor is the one the plugin advertises: `Requires PHP: 7.4` in
+		ZeroBSCRM.php and readme.txt, and `"php": ">=7.4"` in composer.json.
+
+		Know what this does not cover. php-compatibility's only released version is
+		9.3.5, from 2019, so its database stops at PHP 7.4. It catches the legacy
+		deprecations there are plenty of in here (`each()`, `create_function()`), and
+		it is blind to everything PHP 8.0 added. Write `str_contains()`, `match`, an
+		enum or `?->` and this will not say a word, though every one of them is a
+		fatal on the 7.4 we advertise. PHP 8 detection landed on the unreleased 10.x
+		branch. Until that ships, testing on 7.4 is the only thing that catches those.
+	-->
+	<config name="testVersion" value="7.4-"/>
+	<rule ref="PHPCompatibilityWP"/>
+
+</ruleset>
