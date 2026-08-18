@@ -135,7 +135,9 @@ test: $(WP_ENV_BIN) ## Run the PHPUnit unit suite. Usage: make test [ARGS="--fil
 	@# sees it, and `make test ARGS="--testsuite pdf"` arrives as just `pdf`.
 	@# Interpolating ARGS raw does not work either, since the recipe shell has
 	@# already stripped the quotes by then and ARGS="--filter 'It works'" splits.
-	cd "$(MAIN_ROOT)" && args=$$(printf '%q ' $(ARGS)) && \
+	@# %q is run per word: `printf '%q '` with no operands still runs the format
+	@# once and yields '', so an unset ARGS would send phpunit an empty argument.
+	cd "$(MAIN_ROOT)" && args=$$(for a in $(ARGS); do printf '%q ' "$$a"; done) && \
 		$(WP_ENV) run tests-cli --env-cwd="$(ENV_CWD)" \
 		bash -c "WORDPRESS_DEVELOP_DIR=/wordpress-phpunit composer phpunit -- $$args"
 
