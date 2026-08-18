@@ -2085,25 +2085,7 @@ function zeroBSCRM_AJAX_listViewRetrieveData() {
 		global $zbs;
 
 		// } check perms first
-		if ( $listViewParams['listtype'] == 'customer' && ! zeroBSCRM_permsViewCustomers() ) {
-			wp_send_json_error( array( 'no-action-or-rights' => 1 ), 500, JSON_UNESCAPED_SLASHES );
-		}
-		if ( $listViewParams['listtype'] == 'company' && ! zeroBSCRM_permsViewCustomers() ) {
-			wp_send_json_error( array( 'no-action-or-rights' => 1 ), 500, JSON_UNESCAPED_SLASHES );
-		}
-		if ( $listViewParams['listtype'] == 'segment' && ! zeroBSCRM_permsViewCustomers() ) {
-			wp_send_json_error( array( 'no-action-or-rights' => 1 ), 500, JSON_UNESCAPED_SLASHES );
-		}
-		if ( $listViewParams['listtype'] == 'quote' && ! zeroBSCRM_permsViewQuotes() ) {
-			wp_send_json_error( array( 'no-action-or-rights' => 1 ), 500, JSON_UNESCAPED_SLASHES );
-		}
-		if ( $listViewParams['listtype'] == 'quotetemplate' && ! zeroBSCRM_permsViewQuotes() ) {
-			wp_send_json_error( array( 'no-action-or-rights' => 1 ), 500, JSON_UNESCAPED_SLASHES );
-		}
-		if ( $listViewParams['listtype'] == 'invoice' && ! zeroBSCRM_permsViewInvoices() ) {
-			wp_send_json_error( array( 'no-action-or-rights' => 1 ), 500, JSON_UNESCAPED_SLASHES );
-		}
-		if ( $listViewParams['listtype'] == 'transaction' && ! zeroBSCRM_permsViewTransactions() ) {
+		if ( ! jpcrm_perms_view_list_type( $listViewParams['listtype'] ) ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 			wp_send_json_error( array( 'no-action-or-rights' => 1 ), 500, JSON_UNESCAPED_SLASHES );
 		}
 
