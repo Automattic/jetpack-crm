@@ -2085,7 +2085,7 @@ function zeroBSCRM_AJAX_listViewRetrieveData() {
 		global $zbs;
 
 		// } check perms first
-		if ( ! jpcrm_perms_view_list_type( $listViewParams['listtype'] ) ) {
+		if ( ! jpcrm_perms_view_list_type( $listViewParams['listtype'] ) ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 			wp_send_json_error( array( 'no-action-or-rights' => 1 ), 500, JSON_UNESCAPED_SLASHES );
 		}
 

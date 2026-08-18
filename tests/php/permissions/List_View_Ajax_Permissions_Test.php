@@ -237,9 +237,9 @@ class List_View_Ajax_Permissions_Test extends WP_Ajax_UnitTestCase {
 	/**
 	 * An arrayed list view type is refused rather than tripping over itself.
 	 *
-	 * sanitize_text_field() returns an empty string for an array, so the gate sees
-	 * a type it does not recognise. Pinning that, because it rests on a detail of
-	 * how WordPress sanitises and the alternative is a PHP error in the switch.
+	 * Because sanitize_text_field() returns an empty string for an array, the gate
+	 * sees a type it does not recognise. Pinning that, because it rests on a detail
+	 * of how WordPress sanitises and the alternative is a PHP error in the switch.
 	 *
 	 * @return void
 	 */
