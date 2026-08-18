@@ -623,44 +623,51 @@ function jpcrm_perms_view_list_type( $list_type ) {
 		case 'customer':
 		case 'company':
 		case 'segment':
-			return zeroBSCRM_permsViewCustomers();
+			$allowed = zeroBSCRM_permsViewCustomers();
+			break;
 
 		case 'quote':
 		case 'quotetemplate':
-			return zeroBSCRM_permsViewQuotes();
+			$allowed = zeroBSCRM_permsViewQuotes();
+			break;
 
 		case 'invoice':
-			return zeroBSCRM_permsViewInvoices();
+			$allowed = zeroBSCRM_permsViewInvoices();
+			break;
 
 		case 'transaction':
-			return zeroBSCRM_permsViewTransactions();
+			$allowed = zeroBSCRM_permsViewTransactions();
+			break;
 
 		case 'event':
-			return jpcrm_perms_view_tasks();
+			$allowed = jpcrm_perms_view_tasks();
+			break;
 
 		case 'form':
-			return zeroBSCRM_permsForms();
+			$allowed = zeroBSCRM_permsForms();
+			break;
+
+		default:
+			// Not one of ours. Only let it through if an extension is listening for it.
+			$allowed = ! empty( $list_type )
+				&& has_action( 'zerobs_ajax_list_view_' . $list_type )
+				&& zeroBSCRM_permsIsZBSBackendUser();
+			break;
 
 	}
 
-	// Not one of ours. Only let it through if an extension is listening for it.
-	if ( ! empty( $list_type ) && has_action( 'zerobs_ajax_list_view_' . $list_type ) ) {
-
-		/**
-		 * Filters whether the current user may view an extension supplied list view type.
-		 *
-		 * Only fires for list types Jetpack CRM does not serve itself. An extension
-		 * registering `zerobs_ajax_list_view_{$list_type}` is responsible for the
-		 * capability check for that list view, and can apply it here instead of in
-		 * its hook callback.
-		 *
-		 * @param bool   $allowed   Whether the user may view this list type.
-		 * @param string $list_type The list view type requested.
-		 */
-		return (bool) apply_filters( 'jpcrm_perms_view_list_type', zeroBSCRM_permsIsZBSBackendUser(), $list_type );
-	}
-
-	return false;
+	/**
+	 * Filters whether the current user may view a given list view type.
+	 *
+	 * Fires for every list type, ours and those supplied by extensions, so a site
+	 * can widen or narrow access to any list view. An extension registering
+	 * `zerobs_ajax_list_view_{$list_type}` is responsible for the capability check
+	 * for that list view, and can apply it here instead of in its hook callback.
+	 *
+	 * @param bool   $allowed   Whether the user may view this list type.
+	 * @param string $list_type The list view type requested.
+	 */
+	return (bool) apply_filters( 'jpcrm_perms_view_list_type', (bool) $allowed, $list_type );
 }
 
 /**

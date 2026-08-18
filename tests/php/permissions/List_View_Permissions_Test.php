@@ -226,4 +226,55 @@ class List_View_Permissions_Test extends JPCRM_Base_TestCase {
 			remove_action( 'zerobs_ajax_list_view_mailcampaign', $callback );
 		}
 	}
+
+	/**
+	 * The filter can refuse one of our own list types.
+	 */
+	#[TestDox( 'The filter can refuse one of our own list types.' )]
+	public function test_filter_can_deny_a_core_list_type() {
+
+		$filter = static function ( $allowed, $list_type ) {
+			return 'invoice' === $list_type ? false : $allowed;
+		};
+
+		add_filter( 'jpcrm_perms_view_list_type', $filter, 10, 2 );
+
+		try {
+			$this->set_current_user_with_caps( array( 'admin_zerobs_view_invoices', 'admin_zerobs_view_quotes' ) );
+
+			$this->assertFalse( jpcrm_perms_view_list_type( 'invoice' ) );
+
+			// Other list types are untouched.
+			$this->assertTrue( jpcrm_perms_view_list_type( 'quote' ) );
+		} finally {
+			remove_filter( 'jpcrm_perms_view_list_type', $filter, 10 );
+		}
+	}
+
+	/**
+	 * The filter can allow one of our own list types to a user without the capability.
+	 *
+	 * This is the case the filter exists for on our own types: granting a custom
+	 * role access to a list view without granting it the capability outright.
+	 */
+	#[TestDox( 'The filter can allow one of our own list types to a user without the capability.' )]
+	public function test_filter_can_allow_a_core_list_type() {
+
+		$filter = static function ( $allowed, $list_type ) {
+			return 'event' === $list_type ? true : $allowed;
+		};
+
+		add_filter( 'jpcrm_perms_view_list_type', $filter, 10, 2 );
+
+		try {
+			$this->set_current_user_with_caps( array( 'admin_zerobs_view_quotes' ) );
+
+			$this->assertTrue( jpcrm_perms_view_list_type( 'event' ) );
+
+			// Still nothing for the list types the filter does not touch.
+			$this->assertFalse( jpcrm_perms_view_list_type( 'form' ) );
+		} finally {
+			remove_filter( 'jpcrm_perms_view_list_type', $filter, 10 );
+		}
+	}
 }
