@@ -198,7 +198,7 @@ function jpcrm_render_dashboard_page() {
 
 				<div class="jpcrm-listview-table-container">
 					<?php
-					if ( is_array( $transaction_totals_array ) && array_sum( $transaction_totals_array ) > 0 ) {
+					if ( ! empty( $recent_transactions ) ) {
 						?>
 						<div>
 							<canvas id="bar-chart" height="400"></canvas>
