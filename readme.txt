@@ -1,7 +1,7 @@
 === Jetpack CRM - Clients, Leads, Invoices, Billing, Email Marketing, & Automation ===
 Contributors: automattic, kallehauge, cleacos, diegogarciarodrigues, bradshawtm, wpkaren, robertf4, woodyhayday, mikemayhem3030
 Tags: CRM, Woocommerce CRM, Client Portal, Marketing Automation, Lead Generation
-Tested up to: 7.0
+Tested up to: 7.1
 Stable tag: 6.8.3
 Requires at least: 6.0
 Requires PHP: 7.4
