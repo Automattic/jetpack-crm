@@ -83,7 +83,6 @@ function jpcrm_render_dashboard_page() {
 	$labels = array_reverse( $labels );
 
 	$transaction_totals_by_month = array();
-	$transaction_totals_array    = array();
 
 	// fill with zeros if months aren't present
 	for ( $i = 11; $i > 0; $i-- ) {
@@ -97,16 +96,9 @@ function jpcrm_render_dashboard_page() {
 	);
 
 	$recent_transactions = $zbs->DAL->transactions->getTransactionTotalByMonth( $args ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
-	foreach ( $recent_transactions as $k => $v ) {
-		$transaction_totals_array[ $k ]       = $v['total'];
+	foreach ( $recent_transactions as $v ) {
 		$dkey                                 = $v['month'] . $v['year'];
 		$transaction_totals_by_month[ $dkey ] = $v['total'];
-	}
-
-	$i = 0;
-	foreach ( $transaction_totals_by_month as $k => $v ) {
-		$transaction_totals_array[ $i ] = $v;
-		++$i;
 	}
 
 	$chartdata = array_values( $transaction_totals_by_month );
