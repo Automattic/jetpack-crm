@@ -71,7 +71,7 @@ function jpcrm_render_dashboard_page() {
 
 	$funnel_data = array_reverse( $funnel_data );
 
-	/* Transactions - Revenue Chart data gen */
+	// Transactions - Revenue Chart data gen.
 	// One pass over the 12-month window, oldest month first: each month-start
 	// timestamp drives the chart label, the zero-prefill key, and (for the oldest
 	// month) the query window start, so the three cannot drift apart. They used
@@ -89,7 +89,8 @@ function jpcrm_render_dashboard_page() {
 		if ( ! $window_start ) {
 			$window_start = $month_start;
 		}
-		$labels[]                                                    = gmdate( 'M y', $month_start );
+		$labels[] = gmdate( 'M y', $month_start );
+
 		$transaction_totals_by_month[ gmdate( 'nY', $month_start ) ] = 0;
 	}
 
