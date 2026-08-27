@@ -4219,34 +4219,6 @@ function zeroBS_getInvoicesForCustomer(
 	return $zbs->DAL->invoices->getInvoices( $args );
 }
 
-/**
- * Returns invoices assigned to a company.
- *
- * Company counterpart of zeroBS_getInvoicesForCustomer().
- *
- * @since $$next-version$$
- *
- * @param int $company_id Company ID.
- * @param int $per_page   Results per page.
- * @param int $page       Page (0-based).
- *
- * @return array Invoices.
- */
-function zeroBS_getInvoicesForCompany( $company_id = -1, $per_page = 10, $page = 0 ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid -- matches the naming of its contact counterpart.
-	global $zbs;
-
-	$args = array(
-		'assignedCompany' => $company_id,
-		'sortByField'     => 'ID',
-		'sortOrder'       => 'DESC',
-		'page'            => max( 0, (int) $page ),
-		'perPage'         => $per_page,
-		'ignoreowner'     => zeroBSCRM_DAL2_ignoreOwnership( ZBS_TYPE_INVOICE ),
-	);
-
-	return $zbs->DAL->invoices->getInvoices( $args ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
-}
-
 	// moves a inv from being assigned to one cust, to another
 	// this is a fill-in to match old DAL2 func, however DAL3+ can accept customer/company,
 	// ... so use the proper $DAL->addUpdateObjectLinks for fresh code

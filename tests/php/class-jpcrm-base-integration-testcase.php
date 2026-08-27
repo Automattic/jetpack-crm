@@ -37,6 +37,19 @@ abstract class JPCRM_Base_Integration_TestCase extends JPCRM_Base_TestCase {
 	}
 
 	/**
+	 * Add a company.
+	 *
+	 * @param array $args (Optional) A list of arguments we should use for the company.
+	 *
+	 * @return int The company ID.
+	 */
+	public function add_company( array $args = array() ) {
+		global $zbs;
+
+		return $zbs->DAL->companies->addUpdateCompany( array( 'data' => $this->generate_company_data( $args ) ) );
+	}
+
+	/**
 	 * Add an invoice.
 	 *
 	 * @param array $args (Optional) A list of arguments we should use for the invoice.

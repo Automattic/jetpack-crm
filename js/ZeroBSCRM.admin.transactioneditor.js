@@ -18,20 +18,8 @@ jQuery( function () {
 	// turn off auto-complete on records via form attr... should be global for all ZBS record pages
 	// not v3.0jQuery('#post').attr('autocomplete','off');
 
-	// on init, if a contact (or, failing that, a company) has been selected, prefil inv list
-	if ( jQuery( '#customer' ).val() || jQuery( '#zbsct_company' ).val() ) {
-		// any inv selected?
-		let existingInvID = false;
-		if ( jQuery( '#invoice_id' ).val() ) {
-			existingInvID = jQuery( '#invoice_id' ).val();
-		}
-
-		if ( jQuery( '#customer' ).val() ) {
-			zbscrmjs_build_inv_dropdown( 'contact', jQuery( '#customer' ).val(), existingInvID );
-		} else {
-			zbscrmjs_build_inv_dropdown( 'company', jQuery( '#zbsct_company' ).val(), existingInvID );
-		}
-	}
+	// on init, prefil the inv list from any assigned contact or company
+	zbscrmjs_refresh_inv_dropdown( jQuery( '#invoice_id' ).val() || false );
 
 	// bind
 	setTimeout( function () {
@@ -49,12 +37,7 @@ function zbscrmjs_transaction_unsetCustomer( o ) {
 		jQuery( '#customer' ).val( '' );
 		jQuery( '#customer_name' ).val( '' );
 
-		// repopulate the invoice list from any assigned company, else hide it
-		if ( jQuery( '#zbsct_company' ).val() ) {
-			zbscrmjs_build_inv_dropdown( 'company', jQuery( '#zbsct_company' ).val() );
-		} else {
-			jQuery( '.assignInvToCust, #invoiceFieldWrap' ).hide();
-		}
+		zbscrmjs_refresh_inv_dropdown();
 
 		setTimeout( function () {
 			// when inv select drop down changed, show/hide quick nav
@@ -70,12 +53,7 @@ function zbscrmjs_transaction_unsetCompany( o ) {
 	if ( typeof o === 'undefined' || ! o ) {
 		jQuery( '#zbsct_company' ).val( '' );
 
-		// repopulate the invoice list from any assigned contact, else hide it
-		if ( jQuery( '#customer' ).val() ) {
-			zbscrmjs_build_inv_dropdown( 'contact', jQuery( '#customer' ).val() );
-		} else {
-			jQuery( '.assignInvToCust, #invoiceFieldWrap' ).hide();
-		}
+		zbscrmjs_refresh_inv_dropdown();
 
 		setTimeout( function () {
 			// when inv select drop down changed, show/hide quick nav
@@ -274,13 +252,22 @@ function zbscrmjs_build_inv_dropdown( objType, objID, preSelectedInvID ) {
 	}
 }
 
-// back-compat wrapper: builds the invoice dropdown for a contact
+// rebuilds the invoice dropdown from whichever of contact or company is
+// assigned (contact first), or hides it when neither is
 /**
- * @param custID
  * @param preSelectedInvID
  */
-function zbscrmjs_build_custInv_dropdown( custID, preSelectedInvID ) {
-	zbscrmjs_build_inv_dropdown( 'contact', custID, preSelectedInvID );
+function zbscrmjs_refresh_inv_dropdown( preSelectedInvID ) {
+	const contactID = jQuery( '#customer' ).val();
+	const companyID = jQuery( '#zbsct_company' ).val();
+
+	if ( contactID ) {
+		zbscrmjs_build_inv_dropdown( 'contact', contactID, preSelectedInvID );
+	} else if ( companyID ) {
+		zbscrmjs_build_inv_dropdown( 'company', companyID, preSelectedInvID );
+	} else {
+		jQuery( '.assignInvToCust, #invoiceFieldWrap' ).hide();
+	}
 }
 
 // when inv select drop down changed, show/hide quick nav
@@ -489,8 +476,8 @@ if ( typeof module !== 'undefined' ) {
 		zbscrmjs_transaction_unsetCompany,
 		zbscrmjs_transaction_setCustomer,
 		zbscrmjs_transaction_setCompany,
-		zbscrmjs_build_custInv_dropdown,
 		zbscrmjs_build_inv_dropdown,
+		zbscrmjs_refresh_inv_dropdown,
 		zeroBSCRMJS_bindInvSelect,
 		zeroBSCRMJS_showInvLinkIf,
 		zeroBSCRMJS_bindInvLinkIf,

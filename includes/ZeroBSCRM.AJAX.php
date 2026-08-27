@@ -261,25 +261,36 @@ function zeroBSCRM_AJAX_getCustInvs() {
 	if ( zeroBSCRM_permsViewInvoices() ) {
 
 		// } Retrieve ID
-		$cID = -1;
+		$contact_id = -1;
 		if ( isset( $_POST['cid'] ) ) {
-			$cID = (int) $_POST['cid'];
+			$contact_id = (int) $_POST['cid'];
 		}
 
 		$company_id = -1;
-		if ( isset( $_POST['company_id'] ) ) {
-			$company_id = (int) $_POST['company_id'];
+		if ( isset( $_POST['coid'] ) ) {
+			$company_id = (int) $_POST['coid'];
 		}
 
-		if ( $cID > 0 ) {
+		if ( $contact_id > 0 || $company_id > 0 ) {
 
-			// } Retrieve the customers invoices:
-			$ret = zeroBS_getInvoicesForCustomer( $cID, true, 100 );
+			// } Retrieve the contact's (or, failing that, the company's) invoices:
+			global $zbs;
 
-		} elseif ( $company_id > 0 ) {
+			$args = array(
+				'sortByField' => 'ID',
+				'sortOrder'   => 'DESC',
+				'page'        => 0,
+				'perPage'     => 100,
+				'ignoreowner' => zeroBSCRM_DAL2_ignoreOwnership( ZBS_TYPE_INVOICE ),
+			);
 
-			// } Retrieve the company's invoices:
-			$ret = zeroBS_getInvoicesForCompany( $company_id, 100 );
+			if ( $contact_id > 0 ) {
+				$args['assignedContact'] = $contact_id;
+			} else {
+				$args['assignedCompany'] = $company_id;
+			}
+
+			$ret = $zbs->DAL->invoices->getInvoices( $args ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 
 		}
 	}

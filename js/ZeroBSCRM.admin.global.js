@@ -1352,28 +1352,28 @@ function zbscrm_js_uiSpinnerBlocker( spinnerHTML ) {
 	#==================================================
 */
 
-window.zbscrm_custcache_invoices = {};
-window.zbscrm_companycache_invoices = {};
+window.zbscrm_objcache_invoices = {};
 /**
  * Retrieve invoices assigned to a contact or company (shared impl).
  *
- * @param cache      - Cache object keyed by object ID.
- * @param requestKey - POST key the getinvs endpoint reads the ID from ('cid' or 'company_id').
+ * @param requestKey - POST key the getinvs endpoint reads the ID from ('cid' or 'coid'); also namespaces the cache.
  * @param objID
  * @param cb
  * @param errcb
  */
-function zbscrm_js_getObjInvs( cache, requestKey, objID, cb, errcb ) {
+function zbscrm_js_getObjInvs( requestKey, objID, cb, errcb ) {
+	const cacheKey = requestKey + '_' + objID;
+
 	if ( typeof objID !== 'undefined' && objID > 0 ) {
 		// see if in cache (rough cache)
 
-		if ( typeof cache[ objID ] !== 'undefined' ) {
+		if ( typeof window.zbscrm_objcache_invoices[ cacheKey ] !== 'undefined' ) {
 			// call back with that!
 			if ( typeof cb === 'function' ) {
-				cb( cache[ objID ] );
+				cb( window.zbscrm_objcache_invoices[ cacheKey ] );
 			}
 
-			return cache[ objID ];
+			return window.zbscrm_objcache_invoices[ cacheKey ];
 		}
 
 		// ... otherwise retrieve!
@@ -1394,7 +1394,7 @@ function zbscrm_js_getObjInvs( cache, requestKey, objID, cb, errcb ) {
 			timeout: 20000,
 			success: function ( response ) {
 				// set cache
-				cache[ objID ] = response;
+				window.zbscrm_objcache_invoices[ cacheKey ] = response;
 
 				// callback
 				if ( typeof cb === 'function' ) {
@@ -1425,7 +1425,7 @@ function zbscrm_js_getObjInvs( cache, requestKey, objID, cb, errcb ) {
  * @param errcb
  */
 function zbscrm_js_getCustInvs( cID, cb, errcb ) {
-	return zbscrm_js_getObjInvs( window.zbscrm_custcache_invoices, 'cid', cID, cb, errcb );
+	return zbscrm_js_getObjInvs( 'cid', cID, cb, errcb );
 }
 
 /**
@@ -1434,7 +1434,7 @@ function zbscrm_js_getCustInvs( cID, cb, errcb ) {
  * @param errcb
  */
 function zbscrm_js_getCompanyInvs( companyID, cb, errcb ) {
-	return zbscrm_js_getObjInvs( window.zbscrm_companycache_invoices, 'company_id', companyID, cb, errcb );
+	return zbscrm_js_getObjInvs( 'coid', companyID, cb, errcb );
 }
 
 /*

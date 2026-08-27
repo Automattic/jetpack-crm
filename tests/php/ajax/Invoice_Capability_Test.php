@@ -276,11 +276,7 @@ class Invoice_Capability_Test extends JPCRM_Base_Integration_TestCase {
 	 * @return array{company: int, invoice: int, other_company: int, other_invoice: int}
 	 */
 	private function seed_company_invoice(): array {
-		global $zbs;
-
-		$company_id = $zbs->DAL->companies->addUpdateCompany( // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
-			array( 'data' => array( 'name' => 'Acme' ) )
-		);
+		$company_id = $this->add_company( array( 'name' => 'Acme' ) );
 		$invoice_id = $this->add_invoice(
 			array(
 				'contacts'  => array(),
@@ -289,8 +285,11 @@ class Invoice_Capability_Test extends JPCRM_Base_Integration_TestCase {
 			)
 		);
 
-		$other_company_id = $zbs->DAL->companies->addUpdateCompany( // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
-			array( 'data' => array( 'name' => 'Globex' ) )
+		$other_company_id = $this->add_company(
+			array(
+				'name'  => 'Globex',
+				'email' => 'other@companyemail.com',
+			)
 		);
 		$other_invoice_id = $this->add_invoice(
 			array(
@@ -316,18 +315,18 @@ class Invoice_Capability_Test extends JPCRM_Base_Integration_TestCase {
 	}
 
 	/**
-	 * The getinvs endpoint also serves company-assigned invoices via company_id —
+	 * The getinvs endpoint also serves company-assigned invoices via coid —
 	 * the path the transaction editor uses for company-assigned transactions.
 	 */
 	public function test_getinvs_returns_invoices_scoped_to_the_requested_company() {
 		$seed = $this->seed_company_invoice();
 		$this->acting_as( 'zerobs_admin', 'zbscrmjs-glob-ajax-nonce' );
-		$_POST['company_id'] = $seed['company'];
+		$_POST['coid'] = $seed['company'];
 
 		$response = $this->capture_json_response( 'zeroBSCRM_AJAX_getCustInvs' );
 
 		// Exactly one ID: a second company's invoice exists, so this fails if the
-		// handler ignores company_id and returns everything.
+		// handler ignores coid and returns everything.
 		$this->assertSame(
 			array( $seed['invoice'] ),
 			array_map( 'intval', wp_list_pluck( (array) $response, 'id' ) ),
@@ -344,7 +343,7 @@ class Invoice_Capability_Test extends JPCRM_Base_Integration_TestCase {
 	public function test_getinvs_company_path_refuses_roles_without_the_view_capability( string $role ) {
 		$seed = $this->seed_company_invoice();
 		$this->acting_as( $role, 'zbscrmjs-glob-ajax-nonce' );
-		$_POST['company_id'] = $seed['company'];
+		$_POST['coid'] = $seed['company'];
 
 		$response = $this->capture_json_response( 'zeroBSCRM_AJAX_getCustInvs' );
 
@@ -383,7 +382,7 @@ class Invoice_Capability_Test extends JPCRM_Base_Integration_TestCase {
 	 * Clean up request superglobals between tests.
 	 */
 	public function tear_down(): void {
-		unset( $_POST['sec'], $_POST['invid'], $_POST['cid'], $_POST['company_id'], $_REQUEST['sec'] );
+		unset( $_POST['sec'], $_POST['invid'], $_POST['cid'], $_POST['coid'], $_REQUEST['sec'] );
 		parent::tear_down();
 	}
 }
