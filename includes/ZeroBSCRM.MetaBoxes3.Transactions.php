@@ -374,11 +374,7 @@ class zeroBS__Metabox_Transaction extends zeroBS__Metabox {
 									// contact
 									echo zeroBSCRM_CustomerTypeList( 'zbscrmjs_transaction_setCustomer', $contactName, false, 'zbscrmjs_transaction_unsetCustomer' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped,WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 
-									// mikes inv selector
 									?>
-										<div class="assignInvToCust" style="display:none;max-width:658px;margin-top:21px;margin-bottom:10px;" id="invoiceSelectionTitle"><label><?php echo esc_html( __( 'Contact invoice:', 'zero-bs-crm' ) ); ?>&nbsp;</label><span class="zbs-infobox" style="margin-top:3px"><?php echo esc_html( __( 'Is this transaction a payment for an invoice? If so, enter the Invoice ID. Otherwise leave blank.', 'zero-bs-crm' ) ); ?></span></div>
-										<div id="invoiceFieldWrap" style="position:relative;display:none;max-width:658px" class="assignInvToCust"><input style="max-width:200px" id="invoice_id" name="invoice_id" value="<?php echo esc_attr( isset( $transaction['invoice_id'] ) ? $transaction['invoice_id'] : '' ); ?>" class="form-control" autocomplete="<?php echo esc_attr( jpcrm_disable_browser_autocomplete() ); ?>" /></div>
-
 												</div><div class="two wide column centered" style="text-align:center;"><?php echo esc_html( __( 'Or', 'zero-bs-crm' ) ); ?></div><div class="seven wide column"><div id="zbs-company-title"><label><?php echo esc_html( jpcrm_label_company() ); ?></label></div>
 										<?php
 
@@ -388,6 +384,13 @@ class zeroBS__Metabox_Transaction extends zeroBS__Metabox {
 										?>
 										</div>
 									</div>
+									<?php
+
+									// mikes inv selector: one shared selector under both columns; the JS
+									// repopulates it from whichever of contact or company was set last.
+									?>
+										<div class="assignInvToCust" style="display:none;max-width:658px;margin-top:21px;margin-bottom:10px;" id="invoiceSelectionTitle"><label><?php echo esc_html( __( 'Invoice:', 'zero-bs-crm' ) ); ?>&nbsp;</label><span class="zbs-infobox" style="margin-top:3px"><?php echo esc_html( __( 'Is this transaction a payment for an invoice? If so, enter the Invoice ID. Otherwise leave blank.', 'zero-bs-crm' ) ); ?></span></div>
+										<div id="invoiceFieldWrap" style="position:relative;display:none;max-width:658px" class="assignInvToCust"><input style="max-width:200px" id="invoice_id" name="invoice_id" value="<?php echo esc_attr( isset( $transaction['invoice_id'] ) ? $transaction['invoice_id'] : '' ); ?>" class="form-control" autocomplete="<?php echo esc_attr( jpcrm_disable_browser_autocomplete() ); ?>" /></div>
 									<?php
 						}
 

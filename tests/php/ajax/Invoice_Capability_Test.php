@@ -270,6 +270,98 @@ class Invoice_Capability_Test extends JPCRM_Base_Integration_TestCase {
 	}
 
 	/**
+	 * Build two companies with an invoice each, so scoping assertions mean
+	 * something (mirrors the reasoning in seed_invoice()).
+	 *
+	 * @return array{company: int, invoice: int, other_company: int, other_invoice: int}
+	 */
+	private function seed_company_invoice(): array {
+		global $zbs;
+
+		$company_id = $zbs->DAL->companies->addUpdateCompany( // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+			array( 'data' => array( 'name' => 'Acme' ) )
+		);
+		$invoice_id = $this->add_invoice(
+			array(
+				'contacts'  => array(),
+				'companies' => array( $company_id ),
+				'status'    => 'Unpaid',
+			)
+		);
+
+		$other_company_id = $zbs->DAL->companies->addUpdateCompany( // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+			array( 'data' => array( 'name' => 'Globex' ) )
+		);
+		$other_invoice_id = $this->add_invoice(
+			array(
+				'id_override' => '2',
+				'contacts'    => array(),
+				'companies'   => array( $other_company_id ),
+				'status'      => 'Unpaid',
+			)
+		);
+
+		$this->assertNotSame(
+			$company_id,
+			$other_company_id,
+			'the two seeded companies collapsed into one, so nothing below is scoped'
+		);
+
+		return array(
+			'company'       => $company_id,
+			'invoice'       => $invoice_id,
+			'other_company' => $other_company_id,
+			'other_invoice' => $other_invoice_id,
+		);
+	}
+
+	/**
+	 * The getinvs endpoint also serves company-assigned invoices via company_id —
+	 * the path the transaction editor uses for company-assigned transactions.
+	 */
+	public function test_getinvs_returns_invoices_scoped_to_the_requested_company() {
+		$seed = $this->seed_company_invoice();
+		$this->acting_as( 'zerobs_admin', 'zbscrmjs-glob-ajax-nonce' );
+		$_POST['company_id'] = $seed['company'];
+
+		$response = $this->capture_json_response( 'zeroBSCRM_AJAX_getCustInvs' );
+
+		// Exactly one ID: a second company's invoice exists, so this fails if the
+		// handler ignores company_id and returns everything.
+		$this->assertSame(
+			array( $seed['invoice'] ),
+			array_map( 'intval', wp_list_pluck( (array) $response, 'id' ) ),
+			"should get this company's invoices and no others"
+		);
+	}
+
+	/**
+	 * The company path sits behind the same view-invoices gate as the contact path.
+	 *
+	 * @param string $role The role under test.
+	 */
+	#[DataProvider( 'refused_roles' )]
+	public function test_getinvs_company_path_refuses_roles_without_the_view_capability( string $role ) {
+		$seed = $this->seed_company_invoice();
+		$this->acting_as( $role, 'zbscrmjs-glob-ajax-nonce' );
+		$_POST['company_id'] = $seed['company'];
+
+		$response = $this->capture_json_response( 'zeroBSCRM_AJAX_getCustInvs' );
+
+		$this->assertSame( array(), $response, "$role should get no invoices back" );
+
+		// Prove the data was there to leak (see the contact variant above).
+		$this->acting_as( 'zerobs_admin', 'zbscrmjs-glob-ajax-nonce' );
+		$control = $this->capture_json_response( 'zeroBSCRM_AJAX_getCustInvs' );
+
+		$this->assertSame(
+			array( $seed['invoice'] ),
+			array_map( 'intval', wp_list_pluck( $control, 'id' ) ),
+			'the seeded company invoice is not reachable at all, so the refusal above proves nothing'
+		);
+	}
+
+	/**
 	 * Guards the fix itself: contacts access alone must never be sufficient.
 	 * If someone reverts either handler to a contacts-based check, this fails.
 	 */
@@ -291,7 +383,7 @@ class Invoice_Capability_Test extends JPCRM_Base_Integration_TestCase {
 	 * Clean up request superglobals between tests.
 	 */
 	public function tear_down(): void {
-		unset( $_POST['sec'], $_POST['invid'], $_POST['cid'], $_REQUEST['sec'] );
+		unset( $_POST['sec'], $_POST['invid'], $_POST['cid'], $_POST['company_id'], $_REQUEST['sec'] );
 		parent::tear_down();
 	}
 }

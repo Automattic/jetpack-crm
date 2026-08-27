@@ -1353,22 +1353,27 @@ function zbscrm_js_uiSpinnerBlocker( spinnerHTML ) {
 */
 
 window.zbscrm_custcache_invoices = {};
+window.zbscrm_companycache_invoices = {};
 /**
- * @param cID
+ * Retrieve invoices assigned to a contact or company (shared impl).
+ *
+ * @param cache      - Cache object keyed by object ID.
+ * @param requestKey - POST key the getinvs endpoint reads the ID from ('cid' or 'company_id').
+ * @param objID
  * @param cb
  * @param errcb
  */
-function zbscrm_js_getCustInvs( cID, cb, errcb ) {
-	if ( typeof cID !== 'undefined' && cID > 0 ) {
+function zbscrm_js_getObjInvs( cache, requestKey, objID, cb, errcb ) {
+	if ( typeof objID !== 'undefined' && objID > 0 ) {
 		// see if in cache (rough cache)
 
-		if ( typeof window.zbscrm_custcache_invoices[ cID ] !== 'undefined' ) {
+		if ( typeof cache[ objID ] !== 'undefined' ) {
 			// call back with that!
 			if ( typeof cb === 'function' ) {
-				cb( window.zbscrm_custcache_invoices[ cID ] );
+				cb( cache[ objID ] );
 			}
 
-			return window.zbscrm_custcache_invoices[ cID ];
+			return cache[ objID ];
 		}
 
 		// ... otherwise retrieve!
@@ -1377,8 +1382,8 @@ function zbscrm_js_getCustInvs( cID, cb, errcb ) {
 		const data = {
 			action: 'getinvs',
 			sec: window.zbs_root.zbsnonce,
-			cid: cID,
 		};
+		data[ requestKey ] = objID;
 
 		// Send
 		jQuery.ajax( {
@@ -1389,7 +1394,7 @@ function zbscrm_js_getCustInvs( cID, cb, errcb ) {
 			timeout: 20000,
 			success: function ( response ) {
 				// set cache
-				window.zbscrm_custcache_invoices[ cID ] = response;
+				cache[ objID ] = response;
 
 				// callback
 				if ( typeof cb === 'function' ) {
@@ -1412,6 +1417,24 @@ function zbscrm_js_getCustInvs( cID, cb, errcb ) {
 	}
 
 	return false;
+}
+
+/**
+ * @param cID
+ * @param cb
+ * @param errcb
+ */
+function zbscrm_js_getCustInvs( cID, cb, errcb ) {
+	return zbscrm_js_getObjInvs( window.zbscrm_custcache_invoices, 'cid', cID, cb, errcb );
+}
+
+/**
+ * @param companyID
+ * @param cb
+ * @param errcb
+ */
+function zbscrm_js_getCompanyInvs( companyID, cb, errcb ) {
+	return zbscrm_js_getObjInvs( window.zbscrm_companycache_invoices, 'company_id', companyID, cb, errcb );
 }
 
 /*
@@ -2765,6 +2788,7 @@ if ( typeof module !== 'undefined' ) {
 		zbscrm_JS_bindFieldValidators,
 		zbscrm_js_uiSpinnerBlocker,
 		zbscrm_js_getCustInvs,
+		zbscrm_js_getCompanyInvs,
 		zbscrm_JS_validateEmail,
 		zbscrmjs_permify,
 		zbscrmjs_nl2br,

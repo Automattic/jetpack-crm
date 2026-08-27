@@ -248,7 +248,7 @@ function zeroBSCRM_AJAX_markFeedback() {
 	wp_send_json( array( 'fini' => 1 ), 200, JSON_UNESCAPED_SLASHES );
 }
 
-	// } Retrieve list of invoice deets for customer ID
+	// } Retrieve list of invoice deets for customer or company ID
 	add_action( 'wp_ajax_getinvs', 'zeroBSCRM_AJAX_getCustInvs' );
 function zeroBSCRM_AJAX_getCustInvs() {
 
@@ -266,10 +266,20 @@ function zeroBSCRM_AJAX_getCustInvs() {
 			$cID = (int) $_POST['cid'];
 		}
 
+		$company_id = -1;
+		if ( isset( $_POST['company_id'] ) ) {
+			$company_id = (int) $_POST['company_id'];
+		}
+
 		if ( $cID > 0 ) {
 
 			// } Retrieve the customers invoices:
 			$ret = zeroBS_getInvoicesForCustomer( $cID, true, 100 );
+
+		} elseif ( $company_id > 0 ) {
+
+			// } Retrieve the company's invoices:
+			$ret = zeroBS_getInvoicesForCompany( $company_id, 100 );
 
 		}
 	}
