@@ -74,8 +74,6 @@ function jpcrm_render_dashboard_page() {
 	/* Transactions - Revenue Chart data gen */
 	$labels = array();
 
-	$labels[0] = gmdate( 'F Y' );
-
 	for ( $i = 0; $i < 12; $i++ ) {
 		$labels[ $i ] = gmdate( 'M y', mktime( 0, 0, 0, gmdate( 'm' ) - $i, 1, (int) gmdate( 'Y' ) ) );
 	}
@@ -85,13 +83,17 @@ function jpcrm_render_dashboard_page() {
 	$transaction_totals_by_month = array();
 
 	// fill with zeros if months aren't present
-	for ( $i = 11; $i > 0; $i-- ) {
+	for ( $i = 11; $i >= 0; $i-- ) {
 		$key                                 = gmdate( 'nY', mktime( 0, 0, 0, gmdate( 'm' ) - $i, 1, (int) gmdate( 'Y' ) ) );
 		$transaction_totals_by_month[ $key ] = 0;
 	}
 
 	$args = array(
-		'paidAfter'  => strtotime( 'first day of ' . gmdate( 'F Y', strtotime( '11 month ago' ) ) ),
+		// Derive the window start with the same mktime() arithmetic as the labels
+		// and zero-prefill above: strtotime( '11 month ago' ) overflows on
+		// month-end days (e.g. May 31 -> "June 31" -> July 1), which excluded the
+		// oldest labeled month from the query.
+		'paidAfter'  => mktime( 0, 0, 0, (int) gmdate( 'm' ) - 11, 1, (int) gmdate( 'Y' ) ),
 		'paidBefore' => time(),
 	);
 
