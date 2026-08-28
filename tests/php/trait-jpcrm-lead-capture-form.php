@@ -58,7 +58,7 @@ trait JPCRM_Lead_Capture_Form {
 	 * @return array The decoded JSON response.
 	 */
 	protected function submit_lead_capture_form( array $post ): array {
-		$original_post = $_POST;
+		$original_post = $_POST; // phpcs:ignore WordPress.Security.NonceVerification.Missing -- simulating the public form endpoint, which has no nonce by design.
 
 		$_POST = array_merge(
 			array(
