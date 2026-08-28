@@ -15,7 +15,10 @@ if ( PHP_VERSION_ID >= 80400 ) {
 		function ( $errno, $errstr, $errfile = '' ) {
 			return E_DEPRECATED === $errno
 				&& str_contains( $errstr, 'the explicit nullable type must be used instead' )
-				&& str_contains( $errfile, 'crm/vendor/thecodingmachine/safe/' );
+				// Not `crm/vendor/...`: that only matched because the checkout
+				// happened to be in a directory ending in `crm`. Clone this to
+				// `~/src/jpcrm` and the handler stopped firing.
+				&& str_contains( $errfile, '/vendor/thecodingmachine/safe/' );
 		},
 		E_ALL
 	);

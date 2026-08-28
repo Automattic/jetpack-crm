@@ -1,0 +1,51 @@
+name: Lint PHP
+
+# Runs `composer cs` — phpcs, restricted to the lines the PR changed — on every
+# PR against trunk. The other half of #41, phpunit, is separate work: it needs a
+# decision on whether CI drives wp-env like `make test` does or points phpunit
+# at a WordPress checkout, and this job shouldn't wait on that.
+#
+# PRs against release/* branches are not covered, matching the script: it
+# diffs against trunk by name, so a release-branch PR would be linted against
+# the wrong base. Those changes arrive as cherry-picks of trunk PRs that were
+# linted here first.
+
+on:
+  pull_request:
+    branches:
+      - trunk
+
+jobs:
+  phpcs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        with:
+          # scripts/phpcs-changed.sh diffs trunk...HEAD, so the merge base has
+          # to be reachable from the checkout — full history, not the default
+          # single commit.
+          fetch-depth: 0
+
+      # The checkout is a detached merge commit with only remote-tracking refs,
+      # and a bare `trunk` in the script's `git diff trunk...HEAD` resolves
+      # local branches, not origin/trunk. Without this the script exits 1
+      # before linting anything ("Could not diff against trunk.").
+      - name: Create a local trunk for the diff base
+        run: git branch -f trunk origin/trunk
+
+      - uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # 2.37.2
+        with:
+          # `make lint` runs on the host PHP, not the wp-env container, and
+          # composer.lock is resolved on a modern host: it locks packages that
+          # require php >=8.4.1, so `composer install` refuses anything older.
+          # This is the lint toolchain's PHP, not a claim about what the
+          # plugin supports — PHPCompatibility checks the 7.4 floor from here.
+          php-version: '8.5'
+          tools: composer
+          coverage: none
+
+      - name: Install PHP dependencies
+        run: composer install --no-ansi --no-interaction --prefer-dist --no-progress
+
+      - name: phpcs on changed lines
+        run: composer cs

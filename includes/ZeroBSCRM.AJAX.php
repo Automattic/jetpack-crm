@@ -258,7 +258,7 @@ function zeroBSCRM_AJAX_getCustInvs() {
 	$ret = array();
 
 	// } If perms?
-	if ( zeroBSCRM_permsCustomers() ) {
+	if ( zeroBSCRM_permsViewInvoices() ) {
 
 		// } Retrieve ID
 		$cID = -1;
@@ -2002,6 +2002,33 @@ function zeroBSCRM_AJAX_updateListViewColumns() {
 		exit( 0 );
 }
 
+/**
+ * Rejects a list view sort direction that isn't ASC or DESC.
+ *
+ * The sort direction is interpolated into an ORDER BY clause further down, so anything
+ * that isn't one of the two recognised directions is rejected rather than passed along.
+ *
+ * The check is case insensitive but the value itself is returned unchanged: it is passed
+ * on to extensions via zerobs_ajax_list_view_{listtype}, which have always seen the
+ * lowercase form the list view sends. buildSort() uppercases it for the query itself.
+ *
+ * @param string|false $sort_order Sort direction as supplied in the request.
+ *
+ * @return string|false The unmodified sort direction, or false if it was empty or unrecognised.
+ */
+function jpcrm_sanitize_list_view_sort_order( $sort_order ) {
+
+	if ( empty( $sort_order ) || ! is_string( $sort_order ) ) {
+		return false;
+	}
+
+	if ( ! in_array( strtoupper( $sort_order ), array( 'ASC', 'DESC' ), true ) ) {
+		return false;
+	}
+
+	return $sort_order;
+}
+
 	// } Retrieves data sets for list views, with passed params :)
 	add_action( 'wp_ajax_retrieveListViewData', 'zeroBSCRM_AJAX_listViewRetrieveData' );
 function zeroBSCRM_AJAX_listViewRetrieveData() {
@@ -2041,6 +2068,10 @@ function zeroBSCRM_AJAX_listViewRetrieveData() {
 	if ( ! empty( $listViewParams['sort'] ) && ! preg_match( '/^[a-zA-Z_][a-zA-Z0-9_-]*$/', $listViewParams['sort'] ) ) {
 		$listViewParams['sort'] = false;
 	}
+
+	// Security: validate sort direction for the same reason. The DAL normalises this as well,
+	// but this is the request-facing entry point, so reject anything that isn't ASC or DESC here.
+	$listViewParams['sortorder'] = jpcrm_sanitize_list_view_sort_order( $listViewParams['sortorder'] );
 
 	// deal with arrayed items
 
@@ -2126,25 +2157,7 @@ function zeroBSCRM_AJAX_listViewRetrieveData() {
 		global $zbs;
 
 		// } check perms first
-		if ( $listViewParams['listtype'] == 'customer' && ! zeroBSCRM_permsViewCustomers() ) {
-			wp_send_json_error( array( 'no-action-or-rights' => 1 ), 500, JSON_UNESCAPED_SLASHES );
-		}
-		if ( $listViewParams['listtype'] == 'company' && ! zeroBSCRM_permsViewCustomers() ) {
-			wp_send_json_error( array( 'no-action-or-rights' => 1 ), 500, JSON_UNESCAPED_SLASHES );
-		}
-		if ( $listViewParams['listtype'] == 'segment' && ! zeroBSCRM_permsViewCustomers() ) {
-			wp_send_json_error( array( 'no-action-or-rights' => 1 ), 500, JSON_UNESCAPED_SLASHES );
-		}
-		if ( $listViewParams['listtype'] == 'quote' && ! zeroBSCRM_permsViewQuotes() ) {
-			wp_send_json_error( array( 'no-action-or-rights' => 1 ), 500, JSON_UNESCAPED_SLASHES );
-		}
-		if ( $listViewParams['listtype'] == 'quotetemplate' && ! zeroBSCRM_permsViewQuotes() ) {
-			wp_send_json_error( array( 'no-action-or-rights' => 1 ), 500, JSON_UNESCAPED_SLASHES );
-		}
-		if ( $listViewParams['listtype'] == 'invoice' && ! zeroBSCRM_permsViewInvoices() ) {
-			wp_send_json_error( array( 'no-action-or-rights' => 1 ), 500, JSON_UNESCAPED_SLASHES );
-		}
-		if ( $listViewParams['listtype'] == 'transaction' && ! zeroBSCRM_permsViewTransactions() ) {
+		if ( ! jpcrm_perms_view_list_type( $listViewParams['listtype'] ) ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 			wp_send_json_error( array( 'no-action-or-rights' => 1 ), 500, JSON_UNESCAPED_SLASHES );
 		}
 
@@ -5682,7 +5695,7 @@ function zeroBSCRM_AJAX_getInvoice() {
 	check_ajax_referer( 'zbscrmjs-ajax-nonce', 'sec' );
 
 	// check perms
-	if ( ! zeroBSCRM_permsIsZBSUser() ) {
+	if ( ! zeroBSCRM_permsViewInvoices() ) {
 		wp_send_json_error( null, 500, JSON_UNESCAPED_SLASHES );
 	}
 

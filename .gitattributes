@@ -22,6 +22,7 @@ webpack.config.js     export-ignore
 babel.config.js       export-ignore
 codeception.dist.yml  export-ignore
 phpunit.*.xml.dist    export-ignore
+.phpcs.xml.dist       export-ignore
 AGENTS.md             export-ignore
 CLAUDE.md             export-ignore
 README.md             export-ignore
