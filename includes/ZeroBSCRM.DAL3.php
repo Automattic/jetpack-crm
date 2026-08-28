@@ -8569,7 +8569,7 @@ class zbsDAL {
 
 			$sortOrder = strtoupper( $sortOrder );
 
-			if ( ! in_array( $sortOrder, array( 'DESC', 'ASC' ) ) ) {
+			if ( ! in_array( $sortOrder, array( 'DESC', 'ASC' ), true ) ) {
 				$sortOrder = 'DESC';
 			}
 			return ' ORDER BY ' . $sortByField . ' ' . $sortOrder;
@@ -8579,10 +8579,16 @@ class zbsDAL {
 			$orderByStr = '';
 			foreach ( $sortByField as $field => $order ) {
 
+				$order = strtoupper( $order );
+
+				if ( ! in_array( $order, array( 'DESC', 'ASC' ), true ) ) {
+					$order = 'DESC';
+				}
+
 				if ( ! empty( $orderByStr ) ) {
 					$orderByStr .= ', ';
 				}
-				$orderByStr .= $field . ' ' . strtoupper( $order );
+				$orderByStr .= $field . ' ' . $order;
 
 			}
 

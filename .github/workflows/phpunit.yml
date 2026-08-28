@@ -1,0 +1,90 @@
+name: PHPUnit tests
+
+# The test half of #41. Same provisioning shape as the Jetpack monorepo's CI:
+# a wordpress-develop checkout plus a database service, with the plugin's own
+# `composer phpunit` doing the running. Local development keeps using wp-env
+# (`make test`); drift between the two is prevented by sharing everything that
+# matters — the bootstrap (tests/php/bootstrap.php), the composer script, and
+# the WORDPRESS_DEVELOP_DIR contract the bootstrap resolves.
+#
+# One leg for now: current stable WordPress on PHP 8.5. Widening to the
+# supported floor (WP 6.0, PHP 7.4) is blocked on a decision about
+# composer.lock, which is resolved on a modern host and refuses to install on
+# PHP < 8.4 — an older leg needs per-version dependency resolution, the way
+# the monorepo (which commits no lock) gets it.
+
+on:
+  pull_request:
+    branches:
+      - trunk
+  # Trunk is deliberately not PR-gated, so also test what actually lands.
+  push:
+    branches:
+      - trunk
+
+jobs:
+  phpunit:
+    runs-on: ubuntu-latest
+    services:
+      database:
+        image: mariadb:lts
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress_tests
+        ports:
+          - 3306:3306
+        # healthcheck.sh ships in the mariadb image; --innodb_initialized
+        # waits for the server to be writable, not just accepting connections.
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+
+      # The version wp-env runs locally ("core": null in .wp-env.json is
+      # "current stable"), so CI tests the same WordPress developers do.
+      # wordpress-develop tags every release, x.y and x.y.z alike.
+      - name: Resolve current stable WordPress
+        id: wp
+        run: |
+          version=$(curl -sf https://api.wordpress.org/core/version-check/1.7/ | jq -r '.offers[0].version')
+          test -n "$version" && test "$version" != "null"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        with:
+          repository: WordPress/wordpress-develop
+          ref: ${{ steps.wp.outputs.version }}
+          path: wordpress-develop
+
+      # The WP test bootstrap finds wp-tests-config.php at the
+      # wordpress-develop root on its own; no WP_TESTS_CONFIG_FILE_PATH needed.
+      - name: Create wp-tests-config.php
+        run: |
+          sed -e 's/youremptytestdbnamehere/wordpress_tests/' \
+              -e 's/yourusernamehere/root/' \
+              -e 's/yourpasswordhere/root/' \
+              -e 's/localhost/127.0.0.1/' \
+              wordpress-develop/wp-tests-config-sample.php > wordpress-develop/wp-tests-config.php
+
+      - uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # 2.37.2
+        with:
+          # composer.lock is resolved on a modern host and locks packages
+          # requiring php >= 8.4.1; 8.5 is what development runs on. See the
+          # note at the top about widening this.
+          php-version: '8.5'
+          tools: composer
+          coverage: none
+
+      - name: Install PHP dependencies
+        run: composer install --no-ansi --no-interaction --prefer-dist --no-progress
+
+      # `composer phpunit` picks phpunit.<major>.xml.dist to match the
+      # installed PHPUnit, same as it does locally.
+      - name: Run PHPUnit
+        env:
+          WORDPRESS_DEVELOP_DIR: ${{ github.workspace }}/wordpress-develop
+        run: composer phpunit

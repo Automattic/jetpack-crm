@@ -10,18 +10,23 @@
 		"codeception/module-filesystem": "^2.0 || ^3.0",
 		"codeception/util-universalframework": "^1.0 || ^2.0",
 		"yoast/phpunit-polyfills": "^4.0.0",
-		"automattic/phpunit-select-config": "^1.0.6"
+		"automattic/phpunit-select-config": "^1.0.6",
+		"squizlabs/php_codesniffer": "^3.13",
+		"wp-coding-standards/wpcs": "^3.2",
+		"dealerdirect/phpcodesniffer-composer-installer": "^1.1",
+		"sirbrillig/phpcs-changed": "^2.11",
+		"phpcompatibility/phpcompatibility-wp": "^2.1"
 	},
 	"scripts": {
 		"tests": "php -d auto_prepend_file=tests/suppress_php84_deprecations.php vendor/bin/codecept run acceptance --fail-fast",
 		"tests-debug": "php -d auto_prepend_file=tests/suppress_php84_deprecations.php vendor/bin/codecept run acceptance --fail-fast --debug",
 		"create-test": "php -d auto_prepend_file=tests/suppress_php84_deprecations.php vendor/bin/codecept generate:cest acceptance $1",
 		"build-tests": "php -d auto_prepend_file=tests/suppress_php84_deprecations.php vendor/bin/codecept build",
-		"cs": "temp=$(git diff --diff-filter=d --name-only trunk HEAD | grep '.php'); [[ -n $temp ]] && phpcs-changed -s --always-exit-zero --git --git-base trunk $temp || echo 'No changes found.'",
-		"cs-staged": "temp=$(git diff --diff-filter=d --name-only --cached | grep '.php'); [[ -n $temp ]] && phpcs-changed -s --always-exit-zero --git --git-staged $temp || echo 'No changes found.'",
-		"cs-unstaged": "temp=$(git diff --diff-filter=d --name-only | grep '.php'); [[ -n $temp ]] && phpcs-changed -s --always-exit-zero --git --git-unstaged $temp || echo 'No changes found.'",
+		"cs": "scripts/phpcs-changed.sh base",
+		"cs-staged": "scripts/phpcs-changed.sh staged",
+		"cs-unstaged": "scripts/phpcs-changed.sh unstaged",
 		"phpunit": [
-			"php -d auto_prepend_file=tests/suppress_php84_deprecations.php vendor/bin/phpunit-select-config phpunit.#.xml.dist --colors=always"
+			"phpunit=\"php -d auto_prepend_file=tests/suppress_php84_deprecations.php vendor/bin/phpunit\"; major=$($phpunit --version | sed -n 's/^PHPUnit \\([0-9][0-9]*\\).*/\\1/p'); if [ -z \"$major\" ]; then echo 'Could not read a major version out of phpunit --version, so cannot pick a config.' >&2; exit 1; fi; $phpunit -c \"phpunit.$major.xml.dist\" --colors=always"
 		]
 	},
 	"config": {
@@ -29,6 +34,7 @@
 		"allow-plugins": {
 			"automattic/jetpack-autoloader": true,
 			"automattic/jetpack-composer-plugin": true,
+			"dealerdirect/phpcodesniffer-composer-installer": true,
 			"roots/wordpress-core-installer": true
 		}
 	},

@@ -48,10 +48,47 @@ The plugin is mounted into the container, so edits are picked up live (run
 | `make logs` | Tail the WordPress container logs |
 | `make cli` | Open a shell inside the `cli` container |
 | `make wp CMD="plugin list"` | Run a wp-cli command in the container |
-| `make test` | Run the PHPUnit unit suite |
-| `make lint` | Run PHP CodeSniffer on files changed vs `trunk` |
+| `make test` | Run the PHPUnit unit suite (needs `make up` first) |
+| `make lint` | Run PHP CodeSniffer on files committed on this branch vs `trunk` |
+| `make lint-staged` | Run PHP CodeSniffer on staged changes |
+| `make lint-unstaged` | Run PHP CodeSniffer on unstaged working tree changes |
 | `make build` | Build `dist/zero-bs-crm.zip` (tracked source from `HEAD`, assets compiled fresh) |
 | `make clean` | Remove the `dist/` staging directory |
+
+### Tests
+
+`make test` runs inside the wp-env `tests-cli` container, so bring the
+environment up first with `make up`. It takes phpunit flags via `ARGS`:
+
+```sh
+make test                             # the whole unit suite
+make test ARGS="--testsuite pdf"      # one suite
+make test ARGS="--filter Company"     # one test or class
+```
+
+### Linting
+
+Every lint target reports only on the lines you touched, not on the whole file,
+because the tree as a whole does not pass the ruleset in `.phpcs.xml.dist`. A
+run that finds nothing says `No PHP changes found.`; a run that finds something
+exits non-zero.
+
+`make lint` covers what you have committed on this branch. Uncommitted work is
+`make lint-staged` and `make lint-unstaged`. Neither phpcs nor phpunit runs in
+CI yet, so these are local-only.
+
+### Working in a git worktree
+
+Both `make test` and `make lint` work from a worktree under `.claude/worktrees/`,
+which is inside the directory wp-env mounts. `vendor/`, `jetpack_vendor/` and
+`node_modules/` are gitignored and so absent there — run `make worktree-link`
+once to symlink them in from the main checkout. Note what that shares: npm and
+composer run in a worktree write into the main checkout.
+
+wp-env itself only runs from the main checkout, since it keys its state
+directory on the invocation directory. A worktree placed anywhere other than
+inside the main checkout can't work at all, and the targets say so rather than
+falling back. Neither is a checkout path containing a space supported.
 
 ## Publishing a release
 

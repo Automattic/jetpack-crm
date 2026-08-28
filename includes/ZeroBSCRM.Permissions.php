@@ -598,6 +598,87 @@ function zeroBSCRM_permsObjType( $obj_type_id = -1 ) { // phpcs:ignore WordPress
 }
 
 /**
+ * Determine if the current user is allowed to view a given list view type.
+ *
+ * The list view type is supplied by the client, so every type we serve needs an
+ * explicit view capability here. The capabilities are kept in step with what the
+ * matching admin page registers in ZeroBSCRM.Core.Menus.WP.php, which is the
+ * source of truth for who can reach each list.
+ *
+ * Types we do not serve ourselves are handled by extensions, which hook
+ * `zerobs_ajax_list_view_{$list_type}` in the list view handler. Those reach the
+ * extension if a CRM backend user asked for them, and the extension is
+ * responsible for the capability check for the list views it serves, either in
+ * its hook callback or through the `jpcrm_perms_view_list_type` filter below.
+ * Anything with no listener is denied, as is anything asked for by someone with
+ * no CRM access at all.
+ *
+ * @since 6.8.3
+ *
+ * @param string $list_type List view type, as used by zeroBSCRM_list (e.g. 'customer', 'event').
+ *
+ * @return bool
+ */
+function jpcrm_perms_view_list_type( $list_type ) {
+
+	switch ( $list_type ) {
+
+		case 'customer':
+		case 'company':
+		case 'segment':
+			$allowed = zeroBSCRM_permsViewCustomers();
+			break;
+
+		case 'quote':
+		case 'quotetemplate':
+			$allowed = zeroBSCRM_permsViewQuotes();
+			break;
+
+		case 'invoice':
+			$allowed = zeroBSCRM_permsViewInvoices();
+			break;
+
+		case 'transaction':
+			$allowed = zeroBSCRM_permsViewTransactions();
+			break;
+
+		case 'event':
+			$allowed = jpcrm_perms_view_tasks();
+			break;
+
+		case 'form':
+			$allowed = zeroBSCRM_permsForms();
+			break;
+
+		default:
+			// Not one of ours. Only let it through if an extension is listening for
+			// it, and then only for a user with CRM access.
+			$allowed = ! empty( $list_type )
+				&& has_action( 'zerobs_ajax_list_view_' . $list_type )
+				&& zeroBSCRM_permsIsZBSBackendUser();
+			break;
+
+	}
+
+	/**
+	 * Filters whether the current user may view a given list view type.
+	 *
+	 * Fires for every list type, ours and those supplied by extensions, so a site
+	 * can widen or narrow access to any list view. An extension registering
+	 * `zerobs_ajax_list_view_{$list_type}` is responsible for the capability check
+	 * for that list view, and can apply it here instead of in its hook callback.
+	 * Note that an extension type only reaches this filter as `true` for a user
+	 * who already has CRM backend access.
+	 *
+	 * @since 6.8.3
+	 *
+	 * @param bool   $allowed   Whether the user may view this list type.
+	 * @param string $list_type The list view type requested.
+	 */
+	return (bool) apply_filters( 'jpcrm_perms_view_list_type', $allowed, $list_type );
+}
+
+/**
  * Determine if a user is allowed to manage contacts.
  *
  * @since 6.1.0
@@ -743,6 +824,14 @@ function zeroBSCRM_permsForms() {
 	return false;
 }
 
+/**
+ * Determine if the current user is allowed to edit tasks (events).
+ *
+ * This is the edit capability. For the task list views, use
+ * jpcrm_perms_view_tasks() below, which matches what the pages register.
+ *
+ * @return bool
+ */
 function zeroBSCRM_perms_tasks() {
 
 	$cu = wp_get_current_user();
@@ -751,6 +840,23 @@ function zeroBSCRM_perms_tasks() {
 	}
 	return false;
 }
+
+/**
+ * Determine if the current user is allowed to view tasks (events).
+ *
+ * This mirrors the capability used by the Task Scheduler and Task List admin
+ * pages, which is separate from the task edit capability.
+ *
+ * @since 6.8.3
+ *
+ * @return bool
+ */
+function jpcrm_perms_view_tasks() {
+
+	$cu = wp_get_current_user();
+	return $cu->has_cap( 'admin_zerobs_view_events' );
+}
+
 function zeroBSCRM_permsNotify() {
 
 	$cu = wp_get_current_user();

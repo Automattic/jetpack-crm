@@ -1,8 +1,8 @@
 === Jetpack CRM - Clients, Leads, Invoices, Billing, Email Marketing, & Automation ===
 Contributors: automattic, kallehauge, cleacos, diegogarciarodrigues, bradshawtm, wpkaren, robertf4, woodyhayday, mikemayhem3030
 Tags: CRM, Woocommerce CRM, Client Portal, Marketing Automation, Lead Generation
-Tested up to: 7.0
-Stable tag: 6.8.2
+Tested up to: 7.1
+Stable tag: 6.8.3
 Requires at least: 6.0
 Requires PHP: 7.4
 License: GPLv2
@@ -362,6 +362,17 @@ We offer a full, no-hassle refund within 14 days. You can read more about that, 
 
 
 == Changelog ==
+### 6.8.3 - 2026-08-18
+* Fix Activity panel header icon rendering (#37)
+* Don't let self-reported details replace contact fields already filled in (#30)
+* Check that the current user may view a list view type before returning its data. Task and form list views were not checked before.
+* Add a `jpcrm_perms_view_list_type` filter, so a site can grant or deny access to any list view. Use it if custom code shows a task or form list view behind a different capability.
+* Bump @wordpress/theme to 1.0.0 and migrate WPDS token names (#14)
+* CRM: Align admin footer with the unified Jetpack footer (#8)
+* Only accept a recognised sort direction on list views.
+* Require the invoice viewing capability to read invoice data over AJAX.
+* Escape the prefilled company name in the company field.
+
 ### 6.8.2 - 2026-07-27
 * Improve remote image handling in PDF generation (#10)
 
