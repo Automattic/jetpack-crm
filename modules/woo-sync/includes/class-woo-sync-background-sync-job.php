@@ -62,6 +62,8 @@ class Woo_Sync_Background_Sync_Job {
 	 * afterwards, so it gets the same protection as one added by hand.
 	 *
 	 * Set by the two methods that do the walking, and false everywhere else.
+	 *
+	 * @var bool
 	 */
 	private $is_first_import_walk = false;
 
@@ -801,7 +803,7 @@ class Woo_Sync_Background_Sync_Job {
 			return -1;
 		}
 
-		$contact_id = (int) $zbs->DAL->contacts->getContact(
+		$contact_id = (int) $zbs->DAL->contacts->getContact( // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 			-1,
 			array(
 				'email'       => $email,
@@ -827,7 +829,7 @@ class Woo_Sync_Background_Sync_Job {
 
 		global $zbs;
 
-		return $zbs->DAL->updateMeta( ZBS_TYPE_CONTACT, (int) $contact_id, self::IMPORT_CREATED_META_KEY, $this->site_key );
+		return $zbs->DAL->updateMeta( ZBS_TYPE_CONTACT, (int) $contact_id, self::IMPORT_CREATED_META_KEY, $this->site_key ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 	}
 
 	/**
@@ -850,7 +852,7 @@ class Woo_Sync_Background_Sync_Job {
 			return false;
 		}
 
-		$created_by = $zbs->DAL->getMeta(
+		$created_by = $zbs->DAL->getMeta( // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 			array(
 				'objtype' => ZBS_TYPE_CONTACT,
 				'objid'   => (int) $contact_id,
@@ -875,7 +877,7 @@ class Woo_Sync_Background_Sync_Job {
 	 */
 	public static function clear_first_import_marks( $site_key ) {
 
-		global $ZBSCRM_t, $wpdb;
+		global $ZBSCRM_t, $wpdb; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 
 		if ( empty( $site_key ) ) {
 			return false;
@@ -884,7 +886,7 @@ class Woo_Sync_Background_Sync_Job {
 		// There is no DAL helper for this: `deleteMeta()` works one object at a time and
 		// the whole point here is that we do not have the list of contacts.
 		return $wpdb->delete( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-			$ZBSCRM_t['meta'],
+			$ZBSCRM_t['meta'], // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 			array(
 				'zbsm_objtype' => ZBS_TYPE_CONTACT,
 				'zbsm_key'     => self::IMPORT_CREATED_META_KEY,

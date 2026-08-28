@@ -16,6 +16,9 @@
  * @package Automattic\Jetpack\CRM
  */
 
+// The Test_Sync_Job seam lives beside the one test class that uses it, as in WP_UnitTestCase_Fix.php.
+// phpcs:disable Generic.Files.OneObjectStructurePerFile.MultipleFound
+
 namespace Automattic\Jetpack\CRM\Woo_Sync\Tests;
 
 use Automattic\Jetpack\CRM\Tests\JPCRM_Base_Integration_TestCase;

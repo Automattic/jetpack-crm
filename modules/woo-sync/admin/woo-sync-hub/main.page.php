@@ -46,7 +46,7 @@ function jpcrm_woosync_render_hub_page() {
 			foreach ( $sync_sites as $site_key => $site_info ) {
 
 				// back to the start: progress reset, and the record of which contacts
-				// the last import created cleared along with it
+				// the last import created cleared along with it.
 				$zbs->modules->woosync->restart_first_import( $site_key );
 
 			}
