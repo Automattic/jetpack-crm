@@ -1352,23 +1352,28 @@ function zbscrm_js_uiSpinnerBlocker( spinnerHTML ) {
 	#==================================================
 */
 
-window.zbscrm_custcache_invoices = {};
+window.zbscrm_objcache_invoices = {};
 /**
- * @param cID
+ * Retrieve invoices assigned to a contact or company.
+ *
+ * @param objType - 'contact' or 'company'; also namespaces the cache.
+ * @param objID
  * @param cb
  * @param errcb
  */
-function zbscrm_js_getCustInvs( cID, cb, errcb ) {
-	if ( typeof cID !== 'undefined' && cID > 0 ) {
+function zbscrm_js_getObjInvs( objType, objID, cb, errcb ) {
+	const cacheKey = objType + '_' + objID;
+
+	if ( typeof objID !== 'undefined' && objID > 0 ) {
 		// see if in cache (rough cache)
 
-		if ( typeof window.zbscrm_custcache_invoices[ cID ] !== 'undefined' ) {
+		if ( typeof window.zbscrm_objcache_invoices[ cacheKey ] !== 'undefined' ) {
 			// call back with that!
 			if ( typeof cb === 'function' ) {
-				cb( window.zbscrm_custcache_invoices[ cID ] );
+				cb( window.zbscrm_objcache_invoices[ cacheKey ] );
 			}
 
-			return window.zbscrm_custcache_invoices[ cID ];
+			return window.zbscrm_objcache_invoices[ cacheKey ];
 		}
 
 		// ... otherwise retrieve!
@@ -1377,8 +1382,8 @@ function zbscrm_js_getCustInvs( cID, cb, errcb ) {
 		const data = {
 			action: 'getinvs',
 			sec: window.zbs_root.zbsnonce,
-			cid: cID,
 		};
+		data[ objType === 'company' ? 'coid' : 'cid' ] = objID;
 
 		// Send
 		jQuery.ajax( {
@@ -1389,7 +1394,7 @@ function zbscrm_js_getCustInvs( cID, cb, errcb ) {
 			timeout: 20000,
 			success: function ( response ) {
 				// set cache
-				window.zbscrm_custcache_invoices[ cID ] = response;
+				window.zbscrm_objcache_invoices[ cacheKey ] = response;
 
 				// callback
 				if ( typeof cb === 'function' ) {
@@ -1412,6 +1417,17 @@ function zbscrm_js_getCustInvs( cID, cb, errcb ) {
 	}
 
 	return false;
+}
+
+/**
+ * Pre-existing public surface, kept for external callers.
+ *
+ * @param cID
+ * @param cb
+ * @param errcb
+ */
+function zbscrm_js_getCustInvs( cID, cb, errcb ) {
+	return zbscrm_js_getObjInvs( 'contact', cID, cb, errcb );
 }
 
 /*
@@ -2765,6 +2781,7 @@ if ( typeof module !== 'undefined' ) {
 		zbscrm_JS_bindFieldValidators,
 		zbscrm_js_uiSpinnerBlocker,
 		zbscrm_js_getCustInvs,
+		zbscrm_js_getObjInvs,
 		zbscrm_JS_validateEmail,
 		zbscrmjs_permify,
 		zbscrmjs_nl2br,

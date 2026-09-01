@@ -248,7 +248,7 @@ function zeroBSCRM_AJAX_markFeedback() {
 	wp_send_json( array( 'fini' => 1 ), 200, JSON_UNESCAPED_SLASHES );
 }
 
-	// } Retrieve list of invoice deets for customer ID
+	// } Retrieve list of invoice deets for customer or company ID
 	add_action( 'wp_ajax_getinvs', 'zeroBSCRM_AJAX_getCustInvs' );
 function zeroBSCRM_AJAX_getCustInvs() {
 
@@ -260,16 +260,33 @@ function zeroBSCRM_AJAX_getCustInvs() {
 	// } If perms?
 	if ( zeroBSCRM_permsViewInvoices() ) {
 
-		// } Retrieve ID
-		$cID = -1;
-		if ( isset( $_POST['cid'] ) ) {
-			$cID = (int) $_POST['cid'];
-		}
+		// } Retrieve ID (the editor sends one of cid/coid)
+		$contact_id = isset( $_POST['cid'] ) ? (int) $_POST['cid'] : 0;
+		$company_id = isset( $_POST['coid'] ) ? (int) $_POST['coid'] : 0;
 
-		if ( $cID > 0 ) {
+		if ( $contact_id > 0 || $company_id > 0 ) {
 
-			// } Retrieve the customers invoices:
-			$ret = zeroBS_getInvoicesForCustomer( $cID, true, 100 );
+			// } Retrieve the contact's (or, failing that, the company's) invoices;
+			// the dropdown only renders id + ref, so skip line items and custom fields
+			global $zbs;
+
+			$args = array(
+				'sortByField'      => 'ID',
+				'sortOrder'        => 'DESC',
+				'page'             => 0,
+				'perPage'          => 100,
+				'withLineItems'    => false,
+				'withCustomFields' => false,
+				'ignoreowner'      => zeroBSCRM_DAL2_ignoreOwnership( ZBS_TYPE_INVOICE ),
+			);
+
+			if ( $contact_id > 0 ) {
+				$args['assignedContact'] = $contact_id;
+			} else {
+				$args['assignedCompany'] = $company_id;
+			}
+
+			$ret = $zbs->DAL->invoices->getInvoices( $args ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 
 		}
 	}
