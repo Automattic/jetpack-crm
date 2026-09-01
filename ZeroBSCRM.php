@@ -3,7 +3,7 @@
  * Plugin Name: Jetpack CRM
  * Plugin URI: https://jetpackcrm.com
  * Description: Jetpack CRM is the simplest CRM for WordPress. Self host your own Customer Relationship Manager using WP.
- * Version: 6.8.3
+ * Version: 6.8.4
  * Author: Automattic - Jetpack CRM team
  * Author URI: https://jetpackcrm.com
  * Text Domain: zero-bs-crm
@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 // Plugin version. Single source of truth, bumped by the release tooling
 // (release.config.json "versionConstant"). ZeroBSCRM::VERSION reads from this,
 // so this define must be set before the autoloader loads that class below.
-define( 'JPCRM_VERSION', '6.8.3' );
+define( 'JPCRM_VERSION', '6.8.4' );
 
 // Enabling THIS will start LOGGING PERFORMANCE TESTS
 // NOTE: This will do for EVERY page load, so just add temporarily else adds rolling DRAIN on sys
