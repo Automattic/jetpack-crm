@@ -68,6 +68,22 @@ class Woo_Sync_Background_Sync_Job {
 	private $is_first_import_walk = false;
 
 	/**
+	 * Contact IDs already resolved from billing email addresses, keyed by email.
+	 * -1 records a known miss. See `existing_contact_id()`.
+	 *
+	 * @var array
+	 */
+	private $contact_id_by_email = array();
+
+	/**
+	 * Answers `contact_created_by_import()` has already worked out, keyed by
+	 * contact ID. See that method for why memoising is safe.
+	 *
+	 * @var array
+	 */
+	private $created_by_import = array();
+
+	/**
 	 * Number of pages in Woo
 	 */
 	private $woo_total_pages = 0;
@@ -787,9 +803,15 @@ class Woo_Sync_Background_Sync_Job {
 	/**
 	 * The contact an order's billing email would add to or update.
 	 *
-	 * This is the same lookup `addUpdateContact()` makes to decide whether it is
-	 * inserting or updating, so it resolves to the same contact, aliases included.
-	 * Asking for the ID alone takes the faster of the two queries behind it.
+	 * `zeroBS_getCustomerIDWithEmail()` is the same lookup `addUpdateContact()`
+	 * makes to decide whether it is inserting or updating, so it resolves to the
+	 * same contact, aliases included, and asking for the ID alone takes the
+	 * faster of the two queries behind it.
+	 *
+	 * Memoised on the job: order history is full of repeat customers, so most
+	 * orders ask about an address the walk has already resolved, and each miss
+	 * is a query. `import_crm_object_data()` records the contacts it creates
+	 * here too, so a later order for the same address sees them.
 	 *
 	 * @param string $email Billing email address on the order.
 	 *
@@ -797,22 +819,18 @@ class Woo_Sync_Background_Sync_Job {
 	 */
 	public function existing_contact_id( $email ) {
 
-		global $zbs;
-
 		if ( empty( $email ) ) {
 			return -1;
 		}
 
-		$contact_id = (int) $zbs->DAL->contacts->getContact( // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
-			-1,
-			array(
-				'email'       => $email,
-				'ignoreOwner' => 1,
-				'onlyID'      => 1,
-			)
-		);
+		if ( ! isset( $this->contact_id_by_email[ $email ] ) ) {
 
-		return $contact_id > 0 ? $contact_id : -1;
+			$contact_id = (int) zeroBS_getCustomerIDWithEmail( $email );
+
+			$this->contact_id_by_email[ $email ] = $contact_id > 0 ? $contact_id : -1;
+		}
+
+		return $this->contact_id_by_email[ $email ];
 	}
 
 	/**
@@ -829,7 +847,13 @@ class Woo_Sync_Background_Sync_Job {
 
 		global $zbs;
 
-		return $zbs->DAL->updateMeta( ZBS_TYPE_CONTACT, (int) $contact_id, self::IMPORT_CREATED_META_KEY, $this->site_key ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+		$meta_id = $zbs->DAL->updateMeta( ZBS_TYPE_CONTACT, (int) $contact_id, self::IMPORT_CREATED_META_KEY, $this->site_key ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+
+		if ( ! empty( $meta_id ) ) {
+			$this->created_by_import[ (int) $contact_id ] = true;
+		}
+
+		return $meta_id;
 	}
 
 	/**
@@ -837,6 +861,11 @@ class Woo_Sync_Background_Sync_Job {
 	 *
 	 * A contact another store's import created counts as one that was already here,
 	 * because it was already here when this store's import started.
+	 *
+	 * Memoised on the job: every order a repeat customer has asks this about the
+	 * same contact, and each ask is a query. A job never spans a restart of the
+	 * import — each page of the walk runs in its own process — so an answer
+	 * cannot outlive the marks it came from.
 	 *
 	 * @param int $contact_id Contact to check.
 	 *
@@ -852,16 +881,23 @@ class Woo_Sync_Background_Sync_Job {
 			return false;
 		}
 
-		$created_by = $zbs->DAL->getMeta( // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
-			array(
-				'objtype' => ZBS_TYPE_CONTACT,
-				'objid'   => (int) $contact_id,
-				'key'     => self::IMPORT_CREATED_META_KEY,
-				'default' => '',
-			)
-		);
+		$contact_id = (int) $contact_id;
 
-		return (string) $created_by === (string) $this->site_key;
+		if ( ! isset( $this->created_by_import[ $contact_id ] ) ) {
+
+			$created_by = $zbs->DAL->getMeta( // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+				array(
+					'objtype' => ZBS_TYPE_CONTACT,
+					'objid'   => $contact_id,
+					'key'     => self::IMPORT_CREATED_META_KEY,
+					'default' => '',
+				)
+			);
+
+			$this->created_by_import[ $contact_id ] = (string) $created_by === (string) $this->site_key;
+		}
+
+		return $this->created_by_import[ $contact_id ];
 	}
 
 	/**
@@ -1033,7 +1069,8 @@ class Woo_Sync_Background_Sync_Job {
 
 			// Whether this order is about to create the contact or update one already
 			// here. Only the history walk acts on the answer, so only it pays the query.
-			$existing_contact_id = $this->first_import_walk_in_progress()
+			$walking             = $this->first_import_walk_in_progress();
+			$existing_contact_id = $walking
 				? $this->existing_contact_id( $crm_object_data['contact']['email'] )
 				: -1;
 
@@ -1051,7 +1088,11 @@ class Woo_Sync_Background_Sync_Job {
 			// can replace the details an older one filled in. Contacts a live order
 			// creates are not marked: they are new to the CRM as of now, and a CRM user
 			// may correct them at any point after, exactly like one added by hand.
-			if ( $contact_id > 0 && $existing_contact_id < 1 && $this->first_import_walk_in_progress() ) {
+			if ( $walking && $contact_id > 0 && $existing_contact_id < 1 ) {
+
+				// The next order for this address resolves to the contact without asking again.
+				$this->contact_id_by_email[ $crm_object_data['contact']['email'] ] = $contact_id;
+
 				$marked = $this->mark_contact_created_by_import( $contact_id );
 				if ( empty( $marked ) ) {
 					$this->debug( 'Failed to mark contact #' . $contact_id . ' as created by this import' );

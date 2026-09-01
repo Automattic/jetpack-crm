@@ -83,6 +83,15 @@ class Import_Created_Contact_Test extends JPCRM_Base_Integration_TestCase {
 	private const OTHER_STORE = 'other-shop.example.test';
 
 	/**
+	 * Date of the old order most tests create their contact from. Only
+	 * `test_woo_sync_stores_the_order_date_as_the_creation_time` cares about
+	 * the value, beyond it being years in the past.
+	 *
+	 * @var string
+	 */
+	private const OLD_ORDER_DATE = '2019-01-01 09:00:00';
+
+	/**
 	 * A sync job for a given store.
 	 *
 	 * The job is handed its site info directly, so nothing here needs WooCommerce or
@@ -143,23 +152,18 @@ class Import_Created_Contact_Test extends JPCRM_Base_Integration_TestCase {
 	 * Adds a contact the way a first import adds one: `created` comes from the order,
 	 * not from the moment the row is written.
 	 *
-	 * @param string $email          Billing email on the order.
-	 * @param int    $order_date_uts Date of the order that created the contact.
+	 * @param string   $email          Billing email on the order.
+	 * @param int|null $order_date_uts Date of the order that created the contact,
+	 *                                 an old one by default.
 	 *
 	 * @return int Contact ID.
 	 */
-	private function add_contact_from_order( $email, $order_date_uts ) {
+	private function add_contact_from_order( $email = 'alex@example.test', $order_date_uts = null ) {
 
-		global $zbs;
-
-		return $zbs->DAL->contacts->addUpdateContact(
+		return $this->add_contact(
 			array(
-				'data' => $this->generate_contact_data(
-					array(
-						'email'   => $email,
-						'created' => $order_date_uts,
-					)
-				),
+				'email'   => $email,
+				'created' => null === $order_date_uts ? strtotime( self::OLD_ORDER_DATE ) : $order_date_uts,
 			)
 		);
 	}
@@ -172,7 +176,7 @@ class Import_Created_Contact_Test extends JPCRM_Base_Integration_TestCase {
 
 		global $zbs;
 
-		$order_date = strtotime( '2019-01-01 09:00:00' );
+		$order_date = strtotime( self::OLD_ORDER_DATE );
 
 		$contact_id = $this->add_contact_from_order( 'alex@example.test', $order_date );
 
@@ -193,14 +197,14 @@ class Import_Created_Contact_Test extends JPCRM_Base_Integration_TestCase {
 	#[TestDox( 'The walk recognises a contact it created, however old the order that created it.' )]
 	public function test_the_walk_recognises_a_contact_it_created() {
 
-		$job = $this->job();
+		$contact_id = $this->add_contact_from_order();
 
-		$contact_id = $this->add_contact_from_order( 'alex@example.test', strtotime( '2019-01-01 09:00:00' ) );
+		$this->job()->mark_contact_created_by_import( $contact_id );
 
-		$job->mark_contact_created_by_import( $contact_id );
-
+		// A fresh job for the check: each page of the walk runs in its own
+		// process, so the mark has to be read back rather than remembered.
 		$this->assertTrue(
-			$job->contact_created_by_import_walk( $contact_id ),
+			$this->job()->contact_created_by_import_walk( $contact_id ),
 			'A contact this run created should be free for a later order in the same run to replace.'
 		);
 	}
@@ -232,11 +236,9 @@ class Import_Created_Contact_Test extends JPCRM_Base_Integration_TestCase {
 
 		global $zbs;
 
-		$job = $this->job();
+		$contact_id = $this->add_contact_from_order();
 
-		$contact_id = $this->add_contact_from_order( 'alex@example.test', strtotime( '2019-01-01 09:00:00' ) );
-
-		$job->mark_contact_created_by_import( $contact_id );
+		$this->job()->mark_contact_created_by_import( $contact_id );
 
 		// A later order in the same run comes through and updates the contact.
 		$zbs->DAL->contacts->addUpdateContact(
@@ -251,8 +253,10 @@ class Import_Created_Contact_Test extends JPCRM_Base_Integration_TestCase {
 			)
 		);
 
+		// A fresh job, so the answer comes from the stored mark and not from the
+		// job that wrote it remembering its own work.
 		$this->assertTrue(
-			$job->contact_created_by_import( $contact_id ),
+			$this->job()->contact_created_by_import( $contact_id ),
 			'An update should not lose the record of which contacts the import created.'
 		);
 	}
@@ -263,7 +267,7 @@ class Import_Created_Contact_Test extends JPCRM_Base_Integration_TestCase {
 	#[TestDox( 'A contact another store\'s import created is protected from this one.' )]
 	public function test_a_contact_from_another_stores_import_is_protected() {
 
-		$contact_id = $this->add_contact_from_order( 'alex@example.test', strtotime( '2019-01-01 09:00:00' ) );
+		$contact_id = $this->add_contact_from_order();
 
 		$this->job( self::OTHER_STORE )->mark_contact_created_by_import( $contact_id );
 
@@ -328,7 +332,7 @@ class Import_Created_Contact_Test extends JPCRM_Base_Integration_TestCase {
 
 		$job = $this->job();
 
-		$created_by_walk = $this->add_contact_from_order( 'alex@example.test', strtotime( '2019-01-01 09:00:00' ) );
+		$created_by_walk = $this->add_contact_from_order();
 		$job->mark_contact_created_by_import( $created_by_walk );
 
 		$this->assertSame(
@@ -381,7 +385,7 @@ class Import_Created_Contact_Test extends JPCRM_Base_Integration_TestCase {
 	#[TestDox( 'A live order never treats a contact as one the import created.' )]
 	public function test_a_live_order_does_not_get_the_walk_exemption() {
 
-		$contact_id = $this->add_contact_from_order( 'alex@example.test', strtotime( '2019-01-01 09:00:00' ) );
+		$contact_id = $this->add_contact_from_order();
 
 		// Marked by the walk, exactly as a backfill would have left it.
 		$this->job()->mark_contact_created_by_import( $contact_id );
@@ -411,7 +415,7 @@ class Import_Created_Contact_Test extends JPCRM_Base_Integration_TestCase {
 
 		$job = $this->job();
 
-		$contact_id = $this->add_contact_from_order( 'alex@example.test', strtotime( '2019-01-01 09:00:00' ) );
+		$contact_id = $this->add_contact_from_order();
 		$job->mark_contact_created_by_import( $contact_id );
 
 		$this->assertTrue(
@@ -421,13 +425,17 @@ class Import_Created_Contact_Test extends JPCRM_Base_Integration_TestCase {
 
 		Woo_Sync_Background_Sync_Job::clear_first_import_marks( self::STORE );
 
+		// The restarted import's pages run in fresh processes, so the checks run
+		// on a new job rather than the one that wrote the marks.
+		$restarted = $this->job();
+
 		$this->assertFalse(
-			$job->contact_created_by_import( $contact_id ),
+			$restarted->contact_created_by_import( $contact_id ),
 			'A restarted import should not inherit the previous run\'s marks.'
 		);
 
 		$this->assertNotEmpty(
-			$job->fields_to_protect( $this->order_data(), $contact_id ),
+			$restarted->fields_to_protect( $this->order_data(), $contact_id ),
 			'After a restart the contact should be protected like any other.'
 		);
 	}
@@ -438,15 +446,16 @@ class Import_Created_Contact_Test extends JPCRM_Base_Integration_TestCase {
 	#[TestDox( 'Clearing one store\'s marks leaves another store\'s alone.' )]
 	public function test_clearing_marks_is_scoped_to_one_store() {
 
-		$contact_id = $this->add_contact_from_order( 'alex@example.test', strtotime( '2019-01-01 09:00:00' ) );
+		$contact_id = $this->add_contact_from_order();
 
-		$other = $this->job( self::OTHER_STORE );
-		$other->mark_contact_created_by_import( $contact_id );
+		$this->job( self::OTHER_STORE )->mark_contact_created_by_import( $contact_id );
 
 		Woo_Sync_Background_Sync_Job::clear_first_import_marks( self::STORE );
 
+		// A fresh job, so the answer comes from the stored mark and not from the
+		// job that wrote it remembering its own work.
 		$this->assertTrue(
-			$other->contact_created_by_import( $contact_id ),
+			$this->job( self::OTHER_STORE )->contact_created_by_import( $contact_id ),
 			'Restarting one store should not disturb another store\'s import.'
 		);
 	}
