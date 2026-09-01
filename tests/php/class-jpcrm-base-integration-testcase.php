@@ -86,4 +86,21 @@ abstract class JPCRM_Base_Integration_TestCase extends JPCRM_Base_TestCase {
 
 		return wp_create_user( 'testuser', 'password', 'user@demo.com' );
 	}
+
+	/**
+	 * Create a user who is allowed to own a contact.
+	 *
+	 * `addUpdateContact()` drops an owner who cannot, so a test that used a
+	 * default-role user (see `add_wp_user()`) would be asserting against -1
+	 * either way.
+	 *
+	 * @return int The new user ID.
+	 */
+	public function create_contact_owner(): int {
+		$owner_id = self::factory()->user->create( array( 'role' => 'administrator' ) );
+
+		$this->assertTrue( user_can( $owner_id, 'admin_zerobs_usr' ), 'The owner under test cannot own a contact.' );
+
+		return $owner_id;
+	}
 }

@@ -2895,7 +2895,8 @@ class zbsDAL_contacts extends zbsDAL_ObjectLayer {
 			// UPDATE
 			$dataArr = array(
 
-				'zbs_owner'        => $owner,
+				// ownership
+				// 'zbs_owner' => $owner, // appended below: on update only when the caller named one.
 
 				// phpcs:disable VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable -- to be refactored.
 				// fields
@@ -2937,7 +2938,7 @@ class zbsDAL_contacts extends zbsDAL_ObjectLayer {
 			$typeArr = array( // field data types
 				// '%d',  // site
 				// '%d',  // team
-				'%d',    // owner
+				// '%d',  // owner, appended below.
 				'%s',
 				'%s',
 				'%s',
@@ -2975,7 +2976,8 @@ class zbsDAL_contacts extends zbsDAL_ObjectLayer {
 				// is update
 				$update = true;
 
-				// Only write the owner when the caller named one.
+				// Only write the owner when the caller named one, as the
+				// companies DAL does.
 				//
 				// -1 is the default, and it means "not specified" rather than
 				// "unassign": nothing sets an owner through this path. Both
@@ -2985,12 +2987,9 @@ class zbsDAL_contacts extends zbsDAL_ObjectLayer {
 				// which is most of them, cleared whoever the contact was assigned
 				// to. A lead capture submission and a client portal profile save
 				// both did it.
-				//
-				// An insert still writes it. A new contact needs the column set,
-				// and -1 is what an unowned contact holds.
-				if ( (int) $owner <= 0 ) {
-					unset( $dataArr['zbs_owner'] );
-					array_shift( $typeArr ); // the owner is the first type built above.
+				if ( (int) $owner > 0 ) {
+					$dataArr['zbs_owner'] = $owner;
+					$typeArr[]            = '%d';
 				}
 			} else {
 
@@ -3000,6 +2999,11 @@ class zbsDAL_contacts extends zbsDAL_ObjectLayer {
 				$typeArr[]           = '%d';
 				$dataArr['zbs_team'] = zeroBSCRM_team();
 				$typeArr[]           = '%d';
+
+				// A new contact needs the column set, and -1 is what an unowned
+				// contact holds.
+				$dataArr['zbs_owner'] = $owner;
+				$typeArr[]            = '%d';
 
 				if ( isset( $data['created'] ) && ! empty( $data['created'] ) && $data['created'] !== -1 ) {
 					$dataArr['zbsc_created'] = $data['created'];

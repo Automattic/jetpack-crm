@@ -38,9 +38,8 @@ class Form_Capture_Blanking_Test extends JPCRM_Base_Integration_TestCase {
 	 * @return int The new contact ID.
 	 */
 	private function create_contact_with_details( array $overrides = array() ): int {
-		global $zbs;
 
-		$data = $this->generate_contact_data(
+		$id = $this->add_contact(
 			array_merge(
 				array(
 					'email'    => self::CONTACT_EMAIL,
@@ -56,11 +55,28 @@ class Form_Capture_Blanking_Test extends JPCRM_Base_Integration_TestCase {
 			)
 		);
 
-		$id = $zbs->DAL->contacts->addUpdateContact( array( 'data' => $data ) );
-
 		$this->assertGreaterThan( 0, $id, 'Failed to create the contact under test.' );
 
 		return $id;
+	}
+
+	/**
+	 * Assert the hand-filled details from `create_contact_with_details()` are
+	 * still on the contact, one assertion per field a form never collects.
+	 *
+	 * @param int $contact_id The contact to check.
+	 * @return void
+	 */
+	private function assert_contact_details_intact( int $contact_id ) {
+		global $zbs;
+
+		$contact = $zbs->DAL->contacts->getContact( $contact_id );
+
+		$this->assertSame( '19 Prospect Hill', $contact['addr1'], 'A submission emptied the address.' );
+		$this->assertSame( 'Cork', $contact['city'], 'A submission emptied the city.' );
+		$this->assertSame( 'T12 XY45', $contact['postcode'], 'A submission emptied the postcode.' );
+		$this->assertSame( '+353 87 000 0000', $contact['mobtel'], 'A submission emptied the mobile number.' );
+		$this->assertSame( '+353 21 427 0000', $contact['hometel'], 'A submission emptied the telephone number.' );
 	}
 
 	/**
@@ -106,7 +122,6 @@ class Form_Capture_Blanking_Test extends JPCRM_Base_Integration_TestCase {
 	 * @return void
 	 */
 	private function assert_endpoint_keeps_unsent_fields( string $style ) {
-		global $zbs;
 
 		$contact_id = $this->create_contact_with_details();
 
@@ -114,13 +129,7 @@ class Form_Capture_Blanking_Test extends JPCRM_Base_Integration_TestCase {
 
 		$this->assertSame( 'success', $response['code'], 'The endpoint rejected the submission: ' . wp_json_encode( $response ) );
 
-		$contact = $zbs->DAL->contacts->getContact( $contact_id );
-
-		$this->assertSame( '19 Prospect Hill', $contact['addr1'], 'A submission emptied the address.' );
-		$this->assertSame( 'Cork', $contact['city'], 'A submission emptied the city.' );
-		$this->assertSame( 'T12 XY45', $contact['postcode'], 'A submission emptied the postcode.' );
-		$this->assertSame( '+353 87 000 0000', $contact['mobtel'], 'A submission emptied the mobile number.' );
-		$this->assertSame( '+353 21 427 0000', $contact['hometel'], 'A submission emptied the telephone number.' );
+		$this->assert_contact_details_intact( $contact_id );
 	}
 
 	/**
@@ -181,9 +190,7 @@ class Form_Capture_Blanking_Test extends JPCRM_Base_Integration_TestCase {
 	private function create_owned_contact(): array {
 		global $zbs;
 
-		$owner_id = self::factory()->user->create( array( 'role' => 'administrator' ) );
-
-		$this->assertTrue( user_can( $owner_id, 'admin_zerobs_usr' ), 'The owner under test cannot own a contact.' );
+		$owner_id = $this->create_contact_owner();
 
 		$contact_id = $zbs->DAL->contacts->addUpdateContact(
 			array(
@@ -247,19 +254,12 @@ class Form_Capture_Blanking_Test extends JPCRM_Base_Integration_TestCase {
 	 */
 	#[TestDox( 'A form submission does not clear details the form never collected.' )]
 	public function test_submission_does_not_clear_unsent_fields() {
-		global $zbs;
 
 		$contact_id = $this->create_contact_with_details();
 
 		$this->submit_lead_form( $this->cgrab_submission() );
 
-		$contact = $zbs->DAL->contacts->getContact( $contact_id );
-
-		$this->assertSame( '19 Prospect Hill', $contact['addr1'], 'A form submission emptied the address.' );
-		$this->assertSame( 'Cork', $contact['city'], 'A form submission emptied the city.' );
-		$this->assertSame( 'T12 XY45', $contact['postcode'], 'A form submission emptied the postcode.' );
-		$this->assertSame( '+353 87 000 0000', $contact['mobtel'], 'A form submission emptied the mobile number.' );
-		$this->assertSame( '+353 21 427 0000', $contact['hometel'], 'A form submission emptied the telephone number.' );
+		$this->assert_contact_details_intact( $contact_id );
 	}
 
 	/**

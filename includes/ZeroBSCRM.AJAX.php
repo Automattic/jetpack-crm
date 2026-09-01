@@ -1435,11 +1435,16 @@ function zbs_lead_form_capture() {
 			// TO LATER DO:
 			// COMBINE THE FOLLOWING RETRIEVES... no need to have separate input gathering...
 
+			// Every style submits the same email field, and the blanks decision hangs
+			// on nothing else, so both are resolved once for all the cases below. A
+			// style added later cannot silently miss the decision.
+			$zbs_email            = sanitize_email( wp_unslash( $_POST['zbs_email'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
+			$do_not_update_blanks = jpcrm_form_capture_do_not_update_blanks( $zbs_email );
+
 			switch ( $zbs_form_style ) {
 
 				case 'zbs_simple':
 					// simple just has email
-					$zbs_email = sanitize_email( wp_unslash( $_POST['zbs_email'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
 					// have added a new 'form' for 'externals'
 					$cID = zeroBS_integrations_addOrUpdateCustomer(
 						'form',
@@ -1464,7 +1469,7 @@ function zbs_lead_form_capture() {
 						// } This endpoint takes submissions from anyone, against any email address,
 						// } so a submission must not reset the status of an existing contact.
 						array( 'status' ),
-						jpcrm_form_capture_do_not_update_blanks( $zbs_email )
+						$do_not_update_blanks
 					);
 
 					// 2.97.7 - added this:
@@ -1496,7 +1501,6 @@ function zbs_lead_form_capture() {
 					// } Naked only has name + email?
 
 					// validate these...  (use functions in form save down...)
-					$zbs_email = sanitize_email( wp_unslash( $_POST['zbs_email'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
 					$zbs_fname = sanitize_text_field( $_POST['zbs_fname'] );
 					// $zbs_lname = sanitize_text_field($_POST['zbs_lname']);
 					// $zbs_notes = "Customer Form Submit Message:\r\n===========\r\n".sanitize_text_field($_POST['zbs_notes'])."\r\n===========\r\n";
@@ -1528,13 +1532,12 @@ function zbs_lead_form_capture() {
 						// } This endpoint takes submissions from anyone, against any email address,
 						// } so a submission may fill these in on an existing contact but not replace them.
 						array( 'fname', 'status' ),
-						jpcrm_form_capture_do_not_update_blanks( $zbs_email )
+						$do_not_update_blanks
 					);
 
 					break;
 				case 'zbs_cgrab':
 					// validate these...  (use functions in form save down...)
-					$zbs_email = sanitize_email( wp_unslash( $_POST['zbs_email'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
 					$zbs_fname = sanitize_text_field( $_POST['zbs_fname'] );
 					$zbs_lname = sanitize_text_field( $_POST['zbs_lname'] );
 					// Raw: $zbs_notes = "Customer Form Submit Message:\r\n===========\r\n".zeroBSCRM_textProcess($_POST['zbs_notes'])."\r\n===========\r\n";
@@ -1577,7 +1580,7 @@ function zbs_lead_form_capture() {
 						// } This endpoint takes submissions from anyone, against any email address,
 						// } so a submission may fill these in on an existing contact but not replace them.
 						array( 'fname', 'lname', 'status' ),
-						jpcrm_form_capture_do_not_update_blanks( $zbs_email )
+						$do_not_update_blanks
 					);
 
 					// 2.97.7 - added this:

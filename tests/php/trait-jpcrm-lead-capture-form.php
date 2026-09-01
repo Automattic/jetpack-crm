@@ -7,8 +7,6 @@
 
 namespace Automattic\Jetpack\CRM\Tests;
 
-use WPDieException;
-
 /**
  * Ways to put a submission through `zbs_lead_form_capture()`.
  *
@@ -49,10 +47,10 @@ trait JPCRM_Lead_Capture_Form {
 	/**
 	 * Put a submission through the endpoint itself.
 	 *
-	 * `zbs_lead_form_capture()` reads `$_POST` and ends the request with
-	 * `wp_send_json()`, so this fills in the one and catches the other. Going
-	 * through the endpoint is the point: it is the only way to cover the
-	 * arguments each form style passes to the contacts DAL.
+	 * `zbs_lead_form_capture()` reads `$_POST`, so this fills it in and hands
+	 * the exit-and-answer part to `capture_json_response()`. Going through the
+	 * endpoint is the point: it is the only way to cover the arguments each
+	 * form style passes to the contacts DAL.
 	 *
 	 * @param array $post The submitted fields, on top of a valid empty submission.
 	 * @return array The decoded JSON response.
@@ -70,40 +68,13 @@ trait JPCRM_Lead_Capture_Form {
 			$post
 		);
 
-		// `wp_send_json()` calls `die` outright unless this is an AJAX request,
-		// and `wp_die()` picks its handler the same way. WPDieException is what
-		// the WordPress test suite throws in place of the exit.
-		$throw = static function () {
-			throw new WPDieException();
-		};
-
-		add_filter( 'wp_doing_ajax', '__return_true' );
-		add_filter( 'wp_die_ajax_handler', $throw );
-		add_filter( 'wp_die_json_handler', $throw );
-		add_filter( 'wp_die_handler', $throw );
-
-		// The response is written straight out, and the suite fails a test that prints.
-		ob_start();
-
 		try {
-			zbs_lead_form_capture();
-		} catch ( WPDieException $e ) {
-			// The endpoint answered. That is it returning, not a failure.
-			unset( $e );
+			$decoded = $this->capture_json_response( 'zbs_lead_form_capture' );
 		} finally {
-			$response = ob_get_clean();
-
-			remove_filter( 'wp_die_handler', $throw );
-			remove_filter( 'wp_die_json_handler', $throw );
-			remove_filter( 'wp_die_ajax_handler', $throw );
-			remove_filter( 'wp_doing_ajax', '__return_true' );
-
 			$_POST = $original_post;
 		}
 
-		$decoded = json_decode( $response, true );
-
-		$this->assertIsArray( $decoded, 'The endpoint did not answer with JSON: ' . $response );
+		$this->assertIsArray( $decoded, 'The endpoint did not answer with JSON.' );
 
 		return $decoded;
 	}

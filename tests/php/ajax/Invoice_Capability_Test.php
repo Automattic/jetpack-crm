@@ -13,7 +13,6 @@
 namespace Automattic\Jetpack\CRM\Tests;
 
 use PHPUnit\Framework\Attributes\DataProvider;
-use WPDieException;
 
 /**
  * Capability gates on zbs_get_invoice_data and getinvs.
@@ -57,44 +56,6 @@ class Invoice_Capability_Test extends JPCRM_Base_Integration_TestCase {
 			'portal contact'  => array( 'zerobs_customer' ),
 			'subscriber'      => array( 'subscriber' ),
 		);
-	}
-
-	/**
-	 * Capture what a handler passes to wp_send_json* without exiting.
-	 *
-	 * Status codes are not checked here. wp_send_json() only sets one when
-	 * headers_sent() is false, which it never is under PHPUnit, so the response
-	 * body is the only thing actually observable.
-	 *
-	 * @param callable $handler The AJAX handler to invoke.
-	 * @return mixed The decoded response body.
-	 */
-	private function capture_json_response( callable $handler ) {
-		// wp_send_json() calls a bare die() unless wp_doing_ajax() is true, which
-		// would take the whole PHP process with it rather than throwing.
-		add_filter( 'wp_doing_ajax', '__return_true' );
-
-		$die_handler = static function () {
-			return static function () {
-				throw new WPDieException( 'sent' );
-			};
-		};
-		add_filter( 'wp_die_ajax_handler', $die_handler );
-		add_filter( 'wp_die_handler', $die_handler );
-
-		ob_start();
-		try {
-			$handler();
-		} catch ( WPDieException $e ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedCatch
-			// Expected: wp_send_json always terminates.
-		}
-		$output = ob_get_clean();
-
-		remove_filter( 'wp_die_ajax_handler', $die_handler );
-		remove_filter( 'wp_die_handler', $die_handler );
-		remove_filter( 'wp_doing_ajax', '__return_true' );
-
-		return json_decode( $output, true );
 	}
 
 	/**

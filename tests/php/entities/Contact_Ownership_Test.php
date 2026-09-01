@@ -21,22 +21,6 @@ use PHPUnit\Framework\Attributes\TestDox;
 class Contact_Ownership_Test extends JPCRM_Base_Integration_TestCase {
 
 	/**
-	 * Create a user who is allowed to own a contact.
-	 *
-	 * `addUpdateContact()` drops an owner who cannot, so a test that skipped
-	 * this would be asserting against -1 either way.
-	 *
-	 * @return int The new user ID.
-	 */
-	private function create_contact_owner(): int {
-		$owner_id = self::factory()->user->create( array( 'role' => 'administrator' ) );
-
-		$this->assertTrue( user_can( $owner_id, 'admin_zerobs_usr' ), 'The owner under test cannot own a contact.' );
-
-		return $owner_id;
-	}
-
-	/**
 	 * An update that says nothing about ownership is the common case: the
 	 * client portal saving a profile, an integration syncing an address.
 	 *
