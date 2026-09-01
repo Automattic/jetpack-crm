@@ -258,12 +258,13 @@ function zbscrmjs_build_inv_dropdown( objType, objID, preSelectedInvID ) {
  * @param preSelectedInvID
  */
 function zbscrmjs_refresh_inv_dropdown( preSelectedInvID ) {
-	const contactID = jQuery( '#customer' ).val();
-	const companyID = jQuery( '#zbsct_company' ).val();
+	// the hidden fields hold -1 (not '') for "unassigned" on saved transactions
+	const contactID = parseInt( jQuery( '#customer' ).val(), 10 );
+	const companyID = parseInt( jQuery( '#zbsct_company' ).val(), 10 );
 
-	if ( contactID ) {
+	if ( contactID > 0 ) {
 		zbscrmjs_build_inv_dropdown( 'contact', contactID, preSelectedInvID );
-	} else if ( companyID ) {
+	} else if ( companyID > 0 ) {
 		zbscrmjs_build_inv_dropdown( 'company', companyID, preSelectedInvID );
 	} else {
 		jQuery( '.assignInvToCust, #invoiceFieldWrap' ).hide();
