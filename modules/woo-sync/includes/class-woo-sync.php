@@ -1965,6 +1965,32 @@ class Woo_Sync {
 
 
 	/**
+	 * Send a sync site back to the start of its first import.
+	 *
+	 * Three things have to move together, which is why they live here rather than at
+	 * the call site. Resetting the progress without clearing the marks would leave
+	 * every contact the previous import created looking like one this run created, so
+	 * the run would be free to replace details a CRM user has corrected in the months
+	 * since. That is the behaviour contact field protection exists to prevent.
+	 *
+	 * @param string $site_key Sync site to restart.
+	 *
+	 * @return void
+	 */
+	public function restart_first_import( $site_key ) {
+
+		$this->set_sync_site_attribute( $site_key, 'first_import_complete', false );
+		$this->set_sync_site_attribute( $site_key, 'resume_from_page', 1 );
+
+		// The background sync only loads the job class once the 5.2 migration has run
+		// (`Woo_Sync_Background_Sync::verify_ready_mode()`), and the hub renders either
+		// way, so the class cannot be assumed here.
+		require_once JPCRM_WOO_SYNC_ROOT_PATH . 'includes/class-woo-sync-background-sync-job.php';
+
+		Woo_Sync_Background_Sync_Job::clear_first_import_marks( $site_key );
+	}
+
+	/**
 	 * Set a specific attribute against a sync site
 	 */
 	public function set_sync_site_attribute( $site_key, $attribute_key, $value ){

@@ -45,9 +45,9 @@ function jpcrm_woosync_render_hub_page() {
 
 			foreach ( $sync_sites as $site_key => $site_info ) {
 
-				// mark that we've 'not completed first import'
-				$zbs->modules->woosync->set_sync_site_attribute( $site_key, 'first_import_complete', false );
-				$zbs->modules->woosync->set_sync_site_attribute( $site_key, 'resume_from_page', 1 );
+				// back to the start: progress reset, and the record of which contacts
+				// the last import created cleared along with it.
+				$zbs->modules->woosync->restart_first_import( $site_key );
 
 			}
 		}
