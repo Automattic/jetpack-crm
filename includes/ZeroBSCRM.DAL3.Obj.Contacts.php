@@ -2895,7 +2895,8 @@ class zbsDAL_contacts extends zbsDAL_ObjectLayer {
 			// UPDATE
 			$dataArr = array(
 
-				'zbs_owner'        => $owner,
+				// ownership
+				// 'zbs_owner' => $owner, // appended below: on update only when the caller named one.
 
 				// phpcs:disable VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable -- to be refactored.
 				// fields
@@ -2937,7 +2938,7 @@ class zbsDAL_contacts extends zbsDAL_ObjectLayer {
 			$typeArr = array( // field data types
 				// '%d',  // site
 				// '%d',  // team
-				'%d',    // owner
+				// '%d',  // owner, appended below.
 				'%s',
 				'%s',
 				'%s',
@@ -2975,6 +2976,21 @@ class zbsDAL_contacts extends zbsDAL_ObjectLayer {
 				// is update
 				$update = true;
 
+				// Only write the owner when the caller named one, as the
+				// companies DAL does.
+				//
+				// -1 is the default, and it means "not specified" rather than
+				// "unassign": nothing sets an owner through this path. Both
+				// setContactOwner() and the ownership box on the contact edit
+				// screen refuse anything below 1. But this path writes every
+				// column, so a caller updating a contact without naming an owner,
+				// which is most of them, cleared whoever the contact was assigned
+				// to. A lead capture submission and a client portal profile save
+				// both did it.
+				if ( (int) $owner > 0 ) {
+					$dataArr['zbs_owner'] = $owner;
+					$typeArr[]            = '%d';
+				}
 			} else {
 
 				// INSERT (get's few extra :D)
@@ -2983,6 +2999,11 @@ class zbsDAL_contacts extends zbsDAL_ObjectLayer {
 				$typeArr[]           = '%d';
 				$dataArr['zbs_team'] = zeroBSCRM_team();
 				$typeArr[]           = '%d';
+
+				// A new contact needs the column set, and -1 is what an unowned
+				// contact holds.
+				$dataArr['zbs_owner'] = $owner;
+				$typeArr[]            = '%d';
 
 				if ( isset( $data['created'] ) && ! empty( $data['created'] ) && $data['created'] !== -1 ) {
 					$dataArr['zbsc_created'] = $data['created'];
@@ -3055,6 +3076,23 @@ class zbsDAL_contacts extends zbsDAL_ObjectLayer {
 				)
 			) !== false ) {
 
+				// externalSources, outside the limitedFields check below.
+				//
+				// Where a contact came from is worth recording whether or not the caller
+				// sent a full set of fields, and a caller that sends none is the norm now
+				// that `do_not_update_blanks` converts a form submission to limitedFields.
+				// Skipping this here lost the 'form' source on every existing contact that
+				// filled a form in.
+				//
+				// Passing no sources is a no-op: this adds and updates, never removes.
+				$this->DAL()->addUpdateExternalSources(
+					array(
+						'obj_id'           => $id,
+						'obj_type_id'      => ZBS_TYPE_CONTACT,
+						'external_sources' => isset( $data['externalSources'] ) ? $data['externalSources'] : array(),
+					)
+				);
+
 				// if passing limitedFields instead of data, we ignore the following
 				// this doesn't work, because data is in args default as arr
 				// if (isset($data) && is_array($data)){
@@ -3073,15 +3111,6 @@ class zbsDAL_contacts extends zbsDAL_ObjectLayer {
 						);
 
 					}
-
-					// externalSources
-					$approvedExternalSource = $this->DAL()->addUpdateExternalSources(
-						array(
-							'obj_id'           => $id,
-							'obj_type_id'      => ZBS_TYPE_CONTACT,
-							'external_sources' => isset( $data['externalSources'] ) ? $data['externalSources'] : array(),
-						)
-					); // for IA below
 
 					// co's work?
 					// OBJ LINKS - to companies (1liner now as genericified)
