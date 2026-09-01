@@ -10,7 +10,7 @@
 /* eslint-disable jsdoc/require-param-type */
 /* eslint-disable jsdoc/require-param-description */
 /* eslint-disable jsdoc/require-description */
-/* global jpcrm, zbscrm_js_uiSpinnerBlocker, zbscrm_js_getCustInvs, zbscrm_js_getCompanyInvs */
+/* global jpcrm, zbscrm_js_uiSpinnerBlocker, zbscrm_js_getObjInvs */
 
 // v3.0 Transactions JS (as base currently)
 
@@ -19,7 +19,7 @@ jQuery( function () {
 	// not v3.0jQuery('#post').attr('autocomplete','off');
 
 	// on init, prefil the inv list from any assigned contact or company
-	zbscrmjs_refresh_inv_dropdown( jQuery( '#invoice_id' ).val() || false );
+	zbscrmjs_refresh_inv_dropdown( jQuery( '#invoice_id' ).val() );
 
 	// bind
 	setTimeout( function () {
@@ -120,136 +120,106 @@ function zbscrmjs_transaction_setCompany( obj ) {
  * @param preSelectedInvID
  */
 function zbscrmjs_build_inv_dropdown( objType, objID, preSelectedInvID ) {
-	let previousInvVal = jQuery( '#invoice_id' ).val();
+	const previousInvVal = jQuery( '#invoice_id' ).val();
 
-	const getInvs = objType === 'company' ? zbscrm_js_getCompanyInvs : zbscrm_js_getCustInvs;
+	// show loading
+	jQuery( '#invoiceFieldWrap' ).append( zbscrm_js_uiSpinnerBlocker() );
 
-	// if obj id, retrieve inv list from ajax/cache
-	if ( objID ) {
-		// show loading
-		jQuery( '#invoiceFieldWrap' ).append( zbscrm_js_uiSpinnerBlocker() );
+	zbscrm_js_getObjInvs(
+		objType,
+		objID,
+		function ( r ) {
+			// successfully got list!
+			// console.log("got list",[r,r.length]);
 
-		getInvs(
-			objID,
-			function ( r ) {
-				// successfully got list!
-				// console.log("got list",[r,r.length]);
+			// wrap
+			let retHTML = '<select id="invoice_id" name="invoice_id" class="form-control">'; //form-control
 
-				// wrap
-				let retHTML = '<select id="invoice_id" name="invoice_id" class="form-control">'; //form-control
+			// if has invoices:
+			if ( r.length > 0 ) {
+				// def
+				retHTML += '<option value="" disabled="disabled"';
 
-				// if has invoices:
-				if ( r.length > 0 ) {
-					// def
-					retHTML += '<option value="" disabled="disabled"';
+				// if an inv id is passed, don't select this
+				if ( typeof preSelectedInvID === 'undefined' || preSelectedInvID <= 0 ) {
+					retHTML += ' selected="selected"';
+				}
 
-					// if an inv id is passed, don't select this
-					if ( typeof preSelectedInvID === 'undefined' || preSelectedInvID <= 0 ) {
+				retHTML += '>' + zeroBSCRMJS_transEditLang( 'selectinv', 'Select Invoice' ) + '</option>';
+				retHTML +=
+					'<option value="">' + zeroBSCRMJS_transEditLang( 'none', 'None' ) + '</option>';
+
+				// cycle through + create
+				jQuery.each( r, function ( ind, ele ) {
+					// build a user-friendly str
+					let invStr = '',
+						invID = -1;
+
+					// translated from admin.view php
+					invID = ele.id;
+
+					// id
+					invStr = '#' + ele.id;
+
+					// if ref, that too
+					if ( typeof ele.id_override !== 'undefined' ) {
+						invStr += ' - ' + ele.id_override;
+					}
+
+					if ( typeof ele.meta !== 'undefined' ) {
+						// val
+						if ( typeof ele.meta.val !== 'undefined' ) {
+							invStr += ' (' + window.zbs_root.currencyOptions.currencyStr + ele.meta.val + ')';
+						}
+						// date
+						if ( typeof ele.meta.date !== 'undefined' ) {
+							invStr += ' - ' + ele.meta.date;
+						}
+					}
+
+					retHTML += '<option value="' + jpcrm.esc_attr( invID ) + '"';
+
+					// if prefilled... select
+					// eslint-disable-next-line eqeqeq
+					if ( typeof preSelectedInvID !== 'undefined' && invID == preSelectedInvID ) {
 						retHTML += ' selected="selected"';
 					}
 
-					retHTML += '>' + zeroBSCRMJS_transEditLang( 'selectinv', 'Select Invoice' ) + '</option>';
-					retHTML +=
-						'<option value="">' + zeroBSCRMJS_transEditLang( 'none', 'None' ) + '</option>';
-
-					// cycle through + create
-					jQuery.each( r, function ( ind, ele ) {
-						// build a user-friendly str
-						let invStr = '',
-							invID = -1;
-
-						// translated from admin.view php
-						invID = ele.id;
-
-						// id
-						invStr = '#' + ele.id;
-
-						// if ref, that too
-						if ( typeof ele.id_override !== 'undefined' ) {
-							invStr += ' - ' + ele.id_override;
-						}
-
-						if ( typeof ele.meta !== 'undefined' ) {
-							// val
-							if ( typeof ele.meta.val !== 'undefined' ) {
-								invStr += ' (' + window.zbs_root.currencyOptions.currencyStr + ele.meta.val + ')';
-							}
-							// date
-							if ( typeof ele.meta.date !== 'undefined' ) {
-								invStr += ' - ' + ele.meta.date;
-							}
-						}
-
-						retHTML += '<option value="' + jpcrm.esc_attr( invID ) + '"';
-
-						// if prefilled... select
-						// eslint-disable-next-line eqeqeq
-						if ( typeof preSelectedInvID !== 'undefined' && invID == preSelectedInvID ) {
-							retHTML += ' selected="selected"';
-						}
-
-						retHTML += '>' + jpcrm.esc_html( invStr ) + '</option>';
-					} );
-				} else {
-					// no invs
-					retHTML +=
-						'<option value="" disabled="disabled" selected="selected">' +
-						zeroBSCRMJS_transEditLang( 'noinvoices', 'None Found' ) +
-						'</option>';
-				}
-
-				// / wrap
-				retHTML += '</select>';
-
-				// output
-				jQuery( '#invoiceFieldWrap' ).html( retHTML );
-
-				// wh addition 20/7/18 - show when useful
-				jQuery( '.assignInvToCust' ).show();
-
-				// bind
-				setTimeout( function () {
-					zeroBSCRMJS_bindInvSelect();
-				}, 0 );
-			},
-			function () {
-				// wh addition 20/7/18 - hide until useful
-				jQuery( '.assignInvToCust' ).hide();
-
-				// failed to get... leave as manual
-
-				// localise
-				let previousInvValL = previousInvVal;
-				if ( ! previousInvValL ) {
-					previousInvValL = '';
-				}
-
-				// NOTE THIS IS DUPE BELOW... REFACTOR
-				document.getElementById( 'invoiceFieldWrap' ).innerHTML =
-					'<input style="max-width: 200px;" id="invoice_id" name="invoice_id" class="form-control" value="' +
-					jpcrm.esc_attr( previousInvValL ) +
-					'">';
+					retHTML += '>' + jpcrm.esc_html( invStr ) + '</option>';
+				} );
+			} else {
+				// no invs
+				retHTML +=
+					'<option value="" disabled="disabled" selected="selected">' +
+					zeroBSCRMJS_transEditLang( 'noinvoices', 'None Found' ) +
+					'</option>';
 			}
-		);
-	} else {
-		// wh addition 20/7/18 - hide until useful
-		jQuery( '.assignInvToCust' ).show();
 
-		// leave as manual entry (but maybe later do not allow?)
-		if ( ! previousInvVal ) {
-			previousInvVal = '';
+			// / wrap
+			retHTML += '</select>';
+
+			// output
+			jQuery( '#invoiceFieldWrap' ).html( retHTML );
+
+			// wh addition 20/7/18 - show when useful
+			jQuery( '.assignInvToCust' ).show();
+
+			// bind
+			setTimeout( function () {
+				zeroBSCRMJS_bindInvSelect();
+			}, 0 );
+		},
+		function () {
+			// wh addition 20/7/18 - hide until useful
+			jQuery( '.assignInvToCust' ).hide();
+
+			// failed to get... leave as manual
+			document.getElementById( 'invoiceFieldWrap' ).innerHTML =
+				'<input style="max-width: 200px;" id="invoice_id" name="invoice_id" class="form-control" value="' +
+				jpcrm.esc_attr( previousInvVal || '' ) +
+				'">';
 		}
-		// NOTE THIS IS DUPE ABOVE... REFACTOR
-		document.getElementById( 'invoiceFieldWrap' ).innerHTML =
-			'<input style="max-width: 200px;" id="invoice_id" name="invoice_id" class="form-control" value="' +
-			jpcrm.esc_attr( previousInvVal ) +
-			'">';
-
-		// bind
-		setTimeout( function () {
-			zeroBSCRMJS_bindInvSelect();
-		}, 0 );
-	}
+	);
 }
 
 // rebuilds the invoice dropdown from whichever of contact or company is
@@ -258,13 +228,12 @@ function zbscrmjs_build_inv_dropdown( objType, objID, preSelectedInvID ) {
  * @param preSelectedInvID
  */
 function zbscrmjs_refresh_inv_dropdown( preSelectedInvID ) {
-	// the hidden fields hold -1 (not '') for "unassigned" on saved transactions
-	const contactID = parseInt( jQuery( '#customer' ).val(), 10 );
-	const companyID = parseInt( jQuery( '#zbsct_company' ).val(), 10 );
+	const contactID = jQuery( '#customer' ).val();
+	const companyID = jQuery( '#zbsct_company' ).val();
 
-	if ( contactID > 0 ) {
+	if ( contactID ) {
 		zbscrmjs_build_inv_dropdown( 'contact', contactID, preSelectedInvID );
-	} else if ( companyID > 0 ) {
+	} else if ( companyID ) {
 		zbscrmjs_build_inv_dropdown( 'company', companyID, preSelectedInvID );
 	} else {
 		jQuery( '.assignInvToCust, #invoiceFieldWrap' ).hide();

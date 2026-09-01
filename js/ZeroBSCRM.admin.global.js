@@ -1354,15 +1354,15 @@ function zbscrm_js_uiSpinnerBlocker( spinnerHTML ) {
 
 window.zbscrm_objcache_invoices = {};
 /**
- * Retrieve invoices assigned to a contact or company (shared impl).
+ * Retrieve invoices assigned to a contact or company.
  *
- * @param requestKey - POST key the getinvs endpoint reads the ID from ('cid' or 'coid'); also namespaces the cache.
+ * @param objType - 'contact' or 'company'; also namespaces the cache.
  * @param objID
  * @param cb
  * @param errcb
  */
-function zbscrm_js_getObjInvs( requestKey, objID, cb, errcb ) {
-	const cacheKey = requestKey + '_' + objID;
+function zbscrm_js_getObjInvs( objType, objID, cb, errcb ) {
+	const cacheKey = objType + '_' + objID;
 
 	if ( typeof objID !== 'undefined' && objID > 0 ) {
 		// see if in cache (rough cache)
@@ -1383,7 +1383,7 @@ function zbscrm_js_getObjInvs( requestKey, objID, cb, errcb ) {
 			action: 'getinvs',
 			sec: window.zbs_root.zbsnonce,
 		};
-		data[ requestKey ] = objID;
+		data[ objType === 'company' ? 'coid' : 'cid' ] = objID;
 
 		// Send
 		jQuery.ajax( {
@@ -1420,21 +1420,14 @@ function zbscrm_js_getObjInvs( requestKey, objID, cb, errcb ) {
 }
 
 /**
+ * Pre-existing public surface, kept for external callers.
+ *
  * @param cID
  * @param cb
  * @param errcb
  */
 function zbscrm_js_getCustInvs( cID, cb, errcb ) {
-	return zbscrm_js_getObjInvs( 'cid', cID, cb, errcb );
-}
-
-/**
- * @param companyID
- * @param cb
- * @param errcb
- */
-function zbscrm_js_getCompanyInvs( companyID, cb, errcb ) {
-	return zbscrm_js_getObjInvs( 'coid', companyID, cb, errcb );
+	return zbscrm_js_getObjInvs( 'contact', cID, cb, errcb );
 }
 
 /*
@@ -2788,7 +2781,7 @@ if ( typeof module !== 'undefined' ) {
 		zbscrm_JS_bindFieldValidators,
 		zbscrm_js_uiSpinnerBlocker,
 		zbscrm_js_getCustInvs,
-		zbscrm_js_getCompanyInvs,
+		zbscrm_js_getObjInvs,
 		zbscrm_JS_validateEmail,
 		zbscrmjs_permify,
 		zbscrmjs_nl2br,

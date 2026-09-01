@@ -260,28 +260,24 @@ function zeroBSCRM_AJAX_getCustInvs() {
 	// } If perms?
 	if ( zeroBSCRM_permsViewInvoices() ) {
 
-		// } Retrieve ID
-		$contact_id = -1;
-		if ( isset( $_POST['cid'] ) ) {
-			$contact_id = (int) $_POST['cid'];
-		}
-
-		$company_id = -1;
-		if ( isset( $_POST['coid'] ) ) {
-			$company_id = (int) $_POST['coid'];
-		}
+		// } Retrieve ID (the editor sends one of cid/coid)
+		$contact_id = isset( $_POST['cid'] ) ? (int) $_POST['cid'] : 0;
+		$company_id = isset( $_POST['coid'] ) ? (int) $_POST['coid'] : 0;
 
 		if ( $contact_id > 0 || $company_id > 0 ) {
 
-			// } Retrieve the contact's (or, failing that, the company's) invoices:
+			// } Retrieve the contact's (or, failing that, the company's) invoices;
+			// the dropdown only renders id + ref, so skip line items and custom fields
 			global $zbs;
 
 			$args = array(
-				'sortByField' => 'ID',
-				'sortOrder'   => 'DESC',
-				'page'        => 0,
-				'perPage'     => 100,
-				'ignoreowner' => zeroBSCRM_DAL2_ignoreOwnership( ZBS_TYPE_INVOICE ),
+				'sortByField'      => 'ID',
+				'sortOrder'        => 'DESC',
+				'page'             => 0,
+				'perPage'          => 100,
+				'withLineItems'    => false,
+				'withCustomFields' => false,
+				'ignoreowner'      => zeroBSCRM_DAL2_ignoreOwnership( ZBS_TYPE_INVOICE ),
 			);
 
 			if ( $contact_id > 0 ) {
