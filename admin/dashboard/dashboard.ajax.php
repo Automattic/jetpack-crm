@@ -8,6 +8,14 @@ function jetpackcrm_dash_refresh() {
 
 	check_ajax_referer( 'zbs_dash_count', 'security' );  // nonce it up...
 
+	// The nonce alone does not gate this: it only proves the request came from a
+	// page that printed the nonce. Require the same capability the dashboard page
+	// itself registers with ('zbs_dash'), so the CRM aggregates this returns are
+	// not served to a logged-in user who has no CRM access.
+	if ( ! current_user_can( 'zbs_dash' ) ) {
+		wp_send_json_error( array( 'no-action-or-rights' => 1 ), 500, JSON_UNESCAPED_SLASHES );
+	}
+
 	// note for WH - looking at the DAL, we can probably extract these into DAL3 helpers?
 	global $zbs, $wpdb, $ZBSCRM_t; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 

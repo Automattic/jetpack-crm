@@ -2,7 +2,7 @@
 Contributors: automattic, kallehauge, cleacos, diegogarciarodrigues, bradshawtm, wpkaren, robertf4, woodyhayday, mikemayhem3030
 Tags: CRM, Woocommerce CRM, Client Portal, Marketing Automation, Lead Generation
 Tested up to: 7.1
-Stable tag: 6.8.3
+Stable tag: 6.8.4
 Requires at least: 6.0
 Requires PHP: 7.4
 License: GPLv2
@@ -362,6 +362,19 @@ We offer a full, no-hassle refund within 14 days. You can read more about that, 
 
 
 == Changelog ==
+### 6.8.4 - 2026-09-02
+* Allow assigning a transaction to a company invoice (#52)
+* Fix the revenue chart's 12-month window start and current-month zero-prefill (#51)
+* Show the Revenue Chart when transactions net to zero or below (#45)
+* Let a first Woo Sync import overwrite the contacts it created itself (#33)
+* Stop forms clearing contact details, and updates clearing the owner (#34)
+* Escape email addresses, the reCAPTCHA site key, and spreadsheet output.
+* Expire a quote's easy-access link when it returns to Draft.
+* Correct the permission check on the single-quote client portal endpoint.
+* Require the dashboard capability for the dashboard data endpoint.
+* Remove an unused invoice AJAX handler.
+* Show the SMS button only to roles permitted to send SMS.
+
 ### 6.8.3 - 2026-08-18
 * Fix Activity panel header icon rendering (#37)
 * Don't let self-reported details replace contact fields already filled in (#30)

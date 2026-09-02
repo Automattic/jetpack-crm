@@ -261,7 +261,7 @@ function jpcrm_quotes_send_email_modal() {
 			'</label>';
 		optsHTML +=
 			'<input type="email" id="jpcrm_quote_email_modal_toemail" value="' +
-			recipientEmail +
+			jpcrm.esc_attr( recipientEmail ) +
 			'" placeholder="' +
 			jpcrm.esc_attr( jpcrm_quotes_lang( 'toemailplaceholder' ) ) +
 			'" />';

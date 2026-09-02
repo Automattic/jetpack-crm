@@ -19,7 +19,7 @@ class Single_Quote_Endpoint extends Client_Portal_Endpoint {
 			$new_endpoint->hide_from_menu               = true;
 			$new_endpoint->template_name                = 'single-quote.php';
 			$new_endpoint->add_rewrite_endpoint         = true;
-			$new_endpoint->should_check_user_permission = $zbs->settings->get( 'easyaccesslinks' ) === '0';
+			$new_endpoint->should_check_user_permission = $zbs->settings->get( 'easyaccesslinks' ) === 0;
 			$new_endpoint->hide_from_settings_page      = true;
 
 			$endpoints[] = $new_endpoint;

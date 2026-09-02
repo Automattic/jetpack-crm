@@ -292,25 +292,28 @@ function zbscrm_JS_draw_invoice_actions_html( res ) {
  *
  */
 function zbscrmJS_retrieveCurrentBillToEmail() {
-	// email? (if assigned)
-	let potentialEmail = jQuery( '#zbs_inv_bill' ).val();
-	// if not set already, then get from this:
-	if ( typeof potentialEmail === 'undefined' || ! zbscrm_JS_validateEmail( potentialEmail ) ) {
-		// here we allow for prefilled data via zbsprefillcust _GET param (passed by php)
-		let billTo = window.zbs_invoice.invoiceObj.bill;
-		if (
-			! billTo &&
-			typeof window.zbsJS_prefillemail !== 'undefined' &&
-			typeof window.zbsJS_prefillid !== 'undefined'
-		) {
-			// prefill - contact/company email
-			billTo = window.zbsJS_prefillemail;
-		}
+	// Resolve the recipient from the invoice's billing email, never from the
+	// #zbs_inv_bill typeahead input. That input shows the contact/company NAME
+	// (invoiceObj.bill_name), which is attacker-controlled via the public lead
+	// form; reading it back as an email let a name like "x"@y.tld through the
+	// validator and into the email modal. The billing email is the only real
+	// address we hold for the recipient.
+	let potentialEmail = window.zbs_invoice.invoiceObj.bill;
 
-		potentialEmail = billTo;
+	// here we allow for prefilled data via zbsprefillcust _GET param (passed by php)
+	if (
+		! potentialEmail &&
+		typeof window.zbsJS_prefillemail !== 'undefined' &&
+		typeof window.zbsJS_prefillid !== 'undefined'
+	) {
+		// prefill - contact/company email
+		potentialEmail = window.zbsJS_prefillemail;
 	}
 
-	return potentialEmail;
+	// Return an empty string rather than a name when no email is known, so the
+	// zbscrm_JS_validateEmail() checks at the call sites fail closed and the
+	// Email Invoice button stays hidden.
+	return potentialEmail || '';
 }
 
 /**
@@ -2196,7 +2199,7 @@ function zbscrmJS_sendInvoiceModal() {
 			'</label>';
 		optsHTML +=
 			'<input type="email" id="zbs_invoice_email_modal_toemail" value="' +
-			invEmail +
+			jpcrm.esc_attr( invEmail ) +
 			'" placeholder="' +
 			jpcrm.esc_attr( zbscrm_JS_invoice_lang( 'toemailplaceholder' ) ) +
 			'" />';
