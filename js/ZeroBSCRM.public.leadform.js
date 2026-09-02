@@ -200,8 +200,12 @@ function zbscrm_JS_leadformcapture( zbs_form_id, zbs_ajaxurl, t ) {
  * @return {boolean} True if it matches the regex, otherwise false.
  */
 function zbscrm_JS_validateEmail( email ) {
+	// The quoted-local-part alternative ("...")@domain is deliberately omitted:
+	// it let a contact name of the form "payload"@x.tld pass as an email and be
+	// laundered into the invoice/quote email modals. Real recipient addresses in
+	// this CRM do not use quoted local parts, so dropping it costs nothing here.
 	const re =
-		/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		/^([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	return re.test( email );
 }
 

@@ -5534,34 +5534,6 @@ function zeroBSCRM_AJAX_sendStatement() {
 		wp_send_json( $r, 200, JSON_UNESCAPED_SLASHES );
 }
 
-add_action( 'wp_ajax_zbs_invoice_mark_paid', 'zbs_invoice_mark_paid' );
-function zbs_invoice_mark_paid() {
-
-	// } get if poss
-	$zbs_invID = -1;
-	if ( isset( $_POST['id'] ) && ! empty( $_POST['id'] ) ) {
-		$zbs_invID = (int) sanitize_text_field( $_POST['id'] );  // accepts the post ID
-	}
-
-	// } Check id + perms + em
-	if ( $zbs_invID < 1 || ! zeroBSCRM_permsInvoices() ) {
-
-		die( 0 );
-
-	}
-
-	// } Continue
-
-	// once the invoice is sent it will mark it as unpaid (automatically)
-	$zbs_inv_meta           = get_post_meta( $zbs_invID, 'zbs_customer_invoice_meta', true ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
-	$zbs_inv_meta['status'] = 'Paid';
-	update_post_meta( $zbs_invID, 'zbs_customer_invoice_meta', $zbs_inv_meta ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
-
-	// all OK ....
-	$r = array( 'message' => 'All done OK' );
-	wp_send_json( $r, 200, JSON_UNESCAPED_SLASHES );
-}
-
 // } and send test so they can test before actually sending the invoice
 add_action( 'wp_ajax_zbs_invoice_send_test_invoice', 'zbs_invoice_send_test_invoice' );
 function zbs_invoice_send_test_invoice() {

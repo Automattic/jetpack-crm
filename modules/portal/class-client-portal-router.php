@@ -141,6 +141,15 @@ class Client_Portal_Router {
 			if ( ! $obj_id ) {
 				return false;
 			}
+
+			// A draft object must not resolve through its easy-access hash.
+			// Returning a quote to Draft is meant to un-share it; without this
+			// the hash link issued while it was published keeps working. The
+			// numeric-ID path below already refuses drafts via
+			// jpcrm_can_current_wp_user_view_object().
+			if ( jpcrm_portal_hash_object_is_draft( $obj_id, $obj_type_id ) ) {
+				return false;
+			}
 		} else {
 
 			// not a hash, so cast to int

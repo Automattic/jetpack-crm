@@ -251,7 +251,7 @@ function zeroBSCRM_forms_getRecaptcha() {
 	$reCaptcha    = zeroBSCRM_getSetting( 'usegcaptcha' );
 	$reCaptchaKey = zeroBSCRM_getSetting( 'gcaptchasitekey' );
 	if ( $reCaptcha && ! empty( $reCaptchaKey ) ) {
-		return '<div class="zbscrmReCaptcha"><div class="g-recaptcha" data-sitekey="' . $reCaptchaKey . '"></div></div>';
+		return '<div class="zbscrmReCaptcha"><div class="g-recaptcha" data-sitekey="' . esc_attr( $reCaptchaKey ) . '"></div></div>'; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 	}
 
 	return '';

@@ -34,6 +34,9 @@
 		<testsuite name="pdf">
 			<directory suffix="Test.php">tests/php/pdf</directory>
 		</testsuite>
+		<testsuite name="format-helpers">
+			<directory suffix="Test.php">tests/php/format-helpers</directory>
+		</testsuite>
 		<testsuite name="woo-sync">
 			<directory suffix="Test.php">tests/php/woo-sync</directory>
 		</testsuite>

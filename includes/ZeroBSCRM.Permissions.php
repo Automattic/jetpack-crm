@@ -1103,6 +1103,14 @@ function jpcrm_can_wp_user_view_object( $wp_user, $obj_id, $obj_type_id ) {
 		return false;
 	}
 
+	// Not logged in. wp_get_current_user() hands back a WP_User with ID 0 for an
+	// anonymous visitor, which is a truthy object, so this has to test the ID.
+	// It also has to run before the object retrieval below, which calls
+	// $wp_user->has_cap() and would fatal on a non-user.
+	if ( ! $wp_user || empty( $wp_user->ID ) ) {
+		return false;
+	}
+
 	global $zbs;
 
 	// retrieve object
@@ -1129,11 +1137,6 @@ function jpcrm_can_wp_user_view_object( $wp_user, $obj_id, $obj_type_id ) {
 
 	// no such object!
 	if ( ! $obj_data ) {
-		return false;
-	}
-
-	// not logged in
-	if ( ! $wp_user ) {
 		return false;
 	}
 
@@ -1201,6 +1204,35 @@ function jpcrm_can_access_portal_via_hash( $obj_type_id ) {
 	}
 	// access via hash is allowed
 	return true;
+}
+
+/**
+ * Whether an object is an unpublished draft that must not be reachable through
+ * its easy-access hash link.
+ *
+ * A quote's published state is derived from its template: zeroBS_getQuote()
+ * reports 'not yet published' unless the quote has a template ( > 0 ). Returning
+ * a quote to Draft clears that, so a draft is a quote with no template. Invoices
+ * carry an explicit 'Draft' status. Both should stop resolving through a
+ * previously issued hash link.
+ *
+ * @param int $obj_id       Object ID.
+ * @param int $obj_type_id  Object type ID.
+ *
+ * @return bool True if the object is a draft that should not be served by hash.
+ */
+function jpcrm_portal_hash_object_is_draft( $obj_id, $obj_type_id ) {
+
+	switch ( $obj_type_id ) {
+		case ZBS_TYPE_QUOTE:
+			$quote = zeroBS_getQuote( $obj_id );
+			return ! is_array( $quote ) || (int) ( $quote['template'] ?? -1 ) <= 0;
+		case ZBS_TYPE_INVOICE:
+			$invoice = zeroBS_getInvoice( $obj_id );
+			return is_array( $invoice ) && isset( $invoice['status'] ) && $invoice['status'] === 'Draft';
+	}
+
+	return false;
 }
 
 /**
