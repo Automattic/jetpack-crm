@@ -1,6 +1,7 @@
 /* stylelint-disable no-duplicate-selectors
 -- Disabled due to copied styles from Bootstrap. */
 @use "sass:color";
+@use "wpds-tokens";
 
 $jetpack_green: #069e08;
 $jetpack_hover: #007017;
@@ -534,26 +535,37 @@ $darkenColor: color.adjust($activeColor, $lightness: -20%);
 .switchCheckbox {
 	width: 80px !important;
 	height: 26px !important;
-	background: #333 !important;
+	background: var(--wpds-color-background-interactive-neutral-strong) !important;
 	margin: 20px auto !important;
 	position: relative !important;
 	border-radius: 50px !important;
 	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(255, 255, 255, 0.2) !important;
 
+	/*
+	 * "ON" and "OFF" both sit on the track and the knob covers whichever one does
+	 * not apply, so exactly one is legible at a time and the state is carried by
+	 * the word itself rather than by colour alone.
+	 *
+	 * Both take the foreground token paired with the track's background token,
+	 * which is about 12:1. "OFF" was #000 on #333, about 1.3:1; "ON" was #27ae60
+	 * on the same, about 3.0:1. Neither reached the 4.5:1 minimum.
+	 *
+	 * The white text-shadow that used to sit under "OFF" is gone with it: it was
+	 * there to lift black text off a dark track, and only muddies light text.
+	 */
 	&::after {
 		content: "OFF" !important;
-		color: #000 !important;
+		color: var(--wpds-color-foreground-interactive-neutral-strong) !important;
 		position: absolute !important;
 		right: 10px !important;
 		z-index: 0 !important;
 		font: 12px/26px Arial, sans-serif !important;
 		font-weight: 700 !important;
-		text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.15) !important;
 	}
 
 	&::before {
 		content: "ON";
-		color: $activeColor !important;
+		color: var(--wpds-color-foreground-interactive-neutral-strong) !important;
 		position: absolute !important;
 		left: 10px !important;
 		z-index: 0 !important;
@@ -561,26 +573,60 @@ $darkenColor: color.adjust($activeColor, $lightness: -20%);
 		font-weight: 700 !important;
 	}
 
-	label {
+	/*
+	 * The sliding knob. A span rather than a label now: the checkbox below covers
+	 * the whole pill and is the click target, which frees the real <label> to name
+	 * the control instead of being an empty box with a `for` attribute.
+	 */
+	.jpcrm-switch-knob {
 		margin-top: 0 !important;
 		display: block !important;
 		width: 34px !important;
 		height: 20px !important;
-		cursor: pointer !important;
 		position: absolute !important;
 		top: 3px !important;
 		left: 3px !important;
 		z-index: 1 !important;
-		background: linear-gradient(to bottom, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%) !important;
+		background: var(--wpds-color-background-surface-neutral-strong) !important;
 		border-radius: 50px !important;
 		transition: all 0.4s ease !important;
 		box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3) !important;
 	}
 
+	/*
+	 * The checkbox itself, stretched over the whole pill. It was
+	 * `visibility: hidden`, which took all four toggles out of the tab order, so
+	 * they could not be reached or operated by keyboard at all.
+	 *
+	 * `appearance: none` with no background or border rather than `opacity: 0`:
+	 * a fully transparent element paints nothing, including its own focus
+	 * outline, so the ring below would never be seen. This way the control is
+	 * invisible but still paints an outline when focused.
+	 *
+	 * Covering the pill also makes the whole control clickable, where previously
+	 * only the 34px knob was.
+	 */
 	input[type="checkbox"] {
-		visibility: hidden !important;
+		appearance: none !important;
+		position: absolute !important;
+		top: 0 !important;
+		left: 0 !important;
+		width: 100% !important;
+		height: 100% !important;
+		margin: 0 !important;
+		padding: 0 !important;
+		background: transparent !important;
+		border: 0 !important;
+		border-radius: 50px !important;
+		cursor: pointer !important;
+		z-index: 2 !important;
 
-		&:checked + label {
+		&:focus-visible {
+			outline: var(--wpds-border-width-focus) solid var(--wpds-color-stroke-focus) !important;
+			outline-offset: 2px !important;
+		}
+
+		&:checked ~ .jpcrm-switch-knob {
 			left: 43px !important;
 		}
 	}
