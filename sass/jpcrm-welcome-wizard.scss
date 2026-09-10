@@ -731,6 +731,48 @@ p.lead {
 	text-align: right;
 }
 /*
+ * Layout for the wizard's side-by-side form rows.
+ *
+ * These were inline style attributes on the markup, which no stylesheet could
+ * override. They are classes so the narrow-screen block below can stack them;
+ * the values are unchanged, so desktop renders exactly as before.
+ */
+.jpcrm-wizard-field {
+	width: 90%;
+}
+
+.jpcrm-wizard-field-col {
+	width: 50%;
+	float: left;
+}
+
+.jpcrm-wizard-field-input {
+	width: 90%;
+}
+
+.jpcrm-wizard-split {
+	width: 100%;
+}
+
+.jpcrm-wizard-split-narrow {
+	width: 25%;
+	float: left;
+}
+
+.jpcrm-wizard-split-wide {
+	width: 75%;
+	float: right;
+}
+
+.jpcrm-wizard-signup-input {
+	width: 40%;
+	margin-right: 5%;
+	display: inline-block;
+	font-size: 15px;
+	line-height: 16px;
+}
+
+/*
  * Narrow screens.
  *
  * Deliberately last in the file: several of the rules below override
@@ -768,6 +810,16 @@ p.lead {
 		padding-right: 0;
 	}
 
+	/*
+	 * Bootstrap pairs that gutter padding with a -15px margin on .row. Zeroing
+	 * the padding alone leaves the negative margin to cancel the outer padding
+	 * above, putting text flush against the screen edge.
+	 */
+	.row {
+		margin-left: 0;
+		margin-right: 0;
+	}
+
 	/* Stack the three menu-style screenshots one per row. */
 	.zbs-menu-opt {
 		width: 100%;
@@ -779,6 +831,24 @@ p.lead {
 		width: 100%;
 		float: none;
 		padding-left: 0;
+	}
+
+	/*
+	 * Its sibling logo image is the other half of that float pair, pulled up by
+	 * a negative margin inside a fixed-height box. Once the callout is full
+	 * width the image escapes the box and lands on top of the buttons, so stack
+	 * it and let the box grow. The descendant selector matches the nesting in
+	 * .zbs-sync-wrap above -- a bare .zbs-sync-img loses on specificity.
+	 */
+	.zbs-sync-wrap {
+		height: auto;
+		display: block;
+	}
+
+	.zbs-sync-wrap .zbs-sync-img {
+		width: 100%;
+		float: none;
+		margin-top: 0;
 	}
 
 	/* Long currency and business-type labels widen an auto-width select. */
@@ -797,5 +867,21 @@ p.lead {
 	 */
 	.switchbox-right {
 		width: 90px;
+	}
+
+	/* Rows that sit side by side on desktop stack here. */
+	.jpcrm-wizard-field,
+	.jpcrm-wizard-field-col,
+	.jpcrm-wizard-field-input,
+	.jpcrm-wizard-split-narrow,
+	.jpcrm-wizard-split-wide,
+	.jpcrm-wizard-signup-input {
+		width: 100%;
+		float: none;
+	}
+
+	.jpcrm-wizard-signup-input {
+		margin-right: 0;
+		margin-bottom: 8px;
 	}
 }
