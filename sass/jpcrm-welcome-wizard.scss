@@ -634,6 +634,7 @@ $darkenColor: color.adjust($activeColor, $lightness: -20%);
 
 .zbs-menu-opt img {
 	max-height: 280px;
+	max-width: 100%;
 }
 
 .zbs-menu-opt-desc {
@@ -728,4 +729,73 @@ p.lead {
 	width: 20%;
 	float: right;
 	text-align: right;
+}
+/*
+ * Narrow screens.
+ *
+ * Deliberately last in the file: several of the rules below override
+ * declarations of equal specificity (.zbs-eb-callout, .switchbox-right) that
+ * appear late, so source order is what makes them win.
+ */
+@media (max-width: 600px) {
+
+	/*
+	 * WordPress's install-page stylesheet (css/welcome-to-zbs/loadstyles.css)
+	 * puts a 20px margin on html and caps body at 90%, which together spend
+	 * 75px of a 390px viewport before any content is laid out.
+	 */
+	html {
+		margin: 0;
+	}
+
+	body {
+		max-width: none;
+	}
+
+	/*
+	 * Three nested Bootstrap gutters (.container, .col-xs-12, .col-md-12) cost
+	 * another 90px. One outer gutter is enough at this width.
+	 */
+	.zbscrm-setup-content {
+		padding-left: 16px;
+		padding-right: 16px;
+	}
+
+	.container,
+	.col-xs-12,
+	.col-md-12 {
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	/* Stack the three menu-style screenshots one per row. */
+	.zbs-menu-opt {
+		width: 100%;
+		margin-left: 0;
+	}
+
+	/* Step 2's "Every extension, every update" callout is a 50% float. */
+	.zbs-eb-callout {
+		width: 100%;
+		float: none;
+		padding-left: 0;
+	}
+
+	/* Long currency and business-type labels widen an auto-width select. */
+	.setup-content select {
+		max-width: 100%;
+	}
+
+	/* Let the four step labels wrap instead of colliding. */
+	.stepwizard-step p {
+		font-size: 13px;
+	}
+
+	/*
+	 * Step 3's toggle is a fixed 80px, which a 20% column cannot hold once
+	 * the outer gutters are gone. Size the column to its contents instead.
+	 */
+	.switchbox-right {
+		width: 90px;
+	}
 }
