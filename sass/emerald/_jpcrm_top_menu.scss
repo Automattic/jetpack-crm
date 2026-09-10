@@ -1,4 +1,4 @@
-@import "@wordpress/theme/design-tokens.css";
+@use "../wpds-tokens";
 
 #jpcrm-top-menu {
 	padding: var(--wpds-dimension-padding-xl) var(--wpds-dimension-padding-2xl) 0;
