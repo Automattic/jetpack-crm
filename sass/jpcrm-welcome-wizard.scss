@@ -773,6 +773,29 @@ p.lead {
 }
 
 /*
+ * Tablet widths.
+ *
+ * body is capped at 90% by WordPress's install-page stylesheet, inside an html
+ * margin of 20px a side, so .zbscrm-setup-content stops reaching its 800px
+ * design width below a 929px viewport: (929 - 40) * 0.9 = 800.1.
+ *
+ * Under that the callout column narrows enough for its button to wrap to two
+ * lines, and the content outgrows .zbs-sync-wrap's fixed 290px height -- the
+ * button ends up hanging out of the bottom of the box, over the rule below it.
+ * An iPad Mini at 768px lands squarely in this range.
+ *
+ * Only the height needs to give. min-height is not an option: the logo image
+ * deliberately overhangs the box by 30px at full width, so a minimum would
+ * grow the box to enclose it and change the desktop rendering.
+ */
+@media (max-width: 928px) {
+
+	.zbs-sync-wrap {
+		height: auto;
+	}
+}
+
+/*
  * Narrow screens.
  *
  * Deliberately last in the file: several of the rules below override
@@ -841,7 +864,6 @@ p.lead {
 	 * .zbs-sync-wrap above -- a bare .zbs-sync-img loses on specificity.
 	 */
 	.zbs-sync-wrap {
-		height: auto;
 		display: block;
 	}
 
