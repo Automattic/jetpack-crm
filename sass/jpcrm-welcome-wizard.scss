@@ -592,7 +592,7 @@ $darkenColor: color.adjust($activeColor, $lightness: -20%);
 .zbscrm-setup-content {
 
 	max-width: 800px;
-	width: 800px;
+	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
 
@@ -634,6 +634,7 @@ $darkenColor: color.adjust($activeColor, $lightness: -20%);
 
 .zbs-menu-opt img {
 	max-height: 280px;
+	max-width: 100%;
 }
 
 .zbs-menu-opt-desc {
@@ -728,4 +729,181 @@ p.lead {
 	width: 20%;
 	float: right;
 	text-align: right;
+}
+/*
+ * Layout for the wizard's side-by-side form rows.
+ *
+ * These were inline style attributes on the markup, which no stylesheet could
+ * override. They are classes so the narrow-screen block below can stack them;
+ * the values are unchanged, so desktop renders exactly as before.
+ */
+.jpcrm-wizard-field {
+	width: 90%;
+}
+
+.jpcrm-wizard-field-col {
+	width: 50%;
+	float: left;
+}
+
+.jpcrm-wizard-field-input {
+	width: 90%;
+}
+
+.jpcrm-wizard-split {
+	width: 100%;
+}
+
+.jpcrm-wizard-split-narrow {
+	width: 25%;
+	float: left;
+}
+
+.jpcrm-wizard-split-wide {
+	width: 75%;
+	float: right;
+}
+
+.jpcrm-wizard-signup-input {
+	width: 40%;
+	margin-right: 5%;
+	display: inline-block;
+	font-size: 15px;
+	line-height: 16px;
+}
+
+/*
+ * Tablet widths.
+ *
+ * body is capped at 90% by WordPress's install-page stylesheet, inside an html
+ * margin of 20px a side, so .zbscrm-setup-content stops reaching its 800px
+ * design width below a 929px viewport: (929 - 40) * 0.9 = 800.1.
+ *
+ * Under that the callout column narrows enough for its button to wrap to two
+ * lines, and the content outgrows .zbs-sync-wrap's fixed 290px height -- the
+ * button ends up hanging out of the bottom of the box, over the rule below it.
+ * An iPad Mini at 768px lands squarely in this range.
+ *
+ * Only the height needs to give. min-height is not an option: the logo image
+ * deliberately overhangs the box by 30px at full width, so a minimum would
+ * grow the box to enclose it and change the desktop rendering.
+ */
+@media (max-width: 928px) {
+
+	.zbs-sync-wrap {
+		height: auto;
+	}
+}
+
+/*
+ * Narrow screens.
+ *
+ * Deliberately last in the file: several of the rules below override
+ * declarations of equal specificity (.zbs-eb-callout, .switchbox-right) that
+ * appear late, so source order is what makes them win.
+ */
+@media (max-width: 600px) {
+
+	/*
+	 * WordPress's install-page stylesheet (css/welcome-to-zbs/loadstyles.css)
+	 * puts a 20px margin on html and caps body at 90%, which together spend
+	 * 75px of a 390px viewport before any content is laid out.
+	 */
+	html {
+		margin: 0;
+	}
+
+	body {
+		max-width: none;
+	}
+
+	/*
+	 * Three nested Bootstrap gutters (.container, .col-xs-12, .col-md-12) cost
+	 * another 90px. One outer gutter is enough at this width.
+	 */
+	.zbscrm-setup-content {
+		padding-left: 16px;
+		padding-right: 16px;
+	}
+
+	.container,
+	.col-xs-12,
+	.col-md-12 {
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	/*
+	 * Bootstrap pairs that gutter padding with a -15px margin on .row. Zeroing
+	 * the padding alone leaves the negative margin to cancel the outer padding
+	 * above, putting text flush against the screen edge.
+	 */
+	.row {
+		margin-left: 0;
+		margin-right: 0;
+	}
+
+	/* Stack the three menu-style screenshots one per row. */
+	.zbs-menu-opt {
+		width: 100%;
+		margin-left: 0;
+	}
+
+	/* Step 2's "Every extension, every update" callout is a 50% float. */
+	.zbs-eb-callout {
+		width: 100%;
+		float: none;
+		padding-left: 0;
+	}
+
+	/*
+	 * Its sibling logo image is the other half of that float pair, pulled up by
+	 * a negative margin inside a fixed-height box. Once the callout is full
+	 * width the image escapes the box and lands on top of the buttons, so stack
+	 * it and let the box grow. The descendant selector matches the nesting in
+	 * .zbs-sync-wrap above -- a bare .zbs-sync-img loses on specificity.
+	 */
+	.zbs-sync-wrap {
+		display: block;
+	}
+
+	.zbs-sync-wrap .zbs-sync-img {
+		width: 100%;
+		float: none;
+		margin-top: 0;
+	}
+
+	/* Long currency and business-type labels widen an auto-width select. */
+	.setup-content select {
+		max-width: 100%;
+	}
+
+	/* Let the four step labels wrap instead of colliding. */
+	.stepwizard-step p {
+		font-size: 13px;
+	}
+
+	/*
+	 * Step 3's toggle is a fixed 80px, which a 20% column cannot hold once
+	 * the outer gutters are gone. Size the column to its contents instead.
+	 */
+	.switchbox-right {
+		width: 90px;
+	}
+
+	/* Rows that sit side by side on desktop stack here. */
+	.jpcrm-wizard-field,
+	.jpcrm-wizard-field-col,
+	.jpcrm-wizard-field-input,
+	.jpcrm-wizard-split-narrow,
+	.jpcrm-wizard-split-wide,
+	.jpcrm-wizard-signup-input {
+		width: 100%;
+		float: none;
+	}
+
+	.jpcrm-wizard-signup-input {
+		margin-right: 0;
+		margin-bottom: 8px;
+	}
 }

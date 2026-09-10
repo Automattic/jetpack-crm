@@ -42,9 +42,9 @@ update_option( 'zbs_wizard_run', $run_count );
 <html lang="en-US">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<meta name="viewport" content="width=device-width">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title><?php esc_html_e( 'Welcome to Jetpack CRM', 'zero-bs-crm' ); ?></title>
-		<style type="text/css">img.wp-smiley,img.emoji{display:inline !important;border:none !important;box-shadow:none !important;height:1em !important;width:1em !important;margin:0 .07em !important;vertical-align:-0.1em !important;background:none !important;padding:0 !important}#zbscrm-logo img{max-width:20% !important}#feedbackPage{display:none}.zbscrm-setup .zbscrm-setup-actions .button-primary{background-color:#408bc9 !important;border-color:#408bc9 !important;-webkit-box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 1px 0 #408bc9 !important;box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 1px 0 #408bc9 !important;text-shadow:0 -1px 1px #408bc9,1px 0 1px #408bc9,0 1px 1px #408bc9,-1px 0 1px #408bc9 !important;float:right;margin:0;opacity:1}</style>
+		<style type="text/css">img.wp-smiley,img.emoji{display:inline !important;border:none !important;box-shadow:none !important;height:1em !important;width:1em !important;margin:0 .07em !important;vertical-align:-0.1em !important;background:none !important;padding:0 !important}#zbscrm-logo img{max-width:224px !important}#feedbackPage{display:none}.zbscrm-setup .zbscrm-setup-actions .button-primary{background-color:#408bc9 !important;border-color:#408bc9 !important;-webkit-box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 1px 0 #408bc9 !important;box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 1px 0 #408bc9 !important;text-shadow:0 -1px 1px #408bc9,1px 0 1px #408bc9,0 1px 1px #408bc9,-1px 0 1px #408bc9 !important;float:right;margin:0;opacity:1}</style>
 		<?php
 		wp_print_styles( $style_handles );
 		wp_print_scripts(); // wp_scripts
@@ -90,9 +90,9 @@ update_option( 'zbs_wizard_run', $run_count );
 									?>
 								</label>
 								<p style="margin-bottom:0"><?php esc_html_e( "This name will be shown at the top left of your CRM. E.g. 'Widget Co CRM'", 'zero-bs-crm' ); ?></p>
-								<div style="width:90%;">
-									<div style="width:50%;float:left">
-										<input class='form-control' type="text" name="zbs_crm_name" id='zbs_crm_name' value="" placeholder="<?php esc_html_e( 'Name of your CRM (e.g Jetpack CRM)', 'zero-bs-crm' ); ?>" style="width:90%" onchange="zbs_crm_name_change();"/>
+								<div class="jpcrm-wizard-field">
+									<div class="jpcrm-wizard-field-col">
+										<input class='form-control jpcrm-wizard-field-input' type="text" name="zbs_crm_name" id='zbs_crm_name' value="" placeholder="<?php esc_html_e( 'Name of your CRM (e.g Jetpack CRM)', 'zero-bs-crm' ); ?>" onchange="zbs_crm_name_change();"/>
 									</div>
 								</div>
 								<div class='clear'></div>
@@ -233,11 +233,11 @@ update_option( 'zbs_wizard_run', $run_count );
 							<div class="wizopt">
 								<label for="zbs_ess"><?php esc_html_e( 'Usage Tracking', 'zero-bs-crm' ); ?></label>
 
-								<div style="width:100%;">
-									<div style="width:25%;float:left;">
+								<div class="jpcrm-wizard-split">
+									<div class="jpcrm-wizard-split-narrow">
 										<div class='yesplsess'><p><?php esc_html_e( 'Track CRM Usage', 'zero-bs-crm' ); ?> <input type="checkbox" id="zbs_ess" value="zbs_ess"/></p></div>
 									</div>
-									<div style="width:75%;float:right;">
+									<div class="jpcrm-wizard-split-wide">
 										<div class="zbs-extrainfo">
 											<?php esc_html_e( 'Share CRM usage data with us. No contact or sensitive CRM data is shared. This helps us build a better CRM by understanding how our users are using it.', 'zero-bs-crm' ); ?> <a href="<?php echo esc_url( $zbs->urls['usagetrackinginfo'] ); ?>" style="color: #000000;" target="_blank" ><?php esc_html_e( 'Click here to learn more.', 'zero-bs-crm' ); ?></a>
 										</div>
@@ -391,8 +391,8 @@ update_option( 'zbs_wizard_run', $run_count );
 
 							<p style="text-align:center">
 								<input type="hidden" id="zbs_crm_subblogname" name="zbs_crm_subblogname" value="<?php bloginfo( 'name' ); ?>" />
-								<input class='form-control' style="width:40%;margin-right:5%;display:inline-block;font-size:15px;line-height:16px;" type="text" name="zbs_crm_first_name" id="zbs_crm_first_name" value="<?php echo esc_attr( $fname ); ?>" placeholder="<?php esc_attr_e( 'Type your first name', 'zero-bs-crm' ); ?>..." />                    
-								<input class='form-control' style="width:40%;margin-right:5%;display:inline-block;font-size:15px;line-height:16px;"  type="text" name="zbs_crm_email" id="zbs_crm_email" value="<?php echo esc_attr( $em ); ?>" placeholder="<?php esc_attr_e( 'Enter your best email', 'zero-bs-crm' ); ?>..." />
+								<input class='form-control jpcrm-wizard-signup-input' type="text" name="zbs_crm_first_name" id="zbs_crm_first_name" value="<?php echo esc_attr( $fname ); ?>" placeholder="<?php esc_attr_e( 'Type your first name', 'zero-bs-crm' ); ?>..." />                    
+								<input class='form-control jpcrm-wizard-signup-input'  type="text" name="zbs_crm_email" id="zbs_crm_email" value="<?php echo esc_attr( $em ); ?>" placeholder="<?php esc_attr_e( 'Enter your best email', 'zero-bs-crm' ); ?>..." />
 
 								<input class='form-control' style="display:none !important"  type="text" name="zbs_crm_last_name" id="zbs_crm_last_name" value="<?php echo esc_attr( $lname ); ?>" placeholder="<?php esc_attr_e( 'And your last name', 'zero-bs-crm' ); ?>..." />
 							</p>
