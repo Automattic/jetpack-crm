@@ -667,6 +667,27 @@ p.lead {
 	padding-left: 15px;
 }
 
+/*
+ * This label is long enough to wrap to two lines in the narrower half of the
+ * range -- at 768px, and again below about 360px -- and left to itself it
+ * breaks after "other", leaving "services" alone on the second line.
+ *
+ * balance rather than pretty: balance evens every line in the block, which is
+ * what a two-line button wants, and browsers cap it at a few lines precisely
+ * because it is meant for short text like this. pretty is tuned for long-form
+ * copy, optimising only the last line and leaving the ones above it roughly as
+ * they fell. Measured on this label at 768px: balance gives lines of 138 and
+ * 124px, pretty 158 and 104, and neither at all 203 and 59.
+ *
+ * Centred to go with it. Balanced lines are still unequal, and ragged left
+ * alignment inside a symmetric button reads as an accident rather than a
+ * choice. A single line is unaffected, the button being sized to its content.
+ */
+.zbs-eb-callout .btn {
+	text-wrap: balance;
+	text-align: center;
+}
+
 .zbs-sync-wrap {
 
 	padding: 12px;
