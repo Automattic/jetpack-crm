@@ -287,7 +287,30 @@ update_option( 'zbs_wizard_run', $run_count );
 											<a href="<?php echo esc_url( $zbs->urls['pricing'] ); ?>" target="_blank" class="btn btn-jetpack">Connect your CRM to other services</a>
 										</div>
 										<div id="zbs-starterbundle-img" class="zbs-sync-img">
-											<a href="<?php echo esc_url( $zbs->urls['pricing'] ); ?>" target="_blank"><img src="<?php echo esc_url( ZEROBSCRM_URL ); ?>i/welcome-to-zbs/entrepreneur-bundle.png" alt="Entrepreneur Bundle" /></a>
+											<?php
+											/*
+											 * The logos illustrate the bundle rather than label anything, and
+											 * they sit inside a single link to pricing, so they carry empty alt
+											 * text and the link is named instead. Naming all five would make
+											 * the link read as a list of brands.
+											 *
+											 * Provenance and licensing for these files: i/welcome-to-zbs/LOGOS.md
+											 */
+											$jpcrm_bundle_logos = array(
+												array( 'file' => 'woo-logo.svg' ),
+												array( 'file' => 'twilio-logo.svg' ),
+												array( 'file' => 'stripe-logo.svg' ),
+												array( 'file' => 'paypal-logo@2x.png' ),
+												array( 'file' => 'gravity-forms-logo.svg' ),
+											);
+											?>
+											<a href="<?php echo esc_url( $zbs->urls['pricing'] ); ?>" target="_blank" class="jpcrm-bundle-logos" aria-label="<?php esc_attr_e( 'See pricing for Jetpack CRM extensions', 'zero-bs-crm' ); ?>">
+												<?php foreach ( $jpcrm_bundle_logos as $jpcrm_bundle_logo ) : ?>
+													<span class="jpcrm-bundle-logo jpcrm-bundle-logo-<?php echo esc_attr( pathinfo( $jpcrm_bundle_logo['file'], PATHINFO_FILENAME ) ); ?>">
+														<img src="<?php echo esc_url( ZEROBSCRM_URL . 'i/welcome-to-zbs/' . $jpcrm_bundle_logo['file'] ); ?>" alt="" />
+													</span>
+												<?php endforeach; ?>
+											</a>
 										</div>
 
 									</div>
