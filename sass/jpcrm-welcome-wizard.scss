@@ -684,16 +684,10 @@ p.lead {
 		font-size: 18px;
 	}
 
-	/*
-	 * The logo stagger is taller than this box and deliberately breaks out of
-	 * it, top and bottom, exactly as the composite banner it replaced did. This
-	 * offset is what lifts it clear of the top edge.
-	 */
 	.zbs-sync-img {
 		text-align: center;
 		width: 50%;
 		float: right;
-		margin-top: -39px;
 	}
 
 }
@@ -707,6 +701,34 @@ p.lead {
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+/*
+ * Copy on the left, logos on the right, centred against each other.
+ *
+ * Centring is what makes the stagger behave at every width. Where it is taller
+ * than this box, as on a wide screen, it breaks out equally top and bottom the
+ * way the composite banner did; where the box is the taller of the two, as
+ * around 768px, it simply sits in the middle and breaks out of neither. The
+ * fixed negative offset this replaced could not tell those cases apart, so it
+ * pulled the group out of the top edge and left a gap at the bottom.
+ *
+ * Two things here are load-bearing. height: 100% gives the flex line the box's
+ * height to centre against; without it the line is only as tall as its contents
+ * and there is nothing to centre against. And this must stay a single-line
+ * container: flex-wrap would make it multi-line, and a line in a multi-line
+ * container takes its cross size from its own items, so align-items would
+ * centre the stagger inside a line as tall as itself while align-content parked
+ * that line at the top -- which looks exactly like no centring at all. Narrow
+ * screens stack by switching direction to column, not by wrapping.
+ *
+ * float is ignored on flex items, so the 50% widths keep doing the column work
+ * and their float declarations go inert rather than needing to be unpicked.
+ */
+.zbs-eb-wizard {
+	display: flex;
+	align-items: center;
+	height: 100%;
 }
 
 /*
@@ -936,6 +958,52 @@ p.lead {
 
 	.jpcrm-bundle-logo-gravity-forms {
 		width: 140px;
+	}
+
+	/*
+	 * Cap the group at three standard cards. Left to fill the full width it
+	 * fits four on the first row at the wider end of this range, orphaning the
+	 * fifth; this holds it to 3-2, or 2-2-1 once the column is too narrow for
+	 * three.
+	 */
+	.jpcrm-bundle-logos {
+		max-width: 320px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	/*
+	 * Stacked, the call to action reads better after the logos than wedged
+	 * between them and the copy. display: contents flattens the callout so its
+	 * button becomes a sibling of the logos and can be ordered past them,
+	 * without moving anything in the markup.
+	 */
+	.zbs-eb-wizard {
+		flex-direction: column;
+
+		/*
+		 * The base rule centres the two columns against each other. Here the
+		 * callout is flattened by display: contents, so that centring would apply
+		 * to its heading and paragraphs individually and pull the copy off the
+		 * left margin. Only the button is meant to be centred, and it says so
+		 * itself below.
+		 */
+		align-items: stretch;
+	}
+
+	.zbs-eb-callout {
+		display: contents;
+	}
+
+	.zbs-sync-wrap .zbs-sync-img {
+		order: 2;
+		margin-top: 20px;
+	}
+
+	.zbs-eb-callout .btn {
+		order: 3;
+		align-self: center;
+		margin-top: 20px;
 	}
 
 	/* Long currency and business-type labels widen an auto-width select. */
