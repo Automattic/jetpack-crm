@@ -684,19 +684,86 @@ p.lead {
 		font-size: 18px;
 	}
 
+	/*
+	 * The -39px margin that used to be here pulled the old composite banner,
+	 * which was taller than this box, up into it. The logos that replaced it are
+	 * a third of that height, so the offset only lifted them out of the box.
+	 */
 	.zbs-sync-img {
 		text-align: center;
 		width: 50%;
 		float: right;
-		margin-top: -39px;
 	}
 
 }
 
-.zbs-sync-wrap img {
+/*
+ * Scoped away from .jpcrm-bundle-logo: this used to stretch the single
+ * composite banner across its column, and would otherwise blow each of the
+ * five logos that replaced it up to full width.
+ */
+.zbs-sync-wrap img:not(.jpcrm-bundle-logo img) {
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+/*
+ * Copy on the left, logos on the right, centred against each other.
+ *
+ * float is ignored on flex items, so the 50% widths above keep doing the
+ * column work and their float declarations simply go inert -- no need to
+ * unpick them. flex-wrap is what lets the narrow-screen rules below, which
+ * take both columns to 100%, stack rather than overflow.
+ */
+.zbs-eb-wizard {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+}
+
+/*
+ * The extension logos that illustrate the bundle.
+ *
+ * Sized by height rather than width. The five marks run from Stripe's 2.4:1 to
+ * Gravity Forms' 7.8:1, so matching their widths would leave Stripe enormous
+ * and Gravity illegible; matching heights is what makes them read as a set.
+ * Gravity is wide enough that it takes a row of its own, which is simply what
+ * a 7.8:1 mark does in a column this size -- better than hand-placing a
+ * composition that breaks the next time a brand changes shape.
+ */
+.jpcrm-bundle-logos {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	justify-content: center;
+	align-items: center;
+}
+
+.jpcrm-bundle-logo {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: #fff;
+	border-radius: 4px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+	padding: 10px 14px;
+}
+
+.jpcrm-bundle-logo img {
+	display: block;
+	width: auto;
+	height: 22px;
+}
+
+/*
+ * Twilio's file is shipped exactly as twilio.com serves it, and its viewBox
+ * carries 16.7% vertical padding (the artwork is 40 units tall in a 48 unit
+ * box). Scaling it up by that ratio makes the mark itself match the others,
+ * rather than altering their file to crop it.
+ */
+.jpcrm-bundle-logo-twilio-logo img {
+	height: 26px;
 }
 
 .zbs-sync-wrap p.lft {
