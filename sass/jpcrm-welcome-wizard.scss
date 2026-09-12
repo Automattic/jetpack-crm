@@ -843,6 +843,22 @@ p.lead {
 	left: 52.8%;
 }
 
+/*
+ * PayPal's file is cropped flush to its ink and the "y" descender is a quarter
+ * of that height, so centring the box puts the body of the letterforms -- cap
+ * height to baseline, which is what the eye reads as the logo -- 12.6% of the
+ * height above the middle of the card. It looks like it is floating. Nudging it
+ * down by exactly that much centres what is actually seen. The percentage
+ * resolves against the element's own height, so it holds at every width.
+ *
+ * Only PayPal. Stripe's "p" descends too but half as far, and the ink hanging
+ * below Twilio's and Gravity Forms' text is their icon, which is part of how
+ * those marks are balanced and is not something to correct.
+ */
+.jpcrm-bundle-logo-paypal img {
+	transform: translateY(12.6%);
+}
+
 /* Row 4, the wide one */
 .jpcrm-bundle-logo-gravity-forms {
 	top: 76.58%;
@@ -1016,15 +1032,21 @@ p.lead {
 		display: contents;
 	}
 
+	/*
+	 * The paragraph above already carries a 24px bottom margin, and margins do
+	 * not collapse between flex items, so anything added here stacks on top of
+	 * it. It had 20px, which made the space above the logos nearly twice the
+	 * space below them. The button matches that 24px instead.
+	 */
 	.zbs-sync-wrap .zbs-sync-img {
 		order: 2;
-		margin-top: 20px;
+		margin-top: 0;
 	}
 
 	.zbs-eb-callout .btn {
 		order: 3;
 		align-self: center;
-		margin-top: 20px;
+		margin-top: 24px;
 	}
 
 	/* Long currency and business-type labels widen an auto-width select. */
