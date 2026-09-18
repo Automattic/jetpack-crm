@@ -63,6 +63,49 @@
 		margin: 0;
 	}
 
+	/*
+	 * The two hero logos, and the whitespace around them.
+	 *
+	 * What the eye measures is ink to ink: the card's inner edge down to the
+	 * first painted pixel of the mark, and its last painted pixel down to the
+	 * cap height of the heading. Neither lines up with the box geometry, so the
+	 * padding below is deliberately uneven -- symmetric padding here renders as
+	 * visibly lopsided space.
+	 *
+	 * Above, the card already contributes 20px before the image begins:
+	 * .intro's 40px of padding plus .block's 30px, less the 50px the block is
+	 * pulled up by. The 2px border sits outside that, so it does not count.
+	 *
+	 * Below, the h6 directly above sets 16px type on a 1.6 line height, giving a
+	 * 25.6px line box whose glyphs start 11px down from its top. Change that
+	 * type and this number needs revisiting with it.
+	 *
+	 * Both marks ship cropped tight to their artwork, so the images add nothing
+	 * of their own.
+	 */
+	.jpcrm-dash-hero-logo {
+		--jpcrm-hero-card-offset: 20px;
+		--jpcrm-hero-heading-lead: 11px;
+
+		// The width and height attributes describe the artwork, not the box.
+		box-sizing: content-box;
+		padding-top: calc(var(--jpcrm-hero-gap) - var(--jpcrm-hero-card-offset));
+		padding-bottom: calc(var(--jpcrm-hero-gap) - var(--jpcrm-hero-heading-lead));
+	}
+
+	#jetpack-crm-welcome {
+		--jpcrm-hero-gap: 50px;
+	}
+
+	/*
+	 * Woo ask for clear space of at least one of the logo's "o"s on every side,
+	 * and in their file an "o" is as tall as the whole logo, so this tracks the
+	 * mark's rendered height.
+	 */
+	#woocommerce-logo {
+		--jpcrm-hero-gap: 60px;
+	}
+
 	#zbs-welcome #first-customer {
 		border-left: 2px solid #e1e1e1;
 		border-right: 2px solid #e1e1e1;
