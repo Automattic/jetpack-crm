@@ -297,17 +297,17 @@ update_option( 'zbs_wizard_run', $run_count );
 											 * Provenance and licensing for these files: i/welcome-to-zbs/LOGOS.md
 											 */
 											$jpcrm_bundle_logos = array(
-												array( 'slug' => 'woo',           'file' => 'woo-logo.svg' ),
-												array( 'slug' => 'twilio',        'file' => 'twilio-logo.svg' ),
-												array( 'slug' => 'stripe',        'file' => 'stripe-logo.svg' ),
-												array( 'slug' => 'paypal',        'file' => 'paypal-logo@2x.png' ),
-												array( 'slug' => 'gravity-forms', 'file' => 'gravity-forms-logo.svg' ),
+												'woo'    => 'woo-logo.svg',
+												'twilio' => 'twilio-logo.svg',
+												'stripe' => 'stripe-logo.svg',
+												'paypal' => 'paypal-logo@2x.png',
+												'gravity-forms' => 'gravity-forms-logo.svg',
 											);
 											?>
 											<a href="<?php echo esc_url( $zbs->urls['pricing'] ); ?>" target="_blank" class="jpcrm-bundle-logos" aria-label="<?php esc_attr_e( 'See pricing for Jetpack CRM extensions', 'zero-bs-crm' ); ?>">
-												<?php foreach ( $jpcrm_bundle_logos as $jpcrm_bundle_logo ) : ?>
-													<span class="jpcrm-bundle-logo jpcrm-bundle-logo-<?php echo esc_attr( $jpcrm_bundle_logo['slug'] ); ?>">
-														<img src="<?php echo esc_url( ZEROBSCRM_URL . 'i/welcome-to-zbs/' . $jpcrm_bundle_logo['file'] ); ?>" alt="" />
+												<?php foreach ( $jpcrm_bundle_logos as $jpcrm_bundle_logo_slug => $jpcrm_bundle_logo_file ) : ?>
+													<span class="jpcrm-bundle-logo jpcrm-bundle-logo-<?php echo esc_attr( $jpcrm_bundle_logo_slug ); ?>">
+														<img src="<?php echo esc_url( ZEROBSCRM_URL . 'i/welcome-to-zbs/' . $jpcrm_bundle_logo_file ); ?>" alt="" />
 													</span>
 												<?php endforeach; ?>
 											</a>
