@@ -1271,7 +1271,8 @@ function zeroBSCRM_html_home2() {
 
 		<div class="intro">
 			<div class="block" style="text-align:center;margin-top:-50px;">
-						<img src="<?php echo esc_url( jpcrm_get_logo( false ) ); ?>" alt="Jetpack CRMt" id="jetpack-crm-welcome" style="text-align:center;padding:30px;"> 
+						<?php // Sized explicitly: the SVG is a 264x50 design where the PNG was its 2x export, so without this it renders at half the size it always has. Spacing lives in sass/ZeroBSCRM.admin.intro.scss. ?>
+						<img src="<?php echo esc_url( jpcrm_get_logo( false, 'black', 'svg' ) ); ?>" alt="Jetpack CRM" width="528" height="100" id="jetpack-crm-welcome" class="jpcrm-dash-hero-logo"> 
 						<h6><?php esc_html_e( 'Thank you for choosing Jetpack CRM - The Ultimate Entrepreneurs\' CRM for WordPress', 'zero-bs-crm' ); ?></h6>
 			</div>
 		</div>
@@ -1300,7 +1301,8 @@ function zeroBSCRM_html_home2() {
 	<div class="container margin-top30">
 		<div class="intro">
 			<div class="block" style="text-align:center;margin-top:-50px;">
-				<img src="<?php echo esc_url( plugins_url( '/i/ext/woocommerce-logo-horizontal-black.png', ZBS_ROOTFILE ) ); ?>" alt="WooCommerce" id="woocommerce-logo" style="text-align:center;padding:30px;padding-bottom:15px;max-width:440px;">
+				<?php // Woo's current mark is the short "Woo" where this was the long WooCommerce wordmark, so it is sized to a similar optical weight rather than to the old lockup's width. Spacing lives in sass/ZeroBSCRM.admin.intro.scss. ?>
+				<img src="<?php echo esc_url( plugins_url( '/i/welcome-to-zbs/woo-logo.svg', ZBS_ROOTFILE ) ); ?>" alt="Woo" width="232" height="60" id="woocommerce-logo" class="jpcrm-dash-hero-logo">
 				<h6><?php esc_html_e( 'Jetpack CRM is WooCommerce ready!', 'zero-bs-crm' ); ?></h6>
 			</div>
 		</div>
