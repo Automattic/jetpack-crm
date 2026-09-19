@@ -19,21 +19,59 @@
 
 		}
 
+		/*
+		 * A co-branding lockup, so the two marks are sized by height rather than
+		 * by width: matching widths would leave whichever mark is the longer
+		 * lockup looking smaller than the other.
+		 *
+		 * Woo is deliberately shorter than the CRM mark rather than level with
+		 * it. The CRM logo's icon fills its full height but the wordmark beside
+		 * it reaches only about 70% of that, where Woo's letterforms fill their
+		 * box entirely, so two marks set to the same height do not read as the
+		 * same size.
+		 */
 		#jpcrm-woosync-jpcrm-logo {
-			max-width: 250px;
+			height: 47px;
+			width: auto;
 		}
 
+		/*
+		 * Woo sits on the CRM wordmark's baseline. That part is not a taste
+		 * call: "Jetpack" carries a descender and "Woo" has none, so aligning
+		 * the two by ink centre -- which is what the default centring does --
+		 * drops Woo's baseline about 10px below the CRM one and it reads as
+		 * sagging.
+		 *
+		 * The height is a taste call. Matching the CRM wordmark's 24px cap
+		 * height is what you would do for two wordmarks, but this logo is a
+		 * wordmark next to a 46px icon, and at 24px Woo does not hold its half
+		 * of a lockup that is meant to read as a partnership. It runs a little
+		 * over the cap height instead, with the baseline still locked.
+		 */
 		#jpcrm-woosync-woo-logo {
-			max-width: 230px;
+			height: 30px;
+			width: auto;
+			position: relative;
+			top: -6.5px;
 		}
 
 		i {
 
 			vertical-align: middle;
 			display: table-cell;
-			padding: 0 1em;
+
+			/*
+			 * Woo ask for clear space of at least one of the logo's "o"s on
+			 * every side, and in their file an "o" is as tall as the whole
+			 * logo, so the separator keeps the Woo mark's height either side.
+			 */
+			padding: 0 24px;
 			font-size: 1.5em;
 			color: #069e08;
+
+			// Sits on the wordmarks' cap midpoint rather than the row's centre.
+			position: relative;
+			top: -4px;
 
 		}
 
