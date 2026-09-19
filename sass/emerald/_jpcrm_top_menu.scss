@@ -171,5 +171,16 @@
 			right: var(--wpds-dimension-padding-2xl);
 			height: 24px; /* The logo row, so the controls centre against it. */
 		}
+
+		/*
+		 * With the controls out of the way the nav can now reach the right edge,
+		 * and the last item's panel -- anchored to its left -- hangs off it. Hang
+		 * that one off its right edge instead. It opens leftward into the bar,
+		 * which is clear whether or not the nav has wrapped.
+		 */
+		menu-bar menu-section:first-of-type > .ui.dropdown.item:last-child > .menu {
+			left: auto;
+			right: 0;
+		}
 	}
 }
