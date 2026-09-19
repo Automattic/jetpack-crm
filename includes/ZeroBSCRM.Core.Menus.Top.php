@@ -297,7 +297,7 @@ function zeroBSCRM_admin_top_menu( $branding = 'zero-bs-crm', $page = 'dash' ) {
 
 			<menu-section>
 			<a class="item<?php esc_attr( zeroBS_menu_active( $zbs->slugs['dash'] ) ); ?>" href="<?php echo esc_url( zeroBSCRM_getAdminURL( $zbs->slugs['dash'] ) ); ?>"><?php esc_html_e( 'Dashboard', 'zero-bs-crm' ); ?></a>
-			<div class="ui simple dropdown item select<?php esc_attr( zeroBS_menu_active_type( 'contact' ) ); ?>" id="zbs-contacts-topmenu" style="min-width:114px;z-index:5">
+			<div class="ui simple dropdown item select<?php esc_attr( zeroBS_menu_active_type( 'contact' ) ); ?>" id="zbs-contacts-topmenu">
 				<span class="text"><?php esc_html_e( 'Contacts', 'zero-bs-crm' ); ?></span>
 				<i class="dropdown icon"></i>
 				<div class="menu ui">
@@ -385,7 +385,7 @@ function zeroBSCRM_admin_top_menu( $branding = 'zero-bs-crm', $page = 'dash' ) {
 			<?php
 			if ( zeroBSCRM_permsViewQuotes() && zeroBSCRM_getSetting( 'feat_quotes' ) > 0 ) {
 				?>
-			<div class="ui simple dropdown item select<?php zeroBS_menu_active_type( 'quote' ); ?>" id="zbs-quotes-topmenu" style="z-index:5">
+			<div class="ui simple dropdown item select<?php zeroBS_menu_active_type( 'quote' ); ?>" id="zbs-quotes-topmenu">
 				<span class="text"><?php esc_html_e( 'Quotes', 'zero-bs-crm' ); ?></span>
 				<i class="dropdown icon"></i>
 				<div class="menu ui">
@@ -425,7 +425,7 @@ function zeroBSCRM_admin_top_menu( $branding = 'zero-bs-crm', $page = 'dash' ) {
 			<?php } ?>
 
 			<?php if ( zeroBSCRM_permsViewInvoices() && zeroBSCRM_getSetting( 'feat_invs' ) > 0 ) { ?>
-			<div class="ui simple dropdown item select<?php zeroBS_menu_active_type( 'invoice' ); ?>" id="zbs-invoices-topmenu" style="z-index:5">
+			<div class="ui simple dropdown item select<?php zeroBS_menu_active_type( 'invoice' ); ?>" id="zbs-invoices-topmenu">
 				<span class="text"><?php esc_html_e( 'Invoices', 'zero-bs-crm' ); ?></span>
 				<i class="dropdown icon"></i>
 				<div class="menu ui">
@@ -466,7 +466,7 @@ function zeroBSCRM_admin_top_menu( $branding = 'zero-bs-crm', $page = 'dash' ) {
 			if ( zeroBSCRM_permsViewTransactions() && zeroBSCRM_getSetting( 'feat_transactions' ) > 0 ) {
 				$transactions_menu = array();
 				?>
-			<div class="ui simple dropdown item select<?php zeroBS_menu_active_type( 'transaction' ); ?>" id="zbs-transactions-topmenu" style="z-index:5">
+			<div class="ui simple dropdown item select<?php zeroBS_menu_active_type( 'transaction' ); ?>" id="zbs-transactions-topmenu">
 				<span class="text"><?php esc_html_e( 'Transactions', 'zero-bs-crm' ); ?></span>
 				<i class="dropdown icon"></i>
 				<div class="menu ui">

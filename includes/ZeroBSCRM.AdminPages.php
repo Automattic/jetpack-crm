@@ -1271,7 +1271,8 @@ function zeroBSCRM_html_home2() {
 
 		<div class="intro">
 			<div class="block" style="text-align:center;margin-top:-50px;">
-						<img src="<?php echo esc_url( jpcrm_get_logo( false ) ); ?>" alt="Jetpack CRMt" id="jetpack-crm-welcome" style="text-align:center;padding:30px;"> 
+						<?php // Sized explicitly: the SVG is a 264x50 design where the PNG was its 2x export, so without this it renders at half the size it always has. Spacing lives in sass/ZeroBSCRM.admin.intro.scss. ?>
+						<img src="<?php echo esc_url( jpcrm_get_logo( false, 'black', 'svg' ) ); ?>" alt="Jetpack CRM" width="528" height="100" id="jetpack-crm-welcome" class="jpcrm-dash-hero-logo"> 
 						<h6><?php esc_html_e( 'Thank you for choosing Jetpack CRM - The Ultimate Entrepreneurs\' CRM for WordPress', 'zero-bs-crm' ); ?></h6>
 			</div>
 		</div>
@@ -1300,7 +1301,8 @@ function zeroBSCRM_html_home2() {
 	<div class="container margin-top30">
 		<div class="intro">
 			<div class="block" style="text-align:center;margin-top:-50px;">
-				<img src="<?php echo esc_url( plugins_url( '/i/ext/woocommerce-logo-horizontal-black.png', ZBS_ROOTFILE ) ); ?>" alt="WooCommerce" id="woocommerce-logo" style="text-align:center;padding:30px;padding-bottom:15px;max-width:440px;">
+				<?php // Woo's current mark is the short "Woo" where this was the long WooCommerce wordmark, so it is sized to a similar optical weight rather than to the old lockup's width. Spacing lives in sass/ZeroBSCRM.admin.intro.scss. ?>
+				<img src="<?php echo esc_url( plugins_url( '/i/welcome-to-zbs/woo-logo.svg', ZBS_ROOTFILE ) ); ?>" alt="Woo" width="232" height="60" id="woocommerce-logo" class="jpcrm-dash-hero-logo">
 				<h6><?php esc_html_e( 'Jetpack CRM is WooCommerce ready!', 'zero-bs-crm' ); ?></h6>
 			</div>
 		</div>
@@ -1365,25 +1367,25 @@ function zeroBSCRM_html_home2() {
 
 					<div class="feature-block first">
 						<img alt="<?php esc_attr_e( 'Automations', 'zero-bs-crm' ); ?>" src="<?php echo esc_url( plugins_url( '/i/auto.png', ZBS_ROOTFILE ) ); ?>">
-						<h5><?php esc_html_e( 'Automations', 'zero-bs-crm' ); ?><span class='pro'>Entrepreneur</span></h5>
+						<h5><?php esc_html_e( 'Automations', 'zero-bs-crm' ); ?> <span class='pro'>Entrepreneur</span></h5>
 						<p><?php esc_html_e( 'Set up rule-based triggers and actions to automate your CRM work. Automatically Email new contacts, Distribute Leads, plus much more.', 'zero-bs-crm' ); ?></p>
 					</div>
 
 					<div class="feature-block last">
 						<img alt="<?php esc_attr_e( 'Send SMS', 'zero-bs-crm' ); ?>" src="<?php echo esc_url( plugins_url( '/i/sms.png', ZBS_ROOTFILE ) ); ?>">
-						<h5><?php esc_html_e( 'Send SMS', 'zero-bs-crm' ); ?><span class='pro'>Entrepreneur</span></h5>
+						<h5><?php esc_html_e( 'Send SMS', 'zero-bs-crm' ); ?> <span class='pro'>Entrepreneur</span></h5>
 						<p><?php esc_html_e( 'Want to get in front of your contacts, wherever they are? Send SMS messages to your contacts from their CRM record.', 'zero-bs-crm' ); ?></p>
 					</div>
 
 					<div class="feature-block first">
 						<img alt="<?php esc_attr_e( 'Client Portal Pro', 'zero-bs-crm' ); ?>" src="<?php echo esc_url( plugins_url( '/i/cpp.png', ZBS_ROOTFILE ) ); ?>">
-						<h5><?php esc_html_e( 'Client Portal Pro', 'zero-bs-crm' ); ?><span class='pro'>Entrepreneur</span></h5>
+						<h5><?php esc_html_e( 'Client Portal Pro', 'zero-bs-crm' ); ?> <span class='pro'>Entrepreneur</span></h5>
 						<p><?php esc_html_e( 'Create a powerful client portal in one click! Easily share files with clients via their contact record. Tweak the portal to fit your branding, and more!', 'zero-bs-crm' ); ?></p>
 					</div>
 
 					<div class="feature-block last">
 						<img alt="<?php esc_attr_e( 'Mail Campaigns', 'zero-bs-crm' ); ?>" src="<?php echo esc_url( plugins_url( '/i/mail.png', ZBS_ROOTFILE ) ); ?>">
-						<h5><?php esc_html_e( 'Mail Campaigns', 'zero-bs-crm' ); ?><span class='pro'>Entrepreneur</span></h5>
+						<h5><?php esc_html_e( 'Mail Campaigns', 'zero-bs-crm' ); ?> <span class='pro'>Entrepreneur</span></h5>
 						<p><?php echo wp_kses( __( 'Send Email Broadcasts and Sequences to your CRM contacts using our <strong>powerful</strong> Mail Campaigns v2.0. which is linked directly into your CRM data!', 'zero-bs-crm' ), $zbs->acceptable_restricted_html ); ?></p>
 					</div>
 
