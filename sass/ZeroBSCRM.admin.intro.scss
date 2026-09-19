@@ -169,15 +169,20 @@
 		padding: 16px 28px;
 	}
 
+	/*
+	 * These two halves carry the welcome card's button pair, one button each,
+	 * centred within its half. They were 60/40, which put the buttons 135px and
+	 * 203px from the card's centre rather than an equal distance either side.
+	 */
 	.left {
 		float: left;
-		width: 60%;
+		width: 50%;
 		padding-right: 10px;
 	}
 
 	.right {
 		float: right;
-		width: 40%;
+		width: 50%;
 		padding-left: 10px;
 	}
 
