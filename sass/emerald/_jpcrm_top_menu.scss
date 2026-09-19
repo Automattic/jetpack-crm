@@ -5,6 +5,14 @@
 	display: block;
 	background-color: var(--wpds-color-background-surface-neutral-strong);
 
+	/*
+	 * The bar wraps when its items stop fitting, and the space it has depends on
+	 * whether WordPress' admin sidebar is expanded, folded or off-canvas — not on
+	 * the viewport. A container query asks the question that actually matters.
+	 */
+	container-type: inline-size;
+	position: relative;
+
 	.logo-cube {
 		cursor: pointer;
 		width: fit-content;
@@ -57,12 +65,14 @@
 		margin-left: -1em;
 		padding-bottom: 0;
 		display: flex;
+		flex-wrap: wrap;
 		justify-content: space-between;
 		align-items: end;
 		border-bottom: var(--wpds-border-width-xs) solid var(--wpds-color-stroke-surface-neutral-weak);
 
 		menu-section {
 			display: flex;
+			flex-wrap: wrap;
 			align-items: center;
 
 			.item {
@@ -70,9 +80,36 @@
 				padding: 1em;
 				line-height: 1;
 
+				/* Without this the items shrink past their own text, clipping it. */
+				flex-shrink: 0;
+
 				&.current_menu_item {
 					border-bottom: 2px solid var(--wpds-color-stroke-interactive-neutral-strong);
 				}
+			}
+
+			/*
+			 * Each dropdown sits in its own stacking context so its panel clears
+			 * the page content below the bar. That context is what confines the
+			 * panel's own z-index, so a sibling at the same level and later in
+			 * the document paints over an open panel — which shows as soon as the
+			 * bar wraps and the second row lands beneath the first row's panels.
+			 * Lifting the whole context of the open item clears its siblings.
+			 * (These levels were inline `style="z-index:5"` attributes, which no
+			 * stylesheet rule could have overridden.)
+			 */
+			> .ui.dropdown.item {
+				position: relative;
+				z-index: 5;
+
+				&:hover,
+				&:focus-within {
+					z-index: 10;
+				}
+			}
+
+			#zbs-contacts-topmenu {
+				min-width: 114px;
 			}
 
 			#jpcrm-user-menu-item {
@@ -84,7 +121,8 @@
 
 			#jpcrm-user-menu {
 				width: 580px;
-				min-width: 580px;
+				min-width: 0;
+				max-width: calc(100vw - 2 * var(--wpds-dimension-padding-2xl));
 
 				i.icon {
 					margin-right: 8px;
@@ -112,6 +150,26 @@
 					}
 				}
 			}
+		}
+	}
+
+	/*
+	 * Once the nav no longer fits alongside the notifications and account
+	 * controls, those two move up into the logo row, which is empty to the right
+	 * of the wordmark. Left in place they wrap onto a row of their own, aligned
+	 * left under the nav.
+	 *
+	 * The threshold is the width the two need side by side (599px + 134px as the
+	 * menu stands here), rounded up. A container query measures the content box,
+	 * so the bar's own padding is already excluded.
+	 */
+	@container (max-width: 740px) {
+
+		menu-bar menu-section:last-of-type {
+			position: absolute;
+			top: var(--wpds-dimension-padding-xl);
+			right: var(--wpds-dimension-padding-2xl);
+			height: 24px; /* The logo row, so the controls centre against it. */
 		}
 	}
 }
