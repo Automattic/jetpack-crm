@@ -12,6 +12,13 @@
 		margin: 0 auto;
 		max-width: 720px;
 		padding: 0;
+
+		/*
+		 * The card is what the layout below responds to, not the window: its
+		 * width depends on whether WordPress' admin sidebar is expanded, folded
+		 * or off-canvas.
+		 */
+		container-type: inline-size;
 	}
 
 	#zbs-welcome .container .intro {
@@ -89,6 +96,15 @@
 
 		// The width and height attributes describe the artwork, not the box.
 		box-sizing: content-box;
+
+		/*
+		 * The attributes pin these at 528px and 232px, wider than a phone. With
+		 * content-box sizing the cap applies to the artwork, so the clear space
+		 * above and below survives; being a minimum, it only ever grows relative
+		 * to a shrunken mark.
+		 */
+		max-width: 100%;
+		height: auto;
 		padding-top: calc(var(--jpcrm-hero-gap) - var(--jpcrm-hero-card-offset));
 		padding-bottom: calc(var(--jpcrm-hero-gap) - var(--jpcrm-hero-heading-lead));
 	}
@@ -143,6 +159,18 @@
 
 	.zbs-button-wrap {
 		text-align: center;
+	}
+
+	/*
+	 * .jpcrm-button is the plugin-wide component and sets `white-space: nowrap`,
+	 * which holds the WooCommerce card's long label on one 380px line -- wider
+	 * than a phone. Relaxed for this page only; the component is shared, and the
+	 * same problem on other pages is not this change's to fix.
+	 */
+	#zbs-welcome .jpcrm-button {
+		max-width: 100%;
+		white-space: normal;
+		text-wrap: balance;
 	}
 
 	.zbs-button-wrap .btn-cta {
@@ -310,10 +338,17 @@
 		display: inline-block;
 	}
 
+	/*
+	 * These badges used to butt straight against the feature name with no space
+	 * between them, so the line breaker saw one unbreakable "AutomationsEntrepreneur"
+	 * that overflowed any column under about 184px -- and screen readers read it
+	 * that way too. The markup now has a real space, which this margin would
+	 * otherwise double up on.
+	 */
 	.pro {
 		font-size: 10px;
 		background: #00b2ff;
-		margin-left: 5px;
+		margin-left: 0;
 		padding: 2px;
 		color: #fff;
 		border-radius: 2px;
@@ -382,6 +417,45 @@
 
 	.final-block .zbs-button-wrap {
 		margin-top: 40px;
+	}
+
+	/*
+	 * Below this the card is too narrow for anything two-up: the feature blocks
+	 * would be left with about 190px of text beside a 46px image and a 68px
+	 * indent, and the button pair's halves would be narrower than the buttons
+	 * standing in them. Everything goes to one column together -- the pair reads
+	 * fine stacked on a card this narrow, and one threshold is easier to keep
+	 * honest than three.
+	 */
+	@container (max-width: 560px) {
+
+		.zbs-button-wrap .left,
+		.zbs-button-wrap .right {
+			float: none;
+			width: 100%;
+			padding: 0;
+		}
+
+		.zbs-button-wrap .left {
+			margin-bottom: 16px;
+		}
+
+		.zbs-features .feature-block,
+		.zbs-features .feature-block.first,
+		.zbs-features .feature-block.last {
+			float: none;
+			width: 100%;
+			padding-left: 0;
+			padding-right: 0;
+		}
+
+		#zbs-welcome .upgrade-cta .upgrade-cta__features {
+			max-width: 100%;
+		}
+
+		#zbs-welcome .upgrade-cta ul li {
+			width: 100%;
+		}
 	}
 
 }
