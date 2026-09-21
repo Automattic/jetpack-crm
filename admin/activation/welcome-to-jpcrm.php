@@ -220,10 +220,10 @@ update_option( 'zbs_wizard_run', $run_count );
 								<div>
 
 									<div class="switchBox">
-										<div class="switchBoxLabel">B2B <?php esc_html_e( 'Mode', 'zero-bs-crm' ); ?></div>
+										<div class="switchBoxLabel" id="zbs_b2b_label">B2B <?php esc_html_e( 'Mode', 'zero-bs-crm' ); ?></div>
 										<div class="switchCheckbox">
-											<input type="checkbox" id="zbs_b2b" value="zbs_b2b" />
-											<label for="zbs_b2b"></label>
+											<input type="checkbox" id="zbs_b2b" value="zbs_b2b" aria-labelledby="zbs_b2b_label" />
+											<span class="jpcrm-switch-knob"></span>
 										</div>
 									</div>
 
@@ -316,12 +316,12 @@ update_option( 'zbs_wizard_run', $run_count );
 									<div class="switchBox">
 										<div class="switchCheckbox">
 											<input type="checkbox" id="zbs_quotes" value="zbs_quotes" checked="checked" />
-											<label for="zbs_quotes"></label>
+											<span class="jpcrm-switch-knob"></span>
 										</div>
 									</div>
 								</div>
 
-								<label><?php esc_html_e( 'Enable Quotes', 'zero-bs-crm' ); ?></label>
+								<label for="zbs_quotes"><?php esc_html_e( 'Enable Quotes', 'zero-bs-crm' ); ?></label>
 								<p><?php esc_html_e( 'Quotes (or proposals) are a super powerful part of', 'zero-bs-crm' ); ?> Jetpack CRM. <?php esc_html_e( "We recommend you use this feature, but if you don't want quotes you can turn it off here.", 'zero-bs-crm' ); ?></p>
 							</div>
 
@@ -332,12 +332,12 @@ update_option( 'zbs_wizard_run', $run_count );
 									<div class="switchBox">
 										<div class="switchCheckbox">
 											<input type="checkbox" id="zbs_invoicing" value="zbs_invoicing" checked="checked" />
-											<label for="zbs_invoicing"></label>
+											<span class="jpcrm-switch-knob"></span>
 										</div>
 									</div>
 								</div>
 
-								<label><?php esc_html_e( 'Enable Invoices', 'zero-bs-crm' ); ?></label>
+								<label for="zbs_invoicing"><?php esc_html_e( 'Enable Invoices', 'zero-bs-crm' ); ?></label>
 								<p><?php esc_html_e( "You can run Jetpack CRM with or without Invoicing. We recommend you use this though, as it's very useful (you can invoice online!)", 'zero-bs-crm' ); ?></p>
 								<div class="zbs-extrainfo"><?php esc_html_e( 'Accept online payments with', 'zero-bs-crm' ); ?> <a href="https://jetpackcrm.com/product/invoicing-pro/?utm_content=zbsplugin_welcomewiz" target="_blank" style="color:#0073aa;">Invoicing Pro</a> <?php esc_html_e( '(Let your clients pay with Stripe or PayPal)', 'zero-bs-crm' ); ?></div>
 							</div>
@@ -349,12 +349,12 @@ update_option( 'zbs_wizard_run', $run_count );
 									<div class="switchBox">
 										<div class="switchCheckbox">
 											<input type="checkbox" id="jpcrm_woo_module" value="jpcrm_woo_module" checked="checked" />
-											<label for="jpcrm_woo_module"></label>
+											<span class="jpcrm-switch-knob"></span>
 										</div>
 									</div>
 								</div>
 
-								<label><?php esc_html_e( 'Enable WooSync', 'zero-bs-crm' ); ?></label>
+								<label for="jpcrm_woo_module"><?php esc_html_e( 'Enable WooSync', 'zero-bs-crm' ); ?></label>
 								<p><?php esc_html_e( 'Automatically import all your customers, transactions, and invoices from WooCommerce, a full-featured eCommerce solution for WordPress.', 'zero-bs-crm' ); ?></p>
 								<div class="zbs-extrainfo"><?php esc_html_e( 'Note that you will also need a site that has the free WooCommerce plugin installed.', 'zero-bs-crm' ); ?></div>
 							</div>
