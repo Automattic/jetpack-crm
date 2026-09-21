@@ -634,6 +634,54 @@ $darkenColor: color.adjust($activeColor, $lightness: -20%);
 
 /* end .switchCheckbox */
 
+.switchbox-right {
+	width: 20%;
+	float: right;
+	text-align: right;
+}
+
+/*
+ * Layout for the wizard's side-by-side form rows. These were inline style
+ * attributes, which no stylesheet could override. The values are unchanged, so
+ * desktop renders as before; the narrow-screen block at the end of the file
+ * stacks them.
+ */
+.jpcrm-wizard-field {
+	width: 90%;
+}
+
+.jpcrm-wizard-field-col {
+	width: 50%;
+	float: left;
+}
+
+.jpcrm-wizard-field-input {
+	width: 90%;
+}
+
+.jpcrm-wizard-split {
+	width: 100%;
+}
+
+.jpcrm-wizard-split-narrow {
+	width: 25%;
+	float: left;
+}
+
+.jpcrm-wizard-split-wide {
+	width: 75%;
+	float: right;
+}
+
+.jpcrm-wizard-signup-input {
+	width: 40%;
+	margin-right: 5%;
+	display: inline-block;
+	font-size: 15px;
+	line-height: 16px;
+}
+
+
 
 .zbscrm-setup-content {
 
