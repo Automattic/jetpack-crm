@@ -713,6 +713,27 @@ p.lead {
 	padding-left: 15px;
 }
 
+/*
+ * This label is long enough to wrap to two lines in the narrower half of the
+ * range -- at 768px, and again below about 360px -- and left to itself it
+ * breaks after "other", leaving "services" alone on the second line.
+ *
+ * balance rather than pretty: balance evens every line in the block, which is
+ * what a two-line button wants, and browsers cap it at a few lines precisely
+ * because it is meant for short text like this. pretty is tuned for long-form
+ * copy, optimising only the last line and leaving the ones above it roughly as
+ * they fell. Measured on this label at 768px: balance gives lines of 138 and
+ * 124px, pretty 158 and 104, and neither at all 203 and 59.
+ *
+ * Centred to go with it. Balanced lines are still unequal, and ragged left
+ * alignment inside a symmetric button reads as an accident rather than a
+ * choice. A single line is unaffected, the button being sized to its content.
+ */
+.zbs-eb-callout .btn {
+	text-wrap: balance;
+	text-align: center;
+}
+
 .zbs-sync-wrap {
 
 	padding: 12px;
@@ -734,88 +755,161 @@ p.lead {
 		text-align: center;
 		width: 50%;
 		float: right;
-		margin-top: -39px;
 	}
 
 }
 
-.zbs-sync-wrap img {
+/*
+ * Scoped away from .jpcrm-bundle-logo: this used to stretch the single
+ * composite banner across its column, and would otherwise blow each of the
+ * five logos that replaced it up to full width.
+ */
+.zbs-sync-wrap img:not(.jpcrm-bundle-logo img) {
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
 }
 
-.zbs-sync-wrap p.lft {
-	width: 42%;
-	margin-left: 16px;
-	text-align: justify;
-}
-
-.zbs-sync-wrap .butt {
-	text-align: center;
-	margin: 10px 0 10px 0;
-	padding-top: 16px;
-}
-
-.zbs-extra {
-
-	background: #2780e3;
-	color: #ffce77 !important;
-	padding: 5px 12px;
-	border-radius: 4px;
-	text-align: center;
-}
-
-.zbs-extra a {
-	border-bottom: 2px #fff dotted;
-}
-
-
-.switchbox-right {
-	width: 20%;
-	float: right;
-	text-align: right;
-}
 /*
- * Layout for the wizard's side-by-side form rows.
+ * Copy on the left, logos on the right, centred against each other.
  *
- * These were inline style attributes on the markup, which no stylesheet could
- * override. They are classes so the narrow-screen block below can stack them;
- * the values are unchanged, so desktop renders exactly as before.
+ * Centring is what makes the stagger behave at every width. Where it is taller
+ * than this box, as on a wide screen, it breaks out equally top and bottom the
+ * way the composite banner did; where the box is the taller of the two, as
+ * around 768px, it simply sits in the middle and breaks out of neither. The
+ * fixed negative offset this replaced could not tell those cases apart, so it
+ * pulled the group out of the top edge and left a gap at the bottom.
+ *
+ * Two things here are load-bearing. height: 100% gives the flex line the box's
+ * height to centre against; without it the line is only as tall as its contents
+ * and there is nothing to centre against. And this must stay a single-line
+ * container: flex-wrap would make it multi-line, and a line in a multi-line
+ * container takes its cross size from its own items, so align-items would
+ * centre the stagger inside a line as tall as itself while align-content parked
+ * that line at the top -- which looks exactly like no centring at all. Narrow
+ * screens stack by switching direction to column, not by wrapping.
+ *
+ * float is ignored on flex items, so the 50% widths keep doing the column work
+ * and their float declarations go inert rather than needing to be unpicked.
  */
-.jpcrm-wizard-field {
-	width: 90%;
+.zbs-eb-wizard {
+	display: flex;
+	align-items: center;
+	height: 100%;
 }
 
-.jpcrm-wizard-field-col {
-	width: 50%;
-	float: left;
-}
-
-.jpcrm-wizard-field-input {
-	width: 90%;
-}
-
-.jpcrm-wizard-split {
+/*
+ * The extension logos that illustrate the bundle.
+ *
+ * These were one composite PNG. The geometry below reproduces that image's
+ * layout, measured from it: a 411x427 canvas holding five 181x86 cards on four
+ * rows, staggered, with the logo inside each card occupying about a third of
+ * its height. Everything is expressed as a percentage of the container so it
+ * scales the way the image did, and the container keeps the image's aspect
+ * ratio so the stagger still breaks out of the callout box top and bottom.
+ *
+ * Gravity Forms is the one card that cannot match the others. Its current
+ * lockup is 7.8:1 where the mark in the old image was 3.9:1, so at the shared
+ * logo height it would need a card three quarters the width of the container.
+ * It takes a row of its own in a wider card, and PayPal moves up beside Stripe.
+ */
+.jpcrm-bundle-logos {
+	position: relative;
+	display: block;
 	width: 100%;
+	aspect-ratio: 411 / 427;
 }
 
-.jpcrm-wizard-split-narrow {
-	width: 25%;
-	float: left;
+.jpcrm-bundle-logo {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 44.04%;
+	height: 20.14%;
+	background: #fff;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.jpcrm-wizard-split-wide {
-	width: 75%;
-	float: right;
+.jpcrm-bundle-logo img {
+	display: block;
+	width: auto;
+	height: auto;
+	max-width: 78%;
+	max-height: 38%;
 }
 
-.jpcrm-wizard-signup-input {
-	width: 40%;
-	margin-right: 5%;
-	display: inline-block;
-	font-size: 15px;
-	line-height: 16px;
+/* Row 1 */
+.jpcrm-bundle-logo-woo {
+	top: 3.51%;
+	left: 36.5%;
+}
+
+/*
+ * Woo ask for clear space on every side of at least the size of one of the
+ * logo's "o"s. Their file is cropped tight to the artwork, and measuring it,
+ * an "o" is 47.8 x 47.5 in a 183.6 x 47.5 viewBox -- as tall as the whole
+ * logo. So the required clear space on each side is the logo's own height,
+ * which caps it at a third of the card: 3h <= card height vertically, and
+ * 5.865h <= card width horizontally, of which the vertical bound is the
+ * tighter. 32% leaves a little room under that limit.
+ *
+ * It reads better smaller in any case. The mark this replaced was the long
+ * "WOOCOMMERCE" wordmark at 5.07:1; "Woo" alone is short and bold, so at the
+ * height the other logos use it carries far more weight than they do.
+ */
+.jpcrm-bundle-logo-woo img {
+	max-height: 32%;
+}
+
+/* Row 2 */
+.jpcrm-bundle-logo-twilio {
+	top: 28.1%;
+	left: 25.06%;
+}
+
+/*
+ * Twilio ship their file with 16.7% vertical padding inside the viewBox: the
+ * artwork is 40 units tall in a 48 unit box. Scaling the element up by that
+ * ratio puts the mark itself at the same height as the others, rather than
+ * altering their file to crop it.
+ */
+.jpcrm-bundle-logo-twilio img {
+	max-height: 45.6%;
+}
+
+/* Row 3 */
+.jpcrm-bundle-logo-stripe {
+	top: 52.46%;
+	left: 3.65%;
+}
+
+.jpcrm-bundle-logo-paypal {
+	top: 52.46%;
+	left: 52.8%;
+}
+
+/*
+ * PayPal's file is cropped flush to its ink and the "y" descender is a quarter
+ * of that height, so centring the box puts the body of the letterforms -- cap
+ * height to baseline, which is what the eye reads as the logo -- 12.6% of the
+ * height above the middle of the card. It looks like it is floating. Nudging it
+ * down by exactly that much centres what is actually seen. The percentage
+ * resolves against the element's own height, so it holds at every width.
+ *
+ * Only PayPal. Stripe's "p" descends too but half as far, and the ink hanging
+ * below Twilio's and Gravity Forms' text is their icon, which is part of how
+ * those marks are balanced and is not something to correct.
+ */
+.jpcrm-bundle-logo-paypal img {
+	transform: translateY(12.6%);
+}
+
+/* Row 4, the wide one */
+.jpcrm-bundle-logo-gravity-forms {
+	top: 76.58%;
+	left: 27.13%;
+	width: 61.56%;
 }
 
 /*
@@ -917,6 +1011,88 @@ p.lead {
 		width: 100%;
 		float: none;
 		margin-top: 0;
+	}
+
+	/*
+	 * The logos stop being a side column here and join the text flow, stacked
+	 * under the copy, which changes what the right size is. At the desktop card
+	 * size they tower over 14px body copy on a 24.5px line: a 70px card is close
+	 * to three lines tall. These are sized so the logo lands between the body
+	 * and heading sizes, putting the card at about two lines.
+	 *
+	 * The stagger goes with it. It reads as a composition beside the copy; in
+	 * the flow it just reads as overlap, so the cards line up instead.
+	 */
+	.jpcrm-bundle-logos {
+		position: static;
+		aspect-ratio: auto;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.jpcrm-bundle-logo {
+		position: static;
+		width: 100px;
+		height: 48px;
+	}
+
+	.jpcrm-bundle-logo-gravity-forms {
+		width: 140px;
+	}
+
+	/*
+	 * Cap the group at three standard cards. Left to fill the full width it
+	 * fits four on the first row at the wider end of this range, orphaning the
+	 * fifth; this holds it to 3-2, or 2-2-1 once the column is too narrow for
+	 * three.
+	 */
+	.jpcrm-bundle-logos {
+		max-width: 320px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	/*
+	 * Stacked, the call to action reads better after the logos than wedged
+	 * between them and the copy. display: contents flattens the callout so its
+	 * button becomes a sibling of the logos and can be ordered past them,
+	 * without moving anything in the markup.
+	 */
+	.zbs-eb-wizard {
+		flex-direction: column;
+
+		/*
+		 * The base rule centres the two columns against each other. Here the
+		 * callout is flattened by display: contents, so that centring would apply
+		 * to its heading and paragraphs individually and pull the copy off the
+		 * left margin. Only the button is meant to be centred, and it says so
+		 * itself below.
+		 */
+		align-items: stretch;
+	}
+
+	.zbs-eb-callout {
+		display: contents;
+	}
+
+	/*
+	 * The paragraph above already carries a 24px bottom margin, and margins do
+	 * not collapse between flex items, so anything added here stacks on top of
+	 * it. It had 20px, which made the space above the logos nearly twice the
+	 * space below them. The button matches that 24px instead.
+	 */
+	.zbs-sync-wrap .zbs-sync-img {
+		order: 2;
+		margin-top: 0;
+	}
+
+	.zbs-eb-callout .btn {
+		order: 3;
+		align-self: center;
+		margin-top: 24px;
 	}
 
 	/* Long currency and business-type labels widen an auto-width select. */
