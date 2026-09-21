@@ -1,20 +1,9 @@
 /*
- * WordPress Design System design tokens.
+ * WordPress Design System tokens. `@use` this from any stylesheet that needs
+ * `--wpds-*` custom properties.
  *
- * Every stylesheet that needs `--wpds-*` custom properties should `@use` this
- * partial. It exists so the repo has exactly one CSS import rather than a copy
- * of the line below in each stylesheet that wants tokens.
- *
- * The import below is `@import` rather than `@use` deliberately, and it is the
- * only `@import` in sass/. "@wordpress/theme/design-tokens.css" is a bare
- * package specifier that resolves through the package's exports map
- * (`./design-tokens.css` -> `./src/prebuilt/css/design-tokens.css`). css-loader
- * honours exports maps; Sass does not. `@use` therefore cannot resolve it
- * without naming the internal path directly, which defeats the purpose of the
- * map and breaks whenever the package rearranges src/.
- *
- * Sass passes a .css-suffixed @import through untouched as a plain CSS @import;
- * webpack's css-loader then resolves it and inlines the token table into the
- * compiled stylesheet.
+ * A CSS `@import` rather than `@use` because the package specifier resolves
+ * through @wordpress/theme's exports map, which css-loader honours and Sass
+ * does not; Sass passes the .css import through and css-loader inlines it.
  */
 @import "@wordpress/theme/design-tokens.css";

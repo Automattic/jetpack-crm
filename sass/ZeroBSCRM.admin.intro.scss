@@ -71,55 +71,27 @@
 	}
 
 	/*
-	 * The two hero logos, and the whitespace around them.
-	 *
-	 * What the eye measures is ink to ink: the card's inner edge down to the
-	 * first painted pixel of the mark, and its last painted pixel down to the
-	 * cap height of the heading. Neither lines up with the box geometry, so the
-	 * padding below is deliberately uneven -- symmetric padding here renders as
-	 * visibly lopsided space.
-	 *
-	 * Above, the card already contributes 20px before the image begins:
-	 * .intro's 40px of padding plus .block's 30px, less the 50px the block is
-	 * pulled up by. The 2px border sits outside that, so it does not count.
-	 *
-	 * Below, the h6 directly above sets 16px type on a 1.6 line height, giving a
-	 * 25.6px line box whose glyphs start 11px down from its top. Change that
-	 * type and this number needs revisiting with it.
-	 *
-	 * Both marks ship cropped tight to their artwork, so the images add nothing
-	 * of their own.
+	 * The two hero logos. The padding is deliberately uneven because the eye
+	 * measures ink to ink: the card already contributes 20px above the mark
+	 * (.intro's 40px plus .block's 30px, less the 50px the block is pulled up
+	 * by), and the h6 below starts its glyphs 11px into a 25.6px line box.
+	 * Each mark gets 50px of visual space above and below, less those two
+	 * amounts; Woo gets 60px for its clear-space rule (i/welcome-to-zbs/LOGOS.md).
 	 */
 	.jpcrm-dash-hero-logo {
-		--jpcrm-hero-card-offset: 20px;
-		--jpcrm-hero-heading-lead: 11px;
-
-		// The width and height attributes describe the artwork, not the box.
+		// The width and height attributes describe the artwork, not the box, so
+		// the padding sits outside them and the cap applies to the artwork.
 		box-sizing: content-box;
-
-		/*
-		 * The attributes pin these at 528px and 232px, wider than a phone. With
-		 * content-box sizing the cap applies to the artwork, so the clear space
-		 * above and below survives; being a minimum, it only ever grows relative
-		 * to a shrunken mark.
-		 */
 		max-width: 100%;
 		height: auto;
-		padding-top: calc(var(--jpcrm-hero-gap) - var(--jpcrm-hero-card-offset));
-		padding-bottom: calc(var(--jpcrm-hero-gap) - var(--jpcrm-hero-heading-lead));
 	}
 
 	#jetpack-crm-welcome {
-		--jpcrm-hero-gap: 50px;
+		padding: 30px 0 39px;
 	}
 
-	/*
-	 * Woo ask for clear space of at least one of the logo's "o"s on every side,
-	 * and in their file an "o" is as tall as the whole logo, so this tracks the
-	 * mark's rendered height.
-	 */
 	#woocommerce-logo {
-		--jpcrm-hero-gap: 60px;
+		padding: 40px 0 49px;
 	}
 
 	#zbs-welcome #first-customer {
@@ -338,13 +310,8 @@
 		display: inline-block;
 	}
 
-	/*
-	 * These badges used to butt straight against the feature name with no space
-	 * between them, so the line breaker saw one unbreakable "AutomationsEntrepreneur"
-	 * that overflowed any column under about 184px -- and screen readers read it
-	 * that way too. The markup now has a real space, which this margin would
-	 * otherwise double up on.
-	 */
+	// The markup now puts a real space before the badge (an unbreakable
+	// "AutomationsEntrepreneur" overflowed narrow columns), so no margin here.
 	.pro {
 		font-size: 10px;
 		background: #00b2ff;
