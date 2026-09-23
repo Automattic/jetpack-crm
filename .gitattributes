@@ -27,10 +27,7 @@ AGENTS.md             export-ignore
 CLAUDE.md             export-ignore
 README.md             export-ignore
 
-# Vendored brand logos, kept exactly as their owners publish them.
-#
-# core.autocrlf normalised woo-logo.svg's CRLF endings on commit, which changed
-# its bytes and so broke the hashes recorded in i/welcome-to-zbs/LOGOS.md. That
-# file's whole purpose is that the logos can be diffed against the vendor's own
-# download, so these must not be touched.
-i/welcome-to-zbs/*.svg  -text
+# Vendored brand logos: keep the bytes exactly as published, so the hashes in
+# i/welcome-to-zbs/LOGOS.md stay checkable (no EOL normalisation).
+i/welcome-to-zbs/*.svg      -text
+i/welcome-to-zbs/LOGOS.md   export-ignore

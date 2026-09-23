@@ -579,18 +579,16 @@ $darkenColor: color.adjust($activeColor, $lightness: -20%);
 	 * the control instead of being an empty box with a `for` attribute.
 	 */
 	.jpcrm-switch-knob {
-		margin-top: 0 !important;
-		display: block !important;
-		width: 34px !important;
-		height: 20px !important;
-		position: absolute !important;
-		top: 3px !important;
-		left: 3px !important;
-		z-index: 1 !important;
-		background: var(--wpds-color-background-surface-neutral-strong) !important;
-		border-radius: 50px !important;
-		transition: all 0.4s ease !important;
-		box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3) !important;
+		width: 34px;
+		height: 20px;
+		position: absolute;
+		top: 3px;
+		left: 3px;
+		z-index: 1;
+		background: var(--wpds-color-background-surface-neutral-strong);
+		border-radius: 50px;
+		transition: all 0.4s ease;
+		box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
 	}
 
 	/*
@@ -607,38 +605,88 @@ $darkenColor: color.adjust($activeColor, $lightness: -20%);
 	 * only the 34px knob was.
 	 */
 	input[type="checkbox"] {
-		appearance: none !important;
-		position: absolute !important;
-		top: 0 !important;
-		left: 0 !important;
-		width: 100% !important;
-		height: 100% !important;
-		margin: 0 !important;
-		padding: 0 !important;
-		background: transparent !important;
-		border: 0 !important;
-		border-radius: 50px !important;
-		cursor: pointer !important;
-		z-index: 2 !important;
+		appearance: none;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		margin: 0;
+		padding: 0;
+		background: transparent;
+		border: 0;
+		border-radius: 50px;
+		cursor: pointer;
+		z-index: 2;
 
 		&:focus-visible {
-			outline: var(--wpds-border-width-focus) solid var(--wpds-color-stroke-focus) !important;
-			outline-offset: 2px !important;
+			outline: var(--wpds-border-width-focus) solid var(--wpds-color-stroke-focus);
+			outline-offset: 2px;
 		}
 
 		&:checked ~ .jpcrm-switch-knob {
-			left: 43px !important;
+			left: 43px;
 		}
 	}
 }
 
 /* end .switchCheckbox */
 
+.switchbox-right {
+	width: 20%;
+	float: right;
+	text-align: right;
+}
+
+/*
+ * Layout for the wizard's side-by-side form rows. These were inline style
+ * attributes, which no stylesheet could override. The values are unchanged, so
+ * desktop renders as before; the narrow-screen block at the end of the file
+ * stacks them.
+ */
+.jpcrm-wizard-field {
+	width: 90%;
+}
+
+.jpcrm-wizard-field-col {
+	width: 50%;
+	float: left;
+}
+
+.jpcrm-wizard-field-input {
+	width: 90%;
+}
+
+.jpcrm-wizard-split {
+	width: 100%;
+}
+
+.jpcrm-wizard-split-narrow {
+	width: 25%;
+	float: left;
+}
+
+.jpcrm-wizard-split-wide {
+	width: 75%;
+	float: right;
+}
+
+.jpcrm-wizard-signup-input {
+	width: 40%;
+	margin-right: 5%;
+	display: inline-block;
+	font-size: 15px;
+	line-height: 16px;
+}
+
+
+#zbscrm-logo img {
+	max-width: 224px;
+}
 
 .zbscrm-setup-content {
 
 	max-width: 800px;
-	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
 
@@ -714,20 +762,11 @@ p.lead {
 }
 
 /*
- * This label is long enough to wrap to two lines in the narrower half of the
- * range -- at 768px, and again below about 360px -- and left to itself it
- * breaks after "other", leaving "services" alone on the second line.
- *
- * balance rather than pretty: balance evens every line in the block, which is
- * what a two-line button wants, and browsers cap it at a few lines precisely
- * because it is meant for short text like this. pretty is tuned for long-form
- * copy, optimising only the last line and leaving the ones above it roughly as
- * they fell. Measured on this label at 768px: balance gives lines of 138 and
- * 124px, pretty 158 and 104, and neither at all 203 and 59.
- *
- * Centred to go with it. Balanced lines are still unequal, and ragged left
- * alignment inside a symmetric button reads as an accident rather than a
- * choice. A single line is unaffected, the button being sized to its content.
+ * The label wraps to two lines at tablet widths and below about 360px, and
+ * left alone strands "services" on the second line. balance rather than
+ * pretty: balance evens every line, which is what a short multi-line label
+ * wants; pretty only tidies the last one. Centred to match, since balanced
+ * lines are still unequal.
  */
 .zbs-eb-callout .btn {
 	text-wrap: balance;
@@ -757,17 +796,6 @@ p.lead {
 		float: right;
 	}
 
-}
-
-/*
- * Scoped away from .jpcrm-bundle-logo: this used to stretch the single
- * composite banner across its column, and would otherwise blow each of the
- * five logos that replaced it up to full width.
- */
-.zbs-sync-wrap img:not(.jpcrm-bundle-logo img) {
-	width: 100%;
-	margin-left: auto;
-	margin-right: auto;
 }
 
 /*
@@ -816,7 +844,6 @@ p.lead {
 .jpcrm-bundle-logos {
 	position: relative;
 	display: block;
-	width: 100%;
 	aspect-ratio: 411 / 427;
 }
 
@@ -833,8 +860,6 @@ p.lead {
 
 .jpcrm-bundle-logo img {
 	display: block;
-	width: auto;
-	height: auto;
 	max-width: 78%;
 	max-height: 38%;
 }
@@ -846,17 +871,10 @@ p.lead {
 }
 
 /*
- * Woo ask for clear space on every side of at least the size of one of the
- * logo's "o"s. Their file is cropped tight to the artwork, and measuring it,
- * an "o" is 47.8 x 47.5 in a 183.6 x 47.5 viewBox -- as tall as the whole
- * logo. So the required clear space on each side is the logo's own height,
- * which caps it at a third of the card: 3h <= card height vertically, and
- * 5.865h <= card width horizontally, of which the vertical bound is the
- * tighter. 32% leaves a little room under that limit.
- *
- * It reads better smaller in any case. The mark this replaced was the long
- * "WOOCOMMERCE" wordmark at 5.07:1; "Woo" alone is short and bold, so at the
- * height the other logos use it carries far more weight than they do.
+ * Woo's clear-space rule (see i/welcome-to-zbs/LOGOS.md) needs the logo's own
+ * height free on every side, which caps it at a third of the card. It reads
+ * better smaller in any case: "Woo" is short and bold where the wordmark it
+ * replaced was long and light.
  */
 .jpcrm-bundle-logo-woo img {
 	max-height: 32%;
@@ -989,19 +1007,12 @@ p.lead {
 		margin-left: 0;
 	}
 
-	/* Step 2's "Every extension, every update" callout is a 50% float. */
-	.zbs-eb-callout {
-		width: 100%;
-		float: none;
-		padding-left: 0;
-	}
-
 	/*
-	 * Its sibling logo image is the other half of that float pair, pulled up by
-	 * a negative margin inside a fixed-height box. Once the callout is full
-	 * width the image escapes the box and lands on top of the buttons, so stack
-	 * it and let the box grow. The descendant selector matches the nesting in
-	 * .zbs-sync-wrap above -- a bare .zbs-sync-img loses on specificity.
+	 * Step 2's callout and its logo column stack. The callout is flattened by
+	 * display: contents below, so it needs no rule of its own here. The
+	 * descendant selector matches the nesting in .zbs-sync-wrap above -- a bare
+	 * .zbs-sync-img loses on specificity. order puts the logos after the copy
+	 * and before the call to action.
 	 */
 	.zbs-sync-wrap {
 		display: block;
@@ -1009,8 +1020,7 @@ p.lead {
 
 	.zbs-sync-wrap .zbs-sync-img {
 		width: 100%;
-		float: none;
-		margin-top: 0;
+		order: 2;
 	}
 
 	/*
@@ -1022,6 +1032,11 @@ p.lead {
 	 *
 	 * The stagger goes with it. It reads as a composition beside the copy; in
 	 * the flow it just reads as overlap, so the cards line up instead.
+	 *
+	 * The group is capped at three standard cards. Left to fill the full width
+	 * it fits four on the first row at the wider end of this range, orphaning
+	 * the fifth; this holds it to 3-2, or 2-2-1 once the column is too narrow
+	 * for three.
 	 */
 	.jpcrm-bundle-logos {
 		position: static;
@@ -1031,6 +1046,9 @@ p.lead {
 		gap: 10px;
 		justify-content: center;
 		align-items: center;
+		max-width: 320px;
+		margin-left: auto;
+		margin-right: auto;
 	}
 
 	.jpcrm-bundle-logo {
@@ -1041,18 +1059,6 @@ p.lead {
 
 	.jpcrm-bundle-logo-gravity-forms {
 		width: 140px;
-	}
-
-	/*
-	 * Cap the group at three standard cards. Left to fill the full width it
-	 * fits four on the first row at the wider end of this range, orphaning the
-	 * fifth; this holds it to 3-2, or 2-2-1 once the column is too narrow for
-	 * three.
-	 */
-	.jpcrm-bundle-logos {
-		max-width: 320px;
-		margin-left: auto;
-		margin-right: auto;
 	}
 
 	/*
@@ -1084,11 +1090,6 @@ p.lead {
 	 * it. It had 20px, which made the space above the logos nearly twice the
 	 * space below them. The button matches that 24px instead.
 	 */
-	.zbs-sync-wrap .zbs-sync-img {
-		order: 2;
-		margin-top: 0;
-	}
-
 	.zbs-eb-callout .btn {
 		order: 3;
 		align-self: center;

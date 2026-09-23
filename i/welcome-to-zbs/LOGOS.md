@@ -1,12 +1,13 @@
 # Extension logos
 
-The five marks shown in the setup wizard's Entrepreneur Bundle banner
-(step 2, "Getting Contacts into your CRM"). They replaced a single composite
-PNG, `entrepreneur-bundle.png`, whose logos had gone out of date.
+Third-party marks shown in the setup wizard's Entrepreneur Bundle banner
+(step 2). `woo-logo.svg` is also used on the CRM dashboard and the WooSync hub.
+Each remains the property of its owner; this file records where each one came
+from so that can be checked rather than asserted.
 
-These are third-party trademarks, reproduced to identify the services the CRM
-integrates with. Each remains the property of its owner. This file records
-where each one came from so the claim is checkable rather than asserted.
+To re-verify: fetch the archive linked below, extract it, and `cmp` the file
+against the one shipped here. Any mismatch means the vendor has published a new
+mark or the file here was altered.
 
 ## Files
 
@@ -26,6 +27,10 @@ where each one came from so the claim is checkable rather than asserted.
 - Archive: <https://woocommerce.com/wp-content/uploads/2025/01/woo-logos.zip>
   (sha256 `a59ff90335d8ca3d13b53b93630445a8aba3e187869245adad80c3ac52628842`)
 - Byte-identical to `Woo Logos/Woo_logo_color.svg` inside that archive.
+- Clear space: Woo ask for at least one of the logo's "o"s on every side. In
+  this file an "o" is 47.8 x 47.5 in a 183.6 x 47.5 viewBox, as tall as the
+  whole logo, so the required clear space on each side equals the rendered
+  height. The stylesheets that place it derive their spacing from that.
 
 ### twilio-logo.svg — verified
 
@@ -51,20 +56,10 @@ where each one came from so the claim is checkable rather than asserted.
 - Media resources: <https://newsroom.paypal-corp.com/media-resources>
 - Archive: <https://newsroom.paypal-corp.com/download/PayPal-Logo-Black-2024.zip>
   (sha256 `3aa7619157c7b1aa333134a4683be83497e470788d82c2778d817c1c32f1768b`)
-- That archive contains `Logo - Black/PayPal-Logo-Black-RGB.png` at 2497x839,
+- Contains `Logo - Black/PayPal-Logo-Black-RGB.png` at 2497x839,
   sha256 `181ce9ae4fa6205a2875c17007f0b9dcc146dcd52ea21911037c5b1d74482f99`.
-- The shipped file is that image downscaled to 320x107:
+  PayPal publish no vector. The shipped file reproduces from it with:
 
   ```
   sips -Z 320 PayPal-Logo-Black-RGB.png --out paypal-logo@2x.png
   ```
-
-  PayPal only provides a raster image. The original size (2497x839) is too
-  large for our use case (~80px wide), so we use a scaled down image.
-
-## Re-verifying
-
-Fetch an archive above, extract it, and `cmp` the file against the one shipped
-here. Four of the five should be byte-identical; `paypal-logo@2x.png` should
-reproduce from the `sips` command. Any mismatch means either the vendor has
-published a new version of their mark, or the file here has been altered.
