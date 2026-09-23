@@ -12,6 +12,13 @@
 		margin: 0 auto;
 		max-width: 720px;
 		padding: 0;
+
+		/*
+		 * The card is what the layout below responds to, not the window: its
+		 * width depends on whether WordPress' admin sidebar is expanded, folded
+		 * or off-canvas.
+		 */
+		container-type: inline-size;
 	}
 
 	#zbs-welcome .container .intro {
@@ -63,6 +70,58 @@
 		margin: 0;
 	}
 
+	/*
+	 * The two hero logos, and the whitespace around them.
+	 *
+	 * What the eye measures is ink to ink: the card's inner edge down to the
+	 * first painted pixel of the mark, and its last painted pixel down to the
+	 * cap height of the heading. Neither lines up with the box geometry, so the
+	 * padding below is deliberately uneven -- symmetric padding here renders as
+	 * visibly lopsided space.
+	 *
+	 * Above, the card already contributes 20px before the image begins:
+	 * .intro's 40px of padding plus .block's 30px, less the 50px the block is
+	 * pulled up by. The 2px border sits outside that, so it does not count.
+	 *
+	 * Below, the h6 directly above sets 16px type on a 1.6 line height, giving a
+	 * 25.6px line box whose glyphs start 11px down from its top. Change that
+	 * type and this number needs revisiting with it.
+	 *
+	 * Both marks ship cropped tight to their artwork, so the images add nothing
+	 * of their own.
+	 */
+	.jpcrm-dash-hero-logo {
+		--jpcrm-hero-card-offset: 20px;
+		--jpcrm-hero-heading-lead: 11px;
+
+		// The width and height attributes describe the artwork, not the box.
+		box-sizing: content-box;
+
+		/*
+		 * The attributes pin these at 528px and 232px, wider than a phone. With
+		 * content-box sizing the cap applies to the artwork, so the clear space
+		 * above and below survives; being a minimum, it only ever grows relative
+		 * to a shrunken mark.
+		 */
+		max-width: 100%;
+		height: auto;
+		padding-top: calc(var(--jpcrm-hero-gap) - var(--jpcrm-hero-card-offset));
+		padding-bottom: calc(var(--jpcrm-hero-gap) - var(--jpcrm-hero-heading-lead));
+	}
+
+	#jetpack-crm-welcome {
+		--jpcrm-hero-gap: 50px;
+	}
+
+	/*
+	 * Woo ask for clear space of at least one of the logo's "o"s on every side,
+	 * and in their file an "o" is as tall as the whole logo, so this tracks the
+	 * mark's rendered height.
+	 */
+	#woocommerce-logo {
+		--jpcrm-hero-gap: 60px;
+	}
+
 	#zbs-welcome #first-customer {
 		border-left: 2px solid #e1e1e1;
 		border-right: 2px solid #e1e1e1;
@@ -102,6 +161,18 @@
 		text-align: center;
 	}
 
+	/*
+	 * .jpcrm-button is the plugin-wide component and sets `white-space: nowrap`,
+	 * which holds the WooCommerce card's long label on one 380px line -- wider
+	 * than a phone. Relaxed for this page only; the component is shared, and the
+	 * same problem on other pages is not this change's to fix.
+	 */
+	#zbs-welcome .jpcrm-button {
+		max-width: 100%;
+		white-space: normal;
+		text-wrap: balance;
+	}
+
 	.zbs-button-wrap .btn-cta {
 		background-color: #00b1ff;
 		border-color: #00b1ff;
@@ -126,15 +197,20 @@
 		padding: 16px 28px;
 	}
 
+	/*
+	 * These two halves carry the welcome card's button pair, one button each,
+	 * centred within its half. They were 60/40, which put the buttons 135px and
+	 * 203px from the card's centre rather than an equal distance either side.
+	 */
 	.left {
 		float: left;
-		width: 60%;
+		width: 50%;
 		padding-right: 10px;
 	}
 
 	.right {
 		float: right;
-		width: 40%;
+		width: 50%;
 		padding-left: 10px;
 	}
 
@@ -262,10 +338,17 @@
 		display: inline-block;
 	}
 
+	/*
+	 * These badges used to butt straight against the feature name with no space
+	 * between them, so the line breaker saw one unbreakable "AutomationsEntrepreneur"
+	 * that overflowed any column under about 184px -- and screen readers read it
+	 * that way too. The markup now has a real space, which this margin would
+	 * otherwise double up on.
+	 */
 	.pro {
 		font-size: 10px;
 		background: #00b2ff;
-		margin-left: 5px;
+		margin-left: 0;
 		padding: 2px;
 		color: #fff;
 		border-radius: 2px;
@@ -334,6 +417,45 @@
 
 	.final-block .zbs-button-wrap {
 		margin-top: 40px;
+	}
+
+	/*
+	 * Below this the card is too narrow for anything two-up: the feature blocks
+	 * would be left with about 190px of text beside a 46px image and a 68px
+	 * indent, and the button pair's halves would be narrower than the buttons
+	 * standing in them. Everything goes to one column together -- the pair reads
+	 * fine stacked on a card this narrow, and one threshold is easier to keep
+	 * honest than three.
+	 */
+	@container (max-width: 560px) {
+
+		.zbs-button-wrap .left,
+		.zbs-button-wrap .right {
+			float: none;
+			width: 100%;
+			padding: 0;
+		}
+
+		.zbs-button-wrap .left {
+			margin-bottom: 16px;
+		}
+
+		.zbs-features .feature-block,
+		.zbs-features .feature-block.first,
+		.zbs-features .feature-block.last {
+			float: none;
+			width: 100%;
+			padding-left: 0;
+			padding-right: 0;
+		}
+
+		#zbs-welcome .upgrade-cta .upgrade-cta__features {
+			max-width: 100%;
+		}
+
+		#zbs-welcome .upgrade-cta ul li {
+			width: 100%;
+		}
 	}
 
 }
