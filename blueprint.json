@@ -1,0 +1,15 @@
+{
+	"$schema": "https://playground.wordpress.net/blueprint-schema.json",
+	"landingPage": "/wp-admin/admin.php?page=zerobscrm-dash",
+	"login": true,
+	"steps": [
+		{
+			"step": "installPlugin",
+			"pluginData": {
+				"resource": "url",
+				"url": "https://raw.githubusercontent.com/Automattic/jetpack-crm/preview/6.8.5/zero-bs-crm.zip"
+			},
+			"options": { "activate": true }
+		}
+	]
+}
