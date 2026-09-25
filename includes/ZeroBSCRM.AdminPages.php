@@ -795,15 +795,26 @@ function zeroBSCRM_pages_admin_system_emails() {
 				$zbs_system_emails = zeroBSCRM_mailTemplate_getAll();
 			if ( count( $zbs_system_emails ) == 0 ) {
 
-				// something went wrong with the creation of the emails...
+				// The templates are created on install, but deleting CRM data empties the table.
 				echo "<div class='ui segment' style='text-align:center'>";
 
 				echo "<div id ='zbs-emails-result'>";
 					echo "<div class='ui inverted dimmer' id='zbs-saving-email-create'><div class='ui text loader'>" . esc_html__( 'Creating templates....', 'zero-bs-crm' ) . '</div></div>';
 
-				echo '<h4 class="template-man-h4">' . esc_html__( 'No Email Templates', 'zero-bs-crm' ) . '</h4>';
-				echo "<p class='lead' style='padding:10px;'>" . esc_html__( 'Something went wrong with the email template creation.', 'zero-bs-crm' ) . '<br/></p>';
-				echo "<div class='button ui large blue' id='force-email-create'>" . esc_html__( 'Create Now', 'zero-bs-crm' ) . '</div>';
+				echo jpcrm_empty_state_html( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped by the helper.
+					array(
+						'icon'        => 'envelope',
+						'title'       => __( 'No email templates', 'zero-bs-crm' ),
+						'description' => __( 'CRM sends its emails, like invoices and client portal invites, from these templates.', 'zero-bs-crm' ),
+						'actions'     => array(
+							array(
+								'label'   => __( 'Create the default templates', 'zero-bs-crm' ),
+								'id'      => 'force-email-create',
+								'primary' => true,
+							),
+						),
+					)
+				);
 
 				echo '</div>';
 

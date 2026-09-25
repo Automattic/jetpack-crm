@@ -1,0 +1,66 @@
+/*
+ * Empty states, laid out like the @wordpress/ui EmptyState: an icon in a circle,
+ * a 15px title, one line on what belongs here, then the actions. The markup comes
+ * from jpcrm_empty_state_html().
+ */
+.jpcrm-empty-state {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--wpds-dimension-gap-xs);
+	max-width: var(--wpds-dimension-surface-width-sm);
+	margin: 0 auto;
+	padding: var(--wpds-dimension-padding-3xl) var(--wpds-dimension-padding-lg);
+	color: var(--wpds-color-foreground-content-neutral);
+	font-family: var(--wpds-typography-font-family-body);
+	text-align: center;
+	text-wrap: balance;
+
+	// WordPress's .hidden loads before this, so repeat it.
+	&.hidden {
+		display: none;
+	}
+
+	.jpcrm-empty-state-icon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-block-end: var(--wpds-dimension-gap-xs);
+		padding: var(--wpds-dimension-padding-xs);
+		border: var(--wpds-border-width-xs) solid var(--wpds-color-stroke-surface-neutral-weak);
+		border-radius: 50%;
+		background-color: var(--wpds-color-background-surface-neutral-weak);
+		color: var(--wpds-color-foreground-content-neutral-weak);
+		line-height: 1;
+	}
+
+	.jpcrm-empty-state-title {
+		margin: 0;
+		padding: 0;
+		color: inherit;
+		font-family: var(--wpds-typography-font-family-heading);
+		font-size: var(--wpds-typography-font-size-lg);
+		font-weight: var(--wpds-typography-font-weight-emphasis);
+		line-height: var(--wpds-typography-line-height-sm);
+	}
+
+	.jpcrm-empty-state-description {
+		margin: 0;
+		color: var(--wpds-color-foreground-content-neutral-weak);
+		font-size: var(--wpds-typography-font-size-md);
+		line-height: var(--wpds-typography-line-height-sm);
+	}
+
+	.jpcrm-empty-state-actions {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: var(--wpds-dimension-gap-xs);
+		margin-block-start: var(--wpds-dimension-gap-md);
+
+		@media (min-width: 480px) {
+			flex-direction: row;
+			justify-content: center;
+		}
+	}
+}

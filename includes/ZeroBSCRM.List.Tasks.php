@@ -116,7 +116,34 @@ function zeroBSCRM_render_tasks_calendar_page() { // phpcs:ignore WordPress.Nami
 			);
 			?>
 
-			<div id='calendar'></div>
+			<?php
+			if ( empty( $calendar_events ) ) {
+				// A month of empty days says nothing, so explain what shows up here instead.
+				echo jpcrm_empty_state_html( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped by the helper.
+					array(
+						'icon'        => 'calendar',
+						'title'       => __( 'No tasks on the calendar', 'zero-bs-crm' ),
+						'description' => __( 'Tasks show up here on the days they start and end.', 'zero-bs-crm' ),
+						'actions'     => array(
+							array(
+								'label'  => __( 'Learn more', 'zero-bs-crm' ),
+								'url'    => $zbs->urls['kbcat_cal'],
+								'target' => '_blank',
+							),
+							array(
+								'label'   => __( 'Add task', 'zero-bs-crm' ),
+								'url'     => jpcrm_esc_link( 'create', -1, 'zerobs_event', false ),
+								'primary' => true,
+							),
+						),
+					)
+				);
+			} else {
+				?>
+				<div id='calendar'></div>
+				<?php
+			}
+			?>
 			<br class="clear">
 		</div>
 	</div>
