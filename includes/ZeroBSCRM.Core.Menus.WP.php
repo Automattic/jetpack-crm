@@ -1293,3 +1293,123 @@ function zeroBSCRM_menus_removeWPSubMenu( $slug = '', $subpage = '' ) {
 
 	}
 }
+
+/**
+ * The CRM list page a hidden CRM page belongs to.
+ *
+ * View and edit screens, the tag manager, the task list and a few tools are
+ * registered under the invisible `jpcrm-hidden` parent. WordPress has nothing
+ * to highlight on those screens, so it collapses the CRM menu.
+ *
+ * @return string The menu slug to highlight, or '' when the page has no single
+ *                home (it still keeps the CRM menu open).
+ */
+function jpcrm_menu_slug_for_hidden_page() {
+	global $zbs;
+
+	$lists = array(
+		'contact'       => $zbs->slugs['managecontacts'],
+		'company'       => $zbs->slugs['managecompanies'],
+		'segment'       => $zbs->slugs['segments'],
+		'quote'         => $zbs->slugs['managequotes'],
+		'quotetemplate' => $zbs->slugs['quote-templates'],
+		'invoice'       => $zbs->slugs['manageinvoices'],
+		'transaction'   => $zbs->slugs['managetransactions'],
+		'event'         => $zbs->slugs['manage-tasks'],
+		'form'          => $zbs->slugs['manageformscrm'],
+	);
+
+	// phpcs:disable WordPress.Security.NonceVerification.Recommended -- Only reads which screen is showing.
+	$page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : '';
+	switch ( $page ) {
+		case $zbs->slugs['addedit']:
+			$type = isset( $_GET['zbstype'] ) ? sanitize_key( wp_unslash( $_GET['zbstype'] ) ) : 'contact';
+			return $lists[ $type ] ?? '';
+		case $zbs->slugs['tagmanager']:
+			$type = isset( $_GET['tagtype'] ) ? sanitize_key( wp_unslash( $_GET['tagtype'] ) ) : 'contact';
+			return $lists[ $type ] ?? '';
+		case $zbs->slugs['manage-tasks-list']:
+			return $zbs->slugs['manage-tasks'];
+	}
+	// phpcs:enable WordPress.Security.NonceVerification.Recommended
+
+	return '';
+}
+
+/**
+ * The visible menu that holds a CRM page, in whichever menu layout is active.
+ *
+ * @param string $slug A CRM page slug.
+ * @return string The parent menu slug, or '' if the page isn't in the menu.
+ */
+function jpcrm_menu_parent_of( $slug ) {
+	global $menu, $submenu;
+
+	foreach ( (array) $submenu as $parent => $items ) {
+		if ( 'jpcrm-hidden' === $parent ) {
+			continue;
+		}
+		foreach ( $items as $item ) {
+			if ( isset( $item[2] ) && $item[2] === $slug ) {
+				return $parent;
+			}
+		}
+	}
+
+	foreach ( (array) $menu as $item ) {
+		if ( isset( $item[2] ) && $item[2] === $slug ) {
+			return $slug;
+		}
+	}
+
+	return '';
+}
+
+/**
+ * Keeps the CRM menu open on hidden CRM pages.
+ *
+ * @param string $parent_file The parent menu WordPress resolved for this screen.
+ * @return string
+ */
+function jpcrm_menu_parent_file( $parent_file ) {
+	global $zbs, $_wp_real_parent_file;
+
+	if ( 'jpcrm-hidden' !== $parent_file ) {
+		return $parent_file;
+	}
+
+	$slug   = jpcrm_menu_slug_for_hidden_page();
+	$parent = jpcrm_menu_parent_of( '' !== $slug ? $slug : $zbs->slugs['dash'] );
+	if ( '' === $parent ) {
+		return $parent_file;
+	}
+
+	// menu-header.php calls get_admin_page_parent() after this filter, which
+	// looks plugin pages up again and would resolve `jpcrm-hidden` a second
+	// time. It honours $_wp_real_parent_file, so point the hidden parent there.
+	$_wp_real_parent_file['jpcrm-hidden'] = $parent; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+
+	return $parent;
+}
+add_filter( 'parent_file', 'jpcrm_menu_parent_file' );
+
+/**
+ * Highlights the list page a hidden CRM page belongs to.
+ *
+ * @param string|null $submenu_file The submenu item WordPress resolved.
+ * @return string|null
+ */
+function jpcrm_menu_submenu_file( $submenu_file ) {
+	global $submenu, $plugin_page;
+
+	// By now `parent_file` has been filtered, so check the registration instead.
+	$hidden_pages = wp_list_pluck( $submenu['jpcrm-hidden'] ?? array(), 2 );
+	if ( ! in_array( $plugin_page, $hidden_pages, true ) ) {
+		return $submenu_file;
+	}
+
+	$slug = jpcrm_menu_slug_for_hidden_page();
+
+	return '' !== $slug ? $slug : $submenu_file;
+}
+add_filter( 'submenu_file', 'jpcrm_menu_submenu_file' );
