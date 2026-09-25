@@ -87,9 +87,6 @@ function jetpackcrm_dash_refresh() {
 	$sql     = $wpdb->prepare( 'SELECT count(ID) as count, MONTH(FROM_UNIXTIME(zbsc_created)) as month, YEAR(FROM_UNIXTIME(zbsc_created)) as year FROM ' . $ZBSCRM_t['contacts'] . ' WHERE zbsc_created > %d AND zbsc_created < %d GROUP BY month, year ORDER BY year, month', $start_date, $end_date ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 	$monthly = $wpdb->get_results( $sql );
 
-	$sql    = $wpdb->prepare( 'SELECT count(ID) as count, YEARWEEK(FROM_UNIXTIME(zbsc_created), 1) as yearweek FROM ' . $ZBSCRM_t['contacts'] . ' WHERE zbsc_created > %d AND zbsc_created < %d GROUP BY yearweek ORDER BY yearweek', $start_date, $end_date ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
-	$weekly = $wpdb->get_results( $sql );
-
 	$sql   = $wpdb->prepare( 'SELECT count(ID) as count, DAY(FROM_UNIXTIME(zbsc_created)) as day, MONTH(FROM_UNIXTIME(zbsc_created)) as month, YEAR(FROM_UNIXTIME(zbsc_created)) as year FROM ' . $ZBSCRM_t['contacts'] . ' WHERE zbsc_created > %d AND zbsc_created < %d GROUP BY day, month, year ORDER BY year, month, day', $start_date, $end_date ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 	$daily = $wpdb->get_results( $sql );
 
@@ -106,16 +103,15 @@ function jetpackcrm_dash_refresh() {
 		$zeros['month'][ $the_month ] = $v->count;
 	}
 
-	foreach ( $weekly as $v ) {
-		$yearweek                   = str_pad( $v->yearweek, 6, '0', STR_PAD_LEFT );
-		$the_week                   = substr( $yearweek, 0, 4 ) . ' W' . substr( $yearweek, 4, 2 );
-		$zeros['week'][ $the_week ] = $v->count;
-	}
-
 	foreach ( $daily as $v ) {
 		$datetime_day             = DateTime::createFromFormat( 'Y-m-d', $v->year . '-' . $v->month . '-' . $v->day );
 		$the_day                  = $datetime_day->format( 'd M y' );
 		$zeros['day'][ $the_day ] = $v->count;
+
+		// Weeks are summed from the days because SQLite has no YEARWEEK(). The label is the ISO
+		// week-numbering year and week, e.g. "2026 W39", matching jetpackcrm_create_zeros_array().
+		$the_week                   = $datetime_day->format( 'o \\WW' );
+		$zeros['week'][ $the_week ] = ( $zeros['week'][ $the_week ] ?? 0 ) + (int) $v->count;
 	}
 
 	$year_labels  = array_keys( $zeros['year'] );
