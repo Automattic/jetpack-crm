@@ -12,8 +12,6 @@
 
 @use "sass:meta";
 
-// block wp notifications:]
-@include meta.load-css( "wp-hide-admin-notices" );
 
 // Import generic edit page styles (old legacy from taxibooker! :o to rewrite)
 @include meta.load-css( "ZeroBSCRM.genericeditpages" );
