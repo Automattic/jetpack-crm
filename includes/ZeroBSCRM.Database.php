@@ -1057,7 +1057,7 @@ function jpcrm_create_notifications_table() {
 /**
  * dangerous, brutal, savage.
  *
- * This one removes all data except settings & migrations
+ * This one removes all data except settings, migrations and the system email templates.
  * see zeroBSCRM_database_nuke for the full show.
  *
  * @param bool $check_permissions (default true) whether to check current user can manage_options.
@@ -1113,8 +1113,9 @@ function zeroBSCRM_database_reset( $check_permissions = true ) {
 
 	foreach ( $ZBSCRM_t as $k => $v ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 
-			// Do not truncate the settings.
-			if ( $k !== 'settings' ) {
+			// Keep the settings, and the system email templates. A migration creates the
+			// templates on install, and nothing recreates them after a reset.
+			if ( ! in_array( $k, array( 'settings', 'system_mail_templates' ), true ) ) {
 				// Copy how maybe_create_table() looks for existing tables.
 				if ( $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $v ) ) ) !== $v ) {
 					continue;
