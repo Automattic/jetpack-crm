@@ -71,3 +71,100 @@
 
 	}
 }
+
+// WordPress's mobile breakpoint: each row becomes a card with one "label  value" line
+// per column. The labels are data-colname, which the list view JS copies from the
+// column headers, as WordPress list tables do. Nothing scrolls sideways.
+@media (max-width: 782px) {
+
+	.jpcrm-listview .jpcrm-listview-table-container {
+		margin-top: var(--wpds-dimension-gap-lg);
+		overflow-x: visible;
+
+		.jpcrm-listview-table,
+		.jpcrm-listview-table tbody {
+			display: block;
+			min-width: 0;
+		}
+
+		.jpcrm-listview-table {
+
+			thead {
+				display: none;
+			}
+
+			tbody tr {
+				display: flex;
+				flex-direction: column;
+				position: relative;
+				margin-bottom: var(--wpds-dimension-gap-sm);
+				padding: var(--wpds-dimension-padding-sm) var(--wpds-dimension-padding-md);
+				border: var(--wpds-border-width-xs) solid var(--wpds-color-stroke-surface-neutral);
+				border-radius: var(--wpds-border-radius-lg);
+
+				// Room for the bulk checkbox, which sits in the card's top left.
+				&:has(.zbs-listview-bulk) {
+					padding-left: 44px;
+				}
+			}
+
+			td {
+				display: flex;
+				align-items: center;
+				gap: var(--wpds-dimension-gap-sm);
+				min-width: 0;
+				padding: var(--wpds-dimension-padding-xs) 0;
+				overflow-wrap: anywhere;
+
+				&::before {
+					content: attr(data-colname);
+					flex: 0 0 35%;
+					color: var(--wpds-color-foreground-content-neutral-weak);
+					font-size: var(--wpds-typography-font-size-sm);
+				}
+
+				// The name or title leads the card without a label, like the primary
+				// column of a WordPress list table.
+				&[data-colkey="nameavatar"],
+				&[data-colkey="name"],
+				&[data-colkey="title"] {
+					order: -1;
+
+					&::before {
+						content: none;
+					}
+				}
+
+				&:empty {
+					display: none;
+				}
+
+				// The "no results" message spans the whole card.
+				&[colspan] {
+					display: block;
+
+					&::before {
+						content: none;
+					}
+				}
+			}
+
+			td.zbs-listview-bulk {
+				display: block;
+				position: absolute;
+				top: var(--wpds-dimension-padding-md);
+				left: var(--wpds-dimension-padding-md);
+				padding: 0;
+
+				&::before {
+					content: none;
+				}
+			}
+
+			tbody tr:has(#zbs-no-results-wrap) {
+				padding: 0;
+				border: 0;
+			}
+		}
+	}
+}

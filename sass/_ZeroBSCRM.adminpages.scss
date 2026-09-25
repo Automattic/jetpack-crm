@@ -302,12 +302,19 @@ div.ui.learn.button {
 		float: left;
 	}
 
-	@media (max-width: 767px) {
-		grid-template-columns: auto 1fr 1fr auto;
+	// Phones (WordPress's 782px breakpoint): team member, role and the permissions
+	// button. The ID and last login are on the user's profile.
+	@media (max-width: 782px) {
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+		line-height: 20px;
 
-		// Hide last login on smaller screens
+		> div:nth-child(5n+1),
 		> div:nth-child(5n-1) {
 			display: none;
+		}
+
+		.zbs-perm-edit {
+			white-space: normal;
 		}
 	}
 }
