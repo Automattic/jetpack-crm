@@ -14,13 +14,17 @@ name: PHPUnit tests
 # the monorepo (which commits no lock) gets it.
 
 on:
+  # crm/branch-* are version branches (e.g. crm/branch-7.0.0) that collect a
+  # release's PRs before it merges to trunk, so they get the same coverage.
   pull_request:
     branches:
       - trunk
+      - 'crm/branch-*'
   # Trunk is deliberately not PR-gated, so also test what actually lands.
   push:
     branches:
       - trunk
+      - 'crm/branch-*'
 
 jobs:
   phpunit:

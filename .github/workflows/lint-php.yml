@@ -9,11 +9,16 @@ name: Lint PHP
 # diffs against trunk by name, so a release-branch PR would be linted against
 # the wrong base. Those changes arrive as cherry-picks of trunk PRs that were
 # linted here first.
+#
+# crm/branch-* version branches are covered. They're cut from trunk and merge
+# back into it, so diffing against trunk lints the PR's lines plus whatever the
+# version branch already holds, all of which is headed for trunk anyway.
 
 on:
   pull_request:
     branches:
       - trunk
+      - 'crm/branch-*'
 
 jobs:
   phpcs:
