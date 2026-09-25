@@ -12,6 +12,20 @@ if ( ! defined( 'ZEROBSCRM_PATH' ) ) {
 
 global $zbs;
 
+// ZeroBSCRM.API.php, which defines the key and endpoint helpers used below, only loads while the API module is on.
+if ( ! zeroBSCRM_isExtensionInstalled( 'api' ) ) {
+	echo zeroBSCRM_UI2_messageHTML( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Both strings are escaped here.
+		'info',
+		esc_html__( 'The API module is turned off', 'zero-bs-crm' ),
+		sprintf(
+			/* translators: %s: URL of the Core Modules page. */
+			wp_kses( __( 'Turn it on in <a href="%s">Core Modules</a> to generate API keys.', 'zero-bs-crm' ), array( 'a' => array( 'href' => array() ) ) ),
+			esc_url( jpcrm_esc_link( $zbs->slugs['modules'] ) )
+		)
+	);
+	return;
+}
+
 $unconfirmed = false;
 
 if ( isset( $_POST['generate-api-creds'] ) && $_POST['generate-api-creds'] === '1' ) {
