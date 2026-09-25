@@ -746,7 +746,7 @@
     text-shadow: none;
     text-transform: none;
     letter-spacing: normal;
-    font: 400 13px/32px "Open Sans", sans-serif;
+    font: 400 13px/32px var(--wpds-typography-font-family-body);
     -webkit-border-radius: 0;
     border-radius: 0;
     -webkit-box-sizing: content-box;
@@ -810,7 +810,7 @@ html:lang(he-il) .rtl #wpadminbar * {
 #wpadminbar {
     direction: ltr;
     color: #ccc;
-    font: 400 13px/32px "Open Sans", sans-serif;
+    font: 400 13px/32px var(--wpds-typography-font-family-body);
     height: 32px;
     position: fixed;
     top: 0;
@@ -1232,7 +1232,7 @@ html:lang(he-il) .rtl #wpadminbar * {
 #wpadminbar>#wp-toolbar>#wp-admin-bar-top-secondary>#wp-admin-bar-search #adminbarsearch input.adminbar-input {
     position: relative;
     z-index: 30;
-    font: 13px/24px "Open Sans", sans-serif;
+    font: 13px/24px var(--wpds-typography-font-family-body);
     height: 24px;
     width: 24px;
     max-width: none;
@@ -1371,7 +1371,7 @@ html:lang(he-il) .rtl #wpadminbar * {
         min-width: 300px
     }
     #wpadminbar * {
-        font: 400 14px/32px "Open Sans", sans-serif
+        font: 400 14px/32px var(--wpds-typography-font-family-body)
     }
     #wpadminbar .quicklinks .ab-empty-item,
     #wpadminbar .quicklinks>ul>li>a {
@@ -1929,7 +1929,7 @@ html {
 body {
     background: #fff;
     color: #444;
-    font-family: "Open Sans", sans-serif;
+    font-family: var(--wpds-typography-font-family-body);
     margin: 140px auto 25px;
     padding: 20px 20px 10px;
     max-width: 90%;
@@ -1977,7 +1977,7 @@ code {
 input,
 submit,
 textarea {
-    font-family: "Open Sans", sans-serif
+    font-family: var(--wpds-typography-font-family-body)
 }
 dl,
 ol,

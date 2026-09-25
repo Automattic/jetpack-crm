@@ -203,7 +203,7 @@
 	// when a segment condition has gone rogue.
 	.segment-condition-errored {
 		max-width: 25%;
-		color: #ccc;
+		color: var(--wpds-color-foreground-content-neutral-weak);
 	}
 }
 
