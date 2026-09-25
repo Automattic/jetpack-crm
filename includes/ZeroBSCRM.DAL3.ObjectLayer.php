@@ -50,6 +50,17 @@ class zbsDAL_ObjectLayer {
 	protected const NAME_CLASH_FIX_SUFFIX = '_zbs-name-clash-tmp-fix';
 
 	/**
+	 * Value placeholder for a case-sensitive exact match, used by the status filters.
+	 *
+	 * Comparing against a binary string makes MySQL and MariaDB compare bytes instead of using
+	 * the column's case-insensitive collation. Unlike `COLLATE utf8mb4_bin`, the SQLite driver
+	 * behind WordPress Studio and Playground supports it too.
+	 *
+	 * @since $$next-version$$
+	 */
+	protected const EXACT_MATCH_PLACEHOLDER = 'CAST(%s AS BINARY)';
+
+	/**
 	 * Prefix used in database table columns, etc.
 	 *
 	 * @var string
