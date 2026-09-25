@@ -1,0 +1,167 @@
+/*
+ * Semantic UI buttons and inputs, restyled as WordPress component controls.
+ *
+ * CRM renders around 290 Semantic UI buttons, so they're mapped here rather
+ * than rewritten in markup:
+ * - default, basic and accent colors (teal, orange, ...) → secondary
+ * - primary, positive, green, blue and black → primary (admin theme color)
+ * - red and negative → destructive
+ * - mini, tiny, small and compact → the 32px compact size; everything else 40px
+ *
+ * Scoped to CRM admin screens. Semantic UI sets the basic variants with
+ * !important, so the declarations that have to beat those use it too.
+ */
+.jpcrm-admin {
+
+	.ui.button {
+		min-height: var(--wpds-dimension-size-lg);
+		padding: 10px var(--wpds-dimension-padding-lg);
+		border-radius: var(--wpds-border-radius-sm);
+		background: transparent;
+		color: var(--wp-admin-theme-color);
+		box-shadow: inset 0 0 0 1px var(--wp-admin-theme-color);
+		font-family: inherit;
+		font-size: var(--wpds-typography-font-size-md);
+		font-weight: var(--wpds-typography-font-weight-emphasis);
+		line-height: var(--wpds-typography-line-height-sm);
+		text-shadow: none;
+
+		&:hover,
+		&:focus,
+		&:active,
+		&.active {
+			background: transparent;
+			color: var(--wp-admin-theme-color-darker-10);
+			box-shadow: inset 0 0 0 1px var(--wp-admin-theme-color-darker-10);
+		}
+
+		&:focus-visible {
+			outline: var(--wpds-border-width-focus) solid var(--wp-admin-theme-color);
+			outline-offset: 2px;
+		}
+	}
+
+	.ui.icon.button {
+		padding: 10px;
+	}
+
+	.ui.mini.button,
+	.ui.tiny.button,
+	.ui.small.button,
+	.ui.compact.button {
+		min-height: var(--wpds-dimension-size-md);
+		padding: 6px var(--wpds-dimension-padding-md);
+		font-size: var(--wpds-typography-font-size-md);
+	}
+
+	// The help toggle beside page titles is an icon, not a button.
+	.ui.learn.button {
+		min-height: 0;
+		padding: 0;
+
+		&,
+		&:hover,
+		&:focus,
+		&:active {
+			box-shadow: none;
+		}
+	}
+
+	.ui.primary.button,
+	.ui.positive.button,
+	.ui.green.button,
+	.ui.blue.button,
+	.ui.black.button {
+		background: var(--wp-admin-theme-color);
+		color: var(--wpds-color-foreground-interactive-brand-strong);
+		box-shadow: none;
+
+		&:hover,
+		&:focus,
+		&:active,
+		&.active {
+			background: var(--wp-admin-theme-color-darker-10);
+			color: var(--wpds-color-foreground-interactive-brand-strong);
+			box-shadow: none;
+		}
+	}
+
+	.ui.red.button,
+	.ui.negative.button {
+		background: var(--wpds-color-background-interactive-error-strong);
+		color: var(--wpds-color-foreground-interactive-brand-strong);
+		box-shadow: none;
+
+		&:hover,
+		&:focus,
+		&:active {
+			background: var(--wpds-color-background-interactive-error-strong-active);
+			color: var(--wpds-color-foreground-interactive-brand-strong);
+			box-shadow: none;
+		}
+	}
+
+	// After the colored rules so a basic green button is secondary, not primary.
+	.ui.basic.button,
+	.ui.teal.button,
+	.ui.olive.button,
+	.ui.orange.button,
+	.ui.yellow.button,
+	.ui.violet.button,
+	.ui.purple.button,
+	.ui.pink.button,
+	.ui.brown.button,
+	.ui.grey.button,
+	.ui.white.button {
+		background: transparent !important;
+		color: var(--wp-admin-theme-color) !important;
+		box-shadow: inset 0 0 0 1px var(--wp-admin-theme-color) !important;
+
+		&:hover,
+		&:focus,
+		&:active {
+			background: transparent !important;
+			color: var(--wp-admin-theme-color-darker-10) !important;
+			box-shadow: inset 0 0 0 1px var(--wp-admin-theme-color-darker-10) !important;
+		}
+	}
+
+	.ui.basic.red.button,
+	.ui.basic.negative.button {
+		color: var(--wpds-color-foreground-interactive-error) !important;
+		box-shadow: inset 0 0 0 1px var(--wpds-color-foreground-interactive-error) !important;
+	}
+
+	// Text fields and selects, like WordPress core's 40px inputs.
+	.ui.input > input,
+	.ui.form input:not([type]),
+	.ui.form input[type="text"],
+	.ui.form input[type="email"],
+	.ui.form input[type="number"],
+	.ui.form input[type="password"],
+	.ui.form input[type="search"],
+	.ui.form input[type="tel"],
+	.ui.form input[type="url"],
+	.ui.form input[type="date"],
+	.ui.selection.dropdown {
+		min-height: var(--wpds-dimension-size-lg);
+		border-color: var(--wpds-color-stroke-interactive-neutral);
+		border-radius: var(--wpds-border-radius-sm);
+	}
+
+	.ui.form textarea {
+		border-color: var(--wpds-color-stroke-interactive-neutral);
+		border-radius: var(--wpds-border-radius-sm);
+	}
+
+	.ui.input > input:focus,
+	.ui.form input:focus,
+	.ui.form textarea:focus,
+	.ui.selection.dropdown:focus,
+	.ui.selection.active.dropdown,
+	.ui.selection.active.dropdown:hover,
+	.ui.selection.active.dropdown .menu {
+		border-color: var(--wp-admin-theme-color);
+		box-shadow: 0 0 0 1px var(--wp-admin-theme-color);
+	}
+}
