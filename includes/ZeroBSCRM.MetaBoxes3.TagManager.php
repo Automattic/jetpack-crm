@@ -163,7 +163,7 @@ class zeroBS__Metabox_TagList extends zeroBS__Metabox {
 								<td>
 									<?php
 									if ( isset( $tag['name'] ) ) {
-										echo '<a href="' . esc_url( $link ) . '" class="ui large label">' . esc_html( $tag['name'] ) . '</a>';
+										echo '<a href="' . esc_url( $link ) . '" class="jpcrm-badge is-none">' . esc_html( $tag['name'] ) . '</a>';
 									}
 									?>
 								</td>

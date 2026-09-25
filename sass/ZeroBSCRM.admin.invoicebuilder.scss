@@ -711,45 +711,8 @@
 		height: 65px;
 
 		.zbs-invoice-status {
-			margin-top: -2px;
 			float: left;
 			padding: 10px;
-
-			.draft {
-				background-color: #ddd;
-				text-transform: uppercase;
-				color: #fff;
-				padding: 7px;
-				font-weight: 900;
-				font-size: 25px;
-			}
-
-			.unpaid {
-				background-color: #ffd800;
-				text-transform: uppercase;
-				color: #fff;
-				padding: 7px;
-				font-weight: 900;
-				font-size: 25px;
-			}
-
-			.paid {
-				background-color: #008000;
-				text-transform: uppercase;
-				color: #fff;
-				padding: 7px;
-				font-weight: 900;
-				font-size: 25px;
-			}
-
-			.overdue {
-				background-color: #f00;
-				text-transform: uppercase;
-				color: #fff;
-				padding: 7px;
-				font-weight: 900;
-				font-size: 25px;
-			}
 		}
 
 		button {

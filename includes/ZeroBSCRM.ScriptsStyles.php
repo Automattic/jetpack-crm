@@ -255,6 +255,9 @@ function zeroBSCRM_scriptStyles_enqueueJSRoot() {
 
 	$jpcrm_root['jp_green'] = jpcrm_get_jp_green();
 
+	// For jpcrm.status_badge_html().
+	$jpcrm_root['status_badge_intents'] = jpcrm_get_status_badge_intents();
+
 	// filter jpcrm_root, allows us to pass js vars directly into the js global via filter
 	$jpcrm_root = apply_filters( 'zbs_globaljs_vars', $jpcrm_root );
 

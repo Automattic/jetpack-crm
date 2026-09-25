@@ -95,7 +95,7 @@ class zeroBS__Metabox_Tags extends zeroBS__Metabox {
 					// look for zeroBSCRMJS_buildTagsInput in js :) JSONs it
 			}
 
-					echo '<div id="zbs-tags-wrap">';
+					echo '<div id="zbs-tags-wrap" class="jpcrm-badge-list">';
 
 						$tagIndex = array();
 
@@ -137,7 +137,7 @@ class zeroBS__Metabox_Tags extends zeroBS__Metabox {
 							if ( is_array( $tagSuggestions ) && count( $tagSuggestions ) > 0 ) {
 								?>
 						<div id="zbs-tags-suggestions-wrap">
-						<div class="ui horizontal divider zbs-tags-suggestions-title"><?php esc_html_e( 'Suggested Tags', 'zero-bs-crm' ); ?></div>
+						<p class="zbs-tags-suggestions-title"><?php esc_html_e( 'Suggested tags', 'zero-bs-crm' ); ?></p>
 							<div id="zbs-tags-suggestions">
 								<?php
 
@@ -154,7 +154,7 @@ class zeroBS__Metabox_Tags extends zeroBS__Metabox {
 
 									// brutal out
 									?>
-													<div class="ui small basic black label zbsTagSuggestion" title="<?php esc_attr_e( 'Add Tag', 'zero-bs-crm' ); ?>"><?php echo esc_html( $tagSuggest['name'] ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase ?></div>
+													<button type="button" class="jpcrm-badge is-none zbsTagSuggestion" title="<?php esc_attr_e( 'Add Tag', 'zero-bs-crm' ); ?>"><?php echo esc_html( $tagSuggest['name'] ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase ?></button>
 												<?php
 
 												++$suggestionIndx;
@@ -179,6 +179,7 @@ class zeroBS__Metabox_Tags extends zeroBS__Metabox {
 					<script type="text/javascript">
 
 						var zbsCRMJS_currentTags = <?php echo wp_json_encode( $tags, JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP ); ?>;
+						var zbsCRMJS_tagsLang = <?php echo wp_json_encode( array( 'remove' => __( 'Remove tag', 'zero-bs-crm' ) ), JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP ); ?>;
 
 					</script>
 			<?php

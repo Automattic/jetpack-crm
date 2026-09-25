@@ -1768,7 +1768,7 @@ function zeroBSCRMJS_listView_generic_status( dataLine ) {
 		'<td' +
 		zeroBSCRMJS_listView_tdAttr( 'status', dataLine, dataLine.status ) +
 		'>' +
-		jpcrm.esc_html( statusStr ) +
+		( statusStr ? jpcrm.status_badge_html( statusStr ) : '' ) +
 		'</td>'
 	);
 }
@@ -2138,18 +2138,15 @@ function zeroBSCRMJS_listView_generic_tagged( dataLine ) {
 	let tagStr = '';
 	if ( typeof dataLine.tags !== 'undefined' && dataLine.tags.length > 0 ) {
 		jQuery.each( dataLine.tags, function ( ind, ele ) {
-			// ui choices: https://semantic-ui.com/elements/label.html
-			// ui tag
-			// ui basic
-			// ui horizontal
 			tagStr +=
 				'<a href="' +
 				window.zbsTagSkipLinkPrefix +
 				ele.id +
-				'" title="View all with this tag" class="ui small basic label teal">' +
+				'" title="View all with this tag" class="jpcrm-badge is-none">' +
 				jpcrm.esc_html( ele.name ) +
 				'</a>';
 		} );
+		tagStr = '<span class="jpcrm-badge-list">' + tagStr + '</span>';
 	}
 
 	return '<td>' + tagStr + '</td>';
@@ -2691,18 +2688,15 @@ function zeroBSCRMJS_listView_customer_tagged( dataLine ) {
 	let tagStr = '';
 	if ( typeof dataLine.tags !== 'undefined' && dataLine.tags.length > 0 ) {
 		jQuery.each( dataLine.tags, function ( ind, ele ) {
-			// ui choices: https://semantic-ui.com/elements/label.html
-			// ui tag
-			// ui basic
-			// ui horizontal
 			tagStr +=
 				'<a href="' +
 				window.zbsTagSkipLinkPrefix +
 				ele.id +
-				'" title="View all with this tag" class="ui small basic label teal">' +
+				'" title="View all with this tag" class="jpcrm-badge is-none">' +
 				jpcrm.esc_html( ele.name ) +
 				'</a>';
 		} );
+		tagStr = '<span class="jpcrm-badge-list">' + tagStr + '</span>';
 	}
 
 	return '<td>' + tagStr + '</td>';
@@ -4102,32 +4096,13 @@ function zeroBSCRMJS_listView_invoice_value( dataLine ) {
  * @param dataLine
  */
 function zeroBSCRMJS_listView_invoice_status( dataLine ) {
-	let stat = '';
-	if ( typeof dataLine.status_label !== 'undefined' ) {
-		stat = dataLine.status_label;
+	if ( typeof dataLine.status === 'undefined' ) {
+		return '<td></td>';
 	}
-	let color = '';
-	switch ( stat ) {
-		case zeroBSCRMJS_listViewLang( 'statusdraft', 'Draft' ):
-			color = 'grey';
-			break;
 
-		case zeroBSCRMJS_listViewLang( 'statusunpaid', 'Unpaid' ):
-			color = 'orange';
-			break;
-
-		case zeroBSCRMJS_listViewLang( 'statuspaid', 'Paid' ):
-			color = 'green';
-			break;
-
-		case zeroBSCRMJS_listViewLang( 'statusoverdue', 'Overdue' ):
-			color = 'red';
-			break;
-	}
-	stat =
-		'<span class="ui label ' + jpcrm.esc_attr( color ) + '">' + jpcrm.esc_html( stat ) + '</span>';
-
-	return '<td>' + stat + '</td>';
+	return (
+		'<td>' + jpcrm.status_badge_html( dataLine.status, dataLine.status_label || dataLine.status ) + '</td>'
+	);
 }
 
 /* ====================================================================================
@@ -4341,48 +4316,11 @@ function zeroBSCRMJS_listView_transaction_total( dataLine ) {
  * @param dataLine
  */
 function zeroBSCRMJS_listView_transaction_status( dataLine ) {
-	let stat = '';
-	if ( typeof dataLine.status !== 'undefined' ) {
-		stat = dataLine.status;
+	if ( typeof dataLine.status === 'undefined' ) {
+		return '<td></td>';
 	}
-	let color = '';
-	switch ( stat ) {
-		case zeroBSCRMJS_listViewLang( 'trans_status_cancelled', 'Cancelled' ):
-			color = 'pink';
-			break;
 
-		case zeroBSCRMJS_listViewLang( 'trans_status_hold', 'Hold' ):
-			color = 'orange';
-			break;
-
-		case zeroBSCRMJS_listViewLang( 'trans_status_pending', 'Pending' ):
-			color = 'teal';
-			break;
-
-		case zeroBSCRMJS_listViewLang( 'trans_status_processing', 'Processing' ):
-			color = 'teal';
-			break;
-
-		case zeroBSCRMJS_listViewLang( 'trans_status_refunded', 'Refunded' ):
-			color = 'orange';
-			break;
-
-		case zeroBSCRMJS_listViewLang( 'trans_status_failed', 'Failed' ):
-			color = 'red';
-			break;
-
-		case zeroBSCRMJS_listViewLang( 'trans_status_completed', 'Completed' ):
-			color = 'positive';
-			break;
-
-		case zeroBSCRMJS_listViewLang( 'trans_status_succeeded', 'Succeeded' ):
-			color = 'positive';
-			break;
-	}
-	stat =
-		'<span class="ui label ' + jpcrm.esc_attr( color ) + '">' + jpcrm.esc_html( stat ) + '</span>';
-
-	return '<td>' + stat + '</td>';
+	return '<td>' + jpcrm.status_badge_html( dataLine.status ) + '</td>';
 }
 
 /**
@@ -5080,12 +5018,10 @@ function zeroBSCRMJS_listView_event_action( dataLine ) {
  * @param dataLine
  */
 function zeroBSCRMJS_listView_event_status( dataLine ) {
-	let status =
-		'<span class="ui grey label">' + zeroBSCRMJS_listViewLang( 'incomplete' ) + '</span>';
-
-	if ( dataLine.complete == 1 ) {
-		status = '<span class="ui green label">' + zeroBSCRMJS_listViewLang( 'complete' ) + '</span>';
-	}
+	const status =
+		dataLine.complete == 1
+			? jpcrm.status_badge_html( 'complete', zeroBSCRMJS_listViewLang( 'complete' ) )
+			: jpcrm.status_badge_html( 'incomplete', zeroBSCRMJS_listViewLang( 'incomplete' ) );
 
 	return '<td>' + status + '</td>';
 }
@@ -5398,6 +5334,27 @@ function zeroBSCRMJS_listView_tdAttr( colKey, dataLine, val ) {
 	return classStr + attrStr;
 }
 
+/**
+ * Puts an inline-edited cell back into display mode, showing its value.
+ *
+ * @param {Element} field - The inline edit field.
+ * @param {string}  value - The field's value.
+ * @param {string}  label - The value's label, for selects whose values differ from their labels.
+ */
+function zeroBSCRMJS_listView_endInlineEdit( field, value, label ) {
+	const cell = jQuery( field ).closest( '.zbs-inline-editing' );
+
+	if ( cell.attr( 'data-col' ) === 'status' ) {
+		cell.html( jpcrm.status_badge_html( value, label ) );
+	} else {
+		cell.text( label );
+	}
+
+	cell.attr( 'data-val', value ).removeClass( 'zbs-inline-editing' ).addClass( 'zbs-inline-edit' );
+
+	zeroBSCRMJS_bindInlineEditing();
+}
+
 // binds the 'click out to save' func
 /**
  *
@@ -5429,23 +5386,7 @@ function zeroBSCRMJS_listView_bindInlineEditSave() {
 						col,
 						value,
 						function () {
-							const lThis = that,
-								lLabel = thisLabel;
-
-							// worked, update td
-							// for now, just dump the str
-							// ... this'll need adjusting when we get to more complex cols
-							// ... probably using the "zeroBSCRMJS_listView_customer_id" and generic draw html model
-
-							// replace html  + do classes
-							jQuery( lThis )
-								.closest( '.zbs-inline-editing' )
-								.text( lLabel )
-								.removeClass( 'zbs-inline-editing' )
-								.addClass( 'zbs-inline-edit' );
-
-							// rebind
-							zeroBSCRMJS_bindInlineEditing();
+							zeroBSCRMJS_listView_endInlineEdit( that, value, thisLabel );
 						},
 						function () {
 							// err
@@ -5459,23 +5400,7 @@ function zeroBSCRMJS_listView_bindInlineEditSave() {
 				}
 			} else {
 				// no change but clicked out :)
-				const lThis = that,
-					lLabel = thisLabel;
-
-				// worked, update td
-				// for now, just dump the str
-				// ... this'll need adjusting when we get to more complex cols
-				// ... probably using the "zeroBSCRMJS_listView_customer_id" and generic draw html model
-
-				// replace html  + do classes
-				jQuery( lThis )
-					.closest( '.zbs-inline-editing' )
-					.text( lLabel )
-					.removeClass( 'zbs-inline-editing' )
-					.addClass( 'zbs-inline-edit' );
-
-				// rebind
-				zeroBSCRMJS_bindInlineEditing();
+				zeroBSCRMJS_listView_endInlineEdit( that, value, thisLabel );
 			}
 		} );
 }
