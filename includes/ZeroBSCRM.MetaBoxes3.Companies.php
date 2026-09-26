@@ -964,7 +964,7 @@ class zeroBS__Metabox_CompanyActions extends zeroBS__Metabox {
 		?>
 			<div class="zbs-generic-save-wrap">
 
-					<div class="ui medium dividing header"><i class="save icon"></i> <?php echo esc_html( jpcrm_label_company() ); ?> <?php esc_html_e( 'Actions', 'zero-bs-crm' ); ?></div>
+					<div class="ui medium dividing header"><?php echo esc_html( jpcrm_label_company() ); ?> <?php esc_html_e( 'Actions', 'zero-bs-crm' ); ?></div>
 
 			<?php
 
@@ -1040,7 +1040,6 @@ class zeroBS__Metabox_Company_Activity extends zeroBS__Metabox {
 
 		$this->metaboxID       = 'zbs-company-activity-metabox';
 		$this->metaboxTitle    = __( 'Activity', 'zero-bs-crm' );
-		$this->metaboxIcon     = 'heartbeat';
 		$this->metaboxScreen   = 'zerobs_view_company'; // we can use anything here as is now using our func
 		$this->metaboxArea     = 'side';
 		$this->metaboxLocation = 'high';

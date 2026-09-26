@@ -715,7 +715,7 @@ class zeroBS__Metabox_ContactActions extends zeroBS__Metabox {
 
 		?>
 		<div class="zbs-generic-save-wrap">
-			<div class="ui medium dividing header"><i class="save icon"></i> <?php esc_html_e( 'Contact Actions', 'zero-bs-crm' ); ?></div>
+			<div class="ui medium dividing header"><?php esc_html_e( 'Contact Actions', 'zero-bs-crm' ); ?></div>
 			<div class="clear"></div>
 		<?php
 
@@ -2438,7 +2438,6 @@ class zeroBS__Metabox_Contact_Activity extends zeroBS__Metabox {
 
 		$this->metaboxID       = 'zbs-contact-activity-metabox';
 		$this->metaboxTitle    = __( 'Activity', 'zero-bs-crm' );
-		$this->metaboxIcon     = 'heartbeat';
 		$this->metaboxScreen   = 'zbs-view-contact'; // we can use anything here as is now using our func
 		$this->metaboxArea     = 'side';
 		$this->metaboxLocation = 'high';

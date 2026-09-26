@@ -930,10 +930,12 @@ function jpcrm_status_badge_html( $status, $label = null ) {
  */
 
 /**
- * Returns an icon from @wordpress/icons as inline SVG.
+ * Returns one of CRM's icons as inline SVG.
  *
- * The icons CRM uses are listed in tools/wp-icons.mjs and built into
- * includes/jpcrm-wp-icons.php from the @wordpress/icons package.
+ * The icons are listed in tools/wp-icons.mjs and built into
+ * includes/jpcrm-wp-icons.php: @wordpress/icons first, then social-logos for
+ * social networks, then CRM's own for the gaps. Brand marks keep their color;
+ * everything else takes the text color.
  *
  * @since $$next-version$$
  *

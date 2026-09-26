@@ -314,7 +314,7 @@ class zeroBS__Metabox_QuoteTemplateActions extends zeroBS__Metabox {
 		?>
 			<div class="zbs-generic-save-wrap">
 
-					<div class="ui medium dividing header"><i class="save icon"></i> <?php esc_html_e( 'Template', 'zero-bs-crm' ); ?> <?php esc_html_e( 'Actions', 'zero-bs-crm' ); ?></div>
+					<div class="ui medium dividing header"><?php esc_html_e( 'Template', 'zero-bs-crm' ); ?> <?php esc_html_e( 'Actions', 'zero-bs-crm' ); ?></div>
 
 			<?php
 
