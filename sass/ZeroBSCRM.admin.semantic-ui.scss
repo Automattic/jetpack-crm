@@ -16,6 +16,9 @@
 // WH/MS semantic add ins/additions
 @use "semantic-ui-additions";
 
+// Semantic UI buttons and inputs as WordPress component controls
+@use "semantic-ui-wp-controls";
+
 // Semantic UI's placeholder grey is under 2:1 on white. Selectors match its own
 // so these win by load order.
 .ui.input > input::placeholder,
