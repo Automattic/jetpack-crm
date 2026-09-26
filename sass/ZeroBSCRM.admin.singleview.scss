@@ -126,12 +126,6 @@
 	text-align: right !important;
 }
 
-.zbs-view-tags {
-	text-align: center;
-	margin-top: 2em;
-	margin-bottom: 2em;
-}
-
 
 .ui.menu,
 .ui.menu .menu {
@@ -234,6 +228,11 @@ i.zbs-hide-longdesc {
 	width: 80%;
 }
 
+// Tags in the contact and company headers.
+.zbs-view-card .jpcrm-badge-list {
+	margin: var(--wpds-dimension-gap-sm) 0;
+}
+
 .zbs-contact-owner {
 	position: absolute;
 	top: 8px;
@@ -245,17 +244,8 @@ i.zbs-hide-longdesc {
 	padding-right: 1em;
 }
 
-.zbs-view-tags a {
-	margin-bottom: 3px !important;
-}
-
 .actvity-feed-view-box {
 	margin-top: -15px !important;
-}
-
-.zbs-mini-tag {
-	margin-top: 10px !important;
-	margin-right: 10px !important;
 }
 
 // === Pinned notes

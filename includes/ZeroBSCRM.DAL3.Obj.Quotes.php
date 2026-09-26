@@ -2706,17 +2706,17 @@ class zbsDAL_quotes extends zbsDAL_ObjectLayer {
 			if ( $resArr['statusint'] == -2 ) {
 
 				#} is published
-				$resArr['status'] = '<span class="ui label orange">' . __( 'Not accepted yet', 'zero-bs-crm' ) . '</span>';
+				$resArr['status'] = jpcrm_status_badge_html( 'published', __( 'Not accepted yet', 'zero-bs-crm' ) ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 
 			} elseif ( $resArr['statusint'] == -1 ) {
 
 				#} not yet published
-				$resArr['status'] = '<span class="ui label grey">' . __( 'Draft', 'zero-bs-crm' ) . '</span>';
+				$resArr['status'] = jpcrm_status_badge_html( 'draft', __( 'Draft', 'zero-bs-crm' ) ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 
 			} else {
 
-				#} Accepted
-				$resArr['status'] = '<span class="ui label green">' . __( 'Accepted', 'zero-bs-crm' ) . ' ' . date( zeroBSCRM_getDateFormat(), $quote['accepted'] ) . '</span>';
+				// Accepted. The date sits after the badge so the badges in the column line up.
+				$resArr['status'] = jpcrm_status_badge_html( 'accepted', __( 'Accepted', 'zero-bs-crm' ) ) . ' ' . esc_html( date( zeroBSCRM_getDateFormat(), $quote['accepted'] ) ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase, WordPress.DateTime.RestrictedFunctions.date_date -- The date call is unchanged from the old label.
 
 			}
 

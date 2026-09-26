@@ -58,15 +58,20 @@ function zeroBSCRMJS_buildTagsInput() {
  * @param tagID
  */
 function zbsJS_drawTag( tagStr, tagID ) {
+	const removeLabel = ( window.zbsCRMJS_tagsLang && window.zbsCRMJS_tagsLang.remove ) || 'Remove tag';
+
+	// The remove icon is close-small from @wordpress/icons.
 	document
 		.getElementById( 'zbs-tags-wrap' )
 		.insertAdjacentHTML(
 			'beforeend',
-			'<div class="ui small basic label black" data-id="' +
+			'<span class="jpcrm-badge is-none jpcrm-tag" data-id="' +
 				jpcrm.esc_attr( tagID ) +
-				'"><i class="window close icon zbs-remove-tag"></i> <span>' +
+				'"><span>' +
 				jpcrm.esc_html( tagStr ) +
-				'</span></div>'
+				'</span><button type="button" class="jpcrm-tag-remove zbs-remove-tag" aria-label="' +
+				jpcrm.esc_attr( removeLabel + ': ' + tagStr ) +
+				'"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><path d="M12 13.06l3.712 3.713 1.061-1.06L13.061 12l3.712-3.712-1.06-1.06L12 10.938 8.288 7.227l-1.061 1.06L10.939 12l-3.712 3.712 1.06 1.061L12 13.061z"></path></svg></button></span>'
 		);
 
 	setTimeout( function () {
@@ -82,8 +87,8 @@ function zbsJS_bindTags() {
 	jQuery( '.zbs-remove-tag' )
 		.off( 'click' )
 		.on( 'click', function () {
-			// get val
-			const val = jQuery( 'span', jQuery( this ).parent() ).html();
+			// get val. text() rather than html(), which would escape & and < and miss the match.
+			const val = jQuery( 'span', jQuery( this ).parent() ).text();
 
 			// remove from array (select everything except it)
 			const index = window.zbsCRMJS_currentTags.indexOf( val );
@@ -142,7 +147,7 @@ function zbsJS_bindTagsInit() {
 	jQuery( '.zbsTagSuggestion' )
 		.off( 'click' )
 		.on( 'click', function () {
-			zbsJS_addTagAction( jQuery( this ).html() );
+			zbsJS_addTagAction( jQuery( this ).text() );
 		} );
 }
 
@@ -215,7 +220,7 @@ function zbsJS_bindTagManagerInit() {
 							.insertAdjacentHTML(
 								'beforeend',
 								'<tr>' +
-									'<td><span class="ui large label">' +
+									'<td><span class="jpcrm-badge is-none">' +
 									jpcrm.esc_html( ltag ) +
 									'</span></td>' +
 									'<td>' +
