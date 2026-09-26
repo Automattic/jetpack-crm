@@ -4,11 +4,12 @@ jpcrm-listview-header#jpcrm-listview-header {
 	justify-content: space-between;
 	align-items: center;
 	flex-wrap: wrap;
-	height: 30px;
+	gap: var(--wpds-dimension-gap-sm);
 
 	header-item {
 		display: flex;
-		gap: 6px;
+		flex-wrap: wrap;
+		gap: var(--wpds-dimension-gap-sm);
 		align-items: center;
 
 		button {
@@ -37,10 +38,12 @@ jpcrm-listview-header#jpcrm-listview-header {
 			box-sizing: border-box;
 			font-weight: 600;
 			vertical-align: middle;
-			display: inline-block;
+			display: inline-flex;
+			align-items: center;
+			gap: var(--wpds-dimension-gap-xs);
 			border: 1px solid var(--jp-gray-10);
 			border-radius: 2px;
-			height: 100%;
+			min-height: 40px;
 			width: 200px;
 		}
 
@@ -52,12 +55,27 @@ jpcrm-listview-header#jpcrm-listview-header {
 		border: 1px solid var(--jp-gray-10);
 		vertical-align: middle;
 		border-radius: 2px;
-		height: 100%;
 		width: 200px;
 	}
 
-	input[type="search"] {
+	// WordPress's mobile breakpoint: search and filters share the full width, and
+	// wrap onto their own rows instead of running into the table.
+	@media (max-width: 782px) {
 
-		/* padding-left:30px; */
+		header-item {
+			flex: 1 1 100%;
+
+			// WordPress caps selects at 350px on phones.
+			> * {
+				flex: 1 1 0;
+				min-width: 0;
+				max-width: none;
+				width: auto;
+			}
+
+			.jpcrm-current-filter:not(.hidden) {
+				width: auto;
+			}
+		}
 	}
 }

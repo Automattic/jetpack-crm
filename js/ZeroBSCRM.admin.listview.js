@@ -494,6 +494,7 @@ function zeroBSCRMJS_drawListView( reset_pagination, update_url ) {
 
 				// draw
 				jQuery( '.jpcrm-listview-table-container' ).html( listViewHTML );
+				jpcrm_listview_label_cells( document.querySelector( '.jpcrm-listview-table' ) );
 
 				//update counts in footer
 				jpcrm_update_listview_counts();
@@ -517,7 +518,7 @@ function zeroBSCRMJS_drawListView( reset_pagination, update_url ) {
 				jQuery( '#zbsCantLoadData' ).hide();
 				jQuery( '.jpcrm-listview-table-container' ).show();
 				jQuery( 'jpcrm-listview-footer' ).show();
-				jQuery( 'jpcrm-dashcount' ).show();
+				jQuery( 'jpcrm-dashcount' ).filter( ':parent' ).show();
 			},
 			function () {
 				// err callback? show msg (prefilled by php)
@@ -655,6 +656,39 @@ function jpcrm_listview_header() {
 }
 
 /**
+ * Copies each column's header text and key to its cells as data-colname and
+ * data-colkey. On narrow screens the rows stack into cards, and the names label
+ * the cells, as they do in WordPress list tables.
+ *
+ * @param {HTMLTableElement|null} table - The list view table.
+ */
+function jpcrm_listview_label_cells( table ) {
+	if ( ! table ) {
+		return;
+	}
+
+	const columns = Array.from( table.querySelectorAll( 'thead th' ), th => ( {
+		name: th.textContent.trim(),
+		key: th.dataset.colkey,
+	} ) );
+
+	table.querySelectorAll( 'tbody tr' ).forEach( row => {
+		Array.from( row.cells ).forEach( ( cell, index ) => {
+			const column = columns[ index ];
+			if ( ! column || cell.colSpan !== 1 ) {
+				return;
+			}
+			if ( column.name ) {
+				cell.dataset.colname = column.name;
+			}
+			if ( column.key ) {
+				cell.dataset.colkey = column.key;
+			}
+		} );
+	} );
+}
+
+/**
  *
  */
 function jpcrm_listview_table_header() {
@@ -685,7 +719,7 @@ function jpcrm_listview_table_header() {
 				}
 				listViewHeaderHTML += `<th class="jpcrm_sort_column" data-sort="${
 					lvhEle.fieldstr
-				}" data-sortdir="${ sortDirectionUrlParam }" title="${ zeroBSCRMJS_listViewLang(
+				}" data-colkey="${ jpcrm.esc_attr( lvhEle.fieldstr ) }" data-sortdir="${ sortDirectionUrlParam }" title="${ zeroBSCRMJS_listViewLang(
 					'click_to_sort'
 				) }">`;
 				listViewHeaderHTML += `${ lvhEle.namestr }`;
@@ -694,7 +728,9 @@ function jpcrm_listview_table_header() {
 				}
 				listViewHeaderHTML += `</th>`;
 			} else {
-				listViewHeaderHTML += `<th>${ jpcrm.esc_html( lvhEle.namestr ) }</th>`;
+				listViewHeaderHTML += `<th data-colkey="${ jpcrm.esc_attr( lvhEle.fieldstr ) }">${ jpcrm.esc_html(
+					lvhEle.namestr
+				) }</th>`;
 			}
 		} );
 		listViewHeaderHTML += '</tr></thead>';
@@ -1174,44 +1210,30 @@ function zeroBSCRMJS_listView_draw_totals_tables() {
 		return;
 	}
 
-	let html = '';
+	// Only the totals for turned-on modules come back formatted.
+	const totals = [
+		[ 'quotes', 'quotes_total' ],
+		[ 'invoices', 'invoices_total' ],
+		[ 'transactions', 'transactions_total' ],
+		[ 'total', 'total_sum' ],
+	].filter( ( [ , key ] ) => jpcrm_totals_table[ key + '_formatted' ] );
 
-	if ( jpcrm_totals_table.quotes_total_formatted ) {
-		html += `<jpcrm-dashcount-card>
-				<h3>${ zeroBSCRMJS_listViewLang( 'quotes' ) }</h3>
-				<div>
-					<span class="range_total">${ jpcrm.esc_html( jpcrm_totals_table.quotes_total_formatted ) }</span>
-				</div>
-			</jpcrm-dashcount-card>`;
-	}
-
-	if ( jpcrm_totals_table.invoices_total_formatted ) {
-		html += `<jpcrm-dashcount-card>
-				<h3>${ zeroBSCRMJS_listViewLang( 'invoices' ) }</h3>
-				<div>
-					<span class="range_total">${ jpcrm.esc_html( jpcrm_totals_table.invoices_total_formatted ) }</span>
-				</div>
-			</jpcrm-dashcount-card>`;
+	// A row of zeros says nothing, e.g. on a new CRM, so leave the strip out.
+	if ( ! totals.some( ( [ , key ] ) => parseFloat( jpcrm_totals_table[ key ] ) ) ) {
+		jQuery( 'jpcrm-dashcount' ).empty().hide();
+		return;
 	}
 
-	if ( jpcrm_totals_table.transactions_total_formatted ) {
-		html += `<jpcrm-dashcount-card>
-				<h3>${ zeroBSCRMJS_listViewLang( 'transactions' ) }</h3>
+	const html = totals
+		.map(
+			( [ label, key ] ) => `<jpcrm-dashcount-card>
+				<h3>${ jpcrm.esc_html( zeroBSCRMJS_listViewLang( label ) ) }</h3>
 				<div>
-					<span class="range_total">${ jpcrm.esc_html(
-						jpcrm_totals_table.transactions_total_formatted
-					) }</span>
+					<span class="range_total">${ jpcrm.esc_html( jpcrm_totals_table[ key + '_formatted' ] ) }</span>
 				</div>
-			</jpcrm-dashcount-card>`;
-	}
-	if ( jpcrm_totals_table.total_sum_formatted ) {
-		html += `<jpcrm-dashcount-card>
-				<h3>${ zeroBSCRMJS_listViewLang( 'total' ) }</h3>
-				<div>
-					<span class="range_total">${ jpcrm.esc_html( jpcrm_totals_table.total_sum_formatted ) }</span>
-				</div>
-			</jpcrm-dashcount-card>`;
-	}
+			</jpcrm-dashcount-card>`
+		)
+		.join( '' );
 
 	jQuery( 'jpcrm-dashcount' ).html( html );
 }
@@ -5607,6 +5629,7 @@ function jpcrm_change_sort() {
 if ( typeof module !== 'undefined' ) {
 	module.exports = {
 		zeroBSCRMJS_initListView,
+		jpcrm_listview_label_cells,
 		jpcrm_listview_generate_current_filter_url,
 		zeroBSCRMJS_updateListViewColumnsVar,
 		zeroBSCRMJS_updateListViewColumns,
