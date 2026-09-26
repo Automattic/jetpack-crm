@@ -19,10 +19,6 @@
 			color: var(--jp-grey-80);
 		}
 
-		#zbs-no-results-wrap a {
-			color: #2271b1;
-		}
-
 		th,
 		td {
 			text-align: left;
@@ -61,10 +57,6 @@
 
 				&:hover {
 					background-color: var(--jp-gray-0);
-				}
-
-				&:has(#zbs-no-results-wrap):hover {
-					background-color: transparent;
 				}
 			}
 		}
@@ -138,15 +130,6 @@
 				&:empty {
 					display: none;
 				}
-
-				// The "no results" message spans the whole card.
-				&[colspan] {
-					display: block;
-
-					&::before {
-						content: none;
-					}
-				}
 			}
 
 			td.zbs-listview-bulk {
@@ -159,11 +142,6 @@
 				&::before {
 					content: none;
 				}
-			}
-
-			tbody tr:has(#zbs-no-results-wrap) {
-				padding: 0;
-				border: 0;
 			}
 		}
 	}

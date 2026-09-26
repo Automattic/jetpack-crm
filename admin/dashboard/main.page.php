@@ -299,11 +299,15 @@ function jpcrm_render_dashboard_page() {
 						}
 					} else {
 						?>
-						<div class="jpcrm-div-message-box">
-							<div class="jpcrm-div-message">
-								<?php esc_html_e( 'No recent activity.', 'zero-bs-crm' ); ?>
-							</div>
-						</div>
+						<?php
+						echo jpcrm_empty_state_html( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped by the helper.
+							array(
+								'icon'        => 'scheduled',
+								'title'       => __( 'No activity yet', 'zero-bs-crm' ),
+								'description' => __( 'Notes, calls, emails and other contact activity show up here.', 'zero-bs-crm' ),
+							)
+						);
+						?>
 						<?php
 					}
 					?>
@@ -368,11 +372,22 @@ function jpcrm_render_dashboard_page() {
 						<?php
 					} else {
 						?>
-						<div class="jpcrm-div-message-box">
-							<div class="jpcrm-div-message">
-								<?php esc_html_e( 'No contacts.', 'zero-bs-crm' ); ?>
-							</div>
-						</div>
+						<?php
+						echo jpcrm_empty_state_html( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped by the helper.
+							array(
+								'icon'        => 'people',
+								'title'       => __( 'No contacts yet', 'zero-bs-crm' ),
+								'description' => __( 'The contacts you add most recently show up here.', 'zero-bs-crm' ),
+								'actions'     => array(
+									array(
+										'label'   => __( 'Add contact', 'zero-bs-crm' ),
+										'url'     => jpcrm_esc_link( 'create', -1, 'zerobs_customer' ),
+										'primary' => true,
+									),
+								),
+							)
+						);
+						?>
 						<?php
 					}
 					?>

@@ -122,7 +122,12 @@ function jpcrm_render_emailbox() {
 			echo '<div class="ui celled list" style="background:white;">';
 			$i = 0;
 			if ( count( $email_hist ) == 0 ) {
-				echo "<div class='no-emails'><i class='ui icon exclamation'></i><br/>" . esc_html__( 'No emails of this type', 'zero-bs-crm' ) . '</div>';
+				echo jpcrm_empty_state_html( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped by the helper.
+					array(
+						'title'       => __( 'No starred emails', 'zero-bs-crm' ),
+						'description' => __( 'Star an email to keep it here.', 'zero-bs-crm' ),
+					)
+				);
 			}
 			foreach ( $email_hist as $email ) {
 					$contact_meta = zeroBS_getCustomerMeta( $email->zbsmail_target_objid );
@@ -165,8 +170,15 @@ function jpcrm_render_emailbox() {
 			echo '<div class="ui celled list" style="background:white;">';
 			$i = 0;
 
-			if ( count( $email_hist ) == 0 ) {
-				echo "<div class='no-emails'><i class='ui icon exclamation'></i><br/>" . esc_html__( 'No emails of this type', 'zero-bs-crm' ) . '</div>';
+			// Every email CRM has sent is in this folder, so an empty one means none yet.
+			$has_sent_emails = count( $email_hist ) > 0;
+			if ( ! $has_sent_emails ) {
+				echo jpcrm_empty_state_html( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped by the helper.
+					array(
+						'title'       => __( 'No sent emails', 'zero-bs-crm' ),
+						'description' => __( 'Emails you send to contacts show up here.', 'zero-bs-crm' ),
+					)
+				);
 			}
 
 			foreach ( $email_hist as $email ) {
@@ -206,8 +218,29 @@ function jpcrm_render_emailbox() {
 		<div class='zbs-email-content inverted dimmer app-content'>
 			<div class="zbs-ajax-loading">
 				<div class='click-email-to-load'>
+					<?php if ( $has_sent_emails ) { ?>
 					<i class="ui icon envelope outline zbs-click-email-icon" style="font-size:30px;font-weight:100"></i>
 					<h4 class="click-email"><?php esc_html_e( 'Click an email to load details', 'zero-bs-crm' ); ?></h4>
+						<?php
+					} else {
+						// There's nothing to click, so say what this page is for.
+						echo jpcrm_empty_state_html( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped by the helper.
+							array(
+								'icon'        => 'envelope',
+								'title'       => __( 'No emails yet', 'zero-bs-crm' ),
+								'description' => __( 'Email a contact from CRM, and the email and any opens show up here.', 'zero-bs-crm' ),
+								'actions'     => array(
+									array(
+										'label'   => __( 'Compose email', 'zero-bs-crm' ),
+										'url'     => admin_url( 'admin.php?page=zerobscrm-send-email' ),
+										'primary' => true,
+										'class'   => 'zbs-inbox-compose-email',
+									),
+								),
+							)
+						);
+					}
+					?>
 				</div>
 				<img alt='<?php esc_attr_e( 'Loading', 'zero-bs-crm' ); ?>' class='spinner-gif' src="<?php echo esc_url( admin_url( 'images/spinner.gif' ) ); ?>" />
 			</div>

@@ -395,27 +395,28 @@ class zeroBSCRM_list {
 					echo zeroBSCRM_UI2_messageHTML( 'warning hidden', sprintf( __( 'Error retrieving %s', 'zero-bs-crm' ), $this->plural ), sprintf( __( 'There has been a problem retrieving your %s. If this issue persists, please contact support.', 'zero-bs-crm' ), $this->plural ), 'disabled warning sign', 'zbsCantLoadData' );
 					echo zeroBSCRM_UI2_messageHTML( 'warning hidden', sprintf( __( 'Error updating columns %s', 'zero-bs-crm' ), $this->plural ), __( 'There has been a problem saving your column configuration. If this issue persists, please contact support.', 'zero-bs-crm' ), 'disabled warning sign', 'zbsCantSaveCols' );
 					echo zeroBSCRM_UI2_messageHTML( 'warning hidden', sprintf( __( 'Error updating columns %s', 'zero-bs-crm' ), $this->plural ), __( 'There has been a problem saving your filter button configuration. If this issue persists, please contact support.', 'zero-bs-crm' ), 'disabled warning sign', 'zbsCantSaveButtons' ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
-					$no_results_msg = sprintf( __( 'There are no %1$s here. Do you want to <a href="%2$s">create one</a>?', 'zero-bs-crm' ), $this->plural, jpcrm_esc_link( 'create', -1, $this->postType ) );
-					$doc_links      = array(
-						'transaction' => array(
-							'url'  => 'https://kb.jetpackcrm.com/knowledge-base/how-do-i-create-a-transaction/',
-							'text' => __( 'Learn more about <a href="%1$s" target="_blank">how to create a transaction</a>.', 'zero-bs-crm' ),
-						),
-						'invoice'     => array(
-							'url'  => 'https://kb.jetpackcrm.com/knowledge-base/how-to-use-the-invoice-builder/',
-							'text' => __( 'Learn more about <a href="%1$s" target="_blank">how to create an invoice</a>.', 'zero-bs-crm' ),
-						),
-						'quote'       => array(
-							'url'  => 'https://kb.jetpackcrm.com/knowledge-base/how-do-i-create-a-quote/',
-							'text' => __( 'Learn more about <a href="%1$s" target="_blank">how to create a quote</a>.', 'zero-bs-crm' ),
-						),
+					// phpcs:enable WordPress.Security.EscapeOutput.OutputNotEscaped,WordPress.WP.I18n.MissingTranslatorsComment
+
+					// Nothing here yet. The list view JS shows this and hides the table and toolbar.
+					echo jpcrm_empty_state_html( $this->get_empty_state() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped by the helper.
+
+					// A search or filter matched nothing. The toolbar stays so it can be changed.
+					echo jpcrm_empty_state_html( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped by the helper.
+						array(
+							'id'          => 'zbsNoResults',
+							'class'       => 'hidden',
+							'icon'        => 'search',
+							'title'       => __( 'No results', 'zero-bs-crm' ),
+							'description' => __( 'Nothing matches your search or filters.', 'zero-bs-crm' ),
+							'actions'     => array(
+								array(
+									'label' => __( 'Clear search and filters', 'zero-bs-crm' ),
+									'url'   => admin_url( 'admin.php?page=' . $this->postPage ), // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+								),
+							),
+						)
 					);
-					// phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
-					if ( isset( $doc_links[ $this->objType ] ) ) {
-						$link            = $doc_links[ $this->objType ];
-						$no_results_msg .= ' ' . sprintf( $link['text'], esc_url( $link['url'] ) );
-					}
-					echo zeroBSCRM_UI2_messageHTML( 'info hidden', sprintf( __( 'No %s Found', 'zero-bs-crm' ), $this->plural ), $no_results_msg, 'disabled warning sign', 'zbsNoResults' ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+					// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped,WordPress.WP.I18n.MissingTranslatorsComment
 
 					// any additional messages?
 					if ( isset( $this->messages ) && is_array( $this->messages ) && count( $this->messages ) > 0 ) {
@@ -650,6 +651,167 @@ class zeroBSCRM_list {
 	 * Draws listview header that contains search, bulk actions, and filter dropdowns
 	 *
 	 * @param array $listview_filters Array of current listview filters.
+	 */
+	/**
+	 * What the list shows before anything has been added to it: what goes here, a
+	 * button to add the first one, and an import or help link where there's one.
+	 *
+	 * @since $$next-version$$
+	 *
+	 * @return array Arguments for jpcrm_empty_state_html().
+	 */
+	private function get_empty_state() {
+		global $zbs;
+
+		// phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+		$add_url = jpcrm_esc_link( 'create', -1, $this->postType );
+
+		switch ( $this->objType ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+			case 'customer':
+				$state = array(
+					'icon'        => 'people',
+					'title'       => __( 'No contacts yet', 'zero-bs-crm' ),
+					'description' => __( 'Contacts are the people you do business with, from new leads to long-time customers.', 'zero-bs-crm' ),
+					'add'         => __( 'Add contact', 'zero-bs-crm' ),
+					'more'        => $zbs->urls['kbfirstcontact'],
+				);
+				if ( zeroBSCRM_isExtensionInstalled( 'csvimporterlite' ) ) {
+					$state['secondary'] = array(
+						'label' => __( 'Import from CSV', 'zero-bs-crm' ),
+						'url'   => jpcrm_esc_link( $zbs->slugs['csvlite'] ),
+					);
+				}
+				break;
+
+			case 'company':
+				// The company label can be renamed in settings.
+				$organisation_type = zeroBSCRM_getSetting( 'coororg' );
+				$state             = array(
+					'icon'        => 'store',
+					'title'       => __( 'No companies yet', 'zero-bs-crm' ),
+					'description' => __( 'Companies group the contacts who work at the same business.', 'zero-bs-crm' ),
+					'add'         => __( 'Add company', 'zero-bs-crm' ),
+					'more'        => 'https://kb.jetpackcrm.com/knowledge-base/how-to-assign-a-contact-to-a-company/',
+				);
+				if ( $organisation_type === 'org' ) {
+					$state['title']       = __( 'No organisations yet', 'zero-bs-crm' );
+					$state['description'] = __( 'Organisations group the contacts who work at the same place.', 'zero-bs-crm' );
+					$state['add']         = __( 'Add organisation', 'zero-bs-crm' );
+				} elseif ( $organisation_type === 'domain' ) {
+					$state['title']       = __( 'No domains yet', 'zero-bs-crm' );
+					$state['description'] = __( 'Domains group the contacts who share a website.', 'zero-bs-crm' );
+					$state['add']         = __( 'Add domain', 'zero-bs-crm' );
+				}
+				break;
+
+			case 'quote':
+				$state = array(
+					'icon'        => 'page',
+					'title'       => __( 'No quotes yet', 'zero-bs-crm' ),
+					'description' => __( 'Send a contact a quote, and they can accept it online.', 'zero-bs-crm' ),
+					'add'         => __( 'Add quote', 'zero-bs-crm' ),
+					'more'        => 'https://kb.jetpackcrm.com/knowledge-base/how-do-i-create-a-quote/',
+				);
+				break;
+
+			case 'quotetemplate':
+				$state = array(
+					'icon'        => 'pages',
+					'title'       => __( 'No quote templates yet', 'zero-bs-crm' ),
+					'description' => __( 'Templates hold the wording you reuse, so a new quote starts mostly written.', 'zero-bs-crm' ),
+					'add'         => __( 'Add quote template', 'zero-bs-crm' ),
+					'more'        => $zbs->urls['kbquoteplaceholders'],
+				);
+				break;
+
+			case 'invoice':
+				$state = array(
+					'icon'        => 'receipt',
+					'title'       => __( 'No invoices yet', 'zero-bs-crm' ),
+					'description' => __( 'Bill your contacts and see what has been paid and what is overdue.', 'zero-bs-crm' ),
+					'add'         => __( 'Add invoice', 'zero-bs-crm' ),
+					'more'        => $zbs->urls['kbinvoicebuilder'],
+				);
+				break;
+
+			case 'transaction':
+				$state = array(
+					'icon'        => 'payment',
+					'title'       => __( 'No transactions yet', 'zero-bs-crm' ),
+					'description' => __( 'Transactions record the money your contacts pay you, from invoices, stores and anywhere else.', 'zero-bs-crm' ),
+					'add'         => __( 'Add transaction', 'zero-bs-crm' ),
+					'more'        => 'https://kb.jetpackcrm.com/knowledge-base/how-do-i-create-a-transaction/',
+				);
+				break;
+
+			case 'event':
+				$state = array(
+					'icon'        => 'scheduled',
+					'title'       => __( 'No tasks yet', 'zero-bs-crm' ),
+					'description' => __( 'Tasks keep track of calls, meetings and to-dos, with reminders if you want them.', 'zero-bs-crm' ),
+					'add'         => __( 'Add task', 'zero-bs-crm' ),
+					'more'        => $zbs->urls['kbcat_cal'],
+				);
+				break;
+
+			case 'form':
+				$state = array(
+					'icon'        => 'post-comments-form',
+					'title'       => __( 'No forms yet', 'zero-bs-crm' ),
+					'description' => __( 'Put a form on your site, and everyone who fills it in becomes a contact.', 'zero-bs-crm' ),
+					'add'         => __( 'Add form', 'zero-bs-crm' ),
+				);
+				break;
+
+			case 'segment':
+				$state = array(
+					'icon'        => 'funnel',
+					'title'       => __( 'No segments yet', 'zero-bs-crm' ),
+					'description' => __( 'Segments are saved groups of contacts, like every customer tagged VIP, that stay up to date.', 'zero-bs-crm' ),
+					'add'         => __( 'Add segment', 'zero-bs-crm' ),
+				);
+				break;
+
+			default:
+				$state = array(
+					/* translators: %s: The plural name of the object, e.g. "Tickets". */
+					'title' => sprintf( __( 'No %s yet', 'zero-bs-crm' ), $this->plural ),
+					/* translators: %s: The singular name of the object, e.g. "Ticket". */
+					'add'   => sprintf( __( 'Add %s', 'zero-bs-crm' ), $this->singular ),
+				);
+		}
+
+		// A secondary action goes first, so the primary one ends the row, as in @wordpress/ui.
+		$actions = array();
+		if ( isset( $state['secondary'] ) ) {
+			$actions[] = $state['secondary'];
+		} elseif ( isset( $state['more'] ) ) {
+			$actions[] = array(
+				'label'  => __( 'Learn more', 'zero-bs-crm' ),
+				'url'    => $state['more'],
+				'target' => '_blank',
+			);
+		}
+		$actions[] = array(
+			'label'   => $state['add'],
+			'url'     => $add_url,
+			'primary' => true,
+		);
+
+		return array(
+			'id'          => 'jpcrm-listview-empty',
+			'class'       => 'hidden',
+			'icon'        => $state['icon'] ?? '',
+			'title'       => $state['title'],
+			'description' => $state['description'] ?? '',
+			'actions'     => $actions,
+		);
+	}
+
+	/**
+	 * Draws the list view's toolbar: search, then the quick filter and tag filter.
+	 *
+	 * @param array $listview_filters The filters the list opened with.
 	 */
 	public function draw_listview_header( $listview_filters ) {
 		global $zbs;
