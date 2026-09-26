@@ -18,6 +18,9 @@
 @use "emerald/dropdown-buttons";
 @use "emerald/edit-page";
 @use "emerald/empty-state";
+
+// @wordpress/icons drawn over the old icon-font classes (generated: npm run build:icons)
+@use "wp-icons";
 @use "emerald/learn-menu";
 @use "emerald/listview";
 @use "emerald/listview-footer";
