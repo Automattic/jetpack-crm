@@ -19,6 +19,9 @@
 // Semantic UI buttons and inputs as WordPress component controls
 @use "semantic-ui-wp-controls";
 
+// Semantic UI message boxes as WordPress admin notices
+@use "semantic-ui-wp-notices";
+
 // Semantic UI's placeholder grey is under 2:1 on white. Selectors match its own
 // so these win by load order.
 .ui.input > input::placeholder,
