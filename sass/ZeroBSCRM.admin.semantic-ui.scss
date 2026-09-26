@@ -16,6 +16,15 @@
 // WH/MS semantic add ins/additions
 @use "semantic-ui-additions";
 
+// Semantic UI's placeholder grey is under 2:1 on white. Selectors match its own
+// so these win by load order.
+.ui.input > input::placeholder,
+.ui.form ::placeholder,
+.ui.default.dropdown:not(.button) > .text,
+.ui.dropdown:not(.button) > .default.text {
+	color: var(--wpds-color-foreground-content-neutral-weak);
+}
+
 // This Semantic UI bug messes with the email composer layout in Safari
 // https://github.com/Semantic-Org/Semantic-UI/issues/3919
 .ui.grid {

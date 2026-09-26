@@ -1,5 +1,4 @@
 @use "sass:math";
-@use "../wpds-tokens";
 
 $bar-pad-y: var(--wpds-dimension-padding-xl);
 $bar-pad-x: var(--wpds-dimension-padding-2xl);
@@ -52,7 +51,7 @@ $logo-row-height: 24px;
 				}
 
 				.jpcrm-header-logo__text {
-					font-family: -apple-system, system-ui, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+					font-family: var(--wpds-typography-font-family-body);
 					font-size: var(--wpds-typography-font-size-lg);
 					font-weight: 499;
 					line-height: var(--wpds-typography-line-height-lg);

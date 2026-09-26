@@ -22,13 +22,13 @@ wp_enqueue_script( 'jquery' );
 wp_enqueue_script( 'zbswelcomewizard', plugins_url( '/js/jpcrm-welcome-wizard' . wp_scripts_get_suffix() . '.js', ZBS_ROOTFILE ), array( 'jquery' ), $zbs::VERSION );
 
 // css
-wp_enqueue_style( 'zbswelcomeloadstyles', plugins_url( '/css/welcome-to-zbs/loadstyles' . wp_scripts_get_suffix() . '.css', ZBS_ROOTFILE ), array(), $zbs::VERSION );
-wp_enqueue_style( 'zbswelcomeopensans', plugins_url( '/css/welcome-to-zbs/opensans' . wp_scripts_get_suffix() . '.css', ZBS_ROOTFILE ), array(), $zbs::VERSION );
+jpcrm_register_wpds_tokens_style();
+wp_enqueue_style( 'zbswelcomeloadstyles', plugins_url( '/css/welcome-to-zbs/loadstyles' . wp_scripts_get_suffix() . '.css', ZBS_ROOTFILE ), array( 'jpcrm-wpds-tokens' ), $zbs::VERSION );
 wp_enqueue_style( 'zbswelcomeadmin', plugins_url( '/css/welcome-to-zbs/admin.min.css', ZBS_ROOTFILE ), array(), $zbs::VERSION );
 wp_enqueue_style( 'zbswelcomeexitform', plugins_url( '/css/welcome-to-zbs/zbs-exitform' . wp_scripts_get_suffix() . '.css', ZBS_ROOTFILE ), array(), $zbs::VERSION );
 wp_enqueue_style( 'zbswelcomeactivation', plugins_url( '/css/welcome-to-zbs/activation.min.css', ZBS_ROOTFILE ), array(), $zbs::VERSION );
-wp_enqueue_style( 'zbswelcomewizard', plugins_url( '/css/jpcrm-welcome-wizard' . wp_scripts_get_suffix() . '.css', ZBS_ROOTFILE ), array(), $zbs::VERSION );
-$style_handles = array( 'zbswelcomeloadstyles', 'zbswelcomeopensans', 'zbswelcomeadmin', 'zbswelcomeexitform', 'zbswelcomeactivation', 'zbswelcomewizard' );
+wp_enqueue_style( 'zbswelcomewizard', plugins_url( '/css/jpcrm-welcome-wizard' . wp_scripts_get_suffix() . '.css', ZBS_ROOTFILE ), array( 'jpcrm-wpds-tokens' ), $zbs::VERSION );
+$style_handles = array( 'zbswelcomeloadstyles', 'zbswelcomeadmin', 'zbswelcomeexitform', 'zbswelcomeactivation', 'zbswelcomewizard' );
 // phpcs:enable WordPress.WP.EnqueuedResourceParameters.NotInFooter
 
 global $zeroBSCRM_killDenied; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase

@@ -35,11 +35,11 @@
 
 .jpcrm-learn-page-title {
 	font-style: normal;
-	font-weight: 700;
-	font-size: 36px;
-	line-height: 40px;
+	font-weight: var(--wpds-typography-font-weight-emphasis);
+	font-size: var(--wpds-typography-font-size-xl);
+	line-height: var(--wpds-typography-line-height-xl);
 	font-family: var(--jpcrm-font-family-emerald);
-	color: var(--jp-black);
+	color: var(--wpds-color-foreground-content-neutral);
 	padding-right: 4px;
 
 	display: flex;

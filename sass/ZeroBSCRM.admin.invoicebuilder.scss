@@ -636,7 +636,7 @@
 		.zbs-row-actions {
 			cursor: pointer;
 			border: 1px solid #ccc;
-			color: #999;
+			color: var(--wpds-color-foreground-content-neutral-weak);
 			font-size: 13px;
 			font-weight: 100;
 			text-align: center;
