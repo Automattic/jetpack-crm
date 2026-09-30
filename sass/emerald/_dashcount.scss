@@ -72,3 +72,12 @@ jpcrm-dashcount {
 		}
 	}
 }
+
+// Phones: the dashboard's counts fill the width, two to a row, like the totals
+// strip above the contacts list.
+@media (max-width: 782px) {
+
+	jpcrm-dashcount:not(.jpcrm-listview-summary) {
+		grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+	}
+}

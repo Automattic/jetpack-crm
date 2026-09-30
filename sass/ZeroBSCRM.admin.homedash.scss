@@ -62,6 +62,18 @@ body ::-webkit-scrollbar-track {
 	}
 }
 
+// Two boxes side by side: the sales funnel and revenue chart, then recent
+// activity and the latest contacts.
+.jpcrm-dashboard-row {
+	display: flex;
+	max-width: 100%;
+
+	// Let the boxes shrink below their content's width, rather than widen the page.
+	> * {
+		min-width: 0;
+	}
+}
+
 #settings_dashboard_sales_funnel_display,
 #settings_dashboard_recent_activity_display {
 	flex: 0 1 30%;
@@ -70,6 +82,44 @@ body ::-webkit-scrollbar-track {
 #settings_dashboard_revenue_chart_display,
 #settings_dashboard_latest_contacts_display {
 	flex: 0 1 70%;
+}
+
+// Phones, at WordPress's mobile breakpoint: one box per row, full width.
+@media (max-width: 782px) {
+
+	.jpcrm-dashboard-row {
+		flex-direction: column;
+
+		> * {
+			flex: none;
+		}
+	}
+
+	// Title, date range and range buttons wrap instead of sitting on one line.
+	.jpcrm-dashcard-header {
+		flex-wrap: wrap;
+		gap: var(--wpds-dimension-gap-sm);
+
+		.jpcrm-date-range {
+			width: auto !important; // Set inline.
+			text-align: left !important;
+		}
+
+		.day-or-month {
+			display: flex;
+			flex-wrap: wrap;
+			gap: var(--wpds-dimension-gap-xs);
+
+			div.button {
+				margin: 0;
+			}
+		}
+	}
+
+	// Seven columns don't fit a phone, so the table scrolls inside its box.
+	#settings_dashboard_latest_contacts_display .jpcrm-listview-table-container {
+		overflow-x: auto;
+	}
 }
 
 #settings_dashboard_recent_activity_display {
