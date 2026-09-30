@@ -163,7 +163,7 @@ class Learn_Menu {
 			 *
 			 * Edit screens add their save button here.
 			 *
-			 * @since 7.0.0
+			 * @since $$next-version$$
 			 *
 			 * @param string $right_buttons Button markup.
 			 * @param string $slug          The page's learn menu slug.
