@@ -172,6 +172,11 @@
 
 	.zbs-objedit-actions-delete {
 		margin-top: 0.6em;
+
+		// Save moved to the page header, so Delete is usually first now.
+		&:first-child {
+			margin-top: 0;
+		}
 	}
 }
 
