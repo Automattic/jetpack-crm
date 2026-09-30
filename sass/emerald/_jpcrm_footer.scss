@@ -40,7 +40,7 @@ body.jpcrm-admin {
 	}
 
 	// Out of the flow, the footer needs room kept for it under the content: its
-	// own height plus a gap. It's two rows on phones (below).
+	// own height plus a gap.
 	&:has( #wpfooter .jetpack-footer__logo ) #wpbody-content {
 		padding-bottom: 96px;
 	}
@@ -70,29 +70,14 @@ body.jpcrm-admin {
 		}
 	}
 
-	// Phones: stack the logo and the Automattic by line onto their own left-aligned
-	// rows, matching the unified Jetpack footer. Unlike that footer we have no
-	// middle nav links to force the wrap, so we stack explicitly.
+	// Phones: keep the logo and the Automattic by line on one row, with tighter
+	// padding so both fit on the narrowest screens.
 	@media ( max-width: 480px ) {
 
 		#wpfooter:has( .jetpack-footer__logo ) {
-
-			#footer-left,
-			#footer-upgrade {
-				flex-basis: 100%;
-			}
-
-			#footer-upgrade {
-				margin-inline-start: 0;
-			}
-		}
-
-		&:has( #wpfooter .jetpack-footer__logo ) #wpbody-content {
-			padding-bottom: 140px;
-		}
-
-		&:has( .jpcrm-edit-save ):has( #wpfooter .jetpack-footer__logo ) #wpbody-content {
-			padding-bottom: 140px + $edit-save-bar-height;
+			flex-wrap: nowrap;
+			gap: var(--wpds-dimension-gap-md);
+			padding: var(--wpds-dimension-padding-lg);
 		}
 	}
 
