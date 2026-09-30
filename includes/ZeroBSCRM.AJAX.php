@@ -35,23 +35,6 @@ function jpcrm_hide_woo_promo() {
 	}
 }
 
-	add_action( 'wp_ajax_jpcrm_hide_track_notice', 'jpcrm_hide_track_notice' );
-function jpcrm_hide_track_notice() {
-	if ( current_user_can( 'activate_plugins' ) ) {
-		$option = update_option( 'jpcrm_hide_track_notice', 'hide', false );
-		wp_send_json_success( null, 200, JSON_UNESCAPED_SLASHES );
-	}
-}
-
-	add_action( 'wp_ajax_jpcrm_hide_feature_alert', 'jpcrm_hide_feature_alert' );
-function jpcrm_hide_feature_alert() {
-	if ( current_user_can( 'activate_plugins' ) && isset( $_POST['feature_alert'] ) ) {
-		$option = 'jpcrm_hide_' . sanitize_text_field( $_POST['feature_alert'] );
-		update_option( $option, true, false );
-		wp_send_json_success( null, 200, JSON_UNESCAPED_SLASHES );
-	}
-}
-
 	// AJAX email template population (as backup)
 	add_action( 'wp_ajax_zbs_create_email_templates', 'zbs_create_email_templates' );
 function zbs_create_email_templates() {
