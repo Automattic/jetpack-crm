@@ -982,8 +982,6 @@ class zeroBS__Metabox_CompanyActions extends zeroBS__Metabox {
 
 					<div class="zbs-company-actions-bottom zbs-objedit-actions-bottom">
 
-								<button  class="ui button black" type="button" id="zbs-edit-save"><?php esc_html_e( 'Update', 'zero-bs-crm' ); ?> <?php echo esc_html( $this->coOrgLabel ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase ?></button>
-
 					<?php
 
 						// delete?
@@ -999,19 +997,6 @@ class zeroBS__Metabox_CompanyActions extends zeroBS__Metabox {
 						<div class='clear'></div>
 
 					</div>
-				<?php
-
-			} else {
-
-				// NEW quote
-				?>
-
-					<div class="zbs-company-actions-bottom zbs-objedit-actions-bottom">
-						
-							<button class="ui button black" type="button" id="zbs-edit-save"><?php esc_html_e( 'Save', 'zero-bs-crm' ); ?> <?php echo esc_html( $this->coOrgLabel ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase ?></button>
-
-					</div>
-
 				<?php
 
 			}

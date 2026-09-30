@@ -361,8 +361,6 @@ class zeroBS__Metabox_TaskActions extends zeroBS__Metabox {
 
 					<div class="zbs-task-actions-bottom zbs-objedit-actions-bottom">
 
-							<button class="ui button black" type="button" id="zbs-edit-save"><?php esc_html_e( 'Update', 'zero-bs-crm' ); ?> <?php esc_html_e( 'Task', 'zero-bs-crm' ); ?></button>
-
 						<?php
 
 							// delete?
@@ -378,15 +376,6 @@ class zeroBS__Metabox_TaskActions extends zeroBS__Metabox {
 						<div class='clear'></div>
 
 					</div>
-				<?php
-
-			} else {
-
-					// NEW Task
-				?>
-
-						<button class="ui button black" type="button" id="zbs-edit-save"><?php esc_html_e( 'Save', 'zero-bs-crm' ); ?> <?php esc_html_e( 'Task', 'zero-bs-crm' ); ?></button>
-
 				<?php
 
 			}
@@ -795,9 +784,9 @@ function zeroBSCRM_task_ui_reminders( $taskObject = array(), $taskID = -1 ) {
 			// add admin cog (settings) for task notification template
 	if ( zeroBSCRM_isZBSAdminOrAdmin() ) {
 			$html .= sprintf(
-				'<a href="%s" class="button button-primary button-large" style="background-color:black;border-color:black;" title="%s" target="_blank"><i class="cogs icon"></i></a>',
+				'<a href="%1$s" class="button button-large" title="%2$s" aria-label="%2$s" target="_blank"><i class="cogs icon"></i></a>',
 				esc_url_raw( jpcrm_esc_link( 'zbs-email-templates' ) . '&zbs_template_id=' . ZBSEMAIL_TASK_NOTIFICATION ),
-				__( 'Admin: Notification Settings', 'zero-bs-crm' )
+				esc_attr__( 'Admin: Notification Settings', 'zero-bs-crm' )
 			);
 	}
 

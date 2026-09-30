@@ -41,6 +41,21 @@
 	}
 }
 
+// The header's actions sit together at the right edge: the title side takes the
+// spare width, and the right-hand buttons (Save, on edit screens) only their own.
+// Phones stack everything instead, below.
+@media (min-width: 769px) {
+
+	.jpcrm-learn-menu > .jpcrm-learn-menu-subdiv-75 {
+		flex-grow: 1;
+	}
+
+	.jpcrm-learn-menu > .jpcrm-learn-menu-subdiv-25 {
+		flex-basis: auto;
+		flex-grow: 0;
+	}
+}
+
 .jpcrm-learn-page-title {
 	font-style: normal;
 	font-weight: var(--wpds-typography-font-weight-emphasis);

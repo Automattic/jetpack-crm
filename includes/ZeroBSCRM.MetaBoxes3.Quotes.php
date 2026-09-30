@@ -319,7 +319,7 @@ class zeroBS__Metabox_Quote extends zeroBS__Metabox {
 												jQuery('#zbs-customer-title').prepend(html); */
 
 												// ALSO show in header bar, if so
-																var navButton = '<a target="_blank" style="margin-left:6px;" class="zbs-quote-quicknav-contact ui icon button black mini labeled" href="<?php echo jpcrm_esc_link( 'edit', -1, 'zerobs_customer', true ); ?>' + contactID + '"><i class="user icon"></i> ' + <?php echo wp_json_encode( __( 'Contact', 'zero-bs-crm' ), JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP ); ?> + '</a>';
+																var navButton = '<a target="_blank" style="margin-left:6px;" class="zbs-quote-quicknav-contact ui icon button mini labeled" href="<?php echo jpcrm_esc_link( 'edit', -1, 'zerobs_customer', true ); ?>' + contactID + '"><i class="user icon"></i> ' + <?php echo wp_json_encode( __( 'Contact', 'zero-bs-crm' ), JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP ); ?> + '</a>';
 												jQuery('#zbs-quote-learn-nav').append(navButton);
 
 												// bind
@@ -844,7 +844,7 @@ class zeroBS__Metabox_QuoteNextStep extends zeroBS__Metabox {
 										<h4><?php esc_html_e( 'Email to Contact', 'zero-bs-crm' ); ?>:</h4>
 										<!-- todo -->                                    
 										<p><input type="text" class="form-control" id="zbsQuoteBuilderEmailTo" value="<?php echo esc_attr( $contactEmail ); ?>" placeholder="<?php esc_attr_e( 'e.g. customer@yahoo.com', 'zero-bs-crm' ); ?>" data-quoteid="<?php echo esc_attr( $quoteID ); ?>" /></p>
-													<p><button type="button" id="zbsQuoteBuilderSendNotification" class="ui button black"><?php esc_html_e( 'Send Quote', 'zero-bs-crm' ); ?></button></p>
+													<p><button type="button" id="zbsQuoteBuilderSendNotification" class="ui button"><?php esc_html_e( 'Send Quote', 'zero-bs-crm' ); ?></button></p>
 										<p class="small" id="zbsQuoteBuilderEmailToErr" style="display:none"><?php esc_html_e( 'An Email Address to send to is required', 'zero-bs-crm' ); ?>!</p>
 									</div>
 											<?php
@@ -871,7 +871,7 @@ class zeroBS__Metabox_QuoteNextStep extends zeroBS__Metabox {
 												<div class="zbsEmailOrShare">
 												<h4><?php esc_html_e( 'Download PDF', 'zero-bs-crm' ); ?></h4>
 												<p><i class="file pdf outline icon red" style="font-size:30px;margin-top:10px;"></i></p>
-																<input type="button" name="jpcrm_quote_download_pdf" id="jpcrm_quote_download_pdf" class="ui button black" value="<?php esc_attr_e( 'Download PDF', 'zero-bs-crm' ); ?>" />
+																<input type="button" name="jpcrm_quote_download_pdf" id="jpcrm_quote_download_pdf" class="ui button" value="<?php esc_attr_e( 'Download PDF', 'zero-bs-crm' ); ?>" />
 											   
 												</div>
 												<script type="text/javascript">
@@ -1414,8 +1414,6 @@ class zeroBS__Metabox_QuoteActions extends zeroBS__Metabox {
 				?>
 					<div class="zbs-quote-actions-bottom zbs-objedit-actions-bottom">
 
-								<button class="ui button black" type="button" id="zbs-edit-save"><?php esc_html_e( 'Update', 'zero-bs-crm' ); ?> <?php esc_html_e( 'Quote', 'zero-bs-crm' ); ?></button>
-
 						<?php
 
 							// delete?
@@ -1431,15 +1429,6 @@ class zeroBS__Metabox_QuoteActions extends zeroBS__Metabox {
 						<div class='clear'></div>
 
 					</div>
-				<?php
-
-			} else {
-
-				// NEW quote
-				?>
-
-						<button class="ui button black" type="button" id="zbs-edit-save"><?php esc_html_e( 'Save', 'zero-bs-crm' ); ?> <?php esc_html_e( 'Quote', 'zero-bs-crm' ); ?></button>
-
 				<?php
 
 			}

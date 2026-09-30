@@ -349,7 +349,7 @@ function jpcrm_tasks_showContactLinkIf( contactID ) {
 
 			// ALSO show in header bar, if so
 			const navButton =
-				'<a target="_blank" style="margin-left:6px;" class="zbs-quicknav-contact ui icon button black mini labeled" href="' +
+				'<a target="_blank" style="margin-left:6px;" class="zbs-quicknav-contact ui icon button mini labeled" href="' +
 				window.zbsObjectViewLinkPrefixCustomer +
 				contactID +
 				'"><i class="user icon"></i> ' +
@@ -408,10 +408,10 @@ function jpcrm_tasks_showCompanyLinkIf( companyID ) {
 
 			// ALSO show in header bar, if so
 			const navButton =
-				'<a target="_blank" style="margin-left:6px;" class="zbs-quicknav-contact ui icon button black mini labeled" href="' +
+				'<a target="_blank" style="margin-left:6px;" class="zbs-quicknav-company ui icon button mini labeled" href="' +
 				window.zbsObjectViewLinkPrefixCompany +
 				companyID +
-				'"><i class="user icon"></i> ' +
+				'"><i class="building icon"></i> ' +
 				zeroBSCRMJS_editViewLang( 'company', 'Company' ) +
 				'</a>';
 			jQuery( '#jpcrm-task-learn-nav' ).append( navButton );

@@ -158,6 +158,18 @@ class Learn_Menu {
 				$learn_menu_settings = call_user_func( $learn_menu_settings['filter_function'], $learn_menu_settings );
 			}
 
+			/**
+			 * Filters the buttons at the right end of the page header.
+			 *
+			 * Edit screens add their save button here.
+			 *
+			 * @since $$next-version$$
+			 *
+			 * @param string $right_buttons Button markup.
+			 * @param string $slug          The page's learn menu slug.
+			 */
+			$learn_menu_settings['right_buttons'] = apply_filters( 'jpcrm_learn_menu_right_buttons', $learn_menu_settings['right_buttons'], $this->slug );
+
 			// render
 
 			// adapted from `zeroBSCRM_admin_subtop_menu()`

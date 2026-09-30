@@ -810,12 +810,6 @@ class zeroBS__Metabox_InvoiceActions extends zeroBS__Metabox {
 
 
 					<div class="zbs-invoice-actions-bottom zbs-objedit-actions-bottom">
-								<button class="ui button black" type="button" id="zbs-edit-save"><?php esc_html_e( 'Update', 'zero-bs-crm' ); ?> <?php esc_html_e( 'Invoice', 'zero-bs-crm' ); ?></button>
-					<?php
-
-						#} Quick ver of this: http://themeflection.com/replace-wordpress-submit-meta-box/
-
-					?>
 						<div id="zbs-invoice-actions-delete" class="zbs-objedit-actions-delete">
 						<?php
 						// for now just check if can modify invs, later better, granular perms.
@@ -852,13 +846,7 @@ class zeroBS__Metabox_InvoiceActions extends zeroBS__Metabox {
 
 				<?php do_action( 'zbs_invpro_itemlink' ); ?>
 
-							<button class="ui button black" type="button" id="zbs-edit-save"><?php esc_html_e( 'Save', 'zero-bs-crm' ); ?> <?php esc_html_e( 'Invoice', 'zero-bs-crm' ); ?></button>
-
 				<?php
-
-					#} If it's a new post
-
-					#} Gross hide :/
 
 			}
 

@@ -805,11 +805,8 @@ class zeroBS__Metabox_ContactActions extends zeroBS__Metabox {
 			<?php
 		}
 		?>
-			<div class="zbs-contact-actions-bottom zbs-objedit-actions-bottom">
-				<button class="jpcrm-button" type="button" id="zbs-edit-save"><?php $is_new_contact ? esc_html_e( 'Save', 'zero-bs-crm' ) : esc_html_e( 'Update', 'zero-bs-crm' ); ?> <?php esc_html_e( 'Contact', 'zero-bs-crm' ); ?></button>
-				<div class='clear'></div>
-			</div>
-			<?php
+		</div>
+		<?php
 	}
 
 	public function save_data( $contact_id, $contact ) {
@@ -1957,7 +1954,7 @@ class zeroBS__Metabox_ContactAKA extends zeroBS__Metabox {
 			</div><div id="zbs-aka-alias-input-wrap">
 				<input type="text" class="zbs-aka-alias-input" placeholder="<?php esc_attr_e( 'Add Alias.. e.g.', 'zero-bs-crm' ); ?> mike2@domain.com" />
 				<div class="ui pointing label" style="display:none;margin-bottom: 1em;margin-top: 0;" id="zbs-aka-alias-input-msg"><?php esc_html_e( 'Must be a valid email', 'zero-bs-crm' ); ?></div>
-						<button type="button" class="ui small black button primary" id="zbs-aka-alias-add"><?php esc_html_e( 'Add Alias', 'zero-bs-crm' ); ?></button>
+						<button type="button" class="ui small button" id="zbs-aka-alias-add"><?php esc_html_e( 'Add Alias', 'zero-bs-crm' ); ?></button>
 			</div>
 
 			<script type="text/javascript">

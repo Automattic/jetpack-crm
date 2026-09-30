@@ -867,8 +867,6 @@ class zeroBS__Metabox_FormActions extends zeroBS__Metabox {
 
 					<div class="zbs-form-actions-bottom zbs-objedit-actions-bottom">
 
-								<button class="ui button black" type="button" id="zbs-edit-save"><?php esc_html_e( 'Update', 'zero-bs-crm' ); ?> <?php esc_html_e( 'Form', 'zero-bs-crm' ); ?></button>
-
 					<?php
 
 						// delete?
@@ -884,19 +882,6 @@ class zeroBS__Metabox_FormActions extends zeroBS__Metabox {
 						<div class='clear'></div>
 
 					</div>
-				<?php
-
-			} else {
-
-				// NEW form
-				?>
-
-					<div class="zbs-form-actions-bottom zbs-objedit-actions-bottom">
-						
-								<button class="ui button black" type="button" id="zbs-edit-save"><?php esc_html_e( 'Save', 'zero-bs-crm' ); ?> <?php esc_html_e( 'Form', 'zero-bs-crm' ); ?></button>
-
-					</div>
-
 				<?php
 
 			}

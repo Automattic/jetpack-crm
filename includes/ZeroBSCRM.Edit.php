@@ -124,6 +124,28 @@ class zeroBSCRM_Edit {
 
 		// include any 'post learn menu' code
 		add_action( 'zerobscrm-subtop-menu', array( $this, 'post_learn_menu_output' ) );
+
+		// Save is the page header's primary action.
+		add_filter( 'jpcrm_learn_menu_right_buttons', array( $this, 'add_save_button_to_header' ) );
+	}
+
+	/**
+	 * Adds the save button to the end of the page header, as the screen's one
+	 * primary action, at the compact size of the header's other buttons. On
+	 * phones, CSS pins it to the bottom of the screen at full size.
+	 *
+	 * The ID is what the edit view's JS binds to, and what the permission and
+	 * missing-record checks hide.
+	 *
+	 * @param string $right_buttons The header's other buttons.
+	 * @return string
+	 */
+	public function add_save_button_to_header( $right_buttons ) {
+		if ( $this->isGhostRecord ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+			return $right_buttons;
+		}
+
+		return $right_buttons . '<div class="jpcrm-edit-save"><button class="jpcrm-button font-14px" type="button" id="zbs-edit-save">' . esc_html__( 'Save', 'zero-bs-crm' ) . '</button></div>';
 	}
 
 	// automatically, generically, loads the single obj
