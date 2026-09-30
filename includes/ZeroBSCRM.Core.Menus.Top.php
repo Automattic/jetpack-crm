@@ -111,6 +111,7 @@ function zeroBSCRM_show_pending_number( $menu ) {
 }
 
 // } This is NEW UI for the top menu. Helpful links in the top menu = Improved UI
+// phpcs:disable Squiz.Commenting.InlineComment.WrongStyle -- The ##WLREMOVE markers below are read by the white-label build.
 function zeroBSCRM_admin_top_menu( $branding = 'zero-bs-crm', $page = 'dash' ) {
 
 		// } restrict to ONLY Jetpack CRM pages - NOTE our EXTENSIONS will need to use the same
@@ -165,7 +166,7 @@ function zeroBSCRM_admin_top_menu( $branding = 'zero-bs-crm', $page = 'dash' ) {
 			$hiding_wp = (bool) get_user_meta( $uid, 'zbs-hide-wp-menus', true );
 
 			// } Other Prep
-			$currentUser = wp_get_current_user();
+			$current_user = wp_get_current_user();
 			$alsoCo      = ''; // } WH added to fix php warnings - what\s this?
 			$b2bMode     = zeroBSCRM_getSetting( 'companylevelcustomers' );
 
@@ -206,7 +207,7 @@ function zeroBSCRM_admin_top_menu( $branding = 'zero-bs-crm', $page = 'dash' ) {
 			<?php
 			$header_icon = '<img alt="" src="' . esc_url( jpcrm_get_logo( false ) ) . '" width="20" height="20" class="jpcrm-header-logo__icon" />';
 			##WLREMOVE
-			// Jetpack logo
+			// Jetpack logo.
 			$header_icon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="20" height="20" class="jpcrm-header-logo__icon" aria-hidden="true" focusable="false"><path fill="#069e08" d="M16,0C7.2,0,0,7.2,0,16s7.2,16,16,16s16-7.2,16-16S24.8,0,16,0z M15,19H7l8-16V19z M17,29V13h8L17,29z"/></svg>';
 			##/WLREMOVE
 			echo $header_icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Hardcoded HTML with pre-escaped attributes.
@@ -223,7 +224,7 @@ function zeroBSCRM_admin_top_menu( $branding = 'zero-bs-crm', $page = 'dash' ) {
 			</button>
 			<?php
 
-			do_action( 'zbs-crm-notify' );
+			do_action( 'zbs-crm-notify' ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores -- Existing hook; extensions use this name.
 			?>
 			<button type="button" class="jpcrm-top-menu__fullscreen" aria-pressed="<?php echo $hiding_wp ? 'true' : 'false'; ?>" title="<?php esc_attr_e( 'Toggle full screen', 'zero-bs-crm' ); ?>">
 				<i class="expand icon" aria-hidden="true"></i>
@@ -234,7 +235,7 @@ function zeroBSCRM_admin_top_menu( $branding = 'zero-bs-crm', $page = 'dash' ) {
 			<span class="text">
 			<?php
 			$uid = get_current_user_id();
-			echo jpcrm_get_avatar( $uid, 30 );
+			echo wp_kses_post( jpcrm_get_avatar( $uid, 30 ) );
 			?>
 			</span>
 			</div>
@@ -250,7 +251,7 @@ function zeroBSCRM_admin_top_menu( $branding = 'zero-bs-crm', $page = 'dash' ) {
 				'col3' => array(),
 			);
 
-			// if admin, settings + datatools
+			// Admins get settings and data tools.
 			if ( zeroBSCRM_isZBSAdminOrAdmin() ) {
 				$popout_menu['col1'][] = sprintf(
 					'<div class="jpcrm-user-menu-link"><a id="zbs-settings2-top-menu" href="%s" class="item"><i class="settings icon"></i> %s</a></div>',
@@ -274,7 +275,7 @@ function zeroBSCRM_admin_top_menu( $branding = 'zero-bs-crm', $page = 'dash' ) {
 				);
 			}
 
-			// if admin, system status + extensions
+			// Admins get the system assistant, emails, modules and extensions.
 			if ( zeroBSCRM_isZBSAdminOrAdmin() ) {
 				$popout_menu['col1'][] = sprintf(
 					'<div class="jpcrm-user-menu-link"><a class="item" href="%s"><i class="server icon" aria-hidden="true"></i> %s</a></div>',
@@ -301,7 +302,7 @@ function zeroBSCRM_admin_top_menu( $branding = 'zero-bs-crm', $page = 'dash' ) {
 
 			}
 
-			// remove the col if nothing in there
+			// Drop the column if nothing is in it.
 			if ( count( $popout_menu['col1'] ) === 0 ) {
 				unset( $popout_menu['col1'] );
 			}
@@ -327,14 +328,14 @@ function zeroBSCRM_admin_top_menu( $branding = 'zero-bs-crm', $page = 'dash' ) {
 					<div class="ui link list">
 					<?php
 					foreach ( $popout_menu['col1'] as $link ) {
-						echo $link; }
+						echo wp_kses_post( $link ); }
 					?>
 					</div>
 				</div>
 				<?php
 			}
 			##WLREMOVE
-			// no need for support column if white label
+			// No support column when white-labelled.
 			?>
 				<div class="column">
 					<h4 class="ui header"><?php esc_html_e( 'Support', 'zero-bs-crm' ); ?></h4>
@@ -352,7 +353,7 @@ function zeroBSCRM_admin_top_menu( $branding = 'zero-bs-crm', $page = 'dash' ) {
 							<a class="item" href="<?php echo esc_url( $zbs->urls['rateuswporg'] ); ?>"><i class="star icon" aria-hidden="true"></i> <?php esc_html_e( 'Leave a review', 'zero-bs-crm' ); ?></a>
 						</div>
 						<?php
-						// welcome tour and crm resources page for admins :)
+						// Welcome tour and CRM resources page for admins.
 						if ( zeroBSCRM_isZBSAdminOrAdmin() ) {
 							?>
 							<div class="jpcrm-user-menu-link">
@@ -370,7 +371,7 @@ function zeroBSCRM_admin_top_menu( $branding = 'zero-bs-crm', $page = 'dash' ) {
 				##/WLREMOVE
 				?>
 				<div class="column">
-					<h4 class="ui header"><?php echo esc_html( $currentUser->display_name ); ?></h4>
+					<h4 class="ui header"><?php echo esc_html( $current_user->display_name ); ?></h4>
 					<div class="ui link list">
 
 					<div class="jpcrm-user-menu-link">
@@ -379,10 +380,9 @@ function zeroBSCRM_admin_top_menu( $branding = 'zero-bs-crm', $page = 'dash' ) {
 
 					<?php
 					if ( zeroBSCRM_getSetting( 'feat_calendar' ) > 0 ) {
-						$cID = get_current_user_id();
 						?>
 					<div class="jpcrm-user-menu-link">
-						<a id="jpcrm-tasks-top-menu" href="<?php echo esc_url( zeroBSCRM_getAdminURL( $zbs->slugs['manage-tasks'] ) ); ?>&zbsowner=<?php echo esc_attr( $cID ); // phpcs:ignore ?>" class="item"><i class="icon tasks"></i> <?php esc_html_e( 'Your Tasks', 'zero-bs-crm' ); ?></a>
+						<a id="jpcrm-tasks-top-menu" href="<?php echo esc_url( zeroBSCRM_getAdminURL( $zbs->slugs['manage-tasks'] ) ); ?>&zbsowner=<?php echo esc_attr( $uid ); ?>" class="item"><i class="icon tasks"></i> <?php esc_html_e( 'Your Tasks', 'zero-bs-crm' ); ?></a>
 					</div>
 					<?php } ?>
 
@@ -626,7 +626,6 @@ function zeroBSCRM_admin_top_menu( $branding = 'zero-bs-crm', $page = 'dash' ) {
 				<?php
 			}
 
-
 			if ( count( $toolsMenu ) > 0 ) {
 				?>
 			<div class="ui simple dropdown item<?php zeroBS_menu_active_type( 'tools' ); ?>" id="top-bar-tools-menu" tabindex="0">
@@ -655,6 +654,8 @@ function zeroBSCRM_admin_top_menu( $branding = 'zero-bs-crm', $page = 'dash' ) {
 
 	}
 }
+
+// phpcs:enable Squiz.Commenting.InlineComment.WrongStyle
 
 // dumps out 'active' class if slug matches loaded page
 // note 'active' seems to open drop downs, so now using: current_menu_item
