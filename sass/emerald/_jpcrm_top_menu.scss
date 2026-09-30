@@ -88,8 +88,8 @@ $logo-row-height: 24px;
 		flex-wrap: nowrap;
 		gap: var(--wpds-dimension-gap-xs);
 
-		/* The avatar sits 14px in from the right edge, 10px into the bar's padding. */
-		margin-right: -10px;
+		/* The avatar sits 14px in from the right edge, inside the bar's padding. */
+		margin-right: calc(14px - #{$bar-pad-x});
 
 		/* The logo row is short; the controls centre on it rather than stretch it. */
 		> .item {
@@ -103,19 +103,17 @@ $logo-row-height: 24px;
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		width: 36px;
-		height: 36px;
-		margin: -6px 0; /* A comfortable target without growing the logo row. */
+		width: var(--wpds-dimension-size-md);
+		height: var(--wpds-dimension-size-md);
+
+		/* A comfortable target without growing the logo row. */
+		margin-block: calc((#{$logo-row-height} - var(--wpds-dimension-size-md)) / 2);
 		padding: 0;
 		border: 0;
-		border-radius: 2px;
+		border-radius: var(--wpds-border-radius-sm);
 		background: transparent;
 		color: var(--wpds-color-foreground-content-neutral);
 		cursor: pointer;
-
-		svg {
-			fill: currentColor;
-		}
 
 		i.icon {
 			margin: 0;
@@ -124,11 +122,11 @@ $logo-row-height: 24px;
 		&:hover,
 		&[aria-expanded="true"],
 		&[aria-pressed="true"] {
-			background-color: rgba(0, 0, 0, 0.05);
+			background-color: var(--wpds-color-background-interactive-neutral-weak-active);
 		}
 
 		&:focus-visible {
-			outline: 2px solid var(--wp-admin-theme-color, #3858e9);
+			outline: var(--wpds-border-width-focus) solid var(--wp-admin-theme-color);
 			outline-offset: 0;
 		}
 	}
@@ -149,12 +147,15 @@ $logo-row-height: 24px;
 		.item.current_menu_item {
 			border-bottom: 2px solid var(--wpds-color-stroke-interactive-neutral-strong);
 		}
+	}
 
-		/*
-		 * Semantic opens these on hover only. Opening them on focus as well lets
-		 * the keyboard reach every link in the nav.
-		 */
-		.ui.simple.dropdown:focus-within > .menu {
+	/*
+	 * Semantic opens these on hover only. Opening them on focus as well lets the
+	 * keyboard reach every link in the nav. Folded, sections open on their own.
+	 */
+	@container (width > 600px) {
+
+		menu-bar .ui.simple.dropdown:focus-within > .menu {
 			overflow: visible;
 			width: auto;
 			height: auto;
@@ -162,7 +163,7 @@ $logo-row-height: 24px;
 			opacity: 1;
 		}
 
-		.ui.simple.dropdown > .menu > .item:focus-within > .menu {
+		menu-bar .ui.simple.dropdown > .menu > .item:focus-within > .menu {
 			overflow: visible;
 			width: auto;
 			height: auto;
@@ -186,12 +187,6 @@ $logo-row-height: 24px;
 	}
 
 	#jpcrm-user-menu {
-
-		/* The script measures where the avatar's centre falls and points the arrow at it. */
-		&.bottom.right::before {
-			right: var(--jpcrm-user-menu-arrow-right, 1em);
-		}
-
 		width: 580px;
 		min-width: 0;
 		/* The bar's content width; the viewport overstates it beside the admin sidebar. */
@@ -199,6 +194,11 @@ $logo-row-height: 24px;
 
 		i.icon {
 			margin-right: 8px;
+		}
+
+		/* The script measures where the avatar's centre falls and points the arrow at it. */
+		&.bottom.right::before {
+			right: var(--jpcrm-user-menu-arrow-right, 1em);
 		}
 	}
 
@@ -275,22 +275,34 @@ $logo-row-height: 24px;
 			display: inline-flex;
 		}
 
+		/* Both rows run edge to edge, so their dividing lines do too. */
+		.jpcrm-top-menu__header,
+		menu-bar {
+			margin: 0 calc(-1 * #{$bar-pad-x});
+		}
+
 		/* With the tabs gone, the logo row carries the line that closes off the bar. */
 		.jpcrm-top-menu__header {
-			margin: 0 calc(-1 * #{$bar-pad-x});
 			padding: 0 $bar-pad-x var(--wpds-dimension-padding-xl);
 			border-bottom: var(--wpds-border-width-xs) solid var(--wpds-color-stroke-surface-neutral-weak);
 		}
 
 		menu-bar {
 			display: none;
-			margin: 0 calc(-1 * #{$bar-pad-x});
 			padding: var(--wpds-dimension-gap-xs) 0;
-			border-bottom: var(--wpds-border-width-xs) solid var(--wpds-color-stroke-surface-neutral-weak);
 		}
 
 		&.is-open menu-bar {
 			display: block;
+		}
+
+		/* Each section, and Companies nested under Contacts, is its label then its panel. */
+		menu-bar menu-section > .item,
+		menu-bar .ui.dropdown .menu > .ui.dropdown.item {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			justify-content: space-between;
 		}
 
 		menu-bar menu-section {
@@ -299,10 +311,6 @@ $logo-row-height: 24px;
 			flex-wrap: nowrap;
 
 			> .item {
-				display: flex;
-				flex-wrap: wrap;
-				align-items: center;
-				justify-content: space-between;
 				position: static;
 				min-height: 44px;
 				padding: 0 $bar-pad-x;
@@ -334,9 +342,7 @@ $logo-row-height: 24px;
 
 		/* Panels open below their label instead of floating over the page. */
 		menu-bar .ui.simple.dropdown .menu,
-		menu-bar .ui.simple.dropdown:focus-within > .menu,
 		menu-bar .ui.simple.dropdown:hover > .menu,
-		menu-bar .ui.simple.dropdown > .menu > .item:focus-within > .menu,
 		menu-bar .ui.simple.dropdown:hover > .menu > .item:hover > .menu {
 			display: none;
 			position: static;
@@ -363,20 +369,12 @@ $logo-row-height: 24px;
 			white-space: normal;
 		}
 
-		/* A section nested inside another (Companies under Contacts). */
-		menu-bar .ui.dropdown .menu > .ui.dropdown.item {
-			display: flex;
-			flex-wrap: wrap;
-			align-items: center;
-			justify-content: space-between;
-		}
-
 		/* The account menu's columns stack; side by side they overlap at this width. */
 		#jpcrm-user-menu .ui.grid > .column {
 			width: 100% !important;
 			padding-top: var(--wpds-dimension-padding-md);
 			padding-bottom: var(--wpds-dimension-padding-md);
-			box-shadow: none !important;
+			box-shadow: none;
 		}
 
 		#jpcrm-user-menu .ui.grid > .column + .column {

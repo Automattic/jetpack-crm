@@ -161,13 +161,8 @@ function zeroBSCRM_admin_top_menu( $branding = 'zero-bs-crm', $page = 'dash' ) {
 			<script type="text/javascript">var zbscrmjs_topMenuSecToken = <?php echo wp_json_encode( wp_create_nonce( 'zbscrmjs-ajax-nonce-topmenu' ), JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP ); ?>;</script>
 			<?php
 
-			// } Menu hidden? - maybe we can cookie this? for now this is slick.
-			$hiding_wp = get_user_meta( $uid, 'zbs-hide-wp-menus', true );
-			if ( $hiding_wp ) {
-				$admin_menu_state = 'menu-closed';
-			} else {
-				$admin_menu_state = 'menu-open';
-			}
+			// Full screen hides the WordPress menus; the choice is saved per user.
+			$hiding_wp = (bool) get_user_meta( $uid, 'zbs-hide-wp-menus', true );
 
 			// } Other Prep
 			$currentUser = wp_get_current_user();
@@ -223,14 +218,14 @@ function zeroBSCRM_admin_top_menu( $branding = 'zero-bs-crm', $page = 'dash' ) {
 
 		<menu-section class="jpcrm-top-menu__controls">
 			<button type="button" class="jpcrm-top-menu__toggle" aria-expanded="false" aria-controls="jpcrm-top-menu-nav">
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="M5 5v1.5h14V5H5zm0 7.8h14v-1.5H5v1.5zM5 19h14v-1.5H5V19z" /></svg>
+				<?php echo jpcrm_wp_icon_svg( 'menu' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Hardcoded SVG. ?>
 				<span class="screen-reader-text"><?php esc_html_e( 'CRM menu', 'zero-bs-crm' ); ?></span>
 			</button>
 			<?php
 
 			do_action( 'zbs-crm-notify' );
 			?>
-			<button type="button" class="jpcrm-top-menu__fullscreen <?php echo esc_attr( $admin_menu_state ); ?>" aria-pressed="<?php echo 'menu-closed' === $admin_menu_state ? 'true' : 'false'; ?>" title="<?php esc_attr_e( 'Toggle full screen', 'zero-bs-crm' ); ?>">
+			<button type="button" class="jpcrm-top-menu__fullscreen" aria-pressed="<?php echo $hiding_wp ? 'true' : 'false'; ?>" title="<?php esc_attr_e( 'Toggle full screen', 'zero-bs-crm' ); ?>">
 				<i class="expand icon" aria-hidden="true"></i>
 				<span class="screen-reader-text"><?php esc_html_e( 'Full screen', 'zero-bs-crm' ); ?></span>
 			</button>
@@ -417,7 +412,7 @@ function zeroBSCRM_admin_top_menu( $branding = 'zero-bs-crm', $page = 'dash' ) {
 
 			<menu-section>
 			<a class="item<?php esc_attr( zeroBS_menu_active( $zbs->slugs['dash'] ) ); ?>" href="<?php echo esc_url( zeroBSCRM_getAdminURL( $zbs->slugs['dash'] ) ); ?>"><?php esc_html_e( 'Dashboard', 'zero-bs-crm' ); ?></a>
-			<div class="ui simple dropdown item select<?php esc_attr( zeroBS_menu_active_type( 'contact' ) ); ?>" id="zbs-contacts-topmenu">
+			<div class="ui simple dropdown item select<?php esc_attr( zeroBS_menu_active_type( 'contact' ) ); ?>" id="zbs-contacts-topmenu" tabindex="0">
 				<span class="text"><?php esc_html_e( 'Contacts', 'zero-bs-crm' ); ?></span>
 				<i class="dropdown icon"></i>
 				<div class="menu ui">
@@ -439,7 +434,7 @@ function zeroBSCRM_admin_top_menu( $branding = 'zero-bs-crm', $page = 'dash' ) {
 
 					<div class="ui divider"></div>
 
-					<div class="ui simple dropdown item " id="zbs-companies-topmenu">
+					<div class="ui simple dropdown item " id="zbs-companies-topmenu" tabindex="0">
 						<?php echo esc_html( jpcrm_label_company( true ) ); ?><i class="dropdown icon zbs-subsub-ico"></i>
 						<div class="menu ui">
 							<?php
@@ -505,7 +500,7 @@ function zeroBSCRM_admin_top_menu( $branding = 'zero-bs-crm', $page = 'dash' ) {
 			<?php
 			if ( zeroBSCRM_permsViewQuotes() && zeroBSCRM_getSetting( 'feat_quotes' ) > 0 ) {
 				?>
-			<div class="ui simple dropdown item select<?php zeroBS_menu_active_type( 'quote' ); ?>" id="zbs-quotes-topmenu">
+			<div class="ui simple dropdown item select<?php zeroBS_menu_active_type( 'quote' ); ?>" id="zbs-quotes-topmenu" tabindex="0">
 				<span class="text"><?php esc_html_e( 'Quotes', 'zero-bs-crm' ); ?></span>
 				<i class="dropdown icon"></i>
 				<div class="menu ui">
@@ -545,7 +540,7 @@ function zeroBSCRM_admin_top_menu( $branding = 'zero-bs-crm', $page = 'dash' ) {
 			<?php } ?>
 
 			<?php if ( zeroBSCRM_permsViewInvoices() && zeroBSCRM_getSetting( 'feat_invs' ) > 0 ) { ?>
-			<div class="ui simple dropdown item select<?php zeroBS_menu_active_type( 'invoice' ); ?>" id="zbs-invoices-topmenu">
+			<div class="ui simple dropdown item select<?php zeroBS_menu_active_type( 'invoice' ); ?>" id="zbs-invoices-topmenu" tabindex="0">
 				<span class="text"><?php esc_html_e( 'Invoices', 'zero-bs-crm' ); ?></span>
 				<i class="dropdown icon"></i>
 				<div class="menu ui">
@@ -586,7 +581,7 @@ function zeroBSCRM_admin_top_menu( $branding = 'zero-bs-crm', $page = 'dash' ) {
 			if ( zeroBSCRM_permsViewTransactions() && zeroBSCRM_getSetting( 'feat_transactions' ) > 0 ) {
 				$transactions_menu = array();
 				?>
-			<div class="ui simple dropdown item select<?php zeroBS_menu_active_type( 'transaction' ); ?>" id="zbs-transactions-topmenu">
+			<div class="ui simple dropdown item select<?php zeroBS_menu_active_type( 'transaction' ); ?>" id="zbs-transactions-topmenu" tabindex="0">
 				<span class="text"><?php esc_html_e( 'Transactions', 'zero-bs-crm' ); ?></span>
 				<i class="dropdown icon"></i>
 				<div class="menu ui">
@@ -631,11 +626,10 @@ function zeroBSCRM_admin_top_menu( $branding = 'zero-bs-crm', $page = 'dash' ) {
 				<?php
 			}
 
-			// tools menu added to mobile menu above, so collated at top now ^^
 
 			if ( count( $toolsMenu ) > 0 ) {
 				?>
-			<div class="ui simple dropdown item<?php zeroBS_menu_active_type( 'tools' ); ?>" id="top-bar-tools-menu">
+			<div class="ui simple dropdown item<?php zeroBS_menu_active_type( 'tools' ); ?>" id="top-bar-tools-menu" tabindex="0">
 			<span class="text"><?php esc_html_e( 'Tools', 'zero-bs-crm' ); ?></span>
 			<i class="dropdown icon"></i>
 			<div class="menu ui">

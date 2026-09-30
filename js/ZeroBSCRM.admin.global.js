@@ -201,7 +201,7 @@ function zbscrm_JS_adminMenuDropdown() {
 		// if calypso, loading on an embed page, already full screen, need to run this to re-adjust/hide:
 		setTimeout( function () {
 			const $fullscreenToggle = jQuery( '#jpcrm-top-menu .jpcrm-top-menu__fullscreen' );
-			if ( $fullscreenToggle.length && ! $fullscreenToggle.hasClass( 'menu-open' ) ) {
+			if ( $fullscreenToggle.attr( 'aria-pressed' ) === 'true' ) {
 				zbscrm_JS_fullscreenModeOn( $fullscreenToggle );
 			}
 		}, 0 );
@@ -213,7 +213,7 @@ function zbscrm_JS_adminMenuDropdown() {
 		.on( 'click', function () {
 			if ( ! window.zbscrmjs_adminMenuBlocker ) {
 				window.zbscrmjs_adminMenuBlocker = true;
-				if ( jQuery( this ).hasClass( 'menu-open' ) ) {
+				if ( jQuery( this ).attr( 'aria-pressed' ) !== 'true' ) {
 					// go fullscreen
 					zbscrm_JS_fullscreenModeOn( this );
 				} else {
@@ -232,7 +232,7 @@ function zbscrm_JS_fullscreenModeOn( wrapperElement ) {
 	// adjust classes & hide menu bar etc.
 	// any work here, take account of calypsoify results
 	jQuery( 'body' ).addClass( 'zbs-fullscreen' );
-	jQuery( wrapperElement ).removeClass( 'menu-open' ).attr( 'aria-pressed', 'true' );
+	jQuery( wrapperElement ).attr( 'aria-pressed', 'true' );
 	jQuery( '#wpadminbar, #adminmenuback, #adminmenuwrap, #calypso-sidebar-header' ).hide();
 
 	// if we're in calypso, also adjust this:
@@ -276,7 +276,7 @@ function zbscrm_JS_fullscreenModeOff( wrapperElement ) {
 	// adjust classes & show menu bar etc.
 	// any work here, take account of calypsoify results
 	jQuery( 'body' ).removeClass( 'zbs-fullscreen' );
-	jQuery( wrapperElement ).addClass( 'menu-open' ).attr( 'aria-pressed', 'false' );
+	jQuery( wrapperElement ).attr( 'aria-pressed', 'false' );
 	jQuery( '#wpadminbar, #adminmenuback, #adminmenuwrap, #calypso-sidebar-header' ).show();
 
 	// if we're in calypso, also adjust this:
@@ -324,21 +324,23 @@ function zbscrm_JS_initMenuPopups() {
 
 		$userMenuItem.popup( {
 			popup: jQuery( '#jpcrm-user-menu' ),
-			position: 'bottom center',
+			// The avatar sits at the bar's right edge, so the menu hangs from there
+			// and the CSS points its arrow at the avatar.
+			position: 'bottom right',
 			hoverable: canHover,
 			on: canHover ? 'hover' : 'click',
 			// Stacked on a phone the menu is taller than the screen, and without
 			// this Semantic declines to show a popup that doesn't fit.
 			lastResort: 'bottom right',
-			// Point the arrow at the middle of the avatar; Semantic pins it 1em in.
+			// Point the arrow at the middle of the avatar. Semantic pins it 1em in,
+			// and where the popup's edge lands against the avatar varies by a few px.
 			onShow: function () {
-				const popup = document.getElementById( 'jpcrm-user-menu' );
+				const popup = this.get( 0 );
 				window.requestAnimationFrame( function () {
 					const avatar = $userMenuItem.find( 'img' ).get( 0 ) || $userMenuItem.get( 0 );
-					const popupRect = popup.getBoundingClientRect();
 					const avatarRect = avatar.getBoundingClientRect();
 					const arrowWidth = parseFloat( window.getComputedStyle( popup, '::before' ).width ) || 0;
-					const right = popupRect.right - ( avatarRect.left + avatarRect.width / 2 ) - arrowWidth / 2;
+					const right = popup.getBoundingClientRect().right - ( avatarRect.left + avatarRect.width / 2 ) - arrowWidth / 2;
 					popup.style.setProperty( '--jpcrm-user-menu-arrow-right', right + 'px' );
 				} );
 			},
@@ -386,11 +388,6 @@ function jpcrm_js_init_top_menu_toggle() {
 		section.setAttribute( 'aria-expanded', expanded ? 'true' : 'false' );
 	};
 
-	// The section labels are plain text, so make them reachable by keyboard.
-	nav.querySelectorAll( '.ui.dropdown.item' ).forEach( section => {
-		section.setAttribute( 'tabindex', '0' );
-	} );
-
 	toggle.addEventListener( 'click', () => {
 		setOpen( ! bar.classList.contains( 'is-open' ) );
 	} );
@@ -400,12 +397,12 @@ function jpcrm_js_init_top_menu_toggle() {
 	nav.addEventListener(
 		'click',
 		event => {
-			if ( ! isFolded() || event.target.closest( 'a' ) ) {
+			if ( event.target.closest( 'a' ) ) {
 				return;
 			}
 			const section = event.target.closest( '.ui.dropdown.item' );
 			const panel = event.target.closest( '.menu' );
-			if ( ! section || ( panel && section.contains( panel ) ) ) {
+			if ( ! section || ( panel && section.contains( panel ) ) || ! isFolded() ) {
 				return;
 			}
 			event.preventDefault();
@@ -416,10 +413,11 @@ function jpcrm_js_init_top_menu_toggle() {
 	);
 
 	nav.addEventListener( 'keydown', event => {
-		if ( ! isFolded() ) {
-			return;
-		}
-		if ( ( event.key === 'Enter' || event.key === ' ' ) && event.target.matches( '.ui.dropdown.item' ) ) {
+		if (
+			( event.key === 'Enter' || event.key === ' ' ) &&
+			event.target.matches( '.ui.dropdown.item' ) &&
+			isFolded()
+		) {
 			event.preventDefault();
 			toggleSection( event.target );
 		}

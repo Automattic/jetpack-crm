@@ -99,6 +99,7 @@ export default {
 	link: [ 'i.linkify.icon', 'i.chain.icon' ],
 	'link-off': [ 'i.stop.icon' ],
 	'map-marker': [ 'i.map.marker.icon' ],
+	menu: [],
 	mobile: [ 'i.mobile.icon' ],
 	'not-allowed': [ 'i.ban.icon', 'i.bell.slash.icon', '.fa.fa-ban' ],
 	page: [
