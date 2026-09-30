@@ -427,8 +427,7 @@ function zeroBSCRMJS_drawListView( reset_pagination, update_url ) {
 		history.replaceState( null, null, jpcrm_listview_generate_current_filter_url() );
 	}
 
-	// move this, if it's present (if was 0 results it'll be in the table, otherwise, wont be anyhow :)
-	jQuery( '#zbsNoResults' ).addClass( 'hidden' ).appendTo( '#zbs-list-warnings-wrap' );
+	jpcrm_listview_toggle_empty_state( false );
 
 	// put blocker up
 	window.zbsDrawListViewBlocker = true;
@@ -474,18 +473,8 @@ function zeroBSCRMJS_drawListView( reset_pagination, update_url ) {
 						// add to html
 						listViewHTML += zeroBSCRMJS_listViewLine( ele );
 					} );
-				} else if ( jQuery( '#zbsNoResults' ).length ) {
-					// no lines, move this ui msg into a blank row col
-					// extra column due to checkbox
-					listViewHTML +=
-						'<tr><td colspan="' +
-						( window.zbsListViewParams.columns.length + 1 ) +
-						'" id="zbs-no-results-wrap">';
-
-					// to be fired after setTimeout jQuery('#zbsNoResults').appendTo('#zbs-no-results-wrap');
+				} else {
 					postHTML.nores = true;
-
-					listViewHTML += '</td></tr>';
 				}
 
 				listViewHTML += '</tbody>';
@@ -502,10 +491,6 @@ function zeroBSCRMJS_drawListView( reset_pagination, update_url ) {
 				// update pagination
 				jpcrm_update_listview_pagination();
 
-				// empty result set.
-				if ( postHTML.nores ) {
-					jQuery( '#zbsNoResults' ).appendTo( '#zbs-no-results-wrap' ).removeClass( 'hidden' );
-				}
 
 				// bind any post-render (e.g. bulk action)
 				zeroBSCRMJS_listViewBinds();
@@ -516,9 +501,10 @@ function zeroBSCRMJS_drawListView( reset_pagination, update_url ) {
 				window.zbsDrawListViewBlocker = false;
 
 				jQuery( '#zbsCantLoadData' ).hide();
-				jQuery( '.jpcrm-listview-table-container' ).show();
-				jQuery( 'jpcrm-listview-footer' ).show();
+				jQuery( '.jpcrm-listview-table-container' ).toggle( ! postHTML.nores );
+				jQuery( 'jpcrm-listview-footer' ).toggle( ! postHTML.nores );
 				jQuery( 'jpcrm-dashcount' ).filter( ':parent' ).show();
+				jpcrm_listview_toggle_empty_state( postHTML.nores );
 			},
 			function () {
 				// err callback? show msg (prefilled by php)
@@ -536,6 +522,36 @@ function zeroBSCRMJS_drawListView( reset_pagination, update_url ) {
 			}
 		);
 	}
+}
+
+/**
+ * Whether a search, tag or quick filter is narrowing the list.
+ *
+ * @return {boolean} True when any filter has a value.
+ */
+function jpcrm_listview_has_filters() {
+	const filters = window.zbsListViewParams.filters || {};
+
+	return Object.values( filters ).some( value =>
+		Array.isArray( value ) ? value.length > 0 : Boolean( value )
+	);
+}
+
+/**
+ * Shows the right empty state when the list has no rows, or hides both.
+ *
+ * With filters on, "No results" shows under the toolbar so the filters can be
+ * changed. Without them, nothing has been added yet: the first-run empty state
+ * shows, and the toolbar goes, since there's nothing to search.
+ *
+ * @param {boolean} isEmpty - Whether the list came back with no rows.
+ */
+function jpcrm_listview_toggle_empty_state( isEmpty ) {
+	const filtered = jpcrm_listview_has_filters();
+
+	jQuery( '#jpcrm-listview-empty' ).toggleClass( 'hidden', ! isEmpty || filtered );
+	jQuery( '#zbsNoResults' ).toggleClass( 'hidden', ! isEmpty || ! filtered );
+	jQuery( 'jpcrm-listview-header' ).toggle( ! isEmpty || filtered );
 }
 
 function jpcrm_update_listview_counts() {
@@ -5629,6 +5645,7 @@ function jpcrm_change_sort() {
 if ( typeof module !== 'undefined' ) {
 	module.exports = {
 		zeroBSCRMJS_initListView,
+		jpcrm_listview_has_filters,
 		jpcrm_listview_label_cells,
 		jpcrm_listview_generate_current_filter_url,
 		zeroBSCRMJS_updateListViewColumnsVar,
