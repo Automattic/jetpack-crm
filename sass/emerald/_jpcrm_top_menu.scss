@@ -100,8 +100,9 @@ $logo-row-height: 24px;
 				}
 			}
 
-			#zbs-contacts-topmenu {
-				min-width: 114px;
+			// The caret sits right after its label. Semantic UI puts 1em between them.
+			.ui.dropdown > .dropdown.icon {
+				margin-left: 0;
 			}
 
 			#jpcrm-user-menu-item {
