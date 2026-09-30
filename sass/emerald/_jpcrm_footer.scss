@@ -1,9 +1,21 @@
+// Height of the Save bar pinned to the bottom of edit screens on phones.
+$edit-save-bar-height: 65px;
+
 body.jpcrm-admin {
 
 	// Only restyle the footer when our branded footer content is present. When the
 	// "powered by" setting is off (or under white label) #wpfooter is left empty and
 	// keeps its default WordPress appearance.
 	#wpfooter:has( .jetpack-footer__logo ) {
+		// Pinned to the bottom of the page like Jetpack's footer: at the bottom of
+		// the screen on short pages, after the content on long ones. This is core's
+		// own footer positioning (#wpwrap is at least the screen's height), which
+		// _wp-semantic-fixes.scss turns off for every CRM page.
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		margin-top: 0;
 		align-items: center;
 		background-color: var(--wpds-color-background-surface-neutral);
 		border-top: var(--wpds-border-width-xs) solid var(--wpds-color-stroke-surface-neutral-weak);
@@ -13,6 +25,16 @@ body.jpcrm-admin {
 		font-size: var(--wpds-typography-font-size-md);
 		gap: var(--wpds-dimension-gap-xl);
 		padding: var(--wpds-dimension-padding-xl) var(--wpds-dimension-padding-2xl);
+
+		// Core's <p> wrappers hold the logo and by line as inline boxes on a 20px
+		// text line, which sits them above the middle. Center them as flex items.
+		#footer-left,
+		#footer-upgrade {
+			display: flex;
+			align-items: center;
+			margin: 0;
+			line-height: 1;
+		}
 
 		// Wide footer: single row, Automattic by line pushed to the far right.
 		#footer-upgrade {
@@ -27,6 +49,12 @@ body.jpcrm-admin {
 		}
 	}
 
+	// Out of the flow, the footer needs room kept for it under the content: its
+	// own height plus a gap.
+	&:has( #wpfooter .jetpack-footer__logo ) #wpbody-content {
+		padding-bottom: 96px;
+	}
+
 	// Below 782px WordPress core hides #wpfooter (common.css), but the base rule
 	// above keeps it shown — specificity (1,2,1) vs core's (1,0,0), and no media
 	// query — which is why these mobile rules are reachable at all. Core's
@@ -37,23 +65,29 @@ body.jpcrm-admin {
 		#wpfooter:has( .jetpack-footer__logo ) {
 			margin: 0;
 		}
+
+		// Edit screens pin their Save bar to the bottom of the screen here
+		// (_edit-page.scss), so the footer sits just above it rather than under it.
+		&:has( .jpcrm-edit-save ) {
+
+			#wpfooter:has( .jetpack-footer__logo ) {
+				bottom: $edit-save-bar-height;
+			}
+
+			&:has( #wpfooter .jetpack-footer__logo ) #wpbody-content {
+				padding-bottom: 96px + $edit-save-bar-height;
+			}
+		}
 	}
 
-	// Phones: stack the logo and the Automattic by line onto their own left-aligned
-	// rows, matching the unified Jetpack footer. Unlike that footer we have no
-	// middle nav links to force the wrap, so we stack explicitly.
+	// Phones: keep the logo and the Automattic by line on one row, with tighter
+	// padding so both fit on the narrowest screens.
 	@media ( max-width: 480px ) {
 
 		#wpfooter:has( .jetpack-footer__logo ) {
-
-			#footer-left,
-			#footer-upgrade {
-				flex-basis: 100%;
-			}
-
-			#footer-upgrade {
-				margin-inline-start: 0;
-			}
+			flex-wrap: nowrap;
+			gap: var(--wpds-dimension-gap-md);
+			padding: var(--wpds-dimension-padding-lg);
 		}
 	}
 

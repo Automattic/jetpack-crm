@@ -20,8 +20,6 @@ jpcrm-dashcount {
 			display: block;
 			height: auto;
 			padding: var(--wpds-dimension-padding-lg);
-			border: var(--wpds-border-width-xs) solid var(--wpds-color-stroke-surface-neutral);
-			border-radius: var(--wpds-border-radius-lg);
 
 			h3 {
 				position: static;
@@ -48,6 +46,9 @@ jpcrm-dashcount {
 		position: relative;
 		padding: 15px;
 		background-color: var(--jp-white);
+		// Outlined like the totals strip, since the page behind is white too.
+		border: var(--wpds-border-width-xs) solid var(--wpds-color-stroke-surface-neutral);
+		border-radius: var(--wpds-border-radius-lg);
 		height: 120px;
 
 		h3 {
