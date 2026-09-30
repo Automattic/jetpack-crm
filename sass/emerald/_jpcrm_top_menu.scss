@@ -145,6 +145,32 @@ $logo-row-height: 24px;
 		transition: color 0.1s;
 	}
 
+	/*
+	 * Both icons draw a 21px glyph from ::before inside a 14px line box, and the
+	 * bell's front-end styles add a top margin, so they sat low. As flex boxes
+	 * with no offsets they centre on the logo row like the avatar and menu button.
+	 */
+	#notty,
+	#notifymebell {
+		display: flex;
+		align-items: center;
+	}
+
+	#notty .fa-bell,
+	.jpcrm-top-menu__fullscreen i.icon {
+		display: flex;
+		height: auto;
+		margin: 0;
+		padding-top: 0;
+		padding-bottom: 0;
+		line-height: 1;
+
+		&::before {
+			margin: 0;
+			vertical-align: top;
+		}
+	}
+
 	#notty:hover .fa-bell,
 	#notty:focus-visible .fa-bell,
 	.jpcrm-top-menu__fullscreen:hover,
