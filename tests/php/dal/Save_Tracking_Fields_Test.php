@@ -12,8 +12,9 @@ use PHPUnit\Framework\Attributes\TestDox;
 /**
  * The quote and form editors send only the fields they show. An update writes
  * every column, so the ones they don't send (when a quote was accepted and by
- * whom, its public link hash and view count, a form's views and conversions)
- * were written back as blanks every time someone clicked "Save".
+ * whom, its view count, a form's views and conversions) were written back as
+ * blanks every time someone clicked "Save". The quote's link hash is kept the
+ * same way, though the editor happens to send it.
  */
 class Save_Tracking_Fields_Test extends JPCRM_Base_Integration_TestCase {
 
