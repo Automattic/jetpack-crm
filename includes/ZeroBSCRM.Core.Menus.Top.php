@@ -207,23 +207,18 @@ function zeroBSCRM_admin_top_menu( $branding = 'zero-bs-crm', $page = 'dash' ) {
 
 	<div id="jpcrm-top-menu">
 		<div class="jpcrm-top-menu__header">
-		<div class="logo-cube <?php echo esc_attr( $admin_menu_state ); ?>">
-			<div class="cube-side side1">
-				<?php
-				$header_icon = '<img alt="" src="' . esc_url( jpcrm_get_logo( false ) ) . '" width="20" height="20" class="jpcrm-header-logo__icon" />';
-				##WLREMOVE
-				// Jetpack logo
-				$header_icon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="20" height="20" class="jpcrm-header-logo__icon" aria-hidden="true" focusable="false"><path fill="#069e08" d="M16,0C7.2,0,0,7.2,0,16s7.2,16,16,16s16-7.2,16-16S24.8,0,16,0z M15,19H7l8-16V19z M17,29V13h8L17,29z"/></svg>';
-				##/WLREMOVE
-				echo $header_icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Hardcoded HTML with pre-escaped attributes.
-				?>
-				<?php ##WLREMOVE ?>
-				<span class="jpcrm-header-logo__text">CRM</span>
-				<?php ##/WLREMOVE ?>
-			</div>
-			<div class="cube-side side2">
-				<i class="expand icon jpcrm-fullscreen-toggle" title="<?php esc_attr_e( 'Toggle full screen', 'zero-bs-crm' ); ?>"></i>
-			</div>
+		<div class="jpcrm-header-logo">
+			<?php
+			$header_icon = '<img alt="" src="' . esc_url( jpcrm_get_logo( false ) ) . '" width="20" height="20" class="jpcrm-header-logo__icon" />';
+			##WLREMOVE
+			// Jetpack logo
+			$header_icon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="20" height="20" class="jpcrm-header-logo__icon" aria-hidden="true" focusable="false"><path fill="#069e08" d="M16,0C7.2,0,0,7.2,0,16s7.2,16,16,16s16-7.2,16-16S24.8,0,16,0z M15,19H7l8-16V19z M17,29V13h8L17,29z"/></svg>';
+			##/WLREMOVE
+			echo $header_icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Hardcoded HTML with pre-escaped attributes.
+			?>
+			<?php ##WLREMOVE ?>
+			<span class="jpcrm-header-logo__text">CRM</span>
+			<?php ##/WLREMOVE ?>
 		</div>
 
 		<menu-section class="jpcrm-top-menu__controls">
@@ -235,6 +230,10 @@ function zeroBSCRM_admin_top_menu( $branding = 'zero-bs-crm', $page = 'dash' ) {
 
 			do_action( 'zbs-crm-notify' );
 			?>
+			<button type="button" class="jpcrm-top-menu__fullscreen <?php echo esc_attr( $admin_menu_state ); ?>" aria-pressed="<?php echo 'menu-closed' === $admin_menu_state ? 'true' : 'false'; ?>" title="<?php esc_attr_e( 'Toggle full screen', 'zero-bs-crm' ); ?>">
+				<i class="expand icon" aria-hidden="true"></i>
+				<span class="screen-reader-text"><?php esc_html_e( 'Full screen', 'zero-bs-crm' ); ?></span>
+			</button>
 
 		<div class="ui simple dropdown item" id="jpcrm-user-menu-item" tabindex="0" role="button" aria-haspopup="true" aria-controls="jpcrm-user-menu" aria-label="<?php esc_attr_e( 'Account menu', 'zero-bs-crm' ); ?>">
 			<span class="text">

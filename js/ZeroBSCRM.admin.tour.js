@@ -15,8 +15,8 @@ const zbsTour = {
 		{
 			title: window.zbs_tour.lang.step1.title,
 			content: window.zbs_tour.lang.step1.content,
-			target: '.logo-cube',
-			placement: 'right',
+			target: '.jpcrm-top-menu__fullscreen',
+			placement: 'left',
 			yOffset: -15,
 		},
 		{

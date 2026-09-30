@@ -200,15 +200,15 @@ function zbscrm_JS_adminMenuDropdown() {
 
 		// if calypso, loading on an embed page, already full screen, need to run this to re-adjust/hide:
 		setTimeout( function () {
-			const $logoCube = jQuery( '#jpcrm-top-menu .logo-cube' );
-			if ( $logoCube.length && ! $logoCube.hasClass( 'menu-open' ) ) {
-				zbscrm_JS_fullscreenModeOn( $logoCube );
+			const $fullscreenToggle = jQuery( '#jpcrm-top-menu .jpcrm-top-menu__fullscreen' );
+			if ( $fullscreenToggle.length && ! $fullscreenToggle.hasClass( 'menu-open' ) ) {
+				zbscrm_JS_fullscreenModeOn( $fullscreenToggle );
 			}
 		}, 0 );
 	}
 
 	// bind the toggle
-	jQuery( '#jpcrm-top-menu .logo-cube' )
+	jQuery( '#jpcrm-top-menu .jpcrm-top-menu__fullscreen' )
 		.off( 'click' )
 		.on( 'click', function () {
 			if ( ! window.zbscrmjs_adminMenuBlocker ) {
@@ -232,7 +232,7 @@ function zbscrm_JS_fullscreenModeOn( wrapperElement ) {
 	// adjust classes & hide menu bar etc.
 	// any work here, take account of calypsoify results
 	jQuery( 'body' ).addClass( 'zbs-fullscreen' );
-	jQuery( wrapperElement ).removeClass( 'menu-open' );
+	jQuery( wrapperElement ).removeClass( 'menu-open' ).attr( 'aria-pressed', 'true' );
 	jQuery( '#wpadminbar, #adminmenuback, #adminmenuwrap, #calypso-sidebar-header' ).hide();
 
 	// if we're in calypso, also adjust this:
@@ -276,7 +276,7 @@ function zbscrm_JS_fullscreenModeOff( wrapperElement ) {
 	// adjust classes & show menu bar etc.
 	// any work here, take account of calypsoify results
 	jQuery( 'body' ).removeClass( 'zbs-fullscreen' );
-	jQuery( wrapperElement ).addClass( 'menu-open' );
+	jQuery( wrapperElement ).addClass( 'menu-open' ).attr( 'aria-pressed', 'false' );
 	jQuery( '#wpadminbar, #adminmenuback, #adminmenuwrap, #calypso-sidebar-header' ).show();
 
 	// if we're in calypso, also adjust this:
@@ -330,6 +330,18 @@ function zbscrm_JS_initMenuPopups() {
 			// Stacked on a phone the menu is taller than the screen, and without
 			// this Semantic declines to show a popup that doesn't fit.
 			lastResort: 'bottom right',
+			// Point the arrow at the middle of the avatar; Semantic pins it 1em in.
+			onShow: function () {
+				const popup = document.getElementById( 'jpcrm-user-menu' );
+				window.requestAnimationFrame( function () {
+					const avatar = $userMenuItem.find( 'img' ).get( 0 ) || $userMenuItem.get( 0 );
+					const popupRect = popup.getBoundingClientRect();
+					const avatarRect = avatar.getBoundingClientRect();
+					const arrowWidth = parseFloat( window.getComputedStyle( popup, '::before' ).width ) || 0;
+					const right = popupRect.right - ( avatarRect.left + avatarRect.width / 2 ) - arrowWidth / 2;
+					popup.style.setProperty( '--jpcrm-user-menu-arrow-right', right + 'px' );
+				} );
+			},
 			delay: {
 				show: 50,
 				hide: 500,
