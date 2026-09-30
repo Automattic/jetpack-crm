@@ -1327,6 +1327,27 @@ class zbsDAL_quotes extends zbsDAL_ObjectLayer {
 
 		$id = (int) $id;
 
+		// The quote editor, like most callers, only sends the fields it shows. Keep
+		// the ones CRM tracks itself rather than write them back blank: the public
+		// link's hash, the views, and when and by whom the quote was accepted. A
+		// caller that passes one, like "Draft" clearing the acceptance, still sets it.
+		if ( ! is_array( $limitedFields ) ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+			$data = $this->keep_stored_fields(
+				$ZBSCRM_t['quotes'], // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+				$id,
+				$data,
+				isset( $args['data'] ) ? $args['data'] : array(),
+				array(
+					'hash'           => 'zbsq_hash',
+					'lastviewed'     => 'zbsq_lastviewed',
+					'viewed_count'   => 'zbsq_viewed_count',
+					'accepted'       => 'zbsq_accepted',
+					'acceptedsigned' => 'zbsq_acceptedsigned',
+					'acceptedip'     => 'zbsq_acceptedip',
+				)
+			);
+		}
+
 		// here we check that the potential owner CAN even own
 		if ( ! user_can( $owner, 'admin_zerobs_usr' ) ) {
 			$owner = -1;
@@ -2364,8 +2385,8 @@ class zbsDAL_quotes extends zbsDAL_ObjectLayer {
 			$res['viewed_count']     = (int) $obj->zbsq_viewed_count;
 			$res['accepted']         = (int) $obj->zbsq_accepted;
 			$res['accepted_date']    = ( isset( $obj->zbsq_accepted ) && $obj->zbsq_accepted > 0 ) ? zeroBSCRM_date_i18n( -1, $obj->zbsq_accepted, false, true ) : false;
-			$res['acceptedsigned']   = (int) $obj->zbsq_accepted;
-			$res['acceptedip']       = (int) $obj->zbsq_accepted;
+			$res['acceptedsigned']   = $this->stripSlashes( $obj->zbsq_acceptedsigned );
+			$res['acceptedip']       = $this->stripSlashes( $obj->zbsq_acceptedip );
 			$res['created']          = (int) $obj->zbsq_created;
 			$res['created_date']     = ( isset( $obj->zbsq_created ) && $obj->zbsq_created > 0 ) ? zeroBSCRM_date_i18n( -1, $obj->zbsq_created, false, true ) : false;
 			$res['lastupdated']      = (int) $obj->zbsq_lastupdated;

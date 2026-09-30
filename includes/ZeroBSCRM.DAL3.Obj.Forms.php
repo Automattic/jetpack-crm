@@ -985,6 +985,23 @@ class zbsDAL_forms extends zbsDAL_ObjectLayer {
 
 			$id = (int) $id;
 
+		// Keep the view and conversion counts, which CRM tracks itself, and the
+		// style, rather than write them back as blanks when a caller leaves them
+		// out. The form editor never sends the counts.
+		if ( ! is_array( $limitedFields ) ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+			$data = $this->keep_stored_fields(
+				$ZBSCRM_t['forms'], // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+				$id,
+				$data,
+				isset( $args['data'] ) ? $args['data'] : array(),
+				array(
+					'style'       => 'zbsf_style',
+					'views'       => 'zbsf_views',
+					'conversions' => 'zbsf_conversions',
+				)
+			);
+		}
+
 			// here we check that the potential owner CAN even own
 		if ( $owner > 0 && ! user_can( $owner, 'admin_zerobs_usr' ) ) {
 			$owner = -1;

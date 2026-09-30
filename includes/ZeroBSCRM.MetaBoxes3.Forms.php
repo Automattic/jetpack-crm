@@ -185,6 +185,15 @@ class zeroBS__Metabox_FormLanguage extends zeroBS__Metabox {
 			$autoGenAutonumbers = true; // generate if not set :)
 			$form               = zeroBS_buildObjArr( $_POST, array(), $this->fieldPrefix, '', false, ZBS_TYPE_FORM, $autoGenAutonumbers );
 
+			// The style picker posts its choice in a hidden field that the form's
+			// field list doesn't include, so zeroBS_buildObjArr() leaves it out.
+			if ( isset( $_POST[ $this->fieldPrefix . 'style' ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase -- as the rest of this save.
+				$style = sanitize_key( wp_unslash( $_POST[ $this->fieldPrefix . 'style' ] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+				if ( in_array( $style, array( 'naked', 'cgrab', 'simple' ), true ) ) {
+					$form['style'] = $style;
+				}
+			}
+
 			// add/update
 			$addUpdateReturn = $zbs->DAL->forms->addUpdateForm(
 				array(
