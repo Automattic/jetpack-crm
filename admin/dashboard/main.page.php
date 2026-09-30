@@ -157,7 +157,7 @@ function jpcrm_render_dashboard_page() {
 
 	<?php do_action( 'zbs_dashboard_pre_dashbox_post_totals' ); ?>
 
-	<div style="display:flex; max-width: 100%">
+	<div class="jpcrm-dashboard-row">
 
 		<div id="settings_dashboard_sales_funnel_display"<?php echo $settings_dashboard_sales_funnel ? '' : ' style="display:none;"'; ?>>
 			<div class="jpcrm-dashcard">
@@ -230,7 +230,7 @@ function jpcrm_render_dashboard_page() {
 	?>
 
 
-	<div style="display:flex; max-width: 100%">
+	<div class="jpcrm-dashboard-row">
 		<div id="settings_dashboard_recent_activity_display"<?php echo $settings_dashboard_recent_activity ? '' : ' style="display:none;"'; ?>>
 			<div class="jpcrm-dashcard">
 				<div class="jpcrm-dashcard-header">
