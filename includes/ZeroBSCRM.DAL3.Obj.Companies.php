@@ -1485,7 +1485,7 @@ class zbsDAL_companies extends zbsDAL_ObjectLayer {
 				if ( str_starts_with( $qFilter, 'status_' ) ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 
 					$quick_filter_status         = substr( $qFilter, 7 ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
-					$wheres['quickfilterstatus'] = array( 'zbsco_status', '=', 'convert(%s using utf8mb4) collate utf8mb4_bin', $quick_filter_status );
+					$wheres['quickfilterstatus'] = array( 'zbsco_status', '=', self::EXACT_MATCH_PLACEHOLDER, $quick_filter_status );
 
 				} elseif ( str_starts_with( $qFilter, 'notcontactedin' ) ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 

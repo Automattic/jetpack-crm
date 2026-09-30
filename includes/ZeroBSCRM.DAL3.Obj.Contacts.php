@@ -1698,7 +1698,7 @@ class zbsDAL_contacts extends zbsDAL_ObjectLayer {
 				if ( str_starts_with( $qFilter, 'status_' ) ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 
 					$quick_filter_status         = substr( $qFilter, 7 ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
-					$wheres['quickfilterstatus'] = array( 'zbsc_status', '=', 'convert(%s using utf8mb4) collate utf8mb4_bin', $quick_filter_status );
+					$wheres['quickfilterstatus'] = array( 'zbsc_status', '=', self::EXACT_MATCH_PLACEHOLDER, $quick_filter_status );
 
 				} elseif ( $qFilter === 'assigned_to_me' ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 					$wheres['assigned_to_me'] = array( 'zbs_owner', '=', zeroBSCRM_user() );
@@ -5375,7 +5375,7 @@ class zbsDAL_contacts extends zbsDAL_ObjectLayer {
 		}
 
 		if ( $withStatus !== false && ! empty( $withStatus ) ) {
-			$whereArr['status'] = array( 'zbsc_status', '=', 'convert(%s using utf8mb4) collate utf8mb4_bin', $withStatus );
+			$whereArr['status'] = array( 'zbsc_status', '=', self::EXACT_MATCH_PLACEHOLDER, $withStatus );
 		}
 			// phpcs:enable VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable, WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 
