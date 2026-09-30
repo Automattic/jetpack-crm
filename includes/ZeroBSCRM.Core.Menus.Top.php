@@ -236,7 +236,7 @@ function zeroBSCRM_admin_top_menu( $branding = 'zero-bs-crm', $page = 'dash' ) {
 			do_action( 'zbs-crm-notify' );
 			?>
 
-		<div class="ui simple dropdown item" id="jpcrm-user-menu-item">
+		<div class="ui simple dropdown item" id="jpcrm-user-menu-item" tabindex="0" role="button" aria-haspopup="true" aria-controls="jpcrm-user-menu" aria-label="<?php esc_attr_e( 'Account menu', 'zero-bs-crm' ); ?>">
 			<span class="text">
 			<?php
 			$uid = get_current_user_id();

@@ -317,16 +317,31 @@ function zbscrm_JS_fullscreenModeOff( wrapperElement ) {
  *
  */
 function zbscrm_JS_initMenuPopups() {
-	if ( typeof jQuery( '#jpcrm-user-menu-item' ).popup !== 'undefined' ) {
-		jQuery( '#jpcrm-user-menu-item' ).popup( {
+	const $userMenuItem = jQuery( '#jpcrm-user-menu-item' );
+	if ( typeof $userMenuItem.popup !== 'undefined' ) {
+		// Touch screens have no hover to open it with, so a tap opens it there.
+		const canHover = ! window.matchMedia || window.matchMedia( '(hover: hover)' ).matches;
+
+		$userMenuItem.popup( {
 			popup: jQuery( '#jpcrm-user-menu' ),
 			position: 'bottom center',
-			hoverable: true,
-			on: 'hover',
+			hoverable: canHover,
+			on: canHover ? 'hover' : 'click',
+			// Stacked on a phone the menu is taller than the screen, and without
+			// this Semantic declines to show a popup that doesn't fit.
+			lastResort: 'bottom right',
 			delay: {
 				show: 50,
 				hide: 500,
 			},
+		} );
+
+		// Enter or Space opens it from the keyboard.
+		$userMenuItem.off( 'keydown.jpcrm' ).on( 'keydown.jpcrm', function ( event ) {
+			if ( event.key === 'Enter' || event.key === ' ' ) {
+				event.preventDefault();
+				$userMenuItem.popup( 'toggle' );
+			}
 		} );
 	}
 }
