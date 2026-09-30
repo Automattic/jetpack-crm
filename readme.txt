@@ -362,6 +362,27 @@ We offer a full, no-hassle refund within 14 days. You can read more about that, 
 
 
 == Changelog ==
+### 7.0.0 - Unreleased
+#### Changed
+* Use the system font and WordPress design tokens across CRM admin (#65)
+* Style CRM buttons and form controls like WordPress components, in the admin color scheme (#66)
+* Keep the CRM menu open and highlighted on view and edit screens, and restyle the page header (#67)
+* Style CRM messages as WordPress notices, and handle core admin notices the way Jetpack does (#68)
+* Show statuses and tags as WordPress-style badges (#71)
+* Make CRM lists work on phones: rows become cards and nothing scrolls sideways (#72)
+* Give empty lists and screens real empty states (#73)
+* Replace CRM's icon fonts with @wordpress/icons, social-logos and a few icons of CRM's own (#75)
+* Put the top bar's dropdown carets next to their labels, and drop the one beside the avatar (#78)
+
+#### Fixed
+* Saving a quote no longer clears when it was accepted, by whom, or its views (#80)
+* Saving a form no longer resets its view and conversion counts, and the style picked in the form editor now saves (#80)
+* Show who accepted a quote in the quote editor, instead of the acceptance time (#80)
+* Keep the dashboard inside the screen on phones (#81)
+* Make status filters and the weekly contacts chart work on SQLite (#69)
+* Show a notice instead of a fatal error on API settings when the API module is off (#70)
+* Keep the system email templates when deleting CRM data (#74)
+
 ### 6.8.4 - 2026-09-02
 * Allow assigning a transaction to a company invoice (#52)
 * Fix the revenue chart's 12-month window start and current-month zero-prefill (#51)
