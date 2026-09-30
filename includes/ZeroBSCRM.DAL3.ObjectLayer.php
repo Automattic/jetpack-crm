@@ -124,6 +124,42 @@ class zbsDAL_ObjectLayer {
 		}
 	}
 
+	/**
+	 * Fills in the fields an update left out with what's stored.
+	 *
+	 * A full update writes every column, so a field the caller didn't pass is
+	 * written as its default. For fields CRM tracks itself rather than ones
+	 * anyone edits, like a quote's view count, that loses data, because the edit
+	 * screens don't send them. Leaving one out means no change.
+	 *
+	 * @param string $table   The object's table.
+	 * @param int    $id      The object being updated.
+	 * @param array  $data    The data about to be written, defaults included.
+	 * @param array  $passed  The data the caller passed.
+	 * @param array  $columns Field name => column name, for each field to keep.
+	 * @return array The data, with each left-out field set to what's stored.
+	 */
+	protected function keep_stored_fields( $table, $id, $data, $passed, $columns ) {
+		global $wpdb;
+
+		$missing = array_diff_key( $columns, is_array( $passed ) ? $passed : array() );
+		if ( $id <= 0 || empty( $missing ) ) {
+			return $data;
+		}
+
+		// The table and column names come from the DAL, never from the caller.
+		$stored = $wpdb->get_row( $wpdb->prepare( 'SELECT ' . implode( ', ', $missing ) . ' FROM ' . $table . ' WHERE ID = %d', $id ), ARRAY_A ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+		if ( ! is_array( $stored ) ) {
+			return $data;
+		}
+
+		foreach ( $missing as $field => $column ) {
+			$data[ $field ] = $stored[ $column ];
+		}
+
+		return $data;
+	}
+
 	// return core vars
 	public function objTableName() {
 		return $this->objectTableName;
