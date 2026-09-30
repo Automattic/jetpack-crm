@@ -1,6 +1,8 @@
 /* Remove left padding from WP page content */
 body.jpcrm-admin {
-	background: var(--wpds-color-background-surface-neutral-weak);
+	// White page, like Jetpack's own admin screens. Without it, WordPress' grey
+	// shows around and below whatever box a screen happens to draw.
+	background: var(--wpds-color-background-surface-neutral-strong);
 	font-family: var(--wpds-typography-font-family-body);
 
 	#wpcontent {

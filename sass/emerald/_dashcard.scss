@@ -1,7 +1,8 @@
 .jpcrm-dashcard {
 	background: #fff;
-	filter: drop-shadow(0 4px 24px rgba(0, 0, 0, 0.05));
-	border-radius: 8px;
+	// Outlined rather than shadowed, since the page behind is white too.
+	border: var(--wpds-border-width-xs) solid var(--wpds-color-stroke-surface-neutral);
+	border-radius: var(--wpds-border-radius-lg);
 	display: flex;
 	flex-direction: column;
 	align-items: stretch;

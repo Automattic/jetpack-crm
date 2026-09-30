@@ -1,9 +1,21 @@
+// Height of the Save bar pinned to the bottom of edit screens on phones.
+$edit-save-bar-height: 65px;
+
 body.jpcrm-admin {
 
 	// Only restyle the footer when our branded footer content is present. When the
 	// "powered by" setting is off (or under white label) #wpfooter is left empty and
 	// keeps its default WordPress appearance.
 	#wpfooter:has( .jetpack-footer__logo ) {
+		// Pinned to the bottom of the page like Jetpack's footer: at the bottom of
+		// the screen on short pages, after the content on long ones. This is core's
+		// own footer positioning (#wpwrap is at least the screen's height), which
+		// _wp-semantic-fixes.scss turns off for every CRM page.
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		margin-top: 0;
 		align-items: center;
 		background-color: var(--wpds-color-background-surface-neutral);
 		border-top: var(--wpds-border-width-xs) solid var(--wpds-color-stroke-surface-neutral-weak);
@@ -27,6 +39,12 @@ body.jpcrm-admin {
 		}
 	}
 
+	// Out of the flow, the footer needs room kept for it under the content: its
+	// own height plus a gap. It's two rows on phones (below).
+	&:has( #wpfooter .jetpack-footer__logo ) #wpbody-content {
+		padding-bottom: 96px;
+	}
+
 	// Below 782px WordPress core hides #wpfooter (common.css), but the base rule
 	// above keeps it shown — specificity (1,2,1) vs core's (1,0,0), and no media
 	// query — which is why these mobile rules are reachable at all. Core's
@@ -36,6 +54,19 @@ body.jpcrm-admin {
 
 		#wpfooter:has( .jetpack-footer__logo ) {
 			margin: 0;
+		}
+
+		// Edit screens pin their Save bar to the bottom of the screen here
+		// (_edit-page.scss), so the footer sits just above it rather than under it.
+		&:has( .jpcrm-edit-save ) {
+
+			#wpfooter:has( .jetpack-footer__logo ) {
+				bottom: $edit-save-bar-height;
+			}
+
+			&:has( #wpfooter .jetpack-footer__logo ) #wpbody-content {
+				padding-bottom: 96px + $edit-save-bar-height;
+			}
 		}
 	}
 
@@ -54,6 +85,14 @@ body.jpcrm-admin {
 			#footer-upgrade {
 				margin-inline-start: 0;
 			}
+		}
+
+		&:has( #wpfooter .jetpack-footer__logo ) #wpbody-content {
+			padding-bottom: 140px;
+		}
+
+		&:has( .jpcrm-edit-save ):has( #wpfooter .jetpack-footer__logo ) #wpbody-content {
+			padding-bottom: 140px + $edit-save-bar-height;
 		}
 	}
 
