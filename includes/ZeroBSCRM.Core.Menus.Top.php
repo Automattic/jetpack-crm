@@ -111,6 +111,7 @@ function zeroBSCRM_show_pending_number( $menu ) {
 }
 
 // } This is NEW UI for the top menu. Helpful links in the top menu = Improved UI
+// phpcs:disable Squiz.Commenting.InlineComment.WrongStyle -- The ##WLREMOVE markers below are read by the white-label build.
 function zeroBSCRM_admin_top_menu( $branding = 'zero-bs-crm', $page = 'dash' ) {
 
 		// } restrict to ONLY Jetpack CRM pages - NOTE our EXTENSIONS will need to use the same
@@ -161,16 +162,11 @@ function zeroBSCRM_admin_top_menu( $branding = 'zero-bs-crm', $page = 'dash' ) {
 			<script type="text/javascript">var zbscrmjs_topMenuSecToken = <?php echo wp_json_encode( wp_create_nonce( 'zbscrmjs-ajax-nonce-topmenu' ), JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP ); ?>;</script>
 			<?php
 
-			// } Menu hidden? - maybe we can cookie this? for now this is slick.
-			$hiding_wp = get_user_meta( $uid, 'zbs-hide-wp-menus', true );
-			if ( $hiding_wp ) {
-				$admin_menu_state = 'menu-closed';
-			} else {
-				$admin_menu_state = 'menu-open';
-			}
+			// Full screen hides the WordPress menus; the choice is saved per user.
+			$hiding_wp = (bool) get_user_meta( $uid, 'zbs-hide-wp-menus', true );
 
 			// } Other Prep
-			$currentUser = wp_get_current_user();
+			$current_user = wp_get_current_user();
 			$alsoCo      = ''; // } WH added to fix php warnings - what\s this?
 			$b2bMode     = zeroBSCRM_getSetting( 'companylevelcustomers' );
 
@@ -205,99 +201,218 @@ function zeroBSCRM_admin_top_menu( $branding = 'zero-bs-crm', $page = 'dash' ) {
 			?>
 
 
-		<!--- mobile only menu -->
-		<div class="ui mobile tablet only" id="zbs-mobile-nav">
-			<div id="zbs-main-logo-mobile">
-				<div class="zbs-face-1-mobile">
-					<img id="zbs-main-logo-mobby" alt="Jetpack CRM mobile logo" src="<?php echo esc_url( jpcrm_get_logo( false, 'white' ) ); ?>" style="cursor:pointer;">
+	<div id="jpcrm-top-menu">
+		<div class="jpcrm-top-menu__header">
+		<div class="jpcrm-header-logo">
+			<?php
+			$header_icon = '<img alt="" src="' . esc_url( jpcrm_get_logo( false ) ) . '" width="20" height="20" class="jpcrm-header-logo__icon" />';
+			##WLREMOVE
+			// Jetpack logo.
+			$header_icon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="20" height="20" class="jpcrm-header-logo__icon" aria-hidden="true" focusable="false"><path fill="#069e08" d="M16,0C7.2,0,0,7.2,0,16s7.2,16,16,16s16-7.2,16-16S24.8,0,16,0z M15,19H7l8-16V19z M17,29V13h8L17,29z"/></svg>';
+			##/WLREMOVE
+			echo $header_icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Hardcoded HTML with pre-escaped attributes.
+			?>
+			<?php ##WLREMOVE ?>
+			<span class="jpcrm-header-logo__text">CRM</span>
+			<?php ##/WLREMOVE ?>
+		</div>
+
+		<menu-section class="jpcrm-top-menu__controls">
+			<button type="button" class="jpcrm-top-menu__toggle" aria-expanded="false" aria-controls="jpcrm-top-menu-nav">
+				<?php echo jpcrm_wp_icon_svg( 'menu' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Hardcoded SVG. ?>
+				<span class="screen-reader-text"><?php esc_html_e( 'CRM menu', 'zero-bs-crm' ); ?></span>
+			</button>
+			<?php
+
+			do_action( 'zbs-crm-notify' ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores -- Existing hook; extensions use this name.
+			?>
+			<button type="button" class="jpcrm-top-menu__fullscreen" aria-pressed="<?php echo $hiding_wp ? 'true' : 'false'; ?>" title="<?php esc_attr_e( 'Toggle full screen', 'zero-bs-crm' ); ?>">
+				<i class="expand icon" aria-hidden="true"></i>
+				<span class="screen-reader-text"><?php esc_html_e( 'Full screen', 'zero-bs-crm' ); ?></span>
+			</button>
+
+		<div class="ui simple dropdown item" id="jpcrm-user-menu-item" tabindex="0" role="button" aria-haspopup="true" aria-controls="jpcrm-user-menu" aria-label="<?php esc_attr_e( 'Account menu', 'zero-bs-crm' ); ?>">
+			<span class="text">
+			<?php
+			$uid = get_current_user_id();
+			echo wp_kses_post( jpcrm_get_avatar( $uid, 30 ) );
+			?>
+			</span>
+			</div>
+
+			<?php
+			// } Build pop-out
+
+			$popout_menu = array(
+				'col1' => array(),
+				##WLREMOVE
+				'col2' => array(),
+				##/WLREMOVE
+				'col3' => array(),
+			);
+
+			// Admins get settings and data tools.
+			if ( zeroBSCRM_isZBSAdminOrAdmin() ) {
+				$popout_menu['col1'][] = sprintf(
+					'<div class="jpcrm-user-menu-link"><a id="zbs-settings2-top-menu" href="%s" class="item"><i class="settings icon"></i> %s</a></div>',
+					zeroBSCRM_getAdminURL( $zbs->slugs['settings'] ),
+					__( 'Settings', 'zero-bs-crm' )
+				);
+				##WLREMOVE
+				$popout_menu['col1'][] = sprintf(
+					'<div class="jpcrm-user-menu-link"><a id="zbs-datatools-top-menu" href="%s" class="item"><i class="wrench icon"></i> %s</a></div>',
+					zeroBSCRM_getAdminURL( $zbs->slugs['datatools'] ),
+					__( 'Data Tools', 'zero-bs-crm' )
+				);
+				##/WLREMOVE
+			}
+			// teams page for WP Admin or Jetpack CRM Full Admin.
+			if ( current_user_can( 'manage_options' ) ) {
+				$popout_menu['col1'][] = sprintf(
+					'<div class="jpcrm-user-menu-link"><a id="zbs-team-top-menu" href="%s" class="item"><i class="icon users"></i> %s</a></div>',
+					zeroBSCRM_getAdminURL( $zbs->slugs['team'] ),
+					__( 'Team', 'zero-bs-crm' )
+				);
+			}
+
+			// Admins get the system assistant, emails, modules and extensions.
+			if ( zeroBSCRM_isZBSAdminOrAdmin() ) {
+				$popout_menu['col1'][] = sprintf(
+					'<div class="jpcrm-user-menu-link"><a class="item" href="%s"><i class="server icon" aria-hidden="true"></i> %s</a></div>',
+					zeroBSCRM_getAdminURL( $zbs->slugs['systemstatus'] ),
+					__( 'System Assistant', 'zero-bs-crm' )
+				);
+				$popout_menu['col1'][] = sprintf(
+					'<div class="jpcrm-user-menu-link"><a class="item" href="%s"><i class="envelope icon" aria-hidden="true"></i> %s</a></div>',
+					zeroBSCRM_getAdminURL( $zbs->slugs['emails'] ),
+					__( 'Emails', 'zero-bs-crm' )
+				);
+				$popout_menu['col1'][] = sprintf(
+					'<div class="jpcrm-user-menu-link"><a class="item" href="%s"><i class="icon th" aria-hidden="true"></i> %s</a></div>',
+					zeroBSCRM_getAdminURL( $zbs->slugs['modules'] ),
+					__( 'Core Modules', 'zero-bs-crm' )
+				);
+				##WLREMOVE
+				$popout_menu['col1'][] = sprintf(
+					'<div class="jpcrm-user-menu-link"><a class="item" href="%s"><i class="icon plug" aria-hidden="true"></i> %s</a></div>',
+					zeroBSCRM_getAdminURL( $zbs->slugs['extensions'] ),
+					__( 'Extensions', 'zero-bs-crm' )
+				);
+				##/WLREMOVE
+
+			}
+
+			// Drop the column if nothing is in it.
+			if ( count( $popout_menu['col1'] ) === 0 ) {
+				unset( $popout_menu['col1'] );
+			}
+
+			?>
+			<div class="ui popup" id="jpcrm-user-menu">
+				<?php
+				switch ( count( $popout_menu ) ) {
+					case 3:
+						$menu_style = 'three';
+						break;
+					case 2:
+						$menu_style = 'two';
+						break;
+					default:
+						$menu_style = 'one';
+				}
+				?>
+				<div class="ui <?php echo esc_attr( $menu_style ); ?> column equal height divided grid">
+			<?php if ( isset( $popout_menu['col1'] ) && count( $popout_menu['col1'] ) > 0 ) { ?>
+				<div class="column">
+					<h4 class="ui header"><?php esc_html_e( 'CRM Admin', 'zero-bs-crm' ); ?></h4>
+					<div class="ui link list">
+					<?php
+					foreach ( $popout_menu['col1'] as $link ) {
+						echo wp_kses_post( $link ); }
+					?>
+					</div>
+				</div>
+				<?php
+			}
+			##WLREMOVE
+			// No support column when white-labelled.
+			?>
+				<div class="column">
+					<h4 class="ui header"><?php esc_html_e( 'Support', 'zero-bs-crm' ); ?></h4>
+					<div class="ui link list">
+						<div class="jpcrm-user-menu-link">
+							<a href="<?php echo esc_url( $zbs->urls['docs'] ); ?>" class="item" target="_blank"><i class="file text outline icon"></i> <?php esc_html_e( 'Knowledge base', 'zero-bs-crm' ); ?></a>
+						</div>
+						<div class="jpcrm-user-menu-link">
+							<a href="<?php echo esc_url( zeroBSCRM_getAdminURL( $zbs->slugs['support'] ) ); ?>" class="item"><i class="icon user md"></i> <?php esc_html_e( 'Support', 'zero-bs-crm' ); ?></a>
+						</div>
+						<div class="jpcrm-user-menu-link">
+							<a href="<?php echo esc_url( $zbs->urls['twitter'] ); ?>" class="item" target="_blank"><i class="icon twitter"></i> <?php esc_html_e( '@jetpackcrm', 'zero-bs-crm' ); ?></a>
+						</div>
+						<div class="jpcrm-user-menu-link">
+							<a class="item" href="<?php echo esc_url( $zbs->urls['rateuswporg'] ); ?>"><i class="star icon" aria-hidden="true"></i> <?php esc_html_e( 'Leave a review', 'zero-bs-crm' ); ?></a>
+						</div>
+						<?php
+						// Welcome tour and CRM resources page for admins.
+						if ( zeroBSCRM_isZBSAdminOrAdmin() ) {
+							?>
+							<div class="jpcrm-user-menu-link">
+								<a id="zbs-tour-top-menu-dash" href="<?php echo esc_url( zeroBSCRM_getAdminURL( $zbs->slugs['dash'] ) ); ?>&zbs-welcome-tour=1" class="item"><i class="icon magic"></i> <?php esc_html_e( 'Welcome Tour', 'zero-bs-crm' ); ?></a>
+							</div>
+							<div class="jpcrm-user-menu-link">
+								<a id="crm-resources-top-menu-dash" href="<?php echo esc_url( zeroBSCRM_getAdminURL( $zbs->slugs['crmresources'] ) ); ?>" class="item"><i class="icon building"></i> <?php esc_html_e( 'Resources', 'zero-bs-crm' ); ?></a>
+							</div>
+							<?php
+						}
+						?>
+					</div>
+				</div>
+				<?php
+				##/WLREMOVE
+				?>
+				<div class="column">
+					<h4 class="ui header"><?php echo esc_html( $current_user->display_name ); ?></h4>
+					<div class="ui link list">
+
+					<div class="jpcrm-user-menu-link">
+						<a id="zbs-profile-top-menu" href="<?php echo esc_url( zeroBSCRM_getAdminURL( $zbs->slugs['your-profile'] ) ); ?>" class="item"><i class="icon user"></i> <?php esc_html_e( 'Your Profile', 'zero-bs-crm' ); ?></a>
+					</div>
+
+					<?php
+					if ( zeroBSCRM_getSetting( 'feat_calendar' ) > 0 ) {
+						?>
+					<div class="jpcrm-user-menu-link">
+						<a id="jpcrm-tasks-top-menu" href="<?php echo esc_url( zeroBSCRM_getAdminURL( $zbs->slugs['manage-tasks'] ) ); ?>&zbsowner=<?php echo esc_attr( $uid ); ?>" class="item"><i class="icon tasks"></i> <?php esc_html_e( 'Your Tasks', 'zero-bs-crm' ); ?></a>
+					</div>
+					<?php } ?>
+
+					<?php
+					##WLREMOVE //upsell
+					if ( ! zeroBSCRM_hasPaidExtensionActivated() && zeroBSCRM_isZBSAdminOrAdmin() ) {
+						?>
+						
+						<div class="jpcrm-user-menu-link">
+							<a class="item" href="<?php echo esc_url( $zbs->urls['pricing'] ); ?>" target="_blank"><i class="rocket icon" aria-hidden="true"></i> <?php esc_html_e( 'Plans', 'zero-bs-crm' ); ?></a>
+						</div>
+					<?php } ##/WLREMOVE ?>
+
+						<div class="ui divider"></div>
+
+						<div class="jpcrm-user-menu-link">
+							<a href="<?php echo esc_url( wp_logout_url() ); ?>" class="item"><i class="icon sign out"></i> <?php esc_html_e( 'Log Out', 'zero-bs-crm' ); ?></a>
+						</div>
+					</div>
+				</div>
 				</div>
 			</div>
-			<?php
+		</menu-section>
+		</div><!-- end .jpcrm-top-menu__header -->
 
-			// Dev mode? add ui label
-			if ( zeroBSCRM_isLocal() ) {
-
-				// no id etc. to stop people hiding with css
-				?>
-				<div class="item" style="float: right;color: #FFF;margin-top: -2.5em;"><?php esc_html_e( 'Developer Mode', 'zero-bs-crm' ); ?></div>
-				<?php
-
-			}
-
-			?>
-			<div class="ui stackable menu inverted" id="zbs-mobile-navigation-toggle">
-				
-			<!-- basic menu tabs for mobile -->
-				<a class="item<?php zeroBS_menu_active( $zbs->slugs['dash'] ); ?>" href="<?php echo esc_url( zeroBSCRM_getAdminURL( $zbs->slugs['dash'] ) ); ?>"><i class="icon dashboard"></i><?php esc_html_e( 'Dashboard', 'zero-bs-crm' ); ?></a>
-				<a class="item" href="<?php echo esc_url( zeroBSCRM_getAdminURL( $zbs->slugs['managecontacts'] ) ); ?>"><i class="icon users"></i> <?php esc_html_e( 'Contacts', 'zero-bs-crm' ); ?></a>
-			<?php if ( $b2bMode == 1 ) { ?>
-					<a class="item" href="<?php echo esc_url( zeroBSCRM_getAdminURL( $zbs->slugs['managecompanies'] ) ); ?>"><i class="icon building outline"></i> <?php echo esc_html( jpcrm_label_company( true ) ); ?></a>
-				<?php } ?>
-			<?php if ( zeroBSCRM_permsViewQuotes() && zeroBSCRM_getSetting( 'feat_quotes' ) > 0 ) { ?>
-					<a class="item" href="<?php echo esc_url( zeroBSCRM_getAdminURL( $zbs->slugs['managequotes'] ) ); ?>"><i class="icon file outline"></i> <?php esc_html_e( 'Quotes', 'zero-bs-crm' ); ?></a>
-				<?php } ?>
-
-			<?php if ( zeroBSCRM_permsViewInvoices() && zeroBSCRM_getSetting( 'feat_invs' ) > 0 ) { ?>
-					<a class="item" href="<?php echo esc_url( zeroBSCRM_getAdminURL( $zbs->slugs['manageinvoices'] ) ); ?>"><i class="icon file alternate outline"></i> <?php esc_html_e( 'Invoices', 'zero-bs-crm' ); ?></a>
-				<?php } ?>
-			<?php if ( zeroBSCRM_permsViewTransactions() && zeroBSCRM_getSetting( 'feat_transactions' ) > 0 ) { ?>
-					<a class="item" href="<?php echo esc_url( zeroBSCRM_getAdminURL( $zbs->slugs['managetransactions'] ) ); ?>"><i class="icon shopping cart"></i> <?php esc_html_e( 'Transactions', 'zero-bs-crm' ); ?></a>
-				<?php } ?>
-
-			<?php
-				// tools menu added 29/6/18, because Brian needs access to his, maybe we need to rethink this whole menu setup
-
-			if ( count( $toolsMenu ) > 0 ) {
-				foreach ( $toolsMenu as $menuItem ) {
-
-					// wh quick hack to avoid clashing ID's
-					$menuItemHTML = str_replace( 'id="', 'id="mob-', $menuItem );
-					$menuItemHTML = str_replace( "id='", "id='mob-", $menuItemHTML );
-
-					echo $menuItemHTML;
-
-				}
-			}
-			?>
-				  
-
-
-			</div>
-			
-		</div>
-		<script type="text/javascript">
-		jQuery(function(){
-			jQuery('#zbs-main-logo-mobby').on("click",function(e){
-				jQuery("#zbs-mobile-navigation-toggle").toggle();
-			});
-		})
-		</script>
-		<!---  // mobile only menu -->
-	<div id="jpcrm-top-menu">
-		<div class="logo-cube <?php echo esc_attr( $admin_menu_state ); ?>">
-			<div class="cube-side side1">
-				<?php
-				$header_icon = '<img alt="" src="' . esc_url( jpcrm_get_logo( false ) ) . '" width="20" height="20" class="jpcrm-header-logo__icon" />';
-				##WLREMOVE
-				// Jetpack logo
-				$header_icon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="20" height="20" class="jpcrm-header-logo__icon" aria-hidden="true" focusable="false"><path fill="#069e08" d="M16,0C7.2,0,0,7.2,0,16s7.2,16,16,16s16-7.2,16-16S24.8,0,16,0z M15,19H7l8-16V19z M17,29V13h8L17,29z"/></svg>';
-				##/WLREMOVE
-				echo $header_icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Hardcoded HTML with pre-escaped attributes.
-				?>
-				<?php ##WLREMOVE ?>
-				<span class="jpcrm-header-logo__text">CRM</span>
-				<?php ##/WLREMOVE ?>
-			</div>
-			<div class="cube-side side2">
-				<i class="expand icon jpcrm-fullscreen-toggle" title="<?php esc_attr_e( 'Toggle full screen', 'zero-bs-crm' ); ?>"></i>
-			</div>
-		</div>
-
-		<menu-bar>
+		<menu-bar id="jpcrm-top-menu-nav">
 
 			<menu-section>
 			<a class="item<?php esc_attr( zeroBS_menu_active( $zbs->slugs['dash'] ) ); ?>" href="<?php echo esc_url( zeroBSCRM_getAdminURL( $zbs->slugs['dash'] ) ); ?>"><?php esc_html_e( 'Dashboard', 'zero-bs-crm' ); ?></a>
-			<div class="ui simple dropdown item select<?php esc_attr( zeroBS_menu_active_type( 'contact' ) ); ?>" id="zbs-contacts-topmenu">
+			<div class="ui simple dropdown item select<?php esc_attr( zeroBS_menu_active_type( 'contact' ) ); ?>" id="zbs-contacts-topmenu" tabindex="0">
 				<span class="text"><?php esc_html_e( 'Contacts', 'zero-bs-crm' ); ?></span>
 				<i class="dropdown icon"></i>
 				<div class="menu ui">
@@ -319,7 +434,7 @@ function zeroBSCRM_admin_top_menu( $branding = 'zero-bs-crm', $page = 'dash' ) {
 
 					<div class="ui divider"></div>
 
-					<div class="ui simple dropdown item " id="zbs-companies-topmenu">
+					<div class="ui simple dropdown item " id="zbs-companies-topmenu" tabindex="0">
 						<?php echo esc_html( jpcrm_label_company( true ) ); ?><i class="dropdown icon zbs-subsub-ico"></i>
 						<div class="menu ui">
 							<?php
@@ -385,7 +500,7 @@ function zeroBSCRM_admin_top_menu( $branding = 'zero-bs-crm', $page = 'dash' ) {
 			<?php
 			if ( zeroBSCRM_permsViewQuotes() && zeroBSCRM_getSetting( 'feat_quotes' ) > 0 ) {
 				?>
-			<div class="ui simple dropdown item select<?php zeroBS_menu_active_type( 'quote' ); ?>" id="zbs-quotes-topmenu">
+			<div class="ui simple dropdown item select<?php zeroBS_menu_active_type( 'quote' ); ?>" id="zbs-quotes-topmenu" tabindex="0">
 				<span class="text"><?php esc_html_e( 'Quotes', 'zero-bs-crm' ); ?></span>
 				<i class="dropdown icon"></i>
 				<div class="menu ui">
@@ -425,7 +540,7 @@ function zeroBSCRM_admin_top_menu( $branding = 'zero-bs-crm', $page = 'dash' ) {
 			<?php } ?>
 
 			<?php if ( zeroBSCRM_permsViewInvoices() && zeroBSCRM_getSetting( 'feat_invs' ) > 0 ) { ?>
-			<div class="ui simple dropdown item select<?php zeroBS_menu_active_type( 'invoice' ); ?>" id="zbs-invoices-topmenu">
+			<div class="ui simple dropdown item select<?php zeroBS_menu_active_type( 'invoice' ); ?>" id="zbs-invoices-topmenu" tabindex="0">
 				<span class="text"><?php esc_html_e( 'Invoices', 'zero-bs-crm' ); ?></span>
 				<i class="dropdown icon"></i>
 				<div class="menu ui">
@@ -466,7 +581,7 @@ function zeroBSCRM_admin_top_menu( $branding = 'zero-bs-crm', $page = 'dash' ) {
 			if ( zeroBSCRM_permsViewTransactions() && zeroBSCRM_getSetting( 'feat_transactions' ) > 0 ) {
 				$transactions_menu = array();
 				?>
-			<div class="ui simple dropdown item select<?php zeroBS_menu_active_type( 'transaction' ); ?>" id="zbs-transactions-topmenu">
+			<div class="ui simple dropdown item select<?php zeroBS_menu_active_type( 'transaction' ); ?>" id="zbs-transactions-topmenu" tabindex="0">
 				<span class="text"><?php esc_html_e( 'Transactions', 'zero-bs-crm' ); ?></span>
 				<i class="dropdown icon"></i>
 				<div class="menu ui">
@@ -511,11 +626,9 @@ function zeroBSCRM_admin_top_menu( $branding = 'zero-bs-crm', $page = 'dash' ) {
 				<?php
 			}
 
-			// tools menu added to mobile menu above, so collated at top now ^^
-
 			if ( count( $toolsMenu ) > 0 ) {
 				?>
-			<div class="ui simple dropdown item<?php zeroBS_menu_active_type( 'tools' ); ?>" id="top-bar-tools-menu">
+			<div class="ui simple dropdown item<?php zeroBS_menu_active_type( 'tools' ); ?>" id="top-bar-tools-menu" tabindex="0">
 			<span class="text"><?php esc_html_e( 'Tools', 'zero-bs-crm' ); ?></span>
 			<i class="dropdown icon"></i>
 			<div class="menu ui">
@@ -534,189 +647,6 @@ function zeroBSCRM_admin_top_menu( $branding = 'zero-bs-crm', $page = 'dash' ) {
 
 
 		</menu-section>
-
-		<menu-section>
-			<?php
-
-			do_action( 'zbs-crm-notify' );
-			?>
-
-		<div class="ui simple dropdown item" id="jpcrm-user-menu-item">
-			<span class="text">
-			<?php
-			$uid = get_current_user_id();
-			echo jpcrm_get_avatar( $uid, 30 );
-			?>
-			</span>
-			</div>
-
-			<?php
-			// } Build pop-out
-
-			$popout_menu = array(
-				'col1' => array(),
-				##WLREMOVE
-				'col2' => array(),
-				##/WLREMOVE
-				'col3' => array(),
-			);
-
-			// if admin, settings + datatools
-			if ( zeroBSCRM_isZBSAdminOrAdmin() ) {
-				$popout_menu['col1'][] = sprintf(
-					'<div class="jpcrm-user-menu-link"><a id="zbs-settings2-top-menu" href="%s" class="item"><i class="settings icon"></i> %s</a></div>',
-					zeroBSCRM_getAdminURL( $zbs->slugs['settings'] ),
-					__( 'Settings', 'zero-bs-crm' )
-				);
-				##WLREMOVE
-				$popout_menu['col1'][] = sprintf(
-					'<div class="jpcrm-user-menu-link"><a id="zbs-datatools-top-menu" href="%s" class="item"><i class="wrench icon"></i> %s</a></div>',
-					zeroBSCRM_getAdminURL( $zbs->slugs['datatools'] ),
-					__( 'Data Tools', 'zero-bs-crm' )
-				);
-				##/WLREMOVE
-			}
-			// teams page for WP Admin or Jetpack CRM Full Admin.
-			if ( current_user_can( 'manage_options' ) ) {
-				$popout_menu['col1'][] = sprintf(
-					'<div class="jpcrm-user-menu-link"><a id="zbs-team-top-menu" href="%s" class="item"><i class="icon users"></i> %s</a></div>',
-					zeroBSCRM_getAdminURL( $zbs->slugs['team'] ),
-					__( 'Team', 'zero-bs-crm' )
-				);
-			}
-
-			// if admin, system status + extensions
-			if ( zeroBSCRM_isZBSAdminOrAdmin() ) {
-				$popout_menu['col1'][] = sprintf(
-					'<div class="jpcrm-user-menu-link"><a class="item" href="%s"><i class="server icon" aria-hidden="true"></i> %s</a></div>',
-					zeroBSCRM_getAdminURL( $zbs->slugs['systemstatus'] ),
-					__( 'System Assistant', 'zero-bs-crm' )
-				);
-				$popout_menu['col1'][] = sprintf(
-					'<div class="jpcrm-user-menu-link"><a class="item" href="%s"><i class="envelope icon" aria-hidden="true"></i> %s</a></div>',
-					zeroBSCRM_getAdminURL( $zbs->slugs['emails'] ),
-					__( 'Emails', 'zero-bs-crm' )
-				);
-				$popout_menu['col1'][] = sprintf(
-					'<div class="jpcrm-user-menu-link"><a class="item" href="%s"><i class="icon th" aria-hidden="true"></i> %s</a></div>',
-					zeroBSCRM_getAdminURL( $zbs->slugs['modules'] ),
-					__( 'Core Modules', 'zero-bs-crm' )
-				);
-				##WLREMOVE
-				$popout_menu['col1'][] = sprintf(
-					'<div class="jpcrm-user-menu-link"><a class="item" href="%s"><i class="icon plug" aria-hidden="true"></i> %s</a></div>',
-					zeroBSCRM_getAdminURL( $zbs->slugs['extensions'] ),
-					__( 'Extensions', 'zero-bs-crm' )
-				);
-				##/WLREMOVE
-
-			}
-
-			// remove the col if nothing in there
-			if ( count( $popout_menu['col1'] ) === 0 ) {
-				unset( $popout_menu['col1'] );
-			}
-
-			?>
-			<div class="ui popup" id="jpcrm-user-menu">
-				<?php
-				switch ( count( $popout_menu ) ) {
-					case 3:
-						$menu_style = 'three';
-						break;
-					case 2:
-						$menu_style = 'two';
-						break;
-					default:
-						$menu_style = 'one';
-				}
-				?>
-				<div class="ui <?php echo esc_attr( $menu_style ); ?> column equal height divided grid">
-			<?php if ( isset( $popout_menu['col1'] ) && count( $popout_menu['col1'] ) > 0 ) { ?>
-				<div class="column">
-					<h4 class="ui header"><?php esc_html_e( 'CRM Admin', 'zero-bs-crm' ); ?></h4>
-					<div class="ui link list">
-					<?php
-					foreach ( $popout_menu['col1'] as $link ) {
-						echo $link; }
-					?>
-					</div>
-				</div>
-				<?php
-			}
-			##WLREMOVE
-			// no need for support column if white label
-			?>
-				<div class="column">
-					<h4 class="ui header"><?php esc_html_e( 'Support', 'zero-bs-crm' ); ?></h4>
-					<div class="ui link list">
-						<div class="jpcrm-user-menu-link">
-							<a href="<?php echo esc_url( $zbs->urls['docs'] ); ?>" class="item" target="_blank"><i class="file text outline icon"></i> <?php esc_html_e( 'Knowledge base', 'zero-bs-crm' ); ?></a>
-						</div>
-						<div class="jpcrm-user-menu-link">
-							<a href="<?php echo esc_url( zeroBSCRM_getAdminURL( $zbs->slugs['support'] ) ); ?>" class="item"><i class="icon user md"></i> <?php esc_html_e( 'Support', 'zero-bs-crm' ); ?></a>
-						</div>
-						<div class="jpcrm-user-menu-link">
-							<a href="<?php echo esc_url( $zbs->urls['twitter'] ); ?>" class="item" target="_blank"><i class="icon twitter"></i> <?php esc_html_e( '@jetpackcrm', 'zero-bs-crm' ); ?></a>
-						</div>
-						<div class="jpcrm-user-menu-link">
-							<a class="item" href="<?php echo esc_url( $zbs->urls['rateuswporg'] ); ?>"><i class="star icon" aria-hidden="true"></i> <?php esc_html_e( 'Leave a review', 'zero-bs-crm' ); ?></a>
-						</div>
-						<?php
-						// welcome tour and crm resources page for admins :)
-						if ( zeroBSCRM_isZBSAdminOrAdmin() ) {
-							?>
-							<div class="jpcrm-user-menu-link">
-								<a id="zbs-tour-top-menu-dash" href="<?php echo esc_url( zeroBSCRM_getAdminURL( $zbs->slugs['dash'] ) ); ?>&zbs-welcome-tour=1" class="item"><i class="icon magic"></i> <?php esc_html_e( 'Welcome Tour', 'zero-bs-crm' ); ?></a>
-							</div>
-							<div class="jpcrm-user-menu-link">
-								<a id="crm-resources-top-menu-dash" href="<?php echo esc_url( zeroBSCRM_getAdminURL( $zbs->slugs['crmresources'] ) ); ?>" class="item"><i class="icon building"></i> <?php esc_html_e( 'Resources', 'zero-bs-crm' ); ?></a>
-							</div>
-							<?php
-						}
-						?>
-					</div>
-				</div>
-				<?php
-				##/WLREMOVE
-				?>
-				<div class="column">
-					<h4 class="ui header"><?php echo esc_html( $currentUser->display_name ); ?></h4>
-					<div class="ui link list">
-
-					<div class="jpcrm-user-menu-link">
-						<a id="zbs-profile-top-menu" href="<?php echo esc_url( zeroBSCRM_getAdminURL( $zbs->slugs['your-profile'] ) ); ?>" class="item"><i class="icon user"></i> <?php esc_html_e( 'Your Profile', 'zero-bs-crm' ); ?></a>
-					</div>
-
-					<?php
-					if ( zeroBSCRM_getSetting( 'feat_calendar' ) > 0 ) {
-						$cID = get_current_user_id();
-						?>
-					<div class="jpcrm-user-menu-link">
-						<a id="jpcrm-tasks-top-menu" href="<?php echo esc_url( zeroBSCRM_getAdminURL( $zbs->slugs['manage-tasks'] ) ); ?>&zbsowner=<?php echo esc_attr( $cID ); // phpcs:ignore ?>" class="item"><i class="icon tasks"></i> <?php esc_html_e( 'Your Tasks', 'zero-bs-crm' ); ?></a>
-					</div>
-					<?php } ?>
-
-					<?php
-					##WLREMOVE //upsell
-					if ( ! zeroBSCRM_hasPaidExtensionActivated() && zeroBSCRM_isZBSAdminOrAdmin() ) {
-						?>
-						
-						<div class="jpcrm-user-menu-link">
-							<a class="item" href="<?php echo esc_url( $zbs->urls['pricing'] ); ?>" target="_blank"><i class="rocket icon" aria-hidden="true"></i> <?php esc_html_e( 'Plans', 'zero-bs-crm' ); ?></a>
-						</div>
-					<?php } ##/WLREMOVE ?>
-
-						<div class="ui divider"></div>
-
-						<div class="jpcrm-user-menu-link">
-							<a href="<?php echo esc_url( wp_logout_url() ); ?>" class="item"><i class="icon sign out"></i> <?php esc_html_e( 'Log Out', 'zero-bs-crm' ); ?></a>
-						</div>
-					</div>
-				</div>
-				</div>
-			</div>
-		</menu-section>
 		</menu-bar><!-- end .menu-bar -->
 
 	</div>
@@ -724,6 +654,8 @@ function zeroBSCRM_admin_top_menu( $branding = 'zero-bs-crm', $page = 'dash' ) {
 
 	}
 }
+
+// phpcs:enable Squiz.Commenting.InlineComment.WrongStyle
 
 // dumps out 'active' class if slug matches loaded page
 // note 'active' seems to open drop downs, so now using: current_menu_item

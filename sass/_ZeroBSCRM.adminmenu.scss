@@ -22,20 +22,24 @@
 	color: #8bc63f !important;
 }
 
-/* Full-screen mode */
+/*
+ * Full-screen mode. Only on screens wide enough to offer its toggle; tablets
+ * and phones keep WordPress' toolbar, and with it a way back out.
+ */
+@media screen and (min-width: 1025px) {
 
-// open
-body.zbs-fullscreen {
+	body.zbs-fullscreen {
 
-	#wpcontent,
-	#wpfooter {
-		margin-left: 0 !important;
-		margin-top: -32px !important;
-	}
+		#wpcontent,
+		#wpfooter {
+			margin-left: 0 !important;
+			margin-top: -32px !important;
+		}
 
-	#wpadminbar,
-	#adminmenuback,
-	#adminmenuwrap {
-		display: none !important;
+		#wpadminbar,
+		#adminmenuback,
+		#adminmenuwrap {
+			display: none !important;
+		}
 	}
 }

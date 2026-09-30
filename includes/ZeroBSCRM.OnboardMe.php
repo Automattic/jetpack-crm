@@ -43,7 +43,7 @@ function jpcrm_onboardme_scripts() {
 		'lang'              => array(
 			'step1'  => array(
 				'title'   => __( 'Welcome to your Jetpack CRM', 'zero-bs-crm' ),
-				'content' => __( 'This quick tour will guide you through the basics.', 'zero-bs-crm' ) . '<hr />' . __( 'Clicking this logo will switch to full-screen mode. Try it!', 'zero-bs-crm' ),
+				'content' => __( 'This quick tour will guide you through the basics.', 'zero-bs-crm' ) . '<hr />' . __( 'This button switches to full-screen mode. Try it!', 'zero-bs-crm' ),
 			),
 			'step2'  => array(
 				'title'   => __( 'Learn More', 'zero-bs-crm' ),

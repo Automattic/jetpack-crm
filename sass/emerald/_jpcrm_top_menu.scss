@@ -1,5 +1,3 @@
-@use "sass:math";
-
 $bar-pad-y: var(--wpds-dimension-padding-xl);
 $bar-pad-x: var(--wpds-dimension-padding-2xl);
 $logo-row-height: 24px;
@@ -10,9 +8,10 @@ $logo-row-height: 24px;
 	background-color: var(--wpds-color-background-surface-neutral-strong);
 
 	/*
-	 * The bar wraps when its items stop fitting, and the space it has depends on
-	 * whether WordPress' admin sidebar is expanded, folded or off-canvas — not on
-	 * the viewport. A container query asks the question that actually matters.
+	 * The bar folds its nav away when the items stop fitting, and the space it
+	 * has depends on whether WordPress' admin sidebar is expanded, folded or
+	 * off-canvas — not on the viewport. A container query asks the question
+	 * that actually matters.
 	 */
 	container-type: inline-size;
 	position: relative;
@@ -20,55 +19,170 @@ $logo-row-height: 24px;
 	/*
 	 * One stacking context for the whole bar. Semantic gives every dropdown
 	 * panel z-index 11, so inside this context each open panel paints over the
-	 * bar's other items -- including a second row once the bar wraps -- and the
-	 * bar as a whole clears the page content below it.
+	 * bar's other items and the bar as a whole clears the page content below it.
 	 */
 	z-index: 5;
 
-	.logo-cube {
-		cursor: pointer;
-		width: fit-content;
-		height: $logo-row-height;
-		line-height: 1;
-		transition: transform 0.33s;
-		transform-style: preserve-3d;
+	/*
+	 * At 600px and below WordPress lets its toolbar scroll away with the page
+	 * and stops padding the page to clear it. The bar is the first thing under
+	 * the toolbar, so it does the clearing. Padding, not margin: a margin
+	 * collapses through #wpcontent and carries the toolbar down with it.
+	 */
+	@media screen and (max-width: 600px) {
 
-		&:hover {
-			transform: rotateX(90deg);
+		body.admin-bar & {
+			padding-top: calc(#{$bar-pad-y} + var(--wp-admin--admin-bar--height, 46px));
+		}
+	}
+
+	/* The logo on the left; the menu toggle, notifications and account menu on the right. */
+	.jpcrm-top-menu__header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--wpds-dimension-gap-md);
+		min-height: $logo-row-height;
+	}
+
+	.jpcrm-header-logo {
+		display: flex;
+		align-items: center;
+		gap: var(--wpds-dimension-gap-sm);
+		height: $logo-row-height;
+
+		.jpcrm-header-logo__icon {
+			flex-shrink: 0;
 		}
 
-		.cube-side {
-			height: $logo-row-height;
+		.jpcrm-header-logo__text {
+			font-family: var(--wpds-typography-font-family-body);
+			font-size: var(--wpds-typography-font-size-lg);
+			font-weight: 499;
+			line-height: var(--wpds-typography-line-height-lg);
+			color: var(--wpds-color-foreground-content-neutral);
+		}
+	}
 
-			&.side1 {
-				display: flex;
-				align-items: center;
-				gap: var(--wpds-dimension-gap-sm);
-				transform: translateZ(math.div($logo-row-height, 2));
+	menu-section {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
 
-				.jpcrm-header-logo__icon {
-					flex-shrink: 0;
-				}
+		.item {
+			color: var(--wpds-color-foreground-content-neutral) !important;
+			padding: 1em;
+			line-height: 1;
 
-				.jpcrm-header-logo__text {
-					font-family: var(--wpds-typography-font-family-body);
-					font-size: var(--wpds-typography-font-size-lg);
-					font-weight: 499;
-					line-height: var(--wpds-typography-line-height-lg);
-					color: var(--wpds-color-foreground-content-neutral);
-				}
-			}
+			/* Without this the items shrink past their own text, clipping it. */
+			flex-shrink: 0;
+		}
 
-			&.side2 {
-				font-size: 24px;
-				text-align: center;
-				transform: rotateX(-90deg) translateZ(math.div(-$logo-row-height, 2));
+		// The caret sits right after its label. Semantic UI puts 1em between them.
+		.ui.dropdown > .dropdown.icon {
+			margin-left: 0;
+		}
+	}
 
-				.jpcrm-fullscreen-toggle {
-					color: var(--wpds-color-foreground-content-neutral-weak);
-					margin: 0;
-				}
-			}
+	.jpcrm-top-menu__controls {
+		flex-wrap: nowrap;
+		gap: var(--wpds-dimension-gap-xs);
+
+		/* The avatar sits 14px in from the right edge, inside the bar's padding. */
+		margin-right: calc(14px - #{$bar-pad-x});
+
+		/* The logo row is short; the controls centre on it rather than stretch it. */
+		> .item {
+			padding: 0 0.5em;
+		}
+	}
+
+	/* The menu toggle (only shown once the nav folds away) and the full-screen toggle. */
+	.jpcrm-top-menu__toggle,
+	.jpcrm-top-menu__fullscreen {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: var(--wpds-dimension-size-md);
+		height: var(--wpds-dimension-size-md);
+
+		/* A comfortable target without growing the logo row. */
+		margin-block: calc((#{$logo-row-height} - var(--wpds-dimension-size-md)) / 2);
+		padding: 0;
+		border: 0;
+		border-radius: var(--wpds-border-radius-sm);
+		background: transparent;
+		color: var(--wpds-color-foreground-content-neutral);
+		cursor: pointer;
+
+		i.icon {
+			margin: 0;
+		}
+
+
+		&:focus-visible {
+			outline: var(--wpds-border-width-focus) solid var(--wp-admin-theme-color);
+			outline-offset: 0;
+		}
+	}
+
+	.jpcrm-top-menu__toggle {
+		display: none;
+
+		&:hover,
+		&[aria-expanded="true"] {
+			background-color: var(--wpds-color-background-interactive-neutral-weak-active);
+		}
+	}
+
+	/*
+	 * The bell and full screen share a colour (the bell's, from
+	 * jpcrm-notifyme-front.scss) and darken on hover.
+	 */
+	#notty .fa-bell,
+	.jpcrm-top-menu__fullscreen {
+		color: #bbb;
+		transition: color 0.1s;
+	}
+
+	/*
+	 * Both icons draw a 21px glyph from ::before inside a 14px line box, and the
+	 * bell's front-end styles add a top margin, so they sat low. As flex boxes
+	 * with no offsets they centre on the logo row like the avatar and menu button.
+	 */
+	#notty,
+	#notifymebell {
+		display: flex;
+		align-items: center;
+	}
+
+	#notty .fa-bell,
+	.jpcrm-top-menu__fullscreen i.icon {
+		display: flex;
+		height: auto;
+		margin: 0;
+		padding-top: 0;
+		padding-bottom: 0;
+		line-height: 1;
+
+		&::before {
+			margin: 0;
+			vertical-align: top;
+		}
+	}
+
+	#notty:hover .fa-bell,
+	#notty:focus-visible .fa-bell,
+	.jpcrm-top-menu__fullscreen:hover,
+	.jpcrm-top-menu__fullscreen[aria-pressed="true"] {
+		color: var(--wpds-color-foreground-content-neutral);
+	}
+
+	/* Full screen hides the WordPress sidebar, which tablets and phones already tuck away. */
+	@media screen and (max-width: 1024px) {
+
+		.jpcrm-top-menu__fullscreen {
+			display: none;
 		}
 	}
 
@@ -78,130 +192,244 @@ $logo-row-height: 24px;
 		padding-bottom: 0;
 		display: flex;
 		flex-wrap: wrap;
-		justify-content: space-between;
 		align-items: end;
 		border-bottom: var(--wpds-border-width-xs) solid var(--wpds-color-stroke-surface-neutral-weak);
 
-		menu-section {
+		.item.current_menu_item {
+			border-bottom: 2px solid var(--wpds-color-stroke-interactive-neutral-strong);
+		}
+	}
+
+	/*
+	 * Semantic opens these on hover only. Opening them on focus as well lets the
+	 * keyboard reach every link in the nav. Folded, sections open on their own.
+	 */
+	@container (width > 600px) {
+
+		menu-bar .ui.simple.dropdown:focus-within > .menu {
+			overflow: visible;
+			width: auto;
+			height: auto;
+			top: 100% !important;
+			opacity: 1;
+		}
+
+		menu-bar .ui.simple.dropdown > .menu > .item:focus-within > .menu {
+			overflow: visible;
+			width: auto;
+			height: auto;
+			top: 0 !important;
+			left: 100% !important;
+			opacity: 1;
+		}
+	}
+
+	/*
+	 * Nothing follows the avatar, so it drops the margin Semantic adds after
+	 * dropdown images and the item's own right padding.
+	 */
+	#jpcrm-user-menu-item {
+		padding-right: 0;
+
+		img {
+			margin: 0;
+			border-radius: 50%;
+		}
+	}
+
+	#jpcrm-user-menu {
+		width: 580px;
+		min-width: 0;
+		/* The bar's content width; the viewport overstates it beside the admin sidebar. */
+		max-width: 100cqw;
+
+		i.icon {
+			margin-right: 8px;
+		}
+
+		/* The script measures where the avatar's centre falls and points the arrow at it. */
+		&.bottom.right::before {
+			right: var(--jpcrm-user-menu-arrow-right, 1em);
+		}
+	}
+
+	.jpcrm-user-menu-link {
+		display: flex;
+		align-items: flex-start;
+
+		.item {
 			display: flex;
-			flex-wrap: wrap;
 			align-items: center;
 
-			.item {
-				color: var(--wpds-color-foreground-content-neutral) !important;
-				padding: 1em;
-				line-height: 1;
-
-				/* Without this the items shrink past their own text, clipping it. */
-				flex-shrink: 0;
-
-				&.current_menu_item {
-					border-bottom: 2px solid var(--wpds-color-stroke-interactive-neutral-strong);
-				}
+			i {
+				margin-right: 10px;
+				color: var(--wpds-color-foreground-content-neutral-weak);
 			}
+		}
 
-			// The caret sits right after its label. Semantic UI puts 1em between them.
-			.ui.dropdown > .dropdown.icon {
-				margin-left: 0;
-			}
+		&:hover {
 
-			#jpcrm-user-menu-item {
-
-				img {
-					border-radius: 50%;
-				}
-			}
-
-			#jpcrm-user-menu {
-				width: 580px;
-				min-width: 0;
-				/* The bar's content width; the viewport overstates it beside the admin sidebar. */
-				max-width: 100cqw;
-
-				i.icon {
-					margin-right: 8px;
-				}
-			}
-
-			.jpcrm-user-menu-link {
-				display: flex;
-				align-items: flex-start;
-
-				.item {
-					display: flex;
-					align-items: center;
-
-					i {
-						margin-right: 10px;
-						color: var(--wpds-color-foreground-content-neutral-weak);
-					}
-				}
-
-				&:hover {
-
-					.item i {
-						color: var(--wpds-color-foreground-content-neutral);
-					}
-				}
+			.item i {
+				color: var(--wpds-color-foreground-content-neutral);
 			}
 		}
 	}
 
 	/*
-	 * Once the nav no longer fits alongside the notifications and account
-	 * controls, those two move up into the logo row, which is empty to the right
-	 * of the wordmark. Left in place they wrap onto a row of their own, aligned
-	 * left under the nav.
-	 *
-	 * The threshold is roughly where the nav and the controls stop fitting side
-	 * by side with the menu as it stands; re-measure if items are added or
-	 * renamed. A container query measures the content box, so the bar's own
-	 * padding is already excluded.
+	 * Just above the fold the nav can reach the bar's right edge, and the last
+	 * item's panel -- anchored to its left -- hangs off it. Hang that one off
+	 * its right edge instead.
 	 */
-	@container (max-width: 740px) {
+	@container (max-width: 760px) {
 
-		menu-bar menu-section:last-of-type {
-			position: absolute;
-			top: $bar-pad-y;
-			right: $bar-pad-x;
-			height: $logo-row-height; /* So the controls centre against the logo row. */
-		}
-
-		/*
-		 * With the controls out of the way the nav can now reach the right edge,
-		 * and the last item's panel -- anchored to its left -- hangs off it. Hang
-		 * that one off its right edge instead.
-		 *
-		 * This is the fallback. It assumes the last item is at the right end of a
-		 * row, which stops being true once it wraps onto a row of its own; the
-		 * block below handles that where anchor positioning is available.
-		 */
-		menu-section:first-of-type > .item:last-child > .menu {
+		menu-bar menu-section > .item:last-child > .menu {
 			left: auto;
 			right: 0;
 		}
 
 		/*
-		 * Any panel that would overflow the bar's right edge flips to hang from
-		 * its item's right edge instead, and only then. The item goes static so
-		 * the panel's containing block -- what the overflow check measures
-		 * against -- is the bar rather than the item.
+		 * Where anchor positioning is available, any panel that would overflow
+		 * the bar's right edge flips to hang from its item's right edge instead,
+		 * and only then. The item goes static so the panel's containing block --
+		 * what the overflow check measures against -- is the bar rather than the
+		 * item.
 		 */
 		@supports (position-try-fallbacks: flip-inline) {
 
-			menu-bar menu-section:first-of-type > .ui.dropdown.item {
+			menu-bar menu-section > .ui.dropdown.item {
 				position: static;
 				anchor-name: --jpcrm-nav-item;
 				anchor-scope: --jpcrm-nav-item;
 			}
 
-			menu-bar menu-section:first-of-type > .ui.dropdown.item > .menu {
+			menu-bar menu-section > .ui.dropdown.item > .menu {
 				position-anchor: --jpcrm-nav-item;
 				top: anchor(bottom);
 				left: anchor(left);
 				right: auto;
 				position-try-fallbacks: flip-inline;
 			}
+		}
+	}
+
+	/*
+	 * Once the tabs no longer fit on one row they fold into a menu behind the
+	 * toggle in the logo row. Each section opens in place, so the whole menu
+	 * reads top to bottom and works by touch and keyboard alike.
+	 *
+	 * The threshold is roughly the nav's width as it stands; re-measure if items
+	 * are added or renamed.
+	 */
+	@container (max-width: 600px) {
+
+		.jpcrm-top-menu__toggle {
+			display: inline-flex;
+		}
+
+		/* Both rows run edge to edge, so their dividing lines do too. */
+		.jpcrm-top-menu__header,
+		menu-bar {
+			margin: 0 calc(-1 * #{$bar-pad-x});
+		}
+
+		/* With the tabs gone, the logo row carries the line that closes off the bar. */
+		.jpcrm-top-menu__header {
+			padding: 0 $bar-pad-x var(--wpds-dimension-padding-xl);
+			border-bottom: var(--wpds-border-width-xs) solid var(--wpds-color-stroke-surface-neutral-weak);
+		}
+
+		menu-bar {
+			display: none;
+			padding: var(--wpds-dimension-gap-xs) 0;
+		}
+
+		&.is-open menu-bar {
+			display: block;
+		}
+
+		/* Each section, and Companies nested under Contacts, is its label then its panel. */
+		menu-bar menu-section > .item,
+		menu-bar .ui.dropdown .menu > .ui.dropdown.item {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			justify-content: space-between;
+		}
+
+		menu-bar menu-section {
+			flex-direction: column;
+			align-items: stretch;
+			flex-wrap: nowrap;
+
+			> .item {
+				position: static;
+				min-height: 44px;
+				padding: 0 $bar-pad-x;
+				border-bottom: 0;
+
+				&.current_menu_item {
+					border-bottom: 0;
+					font-weight: 600;
+					box-shadow: inset 3px 0 0 var(--wpds-color-stroke-interactive-neutral-strong) !important; /* Semantic clears it on hover. */
+				}
+			}
+
+			/* The label keeps the row's height once its panel opens beneath it. */
+			> .ui.dropdown.item > .text {
+				flex: 1;
+				display: flex;
+				align-items: center;
+				min-height: 44px;
+			}
+
+			.ui.dropdown > .dropdown.icon {
+				transition: transform 0.15s;
+			}
+
+			.ui.dropdown.is-expanded > .dropdown.icon {
+				transform: rotate(180deg);
+			}
+		}
+
+		/* Panels open below their label instead of floating over the page. */
+		menu-bar .ui.simple.dropdown .menu,
+		menu-bar .ui.simple.dropdown:hover > .menu,
+		menu-bar .ui.simple.dropdown:hover > .menu > .item:hover > .menu {
+			display: none;
+			position: static;
+			flex-basis: 100%;
+			width: auto;
+			height: auto;
+			min-width: 0;
+			margin: 0 0 var(--wpds-dimension-gap-xs);
+			padding: 0;
+			overflow: visible;
+			opacity: 1;
+			border: 0;
+			border-radius: 0;
+			box-shadow: none;
+			background: transparent;
+		}
+
+		menu-bar .ui.simple.dropdown.is-expanded > .menu {
+			display: block;
+		}
+
+		menu-bar .ui.dropdown .menu > .item {
+			padding: 0.75em 0 0.75em 1em !important;
+			white-space: normal;
+		}
+
+		/* The account menu's columns stack; side by side they overlap at this width. */
+		#jpcrm-user-menu .ui.grid > .column {
+			width: 100% !important;
+			padding-top: var(--wpds-dimension-padding-md);
+			padding-bottom: var(--wpds-dimension-padding-md);
+			box-shadow: none;
+		}
+
+		#jpcrm-user-menu .ui.grid > .column + .column {
+			border-top: var(--wpds-border-width-xs) solid var(--wpds-color-stroke-surface-neutral-weak);
 		}
 	}
 }

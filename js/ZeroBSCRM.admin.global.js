@@ -167,6 +167,7 @@ window.zbscrmjs_adminMenuBlocker = false;
 function zbscrm_JS_adminMenuDropdown() {
 	// popup menu
 	zbscrm_JS_initMenuPopups();
+	jpcrm_js_init_top_menu_toggle();
 
 	jQuery( function () {
 		// hopscotch?
@@ -199,20 +200,20 @@ function zbscrm_JS_adminMenuDropdown() {
 
 		// if calypso, loading on an embed page, already full screen, need to run this to re-adjust/hide:
 		setTimeout( function () {
-			const $logoCube = jQuery( '#jpcrm-top-menu .logo-cube' );
-			if ( $logoCube.length && ! $logoCube.hasClass( 'menu-open' ) ) {
-				zbscrm_JS_fullscreenModeOn( $logoCube );
+			const $fullscreenToggle = jQuery( '#jpcrm-top-menu .jpcrm-top-menu__fullscreen' );
+			if ( $fullscreenToggle.attr( 'aria-pressed' ) === 'true' ) {
+				zbscrm_JS_fullscreenModeOn( $fullscreenToggle );
 			}
 		}, 0 );
 	}
 
 	// bind the toggle
-	jQuery( '#jpcrm-top-menu .logo-cube' )
+	jQuery( '#jpcrm-top-menu .jpcrm-top-menu__fullscreen' )
 		.off( 'click' )
 		.on( 'click', function () {
 			if ( ! window.zbscrmjs_adminMenuBlocker ) {
 				window.zbscrmjs_adminMenuBlocker = true;
-				if ( jQuery( this ).hasClass( 'menu-open' ) ) {
+				if ( jQuery( this ).attr( 'aria-pressed' ) !== 'true' ) {
 					// go fullscreen
 					zbscrm_JS_fullscreenModeOn( this );
 				} else {
@@ -231,7 +232,7 @@ function zbscrm_JS_fullscreenModeOn( wrapperElement ) {
 	// adjust classes & hide menu bar etc.
 	// any work here, take account of calypsoify results
 	jQuery( 'body' ).addClass( 'zbs-fullscreen' );
-	jQuery( wrapperElement ).removeClass( 'menu-open' );
+	jQuery( wrapperElement ).attr( 'aria-pressed', 'true' );
 	jQuery( '#wpadminbar, #adminmenuback, #adminmenuwrap, #calypso-sidebar-header' ).hide();
 
 	// if we're in calypso, also adjust this:
@@ -275,7 +276,7 @@ function zbscrm_JS_fullscreenModeOff( wrapperElement ) {
 	// adjust classes & show menu bar etc.
 	// any work here, take account of calypsoify results
 	jQuery( 'body' ).removeClass( 'zbs-fullscreen' );
-	jQuery( wrapperElement ).addClass( 'menu-open' );
+	jQuery( wrapperElement ).attr( 'aria-pressed', 'false' );
 	jQuery( '#wpadminbar, #adminmenuback, #adminmenuwrap, #calypso-sidebar-header' ).show();
 
 	// if we're in calypso, also adjust this:
@@ -316,18 +317,118 @@ function zbscrm_JS_fullscreenModeOff( wrapperElement ) {
  *
  */
 function zbscrm_JS_initMenuPopups() {
-	if ( typeof jQuery( '#jpcrm-user-menu-item' ).popup !== 'undefined' ) {
-		jQuery( '#jpcrm-user-menu-item' ).popup( {
+	const $userMenuItem = jQuery( '#jpcrm-user-menu-item' );
+	if ( typeof $userMenuItem.popup !== 'undefined' ) {
+		// Touch screens have no hover to open it with, so a tap opens it there.
+		const canHover = ! window.matchMedia || window.matchMedia( '(hover: hover)' ).matches;
+
+		$userMenuItem.popup( {
 			popup: jQuery( '#jpcrm-user-menu' ),
-			position: 'bottom center',
-			hoverable: true,
-			on: 'hover',
+			// The avatar sits at the bar's right edge, so the menu hangs from there
+			// and the CSS points its arrow at the avatar.
+			position: 'bottom right',
+			hoverable: canHover,
+			on: canHover ? 'hover' : 'click',
+			// Stacked on a phone the menu is taller than the screen, and without
+			// this Semantic declines to show a popup that doesn't fit.
+			lastResort: 'bottom right',
+			// Point the arrow at the middle of the avatar. Semantic pins it 1em in,
+			// and where the popup's edge lands against the avatar varies by a few px.
+			onShow: function () {
+				const popup = this.get( 0 );
+				window.requestAnimationFrame( function () {
+					const avatar = $userMenuItem.find( 'img' ).get( 0 ) || $userMenuItem.get( 0 );
+					const avatarRect = avatar.getBoundingClientRect();
+					const arrowWidth = parseFloat( window.getComputedStyle( popup, '::before' ).width ) || 0;
+					const right = popup.getBoundingClientRect().right - ( avatarRect.left + avatarRect.width / 2 ) - arrowWidth / 2;
+					popup.style.setProperty( '--jpcrm-user-menu-arrow-right', right + 'px' );
+				} );
+			},
 			delay: {
 				show: 50,
 				hide: 500,
 			},
 		} );
+
+		// Enter or Space opens it from the keyboard.
+		$userMenuItem.off( 'keydown.jpcrm' ).on( 'keydown.jpcrm', function ( event ) {
+			if ( event.key === 'Enter' || event.key === ' ' ) {
+				event.preventDefault();
+				$userMenuItem.popup( 'toggle' );
+			}
+		} );
 	}
+}
+
+/**
+ * Opens and closes the top bar's nav once it has folded behind the menu toggle.
+ *
+ * The CSS decides when the nav folds (a container query on #jpcrm-top-menu);
+ * this only handles the toggle, and opening sections in place while folded.
+ */
+function jpcrm_js_init_top_menu_toggle() {
+	const bar = document.getElementById( 'jpcrm-top-menu' );
+	const nav = document.getElementById( 'jpcrm-top-menu-nav' );
+	const toggle = bar && bar.querySelector( '.jpcrm-top-menu__toggle' );
+	if ( ! nav || ! toggle || toggle.dataset.jpcrmBound ) {
+		return;
+	}
+	toggle.dataset.jpcrmBound = '1';
+
+	const isFolded = () => window.getComputedStyle( toggle ).display !== 'none';
+
+	const setOpen = open => {
+		bar.classList.toggle( 'is-open', open );
+		toggle.setAttribute( 'aria-expanded', open ? 'true' : 'false' );
+	};
+
+	const toggleSection = section => {
+		const expanded = ! section.classList.contains( 'is-expanded' );
+		section.classList.toggle( 'is-expanded', expanded );
+		section.setAttribute( 'aria-expanded', expanded ? 'true' : 'false' );
+	};
+
+	toggle.addEventListener( 'click', () => {
+		setOpen( ! bar.classList.contains( 'is-open' ) );
+	} );
+
+	// A tap on a section's label opens it in place. Capture runs before Semantic's
+	// own dropdown handler, which some screens bind to every .ui.dropdown.
+	nav.addEventListener(
+		'click',
+		event => {
+			if ( event.target.closest( 'a' ) ) {
+				return;
+			}
+			const section = event.target.closest( '.ui.dropdown.item' );
+			const panel = event.target.closest( '.menu' );
+			if ( ! section || ( panel && section.contains( panel ) ) || ! isFolded() ) {
+				return;
+			}
+			event.preventDefault();
+			event.stopPropagation();
+			toggleSection( section );
+		},
+		true
+	);
+
+	nav.addEventListener( 'keydown', event => {
+		if (
+			( event.key === 'Enter' || event.key === ' ' ) &&
+			event.target.matches( '.ui.dropdown.item' ) &&
+			isFolded()
+		) {
+			event.preventDefault();
+			toggleSection( event.target );
+		}
+	} );
+
+	document.addEventListener( 'keydown', event => {
+		if ( event.key === 'Escape' && bar.classList.contains( 'is-open' ) && isFolded() ) {
+			setOpen( false );
+			toggle.focus();
+		}
+	} );
 }
 
 // watches any input with class zbs-watch-input and if they're changed from post dom, it'll flag an input with thier id_dirtyflag
@@ -2834,6 +2935,7 @@ if ( typeof module !== 'undefined' ) {
 		zbscrm_JS_fullscreenModeOn,
 		zbscrm_JS_fullscreenModeOff,
 		zbscrm_JS_initMenuPopups,
+		jpcrm_js_init_top_menu_toggle,
 		zbscrm_JS_watchInputsAndDirty,
 		zbscrm_JS_dirtyCatch,
 		zbscrm_JS_delDirty,
