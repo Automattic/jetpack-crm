@@ -167,6 +167,7 @@ window.zbscrmjs_adminMenuBlocker = false;
 function zbscrm_JS_adminMenuDropdown() {
 	// popup menu
 	zbscrm_JS_initMenuPopups();
+	jpcrm_js_init_top_menu_toggle();
 
 	jQuery( function () {
 		// hopscotch?
@@ -328,6 +329,81 @@ function zbscrm_JS_initMenuPopups() {
 			},
 		} );
 	}
+}
+
+/**
+ * Opens and closes the top bar's nav once it has folded behind the menu toggle.
+ *
+ * The CSS decides when the nav folds (a container query on #jpcrm-top-menu);
+ * this only handles the toggle, and opening sections in place while folded.
+ */
+function jpcrm_js_init_top_menu_toggle() {
+	const bar = document.getElementById( 'jpcrm-top-menu' );
+	const nav = document.getElementById( 'jpcrm-top-menu-nav' );
+	const toggle = bar && bar.querySelector( '.jpcrm-top-menu__toggle' );
+	if ( ! nav || ! toggle || toggle.dataset.jpcrmBound ) {
+		return;
+	}
+	toggle.dataset.jpcrmBound = '1';
+
+	const isFolded = () => window.getComputedStyle( toggle ).display !== 'none';
+
+	const setOpen = open => {
+		bar.classList.toggle( 'is-open', open );
+		toggle.setAttribute( 'aria-expanded', open ? 'true' : 'false' );
+	};
+
+	const toggleSection = section => {
+		const expanded = ! section.classList.contains( 'is-expanded' );
+		section.classList.toggle( 'is-expanded', expanded );
+		section.setAttribute( 'aria-expanded', expanded ? 'true' : 'false' );
+	};
+
+	// The section labels are plain text, so make them reachable by keyboard.
+	nav.querySelectorAll( '.ui.dropdown.item' ).forEach( section => {
+		section.setAttribute( 'tabindex', '0' );
+	} );
+
+	toggle.addEventListener( 'click', () => {
+		setOpen( ! bar.classList.contains( 'is-open' ) );
+	} );
+
+	// A tap on a section's label opens it in place. Capture runs before Semantic's
+	// own dropdown handler, which some screens bind to every .ui.dropdown.
+	nav.addEventListener(
+		'click',
+		event => {
+			if ( ! isFolded() || event.target.closest( 'a' ) ) {
+				return;
+			}
+			const section = event.target.closest( '.ui.dropdown.item' );
+			const panel = event.target.closest( '.menu' );
+			if ( ! section || ( panel && section.contains( panel ) ) ) {
+				return;
+			}
+			event.preventDefault();
+			event.stopPropagation();
+			toggleSection( section );
+		},
+		true
+	);
+
+	nav.addEventListener( 'keydown', event => {
+		if ( ! isFolded() ) {
+			return;
+		}
+		if ( ( event.key === 'Enter' || event.key === ' ' ) && event.target.matches( '.ui.dropdown.item' ) ) {
+			event.preventDefault();
+			toggleSection( event.target );
+		}
+	} );
+
+	document.addEventListener( 'keydown', event => {
+		if ( event.key === 'Escape' && bar.classList.contains( 'is-open' ) && isFolded() ) {
+			setOpen( false );
+			toggle.focus();
+		}
+	} );
 }
 
 // watches any input with class zbs-watch-input and if they're changed from post dom, it'll flag an input with thier id_dirtyflag
@@ -2834,6 +2910,7 @@ if ( typeof module !== 'undefined' ) {
 		zbscrm_JS_fullscreenModeOn,
 		zbscrm_JS_fullscreenModeOff,
 		zbscrm_JS_initMenuPopups,
+		jpcrm_js_init_top_menu_toggle,
 		zbscrm_JS_watchInputsAndDirty,
 		zbscrm_JS_dirtyCatch,
 		zbscrm_JS_delDirty,
