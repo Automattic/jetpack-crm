@@ -377,6 +377,10 @@ class zeroBSCRM_list {
 
 			<div class="jpcrm-listview">
 				<?php
+				// Totals sit above the list as a summary. Currently only implemented in contacts.
+				if ( $zbs->settings->get( 'show_totals_table' ) === 1 && $this->objType === 'customer' ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+					echo '<jpcrm-dashcount class="jpcrm-listview-summary"></jpcrm-dashcount>';
+				}
 				// phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 				$this->draw_listview_header( $listViewFilters );
 				?>
@@ -425,13 +429,6 @@ class zeroBSCRM_list {
 				</div>
 			</div>
 			<?php
-
-			// If totals, show the wrapper. Currently only implemented in contacts
-			if ( $zbs->settings->get( 'show_totals_table' ) === 1 && $this->objType === 'customer' ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
-				?>
-				<jpcrm-dashcount class="wide-cards"></jpcrm-dashcount>
-				<?php
-			}
 			##WLREMOVE
 			// e.g. upsell boxes
 			echo $this->extraBoxes; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase,WordPress.Security.EscapeOutput.OutputNotEscaped
