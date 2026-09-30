@@ -188,7 +188,7 @@ input[type="radio"] {
 }
 
 .click-email-to-load {
-	color: #ccc;
+	color: var(--wpds-color-foreground-content-neutral-weak);
 	font-size: 18px;
 	margin-top: -50px;
 }
@@ -279,7 +279,7 @@ input[type="radio"] {
 .panel-h4 {
 	margin-left: 0;
 	margin-top: 20px;
-	color: #ccc;
+	color: var(--wpds-color-foreground-content-neutral-weak);
 	text-transform: uppercase;
 	font-size: 15px;
 }
@@ -323,7 +323,7 @@ input[type="radio"] {
 }
 
 .no-emails {
-	color: #ccc;
+	color: var(--wpds-color-foreground-content-neutral-weak);
 	font-size: 18px;
 	text-align: center;
 	margin-top: 200px;
@@ -345,7 +345,7 @@ input[type="radio"] {
 	}
 
 	.zbs-email-date {
-		color: #ccc;
+		color: var(--wpds-color-foreground-content-neutral-weak);
 	}
 
 	.zbs-email-subject {
@@ -504,7 +504,7 @@ input[type="radio"] {
 	h3 {
 		font-size: 18px;
 		margin-top: 6px;
-		color: #ccc;
+		color: var(--wpds-color-foreground-content-neutral-weak);
 	}
 }
 
@@ -562,7 +562,7 @@ input[type="radio"] {
 .zbsreadsent {
 	font-size: 13px;
 	text-align: right;
-	color: #ccc;
+	color: var(--wpds-color-foreground-content-neutral-weak);
 
 	.bold {
 		font-weight: 900;

@@ -1037,20 +1037,20 @@ output {
 }
 
 .form-control:-moz-placeholder {
-	color: studio.$studio-gray-5;
+	color: studio.$studio-gray-50;
 }
 
 .form-control::-moz-placeholder {
-	color: studio.$studio-gray-5;
+	color: studio.$studio-gray-50;
 	opacity: 1;
 }
 
 .form-control:-ms-input-placeholder {
-	color: studio.$studio-gray-5;
+	color: studio.$studio-gray-50;
 }
 
 .form-control::-webkit-input-placeholder {
-	color: studio.$studio-gray-5;
+	color: studio.$studio-gray-50;
 }
 
 .form-control[disabled],

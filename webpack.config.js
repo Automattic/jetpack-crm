@@ -86,6 +86,33 @@ function getLegacyWelcomeZBSCSSEntries() {
 	return entries;
 }
 
+/**
+ * Swap Semantic UI's Lato, which it loads from Google Fonts, for the WordPress
+ * admin font token.
+ *
+ * semantic-ui-css is pinned, so the replacements are exact strings; the build
+ * fails if a newer version still mentions Lato. The `jpcrm-semanticui-lib`
+ * style depends on `jpcrm-wpds-tokens`, which defines the token.
+ *
+ * @param {Buffer} content - semantic.min.css as distributed.
+ * @return {string} The stylesheet CRM ships.
+ */
+function semanticUiWithSystemFont( content ) {
+	const css = content
+		.toString()
+		.replace( /@import url\(https:\/\/fonts\.googleapis\.com\/[^)]*\);/, '' )
+		.replaceAll(
+			"Lato,'Helvetica Neue',Arial,Helvetica,sans-serif",
+			'var(--wpds-typography-font-family-body)'
+		);
+
+	if ( /\bLato\b|fonts\.googleapis\.com/.test( css ) ) {
+		throw new Error( 'semantic.min.css still references Lato or Google Fonts; update semanticUiWithSystemFont().' );
+	}
+
+	return css;
+}
+
 const isProduction = process.env.NODE_ENV === 'production';
 
 const crmWebpackConfig = {
@@ -441,6 +468,7 @@ module.exports = [
 					{
 						from: path.resolve( __dirname, 'node_modules/semantic-ui-css/semantic.min.css' ),
 						to: `${ buildLibPath }/semantic-ui-css/`,
+						transform: semanticUiWithSystemFont,
 					},
 					// Used extensively as a general UI base
 					{

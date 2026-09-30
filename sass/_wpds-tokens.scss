@@ -1,6 +1,7 @@
 /*
- * WordPress Design System tokens. `@use` this from any stylesheet that needs
- * `--wpds-*` custom properties.
+ * WordPress Design System tokens. Only jpcrm-wpds-tokens.scss `@use`s this;
+ * stylesheets that need `--wpds-*` custom properties depend on the
+ * `jpcrm-wpds-tokens` style handle instead of inlining the table.
  *
  * A CSS `@import` rather than `@use` because the package specifier resolves
  * through @wordpress/theme's exports map, which css-loader honours and Sass

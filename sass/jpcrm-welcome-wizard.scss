@@ -1,7 +1,6 @@
 /* stylelint-disable no-duplicate-selectors
 -- Disabled due to copied styles from Bootstrap. */
 @use "sass:color";
-@use "wpds-tokens";
 
 $jetpack_green: #069e08;
 $jetpack_hover: #007017;
@@ -17,6 +16,7 @@ $wiz_background: #e5e5e5;
 }
 
 body {
+	font-family: var(--wpds-typography-font-family-body);
 	font-size: 14px;
 	line-height: 1.42857143;
 }
@@ -263,187 +263,6 @@ input[type="radio"] {
 	left: 30px;
 	color: #fff;
 }
-
-/* Layout */
-.ck_form.ck_minimal {
-
-	/* divider image */
-	background: #f9f9f9;
-	font-family: "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;
-	line-height: 1.5;
-	overflow: hidden;
-	color: #666;
-	font-size: 16px;
-	border: solid 1px #d1d1d1;
-	box-shadow: none;
-	clear: both;
-	margin: 20px 0;
-	text-align: center;
-}
-
-
-.ck_form.ck_minimal h3.ck_form_title {
-	text-align: center;
-	margin: 0 0 10px;
-	font-size: 28px;
-}
-
-.ck_form.ck_minimal h4 {
-	text-align: center;
-	font-family: "Open Sans", Helvetica, Arial, sans-serif;
-	text-transform: uppercase;
-	font-size: 18px;
-	font-weight: 400;
-	padding-top: 0;
-	margin-top: 0;
-}
-
-.ck_form.ck_minimal p {
-	padding: 0;
-}
-
-.ck_form,
-.ck_form * {
-	box-sizing: border-box;
-}
-
-.ck_form.ck_minimal .ck_form_fields {
-	width: 100%;
-	float: left;
-	padding: 5%;
-}
-
-/* Form fields */
-
-.ck_errorArea {
-	display: none; /* temporary */
-}
-
-#ck_success_msg {
-	padding: 10px 10px 0;
-	border: solid 1px #ddd;
-	background: #eee;
-}
-
-.ck_form.ck_minimal input[type="text"],
-.ck_form.ck_minimal input[type="email"] {
-	font-size: 18px;
-	padding: 10px 8px;
-	width: 68%;
-	border: 1px solid #d6d6d6; /* stroke */
-	border-radius: 3px; /* border radius */
-	background-color: #fff; /* layer fill content */
-	float: left;
-	margin: 0;
-	margin-right: 2%;
-	height: 42px;
-}
-
-.ck_form input[type="text"]:focus,
-.ck_form input[type="email"]:focus {
-	outline: none;
-	border-color: #aaa;
-}
-
-.ck_form.ck_minimal .ck_subscribe_button {
-	color: #fff;
-	margin: 0;
-	padding: 11px 0;
-	font-size: 18px;
-	background: $jetpack_green;
-	border-radius: 3px; /* border radius */
-	cursor: pointer;
-	border: none;
-	text-shadow: none;
-	width: 30%;
-	float: left;
-	height: 42px;
-}
-
-
-.ck_form.ck_minimal .ck_guarantee {
-	color: #626262;
-	font-size: 12px;
-	text-align: center;
-	padding: 15px 0 0;
-	display: block;
-	clear: both;
-}
-
-.ck_form .ck_powered_by {
-	display: block;
-	color: #aaa;
-	font-size: 12px;
-}
-
-.ck_form .ck_powered_by:hover {
-	display: block;
-	color: #444;
-}
-
-.ck_converted_content {
-	display: none;
-	padding: 5%;
-	background: #fff;
-}
-
-.ck_form.ck_minimal.width400 .ck_subscribe_button,
-.ck_form.ck_minimal.width400 input[type="email"] {
-	width: 100%;
-	float: none;
-	margin-top: 5px;
-}
-
-.ck_slide_up,
-.ck_modal,
-.ck_slide_up .ck_minimal,
-.ck_modal .ck_minimal {
-	min-width: 400px;
-}
-
-.page .ck_form.ck_minimal {
-	margin: 50px auto;
-	max-width: 600px;
-}
-
-
-/* v6 */
-.ck_slide_up.ck_form_v6,
-.ck_modal.ck_form_v6,
-.ck_slide_up.ck_form_v6 .ck_minimal,
-.ck_modal.ck_form_v6 .ck_minimal {
-	min-width: 0 !important;
-}
-
-@media all and (min-width: 801px) {
-
-	.ck_modal.ck_form_v6 .ck_form.ck_minimal {
-		margin-left: -300px;
-		width: 600px;
-	}
-}
-
-.ck_modal.ck_form_v6 .ck_minimal .ck_subscribe_form {
-	padding-top: 20px;
-}
-
-.ck_slide_up.ck_form_v6 .ck_minimal .ck_subscribe_form {
-	padding-top: 10px;
-}
-
-.ck_form_v6 #ck_success_msg {
-	margin-top: 15px;
-	padding: 0 10px;
-}
-
-.ck_slide_up.ck_form_v6 .ck_minimal + .ck_close_link {
-	top: 5px;
-}
-
-.ck_slide_up.ck_form_v6 .ck_minimal h3.ck_form_title {
-	margin-top: 5px;
-}
-
 
 /* WH OVERRIDES */
 .setup-content label {
@@ -746,7 +565,7 @@ $darkenColor: color.adjust($activeColor, $lightness: -20%);
 }
 
 #zbs-lead-header {
-	color: #ccc;
+	color: var(--wpds-color-foreground-content-neutral-weak);
 }
 
 p.lead {

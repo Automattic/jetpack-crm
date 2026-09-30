@@ -13,7 +13,7 @@
 	}
 
 	.content {
-		color: #adadad;
+		color: var(--wpds-color-foreground-content-neutral-weak);
 		font-size: 14px;
 		font-weight: 200;
 		margin-top: 5px;
@@ -181,7 +181,7 @@
 	}
 
 	.top-info-block .who {
-		color: #ccc;
+		color: var(--wpds-color-foreground-content-neutral-weak);
 	}
 
 	.main-talk {

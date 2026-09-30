@@ -9,9 +9,11 @@
  * - no-unknown-ds-tokens catches `--wpds-*` names that don't exist in the
  *   installed @wordpress/theme. This is the rule that would have caught the
  *   0.13.0 -> 1.0.0 `bg`/`fg` -> `background`/`foreground` rename.
- * - no-token-fallback-values keeps hardcoded fallbacks out of `var()`. The token
- *   table is inlined into the same compiled stylesheet that references it, so a
- *   fallback can never be reached, and six of them had silently drifted out of
+ * - no-token-fallback-values keeps hardcoded fallbacks out of `var()`. Every
+ *   admin stylesheet that references a token depends on the `jpcrm-wpds-tokens`
+ *   style, so the token table always loads first and a fallback can never be
+ *   reached. (Partials shared with the invoice PDF/email stylesheet stay
+ *   token-free: that output has no token table and Dompdf can't resolve them.) Six of them had silently drifted out of
  *   sync with the tokens they shadowed.
  */
 export default {
