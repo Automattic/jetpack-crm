@@ -31,7 +31,7 @@ $logo-row-height: 24px;
 	 */
 	@media screen and (max-width: 600px) {
 
-		body.admin-bar:not(.zbs-fullscreen) & {
+		body.admin-bar & {
 			padding-top: calc(#{$bar-pad-y} + var(--wp-admin--admin-bar--height, 46px));
 		}
 	}
@@ -119,11 +119,6 @@ $logo-row-height: 24px;
 			margin: 0;
 		}
 
-		&:hover,
-		&[aria-expanded="true"],
-		&[aria-pressed="true"] {
-			background-color: var(--wpds-color-background-interactive-neutral-weak-active);
-		}
 
 		&:focus-visible {
 			outline: var(--wpds-border-width-focus) solid var(--wp-admin-theme-color);
@@ -133,6 +128,36 @@ $logo-row-height: 24px;
 
 	.jpcrm-top-menu__toggle {
 		display: none;
+
+		&:hover,
+		&[aria-expanded="true"] {
+			background-color: var(--wpds-color-background-interactive-neutral-weak-active);
+		}
+	}
+
+	/*
+	 * The bell and full screen share a colour (the bell's, from
+	 * jpcrm-notifyme-front.scss) and darken on hover.
+	 */
+	#notty .fa-bell,
+	.jpcrm-top-menu__fullscreen {
+		color: #bbb;
+		transition: color 0.1s;
+	}
+
+	#notty:hover .fa-bell,
+	#notty:focus-visible .fa-bell,
+	.jpcrm-top-menu__fullscreen:hover,
+	.jpcrm-top-menu__fullscreen[aria-pressed="true"] {
+		color: var(--wpds-color-foreground-content-neutral);
+	}
+
+	/* Full screen hides the WordPress sidebar, which tablets and phones already tuck away. */
+	@media screen and (max-width: 1024px) {
+
+		.jpcrm-top-menu__fullscreen {
+			display: none;
+		}
 	}
 
 	menu-bar {
