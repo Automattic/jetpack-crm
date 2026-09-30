@@ -88,6 +88,9 @@ $logo-row-height: 24px;
 		flex-wrap: nowrap;
 		gap: var(--wpds-dimension-gap-xs);
 
+		/* The avatar sits 14px in from the right edge, 10px into the bar's padding. */
+		margin-right: -10px;
+
 		/* The logo row is short; the controls centre on it rather than stretch it. */
 		> .item {
 			padding: 0 0.5em;
@@ -170,9 +173,8 @@ $logo-row-height: 24px;
 	}
 
 	/*
-	 * The avatar lines up with the bar's right padding, mirroring the logo on
-	 * the left. Semantic adds a margin after dropdown images, and the item its
-	 * own padding; neither has anything to separate it from here.
+	 * Nothing follows the avatar, so it drops the margin Semantic adds after
+	 * dropdown images and the item's own right padding.
 	 */
 	#jpcrm-user-menu-item {
 		padding-right: 0;
