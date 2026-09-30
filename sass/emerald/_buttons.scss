@@ -1,59 +1,85 @@
+/*
+ * CRM's own buttons, styled like the WordPress components Button at its 40px
+ * size: the default is primary (admin theme color), `.white-bg` is secondary
+ * and `.transparent-bg` is tertiary. `.font-14px` is the 32px compact size.
+ */
 .jpcrm-button {
-	padding: 8px 24px;
-	text-decoration: none;
-	background: var(--jp-black);
-	color: var(--jp-white);
-	border: 1.5px solid var(--jp-black);
-	border-radius: 4px;
-	font-family: var(--jpcrm-font-family-emerald);
-	font-style: normal;
-	font-size: 16px;
-	line-height: 24px;
-	letter-spacing: -0.01em;
-	box-sizing: border-box;
 	display: inline-flex;
-	cursor: pointer;
-	justify-content: center;
 	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	min-height: var(--wpds-dimension-size-lg);
+	padding: 0 var(--wpds-dimension-padding-lg);
+	border: 0;
+	border-radius: var(--wpds-border-radius-sm);
+	background: var(--wp-admin-theme-color);
+	color: var(--wpds-color-foreground-interactive-brand-strong);
+	font-family: inherit;
+	font-size: var(--wpds-typography-font-size-md);
+	font-weight: var(--wpds-typography-font-weight-emphasis);
+	line-height: var(--wpds-typography-line-height-sm);
+	text-decoration: none;
 	white-space: nowrap;
+	cursor: pointer;
 
-	&.font-14px {
-		font-size: 14px;
-		line-height: 24px;
+	&:hover,
+	&:focus,
+	&:active {
+		background: var(--wp-admin-theme-color-darker-10);
+		color: var(--wpds-color-foreground-interactive-brand-strong);
 	}
 
-	&:active,
-	&:focus,
-	&:hover {
-		background: var(--jp-gray-80);
-		color: var(--jp-white);
+	&:focus-visible {
+		outline: var(--wpds-border-width-focus) solid var(--wp-admin-theme-color);
+		outline-offset: 2px;
+	}
+
+	&.font-14px {
+		min-height: var(--wpds-dimension-size-md);
+		padding: 0 var(--wpds-dimension-padding-md);
 	}
 
 	&.white-bg {
-		font-weight: 500;
-		background: var(--jp-white);
-		color: var(--jp-black);
+		background: transparent;
+		color: var(--wp-admin-theme-color);
+		box-shadow: inset 0 0 0 1px var(--wp-admin-theme-color);
 
-		&:hover {
-			background: var(--jp-gray-0);
-			color: var(--jp-gray-80);
+		&:hover,
+		&:focus,
+		&:active {
+			background: transparent;
+			color: var(--wp-admin-theme-color-darker-10);
+			box-shadow: inset 0 0 0 1px var(--wp-admin-theme-color-darker-10);
 		}
 	}
 
 	&.transparent-bg {
-		font-weight: 500;
-		border: 0;
 		background: transparent;
-		color: var(--jp-black);
-		padding: 8px 0;
+		color: var(--wp-admin-theme-color);
+		padding-inline: 0;
 
-		&:hover {
+		&:hover,
+		&:focus,
+		&:active {
 			background: transparent;
-			color: var(--jp-gray-80);
+			color: var(--wp-admin-theme-color-darker-10);
 		}
 	}
 
 	&.zero-padding {
 		padding: 0;
+	}
+}
+
+// Delete links in edit screen action boxes. Core only colors `.submitdelete`
+// inside `.submitbox`, which CRM's action boxes don't use.
+.jpcrm-admin a.submitdelete {
+	color: var(--wpds-color-foreground-interactive-error);
+	text-decoration: none;
+
+	&:hover,
+	&:focus {
+		color: var(--wpds-color-foreground-interactive-error-active);
+		text-decoration: underline;
 	}
 }

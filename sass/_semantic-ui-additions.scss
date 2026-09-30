@@ -32,21 +32,8 @@
 }
 
 
-// button extra colours:
-.ui.button.white {
-
-	background: #fff !important;
-	border: 1px solid #000 !important;
-	color: #000 !important;
-
-}
-
-.ui.button.black {
-
-	background: #000 !important;
-	border: 1px solid #000 !important;
-}
-
+// button extra colours (white and black map to WordPress secondary and primary
+// in _semantic-ui-wp-controls.scss):
 .ui.button.woopink {
 
 	background: #674399 !important;
