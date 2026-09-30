@@ -3,6 +3,8 @@
  * https://jetpackcrm.com
  */
 
+@use "wp-icons-data" as icons;
+
 .zbsSortableFieldList {
 
 	ul {
@@ -23,22 +25,15 @@
 
 		// handle
 		li::before {
+			@include icons.wp-icon( "drag-handle" );
 
-			font-family: FontAwesome;
-			content: "\f0c9";
-			margin: 0 10px 0 0;
-			color: #ddd;
-
+			margin-right: 10px;
+			color: #757575;
 		}
 
 		// ico when dragging
 		li.ui-sortable-helper::before {
-
-			font-family: FontAwesome;
-			content: "\f0c9";
-			margin: 0 10px 0 0;
 			color: #000;
-
 		}
 
 	}

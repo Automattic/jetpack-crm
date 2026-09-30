@@ -223,7 +223,7 @@ function zeroBSCRM_html_addEditSegment( $potentialID = -1 ) {
 				'nosegmentid'          => __( 'No Segment ID Found.', 'zero-bs-crm' ),
 				'to'                   => __( 'to', 'zero-bs-crm' ),
 				'eg'                   => __( 'e.g.', 'zero-bs-crm' ),
-				'saveSegment'          => __( 'Save Segment', 'zero-bs-crm' ) . ' <i class="save icon">',
+				'saveSegment'          => __( 'Save Segment', 'zero-bs-crm' ),
 				'savedSegment'         => __( 'Segment Saved', 'zero-bs-crm' ) . ' <i class="check circle outline icon">',
 				'contactfields'        => '=== ' . __( 'Contact Fields', 'zero-bs-crm' ) . ' ===',
 				'default_description'  => __( 'Condition which selects contacts based on given value', 'zero-bs-crm' ),

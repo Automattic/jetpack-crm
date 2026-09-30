@@ -7,6 +7,8 @@
 	Global styles for form elements
 */
 
+@use "wp-icons-data" as icons;
+
 
 // Info box - will be replaced by js with (i) when
 // page activated (gets class .zbs-live)
@@ -138,15 +140,11 @@ tr.zbs-field-group-tr label.zbs-field-group-label {
 
 // Needed for custom contact avatars add/edit pages
 .jpcrm-customer-file-upload::before {
-	content: "\f0ee";
-	display: inline-block;
-	font-family: FontAwesome;
+	@include icons.wp-icon( "upload" );
 }
 
 .jpcrm-customer-file-upload-remove::before {
-	content: "\f00d";
-	display: inline-block;
-	font-family: FontAwesome;
+	@include icons.wp-icon( "close-small" );
 }
 
 .jpcrm-customer-file-upload,

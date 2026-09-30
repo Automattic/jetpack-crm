@@ -841,7 +841,7 @@ class zeroBS__Metabox_FormActions extends zeroBS__Metabox {
 		?>
 			<div class="zbs-generic-save-wrap">
 
-					<div class="ui medium dividing header"><i class="save icon"></i> <?php esc_html_e( 'Form Actions', 'zero-bs-crm' ); ?></div>
+					<div class="ui medium dividing header"><?php esc_html_e( 'Form Actions', 'zero-bs-crm' ); ?></div>
 
 			<?php
 

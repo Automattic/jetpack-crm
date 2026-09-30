@@ -636,7 +636,7 @@ class zeroBS__Metabox_TransactionActions extends zeroBS__Metabox {
 	public function html( $transaction, $metabox ) { // phpcs:ignore Squiz.Commenting.FunctionComment.Missing,VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable
 		?>
 		<div class="zbs-generic-save-wrap">
-			<div class="ui medium dividing header"><i class="save icon"></i> <?php echo esc_html( __( 'Transaction Actions', 'zero-bs-crm' ) ); ?></div>
+			<div class="ui medium dividing header"><?php echo esc_html( __( 'Transaction Actions', 'zero-bs-crm' ) ); ?></div>
 			<?php
 
 			// localise ID & content

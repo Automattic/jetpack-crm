@@ -73,7 +73,7 @@ function zeroBS_baseExternalSources() {
 		),
 		'str'          => array(
 			'Stripe',
-			'ico' => 'fa-credit-card',
+			'ico' => 'fa-stripe',
 		),
 		'wordpress'    => array(
 			'WordPress',
