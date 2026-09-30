@@ -190,8 +190,8 @@ function jpcrm_render_contact_view_page( $id = -1 ) {
 					if ( ! empty( $statusStr ) ) { //phpcs:ignore  WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 						?>
 					<p>
-						<?php esc_html_e( 'Status', 'zero-bs-crm' ); ?>: 
-						<b><?php echo esc_html( $statusStr ); //phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase ?></b>
+						<?php esc_html_e( 'Status', 'zero-bs-crm' ); ?>:
+						<?php echo jpcrm_status_badge_html( $statusStr ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase, WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped by the helper. ?>
 					</p>
 					<?php } ?>
 
@@ -1322,32 +1322,6 @@ item"><?php esc_html_e( 'Tasks', 'zero-bs-crm' ); ?></div><?php } ?>
 					?>
 				
 				</div><!-- / tabs -->
-
-
-				<?php
-
-					$customerTags = zeroBSCRM_getCustomerTagsByID( $contact['id'] );
-
-					// debug echo '<pre>'; print_r($customerTags); echo '</pre><hr>';
-
-				if ( count( $customerTags ) > 0 ) {
-
-					?>
-						<!-- TAGGED --><div class="zbs-view-tags">
-						<h4 class="ui horizontal header divider">
-							<i class="tag icon"></i>
-						<?php esc_html_e( 'Tagged', 'zero-bs-crm' ); ?>
-						</h4>
-						<?php
-
-						// output as links
-						zeroBSCRM_html_linkedContactTags( $contact['id'], $customerTags, 'ui medium olive button' );
-
-						?>
-						</div><!-- / TAGGED -->
-						<?php
-				}
-				?>
 
 			</div>
 

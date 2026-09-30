@@ -133,6 +133,20 @@ function jpcrm_render_company_view_page( $id = -1 ) {
 						<p class="zbs-sentence">
 							<?php echo zeroBSCRM_html_companyIntroSentence( $company ); ?>
 						</p>
+						<?php if ( ! empty( $company['status'] ) ) { ?>
+						<p>
+							<?php esc_html_e( 'Status', 'zero-bs-crm' ); ?>:
+							<?php echo jpcrm_status_badge_html( $company['status'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped by the helper. ?>
+						</p>
+						<?php } ?>
+						<?php
+						$company_tags = zeroBSCRM_getCompanyTagsByID( $company['id'] );
+						if ( is_array( $company_tags ) && count( $company_tags ) > 0 ) {
+							?>
+						<div class="jpcrm-badge-list">
+							<?php zeroBSCRM_html_linkedCompanyTags( $company['id'], $company_tags, 'jpcrm-badge is-none' ); ?>
+						</div>
+						<?php } ?>
 						<a class="ui button black" style="margin-top:0.8em" href="<?php echo jpcrm_esc_link( 'edit', $id, 'zerobs_company', false ); ?>">
 								<?php esc_html_e( 'Edit ' . jpcrm_label_company(), 'zero-bs-crm' ); // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText ?>
 						</a>
@@ -172,12 +186,6 @@ function jpcrm_render_company_view_page( $id = -1 ) {
 
 				<!-- company vitals -->
 				<?php
-
-				// prep
-				$statusStr = '';
-				if ( isset( $company ) && isset( $company['status'] ) && ! empty( $company['status'] ) ) {
-					$statusStr = $company['status'];
-				}
 
 				// compiled addr str
 				$addr_str = '';
@@ -237,12 +245,6 @@ function jpcrm_render_company_view_page( $id = -1 ) {
 						}
 					}
 					?>
-					<?php if ( ! empty( $statusStr ) ) { ?>
-					<div class="right menu item">
-						<?php esc_html_e( 'Status', 'zero-bs-crm' ); ?>: 
-					<span class="ui green label"><?php echo esc_html( $statusStr ); ?></span>
-					</div>
-					<?php } ?>
 				</div>
 
 				<div class="ui bottom attached active tab segment" data-tab="vitals" id="zbs-company-view-vitals">
@@ -851,12 +853,12 @@ item"><?php esc_html_e( 'Tasks', 'zero-bs-crm' ); ?></div><?php } ?>
 											if ( isset( $task['complete'] ) && $task['complete'] === 1 ) {
 												$statusStr = __( 'Completed', 'zero-bs-crm' );
 											}
-											$status = "<span class='" . zeroBSCRM_html_taskStatusLabel( $task ) . "'>" . $statusStr . '</span>';
+											$status = "<span class='" . esc_attr( zeroBSCRM_html_taskStatusLabel( $task ) ) . "'>" . esc_html( $statusStr ) . '</span>'; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 
 											echo '<tr>';
 											echo '<td>' . esc_html( zeroBSCRM_html_taskDate( $task ) ) . '</td>';
 											echo '<td>' . esc_html( $task['title'] ) . '</td>';
-											echo '<td>' . esc_html( $status ) . '</td>';
+											echo '<td>' . $status . '</td>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped above.
 											echo '<td style="text-align:center"><a href="' . esc_url( $taskURL ) . '">' . esc_html__( 'View', 'zero-bs-crm' ) . '</a></td>';
 											echo '</tr>';
 
@@ -900,29 +902,6 @@ item"><?php esc_html_e( 'Tasks', 'zero-bs-crm' ); ?></div><?php } ?>
 						</div><?php } ?>
 
 				</div><!-- docs -->
-
-				<?php
-
-					$companyTags = zeroBSCRM_getCompanyTagsByID( $company['id'] );
-
-				if ( count( $companyTags ) > 0 ) {
-
-					?>
-						<!-- TAGGED --><div class="zbs-view-tags">
-						<h4 class="ui horizontal header divider">
-							<i class="tag icon"></i>
-						<?php esc_html_e( 'Tagged', 'zero-bs-crm' ); ?>
-						</h4>
-						<?php
-
-						// output as links
-						zeroBSCRM_html_linkedCompanyTags( $company['id'], $companyTags, 'ui medium olive button' );
-
-						?>
-						</div><!-- / TAGGED -->
-						<?php
-				}
-				?>
 
 			</div>
 

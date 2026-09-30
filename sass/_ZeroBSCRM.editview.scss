@@ -106,33 +106,20 @@
 .zbs-edit-tags-box-wrap {
 
 	#zbs-tags-wrap {
-
-		margin-top: 1em;
-
-
-		.ui.label {
-
-			margin-bottom: 0.4em;
-		}
+		margin-top: var(--wpds-dimension-gap-md);
 	}
 
 	// TAG SUGGESTION ENGINE
 	#zbs-tags-suggestions-wrap {
 
-		h4,
 		.zbs-tags-suggestions-title {
-			margin-top: 1em;
-			margin-bottom: 0.4em;
+			margin: var(--wpds-dimension-gap-lg) 0 var(--wpds-dimension-gap-sm);
+			color: var(--wpds-color-foreground-content-neutral-weak);
+			font-size: var(--wpds-typography-font-size-sm);
 		}
 
-		.ui.label {
-
-			margin-bottom: 0.4em;
-		}
-
-		.zbsTagSuggestion:hover {
-			cursor: pointer;
-			color: #000 !important;
+		.zbsTagSuggestion {
+			margin: 0 var(--wpds-dimension-gap-xs) var(--wpds-dimension-gap-xs) 0;
 		}
 
 		#zbs-tag-suggestions-show-more:hover,
@@ -207,11 +194,8 @@
 }
 
 //allow text wrapping in tag manager
-table#zbs-tag-manager td,
-table#zbs-tag-manager td .label,
-#zbs-tags-wrap span,
-.zbsTagSuggestion,
-.zbs-view-tags a.button {
+table#zbs-tag-manager td {
 	white-space: normal;
 	overflow-wrap: anywhere;
+	vertical-align: middle;
 }

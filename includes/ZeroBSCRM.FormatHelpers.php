@@ -54,14 +54,10 @@ function zeroBSCRM_html_contactIntroSentence( $contact ) {
 		$c .= '<br/><i class="map marker alternate icon"></i>' . $contact_location;
 	}
 
-		// tags for easier viewing UI wise (2.98+)
-
-	$customerTags = zeroBSCRM_getCustomerTagsByID( $contact['id'] );
-	if ( ! is_array( $customerTags ) ) {
-		$customerTags = array();
-	}
-	if ( count( $customerTags ) > 0 ) {
-		$c .= '<br/>' . zeroBSCRM_html_linkedContactTags( $contact['id'], $customerTags, 'ui tag label zbs-mini-tag', false, true );
+	// Tags, shown once here in the header.
+	$contact_tags = zeroBSCRM_getCustomerTagsByID( $contact['id'] );
+	if ( is_array( $contact_tags ) && count( $contact_tags ) > 0 ) {
+		$c .= '<span class="jpcrm-badge-list">' . zeroBSCRM_html_linkedContactTags( $contact['id'], $contact_tags, 'jpcrm-badge is-none', false, true ) . '</span>';
 	}
 
 	// assigned to?
@@ -845,6 +841,89 @@ function zeroBSCRM_html_companyTimeline( $companyID = -1, $logs = false, $compan
 	====================================================== */
 
 /*
+ * ======================================================
+ * Badges
+ * ======================================================
+ */
+
+/**
+ * Returns the badge intent for each status that has one, keyed by lowercase status.
+ *
+ * Intents are the ones the @wordpress/ui Badge takes. Statuses that aren't listed,
+ * including the custom ones people add in settings, get the neutral `draft` intent.
+ * The same map is passed to JS as `zbs_root.status_badge_intents`.
+ *
+ * @since $$next-version$$
+ *
+ * @return array
+ */
+function jpcrm_get_status_badge_intents() {
+	$intents = array(
+		// Done, paid or won.
+		'accepted'    => 'stable',
+		'complete'    => 'stable',
+		'completed'   => 'stable',
+		'customer'    => 'stable',
+		'paid'        => 'stable',
+		'succeeded'   => 'stable',
+		// Waiting on someone.
+		'hold'        => 'medium',
+		'pending'     => 'medium',
+		'unpaid'      => 'medium',
+		// Moving along. A published quote hasn't been accepted yet.
+		'processing'  => 'informational',
+		'published'   => 'informational',
+		// Needs attention.
+		'blacklisted' => 'high',
+		'failed'      => 'high',
+		'overdue'     => 'high',
+	);
+
+	/**
+	 * Filters the badge intent for each status, keyed by lowercase status.
+	 *
+	 * @since $$next-version$$
+	 *
+	 * @param array $intents Status => intent: high, medium, low, stable, informational, draft or none.
+	 */
+	return apply_filters( 'jpcrm_status_badge_intents', $intents );
+}
+
+/**
+ * Returns the badge classes for a status.
+ *
+ * @since $$next-version$$
+ *
+ * @param string $status The stored status, e.g. "Paid". Case doesn't matter.
+ * @return string
+ */
+function jpcrm_status_badge_classes( $status ) {
+	$intents = jpcrm_get_status_badge_intents();
+	$intent  = $intents[ strtolower( trim( (string) $status ) ) ] ?? 'draft';
+
+	return 'jpcrm-badge is-' . $intent;
+}
+
+/**
+ * Returns a status badge.
+ *
+ * @since $$next-version$$
+ *
+ * @param string      $status The stored status, which picks the color.
+ * @param string|null $label  What the badge says, if not the status itself (e.g. a translated label).
+ * @return string
+ */
+function jpcrm_status_badge_html( $status, $label = null ) {
+	return '<span class="' . esc_attr( jpcrm_status_badge_classes( $status ) ) . '">' . esc_html( $label ?? $status ) . '</span>';
+}
+
+/*
+ * ======================================================
+ * / Badges
+ * ======================================================
+ */
+
+/*
 ======================================================
 	Quotes
 	====================================================== */
@@ -855,15 +934,12 @@ function zeroBSCRM_html_quoteStatusLabel( $quote = array() ) {
 
 	switch ( $statusInt ) {
 		case -2: // published not accepted
-			return 'ui orange label';
-			break;
+			return jpcrm_status_badge_classes( 'published' );
 		case -1: // draft
-			return 'ui grey label';
-			break;
+			return jpcrm_status_badge_classes( 'draft' );
 	}
 
-	// accepted
-	return 'ui green label';
+	return jpcrm_status_badge_classes( 'accepted' );
 }
 
 /**
@@ -920,25 +996,7 @@ function zeroBSCRM_html_invoiceStatusLabel( $inv = array() ) {
 		$status = $inv['status'];
 	}
 
-	switch ( $status ) {
-		case __( 'Draft', 'zero-bs-crm' ):
-			return 'ui teal label';
-			break;
-		case __( 'Unpaid', 'zero-bs-crm' ):
-			return 'ui orange label';
-			break;
-		case __( 'Paid', 'zero-bs-crm' ):
-			return 'ui green label';
-			break;
-		case __( 'Overdue', 'zero-bs-crm' ):
-			return 'ui red label';
-			break;
-		case __( 'Deleted', 'zero-bs-crm' ):
-			return 'ui red label';
-			break;
-	}
-
-	return 'ui grey label';
+	return jpcrm_status_badge_classes( $status );
 }
 
 /*
@@ -959,23 +1017,7 @@ function zeroBSCRM_html_transactionStatusLabel( $trans = array() ) {
 		$status = $trans['status'];
 	}
 
-	switch ( $status ) {
-		case __( 'failed', 'zero-bs-crm' ):
-			return 'ui orange label';
-			break;
-		case __( 'refunded', 'zero-bs-crm' ):
-			return 'ui red label';
-			break;
-		case __( 'succeeded', 'zero-bs-crm' ):
-			return 'ui green label';
-			break;
-		case __( 'completed', 'zero-bs-crm' ):
-			return 'ui green label';
-			break;
-
-	}
-
-	return 'ui grey label';
+	return jpcrm_status_badge_classes( $status );
 }
 
 /*
@@ -1069,10 +1111,10 @@ function get_jpcrm_table_options_button() {
 function zeroBSCRM_html_taskStatusLabel( $task = array() ) {
 
 	if ( isset( $task['complete'] ) && $task['complete'] === 1 ) {
-		return 'ui green label';
+		return jpcrm_status_badge_classes( 'complete' );
 	}
 
-	return 'ui grey label';
+	return jpcrm_status_badge_classes( 'incomplete' );
 }
 
 /**

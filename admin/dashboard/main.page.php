@@ -355,7 +355,7 @@ function jpcrm_render_dashboard_page() {
 									<td><img class='img-rounded jpcrm-avatar-small' alt='<?php esc_attr_e( 'Contact Image', 'zero-bs-crm' ); ?>' src='<?php echo esc_attr( $avatar ); ?>'/></td>
 									<td><?php echo esc_html( $fname ); ?></td>
 									<td><?php echo esc_html( $lname ); ?></td>
-									<td><?php echo esc_html( $status ); ?></td>
+									<td><?php echo jpcrm_status_badge_html( $status ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped by the helper. ?></td>
 									<td><a href='<?php echo jpcrm_esc_link( 'view', $cust['id'], 'zerobs_customer' ); /* phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped */ ?>'><?php esc_html_e( 'View', 'zero-bs-crm' ); ?></a></td>
 									<td style='text-align:right;' class='zbs-datemoment-since' data-zbs-created-uts='<?php echo esc_attr( $cust['createduts'] ); ?>'><?php echo esc_html( $cust['created'] ); ?></td>
 									</tr>

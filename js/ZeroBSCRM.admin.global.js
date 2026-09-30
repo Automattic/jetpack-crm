@@ -2776,6 +2776,19 @@ const jpcrm = {
 		const decoded = jpcrm.decodeHTMLEntities( text );
 		return jpcrm.esc_html( decoded );
 	},
+	// A status badge, colored by the same map as jpcrm_status_badge_html() in PHP.
+	// label is what the badge says, if not the status itself (e.g. a translated label).
+	status_badge_html: ( status, label = status ) => {
+		const intents = ( window.zbs_root && window.zbs_root.status_badge_intents ) || {};
+		const intent = intents[ String( status ).trim().toLowerCase() ] || 'draft';
+		return (
+			'<span class="jpcrm-badge is-' +
+			jpcrm.esc_attr( intent ) +
+			'">' +
+			jpcrm.esc_html( label ) +
+			'</span>'
+		);
+	},
 };
 
 if ( typeof module !== 'undefined' ) {
