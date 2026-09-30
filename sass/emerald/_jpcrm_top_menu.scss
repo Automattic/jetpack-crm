@@ -189,9 +189,16 @@ $logo-row-height: 24px;
 		}
 	}
 
+	/*
+	 * The avatar lines up with the bar's right padding, mirroring the logo on
+	 * the left. Semantic adds a margin after dropdown images, and the item its
+	 * own padding; neither has anything to separate it from here.
+	 */
 	#jpcrm-user-menu-item {
+		padding-right: 0;
 
 		img {
+			margin: 0;
 			border-radius: 50%;
 		}
 	}
