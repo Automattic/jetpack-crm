@@ -1,0 +1,92 @@
+/*
+ * Semantic UI message boxes, restyled as WordPress admin notices.
+ *
+ * CRM renders these through zeroBSCRM_UI2_messageHTML(), zeroBSCRM_html_msg()
+ * and around 75 hand-written boxes. The helpers also run on the standalone
+ * OAuth popup, which has no wp-admin styles, so the markup stays as it is and
+ * the look is mapped here instead, scoped to CRM admin screens.
+ *
+ * Like WordPress 7.x notices: white, a 4px left border in the notice color,
+ * and a tint for success, warning and error.
+ */
+.jpcrm-admin {
+
+	.ui.message {
+		margin: var(--wpds-dimension-gap-md) 0;
+		padding: var(--wpds-dimension-padding-sm) var(--wpds-dimension-padding-md);
+		border: 0;
+		border-left: var(--wpds-border-width-md) solid var(--wpds-color-stroke-surface-neutral);
+		border-radius: 0;
+		background: var(--wpds-color-background-surface-neutral-strong);
+		box-shadow: none;
+		color: var(--wpds-color-foreground-content-neutral);
+		font-size: var(--wpds-typography-font-size-md);
+		line-height: var(--wpds-typography-line-height-sm);
+		text-align: left;
+
+		.header {
+			margin-bottom: var(--wpds-dimension-gap-xs);
+			font-family: inherit;
+			font-size: var(--wpds-typography-font-size-md);
+			font-weight: var(--wpds-typography-font-weight-emphasis);
+		}
+
+		p {
+			margin: 0;
+		}
+	}
+
+	.ui.icon.message > .icon:not(.close) {
+		font-size: var(--wpds-typography-font-size-xl);
+		opacity: 1;
+	}
+
+	.ui.info.message,
+	.ui.blue.message,
+	.ui.message.alert.info {
+		border-left-color: var(--wp-admin-theme-color);
+	}
+
+	.ui.positive.message,
+	.ui.success.message,
+	.ui.green.message,
+	.ui.message.alert.success {
+		border-left-color: var(--wpds-color-stroke-surface-success-strong);
+		background: var(--wpds-color-background-surface-success-weak);
+	}
+
+	.ui.warning.message,
+	.ui.yellow.message,
+	.ui.orange.message,
+	.ui.message.alert.warning {
+		border-left-color: var(--wpds-color-stroke-surface-warning-strong);
+		background: var(--wpds-color-background-surface-warning-weak);
+	}
+
+	.ui.negative.message,
+	.ui.error.message,
+	.ui.red.message,
+	.ui.message.alert.danger {
+		border-left-color: var(--wpds-color-stroke-surface-error-strong);
+		background: var(--wpds-color-background-surface-error-weak);
+	}
+
+	// Semantic UI colors each variant's text and header; notices keep body text.
+	.ui.info.message,
+	.ui.blue.message,
+	.ui.positive.message,
+	.ui.success.message,
+	.ui.green.message,
+	.ui.warning.message,
+	.ui.yellow.message,
+	.ui.orange.message,
+	.ui.negative.message,
+	.ui.error.message,
+	.ui.red.message {
+		color: var(--wpds-color-foreground-content-neutral);
+
+		.header {
+			color: var(--wpds-color-foreground-content-neutral);
+		}
+	}
+}

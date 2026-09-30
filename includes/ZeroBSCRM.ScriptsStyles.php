@@ -344,6 +344,27 @@ function zeroBSCRM_scriptStyles_admin_formBuilder() {
 #} === /  Edit View individual type functions (e.g. quotebuilder)
 #} ===============================================================================
 
+/**
+ * Hides WordPress core admin notices on CRM screens, the same way Jetpack does.
+ *
+ * Mirrors Automattic\Jetpack\Admin_UI\Admin_Menu::hide_core_admin_notices() in the
+ * jetpack-admin-ui package, which every Jetpack admin page uses. Only notices core
+ * prints straight into #wpbody-content (the admin_notices and all_admin_notices
+ * hooks) are hidden. CRM's own notices render inside the page, so they still show.
+ * The CSS rides on a source-less handle, so there's no stylesheet to build.
+ */
+function jpcrm_hide_core_admin_notices() {
+	if ( ! wp_style_is( 'jpcrm-hide-core-admin-notices', 'registered' ) ) {
+		wp_register_style( 'jpcrm-hide-core-admin-notices', false, array(), null ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion -- Inline-only handle, nothing to cache-bust.
+		wp_add_inline_style(
+			'jpcrm-hide-core-admin-notices',
+			'#wpbody-content > .notice, #wpbody-content > .update-nag, #wpbody-content > .updated, #wpbody-content > .error { display: none !important; }'
+		);
+	}
+
+	wp_enqueue_style( 'jpcrm-hide-core-admin-notices' );
+}
+
 #} ===============================================================================
 #} === Unsorted Styles from pre v3.0
 #} ===============================================================================
@@ -366,6 +387,8 @@ function zeroBSCRM_global_admin_styles() {
 
 		// emerald styles
 		wp_enqueue_style( 'jpcrm-emerald' );
+
+		jpcrm_hide_core_admin_notices();
 
 		// moment everywhere (from 2.98)
 		wp_enqueue_script( 'jpcrm-moment', ZEROBSCRM_URL . 'build/lib/moment/moment-with-locales.min.js', array( 'jquery' ), $zbs::VERSION, false );
