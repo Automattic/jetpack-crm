@@ -26,6 +26,16 @@ body.jpcrm-admin {
 		gap: var(--wpds-dimension-gap-xl);
 		padding: var(--wpds-dimension-padding-xl) var(--wpds-dimension-padding-2xl);
 
+		// Core's <p> wrappers hold the logo and by line as inline boxes on a 20px
+		// text line, which sits them above the middle. Center them as flex items.
+		#footer-left,
+		#footer-upgrade {
+			display: flex;
+			align-items: center;
+			margin: 0;
+			line-height: 1;
+		}
+
 		// Wide footer: single row, Automattic by line pushed to the far right.
 		#footer-upgrade {
 			margin-inline-start: auto;
