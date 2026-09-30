@@ -515,7 +515,7 @@ function zeroBSCRM_admin_top_menu( $branding = 'zero-bs-crm', $page = 'dash' ) {
 
 			if ( count( $toolsMenu ) > 0 ) {
 				?>
-			<div class="ui simple dropdown item" id="top-bar-tools-menu">
+			<div class="ui simple dropdown item<?php zeroBS_menu_active_type( 'tools' ); ?>" id="top-bar-tools-menu">
 			<span class="text"><?php esc_html_e( 'Tools', 'zero-bs-crm' ); ?></span>
 			<i class="dropdown icon"></i>
 			<div class="menu ui">
@@ -737,16 +737,37 @@ function zeroBS_menu_active( $slug = '' ) {
 // dumps out 'active' class if slug is within a 'section'
 // note 'active' seems to open drop downs, so now using: current_menu_item
 function zeroBS_menu_active_type( $type = '' ) {
+	global $zbs;
+
+	// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Only reads which screen is showing.
+	$page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : '';
 
 	switch ( $type ) {
 
 		case 'contact':
-			if ( zeroBSCRM_isAnyContactPage() ) {
+			// The Contacts menu also holds companies and segments.
+			if (
+				zeroBSCRM_isAnyContactPage()
+				|| zeroBSCRM_is_customer_view_page()
+				|| zeroBSCRM_is_company_view_page()
+				|| zeroBSCRM_is_segment_edit_page()
+				|| zeroBSCRM_is_segment_new_page()
+				|| $page === $zbs->slugs['segments']
+			) {
 				echo ' current_menu_item';
 			}
 			break;
 		case 'quote':
-			if ( zeroBSCRM_isAnyQuotePage() ) {
+			if ( zeroBSCRM_isAnyQuotePage() || $page === $zbs->slugs['quote-templates'] ) {
+				echo ' current_menu_item';
+			}
+			break;
+		case 'tools':
+			if (
+				zeroBSCRM_isAnyTaskPage()
+				|| zeroBSCRM_isAnyFormPage()
+				|| in_array( $page, array( $zbs->slugs['manageformscrm'], $zbs->slugs['datatools'], $zbs->slugs['csvlite'], $zbs->slugs['export-tools'], $zbs->slugs['modules'], $zbs->slugs['extensions'] ), true )
+			) {
 				echo ' current_menu_item';
 			}
 			break;

@@ -1,3 +1,11 @@
+// Page header, like the admin-ui Page header current Jetpack screens use: a
+// white band under the CRM top bar with a hairline bottom border.
+.jpcrm-learn-menu-container {
+	background: var(--wpds-color-background-surface-neutral-strong);
+	border-bottom: var(--wpds-border-width-xs) solid var(--wpds-color-stroke-surface-neutral-weak);
+	padding: var(--wpds-dimension-padding-lg) var(--wpds-dimension-padding-2xl);
+}
+
 .jpcrm-learn-menu {
 	display: flex;
 	align-items: center;
@@ -62,19 +70,22 @@
 
 @media (max-width: 768px) {
 
+	// Title on its own row, actions wrapping under it, all left-aligned.
 	.jpcrm-learn-menu {
 		flex-wrap: wrap;
+		gap: var(--wpds-dimension-gap-sm);
 	}
 
 	.jpcrm-learn-menu-subdiv-75,
 	.jpcrm-learn-menu-subdiv-25 {
-		flex-grow: 1;
+		flex-basis: 100%;
 		flex-wrap: wrap;
-		flex-direction: column;
-		width: 100%;
+		justify-content: flex-start;
+		gap: var(--wpds-dimension-gap-sm);
+		padding: 0;
 
 		> *:first-child {
-			margin-left: 0; /* gap not needed anymore as the divs are centered */
+			margin-left: 0;
 		}
 	}
 }
