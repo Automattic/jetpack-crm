@@ -78,13 +78,16 @@ class zeroBS__Metabox_Tags extends zeroBS__Metabox {
 
 			if ( zeroBSCRM_permsCustomers() ) {
 
+				// Adding tags is the tag manager's main action. On edit screens, Save is.
+				$add_button_class = 'zerobs_edit_tags' === $this->metaboxScreen ? 'ui mini primary button' : 'ui mini button'; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+
 				// edit
 				?>
 					<div id="zbs-add-tags">
 						<div class="ui action left icon fluid input">
 							<i class="tags icon"></i>
 							<input id="zbs-add-tag-value" type="text" placeholder="<?php esc_attr_e( 'Enter tags', 'zero-bs-crm' ); ?>">
-									<button id="zbs-add-tag-action" type="button" class="ui mini button">
+									<button id="zbs-add-tag-action" type="button" class="<?php echo esc_attr( $add_button_class ); ?>">
 				<?php esc_html_e( 'Add', 'zero-bs-crm' ); ?>
 							</button>
 						</div>
