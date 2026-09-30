@@ -84,7 +84,7 @@ class zeroBS__Metabox_Tags extends zeroBS__Metabox {
 						<div class="ui action left icon fluid input">
 							<i class="tags icon"></i>
 							<input id="zbs-add-tag-value" type="text" placeholder="<?php esc_attr_e( 'Enter tags', 'zero-bs-crm' ); ?>">
-									<button id="zbs-add-tag-action" type="button" class="ui mini black button">
+									<button id="zbs-add-tag-action" type="button" class="ui mini button">
 				<?php esc_html_e( 'Add', 'zero-bs-crm' ); ?>
 							</button>
 						</div>

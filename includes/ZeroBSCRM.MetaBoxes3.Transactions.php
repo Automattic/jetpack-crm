@@ -649,7 +649,6 @@ class zeroBS__Metabox_TransactionActions extends zeroBS__Metabox {
 			if ( $transaction_id > 0 ) {
 				?>
 				<div class="zbs-transaction-actions-bottom zbs-objedit-actions-bottom">
-					<button class="ui button black" type="button" id="zbs-edit-save"><?php echo esc_html( __( 'Update Transaction', 'zero-bs-crm' ) ); ?></button>
 					<?php
 					// for now just check if can modify, later better, granular perms.
 					if ( zeroBSCRM_permsTransactions() ) {
@@ -661,13 +660,6 @@ class zeroBS__Metabox_TransactionActions extends zeroBS__Metabox {
 					}
 					?>
 					<div class='clear'></div>
-				</div>
-				<?php
-			} else {
-				// NEW transaction
-				?>
-				<div class="zbs-transaction-actions-bottom zbs-objedit-actions-bottom">
-					<button class="ui button black" type="button" id="zbs-edit-save"><?php echo esc_html( __( 'Save Transaction', 'zero-bs-crm' ) ); ?></button>
 				</div>
 				<?php
 			}

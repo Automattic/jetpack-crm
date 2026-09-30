@@ -233,7 +233,7 @@ function zbscrm_JS_draw_invoice_actions_html( res ) {
 			html +=
 				'<a href="' +
 				jpcrm.esc_attr( res.invoiceObj.preview_link ) +
-				'" target="_blank" class="ui button black" id="zbs_invoice_preview">' +
+				'" target="_blank" class="ui button" id="zbs_invoice_preview">' +
 				jpcrm.esc_html( zbscrm_JS_invoice_lang( 'preview' ) ) +
 				'</a>';
 		}
@@ -241,7 +241,7 @@ function zbscrm_JS_draw_invoice_actions_html( res ) {
 		//pdf download only displayed in PDF set.
 		if ( res.invoiceObj.pdf_installed ) {
 			html +=
-				'<button id="zbs_invoicing_download_pdf" type="button" class="ui button black">' +
+				'<button id="zbs_invoicing_download_pdf" type="button" class="ui button">' +
 				jpcrm.esc_html( zbscrm_JS_invoice_lang( 'dl_pdf' ) ) +
 				'</button>';
 			let Formhtml =
@@ -265,7 +265,7 @@ function zbscrm_JS_draw_invoice_actions_html( res ) {
 				zbscrm_JS_validateEmail( potentialEmail )
 			) {
 				html +=
-					'<button type="button" id="zbs_invoicing_send_email" class="ui button black">' +
+					'<button type="button" id="zbs_invoicing_send_email" class="ui button">' +
 					jpcrm.esc_html( zbscrm_JS_invoice_lang( 'send_email' ) ) +
 					'</button>';
 			}
@@ -1994,7 +1994,7 @@ function zeroBSCRMJS_showContactLinkIf( contactID ) {
 		contactID = parseInt( contactID );
 		if ( contactID > 0 ) {
 			const navButton =
-				'<a target="_blank" style="margin-left:6px;" class="zbs-invoice-quicknav-contact jpcrm-button" href="' +
+				'<a target="_blank" style="margin-left:6px;" class="zbs-invoice-quicknav-contact jpcrm-button white-bg" href="' +
 				jpcrm.esc_attr( window.zbs_invoice.invoiceObj.settings.contacturlprefix + contactID ) +
 				'">' +
 				jpcrm.esc_html( window.zbsMetaboxFilesLang.viewcontact ) +
@@ -2017,7 +2017,7 @@ function zeroBSCRMJS_showCompanyLinkIf( companyID ) {
 		companyID = parseInt( companyID );
 		if ( companyID > 0 ) {
 			const navButton =
-				'<a target="_blank" style="margin-left:6px;" class="zbs-invoice-quicknav-company jpcrm-button" href="' +
+				'<a target="_blank" style="margin-left:6px;" class="zbs-invoice-quicknav-company jpcrm-button white-bg" href="' +
 				jpcrm.esc_attr( window.zbs_invoice.invoiceObj.settings.companyurlprefix + companyID ) +
 				'">' +
 				jpcrm.esc_html( window.zbsMetaboxFilesLang.viewcompany ) +

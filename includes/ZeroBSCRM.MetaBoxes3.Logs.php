@@ -362,7 +362,7 @@ class zeroBS__Metabox_LogsV2 extends zeroBS__Metabox {
 					
 					<tr>
 								<td><h4><span id="zbsActiveLogCount"><?php echo esc_html( zeroBSCRM_prettifyLongInts( count( $zbsLogs ) ) ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase ?></span> <?php esc_html_e( 'Logs', 'zero-bs-crm' ); ?></h4></td>
-								<td><button type="button" class="ui button black jpcrm-button" id="zbscrmAddLog"><?php esc_html_e( 'Add Log', 'zero-bs-crm' ); ?></button></td>
+								<td><button type="button" class="jpcrm-button white-bg" id="zbscrmAddLog"><?php esc_html_e( 'Add Log', 'zero-bs-crm' ); ?></button></td>
 					</tr>
 
 					<!-- this line will pop/close with "add log" button -->

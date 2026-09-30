@@ -331,8 +331,6 @@ class zeroBS__Metabox_QuoteTemplateActions extends zeroBS__Metabox {
 
 					<div class="zbs-quotetemplate-actions-bottom zbs-objedit-actions-bottom">
 
-							<button class="ui button black" type="button" id="zbs-edit-save"><?php esc_html_e( 'Update', 'zero-bs-crm' ); ?> <?php esc_html_e( 'Template', 'zero-bs-crm' ); ?></button>
-
 					<?php
 
 						// delete?
@@ -348,19 +346,6 @@ class zeroBS__Metabox_QuoteTemplateActions extends zeroBS__Metabox {
 						<div class='clear'></div>
 
 					</div>
-				<?php
-
-			} else {
-
-				// NEW quote template
-				?>
-
-					<div class="zbs-quotetemplate-actions-bottom zbs-objedit-actions-bottom">
-						
-							<button class="ui button black" type="button" id="zbs-edit-save"><?php esc_html_e( 'Save', 'zero-bs-crm' ); ?> <?php esc_html_e( 'Template', 'zero-bs-crm' ); ?></button>
-
-					</div>
-
 				<?php
 
 			}
