@@ -548,7 +548,6 @@ function zeroBSCRM_admin_top_menu( $branding = 'zero-bs-crm', $page = 'dash' ) {
 			echo jpcrm_get_avatar( $uid, 30 );
 			?>
 			</span>
-			<i class="dropdown icon"></i>
 			</div>
 
 			<?php
