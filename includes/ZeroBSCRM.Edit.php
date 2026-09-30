@@ -131,7 +131,8 @@ class zeroBSCRM_Edit {
 
 	/**
 	 * Adds the save button to the end of the page header, as the screen's one
-	 * primary action. On phones, CSS pins it to the bottom of the screen.
+	 * primary action, at the compact size of the header's other buttons. On
+	 * phones, CSS pins it to the bottom of the screen at full size.
 	 *
 	 * The ID is what the edit view's JS binds to, and what the permission and
 	 * missing-record checks hide.
@@ -144,7 +145,7 @@ class zeroBSCRM_Edit {
 			return $right_buttons;
 		}
 
-		return $right_buttons . '<div class="jpcrm-edit-save"><button class="jpcrm-button" type="button" id="zbs-edit-save">' . esc_html__( 'Save', 'zero-bs-crm' ) . '</button></div>';
+		return $right_buttons . '<div class="jpcrm-edit-save"><button class="jpcrm-button font-14px" type="button" id="zbs-edit-save">' . esc_html__( 'Save', 'zero-bs-crm' ) . '</button></div>';
 	}
 
 	// automatically, generically, loads the single obj

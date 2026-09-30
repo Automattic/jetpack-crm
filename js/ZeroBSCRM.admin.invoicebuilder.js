@@ -1994,7 +1994,7 @@ function zeroBSCRMJS_showContactLinkIf( contactID ) {
 		contactID = parseInt( contactID );
 		if ( contactID > 0 ) {
 			const navButton =
-				'<a target="_blank" style="margin-left:6px;" class="zbs-invoice-quicknav-contact jpcrm-button white-bg" href="' +
+				'<a target="_blank" style="margin-left:6px;" class="zbs-invoice-quicknav-contact jpcrm-button white-bg font-14px" href="' +
 				jpcrm.esc_attr( window.zbs_invoice.invoiceObj.settings.contacturlprefix + contactID ) +
 				'">' +
 				jpcrm.esc_html( window.zbsMetaboxFilesLang.viewcontact ) +
@@ -2017,7 +2017,7 @@ function zeroBSCRMJS_showCompanyLinkIf( companyID ) {
 		companyID = parseInt( companyID );
 		if ( companyID > 0 ) {
 			const navButton =
-				'<a target="_blank" style="margin-left:6px;" class="zbs-invoice-quicknav-company jpcrm-button white-bg" href="' +
+				'<a target="_blank" style="margin-left:6px;" class="zbs-invoice-quicknav-company jpcrm-button white-bg font-14px" href="' +
 				jpcrm.esc_attr( window.zbs_invoice.invoiceObj.settings.companyurlprefix + companyID ) +
 				'">' +
 				jpcrm.esc_html( window.zbsMetaboxFilesLang.viewcompany ) +
