@@ -221,19 +221,6 @@ final class ZeroBSCRM {
 	public $admin_notices = array();
 
 	/**
-	 * Hide admin_notices for specified pages
-	 *
-	 * @var array
-	 */
-	public $hide_admin_pages = array(
-
-		// hidden due to #gh-1442
-		'manage-tasks',
-		'zerobscrm-csvimporterlite-app',
-
-	);
-
-	/**
 	 * Template path, this is where we look in the theme directory for templates
 	 *
 	 * @var string
@@ -1145,9 +1132,6 @@ final class ZeroBSCRM {
 	 */
 	public function includes() {
 
-		// Admin messages (for any promos etc)
-		require_once ZEROBSCRM_INCLUDE_PATH . 'ZeroBSCRM.PluginAdminNotices.php';
-
 		// ====================================================================
 		// ==================== General Perf Testing ==========================
 		if ( defined( 'ZBSPERFTEST' ) ) {
@@ -1944,9 +1928,6 @@ final class ZeroBSCRM {
 
 			// Check for stored messages in case we were redirected.
 			$this->maybe_retrieve_page_messages();
-
-			// autohide admin_notices on pages we specify
-			jpcrm_autohide_admin_notices_for_specific_pages();
 		}
 
 		// ====================================================================
@@ -2188,7 +2169,6 @@ final class ZeroBSCRM {
 			)
 		);
 		do_action( 'jpcrm_sniff_features' );
-		$this->feature_sniffer->show_feature_alerts();
 	}
 
 	/**

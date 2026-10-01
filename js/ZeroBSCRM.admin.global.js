@@ -51,8 +51,6 @@ jQuery( function () {
 
 	// admin dismiss notices
 	jpcrm_dismiss_woo_notice();
-	jpcrm_dismiss_tracking_notice();
-	jpcrm_dismiss_feature_alert();
 
 	// custom field csv builders
 	jpcrm_bind_customfield_csv_builders();
@@ -91,31 +89,6 @@ function jpcrm_dismiss_woo_notice() {
 	jQuery( document ).on( 'click', '#woo-promo .notice-dismiss', function () {
 		const data = {
 			action: 'jpcrm_hide_woo_promo',
-		};
-		jQuery.post( ajaxurl, data, function () {} );
-	} );
-}
-
-/**
- *
- */
-function jpcrm_dismiss_tracking_notice() {
-	jQuery( document ).on( 'click', '#track-notice .notice-dismiss', function () {
-		const data = {
-			action: 'jpcrm_hide_track_notice',
-		};
-		jQuery.post( ajaxurl, data, function () {} );
-	} );
-}
-
-/**
- * Dismiss feature alert notice.
- */
-function jpcrm_dismiss_feature_alert() {
-	jQuery( document ).on( 'click', '.jpcrm_feature_alert .notice-dismiss', function () {
-		const data = {
-			action: 'jpcrm_hide_feature_alert',
-			feature_alert: this.parentElement.id,
 		};
 		jQuery.post( ajaxurl, data, function () {} );
 	} );
@@ -2928,8 +2901,6 @@ if ( typeof module !== 'undefined' ) {
 		jpcrm_strip_scripts,
 		zbscrm_JS_addDirty,
 		jpcrm_dismiss_woo_notice,
-		jpcrm_dismiss_tracking_notice,
-		jpcrm_dismiss_feature_alert,
 		zbscrm_JS_momentInit,
 		zbscrm_JS_adminMenuDropdown,
 		zbscrm_JS_fullscreenModeOn,
