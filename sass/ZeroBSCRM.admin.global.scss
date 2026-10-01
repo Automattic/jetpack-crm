@@ -66,3 +66,6 @@
 
 // Import Jetpack Style overrides
 @include meta.load-css( "JetpackCRM.admin.overrides" );
+
+// Old Semantic UI boxes as core cards; after the overrides above.
+@include meta.load-css( "jpcrm-cards" );

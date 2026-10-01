@@ -5,6 +5,8 @@
 
 // Specifically for admin settings pages
 
+@use "jpcrm-card-mixins" as card;
+
 .zbs-explainer-ico {
 	margin-top: 1em;
 	margin-bottom: 1em;
@@ -159,4 +161,55 @@
 
 #reftype-manual-block.reftype-set {
 	display: block;
+}
+
+// Settings screens as core cards, to match the metaboxes: the section menu
+// is a card, and each settings table is a card whose heading row is the
+// header. The panel that held them all goes, so the cards sit on the page.
+// See admin/settings/main.page.php.
+.zbs-page-wrap {
+
+	#zbs-settings-menu.ui.vertical.menu {
+		overflow: hidden;
+		@include card.card-surface;
+		box-shadow: none;
+
+		> .item::before {
+			background: var(--wpds-color-stroke-surface-neutral-weak);
+		}
+	}
+
+	#zbs-settings-menu .branding.item {
+		padding: 14px var(--wpds-dimension-padding-lg);
+		border-bottom: var(--wpds-border-width-xs) solid var(--wpds-color-stroke-surface-neutral);
+		text-align: left;
+		@include card.card-header-text;
+
+		&::before {
+			display: none;
+		}
+	}
+
+	// The panel around the settings is a card (_jpcrm-cards.scss). Screens
+	// built from settings tables lose it, since each table is a card; the rest
+	// (Mail Delivery, API, ...) keep it.
+	> .column > .ui.segment:has(> #poststuff.zbs-settings-page table.wtab) {
+		padding: 0;
+		background: transparent;
+		border: 0;
+	}
+
+	// The settings sit right against the menu. Below 992px the menu stacks
+	// above them (_ZeroBSCRM.mobile.scss), so they keep the grid's gutter.
+	> .twelve.wide.column {
+		padding-left: 0;
+
+		@media (max-width: 991px) {
+			padding-left: 14px;
+		}
+	}
+}
+
+#poststuff.zbs-settings-page {
+	@include card.title-and-cards;
 }

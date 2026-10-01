@@ -1513,7 +1513,7 @@ function zeroBSCRM_html_datatools() {
 		if ( isset( $_POST['zbs-delete-data'] ) && $_POST['zbs-delete-data'] == 'DO IT' ) {
 			$link = admin_url( 'admin.php?page=' . $zbs->slugs['datatools'] );
 			$str  = __( 'REMOVE ALL DATA', 'zero-bs-crm' );
-			echo "<div class='ui segment' style='margin-right:20px;text-align:center;'>";
+			echo "<div class='ui segment' style='text-align:center;'>";
 
 			echo '<h3>' . esc_html__( 'Delete all CRM data', 'zero-bs-crm' ) . '</h3>';
 
@@ -1540,12 +1540,12 @@ function zeroBSCRM_html_datatools() {
 				// additional nonce check
 			if ( ! isset( $_GET['zbs_delete_nonce'] ) || ! wp_verify_nonce( $_GET['zbs_delete_nonce'], 'zbs_delete_data' ) ) {
 
-				echo "<div class='ui segment' style='margin-right:20px;text-align:center;'>";
+				echo "<div class='ui segment' style='text-align:center;'>";
 				echo "<div class='ui message red' style='margin-right:20px;font-size:20px;'><i class='ui icon'></i>" . esc_html__( 'Data not deleted. Invalid permissions', 'zero-bs-crm' ) . '</div>';
 				echo '</div>';
 
 			} else {
-				echo "<div class='ui segment' style='margin-right:20px;text-align:center;'>";
+				echo "<div class='ui segment' style='text-align:center;'>";
 				echo "<div class='ui message green' style='margin-right:20px;font-size:20px;'><i class='ui icon check circle'></i>" . esc_html__( 'All CRM data deleted.', 'zero-bs-crm' ) . '</div>';
 				echo '</div>';
 
@@ -1560,7 +1560,7 @@ function zeroBSCRM_html_datatools() {
 
 			$link = admin_url( 'admin.php?page=' . $zbs->slugs['datatools'] );
 			$str  = __( 'REMOVE ALL DATA', 'zero-bs-crm' );
-			echo "<div class='ui segment' style='margin-right:20px;text-align:center;'>";
+			echo "<div class='ui segment' style='text-align:center;'>";
 
 			echo '<h3>' . esc_html__( 'Factory Reset CRM', 'zero-bs-crm' ) . '</h3>';
 
@@ -1587,12 +1587,12 @@ function zeroBSCRM_html_datatools() {
 				// additional nonce check
 			if ( ! isset( $_GET['zbs_delete_nonce'] ) || ! wp_verify_nonce( $_GET['zbs_delete_nonce'], 'zbs_delete_data' ) ) {
 
-				echo "<div class='ui segment' style='margin-right:20px;text-align:center;'>";
+				echo "<div class='ui segment' style='text-align:center;'>";
 				echo "<div class='ui message red' style='margin-right:20px;font-size:20px;'><i class='ui icon'></i>" . esc_html__( 'Data not deleted. Invalid permissions', 'zero-bs-crm' ) . '</div>';
 				echo '</div>';
 
 			} else {
-				echo "<div class='ui segment' style='margin-right:20px;text-align:center;'>";
+				echo "<div class='ui segment' style='text-align:center;'>";
 				echo "<div class='ui message green' style='margin-right:20px;font-size:20px;'><i class='ui icon check circle'></i>" . esc_html__( 'CRM Factory Reset', 'zero-bs-crm' ) . '</div>';
 				echo '</div>';
 
@@ -1613,7 +1613,7 @@ function zeroBSCRM_html_datatools() {
 	if ( ! $deleting_data ) {
 		?>
 			
-		<div id="zero-bs-tools" class="ui segment" style="margin-right:20px;">
+		<div id="zero-bs-tools" class="ui segment">
 			<h2 class="sbhomep"><?php esc_html_e( 'Welcome to Jetpack CRM Tools', 'zero-bs-crm' ); ?></h2>
 			<div class="sbhomep"><?php esc_html_e( 'This is the home for all of the different admin tools for Jetpack CRM which import and export data, excluding sync extensions.', 'zero-bs-crm' ); ?></div>
 			<br><br>
@@ -1661,7 +1661,7 @@ function zeroBSCRM_html_datatools() {
 	<div class="ui grid">
 	<div class="eight wide column">
 	  
-		<div class="ui segment" style="margin-right:20px;">
+		<div class="ui segment">
 			<div class='mass-delete' style="text-align:center;">
 				<h4 style="font-weight:900;"><?php esc_html_e( 'Delete CRM Data', 'zero-bs-crm' ); ?></h4>
 				<p>
@@ -1683,7 +1683,7 @@ function zeroBSCRM_html_datatools() {
 	</div>
 	<div class="eight wide column">
 	  
-		<div class="ui segment" style="margin-right:20px;">
+		<div class="ui segment">
 			<div class='mass-delete' style="text-align:center;">
 				<h4 style="font-weight:900;"><?php esc_html_e( 'Factory Reset CRM', 'zero-bs-crm' ); ?></h4>
 				<p>

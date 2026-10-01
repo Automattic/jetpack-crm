@@ -94,7 +94,7 @@ function zeroBSCRM_render_systemstatus_page() {
 		}
 		?>
 
-		<div id="sbA" style="margin-right:1em">
+		<div id="sbA">
 
 
 					<?php

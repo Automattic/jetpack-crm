@@ -359,7 +359,7 @@ function zeroBSCRM_notifyme_activity() {
 		$sql          = $wpdb->prepare( "SELECT * FROM $notify_table WHERE zbsnotify_recipient_id = %d ORDER BY zbsnotify_created_at DESC LIMIT 20", $cid );
 		$notifes      = $wpdb->get_results( $sql );
 
-		echo '<div class="ph_notification_list_wrap ui segment" id="notification-list" style="margin-right:30px;">';
+		echo '<div class="ph_notification_list_wrap ui segment" id="notification-list">';
 
 	if ( count( $notifes ) == 0 ) {
 

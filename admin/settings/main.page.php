@@ -241,7 +241,7 @@ $setting_updated = isset( $_GET['updated'] ) && 'true' == esc_attr( $_GET['updat
 	<div class="four wide column">
 		<?php jpcrm_render_settings_menu( $current_tab ); ?>
 	</div>
-	<div class="twelve wide stretched column" style="padding-left:0;">
+	<div class="twelve wide stretched column">
 		<div class="ui segment">
 			<div id="poststuff" class="pusher zbs-settings-page">
 

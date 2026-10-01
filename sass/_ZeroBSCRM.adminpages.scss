@@ -392,65 +392,6 @@ div.ui.learn.button {
 }
 
 
-// system assistant
-// jobs
-.jpcrm-assistant-job {
-
-
-	margin-bottom: 1em;
-	padding-bottom: 1em;
-	border-bottom: 1px solid #f5eeee;
-
-	.iconWrap {
-
-		text-align: center;
-
-		i {
-
-			font-size: 4em;
-			line-height: 1.5;
-
-		}
-
-	}
-
-	h4.ui.header {
-
-		margin-top: 1em;
-
-	}
-
-}
-
-// incomplete job
-.jpcrm-assistant-job.jpcrm-assistant-state-0 {
-
-	.state-complete {
-
-		display: none;
-
-	}
-
-	.iconWrap i {
-
-		opacity: 0.4;
-
-	}
-
-}
-
-// completed job
-.jpcrm-assistant-job.jpcrm-assistant-state-1 {
-
-	.state-incomplete {
-
-		display: none;
-
-	}
-
-
-}
-
 // hover-over cursor for semanti ui tabs (system asssistant)
 .ui.top.attached.tabular.menu .item:hover {
 	cursor: pointer;

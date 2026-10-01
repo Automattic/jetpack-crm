@@ -91,7 +91,7 @@ function zeroBSCRM_scriptStyles_initStyleRegister() {
 				wp_register_style( 'zerobscrmhomedash', plugins_url( '/css/ZeroBSCRM.admin.homedash' . wp_scripts_get_suffix() . '.css', ZBS_ROOTFILE ), array( 'zbs-wp-semanticui' ), $zbs::VERSION );
 
 				// settings page
-				wp_register_style( 'zerobscrmsettings', plugins_url( '/css/ZeroBSCRM.admin.settings' . wp_scripts_get_suffix() . '.css', ZBS_ROOTFILE ), array(), $zbs::VERSION );
+				wp_register_style( 'zerobscrmsettings', plugins_url( '/css/ZeroBSCRM.admin.settings' . wp_scripts_get_suffix() . '.css', ZBS_ROOTFILE ), array( 'jpcrm-wpds-tokens' ), $zbs::VERSION );
 
 				// mail delivery wizard
 				wp_register_style( 'zerobscrmmaildeliverywizard', plugins_url( '/css/ZeroBSCRM.admin.maildeliverywizard' . wp_scripts_get_suffix() . '.css', ZBS_ROOTFILE ), array( 'jpcrm-wpds-tokens' ), $zbs::VERSION );
@@ -534,8 +534,10 @@ function zeroBSCRM_admin_styles_singleview() {
 }
 
 function jpcrm_admin_scripts_systems_page() {
+	global $zbs;
 
 	wp_enqueue_script( 'jpcrmadminsystem' );
+	wp_enqueue_style( 'jpcrm-admin-system', ZEROBSCRM_URL . 'css/jpcrm-admin-system' . wp_scripts_get_suffix() . '.css', array( 'jpcrm-wpds-tokens' ), $zbs::VERSION );
 }
 
 function zeroBSCRM_admin_styles_homedash() {

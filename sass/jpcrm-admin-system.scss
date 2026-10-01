@@ -1,0 +1,161 @@
+/*!
+ * Jetpack CRM
+ * https://jetpackcrm.com
+ */
+
+@use "jpcrm-card-mixins" as card;
+
+// System Assistant (admin/system/main.page.php): its three tabs are laid out
+// like core's TabPanel, plain labels with an underline on the current one,
+// over a full-width divider; and each tab's boxes are core cards.
+// jetpackBox() (_JetpackCRM.admin.overrides.scss) skips this screen.
+#jpcrm-system-manager {
+	margin: var(--wpds-dimension-gap-lg) 24px 0;
+
+	> .ui.top.attached.tabular.menu {
+		min-height: 48px;
+		margin: 0;
+		padding: 0;
+		overflow-x: auto;
+		overflow-y: hidden;
+		background: transparent;
+		border: 0;
+		border-bottom: var(--wpds-border-width-xs) solid var(--wpds-color-stroke-surface-neutral);
+		border-radius: 0;
+		box-shadow: none;
+
+		@include card.underline-tabs(var(--wpds-dimension-padding-lg));
+
+		// The first tab lines up with the page title.
+		.item:first-child {
+			padding-left: 0;
+
+			&::after {
+				left: 0;
+			}
+		}
+	}
+
+	// Each tab's panel sits on the page; the cards are inside it.
+	> .ui.bottom.attached.tab.segment {
+		width: 100%;
+		max-width: 100%;
+		margin: 0;
+		padding: var(--wpds-dimension-gap-xl) 0 0;
+		background: transparent;
+		border: 0;
+		border-radius: 0;
+		box-shadow: none;
+
+		@include card.title-and-cards;
+
+		// Assistant's checklist and the Re-build User Roles box are cards
+		// already (_jpcrm-cards.scss); the placeholder groups' accordion
+		// becomes one.
+		> .ui.segment {
+			margin: 0 0 var(--wpds-dimension-gap-xl);
+			background: var(--wpds-color-background-surface-neutral-strong);
+		}
+
+		> .ui.styled.accordion {
+			margin: 0 0 var(--wpds-dimension-gap-xl);
+			overflow: hidden;
+			@include card.card-surface;
+			box-shadow: none;
+
+			> .title {
+				padding: 14px var(--wpds-dimension-padding-lg);
+				font-size: var(--wpds-typography-font-size-md);
+				font-weight: var(--wpds-typography-font-weight-emphasis);
+				color: var(--wpds-color-foreground-content-neutral);
+				border-top-color: var(--wpds-color-stroke-surface-neutral-weak);
+			}
+
+			> .content {
+				padding: 0 var(--wpds-dimension-padding-lg) var(--wpds-dimension-padding-lg);
+			}
+		}
+	}
+}
+
+// Assistant checklist: one row per job, divided like a card's rows.
+.jpcrm-assistant-job {
+	padding: var(--wpds-dimension-padding-lg) 0;
+	border-top: var(--wpds-border-width-xs) solid var(--wpds-color-stroke-surface-neutral-weak);
+
+	&:first-child {
+		padding-top: 0;
+		border-top: 0;
+	}
+
+	&:last-child {
+		padding-bottom: 0;
+	}
+
+	> .ui.grid {
+		flex-wrap: nowrap;
+		margin: 0;
+
+		> .column {
+			padding-top: 0;
+			padding-bottom: 0;
+		}
+
+		> .iconWrap {
+			width: auto !important;
+			padding-left: 0;
+		}
+	}
+
+	.iconWrap i {
+		margin: 0;
+		font-size: 2em;
+		line-height: 1;
+	}
+
+	h4.ui.header {
+		margin: 0 0 var(--wpds-dimension-gap-xs);
+		font-size: var(--wpds-typography-font-size-md);
+		font-weight: var(--wpds-typography-font-weight-emphasis);
+		line-height: var(--wpds-typography-line-height-sm);
+	}
+
+	.job-desc {
+		margin: 0 0 var(--wpds-dimension-gap-sm);
+		font-size: var(--wpds-typography-font-size-md);
+		color: var(--wpds-color-foreground-content-neutral-weak);
+	}
+
+	.job-help {
+		margin: 0;
+	}
+}
+
+// incomplete job
+.jpcrm-assistant-job.jpcrm-assistant-state-0 {
+
+	.state-complete {
+
+		display: none;
+
+	}
+
+	.iconWrap i {
+
+		opacity: 0.4;
+
+	}
+
+}
+
+// completed job
+.jpcrm-assistant-job.jpcrm-assistant-state-1 {
+
+	.state-incomplete {
+
+		display: none;
+
+	}
+
+
+}

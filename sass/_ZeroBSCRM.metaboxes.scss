@@ -3,6 +3,8 @@
  * https://jetpackcrm.com
  */
 
+@use "jpcrm-card-mixins" as card;
+
 /*
 	Global styles for ZBS metaboxes
 */
@@ -23,13 +25,98 @@
 	padding-top: 1em !important;
 }
 
+// Metaboxes are drawn as core cards (@wordpress/components Card, CardHeader
+// and CardBody): one outlined, rounded surface with the title in a header row
+// and a divider above the body. See zeroBSCRM_do_meta_box_html().
 .zbs-metabox {
 
 	position: relative;
-	margin-bottom: 1em;
+	margin-bottom: var(--wpds-dimension-gap-lg);
 
-	.zbs-metabox-head:hover {
+	&.jpcrm-card {
+		@include card.card-surface;
+	}
+
+	.zbs-metabox-head {
+		display: flex;
+		align-items: center;
+		gap: var(--wpds-dimension-gap-sm);
+		min-height: 48px;
+		box-sizing: border-box;
+		padding: var(--wpds-dimension-padding-sm) var(--wpds-dimension-padding-sm) var(--wpds-dimension-padding-sm) var(--wpds-dimension-padding-lg);
+		border-bottom: var(--wpds-border-width-xs) solid var(--wpds-color-stroke-surface-neutral);
 		cursor: move;
+	}
+
+	&.zbs-static .zbs-metabox-head {
+		cursor: default;
+	}
+
+	.zbs-metabox-title {
+		flex: 1;
+		min-width: 0;
+		margin: 0;
+		padding: 0;
+		@include card.card-header-text;
+	}
+
+	// Icon button, like core's postbox toggle.
+	.zbs-metabox-minimise {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		flex-shrink: 0;
+		width: var(--wpds-dimension-size-md);
+		height: var(--wpds-dimension-size-md);
+		margin: 0;
+		padding: 0;
+		border: 0;
+		border-radius: var(--wpds-border-radius-sm);
+		background: transparent;
+		color: var(--wpds-color-foreground-content-neutral);
+		cursor: pointer;
+
+		svg {
+			fill: currentColor;
+			transition: transform 0.1s ease-out;
+		}
+
+		&:hover {
+			background: var(--wpds-color-background-interactive-neutral-weak-active);
+		}
+
+		&:focus-visible {
+			outline: var(--wpds-border-width-focus) solid var(--wp-admin-theme-color, #3858e9);
+			outline-offset: 0;
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+
+			svg {
+				transition: none;
+			}
+		}
+	}
+
+	// The body keeps Semantic's .ui.segment for the boxes' own content
+	// styles; the card supplies the surface, so the segment's goes.
+	.zbs-metabox-body.ui.segment {
+		margin: 0;
+		padding: var(--wpds-dimension-padding-lg);
+		background: transparent;
+		border: 0;
+		box-shadow: none;
+	}
+
+	// The headless actions boxes print their own title above the actions
+	// (ZeroBSCRM.MetaBoxes.SubmitBoxes.php and friends). It becomes the card's
+	// header row, to match the headed boxes.
+	.zbs-metabox-body > .zbs-generic-save-wrap > .ui.dividing.header {
+		margin: calc(-1 * var(--wpds-dimension-padding-lg)) calc(-1 * var(--wpds-dimension-padding-lg)) var(--wpds-dimension-padding-lg) !important;
+		padding: 14px var(--wpds-dimension-padding-lg);
+		border-bottom: var(--wpds-border-width-xs) solid var(--wpds-color-stroke-surface-neutral);
+		text-align: left;
+		@include card.card-header-text;
 	}
 
 	// blocker (for when being dragdropped)
@@ -38,7 +125,7 @@
 		display: none;
 
 		position: absolute;
-		border-radius: 4px;
+		border-radius: var(--wpds-border-radius-lg);
 		top: 0;
 		left: 0;
 		width: 100%;
@@ -48,13 +135,12 @@
 		// title
 		div {
 
-			border-radius: 4px;
+			border-radius: var(--wpds-border-radius-lg);
 			padding-top: 1em;
 			padding-bottom: 1em;
 			font-size: 1.5em;
 			text-align: center;
-			text-shadow: 1px 1px 9px #848ca5;
-			background: #fff;
+			background: var(--wpds-color-background-surface-neutral-strong);
 
 		}
 
@@ -109,40 +195,14 @@
 
 
 // minimisation
-.zbs-metabox-head {
-
-	.zbs-metabox-minimise {
-
-		.caret.up.icon {
-			display: block;
-		}
-
-		.caret.down.icon {
-			display: none;
-		}
-
-		.caret.icon:hover {
-			cursor: pointer;
-			color: #fff;
-			border-radius: 2px;
-			background: #000;
-		}
-
-	}
-}
-
 .zbs-metabox.zbs-minimised {
 
-	.zbs-metabox-minimise {
+	.zbs-metabox-head {
+		border-bottom: 0;
+	}
 
-		.caret.up.icon {
-			display: none;
-		}
-
-		.caret.down.icon {
-			display: block;
-		}
-
+	.zbs-metabox-minimise svg {
+		transform: rotate(180deg);
 	}
 
 	// hide body

@@ -89,7 +89,7 @@ if ( ! isset( $tabs[ $active_tab ] ) ) {
 
 ?>
 
-<div id="jpcrm-system-manager" style="margin:1em;">
+<div id="jpcrm-system-manager">
 
 	<div class="ui top attached tabular menu">
 
