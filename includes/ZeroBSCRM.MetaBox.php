@@ -836,60 +836,35 @@ function zeroBSCRM_do_meta_box_html( $box, $page, $hidden, $object, $minimised, 
 		$htmlClasses = '';
 	}
 
-		echo '<div class="' . esc_attr( $classes ) . '" id="' . esc_attr( $box['id'] ) . '" ' . esc_attr( $extraAttrs . $dataAttrStr ) . '>';
-
-			// hide/minimise option
-			$hideMinimiseMenu = '';
-	if ( $canMinimise ) {
-
-		// minimise - <i class="dropdown icon"></i>
-		// now inc both carets, class presence turns on/off
-		$hideMinimiseMenu = '<div class="ui right item zbs-metabox-minimise"><i class="caret up icon"></i><i class="caret down icon"></i></div>';
-
+	// Headed and headless boxes alike are drawn as a core-style card: the
+	// outer div is the card, the head its header and the body its body.
+	// Tab panes sit inside their tab group's card instead.
+	if ( ! $isTabPane ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase -- Existing variable.
+		$classes .= ' jpcrm-card';
+	}
+	if ( $headless ) {
+		$classes .= ' jpcrm-card--headless';
 	}
 
+		echo '<div class="' . esc_attr( $classes ) . '" id="' . esc_attr( $box['id'] ) . '" ' . esc_attr( $extraAttrs . $dataAttrStr ) . '>'; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase -- Existing variable.
+
 	if ( ! $headless ) {
-		echo '<div id="' . esc_attr( $box['id'] ) . '-head" class="zbs-metabox-head ui top attached borderless menu ' . esc_attr( $extraClasses . postbox_classes( $box['id'], $page ) ) . '" ' . '>' . "\n"; // . $hidden_class
-		/*
-				not sure if we need this :)
-		if ( 'dashboard_browser_nag' != $box['id'] ) {
-				$widget_title = $box[ 'title' ];
-				if ( is_array( $box[ 'args' ] ) && isset( $box[ 'args' ][ '__widget_basename' ] ) ) {
-						$widget_title = $box[ 'args' ][ '__widget_basename' ];
-						// Do not pass this parameter to the user callback function.
-						unset( $box[ 'args' ][ '__widget_basename' ] );
-				}
-				echo '<button type="button" class="handlediv" aria-expanded="true">';
-				echo '<span class="screen-reader-text">' . sprintf( __( 'Toggle panel: %s', 'zero-bs-crm' ), $widget_title ) . '</span>';
-				echo '<span class="toggle-indicator" aria-hidden="true"></span>';
-				echo '</button>';
-		} */
+		echo '<div id="' . esc_attr( $box['id'] ) . '-head" class="zbs-metabox-head ' . esc_attr( $extraClasses . postbox_classes( $box['id'], $page ) ) . '">' . "\n"; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase -- Existing variable.
 
-			// txt
-			echo '<div class="header item">' . wp_kses( $box['title'], jpcrm_metabox_title_allowed_html() ) . '</div>' . $hideMinimiseMenu . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $hideMinimiseMenu is hard-coded markup; the title is escaped by wp_kses() above.
+		echo '<h2 class="zbs-metabox-title">' . wp_kses( $box['title'], jpcrm_metabox_title_allowed_html() ) . '</h2>' . "\n";
 
-			// right hand menu, if one
-			/*
-					For now, was css glitching, can look later as don't need yet
-			echo '<div class="right menu">';
-
-				// drop down
-				echo '<div class="ui dropdown icon item"><i class="angle double up icon"></i>';
-
-					echo '<div class="menu">';
-
-						echo '<div class="item">Testing</div>';
-
-					echo '</div>';
-
-				echo '</div>';// / dropdown
-
-			echo '</div>';
-			*/
+		// Show/hide toggle, as on core's postboxes. The chevron points up while
+		// the box is open; CSS turns it over when the box is minimised.
+		if ( $canMinimise ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase -- Existing variable.
+			$is_minimised = in_array( $box['id'], $minimised, true );
+			echo '<button type="button" class="zbs-metabox-minimise" aria-expanded="' . ( $is_minimised ? 'false' : 'true' ) . '" aria-controls="' . esc_attr( $box['id'] ) . '-box">';
+			/* translators: %s: Metabox title. */
+			echo '<span class="screen-reader-text">' . esc_html( sprintf( __( 'Toggle panel: %s', 'zero-bs-crm' ), wp_strip_all_tags( $box['title'] ) ) ) . '</span>';
+			echo '<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="M6.5 12.4L12 8l5.5 4.4-.9 1.2L12 10l-4.6 3.6-1-1.2z"></path></svg>';
+			echo '</button>' . "\n";
+		}
 
 		echo '</div>';
-
-		$htmlClasses .= ' bottom attached';
 	}
 			echo '<div id="' . esc_attr( $box['id'] ) . '-box" class="zbs-metabox-body ' . esc_attr( $htmlClasses ) . ' ' . esc_attr( $extraClasses ) . '">' . "\n"; // $hidden_class.
 				call_user_func( $box['callback'], $object, $box );
