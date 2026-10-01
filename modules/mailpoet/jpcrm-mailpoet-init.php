@@ -32,7 +32,7 @@ function jpcrm_register_free_extension_mailpoet( $exts ) {
 	// append our module
 	$exts['mailpoet'] = array(
 		'name'       => 'MailPoet Sync',
-		'i'          => 'ext/mailpoet.png',
+		'brand'      => 'mailpoet',
 		'short_desc' => __( 'Automatically import MailPoet data into your CRM.', 'zero-bs-crm' ),
 	);
 

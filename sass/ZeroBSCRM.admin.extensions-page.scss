@@ -7,6 +7,336 @@
 // Is also only enqueue on that one page.
 .zbs-extensions-manager {
 
+	// The Core Modules and Extensions lists: a heading and description for each
+	// section, then a grid of cards. Type follows WordPress' metaboxes: 14px
+	// semibold titles and 13px regular text in the secondary color.
+	.jpcrm-extension-section {
+		margin: 0 0 32px;
+	}
+
+	.jpcrm-extension-section__header {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: flex-end;
+		justify-content: space-between;
+		gap: var(--wpds-dimension-gap-md);
+		margin-bottom: var(--wpds-dimension-padding-lg);
+
+		h2 {
+			margin: 0;
+			color: var(--wpds-color-foreground-content-neutral);
+			font-size: 14px;
+			font-weight: var(--wpds-typography-font-weight-emphasis);
+			line-height: 1.4;
+		}
+
+		p {
+			margin: 4px 0 0;
+			color: #50575e;
+			font-size: var(--wpds-typography-font-size-md);
+			line-height: 1.5;
+		}
+	}
+
+	.jpcrm-extension-section__links {
+		display: flex;
+		gap: var(--wpds-dimension-gap-sm);
+	}
+
+	.jpcrm-extension-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+		gap: var(--wpds-dimension-padding-lg);
+	}
+
+	.jpcrm-extension-card {
+		display: flex;
+		flex-direction: column;
+		box-sizing: border-box;
+		padding: 20px;
+		border: 1px solid var(--wpds-color-stroke-surface-neutral);
+		border-radius: 12px;
+		background: #fff;
+		transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
+		&:hover,
+		&:focus-within {
+			border-color: #c3c4c7;
+			box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			transition: none;
+		}
+	}
+
+	.jpcrm-extension-card__header {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		gap: var(--wpds-dimension-gap-sm);
+		margin-bottom: var(--wpds-dimension-padding-lg);
+	}
+
+	// A banner from jetpackcrm.com, for an extension CRM has no icon for yet.
+	.jpcrm-extension-card__banner {
+		width: auto;
+		max-width: 100%;
+		height: 48px;
+		border-radius: 8px;
+	}
+
+	.jpcrm-extension-card__title {
+		margin: 0;
+		color: var(--wpds-color-foreground-content-neutral);
+		font-size: 14px;
+		font-weight: var(--wpds-typography-font-weight-emphasis);
+		line-height: 1.4;
+	}
+
+	.jpcrm-extension-card__description {
+		flex: 1;
+		margin: 4px 0 0;
+		color: #50575e;
+		font-size: var(--wpds-typography-font-size-md);
+		line-height: 1.5;
+
+		// Descriptions from jetpackcrm.com can come wrapped in <p>.
+		p {
+			margin: 0;
+			font-size: inherit;
+		}
+	}
+
+	.jpcrm-extension-card__actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--wpds-dimension-gap-sm);
+		margin-top: var(--wpds-dimension-padding-lg);
+	}
+
+	// A single extension's page: one 800px column with the same type as the lists.
+	.jpcrm-extension-detail {
+		max-width: 800px;
+		margin: 0 auto;
+
+		.jpcrm-upsell-notice {
+			margin-bottom: var(--wpds-dimension-padding-lg);
+		}
+	}
+
+	.jpcrm-extension-detail__back {
+		display: inline-flex;
+		align-items: center;
+		gap: 2px;
+		margin: 0 0 var(--wpds-dimension-padding-lg) -4px;
+		color: var(--wpds-color-foreground-content-neutral);
+		font-size: var(--wpds-typography-font-size-md);
+		line-height: 20px;
+		text-decoration: none;
+
+		&:hover,
+		&:focus {
+			color: var(--wpds-color-foreground-interactive-brand);
+		}
+	}
+
+	.jpcrm-extension-detail__header {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: var(--wpds-dimension-padding-lg);
+		margin-bottom: var(--wpds-dimension-padding-lg);
+		padding: 24px;
+		border: 1px solid var(--wpds-color-stroke-surface-neutral);
+		border-radius: 12px;
+		background: #fff;
+	}
+
+	.jpcrm-extension-detail__heading {
+		flex: 1;
+		min-width: 200px;
+
+		h2 {
+			margin: 0;
+			color: var(--wpds-color-foreground-content-neutral);
+			font-size: var(--wpds-typography-font-size-xl);
+			font-weight: var(--wpds-typography-font-weight-emphasis);
+			line-height: 1.4;
+		}
+
+		p {
+			margin: 2px 0 0;
+			color: #50575e;
+			font-size: var(--wpds-typography-font-size-md);
+			line-height: 1.5;
+		}
+	}
+
+	.jpcrm-extension-detail__actions {
+		display: flex;
+		align-items: center;
+		gap: var(--wpds-dimension-gap-sm);
+	}
+
+	// The description from jetpackcrm.com, set in WordPress' type: 13px text with
+	// 1.6 line height, 20px and 14px semibold headings, and even spacing between.
+	.jpcrm-extension-detail__description {
+		padding: 24px 32px 32px;
+		border: 1px solid var(--wpds-color-stroke-surface-neutral);
+		border-radius: 12px;
+		background: #fff;
+		color: var(--wpds-color-foreground-content-neutral);
+		font-size: var(--wpds-typography-font-size-md);
+		line-height: 1.6;
+
+		h2,
+		h3,
+		h4 {
+			margin: 24px 0 8px;
+			padding: 0;
+			color: var(--wpds-color-foreground-content-neutral);
+			font-family: inherit;
+			font-weight: var(--wpds-typography-font-weight-emphasis);
+			line-height: 1.4;
+		}
+
+		h2 {
+			font-size: var(--wpds-typography-font-size-xl);
+		}
+
+		h3,
+		h4 {
+			font-size: 14px;
+		}
+
+		> :first-child,
+		.extension-section:first-child > :first-child {
+			margin-top: 0;
+		}
+
+		// The source puts Font Awesome glyphs in headings and lists; CRM no longer
+		// loads Font Awesome, and some would draw as other icons through CRM's icon map.
+		i.fa {
+			display: none;
+		}
+
+		// Its Bootstrap grid columns stack in this one column.
+		.row,
+		[class*="col-"] {
+			float: none;
+			width: auto;
+		}
+
+		div.row,
+		div[class*="col-"] {
+			margin: 0;
+			padding: 0;
+		}
+
+		// Its empty headings and sections only add space.
+		h3:empty,
+		.extension-section-closing:empty {
+			display: none;
+		}
+
+		p {
+			margin: 0 0 8px;
+			font-size: inherit;
+			line-height: inherit;
+		}
+
+		ul,
+		ol {
+			margin: 0 0 16px;
+			padding-left: 20px;
+		}
+
+		ul {
+			list-style: disc;
+		}
+
+		ol {
+			list-style: decimal;
+		}
+
+		li {
+			margin: 0 0 4px;
+			font-size: inherit;
+			line-height: inherit;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+
+		strong {
+			font-weight: var(--wpds-typography-font-weight-emphasis);
+		}
+
+		figure {
+			margin: 16px 0;
+		}
+
+		img {
+			display: block;
+			float: none;
+			max-width: 100%;
+			height: auto;
+			margin: 0 auto;
+			border: 1px solid var(--wpds-color-stroke-surface-neutral);
+			border-radius: 8px;
+		}
+	}
+
+	.jpcrm-extension-detail__closing {
+		margin-top: 24px;
+		padding-top: 24px;
+		border-top: 1px solid var(--wpds-color-stroke-surface-neutral);
+		text-align: center;
+	}
+
+	// The upsell above the Extensions list, laid out like jetpack.com's notices:
+	// an icon, a title and one sentence, and the action on the right.
+	.jpcrm-upsell-notice {
+		display: flex;
+		align-items: center;
+		gap: var(--wpds-dimension-padding-lg);
+		margin: 0 0 32px;
+		padding: 20px 24px;
+		border: 1px solid var(--wpds-color-stroke-surface-neutral);
+		border-radius: 12px;
+		background: #fff;
+
+		.button {
+			flex-shrink: 0;
+		}
+
+		@media (max-width: 600px) {
+			flex-wrap: wrap;
+		}
+	}
+
+	.jpcrm-upsell-notice__text {
+		flex: 1;
+		min-width: 200px;
+
+		p {
+			margin: 4px 0 0;
+			color: #50575e;
+			font-size: var(--wpds-typography-font-size-md);
+			line-height: 1.5;
+		}
+	}
+
+	.jpcrm-upsell-notice__title {
+		margin: 0;
+		color: var(--wpds-color-foreground-content-neutral);
+		font-size: 14px;
+		font-weight: var(--wpds-typography-font-weight-emphasis);
+		line-height: 1.4;
+	}
+
 	.title {
 		font-size: 17px;
 		font-weight: 900;
@@ -19,8 +349,9 @@
 		margin-top: 5px;
 	}
 
+	// 24px at the sides, to line up with the page title like other CRM screens.
 	.zbs-page-wrap {
-		padding: 20px;
+		padding: 20px 24px;
 	}
 
 	.zbs-page-wrap .segment {
@@ -193,39 +524,6 @@
 		height: auto;
 		text-align: center;
 		padding: 20px;
-	}
-
-	.extension-main-proposition {
-		font-size: 20px;
-		font-weight: 900;
-	}
-
-	.extension-section {
-		font-size: 14px;
-		line-height: 21px;
-
-		// stuff to modify our sales page html pulled into the zbs ext subpage
-		// improve how this html renders on pages like
-		// /admin.php?page=zerobscrm-extensions&extension_id=20570
-		.wul {
-			padding: 1em;
-			margin: 0.5em;
-		}
-
-
-	}
-
-	.extension-section h3 {
-		color: #000;
-		font-size: 20px;
-		font-weight: 900;
-		padding-top: 20px;
-		padding-bottom: 10px;
-	}
-
-	.extension-section .fa {
-		margin-right: 10px;
-		color: #8c8c8c;
 	}
 
 	.main-header-img .full-size-image {

@@ -30,7 +30,7 @@ add_action( 'jpcrm_sniff_features', 'jpcrm_sniff_feature_givewp' );
 function jpcrm_register_free_extension_givewp( $exts ) {
 	$exts['givewp'] = array(
 		'name'       => __( 'GiveWP Connector', 'zero-bs-crm' ),
-		'i'          => 'givewp.png',
+		'brand'      => 'givewp',
 		'short_desc' => __( 'Capture donations into your CRM.', 'zero-bs-crm' ),
 	);
 	return $exts;

@@ -219,9 +219,10 @@
 		overflow: auto;
 	}
 
-	.zbs-features .feature-block img {
+	.zbs-features .feature-block img,
+	.zbs-features .feature-block .jpcrm-extension-icon {
 		float: left;
-		max-width: 46px;
+		max-width: 56px;
 	}
 
 	.zbs-features  .feature-block h5 {
