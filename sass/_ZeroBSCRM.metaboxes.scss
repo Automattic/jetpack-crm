@@ -3,6 +3,8 @@
  * https://jetpackcrm.com
  */
 
+@use "jpcrm-card-mixins" as card;
+
 /*
 	Global styles for ZBS metaboxes
 */
@@ -32,9 +34,7 @@
 	margin-bottom: var(--wpds-dimension-gap-lg);
 
 	&.jpcrm-card {
-		background: var(--wpds-color-background-surface-neutral-strong);
-		border: var(--wpds-border-width-xs) solid var(--wpds-color-stroke-surface-neutral);
-		border-radius: var(--wpds-border-radius-lg);
+		@include card.card-surface;
 	}
 
 	.zbs-metabox-head {
@@ -45,13 +45,10 @@
 		box-sizing: border-box;
 		padding: var(--wpds-dimension-padding-sm) var(--wpds-dimension-padding-sm) var(--wpds-dimension-padding-sm) var(--wpds-dimension-padding-lg);
 		border-bottom: var(--wpds-border-width-xs) solid var(--wpds-color-stroke-surface-neutral);
-
-		&:hover {
-			cursor: move;
-		}
+		cursor: move;
 	}
 
-	&.zbs-static .zbs-metabox-head:hover {
+	&.zbs-static .zbs-metabox-head {
 		cursor: default;
 	}
 
@@ -60,11 +57,7 @@
 		min-width: 0;
 		margin: 0;
 		padding: 0;
-		font-family: var(--wpds-typography-font-family-heading);
-		font-size: var(--wpds-typography-font-size-md);
-		font-weight: var(--wpds-typography-font-weight-emphasis);
-		line-height: var(--wpds-typography-line-height-sm);
-		color: var(--wpds-color-foreground-content-neutral);
+		@include card.card-header-text;
 	}
 
 	// Icon button, like core's postbox toggle.
@@ -112,12 +105,7 @@
 		padding: var(--wpds-dimension-padding-lg);
 		background: transparent;
 		border: 0;
-		border-radius: 0 0 var(--wpds-border-radius-lg) var(--wpds-border-radius-lg);
 		box-shadow: none;
-	}
-
-	&.jpcrm-card--headless > .zbs-metabox-body.ui.segment {
-		border-radius: var(--wpds-border-radius-lg);
 	}
 
 	// The headless actions boxes print their own title above the actions
@@ -128,11 +116,7 @@
 		padding: 14px var(--wpds-dimension-padding-lg);
 		border-bottom: var(--wpds-border-width-xs) solid var(--wpds-color-stroke-surface-neutral);
 		text-align: left;
-		font-family: var(--wpds-typography-font-family-heading);
-		font-size: var(--wpds-typography-font-size-md);
-		font-weight: var(--wpds-typography-font-weight-emphasis);
-		line-height: var(--wpds-typography-line-height-sm);
-		color: var(--wpds-color-foreground-content-neutral);
+		@include card.card-header-text;
 	}
 
 	// blocker (for when being dragdropped)

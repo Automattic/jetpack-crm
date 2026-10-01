@@ -5,7 +5,7 @@
 
 // Specifically for admin settings pages
 
-@use "jpcrm-wtab-cards" as wtab-cards;
+@use "jpcrm-card-mixins" as card;
 
 .zbs-explainer-ico {
 	margin-top: 1em;
@@ -171,9 +171,7 @@
 
 	#zbs-settings-menu.ui.vertical.menu {
 		overflow: hidden;
-		background: var(--wpds-color-background-surface-neutral-strong);
-		border: var(--wpds-border-width-xs) solid var(--wpds-color-stroke-surface-neutral);
-		border-radius: var(--wpds-border-radius-lg);
+		@include card.card-surface;
 		box-shadow: none;
 
 		> .item::before {
@@ -185,43 +183,33 @@
 		padding: 14px var(--wpds-dimension-padding-lg);
 		border-bottom: var(--wpds-border-width-xs) solid var(--wpds-color-stroke-surface-neutral);
 		text-align: left;
-		font-family: var(--wpds-typography-font-family-heading);
-		font-size: var(--wpds-typography-font-size-md);
-		font-weight: var(--wpds-typography-font-weight-emphasis);
-		line-height: var(--wpds-typography-line-height-sm);
-		color: var(--wpds-color-foreground-content-neutral);
+		@include card.card-header-text;
 
 		&::before {
 			display: none;
 		}
 	}
 
-	// The panel around the settings. Screens built from settings tables lose
-	// it, since each table is a card; the rest (Mail Delivery, API, ...) keep
-	// it as a card.
-	> .column > .ui.segment:has(> #poststuff.zbs-settings-page) {
-		border: var(--wpds-border-width-xs) solid var(--wpds-color-stroke-surface-neutral);
-		border-radius: var(--wpds-border-radius-lg);
-		box-shadow: none !important;
-	}
-
+	// The panel around the settings is a card (_jpcrm-cards.scss). Screens
+	// built from settings tables lose it, since each table is a card; the rest
+	// (Mail Delivery, API, ...) keep it.
 	> .column > .ui.segment:has(> #poststuff.zbs-settings-page table.wtab) {
 		padding: 0;
 		background: transparent;
 		border: 0;
 	}
 
-	// Below 992px the menu stacks above the settings (_ZeroBSCRM.mobile.scss),
-	// and the settings column's inline padding-left: 0 put the cards against
-	// the screen edge now the panel's padding is gone.
-	@media (max-width: 991px) {
+	// The settings sit right against the menu. Below 992px the menu stacks
+	// above them (_ZeroBSCRM.mobile.scss), so they keep the grid's gutter.
+	> .twelve.wide.column {
+		padding-left: 0;
 
-		> .twelve.wide.column {
-			padding-left: 14px !important;
+		@media (max-width: 991px) {
+			padding-left: 14px;
 		}
 	}
 }
 
 #poststuff.zbs-settings-page {
-	@include wtab-cards.title-and-cards;
+	@include card.title-and-cards;
 }

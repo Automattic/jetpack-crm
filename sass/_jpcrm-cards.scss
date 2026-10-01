@@ -17,20 +17,17 @@
 }
 
 // A box that is the whole screen (Data Tools, Team, Notifications, the CSV
-// importer, adding a file) sat flush against the admin menu, with an inline
-// right margin on some. It lines up with the page title's 24px gutter
-// (.jpcrm-learn-menu-container) on both sides instead.
+// importer, adding a file) lines up with the page title's 24px gutter
+// (.jpcrm-learn-menu-container) on both sides, rather than the admin menu.
+// !important over Semantic's .ui.container auto margins (Support) and the
+// add-file screen's own margins.
 #wpbody-content > .ui.segment,
 #wpbody-content > #sgpBody > .ui.segment {
 	margin: var(--wpds-dimension-gap-lg) 24px !important;
 }
 
 // Data Tools' Delete CRM Data and Factory Reset boxes, side by side in a
-// grid below the main box: the same gutter, without their inline right margin.
+// grid below the main box: the same gutter.
 #wpbody-content > .ui.grid:has(.mass-delete) {
 	margin: 0 10px;
-
-	.ui.segment:has(> .mass-delete) {
-		margin-right: 0 !important;
-	}
 }

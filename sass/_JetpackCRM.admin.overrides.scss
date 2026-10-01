@@ -32,7 +32,12 @@ $bottom_border: #dededf;
 .ui.segment[class*="bottom attached"],
 .ui.tabular.menu .active.item {
 
-	@include jetpackBox;
+	// Not on the screens drawn as core cards instead: the contact and company
+	// view panels (ZeroBSCRM.admin.singleview.scss) and the System Assistant
+	// (jpcrm-admin-system.scss).
+	&:not(:where(#zbs-customer-panel *, #zbs-company-panel *, #jpcrm-system-manager *)) {
+		@include jetpackBox;
+	}
 
 }
 
