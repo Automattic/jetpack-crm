@@ -215,10 +215,23 @@
 			margin-top: 0;
 		}
 
-		// The source puts Font Awesome glyphs in its headings; CRM no longer loads them.
-		h3 > i,
-		h4 > i {
+		// The source puts Font Awesome glyphs in headings and lists; CRM no longer
+		// loads Font Awesome, and some would draw as other icons through CRM's icon map.
+		i.fa {
 			display: none;
+		}
+
+		// Its Bootstrap grid columns stack in this one column.
+		.row,
+		[class*="col-"] {
+			float: none;
+			width: auto;
+		}
+
+		div.row,
+		div[class*="col-"] {
+			margin: 0;
+			padding: 0;
 		}
 
 		// Its empty headings and sections only add space.
@@ -267,6 +280,7 @@
 
 		img {
 			display: block;
+			float: none;
 			max-width: 100%;
 			height: auto;
 			margin: 0 auto;

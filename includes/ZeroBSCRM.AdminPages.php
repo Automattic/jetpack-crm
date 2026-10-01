@@ -2231,14 +2231,12 @@ function jpcrm_html_premium_extension( $extension, $show_link_button, $bundle ) 
 	if ( $show_link_button ) {
 		$sales_link = $zbs->urls['home'] . '/product/' . $extension->slug;
 
-		// API Connector has its own sales page instead of a page here.
 		$actions[] = array(
-			'label'  => __( 'Learn more', 'zero-bs-crm' ),
-			'url'    => $extkey === 'apiconnector' ? $zbs->urls['apiconnectorsales'] : admin_url( 'admin.php?page=' . $zbs->slugs['extensions'] . '&extension_id=' . $extension->id ),
-			'target' => $extkey === 'apiconnector' ? '_blank' : '',
+			'label' => __( 'Learn more', 'zero-bs-crm' ),
+			'url'   => admin_url( 'admin.php?page=' . $zbs->slugs['extensions'] . '&extension_id=' . $extension->id ),
 		);
 
-		if ( $installed && $extkey !== 'apiconnector' ) {
+		if ( $installed ) {
 			if ( ! empty( $extension->docs ) ) {
 				$actions[] = array(
 					'label'  => __( 'Docs', 'zero-bs-crm' ),
