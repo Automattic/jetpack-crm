@@ -115,6 +115,161 @@
 		margin-top: var(--wpds-dimension-padding-lg);
 	}
 
+	// A single extension's page: one 800px column with the same type as the lists.
+	.jpcrm-extension-detail {
+		max-width: 800px;
+		margin: 0 auto;
+
+		.jpcrm-upsell-notice {
+			margin-bottom: var(--wpds-dimension-padding-lg);
+		}
+	}
+
+	.jpcrm-extension-detail__back {
+		display: inline-flex;
+		align-items: center;
+		gap: 2px;
+		margin: 0 0 var(--wpds-dimension-padding-lg) -4px;
+		color: var(--wpds-color-foreground-content-neutral);
+		font-size: var(--wpds-typography-font-size-md);
+		line-height: 20px;
+		text-decoration: none;
+
+		&:hover,
+		&:focus {
+			color: var(--wpds-color-foreground-interactive-brand-strong);
+		}
+	}
+
+	.jpcrm-extension-detail__header {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: var(--wpds-dimension-padding-lg);
+		margin-bottom: var(--wpds-dimension-padding-lg);
+		padding: 24px;
+		border: 1px solid var(--wpds-color-stroke-surface-neutral);
+		border-radius: 12px;
+		background: #fff;
+	}
+
+	.jpcrm-extension-detail__heading {
+		flex: 1;
+		min-width: 200px;
+
+		h2 {
+			margin: 0;
+			color: var(--wpds-color-foreground-content-neutral);
+			font-size: var(--wpds-typography-font-size-xl);
+			font-weight: var(--wpds-typography-font-weight-emphasis);
+			line-height: 1.4;
+		}
+
+		p {
+			margin: 2px 0 0;
+			color: #50575e;
+			font-size: var(--wpds-typography-font-size-md);
+			line-height: 1.5;
+		}
+	}
+
+	.jpcrm-extension-detail__actions {
+		display: flex;
+		align-items: center;
+		gap: var(--wpds-dimension-gap-sm);
+	}
+
+	// The description from jetpackcrm.com, set in WordPress' type: 13px text with
+	// 1.6 line height, 20px and 14px semibold headings, and even spacing between.
+	.jpcrm-extension-detail__description {
+		padding: 24px 32px 32px;
+		border: 1px solid var(--wpds-color-stroke-surface-neutral);
+		border-radius: 12px;
+		background: #fff;
+		color: var(--wpds-color-foreground-content-neutral);
+		font-size: var(--wpds-typography-font-size-md);
+		line-height: 1.6;
+
+		h2,
+		h3,
+		h4 {
+			margin: 24px 0 8px;
+			padding: 0;
+			color: var(--wpds-color-foreground-content-neutral);
+			font-family: inherit;
+			font-weight: var(--wpds-typography-font-weight-emphasis);
+			line-height: 1.4;
+		}
+
+		h2 {
+			font-size: var(--wpds-typography-font-size-xl);
+		}
+
+		h3,
+		h4 {
+			font-size: 14px;
+		}
+
+		> :first-child,
+		.extension-section:first-child > :first-child {
+			margin-top: 0;
+		}
+
+		// The source puts Font Awesome glyphs in its headings; CRM no longer loads them.
+		h3 > i,
+		h4 > i {
+			display: none;
+		}
+
+		// Its empty headings and sections only add space.
+		h3:empty,
+		.extension-section-closing:empty {
+			display: none;
+		}
+
+		p {
+			margin: 0 0 8px;
+			font-size: inherit;
+			line-height: inherit;
+		}
+
+		li {
+			margin: 0 0 4px;
+			font-size: inherit;
+			line-height: inherit;
+		}
+
+		ul {
+			margin: 0 0 8px;
+			padding-left: 20px;
+			list-style: disc;
+		}
+
+		strong {
+			font-weight: var(--wpds-typography-font-weight-emphasis);
+		}
+
+		figure {
+			margin: 16px 0;
+		}
+
+		img {
+			display: block;
+			max-width: 100%;
+			height: auto;
+			margin: 0 auto;
+			border: 1px solid var(--wpds-color-stroke-surface-neutral);
+			border-radius: 8px;
+		}
+	}
+
+	.jpcrm-extension-detail__closing {
+		margin-top: 24px;
+		padding-top: 24px;
+		border-top: 1px solid var(--wpds-color-stroke-surface-neutral);
+		text-align: center;
+	}
+
 	// The upsell above the Extensions list, laid out like jetpack.com's notices:
 	// an icon, a title and one sentence, and the action on the right.
 	.jpcrm-upsell-notice {
@@ -342,39 +497,6 @@
 		height: auto;
 		text-align: center;
 		padding: 20px;
-	}
-
-	.extension-main-proposition {
-		font-size: 20px;
-		font-weight: 900;
-	}
-
-	.extension-section {
-		font-size: 14px;
-		line-height: 21px;
-
-		// stuff to modify our sales page html pulled into the zbs ext subpage
-		// improve how this html renders on pages like
-		// /admin.php?page=zerobscrm-extensions&extension_id=20570
-		.wul {
-			padding: 1em;
-			margin: 0.5em;
-		}
-
-
-	}
-
-	.extension-section h3 {
-		color: #000;
-		font-size: 20px;
-		font-weight: 900;
-		padding-top: 20px;
-		padding-bottom: 10px;
-	}
-
-	.extension-section .fa {
-		margin-right: 10px;
-		color: #8c8c8c;
 	}
 
 	.main-header-img .full-size-image {

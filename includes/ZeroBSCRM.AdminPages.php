@@ -1925,91 +1925,71 @@ function zeroBSCRM_html_extensions() {
 			echo '</div>';
 			// end of #error-stuff
 
-			echo '<div class="zbs-page-wrap thinner single-info-start">';
+			$extkey     = $info->extkey;
+			$sales_link = $zbs->urls['home'] . '/product/' . $info->slug;
+			$installed  = zeroBSCRM_isExtensionInstalled( $extkey );
+			$docs       = $info->docs;
 
-			echo '<div class="ui segment main-header-img">';
-				echo '<div class="back">';
-				echo '<a href="' . esc_url( admin_url( 'admin.php?page=' . $zbs->slugs['extensions'] ) ) . '"><i class="chevron left icon"></i> ' . esc_html__( 'Back', 'zero-bs-crm' ) . '</a>';
-				echo '</div>';
-
-				echo '<div class="main-image full-size-image">';
-				echo '<img src="' . esc_url( $info->image ) . '" alt="' . esc_attr( $info->name ) . '"/>';
-				echo '</div>';
-
-				echo '<div class="below-main-image about-author-block">';
-					// start the about block
-					echo '<div class="about-img"><img alt="Jetpack CRM logo" src="' . esc_url( $info->by ) . '"/>';
-					echo '<div class="top-info-block">';
-					echo '<h4 class="extension-name">' . esc_html( $info->name ) . '</h4>';
-					echo '<div class="who">' . esc_html__( 'by ', 'zero-bs-crm' ) . '<a class="by-url" href="' . esc_url( $zbs->urls['home'] ) . '" target="_blank">Jetpack CRM</a></div>';
-					echo '</div>';
-					echo '</div>';
-					// end the about block
-
-					// action block (installed / not)
-					$extkey     = $info->extkey;
-					$sales_link = $zbs->urls['home'] . '/product/' . $info->slug;
-
-					$installed = zeroBSCRM_isExtensionInstalled( $extkey );
-					$docs      = $info->docs;
-					echo '<div class="actions-block"><div class="install-ext">';
-		if ( $installed ) {
-			echo '<span class="ui label green large"><i class="check circle icon"></i> ' . esc_html__( 'Installed', 'zero-bs-crm' ) . '</span>';
-		} elseif ( $bundle ) {
-			echo '<a href="' . esc_url( $zbs->urls['account'] ) . '" class="ui blue button" target="_blank"><i class="download icon"></i> ' . esc_html__( 'Download', 'zero-bs-crm' ) . '</a>';
+			$icon = jpcrm_premium_extension_icon( $extkey );
+		if ( ! empty( $icon['brand'] ) ) {
+			$icon_html = jpcrm_integration_icon_html( $icon['brand'] );
+		} elseif ( ! empty( $icon['icon'] ) ) {
+			$icon_html = jpcrm_extension_icon_html( $icon['icon'] );
 		} else {
-			echo '<a href="' . esc_url( $sales_link ) . '" class="ui blue button" target="_blank"><i class="cart icon"></i> ' . esc_html__( 'Buy', 'zero-bs-crm' ) . '</a>';
+			$icon_html = '';
+		}
+
+			// One column: back link, the extension's header with its actions, the
+			// bundle upsell, then the description from jetpackcrm.com.
+			echo '<div class="zbs-page-wrap jpcrm-extension-detail">';
+
+			echo '<a class="jpcrm-extension-detail__back" href="' . esc_url( admin_url( 'admin.php?page=' . $zbs->slugs['extensions'] ) ) . '">' . jpcrm_wp_icon_svg( 'chevron-left', 20 ) . esc_html__( 'All extensions', 'zero-bs-crm' ) . '</a>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- The SVG is CRM's own.
+
+			echo '<div class="jpcrm-extension-detail__header">';
+		if ( $icon_html !== '' ) {
+			echo $icon_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped when built.
+		}
+			echo '<div class="jpcrm-extension-detail__heading">';
+			echo '<h2>' . esc_html( $info->name ) . '</h2>';
+			echo '<p>' . esc_html__( 'by ', 'zero-bs-crm' ) . '<a href="' . esc_url( $zbs->urls['home'] ) . '" target="_blank">Jetpack CRM</a></p>';
+			echo '</div>';
+			echo '<div class="jpcrm-extension-detail__actions">';
+		if ( $installed ) {
+			echo '<span class="jpcrm-badge is-stable">' . esc_html__( 'Installed', 'zero-bs-crm' ) . '</span>';
+		} elseif ( $bundle ) {
+			echo '<a href="' . esc_url( $zbs->urls['account'] ) . '" class="button button-primary" target="_blank">' . esc_html__( 'Download', 'zero-bs-crm' ) . '</a>';
+		} else {
+			echo '<a href="' . esc_url( $sales_link ) . '" class="button button-primary" target="_blank">' . esc_html__( 'Buy', 'zero-bs-crm' ) . '</a>';
 		}
 		if ( ! empty( $docs ) ) {
-			echo '<a class="docs-url ui button" href="' . esc_url( $docs ) . '" target="_blank"><i class="book icon"></i>' . esc_html__( 'View Docs', 'zero-bs-crm' ) . '</a>';
+			echo '<a class="button" href="' . esc_url( $docs ) . '" target="_blank">' . esc_html__( 'View Docs', 'zero-bs-crm' ) . '</a>';
 		}
-					echo '</div>';
-					echo '</div>';
-					// end action block
-				echo '</div>';
-				// end the about-author-block
-
-				echo '<div class="clear"></div>'; // clear stuff
-
-			echo '</div>';  // end the whole header image block
-
 			echo '</div>';
-			// end the start of the info block (top block)
+			echo '</div>';
 
-			echo '<div class="zbs-page-wrap thinner single-bundle-wrap">';
 		if ( ! $bundle ) {
-			echo '<div class="bullie-wrap">';
-			echo '<div class="bullie">';
-				echo '<img src="' . esc_url( jpcrm_get_logo() ) . '" alt="Jetpack CRM" style="height:48px;padding:10px;">';
-				echo '<div class="upgrade">' . esc_html__( 'Purchase the Entrepreneur Bundle to get access to all of our CRM extensions.', 'zero-bs-crm' ) . '</div>';
-				echo '<a class = "ui button green mini upgrade-bullie-box" href="' . esc_url( $zbs->urls['upgrade'] ) . '" target = "_blank"><i class="cart plus icon"></i> ' . esc_html__( 'Start', 'zero-bs-crm' ) . '</a>';
+			echo '<div class="jpcrm-upsell-notice">';
+			echo jpcrm_extension_icon_html( 'plugins' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped when built.
+			echo '<div class="jpcrm-upsell-notice__text">';
+			echo '<h2 class="jpcrm-upsell-notice__title">' . esc_html__( 'Get every extension with the Entrepreneur Bundle', 'zero-bs-crm' ) . '</h2>';
+			echo '<p>' . esc_html__( 'Purchase the Entrepreneur Bundle to get access to all of our CRM extensions.', 'zero-bs-crm' ) . '</p>';
 			echo '</div>';
+			echo '<a class="button" href="' . esc_url( $zbs->urls['upgrade'] ) . '" target="_blank">' . esc_html__( 'Get the bundle', 'zero-bs-crm' ) . '</a>';
 			echo '</div>';
-			echo '<div class="clear"></div>';
 		}
-			echo '</div>';
 
-			echo '<div class="zbs-page-wrap thinner" id="single-ext-desc">';
-			echo '<div class="ui segment main-talk">';
-				echo '<div class="extension-description">';
+			// The description is page content from jetpackcrm.com. Its inline styles
+			// set their own sizes and widths, so they go and the page's type applies.
+			$desc = wp_kses_post( preg_replace( '/\sstyle=("|\')[^"\']*\1/i', '', $info->description ) );
 
-					// semantic ui switch html from bootstrap ones (grids basically)
-					$desc = str_replace( 'class="row"', 'class="ui grid"', $info->description );
-					$desc = str_replace( ' row"', ' ui grid"', $desc );
-					$desc = str_replace( 'col-md-6', 'eight wide column', $desc );
-					$desc = str_replace( 'col-sm-8', 'ten wide column', $desc );
-					$desc = str_replace( 'col-lg-1', '', $desc );
-					$desc = str_replace( 'col-lg-2', 'four wide column', $desc );
-
-					echo $desc;
-				echo '</div>';
-				// buy
+			echo '<div class="jpcrm-extension-detail__description">';
+			echo $desc; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Passed through wp_kses_post() above.
 		if ( ! $installed && ! $bundle ) {
-			echo '<hr /><div style="margin:2em;text-align:center"><a href="' . esc_url( $sales_link ) . '" class = "ui large blue button" target="_blank"><i class="cart icon"></i> ' . esc_html__( 'Buy Extension', 'zero-bs-crm' ) . '</a></div>';
+			echo '<div class="jpcrm-extension-detail__closing"><a href="' . esc_url( $sales_link ) . '" class="button button-primary" target="_blank">' . esc_html__( 'Buy Extension', 'zero-bs-crm' ) . '</a></div>';
 		}
 			echo '</div>';
+
 			echo '</div>';
-			// id="single-ext-desc"
 
 		##/WLREMOVE
 	} else {
