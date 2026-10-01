@@ -346,4 +346,12 @@ i.zbs-hide-longdesc {
 		border-top: 0 !important;
 		border-radius: 0 0 var(--wpds-border-radius-lg) var(--wpds-border-radius-lg) !important;
 	}
+
+	// A tab panel nested in another (Documents > Files) is part of that card.
+	.ui.bottom.attached.tab.segment .ui.bottom.attached.tab.segment {
+		margin: 0;
+		padding: 0;
+		border: 0 !important;
+		border-radius: 0 !important;
+	}
 }

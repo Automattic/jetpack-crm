@@ -838,7 +838,8 @@ function zeroBSCRM_do_meta_box_html( $box, $page, $hidden, $object, $minimised, 
 
 	// Headed and headless boxes alike are drawn as a core-style card: the
 	// outer div is the card, the head its header and the body its body.
-	// Tab panes sit inside their tab group's card instead.
+	// Tab panes keep Semantic's tab styles; no screen groups metaboxes into
+	// tabs at present.
 	if ( ! $isTabPane ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase -- Existing variable.
 		$classes .= ' jpcrm-card';
 	}

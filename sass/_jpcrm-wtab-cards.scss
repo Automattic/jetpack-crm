@@ -74,6 +74,16 @@
 		}
 	}
 
+	// Tables nested in another table's cell (Field Options) are part of that
+	// card, not cards of their own.
+	table.wtab table.wtab {
+		margin: 0;
+		overflow: visible;
+		background: transparent;
+		border: 0;
+		border-radius: 0;
+	}
+
 	// On phones each setting's name and description sit above its control.
 	@media (max-width: 600px) {
 
@@ -107,9 +117,9 @@
 		}
 	}
 
-	// The last table on each screen only holds the Save button, so it's a
-	// plain footer rather than a card.
-	table.wtab:not(:has(thead)):has(tr:only-child :is(button, input)[type="submit"]) {
+	// The last table on each screen only holds the Save button (a submit, or
+	// Field Sorts' scripted button), so it's a plain footer rather than a card.
+	table.wtab:not(:has(thead)):has(> tbody > tr:only-child > td:only-child > :is(button, input[type="submit"]):only-child) {
 		background: transparent;
 		border: 0;
 		border-radius: 0;
