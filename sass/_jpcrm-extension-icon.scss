@@ -1,10 +1,7 @@
-@use "sass:color";
-@use "@automattic/color-studio/dist/color-variables" as studio;
-
 /*
- * Module and extension icons. jpcrm_extension_icon_html() draws a glyph on a tile
- * tinted with its color, like Jetpack's product icons; jpcrm_integration_icon_html()
- * shows another product's own app icon.
+ * Module and extension icons. jpcrm_extension_icon_html() draws a glyph in
+ * Jetpack green on a dark green tile, the way jetpack.com shows its products;
+ * jpcrm_integration_icon_html() shows another product's own app icon.
  */
 .jpcrm-extension-icon {
 	display: inline-flex;
@@ -15,9 +12,9 @@
 	width: 48px;
 	height: 48px;
 	overflow: hidden;
-	border-radius: var(--wpds-border-radius-lg);
-	background: var(--wpds-color-background-surface-neutral-weak);
-	color: var(--wpds-color-foreground-content-neutral);
+	border-radius: 12px;
+	background: #073f12;
+	color: #0ced57;
 
 	svg,
 	img {
@@ -40,24 +37,5 @@
 		padding: 8px;
 		border: 1px solid var(--wpds-color-stroke-surface-neutral);
 		background: #fff;
-	}
-}
-
-// The tile colors: the glyph in the color's 50 shade, on a light tint of it.
-$jpcrm-extension-icon-colors: (
-	"blue": studio.$studio-blue-50,
-	"celadon": studio.$studio-celadon-50,
-	"green": studio.$studio-green-50,
-	"orange": studio.$studio-orange-50,
-	"pink": studio.$studio-pink-50,
-	"purple": studio.$studio-purple-50,
-	"red": studio.$studio-red-50,
-	"yellow": studio.$studio-yellow-50,
-);
-
-@each $name, $value in $jpcrm-extension-icon-colors {
-	.jpcrm-extension-icon.is-#{$name} {
-		background: color.mix($value, #fff, 14%);
-		color: $value;
 	}
 }
