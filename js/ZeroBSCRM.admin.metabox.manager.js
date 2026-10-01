@@ -23,13 +23,11 @@ function zerobscrmJS_bindMetaboxManager() {
 	jQuery( '.zbs-metabox-minimise' )
 		.off( 'click' )
 		.on( 'click', function () {
-			if ( jQuery( this ).closest( '.zbs-metabox' ).hasClass( 'zbs-minimised' ) ) {
-				// open
-				jQuery( this ).closest( '.zbs-metabox' ).removeClass( 'zbs-minimised' );
-			} else {
-				// close
-				jQuery( this ).closest( '.zbs-metabox' ).addClass( 'zbs-minimised' );
-			}
+			const $metabox = jQuery( this ).closest( '.zbs-metabox' );
+			const minimised = ! $metabox.hasClass( 'zbs-minimised' );
+
+			$metabox.toggleClass( 'zbs-minimised', minimised );
+			jQuery( this ).attr( 'aria-expanded', minimised ? 'false' : 'true' );
 
 			// save screen options
 			setTimeout( function () {
