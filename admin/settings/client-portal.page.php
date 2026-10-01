@@ -3,6 +3,8 @@
  * Admin Page: Settings: Client Portal settings
  */
 
+// phpcs:disable Squiz.Commenting.InlineComment.WrongStyle -- The ##WLREMOVE markers below are read by the white-label build.
+
 // stop direct access
 if ( ! defined( 'ZEROBSCRM_PATH' ) ) {
 	exit( 0 );
@@ -161,7 +163,7 @@ if ( jpcrm_perms_manage_options() && ! zeroBSCRM_isExtensionInstalled( 'clientpo
 <p id="sbDesc"><?php esc_html_e( 'Configure your Client Portal settings here.', 'zero-bs-crm' ); ?></p>
 <?php
 if ( $sbupdated ) {
-	echo '<div style="width:500px; margin-left:20px;" class="wmsgfullwidth">';
+	echo '<div class="wmsgfullwidth">';
 	zeroBSCRM_html_msg( 0, __( 'Settings Updated', 'zero-bs-crm' ) );
 	echo '</div><br>';
 }
@@ -190,10 +192,10 @@ if ( $sbupdated ) {
 			<tr>
 				<td class="wfieldname">
 
-					<?php ##WLREMOVE ?>
-					<div class="ui teal label right floated"><i class="circle info icon link"></i>  <a href="<?php echo esc_url( $zbs->urls['kbclientportal'] ); ?>" target="_blank"><?php esc_html_e( 'Read more', 'zero-bs-crm' ); ?></a></div>
-					<?php ##/WLREMOVE ?>
 					<label for="wpzbscrm_portalpage"><?php esc_html_e( 'Client Portal page', 'zero-bs-crm' ); ?></label><br /><?php esc_html_e( 'Select the page with your client portal shortcode.', 'zero-bs-crm' ); ?>
+					<?php ##WLREMOVE ?>
+					<br /><a href="<?php echo esc_url( $zbs->urls['kbclientportal'] ); ?>" target="_blank" class="jpcrm-settings-read-more"><?php esc_html_e( 'Read more', 'zero-bs-crm' ); ?></a>
+					<?php ##/WLREMOVE ?>
 				</td>
 				<td>
 					<?php
@@ -252,12 +254,12 @@ if ( $sbupdated ) {
 
 			<tr>
 				<td class="wfieldname">
-					<?php ##WLREMOVE ?>
-					<div class="ui teal label right floated"><i class="circle info icon link"></i>  <a href="<?php echo esc_url( $zbs->urls['kbeasyaccess'] ); ?>" target="_blank"><?php esc_html_e( 'Read more', 'zero-bs-crm' ); ?></a></div>
-					<?php ##/WLREMOVE ?>
 					<label for="wpzbscrm_easyaccesslinks"><?php esc_html_e( 'Allow Easy-Access links', 'zero-bs-crm' ); ?></label><br /><?php esc_html_e( 'Tick to allow logged-out users to view quotes and invoices via a secure hash URL.', 'zero-bs-crm' ); ?>
+					<?php ##WLREMOVE ?>
+					<br /><a href="<?php echo esc_url( $zbs->urls['kbeasyaccess'] ); ?>" target="_blank" class="jpcrm-settings-read-more"><?php esc_html_e( 'Read more', 'zero-bs-crm' ); ?></a>
+					<?php ##/WLREMOVE ?>
 				</td>
-				<td style="width:540px"><input type="checkbox" class="winput form-control" name="wpzbscrm_easyaccesslinks" id="wpzbscrm_easyaccesslinks" value="1"
+				<td><input type="checkbox" class="winput form-control" name="wpzbscrm_easyaccesslinks" id="wpzbscrm_easyaccesslinks" value="1"
 				<?php
 				if ( isset( $settings['easyaccesslinks'] ) && $settings['easyaccesslinks'] == '1' ) {
 					echo ' checked="checked"';}
@@ -268,7 +270,7 @@ if ( $sbupdated ) {
 			<tr>
 				<td class="wfieldname"><label for="wpzbscrm_portal_transactions_show_status"><?php esc_html_e( 'Show transaction status', 'zero-bs-crm' ); ?></label><br /><?php esc_html_e( 'Tick to show the transaction status in the transactions page in Client Portal.', 'zero-bs-crm' ); ?>
 				</td>
-				<td style="width:540px"><input type="checkbox" class="winput form-control" name="wpzbscrm_portal_transactions_show_status" id="wpzbscrm_portal_transactions_show_status" value="1"
+				<td><input type="checkbox" class="winput form-control" name="wpzbscrm_portal_transactions_show_status" id="wpzbscrm_portal_transactions_show_status" value="1"
 				<?php
 				if ( isset( $settings['portal_transactions_show_status'] ) && $settings['portal_transactions_show_status'] == '1' ) {
 					echo ' checked="checked"';}
@@ -307,12 +309,12 @@ if ( $sbupdated ) {
 
 			<tr>
 				<td class="wfieldname">
-					<?php ##WLREMOVE ?>
-					<div class="ui teal label right floated"><i class="circle info icon link"></i>  <a href="<?php echo esc_url( $zbs->urls['kbdisablewelcome'] ); ?>" target="_blank"><?php esc_html_e( 'Read more', 'zero-bs-crm' ); ?></a></div>
-					<?php ##/WLREMOVE ?>
 					<label for="wpzbscrm_portalusers"><?php esc_html_e( 'Generate WordPress users for new contacts', 'zero-bs-crm' ); ?></label><br /><?php esc_html_e( "By default this will automatically email the new contact a welcome email as soon as they're added. If you prefer to not have this email sent, you can disable this email template.", 'zero-bs-crm' ); ?>
+					<?php ##WLREMOVE ?>
+					<br /><a href="<?php echo esc_url( $zbs->urls['kbdisablewelcome'] ); ?>" target="_blank" class="jpcrm-settings-read-more"><?php esc_html_e( 'Read more', 'zero-bs-crm' ); ?></a>
+					<?php ##/WLREMOVE ?>
 				</td>
-				<td style="width:540px"><input type="checkbox" class="winput form-control" name="wpzbscrm_portalusers" id="wpzbscrm_portalusers" value="1"
+				<td><input type="checkbox" class="winput form-control" name="wpzbscrm_portalusers" id="wpzbscrm_portalusers" value="1"
 				<?php
 				if ( isset( $settings['portalusers'] ) && $settings['portalusers'] == '1' ) {
 					echo ' checked="checked"';}
@@ -330,7 +332,7 @@ if ( $sbupdated ) {
 					esc_html_e( 'Only users with the following status will have a portal account generated for them. If the status is not checked a user will not be generated. If the contact already has a portal account and they are moved to an unchecked status, their portal account will be disabled until they are moved to another checked status.', 'zero-bs-crm' );
 					?>
 					<br /><br /><strong><?php esc_html_e( 'Note: This only applies when Automatic Generation is ticked above.', 'zero-bs-crm' ); ?></strong></td>
-				<td style="width:540px" id="zbs-portal-users-statuses">
+				<td id="zbs-portal-users-statuses">
 					<?php
 
 					// } retrieve value as simple CSV for now - simplistic at best.
@@ -397,7 +399,7 @@ if ( $sbupdated ) {
 
 			<tr>
 				<td class="wfieldname"><label for="wpzbscrm_portalusers_extrarole"><?php esc_html_e( 'Assign extra role when generating users', 'zero-bs-crm' ); ?></label><br /><?php esc_html_e( "If you'd like to add a secondary role to users which Jetpack CRM creates automatically, you can do so here. This may be useful when integrating with third-party plugins.", 'zero-bs-crm' ); ?></td>
-				<td style="width:540px">
+				<td>
 					<?php
 
 					$roles = zeroBSCRM_getWordPressRoles();
@@ -489,7 +491,8 @@ if ( $sbupdated ) {
 			?>
 
 			<tr>
-				<td class="wmid"><button type="submit" class="ui button primary"><?php esc_html_e( 'Save Settings', 'zero-bs-crm' ); ?></button><a target="_blank" href="<?php echo esc_url( $portalLink ); ?>" class="ui button green"><?php esc_html_e( 'Preview Portal', 'zero-bs-crm' ); ?></a></td>
+				<?php // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase -- legacy variable names. ?>
+				<td class="wmid"><button type="submit" class="ui button primary"><?php esc_html_e( 'Save Settings', 'zero-bs-crm' ); ?></button><a target="_blank" href="<?php echo esc_url( $portalLink ); ?>" class="ui button"><?php esc_html_e( 'Preview Portal', 'zero-bs-crm' ); ?></a></td>
 			</tr>
 
 			</tbody>

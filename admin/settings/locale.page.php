@@ -273,7 +273,7 @@ if ( isset( $_POST['editwplf'] ) && zeroBSCRM_isZBSAdminOrAdmin() ) {
 
 					<tr>
 						<td class="wfieldname"><label for="wpzbscrm_currency_position"><?php esc_html_e( 'Currency Format', 'zero-bs-crm' ); ?>:</label><br /><?php esc_html_e( 'Choose how you want your currency format to display', 'zero-bs-crm' ); ?></td>
-						<td style="width:540px">
+						<td>
 							<label for="wpzbscrm_currency_position">
 								<?php esc_html_e( 'Symbol position: ', 'zero-bs-crm' ); ?>
 							</label>
@@ -397,7 +397,7 @@ if ( isset( $_POST['editwplf'] ) && zeroBSCRM_isZBSAdminOrAdmin() ) {
 							</div>
 
 						</td>
-						<td style="width:540px">
+						<td>
 							<label>
 								<?php esc_html_e( 'Installed Fonts: ', 'zero-bs-crm' ); ?>
 							</label>

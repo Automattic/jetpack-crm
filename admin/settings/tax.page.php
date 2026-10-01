@@ -113,14 +113,14 @@ if ( isset( $_POST['editzbstax'] ) ) {
 
 <?php
 if ( $sbupdated ) {
-	echo '<div style="width:500px; margin-left:20px;" class="wmsgfullwidth">';
+	echo '<div class="wmsgfullwidth">';
 	zeroBSCRM_html_msg( 0, __( 'Settings Updated', 'zero-bs-crm' ) );
 	echo '</div><br>';
 }
 
 // Display errors if any
 if ( ! empty( $tax_errors ) ) {
-	echo '<div style="width:500px; margin-left:20px;" class="wmsgfullwidth">';
+	echo '<div class="wmsgfullwidth">';
 	echo '<div class="ui negative message">';
 	echo '<div class="header">' . esc_html__( 'Tax Rate Errors', 'zero-bs-crm' ) . '</div>';
 	echo '<ul class="list">';

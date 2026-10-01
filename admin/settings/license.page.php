@@ -252,7 +252,7 @@ if ( zeroBSCRM_isLocal( true ) ) {
 
 			<tr>
 				<td class="wfieldname"><label for="wpzbscrm_license_key"><?php esc_html_e( 'License Key', 'zero-bs-crm' ); ?>:</label><br /><?php esc_html_e( 'Enter your License Key.', 'zero-bs-crm' ); ?></td>
-				<td style="width:540px">
+				<td>
 					<input style="padding:10px;" name="wpzbscrm_license_key" id="wpzbscrm_license_key" class="form-control" type="text" value="<?php echo empty( $license_key_array['key'] ) ? '' : esc_attr( $license_key_array['key'] ); ?>" />
 				</td>
 			</tr>

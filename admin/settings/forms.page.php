@@ -56,7 +56,7 @@ if ( isset( $_POST['editwplf'] ) && zeroBSCRM_isZBSAdminOrAdmin() ) {
 
 <?php
 if ( $sbupdated ) {
-	echo '<div style="width:500px; margin-left:20px;" class="wmsgfullwidth">';
+	echo '<div class="wmsgfullwidth">';
 	zeroBSCRM_html_msg( 0, __( 'Settings Updated', 'zero-bs-crm' ) );
 	echo '</div><br>';
 }
@@ -89,7 +89,7 @@ if ( $sbupdated ) {
 					<p><?php echo wp_kses( __( "This setting enables reCaptcha for the built-in CRM forms. If you'd like to use this to avoid spam, please sign up for a site key and secret <a href='https://www.google.com/recaptcha/admin#list' target='_blank'>here</a>.", 'zero-bs-crm' ), $zbs->acceptable_restricted_html ); ?></p>
 					<p><?php esc_html_e( 'Note that only reCaptcha v2 is supported at this time.', 'zero-bs-crm' ); ?></p>
 				</td>
-				<td style="width:540px"><input type="checkbox" class="winput form-control" name="wpzbscrm_usegcaptcha" id="wpzbscrm_usegcaptcha" value="1"
+				<td><input type="checkbox" class="winput form-control" name="wpzbscrm_usegcaptcha" id="wpzbscrm_usegcaptcha" value="1"
 				<?php
 				if ( isset( $settings['usegcaptcha'] ) && $settings['usegcaptcha'] == '1' ) {
 					echo ' checked="checked"';}

@@ -32,26 +32,19 @@ if ( count( $zbsSMTPAccs ) <= 0 ) {
 	// } ====================================
 	// } No settings yet :)
 	?>
-		<h1 class="ui header blue zbs-non-wizard" style="margin-top: 0;"><?php esc_html_e( 'Mail Delivery', 'zero-bs-crm' ); ?></h1>
+		<h2 class="jpcrm-settings__title zbs-non-wizard"><?php esc_html_e( 'Mail Delivery', 'zero-bs-crm' ); ?></h2>
 
-		<div class="ui icon big message zbs-non-wizard">
-			<i class="wordpress icon"></i>
-			<div class="content">
-				<div class="header">
-				<?php esc_html_e( 'Jetpack CRM is using the default WordPress email delivery', 'zero-bs-crm' ); ?>
-				</div>
-				<hr />
-				<p><?php esc_html_e( 'By default Jetpack CRM is configured to use wp_mail to send out all emails. This means your emails will go out from the basic wordpress@yourdomain.com style sender. This isn\'t great for deliverability, or your branding.', 'zero-bs-crm' ); ?></p>
-				<div>
-				<?php
-				esc_html_e( 'Currently mail is sent from', 'zero-bs-crm' );
-				echo ' <div class="ui large teal horizontal label">' . esc_html( $defaultFromDeets['name'] ) . ' (' . esc_html( $defaultFromDeets['email'] ) . ')</div><br />' . esc_html__( 'Do you want to set up a different Mail Delivery option?', 'zero-bs-crm' );
-				?>
-				</div>
-				<div style="padding:2em 0 1em 2em">
-					<button type="button" id="zbs-mail-delivery-start-wizard" class="ui huge primary button"><?php esc_html_e( 'Start Wizard', 'zero-bs-crm' ); ?></button>
-				</div>
-			</div>
+		<div class="jpcrm-mail-delivery-intro zbs-non-wizard">
+			<p><strong><?php esc_html_e( 'Jetpack CRM is using the default WordPress email delivery', 'zero-bs-crm' ); ?></strong></p>
+			<p><?php esc_html_e( 'By default Jetpack CRM is configured to use wp_mail to send out all emails. This means your emails will go out from the basic wordpress@yourdomain.com style sender. This isn\'t great for deliverability, or your branding.', 'zero-bs-crm' ); ?></p>
+			<p>
+				<?php esc_html_e( 'Currently mail is sent from', 'zero-bs-crm' ); ?>
+				<strong><?php echo esc_html( $defaultFromDeets['name'] ) . ' (' . esc_html( $defaultFromDeets['email'] ) . ')'; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase ?></strong>.
+				<?php esc_html_e( 'Do you want to set up a different Mail Delivery option?', 'zero-bs-crm' ); ?>
+			</p>
+			<p>
+				<button type="button" id="zbs-mail-delivery-start-wizard" class="ui primary button"><?php esc_html_e( 'Start Wizard', 'zero-bs-crm' ); ?></button>
+			</p>
 		</div>
 
 
@@ -68,12 +61,12 @@ if ( count( $zbsSMTPAccs ) <= 0 ) {
 
 	?>
 		<div id="zbs-mail-delivery-account-list-wrap">
-		<h1 class="ui header blue zbs-non-wizard" style="margin-top: 0;"><?php esc_html_e( 'Mail Delivery', 'zero-bs-crm' ); ?></h1>
-		<table class="ui celled table zbs-non-wizard">
+		<h2 class="jpcrm-settings__title zbs-non-wizard"><?php esc_html_e( 'Mail Delivery', 'zero-bs-crm' ); ?></h2>
+		<table class="widefat jpcrm-mail-delivery-accounts zbs-non-wizard">
 			<thead>
 			<tr>
 				<th><?php esc_html_e( 'Outbound Account', 'zero-bs-crm' ); ?></th>
-				<th style="text-align:center">Actions</th>
+				<th class="zbs-mail-delivery-actions"><?php esc_html_e( 'Actions', 'zero-bs-crm' ); ?></th>
 			</tr>
 			</thead>
 			<tbody>
@@ -103,7 +96,7 @@ if ( count( $zbsSMTPAccs ) <= 0 ) {
 					if ( $isDefault ) {
 
 						?>
-						<div class="ui ribbon label zbs-default"><?php esc_html_e( 'Default', 'zero-bs-crm' ); ?></div>
+						<span class="jpcrm-badge is-stable zbs-default"><?php esc_html_e( 'Default', 'zero-bs-crm' ); ?></span>
 						<?php
 					}
 
@@ -123,7 +116,7 @@ if ( count( $zbsSMTPAccs ) <= 0 ) {
 
 					// } Mode label
 					?>
-						&nbsp;&nbsp;<div class="ui purple horizontal label">
+						<span class="jpcrm-badge is-none">
 						<?php
 						$modeStr = 'wp_mail';
 						if ( isset( $acc['mode'] ) ) {
@@ -140,7 +133,7 @@ if ( count( $zbsSMTPAccs ) <= 0 ) {
 						}
 						echo esc_html( $modeStr );
 						?>
-							</div>
+							</span>
 							<?php
 
 							// Detail
@@ -158,22 +151,26 @@ if ( count( $zbsSMTPAccs ) <= 0 ) {
 								// Load OAuth
 								$zbs->load_oauth_handler();
 
-								echo '<div style="margin:1em;text-align:center">' . $zbs->oauth->connection_status_string( $acc['oauth_provider'] ) . '</div>';
+								echo '<div class="zbs-mail-delivery-detail">' . esc_html( $zbs->oauth->connection_status_string( $acc['oauth_provider'] ) ) . '</div>';
 
 							}
 
 							?>
 						</td>
-					<td style="text-align:center">
-						<button type="button" class="ui tiny green button zbs-test-mail-delivery" data-from="<?php echo esc_attr( $acc['fromemail'] ); ?>" data-indx="<?php echo esc_attr( $accKey ); ?>"><i class="icon mail"></i> Send Test</button>&nbsp;
-						<button type="button" class="ui tiny orange button zbs-remove-mail-delivery" data-indx="<?php echo esc_attr( $accKey ); ?>"><i class="remove circle icon"></i> Remove</button>&nbsp;
-						<button type="button" class="ui tiny teal button zbs-default-mail-delivery
-						<?php
-						if ( $isDefault ) {
-							echo ' disabled';}
-						?>
-							" data-indx="<?php echo esc_attr( $accKey ); ?>"><i class="check circle outline icon"></i> Set as Default</button>
+					<?php // phpcs:disable WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase -- legacy variable names. ?>
+					<td class="zbs-mail-delivery-actions">
+						<div class="jpcrm-mail-delivery-actions">
+							<button type="button" class="ui tiny button zbs-test-mail-delivery" data-from="<?php echo esc_attr( $acc['fromemail'] ); ?>" data-indx="<?php echo esc_attr( $accKey ); ?>"><i class="icon mail"></i> <?php esc_html_e( 'Send Test', 'zero-bs-crm' ); ?></button>
+							<button type="button" class="ui tiny red button zbs-remove-mail-delivery" data-indx="<?php echo esc_attr( $accKey ); ?>"><i class="remove circle icon"></i> <?php esc_html_e( 'Remove', 'zero-bs-crm' ); ?></button>
+							<button type="button" class="ui tiny button zbs-default-mail-delivery
+							<?php
+							if ( $isDefault ) {
+								echo ' disabled';}
+							?>
+								" data-indx="<?php echo esc_attr( $accKey ); ?>"><i class="check circle outline icon"></i> <?php esc_html_e( 'Set as Default', 'zero-bs-crm' ); ?></button>
+						</div>
 					</td>
+					<?php // phpcs:enable WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase ?>
 				</tr>
 				<?php ++$accIndx; } ?>
 			</tbody>
@@ -540,7 +537,7 @@ if ( count( $zbsSMTPAccs ) <= 0 ) {
 if ( $runningLocally ) {
 
 	?>
-	<div class="ui message"><div class="header"><div class="ui yellow label"><?php esc_html_e( 'Local Machine?', 'zero-bs-crm' ); ?></div></div><p><?php esc_html_e( 'It appears you are running Jetpack CRM locally. This may cause SMTP delivery methods to behave unexpectedly (e.g. your computer may block outgoing SMTP traffic via firewall or antivirus software). Jetpack CRM may require external web hosting to properly send via SMTP.', 'zero-bs-crm' ); ?></p></div>
+	<div class="ui warning message"><p><strong><?php esc_html_e( 'Local Machine?', 'zero-bs-crm' ); ?></strong> <?php esc_html_e( 'It appears you are running Jetpack CRM locally. This may cause SMTP delivery methods to behave unexpectedly (e.g. your computer may block outgoing SMTP traffic via firewall or antivirus software). Jetpack CRM may require external web hosting to properly send via SMTP.', 'zero-bs-crm' ); ?></p></div>
 	<?php
 
 }

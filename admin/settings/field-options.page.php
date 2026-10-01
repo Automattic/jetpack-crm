@@ -150,7 +150,7 @@ $fieldOverride = $settings['fieldoverride'];
 
 <?php
 if ( $sbupdated ) {
-	echo '<div style="width:500px; margin-left:20px;" class="wmsgfullwidth">';
+	echo '<div class="wmsgfullwidth">';
 	zeroBSCRM_html_msg( 0, __( 'Custom Fields Updated', 'zero-bs-crm' ) );
 	echo '</div>';
 }

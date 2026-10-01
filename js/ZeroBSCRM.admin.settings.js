@@ -14,6 +14,11 @@
 // ... starting with custom fields.
 
 jQuery( function () {
+	// On narrow screens the settings menu is a select; picking a page opens it.
+	jQuery( '#jpcrm-settings-jump' ).on( 'change', function () {
+		window.location.href = this.value;
+	} );
+
 	if ( typeof window.wpzbscrm_settings_page !== 'undefined' ) {
 		switch ( window.wpzbscrm_settings_page ) {
 			case 'customfields':

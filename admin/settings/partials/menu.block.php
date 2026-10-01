@@ -4,6 +4,8 @@
  * This outputs the left hand menu for settings pages
  */
 
+// phpcs:disable Squiz.Commenting.InlineComment.WrongStyle -- The ##WLREMOVE markers below are read by the white-label build.
+
 // stop direct access
 if ( ! defined( 'ZEROBSCRM_PATH' ) ) {
 	exit( 0 );
@@ -12,7 +14,7 @@ if ( ! defined( 'ZEROBSCRM_PATH' ) ) {
 	global $zbs;
 
 	// } Default
-	$tabs    = array( 'settings' => 'General' );
+	$tabs    = array( 'settings' => __( 'General', 'zero-bs-crm' ) );
 	$tabsNew = array(); // slugs included in here will get a new flag
 
 	// } Get Settings
@@ -179,66 +181,51 @@ foreach ( $tabs as $tab => $name ) {
 }
 
 ?>
-<div class="ui vertical fluid menu" id="zbs-settings-menu">
-	<!-- Would be nice to add a cpanel style js search
-	<div class="item">
-		<div class="ui input"><input type="text" placeholder="Search..."></div>
-	</div> -->
-	<div class="branding item" id="zbs-settings-head-tour">
-		<?php echo esc_html__( 'CRM Settings', 'zero-bs-crm' ); ?>
-	</div>
+<?php
+// Every page the menu links to, flattened, so the phone-width jump menu and the
+// list below are built from the same entries.
+$jpcrm_settings_url = function ( $tab ) use ( $zbs ) {
+	// Mail templates live on their own admin page.
+	if ( $tab === 'mailtemplates' ) {
+		return admin_url( 'admin.php?page=' . $zbs->slugs['email-templates'] );
+	}
+	return admin_url( 'admin.php?page=' . $zbs->slugs['settings'] . '&tab=' . $tab );
+};
+?>
+<div class="jpcrm-settings-menu" id="zbs-settings-menu">
+	<h2 class="jpcrm-settings-menu__title" id="zbs-settings-head-tour"><?php esc_html_e( 'CRM Settings', 'zero-bs-crm' ); ?></h2>
 
-	<?php foreach ( $sortedTabs as $tab => $tabArr ) : ?>
+	<label class="screen-reader-text" for="jpcrm-settings-jump"><?php esc_html_e( 'Settings page', 'zero-bs-crm' ); ?></label>
+	<select class="jpcrm-settings-menu__jump" id="jpcrm-settings-jump">
+		<?php foreach ( $sortedTabs as $tab => $tab_arr ) : // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase ?>
+			<option value="<?php echo esc_url( $jpcrm_settings_url( $tab ) ); ?>" <?php selected( $tab, $current ); ?>><?php echo esc_html( $tab_arr['name'] ?? '' ); ?></option>
+			<?php if ( ! empty( $tab_arr['submenu'] ) ) : ?>
+				<?php foreach ( $tab_arr['submenu'] as $sub_tab => $sub_tab_arr ) : ?>
+					<option value="<?php echo esc_url( $jpcrm_settings_url( $sub_tab ) ); ?>" <?php selected( $sub_tab, $current ); ?>>&nbsp;&nbsp;&nbsp;<?php echo esc_html( $sub_tab_arr['name'] ); ?></option>
+				<?php endforeach; ?>
+			<?php endif; ?>
+		<?php endforeach; ?>
+	</select>
 
-		<?php
-		// could/should expand this to have icons + submenus
-		// as per example under "sub menu" here: https://semantic-ui.com/collections/menu.html
-		$ico = '';
-		if ( isset( $tabArr['ico'] ) ) {
-			$ico = $tabArr['ico'];
-		}
-		$name = '';
-		if ( isset( $tabArr['name'] ) ) {
-			$name = $tabArr['name'];
-		}
-		?>
+	<ul class="jpcrm-settings-menu__list">
+		<?php foreach ( $sortedTabs as $tab => $tab_arr ) : // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase ?>
+			<li class="jpcrm-settings-menu__group">
+				<a class="jpcrm-settings-menu__item<?php echo $tab === $current ? ' is-active' : ''; ?>" href="<?php echo esc_url( $jpcrm_settings_url( $tab ) ); ?>"<?php echo $tab === $current ? ' aria-current="page"' : ''; ?>><?php echo esc_html( $tab_arr['name'] ?? '' ); ?></a>
+				<?php if ( ! empty( $tab_arr['submenu'] ) ) : ?>
+					<ul class="jpcrm-settings-menu__sub">
+						<?php foreach ( $tab_arr['submenu'] as $sub_tab => $sub_tab_arr ) : ?>
+							<li><a class="jpcrm-settings-menu__item<?php echo $sub_tab === $current ? ' is-active' : ''; ?>" href="<?php echo esc_url( $jpcrm_settings_url( $sub_tab ) ); ?>"<?php echo $sub_tab === $current ? ' aria-current="page"' : ''; ?>><?php echo esc_html( $sub_tab_arr['name'] ); ?></a></li>
+						<?php endforeach; ?>
+					</ul>
+				<?php endif; ?>
+			</li>
+		<?php endforeach; ?>
+	</ul>
 
-		<?php if ( isset( $tabArr['submenu'] ) && count( $tabArr['submenu'] ) > 0 ) { ?>
-			<div class="item">
-				<a class='item zbs-settings-head <?php echo ( $tab == $current ) ? ' active' : ''; ?>>' href='?page=<?php echo esc_attr( $zbs->slugs['settings'] ); ?>&tab=<?php echo esc_attr( $tab ); ?>'><?php echo esc_html( $ico . $name ); ?></a>
-				<div class="menu">
-				<?php foreach ( $tabArr['submenu'] as $tab2 => $tabArr2 ) { ?>
-
-					<?php
-						$ico2  = $tabArr2['ico'];
-						$name2 = $tabArr2['name'];
-						$new   = '';
-					if ( in_array( $tab2, $tabsNew ) ) {
-						$new = '<span class="ui label green tiny">New</span>';
-					}
-						$url = admin_url( 'admin.php?page=' . $zbs->slugs['settings'] . '&tab=' . $tab2 );
-						// temporary hard typed exception
-					if ( $tab2 == 'mailtemplates' ) {
-						$url = admin_url( 'admin.php?page=' . $zbs->slugs['email-templates'] );
-					}
-						$class = ( $tab2 == $current ) ? ' active' : '';
-					?>
-
-					<a class='item <?php echo esc_attr( $class ); ?>' href='<?php echo esc_url( $url ); ?>'><?php echo esc_html( $new . $ico2 . $name2 ); ?></a>
-
-				<?php } ?>
-				</div>
-			</div>
-
-		<?php } else { ?>
-
-			<a class='item <?php echo ( $tab == $current ) ? ' active' : ''; ?>' href='?page=<?php echo esc_attr( $zbs->slugs['settings'] ); ?>&tab=<?php echo esc_attr( $tab ); ?>'><?php echo esc_html( $ico . $name ); ?></a>
-
-		<?php } ?>
-
-	<?php endforeach ?>
-	<?php ##WLREMOVE ?>
-	<a class="item" href="<?php echo jpcrm_esc_link( $zbs->slugs['extensions'] ); ?>"><i class="ui orange puzzle piece icon"></i> <?php echo esc_html__( 'Extensions', 'zero-bs-crm' ); ?></a>
-	<?php ##/WLREMOVE ?>
-	<a class="item" href="<?php echo jpcrm_esc_link( wp_nonce_url( $zbs->slugs['settings'] . '&resetsettings=1' ) ); ?> "> <?php echo esc_html__( 'Restore default settings', 'zero-bs-crm' ); ?></a>
+	<ul class="jpcrm-settings-menu__list jpcrm-settings-menu__footer">
+		<?php ##WLREMOVE ?>
+		<li><a class="jpcrm-settings-menu__item" href="<?php echo jpcrm_esc_link( $zbs->slugs['extensions'] ); /* phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped */ ?>"><?php esc_html_e( 'Extensions', 'zero-bs-crm' ); ?></a></li>
+		<?php ##/WLREMOVE ?>
+		<li><a class="jpcrm-settings-menu__item is-destructive" href="<?php echo jpcrm_esc_link( wp_nonce_url( $zbs->slugs['settings'] . '&resetsettings=1' ) ); /* phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped */ ?>"><?php esc_html_e( 'Restore default settings', 'zero-bs-crm' ); ?></a></li>
+	</ul>
 </div>

@@ -69,7 +69,7 @@ $show_totals_table = $zbs->settings->get( 'show_totals_table' );
 
 <?php
 if ( $sbupdated ) {
-	echo '<div style="width:500px; margin-left:20px;" class="wmsgfullwidth">';
+	echo '<div class="wmsgfullwidth">';
 	zeroBSCRM_html_msg( 0, __( 'Settings Updated', 'zero-bs-crm' ) );
 	echo '</div>';
 }
@@ -97,19 +97,19 @@ if ( $sbupdated ) {
 
 			<tr>
 				<td class="wfieldname"><label for="wpzbscrm_notcontactedinx"><?php esc_html_e( 'Not Contacted in X Days', 'zero-bs-crm' ); ?>:</label><br /><?php esc_html_e( 'Enter the number of days to use in this filter.', 'zero-bs-crm' ); ?><br /><?php esc_html_e( 'For example, show contacts not contacted in the last 10 days.', 'zero-bs-crm' ); ?></td>
-				<td style="width:540px">
+				<td>
 					<input style="width:100px;padding:10px;" name="wpzbscrm_notcontactedinx" id="wpzbscrm_notcontactedinx" class="form-control" type="text" value="<?php echo empty( $settings['notcontactedinx'] ) ? '' : esc_attr( $settings['notcontactedinx'] ); ?>" />
 				</td>
 			</tr>
 			<tr>
 				<td class="wfieldname"><label for="wpzbscrm_olderthanx"><?php esc_html_e( 'Older than X days', 'zero-bs-crm' ); ?>:</label><br /><?php esc_html_e( 'Enter the number of days to use in this filter.', 'zero-bs-crm' ); ?><br /><?php esc_html_e( 'For example, show contacts older than 30 days.', 'zero-bs-crm' ); ?></td>
-				<td style="width:540px">
+				<td>
 					<input style="width:100px;padding:10px;" name="wpzbscrm_olderthanx" id="wpzbscrm_olderthanx" class="form-control" type="text" value="<?php echo empty( $settings['olderthanx'] ) ? '' : esc_attr( $settings['olderthanx'] ); ?>" />
 				</td>
 			</tr>
 			<tr>
 				<td class="wfieldname"><label for="wpzbscrm_allowinlineedits"><?php esc_html_e( 'Allow Inline Edits', 'zero-bs-crm' ); ?>:</label><br /><?php esc_html_e( 'Allow Inline editing of list view fields', 'zero-bs-crm' ); ?></td>
-				<td style="width:540px">
+				<td>
 					<input type="checkbox" name="wpzbscrm_allowinlineedits" id="wpzbscrm_allowinlineedits" class="form-control" value="1"
 					<?php
 					if ( isset( $allowinlineedits ) && $allowinlineedits == '1' ) {
@@ -120,7 +120,7 @@ if ( $sbupdated ) {
 			</tr>
 			<tr>
 				<td class="wfieldname"><label for="wpzbscrm_show_totals_table"><?php esc_html_e( 'Show Totals Table', 'zero-bs-crm' ); ?>:</label><br /><?php esc_html_e( 'When viewing a contact list, show the totals table on the sidebar', 'zero-bs-crm' ); ?></td>
-				<td style="width:540px">
+				<td>
 					<input type="checkbox" name="wpzbscrm_show_totals_table" id="wpzbscrm_show_totals_table" class="form-control" value="1"
 					<?php
 					if ( isset( $show_totals_table ) && $show_totals_table == '1' ) {

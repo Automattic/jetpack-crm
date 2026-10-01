@@ -3,6 +3,8 @@
  * Admin Page: Settings: Quotes settings
  */
 
+// phpcs:disable Squiz.Commenting.InlineComment.WrongStyle -- The ##WLREMOVE markers below are read by the white-label build.
+
 // stop direct access
 if ( ! defined( 'ZEROBSCRM_PATH' ) ) {
 	exit( 0 );
@@ -47,7 +49,7 @@ if ( isset( $_POST['editwplf'] ) && zeroBSCRM_isZBSAdminOrAdmin() ) {
 ?>
 <?php
 if ( $sbupdated ) {
-	echo '<div style="width:500px; margin-left:20px;" class="wmsgfullwidth">';
+	echo '<div class="wmsgfullwidth">';
 	zeroBSCRM_html_msg( 0, __( 'Settings Updated', 'zero-bs-crm' ) );
 	echo '</div><br>';
 }
@@ -85,11 +87,11 @@ if ( $sbupdated ) {
 			</tr>
 			<tr>
 				<td class="wfieldname">
-					<?php ##WLREMOVE ?>
-					<div class="ui teal label right floated"><i class="circle info icon link"></i>  <a href="<?php echo esc_url( $zbs->urls['kbtemplatefiles'] ); ?>" target="_blank"><?php esc_html_e( 'Read more', 'zero-bs-crm' ); ?></a></div>
-					<?php ##/WLREMOVE ?>
 					<label for="quote_pdf_template"><?php esc_html_e( 'Quote PDF Template', 'zero-bs-crm' ); ?>:</label><br />
 					<?php esc_html_e( 'Select a template for quote PDFs.', 'zero-bs-crm' ); ?>                                
+					<?php ##WLREMOVE ?>
+					<br /><a href="<?php echo esc_url( $zbs->urls['kbtemplatefiles'] ); ?>" target="_blank" class="jpcrm-settings-read-more"><?php esc_html_e( 'Read more', 'zero-bs-crm' ); ?></a>
+					<?php ##/WLREMOVE ?>
 				</td>
 				<td>
 				<?php
@@ -104,11 +106,11 @@ if ( $sbupdated ) {
 
 			<tr>
 				<td colspan="2">
-					<p style="text-align:center"><?php esc_html_e( 'Looking for easy-access quote links? You can now turn easy-access links on via the client portal settings page', 'zero-bs-crm' ); ?></p>
-					<p style="text-align:center">
-						<a href="<?php echo esc_url_raw( jpcrm_esc_link( $zbs->slugs['settings'] ) . '&tab=clients' ); ?>" class="ui mini button blue"><?php esc_html_e( 'View Client Portal Settings', 'zero-bs-crm' ); ?></a>
+					<p><?php esc_html_e( 'Looking for easy-access quote links? You can now turn easy-access links on via the client portal settings page', 'zero-bs-crm' ); ?></p>
+					<p>
+						<a href="<?php echo esc_url_raw( jpcrm_esc_link( $zbs->slugs['settings'] ) . '&tab=clients' ); ?>" class="ui mini button"><?php esc_html_e( 'View Client Portal Settings', 'zero-bs-crm' ); ?></a>
 						<?php ##WLREMOVE ?>
-						<a href="<?php echo esc_url( $zbs->urls['easyaccessguide'] ); ?>" target="_blank" class="ui mini button green"><?php esc_html_e( 'View Easy-Access Links Guide', 'zero-bs-crm' ); ?></a>
+						<a href="<?php echo esc_url( $zbs->urls['easyaccessguide'] ); ?>" target="_blank" class="ui mini button"><?php esc_html_e( 'View Easy-Access Links Guide', 'zero-bs-crm' ); ?></a>
 						<?php ##/WLREMOVE ?>
 					</p>
 				</td>

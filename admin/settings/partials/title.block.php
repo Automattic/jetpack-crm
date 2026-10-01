@@ -9,12 +9,11 @@ if ( ! defined( 'ZEROBSCRM_PATH' ) ) {
 }
 
 ?>
+<h2 class="jpcrm-settings__title"><?php echo esc_html( $title ); ?></h2>
 <?php
-// optional right-floated notice
+// Optional notice under the title, e.g. which module a page belongs to.
 if ( is_array( $settings_rightfloated_notice ) ) {
 	?>
-	<div class="ui <?php echo esc_attr( $settings_rightfloated_notice['colour'] ); ?> right floated label"><i class="<?php echo esc_attr( $settings_rightfloated_notice['icon'] ); ?> icon link"></i> <?php echo $settings_rightfloated_notice['body']; ?></div>
+	<p class="jpcrm-settings__title-notice"><?php echo wp_kses_post( $settings_rightfloated_notice['body'] ); ?></p>
 	<?php
 }
-?>
-<h1 class="ui header blue" style="margin-top: 0;"><?php echo esc_html( $title ); ?></h1>

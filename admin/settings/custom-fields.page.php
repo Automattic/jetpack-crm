@@ -404,7 +404,7 @@ $current_custom_fields = array_merge( $custom_fields, $settings['customfields'] 
 
 <?php
 if ( $sbupdated ) {
-	echo '<div style="width:500px; margin-left:20px;" class="wmsgfullwidth">';
+	echo '<div class="wmsgfullwidth">';
 	zeroBSCRM_html_msg( 0, __( 'Custom Fields Updated', 'zero-bs-crm' ) );
 	echo '</div>';
 }
@@ -438,7 +438,7 @@ if ( $sbupdated ) {
 				<tbody id="zbscrm-<?php echo esc_attr( $object_key ); ?>-custom-fields">
 
 					<tr>
-						<td colspan="2" style="text-align:right"><button type="button" id="zbscrm-addcustomfield-<?php echo esc_attr( $object_key ); ?>" class="ui small blue button">+ <?php esc_html_e( 'Add Custom Field', 'zero-bs-crm' ); ?></button></td>
+						<td colspan="2"><button type="button" id="zbscrm-addcustomfield-<?php echo esc_attr( $object_key ); ?>" class="ui small button">+ <?php esc_html_e( 'Add Custom Field', 'zero-bs-crm' ); ?></button></td>
 					</tr>
 
 				</tbody>

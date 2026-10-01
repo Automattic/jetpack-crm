@@ -69,14 +69,14 @@ if ( isset( $_POST['editzbsmail'] ) && zeroBSCRM_isZBSAdminOrAdmin() ) {
 ?>
 
 <p id="sbDesc"><?php esc_html_e( 'Set up your global mail settings. This, along with Mail Delivery settings and Mail Templates, make up the backbone of the CRM system.', 'zero-bs-crm' ); ?></p>
-<p style="padding-top: 18px; text-align:center;margin:1em">
-	<?php echo '<a href="' . jpcrm_esc_link( $zbs->slugs['settings'] ) . '&tab=maildelivery' . '" class="ui button green">' . esc_html__( 'Mail Delivery', 'zero-bs-crm' ) . '</a>'; ?>&nbsp;
-	<?php echo '<a href="' . jpcrm_esc_link( $zbs->slugs['email-templates'] ) . '" class="ui button green">' . esc_html__( 'Mail Templates', 'zero-bs-crm' ) . '</a>'; ?>
+<p>
+	<?php echo '<a href="' . jpcrm_esc_link( $zbs->slugs['settings'] ) . '&tab=maildelivery' . '" class="ui button">' . esc_html__( 'Mail Delivery', 'zero-bs-crm' ) . '</a>'; ?>&nbsp;
+	<?php echo '<a href="' . jpcrm_esc_link( $zbs->slugs['email-templates'] ) . '" class="ui button">' . esc_html__( 'Mail Templates', 'zero-bs-crm' ) . '</a>'; ?>
 </p>
 
 <?php
 if ( $sbupdated ) {
-	echo '<div style="width:500px; margin-left:20px;" class="wmsgfullwidth">';
+	echo '<div class="wmsgfullwidth">';
 	zeroBSCRM_html_msg( 0, __( 'Settings Updated', 'zero-bs-crm' ) );
 	echo '</div>';
 }
@@ -193,7 +193,7 @@ if ( $sbupdated ) {
 
 			<tr>
 				<td class="wfieldname"><label for="wpzbs_unsub"><?php esc_html_e( 'Email Unsubscribe Line', 'zero-bs-crm' ); ?>:</label><br /><?php esc_html_e( 'This line will be shown in your email templates with the placeholder ##UNSUB-LINE##, we recommend you complete this where it is legal to offer contacts the ability to stop communication. We cannot be held responsible for your emails meeting your local laws. Any text here will append this to your default email templates (Mail Campaigns).', 'zero-bs-crm' ); ?></td>
-				<td style="width:540px"><input type="text" class="winput form-control" name="wpzbs_unsub" id="wpzbs_unsub" value="<?php echo empty( $settings['unsub'] ) ? '' : esc_attr( $settings['unsub'] ); ?>" placeholder="<?php esc_attr_e( "e.g. You're seeing this because you're registered as a contact of Michael Scott Paper Company, if you'd like to unsubscribe from any future communications please click ##UNSUB-LINK##.", 'zero-bs-crm' ); ?>" /></td>
+				<td><input type="text" class="winput form-control" name="wpzbs_unsub" id="wpzbs_unsub" value="<?php echo empty( $settings['unsub'] ) ? '' : esc_attr( $settings['unsub'] ); ?>" placeholder="<?php esc_attr_e( "e.g. You're seeing this because you're registered as a contact of Michael Scott Paper Company, if you'd like to unsubscribe from any future communications please click ##UNSUB-LINK##.", 'zero-bs-crm' ); ?>" /></td>
 			</tr>
 			<tr>
 				<td class="wfieldname"><label for="wpzbscrm_unsubpage"><?php esc_html_e( 'Unsubscribe Page', 'zero-bs-crm' ); ?>:</label><br /><?php esc_html_e( 'Select the WordPress page with your unsubscribe shortcode (Required for Mail Campaigns).', 'zero-bs-crm' ); ?>
@@ -255,7 +255,7 @@ if ( $sbupdated ) {
 
 			<tr>
 				<td class="wfieldname"><label for="wpzbs_unsubmsg"><?php esc_html_e( 'Email Unsubscribe Line', 'zero-bs-crm' ); ?>:</label><br /><?php esc_html_e( 'This message will be shown to contacts after they have unsubscribed.', 'zero-bs-crm' ); ?></td>
-				<td style="width:540px"><input type="text" class="winput form-control" name="wpzbs_unsubmsg" id="wpzbs_unsubmsg" value="<?php echo empty( $settings['unsubmsg'] ) ? '' : esc_attr( $settings['unsubmsg'] ); ?>" placeholder="e.g. You've been successfully unsubscribed." /></td>
+				<td><input type="text" class="winput form-control" name="wpzbs_unsubmsg" id="wpzbs_unsubmsg" value="<?php echo empty( $settings['unsubmsg'] ) ? '' : esc_attr( $settings['unsubmsg'] ); ?>" placeholder="e.g. You've been successfully unsubscribed." /></td>
 			</tr>
 
 			</tbody>

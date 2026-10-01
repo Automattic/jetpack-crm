@@ -6,6 +6,8 @@
 // zeroBSCRM_textProcess is used
 // phpcs:disable WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
+// phpcs:disable Squiz.Commenting.InlineComment.WrongStyle -- The ##WLREMOVE markers below are read by the white-label build.
+
 // stop direct access
 if ( ! defined( 'ZEROBSCRM_PATH' ) ) {
 	exit( 0 );
@@ -171,7 +173,7 @@ if ( isset( $_POST['editwplf'] ) && zeroBSCRM_isZBSAdminOrAdmin() ) {
 
 <?php
 if ( $sbupdated ) {
-	echo '<div style="width:500px; margin-left:20px;" class="wmsgfullwidth">';
+	echo '<div class="wmsgfullwidth">';
 	zeroBSCRM_html_msg( 0, __( 'Settings Updated', 'zero-bs-crm' ) );
 	echo '</div><br>';
 }
@@ -207,7 +209,7 @@ if ( $sbupdated ) {
 						<input type="radio" style="margin:0 5px 0 10px" class="winput form-control" name="reftype" id="reftype-autonumber" value="autonumber" <?php echo isset( $settings['reftype'] ) && $settings['reftype'] === 'autonumber' ? 'checked' : ''; ?> /> <label for="reftype-autonumber"><?php echo esc_html__( 'Auto-generated reference', 'zero-bs-crm' ); ?></label>
 					</div>
 				</td>
-				<td style="width:540px; vertical-align: middle" class="zbs-settings-custom-fields" >
+				<td class="zbs-settings-custom-fields" >
 					<div id="reftype-manual-block" class="reftype-block <?php echo ( isset( $settings['reftype'] ) && $settings['reftype'] === 'manual' ? 'reftype-set' : ! isset( $settings['reftype'] ) ) ? 'reftype-set' : ''; ?>">
 						<div class="zbs-cf-type-autonumber-input-wrap">
 							<div class="ui labeled input">
@@ -244,7 +246,7 @@ if ( $sbupdated ) {
 			</tr>
 			<tr>
 				<td class="wfieldname"><label for="wpzbscrm_invtax"><?php esc_html_e( 'Enable tax:', 'zero-bs-crm' ); ?></label><br /><?php esc_html_e( 'Tick if you plan to charge tax.', 'zero-bs-crm' ); ?></td>
-				<td style="width:540px"><input type="checkbox" class="winput form-control" name="wpzbscrm_invtax" id="wpzbscrm_invtax" value="1"
+				<td><input type="checkbox" class="winput form-control" name="wpzbscrm_invtax" id="wpzbscrm_invtax" value="1"
 				<?php
 				if ( isset( $settings['invtax'] ) && $settings['invtax'] == '1' ) {
 					echo ' checked="checked"';}
@@ -253,7 +255,7 @@ if ( $sbupdated ) {
 			</tr>
 			<tr>
 				<td class="wfieldname"><label for="wpzbscrm_invdis"><?php esc_html_e( 'Enable discounts:', 'zero-bs-crm' ); ?></label><br /><?php esc_html_e( 'Tick if you want to add discounts.', 'zero-bs-crm' ); ?></td>
-				<td style="width:540px"><input type="checkbox" class="winput form-control" name="wpzbscrm_invdis" id="wpzbscrm_invdis" value="1"
+				<td><input type="checkbox" class="winput form-control" name="wpzbscrm_invdis" id="wpzbscrm_invdis" value="1"
 				<?php
 				if ( isset( $settings['invdis'] ) && $settings['invdis'] == '1' ) {
 					echo ' checked="checked"';}
@@ -262,7 +264,7 @@ if ( $sbupdated ) {
 			</tr>
 			<tr>
 				<td class="wfieldname"><label for="wpzbscrm_invpandp"><?php esc_html_e( 'Enable shipping:', 'zero-bs-crm' ); ?></label><br /><?php esc_html_e( 'Tick if you want to add shipping (postage and packaging).', 'zero-bs-crm' ); ?></td>
-				<td style="width:540px"><input type="checkbox" class="winput form-control" name="wpzbscrm_invpandp" id="wpzbscrm_invpandp" value="1"
+				<td><input type="checkbox" class="winput form-control" name="wpzbscrm_invpandp" id="wpzbscrm_invpandp" value="1"
 				<?php
 				if ( isset( $settings['invpandp'] ) && $settings['invpandp'] == '1' ) {
 					echo ' checked="checked"';}
@@ -271,7 +273,7 @@ if ( $sbupdated ) {
 			</tr>
 			<tr>
 				<td class="wfieldname"><label for="wpzbscrm_invoicing_disable_partial_payments"><?php esc_html_e( 'Disable Partial Payments:', 'zero-bs-crm' ); ?></label><br /><?php esc_html_e( 'Tick to hide partial payment options on invoices (editor, portal, PDF).', 'zero-bs-crm' ); ?></td>
-				<td style="width:540px"><input type="checkbox" class="winput form-control" name="wpzbscrm_invoicing_disable_partial_payments" id="wpzbscrm_invoicing_disable_partial_payments" value="1"
+				<td><input type="checkbox" class="winput form-control" name="wpzbscrm_invoicing_disable_partial_payments" id="wpzbscrm_invoicing_disable_partial_payments" value="1"
 				<?php
 				// Revert to loose comparison for flexibility
 				if ( isset( $settings['invoicing_disable_partial_payments'] ) && $settings['invoicing_disable_partial_payments'] === 1 ) {
@@ -295,11 +297,11 @@ if ( $sbupdated ) {
 
 			<tr>
 				<td class="wfieldname">
-					<?php ##WLREMOVE ?>
-					<div class="ui teal label right floated"><i class="circle info icon link"></i>  <a href="<?php echo esc_url( $zbs->urls['kbtemplatefiles'] ); ?>" target="_blank"><?php esc_html_e( 'Read more', 'zero-bs-crm' ); ?></a></div>
-					<?php ##/WLREMOVE ?>
 					<label for="inv_pdf_template"><?php esc_html_e( 'Invoice PDF Template', 'zero-bs-crm' ); ?>:</label><br />
 					<?php esc_html_e( 'Select a template for invoice PDFs.', 'zero-bs-crm' ); ?>
+					<?php ##WLREMOVE ?>
+					<br /><a href="<?php echo esc_url( $zbs->urls['kbtemplatefiles'] ); ?>" target="_blank" class="jpcrm-settings-read-more"><?php esc_html_e( 'Read more', 'zero-bs-crm' ); ?></a>
+					<?php ##/WLREMOVE ?>
 				</td>
 				<td>
 				<?php
@@ -313,11 +315,11 @@ if ( $sbupdated ) {
 
 			<tr>
 				<td class="wfieldname">
-					<?php ##WLREMOVE ?>
-					<div class="ui teal label right floated"><i class="circle info icon link"></i>  <a href="<?php echo esc_url( $zbs->urls['kbtemplatefiles'] ); ?>" target="_blank"><?php esc_html_e( 'Read more', 'zero-bs-crm' ); ?></a></div>
-					<?php ##/WLREMOVE ?>
 					<label for="inv_portal_template"><?php esc_html_e( 'Invoice Portal Template', 'zero-bs-crm' ); ?>:</label><br />
 					<?php esc_html_e( 'Select a template for invoices on the Portal.', 'zero-bs-crm' ); ?>
+					<?php ##WLREMOVE ?>
+					<br /><a href="<?php echo esc_url( $zbs->urls['kbtemplatefiles'] ); ?>" target="_blank" class="jpcrm-settings-read-more"><?php esc_html_e( 'Read more', 'zero-bs-crm' ); ?></a>
+					<?php ##/WLREMOVE ?>
 				</td>
 				<td>
 				<?php
@@ -341,18 +343,18 @@ if ( $sbupdated ) {
 
 			<tr>
 				<td class="wfieldname"><label for="businessextra"><?php esc_html_e( 'Extra Invoice Info', 'zero-bs-crm' ); ?>:</label><br /><?php esc_html_e( 'This information is (optionally) added to your invoice', 'zero-bs-crm' ); ?></td>
-				<td style="width:540px"><textarea class="winput form-control" name="businessextra" id="businessextra"  placeholder="<?php esc_attr_e( 'e.g. Your Address', 'zero-bs-crm' ); ?>" ><?php echo empty( $settings['businessextra'] ) ? '' : wp_kses( $settings['businessextra'], $zbs->acceptable_restricted_html ); ?></textarea></td>
+				<td><textarea class="winput form-control" name="businessextra" id="businessextra"  placeholder="<?php esc_attr_e( 'e.g. Your Address', 'zero-bs-crm' ); ?>" ><?php echo empty( $settings['businessextra'] ) ? '' : wp_kses( $settings['businessextra'], $zbs->acceptable_restricted_html ); ?></textarea></td>
 			</tr>
 
 
 			<tr>
 				<td class="wfieldname"><label for="paymentinfo"><?php esc_html_e( 'Payment Info', 'zero-bs-crm' ); ?>:</label><br /><?php esc_html_e( 'This information is (optionally) added to your invoice', 'zero-bs-crm' ); ?></td>
-				<td style="width:540px"><textarea class="winput form-control" name="paymentinfo" id="paymentinfo"  placeholder="<?php esc_attr_e( 'e.g. BACS details', 'zero-bs-crm' ); ?>" ><?php echo empty( $settings['paymentinfo'] ) ? '' : wp_kses( $settings['paymentinfo'], $zbs->acceptable_restricted_html ); ?></textarea></td>
+				<td><textarea class="winput form-control" name="paymentinfo" id="paymentinfo"  placeholder="<?php esc_attr_e( 'e.g. BACS details', 'zero-bs-crm' ); ?>" ><?php echo empty( $settings['paymentinfo'] ) ? '' : wp_kses( $settings['paymentinfo'], $zbs->acceptable_restricted_html ); ?></textarea></td>
 			</tr>
 
 			<tr>
 				<td class="wfieldname"><label for="wpzbscrm_invid"><?php esc_html_e( 'Hide Invoice ID', 'zero-bs-crm' ); ?>:</label><br /><?php esc_html_e( 'Tick if you want to hide the invoice ID in the invoice editor. This is a system-generated ID that auto-increments.', 'zero-bs-crm' ); ?></td>
-				<td style="width:540px"><input type="checkbox" class="winput form-control" name="wpzbscrm_invid" id="wpzbscrm_invid" value="1"
+				<td><input type="checkbox" class="winput form-control" name="wpzbscrm_invid" id="wpzbscrm_invid" value="1"
 				<?php
 				if ( isset( $settings['invid'] ) && $settings['invid'] == '1' ) {
 					echo ' checked="checked"';}
@@ -362,7 +364,7 @@ if ( $sbupdated ) {
 
 			<tr>
 				<td class="wfieldname"><label for="jpcrm_invcustomfields"><?php esc_html_e( 'Invoice custom fields to display', 'zero-bs-crm' ); ?>:</label><br /><?php _e( 'Enter the slug for each invoice custom field you wish to display, separated by commas (e.g. <code>approved,newbatch</code>).', 'zero-bs-crm' ); ?></td>
-				<td style="width:540px">
+				<td>
 					<input type="text" class="winput form-control" id="jpcrm_invcustomfields" name="jpcrm_invcustomfields" placeholder="" value="<?php echo isset( $settings['invcustomfields'] ) ? esc_attr( $settings['invcustomfields'] ) : ''; ?>"/>
 					<?php
 
@@ -383,7 +385,7 @@ if ( $sbupdated ) {
 
 			<tr>
 				<td class="wfieldname"><label for="jpcrm_contactcustomfields"><?php esc_html_e( 'Contact custom fields to display', 'zero-bs-crm' ); ?>:</label><br /><?php _e( 'Enter slugs for each contact custom field you wish to display, separated by commas (e.g. <code>hobby,specialism</code>).', 'zero-bs-crm' ); ?></td>
-				<td style="width:540px">
+				<td>
 					<input type="text" class="winput form-control" id="jpcrm_contactcustomfields" name="jpcrm_contactcustomfields" placeholder="" value="<?php echo isset( $settings['contactcustomfields'] ) ? esc_attr( $settings['contactcustomfields'] ) : ''; ?>"/>
 					<?php
 
@@ -404,7 +406,7 @@ if ( $sbupdated ) {
 
 			<tr>
 				<td class="wfieldname"><label for="jpcrm_companycustomfields"><?php esc_html_e( 'Company custom fields to display', 'zero-bs-crm' ); ?>:</label><br /><?php _e( 'Enter slugs for each company custom field you wish to display, separated by commas (e.g. <code>division,area</code>).', 'zero-bs-crm' ); ?></td>
-				<td style="width:540px">
+				<td>
 					<input type="text" class="winput form-control" id="jpcrm_companycustomfields" name="jpcrm_companycustomfields" placeholder="" value="<?php echo isset( $settings['companycustomfields'] ) ? esc_attr( $settings['companycustomfields'] ) : ''; ?>"/>
 					<?php
 
@@ -441,16 +443,16 @@ if ( $sbupdated ) {
 
 			<tr>
 				<td class="wfieldname"><label for="zbsi_statementextra"><?php esc_html_e( 'Extra Statement Info', 'zero-bs-crm' ); ?>:</label><br /><?php esc_html_e( 'This information is (optionally) added to your statements (e.g. How to pay)', 'zero-bs-crm' ); ?></td>
-				<td style="width:540px"><textarea class="winput form-control" name="zbsi_statementextra" id="zbsi_statementextra"  placeholder="<?php esc_attr_e( 'e.g. BACS details', 'zero-bs-crm' ); ?>" ><?php echo empty( $settings['statementextra'] ) ? '' : wp_kses( $settings['statementextra'], $zbs->acceptable_restricted_html ); ?></textarea></td>
+				<td><textarea class="winput form-control" name="zbsi_statementextra" id="zbsi_statementextra"  placeholder="<?php esc_attr_e( 'e.g. BACS details', 'zero-bs-crm' ); ?>" ><?php echo empty( $settings['statementextra'] ) ? '' : wp_kses( $settings['statementextra'], $zbs->acceptable_restricted_html ); ?></textarea></td>
 			</tr>
 
 			<tr>
 				<td class="wfieldname">
-					<?php ##WLREMOVE ?>
-					<div class="ui teal label right floated"><i class="circle info icon link"></i>  <a href="<?php echo esc_url( $zbs->urls['kbtemplatefiles'] ); ?>" target="_blank"><?php esc_html_e( 'Read more', 'zero-bs-crm' ); ?></a></div>
-					<?php ##/WLREMOVE ?>
 					<label for="statement_pdf_template"><?php esc_html_e( 'Statement PDF Template', 'zero-bs-crm' ); ?>:</label><br />
 					<?php esc_html_e( 'Select a template for statement PDFs.', 'zero-bs-crm' ); ?>
+					<?php ##WLREMOVE ?>
+					<br /><a href="<?php echo esc_url( $zbs->urls['kbtemplatefiles'] ); ?>" target="_blank" class="jpcrm-settings-read-more"><?php esc_html_e( 'Read more', 'zero-bs-crm' ); ?></a>
+					<?php ##/WLREMOVE ?>
 				</td>
 				<td>
 				<?php
@@ -482,16 +484,16 @@ if ( $sbupdated ) {
 
 			<tr>
 				<td class="wfieldname"><label for="paythanks"><?php esc_html_e( 'Thank You', 'zero-bs-crm' ); ?>:</label><br /><?php esc_html_e( 'If text is specified, it will be shown after a user pays for their invoice via portal.', 'zero-bs-crm' ); ?></td>
-				<td style="width:540px"><textarea class="winput form-control" name="paythanks" id="paythanks"  placeholder="<?php esc_attr_e( 'e.g. Thank you for your custom. If you have any questions let us know', 'zero-bs-crm' ); ?>" ><?php echo empty( $settings['paythanks'] ) ? '' : wp_kses( $settings['paythanks'], $zbs->acceptable_restricted_html ); ?></textarea></td>
+				<td><textarea class="winput form-control" name="paythanks" id="paythanks"  placeholder="<?php esc_attr_e( 'e.g. Thank you for your custom. If you have any questions let us know', 'zero-bs-crm' ); ?>" ><?php echo empty( $settings['paythanks'] ) ? '' : wp_kses( $settings['paythanks'], $zbs->acceptable_restricted_html ); ?></textarea></td>
 			</tr>
 
 			<tr>
 				<td colspan="2">
-					<p style="text-align:center"><?php esc_html_e( 'Looking for easy-access link settings? You can turn configure those via the Client Portal settings page.', 'zero-bs-crm' ); ?></p>
-					<p style="text-align:center">
-						<a href="<?php echo jpcrm_esc_link( $zbs->slugs['settings'] ); ?>&tab=clients" class="ui mini button blue"><?php esc_html_e( 'View Client Portal Settings', 'zero-bs-crm' ); ?></a>
+					<p><?php esc_html_e( 'Looking for easy-access link settings? You can turn configure those via the Client Portal settings page.', 'zero-bs-crm' ); ?></p>
+					<p>
+						<a href="<?php echo jpcrm_esc_link( $zbs->slugs['settings'] ); ?>&tab=clients" class="ui mini button"><?php esc_html_e( 'View Client Portal Settings', 'zero-bs-crm' ); ?></a>
 						<?php ##WLREMOVE ?>
-						<a href="<?php echo esc_url( $zbs->urls['easyaccessguide'] ); ?>" target="_blank" class="ui mini button green"><?php esc_html_e( 'View Easy-Access Links Guide', 'zero-bs-crm' ); ?></a>
+						<a href="<?php echo esc_url( $zbs->urls['easyaccessguide'] ); ?>" target="_blank" class="ui mini button"><?php esc_html_e( 'View Easy-Access Links Guide', 'zero-bs-crm' ); ?></a>
 						<?php ##/WLREMOVE ?>
 					</p>
 				</td>

@@ -3,6 +3,8 @@
  * Admin Page: Settings: General settings
  */
 
+// phpcs:disable Squiz.Commenting.InlineComment.WrongStyle -- The ##WLREMOVE markers below are read by the white-label build.
+
 // stop direct access
 if ( ! defined( 'ZEROBSCRM_PATH' ) ) {
 	exit( 0 );
@@ -285,12 +287,12 @@ if ( ! $confirmAct ) {
 
 			<tr>
 				<td class="wfieldname">
-					<?php ##WLREMOVE ?>
-					<div class="ui teal label right floated"><i class="circle info icon link"></i>  <a href="<?php echo esc_url( $zbs->urls['kbshowwpmenus'] ); ?>" target="_blank"><?php esc_html_e( 'Read more', 'zero-bs-crm' ); ?></a></div>
-					<?php ##/WLREMOVE ?>
 					<label for="wpzbscrm_menulayout"><?php esc_html_e( 'Menu Layout', 'zero-bs-crm' ); ?>:</label><br /><?php esc_html_e( 'How do you want your WordPress Admin Menu to Display?', 'zero-bs-crm' ); ?>
+					<?php ##WLREMOVE ?>
+					<br /><a href="<?php echo esc_url( $zbs->urls['kbshowwpmenus'] ); ?>" target="_blank" class="jpcrm-settings-read-more"><?php esc_html_e( 'Read more', 'zero-bs-crm' ); ?></a>
+					<?php ##/WLREMOVE ?>
 				</td>
-				<td style="width:540px">
+				<td>
 					<select class="winput" name="wpzbscrm_menulayout" id="wpzbscrm_menulayout">
 						<!-- common currencies first -->
 						<option value="1" 
@@ -337,7 +339,7 @@ if ( ! $confirmAct ) {
 
 				<tr>
 					<td class="wfieldname"><label for="wpzbscrm_showfullwidthforlisting"><?php esc_html_e( 'Show listing pages in full width', 'zero-bs-crm' ); ?>:</label><br /><?php esc_html_e( 'Untick to limit the width of the listing pages', 'zero-bs-crm' ); ?></td>
-					<td style="width:540px"><input type="checkbox" class="winput form-control" name="wpzbscrm_showfullwidthforlisting" id="wpzbscrm_showfullwidthforlisting" value="1"
+					<td><input type="checkbox" class="winput form-control" name="wpzbscrm_showfullwidthforlisting" id="wpzbscrm_showfullwidthforlisting" value="1"
 					<?php
 					if ( isset( $settings['showfullwidthforlisting'] ) && $settings['showfullwidthforlisting'] === 1 ) {
 						echo ' checked="checked"';}
@@ -347,7 +349,7 @@ if ( ! $confirmAct ) {
 
 				<tr>
 					<td class="wfieldname"><label for="wpzbscrm_showprefix"><?php esc_html_e( 'Show Prefix', 'zero-bs-crm' ); ?>:</label><br /><?php esc_html_e( 'Untick to hide the prefix (mr, mrs, etc)', 'zero-bs-crm' ); ?></td>
-					<td style="width:540px"><input type="checkbox" class="winput form-control" name="wpzbscrm_showprefix" id="wpzbscrm_showprefix" value="1"
+					<td><input type="checkbox" class="winput form-control" name="wpzbscrm_showprefix" id="wpzbscrm_showprefix" value="1"
 					<?php
 					if ( isset( $settings['showprefix'] ) && $settings['showprefix'] == '1' ) {
 						echo ' checked="checked"';}
@@ -359,7 +361,7 @@ if ( ! $confirmAct ) {
 
 				<tr>
 					<td class="wfieldname"><label for="wpzbscrm_showaddress"><?php esc_html_e( 'Show Contact Address Fields', 'zero-bs-crm' ); ?>:</label><br /><?php esc_html_e( 'Untick to hide the address fields (useful for online business)', 'zero-bs-crm' ); ?></td>
-					<td style="width:540px"><input type="checkbox" class="winput form-control" name="wpzbscrm_showaddress" id="wpzbscrm_showaddress" value="1"
+					<td><input type="checkbox" class="winput form-control" name="wpzbscrm_showaddress" id="wpzbscrm_showaddress" value="1"
 					<?php
 					if ( isset( $settings['showaddress'] ) && $settings['showaddress'] == '1' ) {
 						echo ' checked="checked"';}
@@ -369,7 +371,7 @@ if ( ! $confirmAct ) {
 
 				<tr>
 					<td class="wfieldname"><label for="wpzbscrm_secondaddress"><?php esc_html_e( 'Second Address Fields', 'zero-bs-crm' ); ?>:</label><br /><?php esc_html_e( 'Allow editing of a "second address" against a contact', 'zero-bs-crm' ); ?></td>
-					<td style="width:540px">
+					<td>
 						<input type="checkbox" class="winput form-control" name="wpzbscrm_secondaddress" id="wpzbscrm_secondaddress" value="1"
 						<?php
 						if ( isset( $settings['secondaddress'] ) && $settings['secondaddress'] == '1' ) {
@@ -379,14 +381,14 @@ if ( ! $confirmAct ) {
 				</tr>
 				<tr>
 					<td class="wfieldname"><label for="pzbscrm_secondaddresslabel"><?php esc_html_e( 'Second Address Label', 'zero-bs-crm' ); ?>:</label><br /><?php esc_html_e( 'Edit what text is displayed (defaults to Second Address)', 'zero-bs-crm' ); ?></td>
-					<td style="width:540px">
+					<td>
 						<input type="text" class="wpinput form-control" name="wpzbscrm_secondaddresslabel" id="pzbscrm_secondaddresslabel" value="<?php echo empty( $settings['secondaddresslabel'] ) ? '' : esc_attr( $settings['secondaddresslabel'] ); ?>" placeholder="<?php esc_html_e( 'Second Address (if left blank)', 'zero-bs-crm' ); ?>" />
 					</td>
 				</tr>
 
 				<tr>
 					<td class="wfieldname"><label for="wpzbscrm_countries"><?php esc_html_e( 'Use "Countries" in Address Fields', 'zero-bs-crm' ); ?>:</label><br /><?php esc_html_e( 'Untick to hide country from address fields (useful for local business)', 'zero-bs-crm' ); ?></td>
-					<td style="width:540px"><input type="checkbox" class="winput form-control" name="wpzbscrm_countries" id="wpzbscrm_countries" value="1"
+					<td><input type="checkbox" class="winput form-control" name="wpzbscrm_countries" id="wpzbscrm_countries" value="1"
 					<?php
 					if ( isset( $settings['countries'] ) && $settings['countries'] == '1' ) {
 						echo ' checked="checked"';}
@@ -415,7 +417,7 @@ if ( ! $confirmAct ) {
 
 				<tr>
 					<td class="wfieldname"><label for="wpzbscrm_taskownership"><?php esc_html_e( 'Task Scheduler Ownership', 'zero-bs-crm' ); ?>:</label><br /><?php esc_html_e( 'Show only scheduled tasks owned by a user (Admin sees all).', 'zero-bs-crm' ); ?></td>
-					<td style="width:540px"><input type="checkbox" class="winput form-control" name="wpzbscrm_taskownership" id="wpzbscrm_taskownership" value="1"
+					<td><input type="checkbox" class="winput form-control" name="wpzbscrm_taskownership" id="wpzbscrm_taskownership" value="1"
 					<?php
 					if ( isset( $settings['taskownership'] ) && $settings['taskownership'] == '1' ) {
 						echo ' checked="checked"';}
@@ -425,7 +427,7 @@ if ( ! $confirmAct ) {
 
 				<tr>
 					<td class="wfieldname"><label for="wpzbscrm_clicktocall"><?php esc_html_e( 'Show Click 2 Call links', 'zero-bs-crm' ); ?>:</label><br /><?php esc_html_e( 'Show a clickable telephone link next to any available telephone number', 'zero-bs-crm' ); ?></td>
-					<td style="width:540px"><input type="checkbox" class="winput form-control" name="wpzbscrm_clicktocall" id="wpzbscrm_clicktocall" value="1"
+					<td><input type="checkbox" class="winput form-control" name="wpzbscrm_clicktocall" id="wpzbscrm_clicktocall" value="1"
 					<?php
 					if ( isset( $settings['clicktocall'] ) && $settings['clicktocall'] == '1' ) {
 						echo ' checked="checked"';}
@@ -436,7 +438,7 @@ if ( ! $confirmAct ) {
 
 				<tr>
 					<td class="wfieldname"><label for="wpzbscrm_clicktocalltype"><?php esc_html_e( 'Click 2 Call link type', 'zero-bs-crm' ); ?>:</label><br /><?php esc_html_e( 'Choose the link protocol for Click to Call', 'zero-bs-crm' ); ?></td>
-					<td style="width:540px">
+					<td>
 						<select class="winput form-control" name="wpzbscrm_clicktocalltype" id="wpzbscrm_clicktocalltype">
 							<option value="1"
 							<?php
@@ -462,7 +464,7 @@ if ( ! $confirmAct ) {
 
 				<tr>
 					<td class="wfieldname"><label for="wpzbscrm_objnav"><?php esc_html_e( 'Use Navigation Mode', 'zero-bs-crm' ); ?>:</label><br /><?php esc_html_e( 'Shows Previous & Next buttons on each contact and company, allowing quick navigation through your list.', 'zero-bs-crm' ); ?></td>
-					<td style="width:540px"><input type="checkbox" class="winput form-control" name="wpzbscrm_objnav" id="wpzbscrm_objnav" value="1"
+					<td><input type="checkbox" class="winput form-control" name="wpzbscrm_objnav" id="wpzbscrm_objnav" value="1"
 					<?php
 					if ( isset( $settings['objnav'] ) && $settings['objnav'] == '1' ) {
 						echo ' checked="checked"';}
@@ -472,7 +474,7 @@ if ( ! $confirmAct ) {
 
 				<tr>
 					<td class="wfieldname"><label for="wpzbscrm_usesocial"><?php esc_html_e( 'Show Social Accounts', 'zero-bs-crm' ); ?>:</label><br /><?php esc_html_e( 'Show fields for social media accounts for each contact.', 'zero-bs-crm' ); ?></td>
-					<td style="width:540px"><input type="checkbox" class="winput form-control" name="wpzbscrm_usesocial" id="wpzbscrm_usesocial" value="1"
+					<td><input type="checkbox" class="winput form-control" name="wpzbscrm_usesocial" id="wpzbscrm_usesocial" value="1"
 					<?php
 					if ( isset( $settings['usesocial'] ) && $settings['usesocial'] == '1' ) {
 						echo ' checked="checked"';}
@@ -483,7 +485,7 @@ if ( ! $confirmAct ) {
 
 				<tr>
 					<td class="wfieldname"><label for="wpzbscrm_useaka"><?php esc_html_e( 'Use AKA Mode', 'zero-bs-crm' ); ?>:</label><br /><?php esc_html_e( 'Allow each contact to have several email addresses as aliases.', 'zero-bs-crm' ); ?></td>
-					<td style="width:540px"><input type="checkbox" class="winput form-control" name="wpzbscrm_useaka" id="wpzbscrm_useaka" value="1"
+					<td><input type="checkbox" class="winput form-control" name="wpzbscrm_useaka" id="wpzbscrm_useaka" value="1"
 					<?php
 					if ( isset( $settings['useaka'] ) && $settings['useaka'] == '1' ) {
 						echo ' checked="checked"';}
@@ -493,7 +495,7 @@ if ( ! $confirmAct ) {
 
 				<tr>
 					<td class="wfieldname"><label for="wpzbscrm_useaka"><?php esc_html_e( 'Total Value Field', 'zero-bs-crm' ); ?>:</label><br /><?php esc_html_e( 'Include these values in the Total Value field for contacts and companies.', 'zero-bs-crm' ); ?></td>
-					<td style="width:540px">
+					<td>
 						<?php
 						foreach ( $zbs->acceptable_total_value_fields as $field_name => $field_label ) {
 							?>
@@ -512,7 +514,7 @@ if ( ! $confirmAct ) {
 
 				<tr>
 					<td class="wfieldname"><label for="wpzbscrm_avatarmode"><?php esc_html_e( 'Contact Image Mode', 'zero-bs-crm' ); ?>:</label></td>
-					<td style="width:540px">
+					<td>
 						<select class="winput form-control" name="wpzbscrm_avatarmode" id="wpzbscrm_avatarmode">
 							<?php /* // 1 = gravitar only, 2 = custom imgs, 3 = none */ ?>
 							<option value="1"
@@ -579,7 +581,7 @@ if ( ! $confirmAct ) {
 
 			<tr>
 				<td class="wfieldname"><label for="wpzbscrm_loginlogourl"><?php esc_html_e( 'Login Logo Override', 'zero-bs-crm' ); ?>:</label><br /><?php esc_html_e( 'Enter an URL here, or upload a logo to override the WordPress login logo!', 'zero-bs-crm' ); ?></td>
-				<td style="width:540px">
+				<td>
 					<input style="width:90%;padding:10px;" name="wpzbscrm_loginlogourl" id="wpzbscrm_loginlogourl" class="form-control link" type="text" value="<?php echo empty( $settings['loginlogourl'] ) ? '' : esc_attr( $settings['loginlogourl'] ); ?>" />
 					<button id="wpzbscrm_loginlogourlAdd" class="button" type="button"><?php esc_html_e( 'Upload Image', 'zero-bs-crm' ); ?></button>
 				</td>
@@ -608,10 +610,10 @@ if ( ! $confirmAct ) {
 			<?php ##WLREMOVE ?>
 			<tr>
 				<td class="wfieldname">
-					<div class="ui teal label right floated"><i class="circle info icon link"></i>  <a href="<?php echo esc_url( $zbs->urls['usageinfo'] ); ?>" target="_blank"><?php esc_html_e( 'Read more', 'zero-bs-crm' ); ?></a></div>
 					<label for="wpzbscrm_shareessentials"><?php esc_html_e( 'Usage Tracking', 'zero-bs-crm' ); ?>:</label><br /><?php esc_html_e( 'Share CRM usage with us. No contact or sensitive CRM data is shared.', 'zero-bs-crm' ); ?>
+					<br /><a href="<?php echo esc_url( $zbs->urls['usageinfo'] ); ?>" target="_blank" class="jpcrm-settings-read-more"><?php esc_html_e( 'Read more', 'zero-bs-crm' ); ?></a>
 				</td>
-				<td style="width:540px"><input type="checkbox" class="winput form-control" name="wpzbscrm_shareessentials" id="wpzbscrm_shareessentials" value="1"
+				<td><input type="checkbox" class="winput form-control" name="wpzbscrm_shareessentials" id="wpzbscrm_shareessentials" value="1"
 				<?php
 				if ( isset( $settings['shareessentials'] ) && $settings['shareessentials'] == '1' ) {
 					echo ' checked="checked"';}
@@ -624,7 +626,7 @@ if ( ! $confirmAct ) {
 					<label for="jpcrm_showpoweredby_public"><?php esc_html_e( 'Show public credits', 'zero-bs-crm' ); ?>:</label><br />
 					<?php esc_html_e( 'Love Jetpack CRM and willing to share? Show us some love by displaying "Powered by Jetpack CRM" footers on the CRM login page, CRM forms, CRM emails, and the Client Portal.', 'zero-bs-crm' ); ?>
 				</td>
-				<td style="width:540px">
+				<td>
 					<input type="checkbox" class="winput form-control" name="jpcrm_showpoweredby_public" id="jpcrm_showpoweredby_public" value="1"<?php echo empty( $settings['showpoweredby_public'] ) ? '' : ' checked="checked"'; ?> />
 				</td>
 			</tr>
@@ -634,7 +636,7 @@ if ( ! $confirmAct ) {
 					<label for="jpcrm_showpoweredby_admin"><?php esc_html_e( 'Show admin credits', 'zero-bs-crm' ); ?>:</label><br />
 					<?php esc_html_e( 'Show the Jetpack and Automattic logos in the footer of backend admin pages.', 'zero-bs-crm' ); ?>
 				</td>
-				<td style="width:540px">
+				<td>
 					<input type="checkbox" class="winput form-control" name="jpcrm_showpoweredby_admin" id="jpcrm_showpoweredby_admin" value="1"<?php echo isset( $settings['showpoweredby_admin'] ) && $settings['showpoweredby_admin'] === 0 ? '' : ' checked="checked"'; ?> />
 				</td>
 			</tr>
@@ -659,7 +661,7 @@ if ( ! $confirmAct ) {
 
 			<tr>
 				<td class="wfieldname"><label><?php esc_html_e( 'Accepted Upload File Types', 'zero-bs-crm' ); ?>:</label><br /><?php esc_html_e( 'This setting specifies which file types are acceptable for uploading against contacts, quotes, or invoices.', 'zero-bs-crm' ); ?></td>
-				<td style="width:540px">
+				<td>
 					<?php foreach ( $zbs->acceptable_mime_types as $filetype => $mimedeet ) { ?>
 						<input type="checkbox" class="winput form-control" name="<?php echo esc_attr( 'wpzbscrm_ft_' . $filetype ); ?>" id="<?php echo esc_attr( 'wpzbscrm_ft_' . $filetype ); ?>" value="1"
 																							<?php
@@ -673,7 +675,7 @@ if ( ! $confirmAct ) {
 
 			<tr>
 				<td class="wfieldname"><label><?php esc_html_e( 'Allow CRM team members to upload all filetypes', 'zero-bs-crm' ); ?>:</label><br /><?php esc_html_e( 'This setting overrides the above accepted upload file types, and will allow CRM team members to upload any files to the CRM. For security reasons, we don\'t recommend doing this unless necessary.', 'zero-bs-crm' ); ?></td>
-				<td style="width:540px">
+				<td>
 					<input type="checkbox" class="winput form-control" name="<?php echo 'wpzbscrm_ft_all'; ?>" id="<?php echo 'wpzbscrm_ft_all'; ?>" value="1"
 																						<?php
 																						if ( isset( $settings['filetypesupload'] ) && isset( $settings['filetypesupload']['all'] ) && $settings['filetypesupload']['all'] == '1' ) {
@@ -705,7 +707,8 @@ if ( ! $confirmAct ) {
 
 				<tr>
 					<td class="wfieldname"><label for="wpzbscrm_<?php echo esc_attr( $autoLog['fieldname'] ); ?>"><?php esc_html_e( 'Auto-log: ' . $autoLog['title'], 'zero-bs-crm' ); ?>:</label></td>
-					<td style="width:540px"><input type="checkbox" class="winput form-control" name="wpzbscrm_<?php echo esc_attr( $autoLog['fieldname'] ); ?>" id="wpzbscrm_<?php echo esc_attr( $autoLog['fieldname'] ); ?>" value="1"
+					<?php // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase -- legacy variable names. ?>
+					<td><input type="checkbox" class="winput form-control" name="wpzbscrm_<?php echo esc_attr( $autoLog['fieldname'] ); ?>" id="wpzbscrm_<?php echo esc_attr( $autoLog['fieldname'] ); ?>" value="1"
 																														<?php
 																														if ( isset( $settings[ $autoLog['fieldname'] ] ) && $settings[ $autoLog['fieldname'] ] == '1' ) {
 																															echo ' checked="checked"';}

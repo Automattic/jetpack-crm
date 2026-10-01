@@ -5,13 +5,9 @@
 
 // Specifically for admin settings pages
 
+// Decorative icons beside section intros; the headings carry the meaning.
 .zbs-explainer-ico {
-	margin-top: 1em;
-	margin-bottom: 1em;
-
-	i.fa {
-		font-size: 40px;
-	}
+	display: none;
 }
 
 #zbs-portal-users-statuses {
@@ -29,38 +25,344 @@
 }
 
 
+// Layout: the settings menu beside the page, stacked on narrow screens.
+.jpcrm-settings {
+	display: grid;
+	grid-template-columns: 220px minmax(0, 1fr);
+	gap: var(--wpds-dimension-gap-3xl);
+	align-items: start;
+	margin-top: var(--wpds-dimension-gap-xl);
+	// Lines the page up with the CRM header above it.
+	padding: 0 var(--wpds-dimension-padding-md);
+	font-family: var(--wpds-typography-font-family-body);
+
+	@media screen and (max-width: 960px) {
+		grid-template-columns: minmax(0, 1fr);
+		gap: var(--wpds-dimension-gap-xl);
+	}
+
+	@media screen and (max-width: 782px) {
+		padding: 0 var(--wpds-dimension-padding-2xl);
+	}
+}
+
+.jpcrm-settings__nav {
+	position: sticky;
+	top: calc(var(--wp-admin--admin-bar--height, 32px) + var(--wpds-dimension-gap-xl));
+
+	@media screen and (max-width: 960px) {
+		position: static;
+	}
+}
+
+.jpcrm-settings__content {
+	min-width: 0;
+	max-width: 960px;
+}
+
 #poststuff.zbs-settings-page {
 	padding-top: 0;
 	min-width: auto !important;
 }
 
-#zbs-settings-menu .branding.item {
+// Page title, and the note under it some pages carry. Scoped to #poststuff to
+// beat core's #poststuff h2.
+#poststuff .jpcrm-settings__title {
+	margin: 0 0 var(--wpds-dimension-gap-sm);
+	padding: 0;
+	color: var(--wpds-color-foreground-content-neutral);
+	font-size: var(--wpds-typography-font-size-xl);
+	font-weight: var(--wpds-typography-font-weight-emphasis);
+	line-height: var(--wpds-typography-line-height-xl);
+}
 
-	text-align: center;
-	line-height: 20px;
-	font-size: 1.2em;
-	font-weight: 800;
+.jpcrm-settings__title-notice {
+	margin: 0 0 var(--wpds-dimension-gap-lg);
+	color: var(--wpds-color-foreground-content-neutral-weak);
+}
 
-	img {
+#poststuff.zbs-settings-page #sbDesc {
+	margin: 0 0 var(--wpds-dimension-gap-xl);
+	padding: 0;
+	color: var(--wpds-color-foreground-content-neutral-weak);
+	font-size: var(--wpds-typography-font-size-md);
+}
 
-		max-width: 30px !important;
-		background: #000;
-		display: inline-block !important;
-		margin-left: -0.5em !important;
-		float: left;
+// Settings menu
+.jpcrm-settings-menu {
+
+	ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	li {
+		margin: 0;
 	}
 }
-// fix for menu weirdness
-#zbs-settings-menu .item a.item.zbs-settings-head {
-	margin-bottom: -1em;
-	padding: 0;
+
+.jpcrm-settings-menu__title {
+	margin: 0 0 var(--wpds-dimension-gap-sm);
+	padding: 0 var(--wpds-dimension-padding-md);
+	color: var(--wpds-color-foreground-content-neutral-weak);
+	font-size: var(--wpds-typography-font-size-xs);
+	font-weight: var(--wpds-typography-font-weight-emphasis);
+	line-height: var(--wpds-typography-line-height-xs);
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
 }
 
-#zbs-settings-menu.ui.vertical.menu .item a.item.zbs-settings-head.active.item {
-	color: #2185d0 !important;
-	background: rgba(0, 0, 0, 0);
+.jpcrm-settings-menu__item {
+	display: block;
+	padding: 6px var(--wpds-dimension-padding-md);
+	border-radius: var(--wpds-border-radius-sm);
+	color: var(--wpds-color-foreground-content-neutral);
+	font-size: var(--wpds-typography-font-size-md);
+	line-height: var(--wpds-typography-line-height-sm);
+	text-decoration: none;
+
+	&:hover {
+		background: var(--wpds-color-background-interactive-neutral-weak-active);
+		color: var(--wp-admin-theme-color);
+	}
+
+	&:focus {
+		box-shadow: none;
+		outline: var(--wpds-border-width-focus) solid var(--wp-admin-theme-color);
+		outline-offset: -2px;
+	}
+
+	&.is-active {
+		background: var(--wpds-color-background-interactive-brand-weak);
+		background: color-mix(in srgb, var(--wp-admin-theme-color) 8%, transparent);
+		color: var(--wp-admin-theme-color);
+		font-weight: var(--wpds-typography-font-weight-emphasis);
+	}
+
+	&.is-destructive {
+		color: var(--wpds-color-foreground-interactive-error);
+	}
 }
 
+.jpcrm-settings-menu__group + .jpcrm-settings-menu__group {
+	margin-top: 2px;
+}
+
+.jpcrm-settings-menu__sub {
+	margin: 2px 0 var(--wpds-dimension-gap-sm) var(--wpds-dimension-padding-md) !important;
+	padding-left: var(--wpds-dimension-padding-xs) !important;
+	border-left: var(--wpds-border-width-xs) solid var(--wpds-color-stroke-surface-neutral-weak);
+
+	.jpcrm-settings-menu__item {
+		color: var(--wpds-color-foreground-content-neutral-weak);
+
+		&.is-active,
+		&:hover {
+			color: var(--wp-admin-theme-color);
+		}
+	}
+}
+
+.jpcrm-settings-menu__footer {
+	margin-top: var(--wpds-dimension-gap-lg) !important;
+	padding-top: var(--wpds-dimension-gap-lg) !important;
+	border-top: var(--wpds-border-width-xs) solid var(--wpds-color-stroke-surface-neutral-weak);
+}
+
+// A select stands in for the menu on narrow screens.
+.jpcrm-settings-menu__jump {
+	display: none;
+}
+
+@media screen and (max-width: 960px) {
+
+	.jpcrm-settings-menu__title,
+	.jpcrm-settings-menu__list {
+		display: none;
+	}
+
+	.jpcrm-admin select.jpcrm-settings-menu__jump {
+		display: block;
+		width: 100%;
+		max-width: none;
+	}
+}
+
+// Settings forms: each table is a section with a heading, and each row a
+// label and description beside its field, the way WordPress' own settings
+// pages lay them out. Scoped to #poststuff to beat the legacy Bootstrap rules.
+#poststuff.zbs-settings-page table.wtab {
+	width: 100%;
+	margin: 0 0 var(--wpds-dimension-gap-3xl);
+	border: 0;
+	border-collapse: collapse;
+	background: transparent;
+
+	> thead > tr > th,
+	> tbody > tr > th,
+	> tbody > tr > td,
+	> tr > th,
+	> tr > td {
+		padding: var(--wpds-dimension-padding-lg) var(--wpds-dimension-padding-lg) var(--wpds-dimension-padding-lg) 0;
+		border: 0;
+		border-bottom: var(--wpds-border-width-xs) solid var(--wpds-color-stroke-surface-neutral-weak);
+		background: transparent;
+		color: var(--wpds-color-foreground-content-neutral);
+		font-size: var(--wpds-typography-font-size-md);
+		line-height: var(--wpds-typography-line-height-sm);
+		vertical-align: top;
+	}
+
+	> tbody > tr:last-child > td,
+	> tr:last-child > td {
+		border-bottom: 0;
+	}
+
+	// Section heading
+	th.wmid,
+	td.wmid {
+		padding: 0 0 var(--wpds-dimension-padding-sm);
+		border-bottom: var(--wpds-border-width-xs) solid var(--wpds-color-stroke-surface-neutral);
+		color: var(--wpds-color-foreground-content-neutral);
+		font-size: var(--wpds-typography-font-size-lg);
+		font-weight: var(--wpds-typography-font-weight-emphasis);
+		line-height: var(--wpds-typography-line-height-md);
+		text-align: left !important;
+	}
+
+	// The submit row is a table of its own.
+	td.wmid {
+		padding-top: 0;
+		border-bottom: 0;
+		font-size: var(--wpds-typography-font-size-md);
+	}
+
+	td.wfieldname {
+		width: 35%;
+		color: var(--wpds-color-foreground-content-neutral-weak);
+		text-align: left !important;
+
+		label,
+		> strong,
+		> b {
+			display: inline-block;
+			margin-bottom: 2px;
+			color: var(--wpds-color-foreground-content-neutral);
+			font-weight: var(--wpds-typography-font-weight-emphasis);
+		}
+	}
+
+	// Fields fill their column, up to a readable width.
+	input[type="text"],
+	input[type="email"],
+	input[type="url"],
+	input[type="number"],
+	input[type="password"],
+	select,
+	textarea {
+		width: 100%;
+		max-width: 400px;
+	}
+
+	textarea {
+		min-height: 80px;
+	}
+
+	input[type="checkbox"],
+	input[type="radio"] {
+		margin-top: 2px;
+	}
+
+	// "Read more" link under a description
+	.jpcrm-settings-read-more {
+		display: inline-block;
+		margin-top: var(--wpds-dimension-gap-xs);
+		color: var(--wp-admin-theme-color);
+	}
+
+	// Inputs with a label attached, like the invoice reference prefix and suffix
+	.ui.labeled.input {
+		display: flex;
+		max-width: 400px;
+		margin-bottom: var(--wpds-dimension-gap-sm);
+
+		> .label {
+			display: flex;
+			align-items: center;
+			min-width: 110px;
+			padding: 0 var(--wpds-dimension-padding-md) !important;
+			border: var(--wpds-border-width-xs) solid var(--wpds-color-stroke-interactive-neutral);
+			border-right: 0;
+			border-radius: var(--wpds-border-radius-sm) 0 0 var(--wpds-border-radius-sm);
+			background: var(--wpds-color-background-surface-neutral-weak);
+			color: var(--wpds-color-foreground-content-neutral-weak);
+			font-size: var(--wpds-typography-font-size-md);
+			font-weight: var(--wpds-typography-font-weight-default);
+		}
+
+		> input {
+			flex: 1;
+			min-width: 0;
+			border-radius: 0 var(--wpds-border-radius-sm) var(--wpds-border-radius-sm) 0;
+		}
+	}
+
+	// Slugs and placeholders listed in descriptions
+	code {
+		padding: 1px 4px;
+		border-radius: var(--wpds-border-radius-sm);
+		background: var(--wpds-color-background-surface-neutral-weak);
+		font-size: var(--wpds-typography-font-size-sm);
+	}
+}
+
+// Narrow screens: label and description above the field.
+@media screen and (max-width: 782px) {
+
+	#poststuff.zbs-settings-page table.wtab {
+
+		&,
+		> tbody,
+		> tbody > tr,
+		> tbody > tr > td,
+		> tbody > tr > th {
+			display: block;
+			width: 100% !important;
+		}
+
+		> tbody > tr {
+			padding: var(--wpds-dimension-padding-md) 0;
+			border-bottom: var(--wpds-border-width-xs) solid var(--wpds-color-stroke-surface-neutral-weak);
+		}
+
+		> tbody > tr:last-child {
+			border-bottom: 0;
+		}
+
+		> tbody > tr > td,
+		> tbody > tr > th {
+			padding: 0;
+			border-bottom: 0;
+		}
+
+		> tbody > tr > td.wfieldname {
+			padding-bottom: var(--wpds-dimension-padding-sm);
+		}
+
+		> tbody > tr > th.wmid {
+			padding-bottom: var(--wpds-dimension-padding-sm);
+			border-bottom: 0;
+		}
+
+		> thead,
+		> thead > tr,
+		> thead > tr > th {
+			display: block;
+			width: 100%;
+		}
+	}
+}
 
 // WH new custom fields type
 .zbs-settings-custom-fields {
@@ -159,4 +461,96 @@
 
 #reftype-manual-block.reftype-set {
 	display: block;
+}
+
+// Mail Delivery
+.jpcrm-mail-delivery-intro {
+	max-width: 640px;
+	margin-bottom: var(--wpds-dimension-gap-xl);
+	color: var(--wpds-color-foreground-content-neutral);
+	font-size: var(--wpds-typography-font-size-md);
+
+	p {
+		margin: 0 0 var(--wpds-dimension-gap-md);
+		font-size: inherit;
+	}
+}
+
+#poststuff.zbs-settings-page table.jpcrm-mail-delivery-accounts {
+	margin-bottom: var(--wpds-dimension-gap-xl);
+
+	th,
+	td {
+		padding: var(--wpds-dimension-padding-md);
+		vertical-align: middle;
+	}
+
+	.zbs-default {
+		margin-right: var(--wpds-dimension-gap-sm);
+	}
+
+	.jpcrm-badge.is-none {
+		margin-left: var(--wpds-dimension-gap-sm);
+	}
+
+	.zbs-mail-delivery-detail {
+		margin-top: var(--wpds-dimension-gap-xs);
+		color: var(--wpds-color-foreground-content-neutral-weak);
+	}
+
+	.zbs-mail-delivery-actions {
+		text-align: right;
+	}
+
+	.jpcrm-mail-delivery-actions {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-end;
+		gap: var(--wpds-dimension-gap-sm);
+
+		.ui.button {
+			margin: 0;
+		}
+	}
+
+	tfoot th {
+		text-align: right;
+	}
+
+	// Phones: each account's actions sit under it.
+	@media screen and (max-width: 782px) {
+
+		thead .zbs-mail-delivery-actions {
+			display: none;
+		}
+
+		tbody tr,
+		tbody td {
+			display: block;
+			width: auto;
+		}
+
+		tbody td.zbs-mail-delivery-actions {
+			padding-top: 0;
+		}
+
+		.jpcrm-mail-delivery-actions {
+			justify-content: flex-start;
+		}
+	}
+}
+
+// Mail Delivery wizard: step headings at the page's heading size.
+#poststuff #zbs-mail-delivery-wizard-wrap h1.ui.header {
+	margin: var(--wpds-dimension-gap-xl) 0 var(--wpds-dimension-gap-sm);
+	padding: 0;
+	color: var(--wpds-color-foreground-content-neutral);
+	font-family: inherit;
+	font-size: var(--wpds-typography-font-size-xl);
+	font-weight: var(--wpds-typography-font-weight-emphasis);
+	line-height: var(--wpds-typography-line-height-xl);
+
+	> i.icon {
+		display: none;
+	}
 }

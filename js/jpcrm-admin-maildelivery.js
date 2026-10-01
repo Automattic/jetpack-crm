@@ -241,9 +241,9 @@ function zeroBSCRMJS_mail_delivery_bindList() {
 								jQuery(
 									'#zbs-mail-delivery-' + llIndx + ' td.zbs-mail-delivery-item-details'
 								).prepend(
-									'<div class="ui ribbon label zbs-default">' +
+									'<span class="jpcrm-badge is-stable zbs-default">' +
 										jpcrm.esc_html( window.zeroBSCRMJS_globViewLang( 'defaultText' ) ) +
-										'</div>'
+										'</span>'
 								);
 								jQuery(
 									'#zbs-mail-delivery-' + llIndx + ' .ui.button.zbs-default-mail-delivery'

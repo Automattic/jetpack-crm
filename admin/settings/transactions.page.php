@@ -121,7 +121,7 @@ if ( isset( $_POST['editwplf'] ) && zeroBSCRM_isZBSAdminOrAdmin() ) {
 ?>
 <?php
 if ( $sbupdated ) {
-	echo '<div style="width:500px; margin-left:20px;" class="wmsgfullwidth">';
+	echo '<div class="wmsgfullwidth">';
 	zeroBSCRM_html_msg( 0, __( 'Settings Updated', 'zero-bs-crm' ) );
 	echo '</div>';
 }
@@ -181,7 +181,7 @@ if ( $sbupdated ) {
 			<tr>
 				<td class="wfieldname"><label><?php esc_html_e( 'Include these statuses in the transaction total value', 'zero-bs-crm' ); ?>:</label><br /><?php esc_html_e( 'Tick which statuses to include when calculating total transaction value and total overall value of contacts.', 'zero-bs-crm' ); ?>
 					<br /><br /></td>
-				<td style="width:540px" id="jpcrm-transaction-include-status">
+				<td id="jpcrm-transaction-include-status">
 					<?php
 
 					$selectedStatuses = 'all';
@@ -306,7 +306,7 @@ if ( $sbupdated ) {
 			<tbody>
 			<tr>
 				<td class="wfieldname"><label for="wpzbscrm_transaction_fee"><?php echo esc_html__( 'Show fee', 'zero-bs-crm' ); ?>:</label><br /><?php echo esc_html__( 'Tick if you need to use fees', 'zero-bs-crm' ); ?></td>
-				<td style="width:540px"><input type="checkbox" class="winput form-control" name="wpzbscrm_transaction_fee" id="wpzbscrm_transaction_fee" value="1"
+				<td><input type="checkbox" class="winput form-control" name="wpzbscrm_transaction_fee" id="wpzbscrm_transaction_fee" value="1"
 				<?php
 				if ( isset( $settings['transaction_fee'] ) && $settings['transaction_fee'] == '1' ) {
 					echo ' checked="checked"';}
@@ -315,7 +315,7 @@ if ( $sbupdated ) {
 			</tr>
 			<tr>
 				<td class="wfieldname"><label for="wpzbscrm_transaction_tax"><?php echo esc_html__( 'Show tax', 'zero-bs-crm' ); ?>:</label><br /><?php echo esc_html__( 'Tick if you need to use taxes', 'zero-bs-crm' ); ?></td>
-				<td style="width:540px"><input type="checkbox" class="winput form-control" name="wpzbscrm_transaction_tax" id="wpzbscrm_transaction_tax" value="1"
+				<td><input type="checkbox" class="winput form-control" name="wpzbscrm_transaction_tax" id="wpzbscrm_transaction_tax" value="1"
 				<?php
 				if ( isset( $settings['transaction_tax'] ) && $settings['transaction_tax'] == '1' ) {
 					echo ' checked="checked"';}
@@ -324,7 +324,7 @@ if ( $sbupdated ) {
 			</tr>
 			<tr>
 				<td class="wfieldname"><label for="wpzbscrm_transaction_discount"><?php echo esc_html__( 'Show discount', 'zero-bs-crm' ); ?>:</label><br /><?php echo esc_html__( 'Tick if you need to use discounts', 'zero-bs-crm' ); ?></td>
-				<td style="width:540px"><input type="checkbox" class="winput form-control" name="wpzbscrm_transaction_discount" id="wpzbscrm_transaction_discount" value="1"
+				<td><input type="checkbox" class="winput form-control" name="wpzbscrm_transaction_discount" id="wpzbscrm_transaction_discount" value="1"
 				<?php
 				if ( isset( $settings['transaction_discount'] ) && $settings['transaction_discount'] == '1' ) {
 					echo ' checked="checked"';}
@@ -333,7 +333,7 @@ if ( $sbupdated ) {
 			</tr>
 			<tr>
 				<td class="wfieldname"><label for="wpzbscrm_transaction_net"><?php echo esc_html__( 'Show net amount', 'zero-bs-crm' ); ?>:</label><br /><?php echo esc_html__( 'Tick if you need to use net amount', 'zero-bs-crm' ); ?></td>
-				<td style="width:540px"><input type="checkbox" class="winput form-control" name="wpzbscrm_transaction_net" id="wpzbscrm_transaction_net" value="1"
+				<td><input type="checkbox" class="winput form-control" name="wpzbscrm_transaction_net" id="wpzbscrm_transaction_net" value="1"
 				<?php
 				if ( isset( $settings['transaction_net'] ) && $settings['transaction_net'] == '1' ) {
 					echo ' checked="checked"';}
