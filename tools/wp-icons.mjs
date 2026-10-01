@@ -32,6 +32,7 @@ export default {
 		'#wpbody-content .dashicons-cart',
 	],
 	caution: [ 'i.exclamation.icon', 'i.exclamation.circle.icon' ],
+	'chart-bar': [],
 	check: [ 'i.check.icon', 'i.checkmark.icon', '.fa.fa-check', '#wpbody-content .dashicons-yes' ],
 	'chevron-down': [
 		'i.search.plus.icon',
@@ -72,6 +73,7 @@ export default {
 	'drag-handle': [ 'i.arrows.alternate.icon' ],
 	comment: [ '.fa.fa-commenting', '.fa.fa-comments' ],
 	'comment-author-avatar': [ 'i.user.icon', 'i.user.circle.icon', 'i.user.md.icon', 'i.child.icon', '.fa.fa-user' ],
+	connection: [],
 	'currency-dollar': [ 'i.money.icon', '.fa.fa-money' ],
 	dashboard: [ 'i.dashboard.icon', '.fa.fa-dashboard' ],
 	download: [ 'i.download.icon', '.fa.fa-download' ],
@@ -84,6 +86,7 @@ export default {
 	],
 	error: [ 'i.warning.icon', 'i.warning.sign.icon', 'i.exclamation.triangle.icon' ],
 	external: [ 'i.external.icon', '.fa.fa-share-square-o', '.fa.fa-external-link' ],
+	filter: [],
 	'format-list-bullets': [ 'i.list.icon', 'i.list.layout.icon', 'i.tasks.icon' ],
 	fullscreen: [ 'i.expand.icon' ],
 	globe: [ 'i.wifi.icon' ],
@@ -94,11 +97,17 @@ export default {
 	home: [ 'i.home.icon' ],
 	image: [ '.fa.fa-file-image-o' ],
 	info: [ 'i.info.icon', '.fa.fa-info-circle' ],
+	inbox: [],
+	institution: [],
+	key: [],
 	keyboard: [ '.fa.fa-keyboard-o' ],
+	layout: [],
 	lifesaver: [ 'i.life.ring.icon' ],
 	link: [ 'i.linkify.icon', 'i.chain.icon' ],
 	'link-off': [ 'i.stop.icon' ],
+	login: [],
 	'map-marker': [ 'i.map.marker.icon' ],
+	megaphone: [],
 	menu: [],
 	mobile: [ 'i.mobile.icon' ],
 	'not-allowed': [ 'i.ban.icon', 'i.bell.slash.icon', '.fa.fa-ban' ],
@@ -155,6 +164,7 @@ export default {
 	unlock: [ '#wpbody-content .dashicons-unlock' ],
 	update: [ 'i.sync.icon', 'i.exchange.icon' ],
 	upload: [ 'i.upload.icon', '.fa.fa-upload' ],
+	video: [],
 	wordpress: [ 'i.wordpress.icon' ],
 };
 
@@ -167,6 +177,9 @@ export const socialLogos = {
 	facebook: [ 'i.facebook.icon', '.fa.fa-facebook', '.fa.fa-facebook-official' ],
 	linkedin: [ 'i.linkedin.icon', '.fa.fa-linkedin' ],
 	twitter: [ 'i.twitter.icon', '.fa.fa-twitter' ],
+	// Brand marks for the WooSync module and the Google Contacts extension, in the brand's color.
+	woocommerce: { color: '#720eec', replaces: [] },
+	google: { color: '#4285f4', replaces: [] },
 };
 
 /**
@@ -175,7 +188,9 @@ export const socialLogos = {
  */
 export const customIcons = {
 	envato: { color: '#87e64b', replaces: [ '.fa.fa-envira' ] },
+	jetpack: { color: '#069e08', replaces: [] },
 	logout: [ 'i.sign.out.icon' ],
+	mailchimp: [],
 	paypal: { color: '#002991', replaces: [ '.fa.fa-paypal' ] },
 	phone: [ 'i.phone.icon', 'i.call.icon', '.fa.fa-phone', '.fa.fa-phone-square' ],
 	stripe: { color: '#635bff', replaces: [ '.fa.fa-stripe' ] },

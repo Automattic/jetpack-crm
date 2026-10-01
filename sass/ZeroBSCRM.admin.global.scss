@@ -46,6 +46,9 @@
 // Status and tag badges
 @include meta.load-css( "jpcrm-badges" );
 
+// Module and extension icons
+@include meta.load-css( "jpcrm-extension-icon" );
+
 // Import "Hide WP Features" styles
 @include meta.load-css( "ZeroBSCRM.hidewpfeatures" );
 

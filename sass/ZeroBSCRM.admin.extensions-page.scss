@@ -79,6 +79,15 @@
 		text-align: center;
 	}
 
+	// Center the icon tiles from jpcrm_extension_icon_html() in their column. Semantic
+	// UI's grid makes columns inline-blocks with a more specific selector.
+	.free-ext-img,
+	.ext-icon {
+		display: flex !important;
+		align-items: center;
+		justify-content: center;
+	}
+
 	.free-ext-area .free-ext-img img {
 		height: 50px;
 		width: auto;

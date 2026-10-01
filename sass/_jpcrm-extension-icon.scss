@@ -1,0 +1,20 @@
+/*
+ * Module and extension icons, from jpcrm_extension_icon_html(): one glyph on a
+ * rounded tile, like Jetpack's product icons. Brand marks bring their own color;
+ * the rest take the text color.
+ */
+.jpcrm-extension-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	width: 56px;
+	height: 56px;
+	border-radius: var(--wpds-border-radius-lg);
+	background: var(--wpds-color-background-surface-neutral-weak);
+	color: var(--wpds-color-foreground-content-neutral);
+
+	svg {
+		display: block;
+	}
+}

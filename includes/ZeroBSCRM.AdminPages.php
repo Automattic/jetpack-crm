@@ -1341,61 +1341,61 @@ function zeroBSCRM_html_home2() {
 		<div class="feature-list block">
 
 					<div class="feature-block first">
-						<img alt="<?php esc_attr_e( 'CRM Dashboard', 'zero-bs-crm' ); ?>" src="<?php echo esc_url( plugins_url( '/i/crm-dash.png', ZBS_ROOTFILE ) ); ?>">
+						<?php echo jpcrm_extension_icon_html( 'dashboard' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG markup from CRM's own icon set. ?>
 						<h5><?php esc_html_e( 'CRM Dashboard', 'zero-bs-crm' ); ?></h5>
 						<p><?php esc_html_e( 'See at a glance the key areas of your CRM: e.g. Contact Activity, Contact Funnel, and Revenue snapshot.', 'zero-bs-crm' ); ?></p>
 					</div>
 
 					<div class="feature-block last">
-						<img alt="<?php esc_html_e( 'Limitless Contacts', 'zero-bs-crm' ); ?>" src="<?php echo esc_url( plugins_url( '/i/customers.png', ZBS_ROOTFILE ) ); ?>">
+						<?php echo jpcrm_extension_icon_html( 'people' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG markup from CRM's own icon set. ?>
 						<h5><?php esc_html_e( 'Limitless Contacts', 'zero-bs-crm' ); ?></h5>
 						<p><?php esc_html_e( 'Add as many contacts as you like. No limits to the number of contacts you can add to your CRM.', 'zero-bs-crm' ); ?></p>
 					</div>
 
 					<div class="feature-block first">
-						<img alt="<?php esc_attr_e( 'Quote Builder', 'zero-bs-crm' ); ?>" src="<?php echo esc_url( plugins_url( '/i/quotes.png', ZBS_ROOTFILE ) ); ?>">
+						<?php echo jpcrm_extension_icon_html( 'page' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG markup from CRM's own icon set. ?>
 						<h5><?php esc_html_e( 'Quote Builder', 'zero-bs-crm' ); ?></h5>
 						<p><?php esc_html_e( 'Do you find yourself writing similar quotes/proposals over and over? Quote Builder makes it easy for your team.', 'zero-bs-crm' ); ?></p>
 					</div>
 
 					<div class="feature-block last">
-						<img alt="<?php esc_attr_e( 'Invoicing', 'zero-bs-crm' ); ?>" src="<?php echo esc_url( plugins_url( '/i/invoices.png', ZBS_ROOTFILE ) ); ?>">
+						<?php echo jpcrm_extension_icon_html( 'receipt' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG markup from CRM's own icon set. ?>
 						<h5><?php esc_html_e( 'Invoicing', 'zero-bs-crm' ); ?></h5>
 						<p><?php esc_html_e( 'Got clients or people to bill? Easily create invoices, and get paid online (pro). Clients can see all Invoices in one place on the Client Portal.', 'zero-bs-crm' ); ?></p>
 					</div>
 
 					<div class="feature-block first">
-						<img alt="<?php esc_attr_e( 'Transactions', 'zero-bs-crm' ); ?>" src="<?php echo esc_url( plugins_url( '/i/transactions.png', ZBS_ROOTFILE ) ); ?>">
+						<?php echo jpcrm_extension_icon_html( 'payment' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG markup from CRM's own icon set. ?>
 						<h5><?php esc_html_e( 'Transactions', 'zero-bs-crm' ); ?></h5>
 						<p><?php esc_html_e( 'Log transactions against contacts or companies, and reconcile to invoices. Track payments, ecommerce data, and LTV (lifetime value).', 'zero-bs-crm' ); ?></p>
 					</div>
 
 					<div class="feature-block last">
-						<img alt="<?php esc_attr_e( 'B2B Mode', 'zero-bs-crm' ); ?>" src="<?php echo esc_url( plugins_url( '/i/b2b.png', ZBS_ROOTFILE ) ); ?>">
+						<?php echo jpcrm_extension_icon_html( 'institution' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG markup from CRM's own icon set. ?>
 						<h5><?php esc_html_e( 'B2B Mode', 'zero-bs-crm' ); ?></h5>
 						<p><?php esc_html_e( 'Manage leads working at Companies? B2B mode lets you group contacts under a Company and keep track of sales easier.', 'zero-bs-crm' ); ?></p>
 					</div>
 
 					<div class="feature-block first">
-						<img alt="<?php esc_attr_e( 'Automations', 'zero-bs-crm' ); ?>" src="<?php echo esc_url( plugins_url( '/i/auto.png', ZBS_ROOTFILE ) ); ?>">
+						<?php echo jpcrm_extension_icon_html( 'update' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG markup from CRM's own icon set. ?>
 						<h5><?php esc_html_e( 'Automations', 'zero-bs-crm' ); ?> <span class='pro'>Entrepreneur</span></h5>
 						<p><?php esc_html_e( 'Set up rule-based triggers and actions to automate your CRM work. Automatically Email new contacts, Distribute Leads, plus much more.', 'zero-bs-crm' ); ?></p>
 					</div>
 
 					<div class="feature-block last">
-						<img alt="<?php esc_attr_e( 'Send SMS', 'zero-bs-crm' ); ?>" src="<?php echo esc_url( plugins_url( '/i/sms.png', ZBS_ROOTFILE ) ); ?>">
+						<?php echo jpcrm_extension_icon_html( 'mobile' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG markup from CRM's own icon set. ?>
 						<h5><?php esc_html_e( 'Send SMS', 'zero-bs-crm' ); ?> <span class='pro'>Entrepreneur</span></h5>
 						<p><?php esc_html_e( 'Want to get in front of your contacts, wherever they are? Send SMS messages to your contacts from their CRM record.', 'zero-bs-crm' ); ?></p>
 					</div>
 
 					<div class="feature-block first">
-						<img alt="<?php esc_attr_e( 'Client Portal Pro', 'zero-bs-crm' ); ?>" src="<?php echo esc_url( plugins_url( '/i/cpp.png', ZBS_ROOTFILE ) ); ?>">
+						<?php echo jpcrm_extension_icon_html( 'login' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG markup from CRM's own icon set. ?>
 						<h5><?php esc_html_e( 'Client Portal Pro', 'zero-bs-crm' ); ?> <span class='pro'>Entrepreneur</span></h5>
 						<p><?php esc_html_e( 'Create a powerful client portal in one click! Easily share files with clients via their contact record. Tweak the portal to fit your branding, and more!', 'zero-bs-crm' ); ?></p>
 					</div>
 
 					<div class="feature-block last">
-						<img alt="<?php esc_attr_e( 'Mail Campaigns', 'zero-bs-crm' ); ?>" src="<?php echo esc_url( plugins_url( '/i/mail.png', ZBS_ROOTFILE ) ); ?>">
+						<?php echo jpcrm_extension_icon_html( 'megaphone' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG markup from CRM's own icon set. ?>
 						<h5><?php esc_html_e( 'Mail Campaigns', 'zero-bs-crm' ); ?> <span class='pro'>Entrepreneur</span></h5>
 						<p><?php echo wp_kses( __( 'Send Email Broadcasts and Sequences to your CRM contacts using our <strong>powerful</strong> Mail Campaigns v2.0. which is linked directly into your CRM data!', 'zero-bs-crm' ), $zbs->acceptable_restricted_html ); ?></p>
 					</div>
@@ -2110,9 +2110,17 @@ function zeroBSCRM_html_extensions() {
 						echo '<div class="row">';
 					}
 
-					echo "<div class='two wide column'>";
-						echo "<img alt='" . esc_attr( $extension->name ) . "' src='" . esc_url( $extension->image ) . "'/>";
-					echo '</div>';
+					$icon_html = jpcrm_extension_icon_html( jpcrm_premium_extension_icon( $extkey ) );
+					if ( $icon_html !== '' ) {
+						echo "<div class='two wide column ext-icon'>";
+							echo $icon_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG markup from CRM's own icon set.
+						echo '</div>';
+					} else {
+						// An extension added on jetpackcrm.com after this release keeps its banner.
+						echo "<div class='two wide column'>";
+							echo "<img alt='" . esc_attr( $extension->name ) . "' src='" . esc_url( $extension->image ) . "'/>";
+						echo '</div>';
+					}
 
 					echo "<div class='six wide column ext-desc'>";
 					if ( $installed ) {
@@ -2177,8 +2185,8 @@ function zeroBSCRM_html_extensions() {
 
 			// End of row
 
-				echo "<div class='two wide column'>";
-				echo "<img alt='" . esc_attr__( 'Coming Soon', 'zero-bs-crm' ) . "' src='" . esc_url( plugins_url( 'i/soon.png', ZBS_ROOTFILE ) ) . "'/>";
+				echo "<div class='two wide column ext-icon'>";
+				echo jpcrm_extension_icon_html( 'plus' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG markup from CRM's own icon set.
 				echo '</div>';
 
 				echo "<div class='six wide column ext-desc'>";
@@ -2195,8 +2203,8 @@ function zeroBSCRM_html_extensions() {
 
 			echo '<div class="row">';
 
-			echo "<div class='two wide column'>";
-			echo "<img alt='" . esc_attr__( 'Coming Soon', 'zero-bs-crm' ) . "' src='" . esc_url( plugins_url( 'i/soon.png', ZBS_ROOTFILE ) ) . "'/>";
+			echo "<div class='two wide column ext-icon'>";
+			echo jpcrm_extension_icon_html( 'plus' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG markup from CRM's own icon set.
 			echo '</div>';
 
 			echo "<div class='six wide column ext-desc'>";
@@ -2321,7 +2329,13 @@ function jpcrm_html_modules() {
 			}
 
 					echo "<div class='two wide column free-ext-img'>";
-						echo "<img src='" . esc_url( plugins_url( 'i/' . $v['i'], ZBS_ROOTFILE ) ) . "'/>";
+			// Modules registered before icons were drawn may still pass an image in `i`.
+			$icon_html = ! empty( $v['icon'] ) ? jpcrm_extension_icon_html( $v['icon'] ) : '';
+			if ( $icon_html !== '' ) {
+				echo $icon_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG markup from CRM's own icon set.
+			} elseif ( ! empty( $v['i'] ) ) {
+				echo "<img src='" . esc_url( plugins_url( 'i/' . $v['i'], ZBS_ROOTFILE ) ) . "'/>";
+			}
 					echo '</div>';
 
 					echo "<div class='six wide column ext-desc'>";
