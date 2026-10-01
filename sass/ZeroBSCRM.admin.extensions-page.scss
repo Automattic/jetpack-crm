@@ -137,7 +137,7 @@
 
 		&:hover,
 		&:focus {
-			color: var(--wpds-color-foreground-interactive-brand-strong);
+			color: var(--wpds-color-foreground-interactive-brand);
 		}
 	}
 
@@ -233,16 +233,28 @@
 			line-height: inherit;
 		}
 
+		ul,
+		ol {
+			margin: 0 0 16px;
+			padding-left: 20px;
+		}
+
+		ul {
+			list-style: disc;
+		}
+
+		ol {
+			list-style: decimal;
+		}
+
 		li {
 			margin: 0 0 4px;
 			font-size: inherit;
 			line-height: inherit;
-		}
 
-		ul {
-			margin: 0 0 8px;
-			padding-left: 20px;
-			list-style: disc;
+			&:last-child {
+				margin-bottom: 0;
+			}
 		}
 
 		strong {
