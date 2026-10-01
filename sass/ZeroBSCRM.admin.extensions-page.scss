@@ -349,8 +349,9 @@
 		margin-top: 5px;
 	}
 
+	// 24px at the sides, to line up with the page title like other CRM screens.
 	.zbs-page-wrap {
-		padding: 20px;
+		padding: 20px 24px;
 	}
 
 	.zbs-page-wrap .segment {
