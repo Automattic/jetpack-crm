@@ -2143,6 +2143,7 @@ function zeroBSCRM_html_extensions() {
 
 			echo '</div>';  // end page wrap.
 
+			// phpcs:ignore Squiz.Commenting.InlineComment.WrongStyle -- The white-label build reads this marker.
 			##/WLREMOVE
 
 	}
