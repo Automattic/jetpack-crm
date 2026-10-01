@@ -11,7 +11,5 @@ Each one is a single SVG on the 24px grid (`viewBox="0 0 24 24"`), like `@wordpr
 | `paypal.svg` | PayPal mark, shown in PayPal blue `#002991`. | [Simple Icons](https://simpleicons.org) 16.32.0 (CC0-1.0), scaled to 18px inside the grid. |
 | `stripe.svg` | Stripe mark, shown in Stripe purple `#635BFF`. | Simple Icons 16.32.0 (CC0-1.0), scaled the same way. |
 | `envato.svg` | Envato mark, shown in Envato green `#87E64B`. CRM used Font Awesome's Envira leaf as a look-alike. | Simple Icons 16.32.0 (CC0-1.0), scaled the same way. |
-| `jetpack.svg` | Jetpack mark, shown in Jetpack green `#069E08`, for the Jetpack Forms module. | Jetpack's own logo, scaled to 18px inside the grid like the brand marks above. |
-| `mailchimp.svg` | Mailchimp's Freddie mark, in the text color like Mailchimp's one-color logo. | Simple Icons 16.32.0 (CC0-1.0), scaled to 18px inside the grid. |
 
-The brand marks are the companies' trademarks. CRM shows them only to say where a record came from or which service an extension connects to, as the Simple Icons disclaimer describes.
+The brand marks are the companies' trademarks. CRM shows them only to say where a record came from, as the Simple Icons disclaimer describes.

@@ -32,7 +32,7 @@ function jpcrm_register_free_extension_woosync( $exts ) {
 	// append our module
 	$exts['woo-sync'] = array(
 		'name'       => 'WooCommerce Sync',
-		'icon'       => 'woocommerce',
+		'brand'      => 'woocommerce',
 		'short_desc' => __( 'Automatically import WooCommerce data into your CRM.', 'zero-bs-crm' ),
 	);
 

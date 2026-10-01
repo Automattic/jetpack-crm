@@ -7,16 +7,51 @@
 // Is also only enqueue on that one page.
 .zbs-extensions-manager {
 
+	// Type sizes and weights from WordPress' metaboxes: 14px semibold box and
+	// item titles, 13px regular text in the secondary text color.
 	.title {
-		font-size: 17px;
-		font-weight: 900;
+		color: var(--wpds-color-foreground-content-neutral);
+		font-size: 14px;
+		font-weight: var(--wpds-typography-font-weight-emphasis);
+		line-height: 1.4;
 	}
 
 	.content {
-		color: var(--wpds-color-foreground-content-neutral-weak);
+		color: #50575e;
+		font-size: var(--wpds-typography-font-size-md);
+		font-weight: var(--wpds-typography-font-weight-default);
+		line-height: 1.5;
+		margin-top: 4px;
+	}
+
+	.ui.top.attached.header.free-box,
+	.ui.top.attached.header.premium-box {
+		display: flex;
+		align-items: center;
+		gap: var(--wpds-dimension-gap-sm);
+		height: auto;
+		min-height: 0;
+		padding: var(--wpds-dimension-padding-sm) var(--wpds-dimension-padding-md);
+		color: var(--wpds-color-foreground-content-neutral);
+		font-family: inherit;
 		font-size: 14px;
-		font-weight: 200;
-		margin-top: 5px;
+		font-weight: var(--wpds-typography-font-weight-emphasis);
+		line-height: 1.4;
+	}
+
+	.premium-box .box-title {
+		flex: 1;
+		margin: 0;
+		color: inherit;
+		font-family: inherit;
+		font-size: inherit;
+		font-weight: inherit;
+		line-height: inherit;
+	}
+
+	// Space between the boxes, like stacked metaboxes.
+	.ui.segment.attached + .ui.top.attached.header.premium-box {
+		margin-top: 20px !important;
 	}
 
 	.zbs-page-wrap {
@@ -243,12 +278,8 @@
 		margin-bottom: -4px;
 	}
 
-	.box-title {
-		float: left;
-	}
-
 	.guides {
-		float: right;
+		margin: 0 !important;
 	}
 
 	.actions-block {

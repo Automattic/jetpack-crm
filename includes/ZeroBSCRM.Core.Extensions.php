@@ -1091,51 +1091,59 @@ function zeroBSCRM_extensions_free( $justKeys = false ) {
 		'api'             => array(
 			'name'       => __( 'API', 'zero-bs-crm' ),
 			'icon'       => 'code',
+			'color'      => 'purple',
 			'short_desc' => __( 'The CRM API lets you interact with Jetpack CRM via the application program interface.', 'zero-bs-crm' ),
 		),
 		'cal'             => array(
 			'name'       => __( 'Tasks', 'zero-bs-crm' ),
 			'icon'       => 'calendar',
+			'color'      => 'pink',
 			'short_desc' => __( 'Manage tasks for your contacts and what you need to do for them.', 'zero-bs-crm' ),
 		),
 		'quotebuilder'    => array(
 			'name'       => __( 'Quotes', 'zero-bs-crm' ),
 			'icon'       => 'page',
+			'color'      => 'celadon',
 			'short_desc' => __( 'Offer Quotes for your contacts to help you win more business.', 'zero-bs-crm' ),
 		),
 		'invbuilder'      => array(
 			'name'       => __( 'Invoices', 'zero-bs-crm' ),
 			'icon'       => 'receipt',
+			'color'      => 'green',
 			'short_desc' => __( 'Send invoices to your clients and allow them to pay online.', 'zero-bs-crm' ),
 		),
 		'pdfinv'          => array(
 			'name'       => __( 'PDF Engine', 'zero-bs-crm' ),
 			'icon'       => 'pages',
+			'color'      => 'red',
 			'short_desc' => __( 'Supports PDF invoicing and PDF quotes (plus more).', 'zero-bs-crm' ),
 		),
 		'forms'           => array(
 			'name'       => __( 'Forms', 'zero-bs-crm' ),
 			'icon'       => 'post-comments-form',
+			'color'      => 'orange',
 			'short_desc' => __( 'Capture contacts into your CRM using our simple form solutions.', 'zero-bs-crm' ),
 		),
 		'transactions'    => array(
 			'name'       => __( 'Transactions', 'zero-bs-crm' ),
 			'icon'       => 'payment',
+			'color'      => 'yellow',
 			'short_desc' => __( 'Log transactions against contacts and see their total value in the CRM.', 'zero-bs-crm' ),
 		),
 		'b2bmode'         => array(
 			'name'       => __( 'B2B Mode', 'zero-bs-crm' ),
 			'icon'       => 'institution',
+			'color'      => 'pink',
 			'short_desc' => __( 'Manage Contacts at Companies or Organisations', 'zero-bs-crm' ),
 		),
 		'jetpackforms'    => array(
 			'name'       => __( 'Jetpack Forms', 'zero-bs-crm' ),
-			'icon'       => 'jetpack',
+			'brand'      => 'jetpack',
 			'short_desc' => __( 'Capture contacts from Jetpack forms into your CRM.', 'zero-bs-crm' ),
 		),
 		'woo-sync'        => array(
 			'name'       => 'WooSync',
-			'icon'       => 'woocommerce',
+			'brand'      => 'woocommerce',
 			'short_desc' => __( 'Retrieve all customer data from WooCommerce into your CRM.', 'zero-bs-crm' ),
 		),
 
@@ -1151,71 +1159,118 @@ function zeroBSCRM_extensions_free( $justKeys = false ) {
 }
 
 /**
- * Returns the icon for a premium extension, by its extkey.
+ * Returns how to draw a premium extension's icon, by its extkey.
  *
  * The extensions list comes from jetpackcrm.com with a banner image for each, so
- * the icons are kept here instead. Integrations show the service's own mark where
- * CRM has one, and a @wordpress/icons glyph for what the extension does otherwise.
+ * the icons are kept here instead. Extensions that connect another product to CRM
+ * are integrations and show that product's own icon; the rest show a glyph
+ * from @wordpress/icons on a colored tile.
  *
  * @since $$next-version$$
  *
  * @param string $extkey The extension's key, e.g. "advancedsegments".
- * @return string An icon name for jpcrm_wp_icon_svg(), or empty if there's none.
+ * @return array Either `brand` (for jpcrm_integration_icon_html()), or `icon` and
+ *               `color` (for jpcrm_extension_icon_html()). Empty if there's none.
  */
 function jpcrm_premium_extension_icon( $extkey ) {
-	$icons = array(
-		'advancedsegments'   => 'filter',
-		'apiconnector'       => 'connection',
-		'automations'        => 'update',
-		'awesomesupport'     => 'lifesaver',
-		'aweber'             => 'envelope',
-		'batchtag'           => 'tag',
-		'clientportalpro'    => 'login',
-		'contactform'        => 'post-comments-form',
-		'convertkit'         => 'send',
-		'csvpro'             => 'table',
-		'exitbee'            => 'logout',
-		'funnels'            => 'funnel',
-		'googlecontact'      => 'google',
-		'gravity'            => 'post-comments-form',
-		'groove'             => 'comment',
-		'invpro'             => 'receipt',
-		'livestorm'          => 'video',
-		'mailcamp'           => 'megaphone',
-		'mailchimp'          => 'mailchimp',
-		'membermouse'        => 'people',
-		'optinmonster'       => 'layout',
-		'passwordmanager'    => 'key',
-		'paypal'             => 'paypal',
-		'registrationmagic'  => 'comment-author-avatar',
-		'salesdash'          => 'chart-bar',
-		'stripe'             => 'stripe',
-		'systememail'        => 'inbox',
-		'twilio'             => 'mobile',
-		'wordpressutilities' => 'wordpress',
-		'worldpay'           => 'payment',
+	// Extensions: an icon and its tile color.
+	$extensions = array(
+		'advancedsegments'   => array( 'filter', 'purple' ),
+		'apiconnector'       => array( 'connection', 'blue' ),
+		'automations'        => array( 'update', 'orange' ),
+		'batchtag'           => array( 'tag', 'pink' ),
+		'clientportalpro'    => array( 'login', 'blue' ),
+		'csvpro'             => array( 'table', 'green' ),
+		'funnels'            => array( 'funnel', 'celadon' ),
+		'invpro'             => array( 'receipt', 'green' ),
+		'mailcamp'           => array( 'megaphone', 'red' ),
+		'passwordmanager'    => array( 'key', 'yellow' ),
+		'salesdash'          => array( 'chart-bar', 'purple' ),
+		'systememail'        => array( 'inbox', 'orange' ),
+		'wordpressutilities' => array( 'wordpress', 'blue' ),
 	);
 
-	return $icons[ $extkey ] ?? '';
+	// Integrations: the other product's icon in i/integrations/.
+	$integrations = array(
+		'awesomesupport'    => 'awesome-support',
+		'aweber'            => 'aweber',
+		'contactform'       => 'contact-form-7',
+		'convertkit'        => 'kit',
+		'exitbee'           => 'exitbee',
+		'googlecontact'     => 'google',
+		'gravity'           => 'gravity-forms',
+		'groove'            => 'groove',
+		'livestorm'         => 'livestorm',
+		'mailchimp'         => 'mailchimp',
+		'membermouse'       => 'membermouse',
+		'optinmonster'      => 'optinmonster',
+		'paypal'            => 'paypal',
+		'registrationmagic' => 'registration-magic',
+		'stripe'            => 'stripe',
+		'twilio'            => 'twilio',
+		'worldpay'          => 'worldpay',
+	);
+
+	if ( isset( $integrations[ $extkey ] ) ) {
+		return array( 'brand' => $integrations[ $extkey ] );
+	}
+
+	if ( isset( $extensions[ $extkey ] ) ) {
+		return array(
+			'icon'  => $extensions[ $extkey ][0],
+			'color' => $extensions[ $extkey ][1],
+		);
+	}
+
+	return array();
 }
 
 /**
- * Returns a module or extension icon on its tile, for the Core Modules and
- * Extensions pages.
+ * Returns a module or extension icon: a @wordpress/icons glyph on a colored tile,
+ * like Jetpack's product icons.
  *
  * @since $$next-version$$
  *
- * @param string $name An icon name for jpcrm_wp_icon_svg().
+ * @param string $name  An icon name for jpcrm_wp_icon_svg().
+ * @param string $color Optional. The tile's color: blue, celadon, green, orange,
+ *                      pink, purple, red or yellow. Grey when empty.
  * @return string Empty if CRM doesn't have that icon.
  */
-function jpcrm_extension_icon_html( $name ) {
-	$svg = jpcrm_wp_icon_svg( $name, 32 );
+function jpcrm_extension_icon_html( $name, $color = '' ) {
+	$svg = jpcrm_wp_icon_svg( $name, 28 );
 
 	if ( '' === $svg ) {
 		return '';
 	}
 
-	return '<span class="jpcrm-extension-icon">' . $svg . '</span>';
+	$class = 'jpcrm-extension-icon' . ( '' !== $color ? ' is-' . sanitize_html_class( $color ) : '' );
+
+	return '<span class="' . esc_attr( $class ) . '">' . $svg . '</span>';
+}
+
+/**
+ * Returns an integration's icon: the other product's own app icon, from
+ * i/integrations/. See i/integrations/README.md for where each one comes from.
+ *
+ * @since $$next-version$$
+ *
+ * @param string $brand The icon's file name without its extension, e.g. "woocommerce".
+ * @return string Empty if CRM doesn't have that icon.
+ */
+function jpcrm_integration_icon_html( $brand ) {
+	// Marks without a background of their own, drawn on a white tile.
+	$on_tile = array( 'aweber', 'contact-form-7', 'exitbee', 'givewp', 'gravity-forms', 'membermouse', 'optinmonster', 'registration-magic', 'worldpay' );
+
+	$brand = sanitize_file_name( $brand );
+	foreach ( array( 'svg', 'png' ) as $extension ) {
+		if ( file_exists( ZEROBSCRM_PATH . 'i/integrations/' . $brand . '.' . $extension ) ) {
+			$class = 'jpcrm-extension-icon is-brand' . ( in_array( $brand, $on_tile, true ) ? ' is-on-tile' : '' );
+
+			return '<span class="' . esc_attr( $class ) . '"><img src="' . esc_url( ZEROBSCRM_URL . 'i/integrations/' . $brand . '.' . $extension ) . '" alt="" width="48" height="48" /></span>';
+		}
+	}
+
+	return '';
 }
 
 // } Free extensions name funcs

@@ -101,7 +101,6 @@ export default {
 	institution: [],
 	key: [],
 	keyboard: [ '.fa.fa-keyboard-o' ],
-	layout: [],
 	lifesaver: [ 'i.life.ring.icon' ],
 	link: [ 'i.linkify.icon', 'i.chain.icon' ],
 	'link-off': [ 'i.stop.icon' ],
@@ -164,7 +163,6 @@ export default {
 	unlock: [ '#wpbody-content .dashicons-unlock' ],
 	update: [ 'i.sync.icon', 'i.exchange.icon' ],
 	upload: [ 'i.upload.icon', '.fa.fa-upload' ],
-	video: [],
 	wordpress: [ 'i.wordpress.icon' ],
 };
 
@@ -177,9 +175,6 @@ export const socialLogos = {
 	facebook: [ 'i.facebook.icon', '.fa.fa-facebook', '.fa.fa-facebook-official' ],
 	linkedin: [ 'i.linkedin.icon', '.fa.fa-linkedin' ],
 	twitter: [ 'i.twitter.icon', '.fa.fa-twitter' ],
-	// Brand marks for the WooSync module and the Google Contacts extension, in the brand's color.
-	woocommerce: { color: '#720eec', replaces: [] },
-	google: { color: '#4285f4', replaces: [] },
 };
 
 /**
@@ -188,9 +183,7 @@ export const socialLogos = {
  */
 export const customIcons = {
 	envato: { color: '#87e64b', replaces: [ '.fa.fa-envira' ] },
-	jetpack: { color: '#069e08', replaces: [] },
 	logout: [ 'i.sign.out.icon' ],
-	mailchimp: [],
 	paypal: { color: '#002991', replaces: [ '.fa.fa-paypal' ] },
 	phone: [ 'i.phone.icon', 'i.call.icon', '.fa.fa-phone', '.fa.fa-phone-square' ],
 	stripe: { color: '#635bff', replaces: [ '.fa.fa-stripe' ] },

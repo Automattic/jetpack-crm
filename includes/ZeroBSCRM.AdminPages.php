@@ -1341,61 +1341,61 @@ function zeroBSCRM_html_home2() {
 		<div class="feature-list block">
 
 					<div class="feature-block first">
-						<?php echo jpcrm_extension_icon_html( 'dashboard' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG markup from CRM's own icon set. ?>
+						<?php echo jpcrm_extension_icon_html( 'dashboard', 'blue' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped when built. ?>
 						<h5><?php esc_html_e( 'CRM Dashboard', 'zero-bs-crm' ); ?></h5>
 						<p><?php esc_html_e( 'See at a glance the key areas of your CRM: e.g. Contact Activity, Contact Funnel, and Revenue snapshot.', 'zero-bs-crm' ); ?></p>
 					</div>
 
 					<div class="feature-block last">
-						<?php echo jpcrm_extension_icon_html( 'people' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG markup from CRM's own icon set. ?>
+						<?php echo jpcrm_extension_icon_html( 'people', 'pink' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped when built. ?>
 						<h5><?php esc_html_e( 'Limitless Contacts', 'zero-bs-crm' ); ?></h5>
 						<p><?php esc_html_e( 'Add as many contacts as you like. No limits to the number of contacts you can add to your CRM.', 'zero-bs-crm' ); ?></p>
 					</div>
 
 					<div class="feature-block first">
-						<?php echo jpcrm_extension_icon_html( 'page' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG markup from CRM's own icon set. ?>
+						<?php echo jpcrm_extension_icon_html( 'page', 'celadon' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped when built. ?>
 						<h5><?php esc_html_e( 'Quote Builder', 'zero-bs-crm' ); ?></h5>
 						<p><?php esc_html_e( 'Do you find yourself writing similar quotes/proposals over and over? Quote Builder makes it easy for your team.', 'zero-bs-crm' ); ?></p>
 					</div>
 
 					<div class="feature-block last">
-						<?php echo jpcrm_extension_icon_html( 'receipt' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG markup from CRM's own icon set. ?>
+						<?php echo jpcrm_extension_icon_html( 'receipt', 'green' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped when built. ?>
 						<h5><?php esc_html_e( 'Invoicing', 'zero-bs-crm' ); ?></h5>
 						<p><?php esc_html_e( 'Got clients or people to bill? Easily create invoices, and get paid online (pro). Clients can see all Invoices in one place on the Client Portal.', 'zero-bs-crm' ); ?></p>
 					</div>
 
 					<div class="feature-block first">
-						<?php echo jpcrm_extension_icon_html( 'payment' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG markup from CRM's own icon set. ?>
+						<?php echo jpcrm_extension_icon_html( 'payment', 'yellow' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped when built. ?>
 						<h5><?php esc_html_e( 'Transactions', 'zero-bs-crm' ); ?></h5>
 						<p><?php esc_html_e( 'Log transactions against contacts or companies, and reconcile to invoices. Track payments, ecommerce data, and LTV (lifetime value).', 'zero-bs-crm' ); ?></p>
 					</div>
 
 					<div class="feature-block last">
-						<?php echo jpcrm_extension_icon_html( 'institution' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG markup from CRM's own icon set. ?>
+						<?php echo jpcrm_extension_icon_html( 'institution', 'purple' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped when built. ?>
 						<h5><?php esc_html_e( 'B2B Mode', 'zero-bs-crm' ); ?></h5>
 						<p><?php esc_html_e( 'Manage leads working at Companies? B2B mode lets you group contacts under a Company and keep track of sales easier.', 'zero-bs-crm' ); ?></p>
 					</div>
 
 					<div class="feature-block first">
-						<?php echo jpcrm_extension_icon_html( 'update' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG markup from CRM's own icon set. ?>
+						<?php echo jpcrm_extension_icon_html( 'update', 'orange' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped when built. ?>
 						<h5><?php esc_html_e( 'Automations', 'zero-bs-crm' ); ?> <span class='pro'>Entrepreneur</span></h5>
 						<p><?php esc_html_e( 'Set up rule-based triggers and actions to automate your CRM work. Automatically Email new contacts, Distribute Leads, plus much more.', 'zero-bs-crm' ); ?></p>
 					</div>
 
 					<div class="feature-block last">
-						<?php echo jpcrm_extension_icon_html( 'mobile' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG markup from CRM's own icon set. ?>
+						<?php echo jpcrm_extension_icon_html( 'mobile', 'purple' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped when built. ?>
 						<h5><?php esc_html_e( 'Send SMS', 'zero-bs-crm' ); ?> <span class='pro'>Entrepreneur</span></h5>
 						<p><?php esc_html_e( 'Want to get in front of your contacts, wherever they are? Send SMS messages to your contacts from their CRM record.', 'zero-bs-crm' ); ?></p>
 					</div>
 
 					<div class="feature-block first">
-						<?php echo jpcrm_extension_icon_html( 'login' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG markup from CRM's own icon set. ?>
+						<?php echo jpcrm_extension_icon_html( 'login', 'blue' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped when built. ?>
 						<h5><?php esc_html_e( 'Client Portal Pro', 'zero-bs-crm' ); ?> <span class='pro'>Entrepreneur</span></h5>
 						<p><?php esc_html_e( 'Create a powerful client portal in one click! Easily share files with clients via their contact record. Tweak the portal to fit your branding, and more!', 'zero-bs-crm' ); ?></p>
 					</div>
 
 					<div class="feature-block last">
-						<?php echo jpcrm_extension_icon_html( 'megaphone' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG markup from CRM's own icon set. ?>
+						<?php echo jpcrm_extension_icon_html( 'megaphone', 'red' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped when built. ?>
 						<h5><?php esc_html_e( 'Mail Campaigns', 'zero-bs-crm' ); ?> <span class='pro'>Entrepreneur</span></h5>
 						<p><?php echo wp_kses( __( 'Send Email Broadcasts and Sequences to your CRM contacts using our <strong>powerful</strong> Mail Campaigns v2.0. which is linked directly into your CRM data!', 'zero-bs-crm' ), $zbs->acceptable_restricted_html ); ?></p>
 					</div>
@@ -2050,14 +2050,14 @@ function zeroBSCRM_html_extensions() {
 			echo '</div>';
 			echo '<div class="clear"></div>';
 		}
-			echo '<div class="ui top attached header premium-box"><h3 class="box-title">' . esc_html__( 'Premium Extensions', 'zero-bs-crm' ) . '</h3>   <a class="guides ui button black mini" href="' . esc_url( $zbs->urls['docs'] ) . '" target="_blank"><i class="book icon"></i> ' . esc_html__( 'Knowledge-base', 'zero-bs-crm' ) . '</a> <a style="color: black !important;box-shadow: 0 0 0 1px black inset !important;" class="guides ui button blue basic mini" href="' . esc_url( zeroBSCRM_getAdminURL( $zbs->slugs['modules'] ) ) . '"><i class="puzzle piece icon"></i> ' . esc_html__( 'Core Modules', 'zero-bs-crm' ) . '</a>   </div>';
-			echo '<div class="clear"></div>';
-			echo '<div class="ui segment attached">';
-				echo '<div class="ui internally celled grid">';
-
-				$e = 0;
-		$count     = 0;
 		$idsToHide = array( 17121, 17119 );
+
+		// Extensions add features to CRM; integrations connect another product to it.
+		$groups = array(
+			'extensions'   => array(),
+			'integrations' => array(),
+		);
+
 		if ( is_array( $extensions->paid ) ) {
 
 			$top_woo_extension_slugs = array( 'advanced-segments', 'sales-dashboard', 'automations', 'client-portal-pro', 'csv-importer-pro', 'wordpress-utilities' );
@@ -2096,97 +2096,60 @@ function zeroBSCRM_html_extensions() {
 				}
 			);
 
-			$extensions_to_display = array_merge( $top_woo_extensions, $extensions_to_display );
-
-			foreach ( $extensions_to_display as $extension ) {
+			foreach ( array_merge( $top_woo_extensions, $extensions_to_display ) as $extension ) {
 				// hide bundles
-				if ( ! in_array( $extension->id, $idsToHide ) ) {
-
-					$more_url = admin_url( 'admin.php?page=' . $zbs->slugs['extensions'] . '&extension_id=' . $extension->id );
-
-					$extkey    = $extension->extkey;
-					$installed = zeroBSCRM_isExtensionInstalled( $extkey );
-					if ( $e == 0 ) {
-						echo '<div class="row">';
-					}
-
-					$icon_html = jpcrm_extension_icon_html( jpcrm_premium_extension_icon( $extkey ) );
-					if ( $icon_html !== '' ) {
-						echo "<div class='two wide column ext-icon'>";
-							echo $icon_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG markup from CRM's own icon set.
-						echo '</div>';
-					} else {
-						// An extension added on jetpackcrm.com after this release keeps its banner.
-						echo "<div class='two wide column'>";
-							echo "<img alt='" . esc_attr( $extension->name ) . "' src='" . esc_url( $extension->image ) . "'/>";
-						echo '</div>';
-					}
-
-					echo "<div class='six wide column ext-desc'>";
-					if ( $installed ) {
-						echo '<div class="ui green right corner label"><i class="check icon"></i></div>';
-					}
-					echo "<div class='title'>" . esc_html( $extension->name ) . '</div>';
-					echo "<div class='content'>" . $extension->short_desc . '</div>';
-
-					if ( $showLinkButton ) {
-							echo '<div class="hover"></div><div class="hover-link">';
-
-							$sales_link = $zbs->urls['home'] . '/product/' . $extension->slug;
-
-							// api connector skips these
-						if ( $extkey == 'apiconnector' ) {
-
-							// api connector
-
-							// view
-							echo "<a href='" . esc_url( $zbs->urls['apiconnectorsales'] ) . "' target='_blank'><span class='ui button orange mini'>" . esc_html__( 'View', 'zero-bs-crm' ) . '</span></a>';
-
-							// download or buy
-							if ( $bundle ) {
-								echo "<a href='" . esc_url( $zbs->urls['account'] ) . "' target='_blank'><span class='ui button green mini'>" . esc_html__( 'Download', 'zero-bs-crm' ) . '</span></a>';
-							} else {
-								echo "<a href='" . esc_url( $sales_link ) . "' target='_blank'><span class='ui button green mini'>" . esc_html__( 'Buy', 'zero-bs-crm' ) . '</span></a>';
-							}
-						} else {
-
-												// non api connector
-												echo "<a href='" . esc_url( $more_url ) . "'><span class='ui button orange mini'>" . esc_html__( 'View', 'zero-bs-crm' ) . '</span></a>';
-
-							if ( ! $installed ) {
-
-								if ( $bundle ) {
-									echo "<a href='" . esc_url( $zbs->urls['account'] ) . "' target='_blank'><span class='ui button green mini'>" . esc_html__( 'Download', 'zero-bs-crm' ) . '</span></a>';
-								} else {
-									echo "<a href='" . esc_url( $sales_link ) . "' target='_blank'><span class='ui button green mini'>" . esc_html__( 'Buy', 'zero-bs-crm' ) . '</span></a>';
-								}
-							} elseif ( isset( $extension->docs ) && ! empty( $extension->docs ) ) {
-								echo "<a href='" . esc_url( $extension->docs ) . "' target='_blank'><span class='ui button blue mini'>" . esc_html__( 'Docs', 'zero-bs-crm' ) . '</span></a>';
-							}
-						}
-						echo '</div>';
-					}
-
-							echo '</div>';
-
-							++$e;
-							++$count;
-					if ( $e > 1 ) {
-						echo '</div>';
-						$e = 0;
-					}
-				} // / if not hidde
-
+				if ( in_array( $extension->id, $idsToHide ) ) { // phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict, WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+					continue;
+				}
+				$icon = jpcrm_premium_extension_icon( $extension->extkey );
+				$groups[ empty( $icon['brand'] ) ? 'extensions' : 'integrations' ][] = $extension;
 			}
 		}
 
-				// add on the coming soon block
-		if ( $e == 1 ) {
+		$sections = array(
+			'extensions'   => __( 'Premium Extensions', 'zero-bs-crm' ),
+			'integrations' => __( 'Integrations', 'zero-bs-crm' ),
+		);
 
-			// End of row
+		foreach ( $sections as $section_key => $section_title ) {
+
+			// Extensions always show, for the Coming soon slot.
+			if ( $section_key === 'integrations' && empty( $groups['integrations'] ) ) {
+				continue;
+			}
+
+			echo '<div class="ui top attached header premium-box" id="' . esc_attr( $section_key ) . '"><h2 class="box-title">' . esc_html( $section_title ) . '</h2>';
+			if ( $section_key === 'extensions' ) {
+				echo ' <a class="guides ui button black mini" href="' . esc_url( $zbs->urls['docs'] ) . '" target="_blank"><i class="book icon"></i> ' . esc_html__( 'Knowledge-base', 'zero-bs-crm' ) . '</a> <a style="color: black !important;box-shadow: 0 0 0 1px black inset !important;" class="guides ui button blue basic mini" href="' . esc_url( zeroBSCRM_getAdminURL( $zbs->slugs['modules'] ) ) . '"><i class="puzzle piece icon"></i> ' . esc_html__( 'Core Modules', 'zero-bs-crm' ) . '</a>';
+			}
+			echo '</div>';
+			echo '<div class="clear"></div>';
+			echo '<div class="ui segment attached">';
+			echo '<div class="ui internally celled grid">';
+
+			$e = 0;
+			foreach ( $groups[ $section_key ] as $extension ) {
+				if ( $e === 0 ) {
+					echo '<div class="row">';
+				}
+
+				jpcrm_html_premium_extension( $extension, $showLinkButton, $bundle ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+
+				++$e;
+				if ( $e > 1 ) {
+					echo '</div>';
+					$e = 0;
+				}
+			}
+
+			if ( $section_key === 'extensions' ) {
+				// The Coming soon slot ends the extensions, on the last row or one of its own.
+				if ( $e === 0 ) {
+					echo '<div class="row">';
+				}
 
 				echo "<div class='two wide column ext-icon'>";
-				echo jpcrm_extension_icon_html( 'plus' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG markup from CRM's own icon set.
+				echo jpcrm_extension_icon_html( 'plus' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped when built.
 				echo '</div>';
 
 				echo "<div class='six wide column ext-desc'>";
@@ -2197,36 +2160,96 @@ function zeroBSCRM_html_extensions() {
 				echo "<a class='hover-link' href='" . esc_url( $zbs->urls['soon'] ) . "' target='_blank'><span class='ui button orange mini'>" . esc_html__( 'View', 'zero-bs-crm' ) . '</span></a>';
 				echo '</div>';
 
-		} else {
+				echo '</div>';
+			} elseif ( $e === 1 ) {
+				echo '</div>';
+			}
 
-			// Row to itself
-
-			echo '<div class="row">';
-
-			echo "<div class='two wide column ext-icon'>";
-			echo jpcrm_extension_icon_html( 'plus' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG markup from CRM's own icon set.
 			echo '</div>';
-
-			echo "<div class='six wide column ext-desc'>";
-
-			echo "<div class='title'>" . esc_html__( 'Coming soon', 'zero-bs-crm' ) . '</div>';
-			echo "<div class='content'>" . esc_html__( 'See and vote for what extensions we release next', 'zero-bs-crm' ) . '</div>';
-
-			echo '<div class="hover"></div>';
-			echo "<a class='hover-link' href='" . esc_url( $zbs->urls['soon'] ) . "' target='_blank'><span class='ui button orange mini'>" . esc_html__( 'View', 'zero-bs-crm' ) . '</span></a>';
 			echo '</div>';
-
 		}
 
-				// coming soon end row
-				echo '</div>'; // end the row (as it will be adding on)
-
-				echo '</div>';
-			echo '</div>';
 			echo '</div>';  // end page wrap.
 
 			##/WLREMOVE
 
+	}
+
+	echo '</div>';
+}
+
+/**
+ * Prints one premium extension or integration on the Extensions page: its icon, and
+ * its name and description with the View and Buy (or Download, or Docs) buttons.
+ *
+ * @since $$next-version$$
+ *
+ * @param object $extension        The extension, from the jetpackcrm.com list.
+ * @param bool   $show_link_button Whether the list is live, so the buttons can link out.
+ * @param bool   $bundle           Whether the site has the Entrepreneur bundle.
+ */
+function jpcrm_html_premium_extension( $extension, $show_link_button, $bundle ) {
+	global $zbs;
+
+	$more_url  = admin_url( 'admin.php?page=' . $zbs->slugs['extensions'] . '&extension_id=' . $extension->id );
+	$extkey    = $extension->extkey;
+	$installed = zeroBSCRM_isExtensionInstalled( $extkey );
+
+	$icon = jpcrm_premium_extension_icon( $extkey );
+	if ( ! empty( $icon['brand'] ) ) {
+		$icon_html = jpcrm_integration_icon_html( $icon['brand'] );
+	} elseif ( ! empty( $icon['icon'] ) ) {
+		$icon_html = jpcrm_extension_icon_html( $icon['icon'], $icon['color'] );
+	} else {
+		$icon_html = '';
+	}
+
+	if ( $icon_html !== '' ) {
+		echo "<div class='two wide column ext-icon'>";
+		echo $icon_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped when built.
+		echo '</div>';
+	} else {
+		// An extension added on jetpackcrm.com after this release keeps its banner.
+		echo "<div class='two wide column'>";
+		echo "<img alt='" . esc_attr( $extension->name ) . "' src='" . esc_url( $extension->image ) . "'/>";
+		echo '</div>';
+	}
+
+	echo "<div class='six wide column ext-desc'>";
+	if ( $installed ) {
+		echo '<div class="ui green right corner label"><i class="check icon"></i></div>';
+	}
+	echo "<div class='title'>" . esc_html( $extension->name ) . '</div>';
+	echo "<div class='content'>" . $extension->short_desc . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+
+	if ( $show_link_button ) {
+		echo '<div class="hover"></div><div class="hover-link">';
+
+		$sales_link = $zbs->urls['home'] . '/product/' . $extension->slug;
+
+		if ( $extkey === 'apiconnector' ) {
+			// API Connector has its own sales page and nothing to view here.
+			echo "<a href='" . esc_url( $zbs->urls['apiconnectorsales'] ) . "' target='_blank'><span class='ui button orange mini'>" . esc_html__( 'View', 'zero-bs-crm' ) . '</span></a>';
+
+			if ( $bundle ) {
+				echo "<a href='" . esc_url( $zbs->urls['account'] ) . "' target='_blank'><span class='ui button green mini'>" . esc_html__( 'Download', 'zero-bs-crm' ) . '</span></a>';
+			} else {
+				echo "<a href='" . esc_url( $sales_link ) . "' target='_blank'><span class='ui button green mini'>" . esc_html__( 'Buy', 'zero-bs-crm' ) . '</span></a>';
+			}
+		} else {
+			echo "<a href='" . esc_url( $more_url ) . "'><span class='ui button orange mini'>" . esc_html__( 'View', 'zero-bs-crm' ) . '</span></a>';
+
+			if ( ! $installed ) {
+				if ( $bundle ) {
+					echo "<a href='" . esc_url( $zbs->urls['account'] ) . "' target='_blank'><span class='ui button green mini'>" . esc_html__( 'Download', 'zero-bs-crm' ) . '</span></a>';
+				} else {
+					echo "<a href='" . esc_url( $sales_link ) . "' target='_blank'><span class='ui button green mini'>" . esc_html__( 'Buy', 'zero-bs-crm' ) . '</span></a>';
+				}
+			} elseif ( ! empty( $extension->docs ) ) {
+				echo "<a href='" . esc_url( $extension->docs ) . "' target='_blank'><span class='ui button blue mini'>" . esc_html__( 'Docs', 'zero-bs-crm' ) . '</span></a>';
+			}
+		}
+		echo '</div>';
 	}
 
 	echo '</div>';
@@ -2308,39 +2331,70 @@ function jpcrm_html_modules() {
 
 	echo '<div class="zbs-extensions-manager">';
 
-			// this block should be in here for rebranded people who want to turn on or off features.
-			echo '<div class="zbs-page-wrap free-block-wrap">';
-			echo '<h3 class="ui top attached header free-box" id="core-modules">' . esc_html__( 'Core Modules', 'zero-bs-crm' ) . '</h3>';
-			echo '<div class="ui segment attached free-ext-area">';
-			echo '<div class="ui internally celled grid">';
-
-				// output the free stuff :-) with turn on / off.
-				$e = 0;
+	// Core modules first, then the ones that connect another product to CRM. Both can be turned on or off,
+	// which rebranded (white label) sites need too.
+	$modules = array(
+		'core'         => array(),
+		'integrations' => array(),
+	);
 	foreach ( zeroBSCRM_extensions_free() as $k => $v ) {
-
+		// csvimporterlite is `false`: it's always on, so it isn't listed.
 		if ( is_array( $v ) ) {
+			$modules[ empty( $v['brand'] ) ? 'core' : 'integrations' ][ $k ] = $v;
+		}
+	}
 
-					$modify_url = wp_nonce_url( 'admin.php?page=' . $zbs->slugs['modules'] . '&zbsinstall=' . $k, 'zbscrminstallnonce' );
+	$sections = array(
+		'core'         => array(
+			'id'    => 'core-modules',
+			'title' => __( 'Core Modules', 'zero-bs-crm' ),
+		),
+		'integrations' => array(
+			'id'    => 'integrations',
+			'title' => __( 'Integrations', 'zero-bs-crm' ),
+		),
+	);
 
-					$installed = zeroBSCRM_isExtensionInstalled( $k );
+	foreach ( $sections as $section_key => $section ) {
+		if ( empty( $modules[ $section_key ] ) ) {
+			continue;
+		}
+
+		echo '<div class="zbs-page-wrap free-block-wrap">';
+		echo '<h2 class="ui top attached header free-box" id="' . esc_attr( $section['id'] ) . '">' . esc_html( $section['title'] ) . '</h2>';
+		echo '<div class="ui segment attached free-ext-area">';
+		echo '<div class="ui internally celled grid">';
+
+		$e = 0;
+		foreach ( $modules[ $section_key ] as $k => $v ) {
+
+			$modify_url = wp_nonce_url( 'admin.php?page=' . $zbs->slugs['modules'] . '&zbsinstall=' . $k, 'zbscrminstallnonce' );
+
+			$installed = zeroBSCRM_isExtensionInstalled( $k );
 
 			if ( $e == 0 ) {
 				echo '<div class="row">';
 			}
 
-					echo "<div class='two wide column free-ext-img'>";
-			// Modules registered before icons were drawn may still pass an image in `i`.
-			$icon_html = ! empty( $v['icon'] ) ? jpcrm_extension_icon_html( $v['icon'] ) : '';
+			echo "<div class='two wide column free-ext-img'>";
+			if ( ! empty( $v['brand'] ) ) {
+				$icon_html = jpcrm_integration_icon_html( $v['brand'] );
+			} elseif ( ! empty( $v['icon'] ) ) {
+				$icon_html = jpcrm_extension_icon_html( $v['icon'], $v['color'] ?? '' );
+			} else {
+				$icon_html = '';
+			}
 			if ( $icon_html !== '' ) {
-				echo $icon_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG markup from CRM's own icon set.
+				echo $icon_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped when built.
 			} elseif ( ! empty( $v['i'] ) ) {
+				// Modules registered before icons were drawn may still pass an image in `i`.
 				echo "<img src='" . esc_url( plugins_url( 'i/' . $v['i'], ZBS_ROOTFILE ) ) . "'/>";
 			}
-					echo '</div>';
+			echo '</div>';
 
-					echo "<div class='six wide column ext-desc'>";
-						$amend       = __( 'Activate', 'zero-bs-crm' );
-						$amend_color = 'green';
+			echo "<div class='six wide column ext-desc'>";
+			$amend       = __( 'Activate', 'zero-bs-crm' );
+			$amend_color = 'green';
 			if ( $installed ) {
 				echo '<div class="ui green right corner label"><i class="check icon"></i></div>';
 				$amend       = __( 'Deactivate', 'zero-bs-crm' );
@@ -2348,28 +2402,32 @@ function jpcrm_html_modules() {
 			} else {
 				echo '<div class="ui red right corner label"><i class="times icon"></i></div>';
 			}
-						echo "<div class='title'>" . esc_html( $v['name'] ) . '</div>';
-						echo "<div class='content'>" . $v['short_desc'] . '</div>';
+			echo "<div class='title'>" . esc_html( $v['name'] ) . '</div>';
+			echo "<div class='content'>" . $v['short_desc'] . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
-						echo '<div class="hover"></div>';
-						echo "<a class='hover-link' href='" . esc_url( $modify_url ) . "'><span class='ui button " . esc_attr( $amend_color ) . " mini'>" . esc_html( $amend ) . '</span></a>';
+			echo '<div class="hover"></div>';
+			echo "<a class='hover-link' href='" . esc_url( $modify_url ) . "'><span class='ui button " . esc_attr( $amend_color ) . " mini'>" . esc_html( $amend ) . '</span></a>';
 
-					echo '</div>';
+			echo '</div>';
 
-					++$e;
+			++$e;
 			if ( $e > 1 ) {
 				echo '</div>';
 				$e = 0;
 			}
-		} // / if is array (csvimporterlite = false so won't show here)
+		}
 
-	} // /foreach
-
+		// Close a row left with one module in it.
+		if ( $e === 1 ) {
 			echo '</div>';
-			echo '</div>';
-		echo '</div>';
+		}
 
 		echo '</div>';
+		echo '</div>';
+		echo '</div>';
+	}
+
+	echo '</div>';
 }
 
 // } post-deletion page

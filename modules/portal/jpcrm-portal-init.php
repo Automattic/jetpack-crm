@@ -28,6 +28,7 @@ function jpcrm_register_free_extension_portal( $exts ) {
 	$exts['portal'] = array(
 		'name'       => __( 'Client Portal', 'zero-bs-crm' ),
 		'icon'       => 'login',
+		'color'      => 'blue',
 		'short_desc' => __( 'Adds a client area to your CRM install so they can see  their documents.', 'zero-bs-crm' ),
 	);
 	return $exts;
