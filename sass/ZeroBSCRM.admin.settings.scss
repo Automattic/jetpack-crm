@@ -223,12 +223,24 @@
 #poststuff.zbs-settings-page {
 
 	h1.ui.header {
-		margin-bottom: var(--wpds-dimension-gap-sm);
+		margin-bottom: var(--wpds-dimension-gap-xs);
 		font-family: var(--wpds-typography-font-family-heading);
 		font-size: var(--wpds-typography-font-size-xl);
 		font-weight: var(--wpds-typography-font-weight-emphasis);
 		line-height: var(--wpds-typography-line-height-lg);
 		color: var(--wpds-color-foreground-content-neutral) !important; // Over Semantic's .ui.blue.header.
+	}
+
+	// The screen's description, under its title. Most screens' <p> carried
+	// 18px 10px of padding, which set it in from the title and the cards and
+	// left a wide gap under the title.
+	> h1.ui.header + p,
+	> h1.ui.header + .ui.button.right.floated + p {
+		margin: 0 0 var(--wpds-dimension-gap-xl);
+		padding: 0;
+		font-size: var(--wpds-typography-font-size-md);
+		line-height: var(--wpds-typography-line-height-sm);
+		color: var(--wpds-color-foreground-content-neutral-weak);
 	}
 
 	table.wtab {
@@ -282,14 +294,29 @@
 	// On phones each setting's name and description sit above its control.
 	@media (max-width: 600px) {
 
-		table.wtab > tbody > tr > td {
+		// Block layout throughout, so the table can't grow wider than the
+		// screen to fit a long select or an unbroken list of statuses.
+		table.wtab,
+		table.wtab > :is(thead, tbody),
+		table.wtab > :is(thead, tbody) > tr,
+		table.wtab > :is(thead, tbody) > tr > :is(td, th) {
 			display: block;
 			width: auto !important;
+		}
+
+		table.wtab > tbody > tr > td {
+			overflow-wrap: anywhere;
 		}
 
 		table.wtab > tbody > tr > td + td {
 			padding-top: 0;
 			border-top: 0;
+		}
+
+		// Long option labels (template names) otherwise widen the card past
+		// the screen.
+		table.wtab :is(select, textarea, input:not([type="checkbox"], [type="radio"])) {
+			max-width: 100%;
 		}
 	}
 
