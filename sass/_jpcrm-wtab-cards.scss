@@ -1,0 +1,122 @@
+// CRM admin screens' title, description and settings tables (table.wtab)
+// drawn as core cards. Used by the CRM Settings screens
+// (ZeroBSCRM.admin.settings.scss) and the System Assistant
+// (_ZeroBSCRM.adminpages.scss).
+
+@mixin title-and-cards {
+
+	h1.ui.header {
+		margin-bottom: var(--wpds-dimension-gap-xs);
+		font-family: var(--wpds-typography-font-family-heading);
+		font-size: var(--wpds-typography-font-size-xl);
+		font-weight: var(--wpds-typography-font-weight-emphasis);
+		line-height: var(--wpds-typography-line-height-lg);
+		color: var(--wpds-color-foreground-content-neutral) !important; // Over Semantic's .ui.blue.header.
+	}
+
+	// The screen's description, under its title. Most screens' <p> carried
+	// 18px 10px of padding, which set it in from the title and the cards and
+	// left a wide gap under the title.
+	> h1.ui.header + p,
+	> h1.ui.header + .ui.button.right.floated + p {
+		margin: 0 0 var(--wpds-dimension-gap-xl);
+		padding: 0;
+		font-size: var(--wpds-typography-font-size-md);
+		line-height: var(--wpds-typography-line-height-sm);
+		color: var(--wpds-color-foreground-content-neutral-weak);
+	}
+
+	table.wtab {
+		width: 100%;
+		margin: 0 0 var(--wpds-dimension-gap-xl);
+		overflow: hidden;
+		border-collapse: separate;
+		border-spacing: 0;
+		background: var(--wpds-color-background-surface-neutral-strong);
+		border: var(--wpds-border-width-xs) solid var(--wpds-color-stroke-surface-neutral);
+		border-radius: var(--wpds-border-radius-lg);
+
+		> thead > tr > th {
+			padding: 14px var(--wpds-dimension-padding-lg);
+			background: var(--wpds-color-background-surface-neutral-strong);
+			border: 0;
+			border-bottom: var(--wpds-border-width-xs) solid var(--wpds-color-stroke-surface-neutral);
+			text-align: left !important;
+			font-family: var(--wpds-typography-font-family-heading);
+			font-size: var(--wpds-typography-font-size-md);
+			font-weight: var(--wpds-typography-font-weight-emphasis);
+			line-height: var(--wpds-typography-line-height-sm);
+			color: var(--wpds-color-foreground-content-neutral);
+		}
+
+		> tbody > tr > td,
+		> tbody > tr > th {
+			padding: var(--wpds-dimension-padding-lg);
+			background: transparent;
+			border: 0;
+			border-top: var(--wpds-border-width-xs) solid var(--wpds-color-stroke-surface-neutral-weak);
+			vertical-align: top;
+		}
+
+		> tbody > tr:first-child > td,
+		> tbody > tr:first-child > th {
+			border-top: 0;
+		}
+
+		// Setting name, with its description under it.
+		.wfieldname {
+			color: var(--wpds-color-foreground-content-neutral-weak);
+
+			label {
+				font-weight: var(--wpds-typography-font-weight-emphasis);
+				color: var(--wpds-color-foreground-content-neutral);
+			}
+		}
+	}
+
+	// On phones each setting's name and description sit above its control.
+	@media (max-width: 600px) {
+
+		// Block layout throughout, so the table can't grow wider than the
+		// screen to fit a long select or an unbroken list of statuses.
+		table.wtab,
+		table.wtab > :is(thead, tbody),
+		table.wtab > :is(thead, tbody) > tr,
+		table.wtab > :is(thead, tbody) > tr > :is(td, th) {
+			display: block;
+			width: auto !important;
+		}
+
+		table.wtab > tbody > tr > td {
+			overflow-wrap: anywhere;
+		}
+
+		table.wtab > tbody > tr > td:has(+ td) {
+			padding-bottom: var(--wpds-dimension-gap-sm);
+		}
+
+		table.wtab > tbody > tr > td + td {
+			padding-top: 0;
+			border-top: 0;
+		}
+
+		// Long option labels (template names) otherwise widen the card past
+		// the screen.
+		table.wtab :is(select, textarea, input:not([type="checkbox"], [type="radio"])) {
+			max-width: 100%;
+		}
+	}
+
+	// The last table on each screen only holds the Save button, so it's a
+	// plain footer rather than a card.
+	table.wtab:not(:has(thead)):has(tr:only-child :is(button, input)[type="submit"]) {
+		background: transparent;
+		border: 0;
+		border-radius: 0;
+
+		> tbody > tr > td {
+			padding: 0;
+			text-align: left;
+		}
+	}
+}
