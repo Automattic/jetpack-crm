@@ -1,0 +1,33 @@
+/*!
+ * Jetpack CRM
+ * https://jetpackcrm.com
+ */
+
+// Semantic UI boxes across CRM admin screens (Data Tools, Team, Support,
+// the segment editor, ...) drawn as core cards: a 1px outline and 8px
+// corners instead of the old shadow. Same specificity as Semantic's own
+// rules and loaded after them; screens with their own card styles (metaboxes,
+// settings, System Assistant) are more specific and keep them. Segments
+// inside a .ui.segments group, tabs, attached and borderless variants keep
+// Semantic's look.
+.ui:is(.segment, .segments, .card):not(:where(.basic, .vertical, .attached, .tab, .inverted, .circular, .segments > .segment)) {
+	border: var(--wpds-border-width-xs) solid var(--wpds-color-stroke-surface-neutral);
+	border-radius: var(--wpds-border-radius-lg);
+	box-shadow: none;
+}
+
+// A box that is the whole screen (Data Tools, Team, Notifications, the CSV
+// importer, adding a file) lines up with the page title's 24px gutter
+// (.jpcrm-learn-menu-container) on both sides, rather than the admin menu.
+// !important over Semantic's .ui.container auto margins (Support) and the
+// add-file screen's own margins.
+#wpbody-content > .ui.segment,
+#wpbody-content > #sgpBody > .ui.segment {
+	margin: var(--wpds-dimension-gap-lg) 24px !important;
+}
+
+// Data Tools' Delete CRM Data and Factory Reset boxes, side by side in a
+// grid below the main box: the same gutter.
+#wpbody-content > .ui.grid:has(.mass-delete) {
+	margin: 0 10px;
+}

@@ -1,7 +1,67 @@
-// CRM admin screens' title, description and settings tables (table.wtab)
-// drawn as core cards. Used by the CRM Settings screens
-// (ZeroBSCRM.admin.settings.scss) and the System Assistant
-// (_ZeroBSCRM.adminpages.scss).
+// Core card styles shared by the CRM admin screens: the card surface, a
+// card header's text, core TabPanel-style tabs, and the title, description
+// and settings tables (table.wtab) drawn as cards. Used by the metaboxes,
+// the CRM Settings screens, the contact and company view panels and the
+// System Assistant.
+
+// Outlined, rounded surface, like @wordpress/components' Card.
+@mixin card-surface {
+	background: var(--wpds-color-background-surface-neutral-strong);
+	border: var(--wpds-border-width-xs) solid var(--wpds-color-stroke-surface-neutral);
+	border-radius: var(--wpds-border-radius-lg);
+}
+
+// A card header's title text.
+@mixin card-header-text {
+	font-family: var(--wpds-typography-font-family-heading);
+	font-size: var(--wpds-typography-font-size-md);
+	font-weight: var(--wpds-typography-font-weight-emphasis);
+	line-height: var(--wpds-typography-line-height-sm);
+	color: var(--wpds-color-foreground-content-neutral);
+}
+
+// The .item links of a Semantic tabular menu laid out like core's TabPanel:
+// plain labels, $pad either side, with an underline on the current one.
+@mixin underline-tabs($pad) {
+
+	.item {
+		position: relative;
+		align-self: stretch;
+		margin: 0;
+		padding: 0 $pad;
+		background: transparent;
+		border: 0;
+		border-radius: 0;
+		box-shadow: none;
+		font-size: var(--wpds-typography-font-size-md);
+		font-weight: var(--wpds-typography-font-weight-default);
+		color: var(--wpds-color-foreground-content-neutral);
+		white-space: nowrap;
+
+		&::after {
+			content: "";
+			position: absolute;
+			right: $pad;
+			bottom: 0;
+			left: $pad;
+			height: var(--wpds-border-width-sm);
+			background: transparent;
+		}
+
+		&.active {
+			font-weight: var(--wpds-typography-font-weight-emphasis);
+
+			&::after {
+				background: var(--wp-admin-theme-color, #3858e9);
+			}
+		}
+
+		&:focus-visible {
+			outline: var(--wpds-border-width-focus) solid var(--wp-admin-theme-color, #3858e9);
+			outline-offset: -2px;
+		}
+	}
+}
 
 @mixin title-and-cards {
 
@@ -32,9 +92,7 @@
 		overflow: hidden;
 		border-collapse: separate;
 		border-spacing: 0;
-		background: var(--wpds-color-background-surface-neutral-strong);
-		border: var(--wpds-border-width-xs) solid var(--wpds-color-stroke-surface-neutral);
-		border-radius: var(--wpds-border-radius-lg);
+		@include card-surface;
 
 		> thead > tr > th {
 			padding: 14px var(--wpds-dimension-padding-lg);
@@ -42,11 +100,7 @@
 			border: 0;
 			border-bottom: var(--wpds-border-width-xs) solid var(--wpds-color-stroke-surface-neutral);
 			text-align: left !important;
-			font-family: var(--wpds-typography-font-family-heading);
-			font-size: var(--wpds-typography-font-size-md);
-			font-weight: var(--wpds-typography-font-weight-emphasis);
-			line-height: var(--wpds-typography-line-height-sm);
-			color: var(--wpds-color-foreground-content-neutral);
+			@include card-header-text;
 		}
 
 		> tbody > tr > td,

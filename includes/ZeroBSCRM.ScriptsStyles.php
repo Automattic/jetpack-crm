@@ -534,8 +534,10 @@ function zeroBSCRM_admin_styles_singleview() {
 }
 
 function jpcrm_admin_scripts_systems_page() {
+	global $zbs;
 
 	wp_enqueue_script( 'jpcrmadminsystem' );
+	wp_enqueue_style( 'jpcrm-admin-system', ZEROBSCRM_URL . 'css/jpcrm-admin-system' . wp_scripts_get_suffix() . '.css', array( 'jpcrm-wpds-tokens' ), $zbs::VERSION );
 }
 
 function zeroBSCRM_admin_styles_homedash() {

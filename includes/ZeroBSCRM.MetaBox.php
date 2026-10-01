@@ -816,7 +816,8 @@ function zeroBSCRM_do_meta_box_html( $box, $page, $hidden, $object, $minimised, 
 		$classes .= in_array( $box['id'], $hidden ) ? ' hide-if-js zbs-hidden' : '';
 
 		// minimised class
-		$classes .= in_array( $box['id'], $minimised ) ? ' zbs-minimised' : '';
+		$is_minimised = in_array( $box['id'], $minimised ); // phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict -- As before.
+		$classes     .= $is_minimised ? ' zbs-minimised' : '';
 
 		// static class
 		$classes .= $canMove ? '' : ' zbs-static';
@@ -834,17 +835,12 @@ function zeroBSCRM_do_meta_box_html( $box, $page, $hidden, $object, $minimised, 
 		$canMinimise = false;
 		$headless    = true;
 		$htmlClasses = '';
-	}
-
-	// Headed and headless boxes alike are drawn as a core-style card: the
-	// outer div is the card, the head its header and the body its body.
-	// Tab panes keep Semantic's tab styles; no screen groups metaboxes into
-	// tabs at present.
-	if ( ! $isTabPane ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase -- Existing variable.
+	} else {
+		// Every other box, headed or headless, is drawn as a core-style card:
+		// the outer div is the card, the head its header and the body its
+		// body. Tab panes keep Semantic's tab styles; no screen groups
+		// metaboxes into tabs at present.
 		$classes .= ' jpcrm-card';
-	}
-	if ( $headless ) {
-		$classes .= ' jpcrm-card--headless';
 	}
 
 		echo '<div class="' . esc_attr( $classes ) . '" id="' . esc_attr( $box['id'] ) . '" ' . esc_attr( $extraAttrs . $dataAttrStr ) . '>'; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase -- Existing variable.
@@ -857,7 +853,6 @@ function zeroBSCRM_do_meta_box_html( $box, $page, $hidden, $object, $minimised, 
 		// Show/hide toggle, as on core's postboxes. The chevron points up while
 		// the box is open; CSS turns it over when the box is minimised.
 		if ( $canMinimise ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase -- Existing variable.
-			$is_minimised = in_array( $box['id'], $minimised, true );
 			echo '<button type="button" class="zbs-metabox-minimise" aria-expanded="' . ( $is_minimised ? 'false' : 'true' ) . '" aria-controls="' . esc_attr( $box['id'] ) . '-box">';
 			/* translators: %s: Metabox title. */
 			echo '<span class="screen-reader-text">' . esc_html( sprintf( __( 'Toggle panel: %s', 'zero-bs-crm' ), wp_strip_all_tags( $box['title'] ) ) ) . '</span>';

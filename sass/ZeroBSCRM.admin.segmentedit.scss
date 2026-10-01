@@ -27,7 +27,7 @@
 
 	#zbs-segment-edit-var-title {
 
-		min-width: 400px;
+		min-width: min(400px, 100%); // Fits a phone.
 
 	}
 

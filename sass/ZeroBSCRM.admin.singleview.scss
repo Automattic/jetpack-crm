@@ -10,6 +10,7 @@
 
 // Import generic edit page styles (old legacy from taxibooker! :o to rewrite)
 @use "ZeroBSCRM.timelines";
+@use "jpcrm-card-mixins" as card;
 
 // hide these, they look bad/inaccessible on this page:
 #wpwrap .update-nag {
@@ -273,22 +274,16 @@ i.zbs-hide-longdesc {
 
 // The contact and company view panels (header, vitals tabs, documents tabs)
 // are drawn as core cards, to match the metaboxes beside them. A tab group's
-// menu is the card's header, laid out like core's TabPanel: plain labels
-// with an underline on the current tab. Overrides jetpackBox() in
-// _JetpackCRM.admin.overrides.scss, hence the !importants.
+// menu is the card's header, laid out like core's TabPanel. jetpackBox()
+// (_JetpackCRM.admin.overrides.scss) skips these panels.
 #zbs-customer-panel,
 #zbs-company-panel {
 
 	> .ui.segment.grid,
 	.ui.top.attached.tabular.menu,
 	.ui.bottom.attached.tab.segment {
-		background: var(--wpds-color-background-surface-neutral-strong);
-		border: var(--wpds-border-width-xs) solid var(--wpds-color-stroke-surface-neutral) !important;
-		box-shadow: none !important;
-	}
-
-	> .ui.segment.grid {
-		border-radius: var(--wpds-border-radius-lg) !important;
+		@include card.card-surface;
+		box-shadow: none;
 	}
 
 	.ui.top.attached.tabular.menu {
@@ -296,62 +291,26 @@ i.zbs-hide-longdesc {
 		min-height: 48px;
 		margin: 0;
 		padding: 0 var(--wpds-dimension-padding-sm);
-		border-radius: var(--wpds-border-radius-lg) var(--wpds-border-radius-lg) 0 0 !important;
+		border-radius: var(--wpds-border-radius-lg) var(--wpds-border-radius-lg) 0 0;
 		overflow-x: auto;
 		overflow-y: hidden;
 
-		.item {
-			position: relative;
-			align-self: stretch;
-			margin: 0;
-			padding: 0 var(--wpds-dimension-padding-sm);
-			border: 0 !important;
-			border-radius: 0 !important;
-			background: transparent;
-			box-shadow: none !important;
-			font-size: var(--wpds-typography-font-size-md);
-			font-weight: var(--wpds-typography-font-weight-default);
-			color: var(--wpds-color-foreground-content-neutral);
-			white-space: nowrap;
-
-			&::after {
-				content: "";
-				position: absolute;
-				right: var(--wpds-dimension-padding-sm);
-				bottom: 0;
-				left: var(--wpds-dimension-padding-sm);
-				height: var(--wpds-border-width-sm);
-				background: transparent;
-			}
-
-			&.active {
-				font-weight: var(--wpds-typography-font-weight-emphasis);
-
-				&::after {
-					background: var(--wp-admin-theme-color, #3858e9);
-				}
-			}
-
-			&:focus-visible {
-				outline: var(--wpds-border-width-focus) solid var(--wp-admin-theme-color, #3858e9);
-				outline-offset: -2px;
-			}
-		}
+		@include card.underline-tabs(var(--wpds-dimension-padding-sm));
 	}
 
 	.ui.bottom.attached.tab.segment {
 		width: 100%;
 		max-width: 100%;
 		margin: 0 0 var(--wpds-dimension-gap-lg);
-		border-top: 0 !important;
-		border-radius: 0 0 var(--wpds-border-radius-lg) var(--wpds-border-radius-lg) !important;
+		border-top: 0;
+		border-radius: 0 0 var(--wpds-border-radius-lg) var(--wpds-border-radius-lg);
 	}
 
 	// A tab panel nested in another (Documents > Files) is part of that card.
 	.ui.bottom.attached.tab.segment .ui.bottom.attached.tab.segment {
 		margin: 0;
 		padding: 0;
-		border: 0 !important;
-		border-radius: 0 !important;
+		border: 0;
+		border-radius: 0;
 	}
 }
