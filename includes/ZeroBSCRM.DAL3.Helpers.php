@@ -5437,6 +5437,11 @@ function zeroBS_addUpdateEvent( $eventID = -1, $eventFields = array(), $reminder
 		$args['data']['companies'] = array( $eventFields['company'] );
 	}
 
+	// tags (array of tag names or IDs; the DAL creates missing ones).
+	if ( isset( $eventFields['tags'] ) && is_array( $eventFields['tags'] ) ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+		$args['data']['tags'] = $eventFields['tags']; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+	}
+
 	$args['data']['reminders'] = array();
 
 	// reminders into new DAL2 eventreminder format:

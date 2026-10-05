@@ -33,6 +33,15 @@ if ( is_array( $potential_task ) ) {
 		$task_fields['customer'] = (int) $potential_task['customer'];
 	}
 
+	$task_fields['company'] = -1;
+	if ( isset( $potential_task['company'] ) ) {
+		$task_fields['company'] = (int) $potential_task['company'];
+	}
+
+	if ( isset( $potential_task['tags'] ) && is_array( $potential_task['tags'] ) ) {
+		$task_fields['tags'] = array_map( 'sanitize_text_field', array_filter( $potential_task['tags'], 'is_scalar' ) );
+	}
+
 	$task_fields['notes'] = '';
 	if ( isset( $potential_task['notes'] ) ) {
 		$task_fields['notes'] = sanitize_text_field( $potential_task['notes'] );
@@ -79,6 +88,8 @@ if ( is_array( $potential_task ) ) {
 	$task_fields = array(
 		'title' => task title
 		'customer' => ID of the customer the task is for (if any)
+		'company' => ID of the company the task is for (if any)
+		'tags' => array of tag names (or tag IDs); missing tags are created
 		'notes' => task description
 		'to' => to date, format date('m/d/Y H') . ":00:00";
 		'from' => from date, format date('m/d/Y H') . ":00:00";
