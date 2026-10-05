@@ -267,10 +267,10 @@ class Bulk_Action_Ownership_Test extends WP_Ajax_UnitTestCase {
 	public function test_mixed_bulk_selection_only_changes_own_contacts() {
 		global $zbs;
 
-		$editor_id  = $this->create_manager();
-		$owner_id   = $this->create_manager();
-		$own_id     = $this->create_contact_owned_by( $editor_id );
-		$others_id  = $this->create_contact_owned_by( $owner_id );
+		$editor_id = $this->create_manager();
+		$owner_id  = $this->create_manager();
+		$own_id    = $this->create_contact_owned_by( $editor_id );
+		$others_id = $this->create_contact_owned_by( $owner_id );
 
 		$this->set_ownership_settings( 1, 0 );
 
