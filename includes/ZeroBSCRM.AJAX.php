@@ -3812,6 +3812,37 @@ function zeroBSCRM_AJAX_enactListViewBulkAction() {
 			switch ( $objtype ) {
 
 				case 'customer':
+					// Bulk writes follow the same ownership rules as the edit page and
+					// the inline editor (see zeroBSCRM_AJAX_listViewInlineEdit_save()):
+					// without the permission to change owners, a user may only act on
+					// their own or unowned contacts, so filter the IDs to those.
+					$can_edit_all_contacts = current_user_can( 'admin_zerobs_customers' ) && $zbs->settings->get( 'perusercustomers' ) == 0; // phpcs:ignore Universal.Operators.StrictComparisons.LooseEqual,WordPress.WP.Capabilities.Unknown  -- capability was defined in ZeroBSCRM.Permissions.php
+					$can_give_ownership    = $zbs->settings->get( 'usercangiveownership' ) == 1; // phpcs:ignore Universal.Operators.StrictComparisons.LooseEqual -- the setting may arrive as a string, as elsewhere in the plugin.
+					$can_change_owner      = ( $can_give_ownership || current_user_can( 'manage_options' ) || $can_edit_all_contacts );
+
+					if ( ! $can_change_owner ) {
+
+						$current_user_id = get_current_user_id();
+						$editable_ids    = array();
+
+						foreach ( $legitIDs as $id ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+
+							$owner = (int) $zbs->DAL->contacts->getContactOwner( $id ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+
+							if ( ( $owner > 0 && $owner !== $current_user_id ) || $owner === -1 ) {
+								continue;
+							}
+
+							$editable_ids[] = $id;
+						}
+
+						$legitIDs = $editable_ids; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+
+						if ( count( $legitIDs ) === 0 ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+							wp_send_json_error( array( 'no-action-or-rights' => 1 ), 500, JSON_UNESCAPED_SLASHES );
+						}
+					}
+
 						// Actions:
 					switch ( $actionstr ) {
 
@@ -5170,6 +5201,24 @@ function zeroBSCRM_AJAX_listViewInlineEdit_save() {
 			// } check deets
 			if ( $id > 0 && ! empty( $field ) ) {
 
+				// This endpoint writes the same fields as the edit page, so it enforces
+				// the same ownership rules (see ZeroBSCRM.Edit.php and
+				// ZeroBSCRM.MetaBoxes3.Contacts.php): a contact owned by another user
+				// (or by nobody) may only be changed by a user who could change its
+				// owner, and reassignment itself always needs that permission.
+				$can_edit_all_contacts = current_user_can( 'admin_zerobs_customers' ) && $zbs->settings->get( 'perusercustomers' ) == 0; // phpcs:ignore Universal.Operators.StrictComparisons.LooseEqual,WordPress.WP.Capabilities.Unknown  -- capability was defined in ZeroBSCRM.Permissions.php
+				$can_give_ownership    = $zbs->settings->get( 'usercangiveownership' ) == 1; // phpcs:ignore Universal.Operators.StrictComparisons.LooseEqual -- the setting may arrive as a string, as elsewhere in the plugin.
+				$can_change_owner      = ( $can_give_ownership || current_user_can( 'manage_options' ) || $can_edit_all_contacts );
+
+				if ( ! $can_change_owner ) {
+
+					$owner = (int) $zbs->DAL->contacts->getContactOwner( $id ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+
+					if ( ( $owner > 0 && $owner !== get_current_user_id() ) || $owner === -1 ) {
+						wp_send_json_error( array( 'no-action-or-rights' => 1 ), 500, JSON_UNESCAPED_SLASHES );
+					}
+				}
+
 				$success = false;
 				switch ( $field ) {
 
@@ -5177,7 +5226,10 @@ function zeroBSCRM_AJAX_listViewInlineEdit_save() {
 						$success = $zbs->DAL->contacts->setContactStatus( $id, $v );
 						break;
 					case 'assigned':
-						$success = $zbs->DAL->contacts->setContactOwner( $id, $v );
+						if ( ! $can_change_owner ) {
+							wp_send_json_error( array( 'no-action-or-rights' => 1 ), 500, JSON_UNESCAPED_SLASHES );
+						}
+						$success = $zbs->DAL->contacts->setContactOwner( $id, (int) $v ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 						break;
 
 				}
