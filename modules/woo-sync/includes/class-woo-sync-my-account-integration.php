@@ -360,27 +360,6 @@ class Woo_Sync_My_Account_Integration {
 
 								}
 
-								if ( $field_key == 'mobtel' ) {
-
-									// Twilio hook-in
-									do_action( 'zbs_twilio_nonce' );
-
-									// Twilio filtering for css classes
-									$sms_class = 'send-sms-none';
-									$sms_class = apply_filters( 'zbs_twilio_sms', $sms_class );
-
-									$contact_mobile = '';
-									if ( is_array( $crm_contact ) && isset( $crm_contact[ $field_key ] ) && isset( $contact['id'] ) ) {
-
-										$contact_mobile = zeroBS_customerMobile( $contact['id'], $crm_contact );
-
-									}
-
-									if ( ! empty( $contact_mobile ) ) {
-										echo '<a class="' . esc_attr( $sms_class ) . ' button" data-smsnum="' . esc_attr( $contact_mobile ) . '"><i class="mobile alternate icon"></i> ' . esc_html__( 'SMS', 'zero-bs-crm' ) . ': ' . esc_html( $contact_mobile ) . '</a>';
-									}
-								}
-
 								?>
 								<?php
 
