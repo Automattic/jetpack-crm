@@ -126,8 +126,8 @@ class zeroBSCRM_Plugin_Updater {
 				)
 			); // , 'license'=>$lk
 
-			// if got response
-			if ( ! is_wp_error( $response ) ) {
+			// if got response (api_request() returns false or non-array JSON on failure, so is_wp_error() alone is not enough)
+			if ( ! is_wp_error( $response ) && is_array( $response ) ) {
 
 				// check presence of license_key_valid
 				// ... this catches the faulty/empty/devmode ones
@@ -461,8 +461,8 @@ class zeroBSCRM_Plugin_Updater {
 					)
 				);
 
-				// is it a WP error?
-				if ( ! is_wp_error( $res ) ) {
+				// is it a WP error? (api_request() returns false or non-array JSON on failure, so is_wp_error() alone is not enough)
+				if ( ! is_wp_error( $res ) && is_array( $res ) ) {
 
 					// ===========================
 					// Local Mods to dl obj - these are needed in get_info (here) and all_info
