@@ -126,7 +126,7 @@ class zeroBSCRM_Plugin_Updater {
 				)
 			); // , 'license'=>$lk
 
-			// if got response (api_request() returns false or non-array JSON on failure, so is_wp_error() alone is not enough)
+			// if got response (api_request() returns false or non-array JSON on failure, so is_wp_error() alone is not enough).
 			if ( ! is_wp_error( $response ) && is_array( $response ) ) {
 
 				// check presence of license_key_valid
@@ -461,7 +461,7 @@ class zeroBSCRM_Plugin_Updater {
 					)
 				);
 
-				// is it a WP error? (api_request() returns false or non-array JSON on failure, so is_wp_error() alone is not enough)
+				// is it a WP error? (api_request() returns false or non-array JSON on failure, so is_wp_error() alone is not enough).
 				if ( ! is_wp_error( $res ) && is_array( $res ) ) {
 
 					// ===========================
