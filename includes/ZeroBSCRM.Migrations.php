@@ -38,6 +38,7 @@ global $zeroBSCRM_migrations; $zeroBSCRM_migrations = array(
 	'gh3465_increase_city_field_size',  // from gh issue 3465, increases the city field size to 200
 	'tax_rate_precision_fix', // increase tax rate precision from 2 to 10 decimal places
 	'ensure_notifications_table', // Ensure notifications table exists
+	'restore_missing_columns', // Restore columns (5.0 zbss_origin, 5.4 zbsl_pinned) on sites where the original ALTER failed but was marked complete.
 );
 
 global $zeroBSCRM_migrations_requirements; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
@@ -554,12 +555,7 @@ function zeroBSCRM_migration_50() {
 	global $zbs, $wpdb, $ZBSCRM_t;
 
 	// external source tweak
-	if ( ! zeroBSCRM_migration_tableHasColumn( $ZBSCRM_t['externalsources'], 'zbss_origin' ) ) {
-
-		$sql = 'ALTER TABLE ' . $ZBSCRM_t['externalsources'] . ' ADD COLUMN `zbss_origin` VARCHAR(400) NULL DEFAULT NULL AFTER `zbss_uid`, ADD INDEX (zbss_origin);';
-		$wpdb->query( $sql );
-
-	}
+	$origin_column_exists = jpcrm_migration_ensure_externalsources_origin_column();
 
 	// add transaction status
 
@@ -576,8 +572,10 @@ function zeroBSCRM_migration_50() {
 	$customisedFields['transactions']['status'][1] = $transaction_statuses_str;
 	$zbs->settings->update( 'customisedfields', $customisedFields );
 
-	// mark complete
-	zeroBSCRM_migrations_markComplete( '50', array( 'updated' => 1 ) );
+	// mark complete only once the column verifiably exists, else retry on next load.
+	if ( $origin_column_exists ) {
+		zeroBSCRM_migrations_markComplete( '50', array( 'updated' => 1 ) );
+	}
 }
 
 	/*
@@ -708,10 +706,7 @@ function zeroBSCRM_migration_54() {
 	global $zbs, $wpdb, $ZBSCRM_t;
 
 	// add zbsl_pinned to log table if not existing
-	if ( ! zeroBSCRM_migration_tableHasColumn( $ZBSCRM_t['logs'], 'zbsl_pinned' ) ) {
-		$sql = 'ALTER TABLE ' . $ZBSCRM_t['logs'] . ' ADD `zbsl_pinned` int(1) NULL AFTER `zbsl_longdesc`;';
-		$wpdb->query( $sql );
-	}
+	$pinned_column_exists = jpcrm_migration_ensure_logs_pinned_column();
 
 	// get outdated log meta count
 	$outdated_log_meta_count = (int) $wpdb->get_var( 'SELECT COUNT(ID) FROM ' . $ZBSCRM_t['meta'] . ' WHERE zbsm_objtype = 8 AND zbsm_key = "logmeta"' );
@@ -746,7 +741,7 @@ function zeroBSCRM_migration_54() {
 
 	}
 
-	if ( $outdated_log_meta_count == 0 ) {
+	if ( $outdated_log_meta_count === 0 && $pinned_column_exists ) {
 
 		// mark complete
 		zeroBSCRM_migrations_markComplete( '54', array( 'updated' => 1 ) );
@@ -1348,6 +1343,22 @@ function zeroBSCRM_migration_ensure_notifications_table() {
 	return true;
 }
 
+/**
+ * Restore schema columns that older migrations (5.0 `zbss_origin`, 5.4 `zbsl_pinned`)
+ * may have failed to add while still marking themselves complete, e.g. when the
+ * original ALTER hit the index key length limit on older MySQL (see JETCRM-1460).
+ */
+function zeroBSCRM_migration_restore_missing_columns() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid -- the migration runner requires the zeroBSCRM_migration_ prefix.
+
+	$origin_column_exists = jpcrm_migration_ensure_externalsources_origin_column();
+	$pinned_column_exists = jpcrm_migration_ensure_logs_pinned_column();
+
+	// mark complete only once both columns verifiably exist, else retry on next load.
+	if ( $origin_column_exists && $pinned_column_exists ) {
+		zeroBSCRM_migrations_markComplete( 'restore_missing_columns', array( 'updated' => 1 ) );
+	}
+}
+
 /*
 ======================================================
 	/ MIGRATIONS
@@ -1380,6 +1391,56 @@ function zeroBSCRM_migration_addErrToStack( $err = array(), $errKey = '' ) {
 
 	return false;
 }
+
+// phpcs:disable WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase -- $ZBSCRM_t is a legacy global.
+
+/**
+ * Ensures the external sources table has the `zbss_origin` column and index (added in v5.0).
+ *
+ * The column and index are separate statements, and the index is a 191-char prefix:
+ * a full-width VARCHAR(400) index exceeds the 767-byte key limit of older MySQL
+ * configs, which fails the whole ALTER and leaves the column missing too.
+ *
+ * @return bool True if the column exists.
+ */
+function jpcrm_migration_ensure_externalsources_origin_column() {
+
+	global $wpdb, $ZBSCRM_t;
+
+	if ( ! zeroBSCRM_migration_tableHasColumn( $ZBSCRM_t['externalsources'], 'zbss_origin' ) ) {
+
+		$wpdb->query( 'ALTER TABLE ' . $ZBSCRM_t['externalsources'] . ' ADD COLUMN `zbss_origin` VARCHAR(400) NULL DEFAULT NULL AFTER `zbss_uid`;' ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQL.NotPrepared
+
+		if ( ! zeroBSCRM_migration_tableHasColumn( $ZBSCRM_t['externalsources'], 'zbss_origin' ) ) {
+			return false;
+		}
+	}
+
+	// the index is an optimisation: its failure never blocks completion.
+	if ( ! jpcrm_migration_table_has_index( $ZBSCRM_t['externalsources'], 'zbss_origin' ) ) {
+		$wpdb->query( 'ALTER TABLE ' . $ZBSCRM_t['externalsources'] . ' ADD INDEX `zbss_origin` (`zbss_origin`(191));' ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQL.NotPrepared
+	}
+
+	return true;
+}
+
+/**
+ * Ensures the logs table has the `zbsl_pinned` column (added in v5.4).
+ *
+ * @return bool True if the column exists.
+ */
+function jpcrm_migration_ensure_logs_pinned_column() {
+
+	global $wpdb, $ZBSCRM_t;
+
+	if ( ! zeroBSCRM_migration_tableHasColumn( $ZBSCRM_t['logs'], 'zbsl_pinned' ) ) {
+		$wpdb->query( 'ALTER TABLE ' . $ZBSCRM_t['logs'] . ' ADD `zbsl_pinned` int(1) NULL AFTER `zbsl_longdesc`;' ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQL.NotPrepared
+	}
+
+	return zeroBSCRM_migration_tableHasColumn( $ZBSCRM_t['logs'], 'zbsl_pinned' );
+}
+
+// phpcs:enable WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 
 	// checks if a column already exists
 	// note $tableName is used unchecked
