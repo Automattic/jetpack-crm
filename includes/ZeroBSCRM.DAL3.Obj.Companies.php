@@ -2539,78 +2539,30 @@ class zbsDAL_companies extends zbsDAL_ObjectLayer {
 				// A limited field update moves any custom field keys it is given into $data
 				// (see LOAD ARGS), and fieldoverride converts an external-source update to
 				// one, so saving these only on the full update path silently dropped them.
-				// phpcs:disable WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase -- legacy names, moved unchanged.
-				if ( is_array( $customFields ) ) {
-					foreach ( $customFields as $cK => $cF ) {
-						if ( isset( $data[ $cK ] ) ) {
-
-							// Under do_not_update_blanks (or fieldoverride for an external source), a
-							// blank means 'not supplied', not 'clear it', as for the base columns above.
-							if ( ! ( $do_not_update_blanks && empty( $data[ $cK ] ) ) ) {
-
-								$this->DAL()->addUpdateCustomField(
-									array(
-										'data' => array(
-											'objtype' => ZBS_TYPE_COMPANY,
-											'objid'   => $id,
-											'objkey'  => $cK,
-											'objval'  => $data[ $cK ],
-										),
-									)
-								);
-							}
-						}
+				// Under do_not_update_blanks a blank means 'not supplied', not 'clear it',
+				// as for the base columns above.
+				// phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase -- legacy name.
+				$custom_field_keys = is_array( $customFields ) ? array_keys( $customFields ) : array();
+				// phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase -- legacy name.
+				$addr_field_keys = is_array( $addrCustomFields ) ? array_keys( $addrCustomFields ) : array();
+				foreach ( $addr_field_keys as $addr_field_key ) {
+					$custom_field_keys[] = 'addr_' . $addr_field_key;
+					$custom_field_keys[] = 'secaddr_' . $addr_field_key;
+				}
+				foreach ( $custom_field_keys as $custom_field_key ) {
+					if ( isset( $data[ $custom_field_key ] ) && ! ( $do_not_update_blanks && empty( $data[ $custom_field_key ] ) ) ) {
+						$this->DAL()->addUpdateCustomField(
+							array(
+								'data' => array(
+									'objtype' => ZBS_TYPE_COMPANY,
+									'objid'   => $id,
+									'objkey'  => $custom_field_key,
+									'objval'  => $data[ $custom_field_key ],
+								),
+							)
+						);
 					}
 				}
-
-				// Also catch any address custom fields.
-				if ( is_array( $addrCustomFields ) && count( $addrCustomFields ) > 0 ) {
-					foreach ( $addrCustomFields as $cK => $cF ) {
-
-						$cKey  = 'addr_' . $cK;
-						$cKey2 = 'secaddr_' . $cK;
-
-						if ( isset( $data[ $cKey ] ) ) {
-
-							// Under do_not_update_blanks (or fieldoverride for an external source), a
-							// blank means 'not supplied', not 'clear it', as for the base columns above.
-							if ( ! ( $do_not_update_blanks && empty( $data[ $cKey ] ) ) ) {
-
-								$this->DAL()->addUpdateCustomField(
-									array(
-										'data' => array(
-											'objtype' => ZBS_TYPE_COMPANY,
-											'objid'   => $id,
-											'objkey'  => $cKey,
-											'objval'  => $data[ $cKey ],
-										),
-									)
-								);
-							}
-						}
-
-						if ( isset( $data[ $cKey2 ] ) ) {
-
-							// Under do_not_update_blanks (or fieldoverride for an external source), a
-							// blank means 'not supplied', not 'clear it', as for the base columns above.
-							if ( ! ( $do_not_update_blanks && empty( $data[ $cKey2 ] ) ) ) {
-
-								$this->DAL()->addUpdateCustomField(
-									array(
-										'data' => array(
-											'objtype' => ZBS_TYPE_COMPANY,
-											'objid'   => $id,
-											'objkey'  => $cKey2,
-											'objval'  => $data[ $cKey2 ],
-										),
-									)
-								);
-							}
-						}
-					}
-				}
-				// phpcs:enable WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
-				// / Custom Fields
 
 						#} Any extra meta keyval pairs?
 						// BRUTALLY updates (no checking)

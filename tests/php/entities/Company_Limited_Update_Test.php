@@ -45,7 +45,7 @@ class Company_Limited_Update_Test extends JPCRM_Base_Integration_TestCase {
 	}
 
 	/**
-	 * Restore settings and clear the CRM tables.
+	 * Restore the settings the CRM table reset leaves alone.
 	 *
 	 * @return void
 	 */
@@ -58,8 +58,6 @@ class Company_Limited_Update_Test extends JPCRM_Base_Integration_TestCase {
 				'fields'    => array(),
 			)
 		);
-
-		zeroBSCRM_database_reset( false );
 
 		parent::tear_down();
 	}
@@ -113,13 +111,11 @@ class Company_Limited_Update_Test extends JPCRM_Base_Integration_TestCase {
 	 */
 	#[TestDox( 'An external-source update under fieldoverride records the source.' )]
 	public function test_fieldoverride_update_records_external_source() {
-		global $zbs;
-
 		$company_id = $this->create_company_with_custom_fields();
 
 		$this->update_from_external_source( $company_id, array( 'website' => 'https://new.example.test' ) );
 
-		$company = $zbs->DAL->companies->getCompany( $company_id, array( 'withExternalSources' => true ) ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+		$company = $this->get_company( $company_id, array( 'withExternalSources' => true ) );
 		$this->assertContains( 'api', wp_list_pluck( $company['external_sources'], 'source' ) );
 	}
 
@@ -214,12 +210,13 @@ class Company_Limited_Update_Test extends JPCRM_Base_Integration_TestCase {
 	/**
 	 * Get a company with its custom fields.
 	 *
-	 * @param int $company_id The company ID.
+	 * @param int   $company_id The company ID.
+	 * @param array $args       Extra getCompany() arguments.
 	 * @return array The company.
 	 */
-	private function get_company( int $company_id ): array {
+	private function get_company( int $company_id, array $args = array() ): array {
 		global $zbs;
 
-		return $zbs->DAL->companies->getCompany( $company_id, array( 'withCustomFields' => true ) ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+		return $zbs->DAL->companies->getCompany( $company_id, array_merge( array( 'withCustomFields' => true ), $args ) ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 	}
 }
