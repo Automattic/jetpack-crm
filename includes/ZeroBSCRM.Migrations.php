@@ -125,11 +125,6 @@ function zeroBSCRM_migrations_run( $settingsArr = false, $run_at = 'init' ) {
 
 	global $zeroBSCRM_migrations, $zeroBSCRM_migrations_requirements;
 
-	// Like core's database upgrades, never run schema changes on front-end traffic.
-	if ( ! jpcrm_migrations_can_run_in_this_request() ) {
-		return false;
-	}
-
 	// Catch a retry of a failed migration (linked from the admin notice and system status).
 	if ( jpcrm_perms_manage_options() && isset( $_GET['jpcrm_retry_migration'] ) ) {
 		$retry_key = sanitize_key( wp_unslash( $_GET['jpcrm_retry_migration'] ) );
@@ -172,12 +167,6 @@ function zeroBSCRM_migrations_run( $settingsArr = false, $run_at = 'init' ) {
 		return;
 	}
 
-	// One request at a time: concurrent ALTERs on the same table pile up behind each other.
-	require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
-	if ( ! WP_Upgrader::create_lock( 'jpcrm_migrations', 10 * MINUTE_IN_SECONDS ) ) {
-		return false;
-	}
-
 	#} Run count
 	$migrationRunCount = 0;
 
@@ -211,7 +200,6 @@ function zeroBSCRM_migrations_run( $settingsArr = false, $run_at = 'init' ) {
 							update_option( 'zbsmigrationpreloadcatch', $previousAttempts, false );
 
 							// stop running migrations, reload the page
-							WP_Upgrader::release_lock( 'jpcrm_migrations' );
 							header( 'Refresh:0' );
 							exit( 0 );
 
@@ -265,8 +253,6 @@ function zeroBSCRM_migrations_run( $settingsArr = false, $run_at = 'init' ) {
 			}
 		}
 	}
-
-	WP_Upgrader::release_lock( 'jpcrm_migrations' );
 }
 
 function zeroBSCRM_migrations_checks_postsettings() {
@@ -314,22 +300,6 @@ function zeroBSCRM_adminNotices_majorMigrationError() {
 
 		}
 	}
-}
-
-/**
- * Whether migrations may run in this request.
- *
- * Like core's database upgrades: admin page loads, cron and WP-CLI only, so
- * schema changes never run on (and pile up behind) front-end traffic.
- *
- * @return bool
- */
-function jpcrm_migrations_can_run_in_this_request() {
-	if ( defined( 'WP_CLI' ) && WP_CLI ) {
-		return true;
-	}
-
-	return wp_doing_cron() || ( is_admin() && ! wp_doing_ajax() );
 }
 
 /**
@@ -706,16 +676,20 @@ function zeroBSCRM_migration_50() {
 	// external source tweak
 	$origin_column = jpcrm_migration_ensure_externalsources_origin_column();
 
-	// Add a 'Deleted' transaction status, if it isn't there yet.
+	// add transaction status
+
+	// build string
 	$transaction_statuses = zeroBSCRM_getTransactionsStatuses( true );
 	$deleted_string       = __( 'Deleted', 'zero-bs-crm' );
 	if ( ! in_array( $deleted_string, $transaction_statuses ) ) {
 		$transaction_statuses[] = $deleted_string;
-
-		$customised_fields                              = $zbs->settings->get( 'customisedfields' );
-		$customised_fields['transactions']['status'][1] = implode( ',', $transaction_statuses );
-		$zbs->settings->update( 'customisedfields', $customised_fields );
 	}
+	$transaction_statuses_str = implode( ',', $transaction_statuses );
+
+	// update
+	$customisedFields                              = $zbs->settings->get( 'customisedfields' );
+	$customisedFields['transactions']['status'][1] = $transaction_statuses_str;
+	$zbs->settings->update( 'customisedfields', $customisedFields );
 
 	// mark complete only once the column verifiably exists.
 	if ( is_wp_error( $origin_column ) ) {
@@ -893,7 +867,7 @@ function zeroBSCRM_migration_54() {
 
 	}
 
-	if ( $outdated_log_meta_count === 0 ) {
+	if ( $outdated_log_meta_count == 0 ) {
 
 		// mark complete
 		zeroBSCRM_migrations_markComplete( '54', array( 'updated' => 1 ) );

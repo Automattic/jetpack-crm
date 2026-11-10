@@ -15,8 +15,8 @@ require_once ZEROBSCRM_PATH . 'includes/ZeroBSCRM.Migrations.php';
 /**
  * The restore_missing_columns migration puts back zbss_origin and zbsl_pinned.
  *
- * Also covers how the runner treats a failed migration: recorded, not retried
- * until an admin asks, and never run on front-end requests.
+ * Also covers how the runner treats a failed migration: recorded, and not
+ * retried until an admin asks.
  *
  * These tests alter the real CRM tables. ALTER TABLE commits implicitly, so the
  * test transaction can't undo it: tear_down() always puts both columns back.
@@ -68,10 +68,8 @@ class Restore_Missing_Columns_Test extends JPCRM_Base_TestCase {
 
 		remove_filter( 'query', array( $this, 'break_origin_alter_query' ) );
 		$wpdb->suppress_errors( false );
-		$GLOBALS['current_screen'] = null; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
-		$zeroBSCRM_migrations      = $this->migrations_before; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+		$zeroBSCRM_migrations = $this->migrations_before; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 		delete_option( 'jpcrm_migration_failures' );
-		delete_option( 'jpcrm_migrations.lock' );
 
 		jpcrm_migration_ensure_externalsources_origin_column();
 		jpcrm_migration_ensure_logs_pinned_column();
@@ -158,7 +156,6 @@ class Restore_Missing_Columns_Test extends JPCRM_Base_TestCase {
 		global $ZBSCRM_t; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 
 		$this->only_run_restore_migration();
-		set_current_screen( 'dashboard' );
 		$this->drop_origin_column();
 		$this->break_origin_alter();
 
@@ -177,32 +174,6 @@ class Restore_Missing_Columns_Test extends JPCRM_Base_TestCase {
 		$this->assertTrue( zeroBSCRM_migration_tableHasColumn( $ZBSCRM_t['externalsources'], 'zbss_origin' ) ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 		$this->assertContains( 'restore_missing_columns', $this->completed() );
 		$this->assertSame( array(), jpcrm_migrations_get_failures() );
-	}
-
-	/**
-	 * @testdox The runner doesn't run migrations on front-end requests.
-	 */
-	#[TestDox( "The runner doesn't run migrations on front-end requests." )]
-	public function test_runner_skips_front_end() {
-		$this->only_run_restore_migration();
-
-		zeroBSCRM_migrations_run( false, 'init' );
-
-		$this->assertNotContains( 'restore_missing_columns', $this->completed() );
-	}
-
-	/**
-	 * @testdox The runner doesn't run while another request holds the migration lock.
-	 */
-	#[TestDox( "The runner doesn't run while another request holds the migration lock." )]
-	public function test_runner_respects_lock() {
-		$this->only_run_restore_migration();
-		set_current_screen( 'dashboard' );
-		add_option( 'jpcrm_migrations.lock', time(), '', false );
-
-		zeroBSCRM_migrations_run( false, 'init' );
-
-		$this->assertNotContains( 'restore_missing_columns', $this->completed() );
 	}
 
 	/**
