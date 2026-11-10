@@ -897,9 +897,11 @@ function zeroBSCRMJS_segment_previewAudience() {
 									'" target="_blank">' +
 									jpcrm.esc_html( fn ) +
 									'</a>';
+							} else {
+								fn = jpcrm.esc_html( fn );
 							}
 
-							html += '<tr><td>' + fn + '</td><td>' + em + '</td></tr>';
+							html += '<tr><td>' + fn + '</td><td>' + jpcrm.esc_html( em ) + '</td></tr>';
 						} );
 
 						html += '</tbody></table>';

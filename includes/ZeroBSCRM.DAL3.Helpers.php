@@ -6631,7 +6631,13 @@ function zeroBSCRM_taxRates_deleteTaxRate( $args = array() ) {
 	#} Check ID & Delete :)
 	$id = (int) $id;
 	if ( ! empty( $id ) && $id > 0 ) {
-		return zeroBSCRM_db2_deleteGeneric( $id, 'tax' );
+		$deleted = zeroBSCRM_db2_deleteGeneric( $id, 'tax' );
+
+		// The duplicate check in zeroBSCRM_taxRates_addUpdateTaxRate() caches every rate;
+		// clear it as add and update do, so a deleted rate can be added again.
+		wp_cache_delete( 'all_tax_rates', 'zbscrm_tax_rates' );
+
+		return $deleted;
 	}
 
 	return false;
