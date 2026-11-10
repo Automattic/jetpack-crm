@@ -2157,8 +2157,11 @@ class zbsDAL {
 			}
 		} // / if ID
 
-		if ( ! $fullDetails ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase, VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
-			// We only update the mitigation cache when $fullDetails is false.
+		// We only update the mitigation cache when $fullDetails is false. Not for an ID
+		// lookup either: addUpdateSetting() uses one to decide between insert and update,
+		// and caching that miss made a newly inserted setting read back as unset for the
+		// rest of the request.
+		if ( ! $fullDetails && ! $onlyID ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase, VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 			static::mitigation_cache_for_issue_3504_set_single_setting( $key, $default ); // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 		}
 
@@ -2607,6 +2610,10 @@ class zbsDAL {
 			}
 		}
 		#} =========== / LOAD ARGS ============
+
+		// Invalidates our whole cache, as addUpdateSetting() does, so a deleted setting
+		// doesn't keep reading back its old value.
+		static::reset_mitigation_cache_for_issue_3504();
 
 		// if ID passed, Check ID & Delete :)
 		$id = (int) $id;
