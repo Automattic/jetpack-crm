@@ -15,6 +15,9 @@ require_once ZEROBSCRM_PATH . 'includes/ZeroBSCRM.Migrations.php';
 /**
  * The restore_missing_columns migration puts back zbss_origin and zbsl_pinned.
  *
+ * Also covers how the runner treats a failed migration: recorded, not retried
+ * until an admin asks, and never run on front-end requests.
+ *
  * These tests alter the real CRM tables. ALTER TABLE commits implicitly, so the
  * test transaction can't undo it: tear_down() always puts both columns back.
  */
@@ -28,13 +31,30 @@ class Restore_Missing_Columns_Test extends JPCRM_Base_TestCase {
 	private $completed_before = array();
 
 	/**
+	 * The registered migration list before the test.
+	 *
+	 * @var array
+	 */
+	private $migrations_before = array();
+
+	/**
+	 * How many times the zbss_origin ALTER has been sent to the database.
+	 *
+	 * @var int
+	 */
+	private $origin_alter_attempts = 0;
+
+	/**
 	 * Remember which migrations were complete, and mark ours as not yet run.
 	 *
 	 * @return void
 	 */
 	public function set_up(): void {
 		parent::set_up();
-		$this->completed_before = get_option( 'zbsmigrations', array() );
+		global $zeroBSCRM_migrations; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+
+		$this->completed_before  = get_option( 'zbsmigrations', array() );
+		$this->migrations_before = $zeroBSCRM_migrations; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 		$this->set_completed( array_diff( (array) $this->completed_before, array( 'restore_missing_columns' ) ) );
 	}
 
@@ -44,6 +64,15 @@ class Restore_Missing_Columns_Test extends JPCRM_Base_TestCase {
 	 * @return void
 	 */
 	public function tear_down(): void {
+		global $wpdb, $zeroBSCRM_migrations; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+
+		remove_filter( 'query', array( $this, 'break_origin_alter_query' ) );
+		$wpdb->suppress_errors( false );
+		$GLOBALS['current_screen'] = null; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+		$zeroBSCRM_migrations      = $this->migrations_before; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+		delete_option( 'jpcrm_migration_failures' );
+		delete_option( 'jpcrm_migrations.lock' );
+
 		jpcrm_migration_ensure_externalsources_origin_column();
 		jpcrm_migration_ensure_logs_pinned_column();
 		update_option( 'zbsmigrations', $this->completed_before, false );
@@ -102,6 +131,115 @@ class Restore_Missing_Columns_Test extends JPCRM_Base_TestCase {
 
 		$this->assertSame( $before, $after );
 		$this->assertContains( 'restore_missing_columns', $this->completed() );
+	}
+
+	/**
+	 * @testdox A failed ALTER is recorded with the database error, not marked complete.
+	 */
+	#[TestDox( 'A failed ALTER is recorded with the database error, not marked complete.' )]
+	public function test_failed_alter_is_recorded() {
+		$this->drop_origin_column();
+		$this->break_origin_alter();
+
+		zeroBSCRM_migration_restore_missing_columns();
+
+		$failures = jpcrm_migrations_get_failures();
+		$this->assertArrayHasKey( 'restore_missing_columns', $failures );
+		$this->assertStringContainsString( 'zbss_origin', $failures['restore_missing_columns']['error'] );
+		$this->assertStringNotContainsString( 'no database error reported', $failures['restore_missing_columns']['error'] );
+		$this->assertNotContains( 'restore_missing_columns', $this->completed() );
+	}
+
+	/**
+	 * @testdox The runner doesn't retry a failed migration until it's cleared.
+	 */
+	#[TestDox( "The runner doesn't retry a failed migration until it's cleared." )]
+	public function test_runner_waits_for_retry() {
+		global $ZBSCRM_t; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+
+		$this->only_run_restore_migration();
+		set_current_screen( 'dashboard' );
+		$this->drop_origin_column();
+		$this->break_origin_alter();
+
+		zeroBSCRM_migrations_run( false, 'init' );
+		zeroBSCRM_migrations_run( false, 'wp_loaded' );
+		zeroBSCRM_migrations_run( false, 'init' );
+
+		$this->assertSame( 1, $this->origin_alter_attempts );
+		$this->assertArrayHasKey( 'restore_missing_columns', jpcrm_migrations_get_failures() );
+
+		// whatever was wrong is fixed, and an admin retries.
+		remove_filter( 'query', array( $this, 'break_origin_alter_query' ) );
+		jpcrm_migration_clear_failure( 'restore_missing_columns' );
+		zeroBSCRM_migrations_run( false, 'init' );
+
+		$this->assertTrue( zeroBSCRM_migration_tableHasColumn( $ZBSCRM_t['externalsources'], 'zbss_origin' ) ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+		$this->assertContains( 'restore_missing_columns', $this->completed() );
+		$this->assertSame( array(), jpcrm_migrations_get_failures() );
+	}
+
+	/**
+	 * @testdox The runner doesn't run migrations on front-end requests.
+	 */
+	#[TestDox( "The runner doesn't run migrations on front-end requests." )]
+	public function test_runner_skips_front_end() {
+		$this->only_run_restore_migration();
+
+		zeroBSCRM_migrations_run( false, 'init' );
+
+		$this->assertNotContains( 'restore_missing_columns', $this->completed() );
+	}
+
+	/**
+	 * @testdox The runner doesn't run while another request holds the migration lock.
+	 */
+	#[TestDox( "The runner doesn't run while another request holds the migration lock." )]
+	public function test_runner_respects_lock() {
+		$this->only_run_restore_migration();
+		set_current_screen( 'dashboard' );
+		add_option( 'jpcrm_migrations.lock', time(), '', false );
+
+		zeroBSCRM_migrations_run( false, 'init' );
+
+		$this->assertNotContains( 'restore_missing_columns', $this->completed() );
+	}
+
+	/**
+	 * Make restore_missing_columns the only migration the runner knows about.
+	 *
+	 * @return void
+	 */
+	private function only_run_restore_migration(): void {
+		global $zeroBSCRM_migrations; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+
+		$zeroBSCRM_migrations = array( 'restore_missing_columns' ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+	}
+
+	/**
+	 * Make the ALTER that adds zbss_origin fail with a database error, and count attempts.
+	 *
+	 * @return void
+	 */
+	private function break_origin_alter(): void {
+		global $wpdb;
+
+		$wpdb->suppress_errors( true );
+		add_filter( 'query', array( $this, 'break_origin_alter_query' ) );
+	}
+
+	/**
+	 * Query filter: turn the zbss_origin ALTER into invalid SQL.
+	 *
+	 * @param string $query SQL query.
+	 * @return string
+	 */
+	public function break_origin_alter_query( $query ) {
+		if ( str_contains( $query, 'ADD COLUMN `zbss_origin`' ) ) {
+			++$this->origin_alter_attempts;
+			return str_replace( 'VARCHAR(400)', 'NOT_A_TYPE', $query );
+		}
+		return $query;
 	}
 
 	/**

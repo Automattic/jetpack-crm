@@ -125,6 +125,19 @@ function zeroBSCRM_migrations_run( $settingsArr = false, $run_at = 'init' ) {
 
 	global $zeroBSCRM_migrations, $zeroBSCRM_migrations_requirements;
 
+	// Like core's database upgrades, never run schema changes on front-end traffic.
+	if ( ! jpcrm_migrations_can_run_in_this_request() ) {
+		return false;
+	}
+
+	// catch a retry of a failed migration (linked from the admin notice and system status):
+	if ( jpcrm_perms_manage_options() && isset( $_GET['jpcrm_retry_migration'] ) ) {
+		$retry_key = sanitize_key( wp_unslash( $_GET['jpcrm_retry_migration'] ) );
+		if ( wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ?? '' ) ), 'jpcrm_retry_migration_' . $retry_key ) ) {
+			jpcrm_migration_clear_failure( $retry_key );
+		}
+	}
+
 		// catch migration block removal (can be run from system status):
 	if ( jpcrm_perms_manage_options() && isset( $_GET['resetmigrationblock'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ?? '' ) ), 'resetmigrationblock' ) ) {
 
@@ -145,92 +158,112 @@ function zeroBSCRM_migrations_run( $settingsArr = false, $run_at = 'init' ) {
 	#} load migrated list if not loaded
 	$migratedAlreadyArr = zeroBSCRM_migrations_getCompleted();
 
+	// failed migrations wait for an admin to retry them: the same failure would recur on every load.
+	$failed_migrations = jpcrm_migrations_get_failures();
+
+	$pending_migrations = array_filter(
+		$zeroBSCRM_migrations,
+		function ( $migration ) use ( $migratedAlreadyArr, $failed_migrations ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+			return ! in_array( $migration, $migratedAlreadyArr ) && ! isset( $failed_migrations[ $migration ] ) && function_exists( 'zeroBSCRM_migration_' . $migration ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase,WordPress.PHP.StrictInArray.MissingTrueStrict
+		}
+	);
+
+	if ( empty( $pending_migrations ) ) {
+		return;
+	}
+
+	// One request at a time: concurrent ALTERs on the same table pile up behind each other.
+	require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+	if ( ! WP_Upgrader::create_lock( 'jpcrm_migrations', 10 * MINUTE_IN_SECONDS ) ) {
+		return false;
+	}
+
 	#} Run count
 	$migrationRunCount = 0;
 
 	#} cycle through any migrations + fire if not fired.
-	if ( count( $zeroBSCRM_migrations ) > 0 ) {
-		foreach ( $zeroBSCRM_migrations as $migration ) {
+	if ( count( $pending_migrations ) > 0 ) {
+		foreach ( $pending_migrations as $migration ) {
 
-			if ( ! in_array( $migration, $migratedAlreadyArr ) && function_exists( 'zeroBSCRM_migration_' . $migration ) ) {
+			$run = true;
 
-				$run = true;
+			// check reached state
+			if ( isset( $zeroBSCRM_migrations_requirements[ $migration ] ) ) {
 
-				// check reached state
-				if ( isset( $zeroBSCRM_migrations_requirements[ $migration ] ) ) {
+				// 'preload' requirement means this migration needs to run AFTER a reload AFTER the previous migration
+				// ... so if preload here, we kill this loop, if prev migrations have run
+				if ( in_array( 'preload', $zeroBSCRM_migrations_requirements[ $migration ] ) && $migrationRunCount > 0 ) {
 
-					// 'preload' requirement means this migration needs to run AFTER a reload AFTER the previous migration
-					// ... so if preload here, we kill this loop, if prev migrations have run
-					if ( in_array( 'preload', $zeroBSCRM_migrations_requirements[ $migration ] ) && $migrationRunCount > 0 ) {
-
-						// ... as a catch to stop infinite reloads, we check whether more than 3 of these have run in a row, and we stop that.
-						$previousAttempts = get_option( 'zbsmigrationpreloadcatch', array() );
-						if ( ! is_array( $previousAttempts ) ) {
-							$previousAttempts = array();
-						}
-						if ( ! isset( $previousAttempts[ $migration ] ) ) {
-							$previousAttempts[ $migration ] = 1;
-						}
-						if ( $previousAttempts[ $migration ] < 5 ) {
-
-							// update count
-							++$previousAttempts[ $migration ];
-							update_option( 'zbsmigrationpreloadcatch', $previousAttempts, false );
-
-							// stop running migrations, reload the page
-							header( 'Refresh:0' );
-							exit( 0 );
-
-						} else {
-
-							// set a global which'll show up on systemstatus if this state occurs.
-							update_option( 'zbsmigrationblockerrors', $migration, false );
-
-							// expose an error that the world's about to rupture
-							add_action( 'after-zerobscrm-admin-init', 'zeroBSCRM_adminNotices_majorMigrationError' );
-							add_action( 'admin_notices', 'zeroBSCRM_adminNotices_majorMigrationError' );
-
-						}
+					// ... as a catch to stop infinite reloads, we check whether more than 3 of these have run in a row, and we stop that.
+					$previousAttempts = get_option( 'zbsmigrationpreloadcatch', array() );
+					if ( ! is_array( $previousAttempts ) ) {
+						$previousAttempts = array();
 					}
-
-					// assume func
-					foreach ( $zeroBSCRM_migrations_requirements[ $migration ] as $check ) {
-
-						// skip 'preload', dealt with above
-						// skip 'wp_loaded', dealt with in second run
-						if ( $check !== 'preload' && $check !== 'wp_loaded' ) {
-
-							$checkFuncName = 'zeroBSCRM_migrations_checks_' . $check;
-							if ( ! call_user_func( $checkFuncName ) ) {
-								$run = false;
-							}
-						}
+					if ( ! isset( $previousAttempts[ $migration ] ) ) {
+						$previousAttempts[ $migration ] = 1;
 					}
+					if ( $previousAttempts[ $migration ] < 5 ) {
 
-					// wp_loaded
-					if ( in_array( 'wp_loaded', $zeroBSCRM_migrations_requirements[ $migration ] ) ) {
+						// update count
+						++$previousAttempts[ $migration ];
+						update_option( 'zbsmigrationpreloadcatch', $previousAttempts, false );
 
-						$run = false;
+						// stop running migrations, reload the page
+						WP_Upgrader::release_lock( 'jpcrm_migrations' );
+						header( 'Refresh:0' );
+						exit( 0 );
 
-						if ( $run_at == 'wp_loaded' ) {
-							$run = true;
+					} else {
+
+						// set a global which'll show up on systemstatus if this state occurs.
+						update_option( 'zbsmigrationblockerrors', $migration, false );
+
+						// expose an error that the world's about to rupture
+						add_action( 'after-zerobscrm-admin-init', 'zeroBSCRM_adminNotices_majorMigrationError' );
+						add_action( 'admin_notices', 'zeroBSCRM_adminNotices_majorMigrationError' );
+
+					}
+				}
+
+				// assume func
+				foreach ( $zeroBSCRM_migrations_requirements[ $migration ] as $check ) {
+
+					// skip 'preload', dealt with above
+					// skip 'wp_loaded', dealt with in second run
+					if ( $check !== 'preload' && $check !== 'wp_loaded' ) {
+
+						$checkFuncName = 'zeroBSCRM_migrations_checks_' . $check;
+						if ( ! call_user_func( $checkFuncName ) ) {
+							$run = false;
 						}
 					}
 				}
 
-				// go
-				if ( $run ) {
+				// wp_loaded
+				if ( in_array( 'wp_loaded', $zeroBSCRM_migrations_requirements[ $migration ] ) ) {
 
-					// run migration
-					call_user_func( 'zeroBSCRM_migration_' . $migration );
+					$run = false;
 
-					// update count
-					++$migrationRunCount;
-
+					if ( $run_at == 'wp_loaded' ) {
+						$run = true;
+					}
 				}
+			}
+
+			// go
+			if ( $run ) {
+
+				// run migration
+				call_user_func( 'zeroBSCRM_migration_' . $migration );
+
+				// update count
+				++$migrationRunCount;
+
 			}
 		}
 	}
+
+	WP_Upgrader::release_lock( 'jpcrm_migrations' );
 }
 
 function zeroBSCRM_migrations_checks_postsettings() {
@@ -279,6 +312,119 @@ function zeroBSCRM_adminNotices_majorMigrationError() {
 		}
 	}
 }
+
+/**
+ * Whether migrations may run in this request.
+ *
+ * Like core's database upgrades: admin page loads, cron and WP-CLI only, so
+ * schema changes never run on (and pile up behind) front-end traffic.
+ *
+ * @return bool
+ */
+function jpcrm_migrations_can_run_in_this_request() {
+	if ( defined( 'WP_CLI' ) && WP_CLI ) {
+		return true;
+	}
+
+	return wp_doing_cron() || ( is_admin() && ! wp_doing_ajax() );
+}
+
+/**
+ * Migrations that failed, keyed by migration key.
+ *
+ * @return array<string, array{failed: int, error: string}>
+ */
+function jpcrm_migrations_get_failures() {
+	$failures = get_option( 'jpcrm_migration_failures', array() );
+
+	return is_array( $failures ) ? $failures : array();
+}
+
+/**
+ * Record a migration as failed so it isn't retried until an admin asks.
+ *
+ * Schema failures (missing privileges, key length limits) recur identically on
+ * every attempt, so retrying automatically only repeats the ALTER on a live table.
+ *
+ * @param string $migration_key Migration key.
+ * @param string $error         What went wrong, e.g. the database error.
+ * @return void
+ */
+function jpcrm_migration_mark_failed( $migration_key, $error ) {
+	$failures                   = jpcrm_migrations_get_failures();
+	$failures[ $migration_key ] = array(
+		'failed' => time(),
+		'error'  => (string) $error,
+	);
+	update_option( 'jpcrm_migration_failures', $failures, false );
+}
+
+/**
+ * Clear a migration's failure so it runs again.
+ *
+ * @param string $migration_key Migration key.
+ * @return void
+ */
+function jpcrm_migration_clear_failure( $migration_key ) {
+	$failures = jpcrm_migrations_get_failures();
+
+	if ( isset( $failures[ $migration_key ] ) ) {
+		unset( $failures[ $migration_key ] );
+		update_option( 'jpcrm_migration_failures', $failures, false );
+	}
+}
+
+/**
+ * Nonced URL that retries a failed migration, landing on System Status.
+ *
+ * @param string $migration_key Migration key.
+ * @return string
+ */
+function jpcrm_migration_retry_url( $migration_key ) {
+	global $zbs;
+
+	return wp_nonce_url(
+		add_query_arg(
+			array(
+				'page'                  => $zbs->slugs['systemstatus'],
+				'tab'                   => 'status',
+				'jpcrm_retry_migration' => $migration_key,
+			),
+			admin_url( 'admin.php' )
+		),
+		'jpcrm_retry_migration_' . $migration_key
+	);
+}
+
+/**
+ * Tell admins about failed migrations, with the database error and a retry link.
+ *
+ * @return void
+ */
+function jpcrm_migrations_failure_notice() {
+	if ( ! jpcrm_perms_manage_options() ) {
+		return;
+	}
+
+	foreach ( jpcrm_migrations_get_failures() as $migration_key => $failure ) {
+		?>
+		<div class="notice notice-error">
+			<p>
+				<?php
+				printf(
+					/* translators: %s: migration identifier */
+					esc_html__( 'Jetpack CRM couldn\'t finish updating its database (migration %s). Some CRM features may not work until this is fixed.', 'zero-bs-crm' ),
+					'<code>' . esc_html( $migration_key ) . '</code>'
+				);
+				?>
+			</p>
+			<p><code><?php echo esc_html( $failure['error'] ?? '' ); ?></code></p>
+			<p><a class="button" href="<?php echo esc_url( jpcrm_migration_retry_url( $migration_key ) ); ?>"><?php esc_html_e( 'Retry', 'zero-bs-crm' ); ?></a></p>
+		</div>
+		<?php
+	}
+}
+add_action( 'admin_notices', 'jpcrm_migrations_failure_notice' );
 
 /*
 ======================================================
@@ -555,27 +701,26 @@ function zeroBSCRM_migration_50() {
 	global $zbs, $wpdb, $ZBSCRM_t;
 
 	// external source tweak
-	$origin_column_exists = jpcrm_migration_ensure_externalsources_origin_column();
+	$origin_column = jpcrm_migration_ensure_externalsources_origin_column();
 
-	// add transaction status
-
-	// build string
+	// add a 'Deleted' transaction status, if it isn't there yet
 	$transaction_statuses = zeroBSCRM_getTransactionsStatuses( true );
 	$deleted_string       = __( 'Deleted', 'zero-bs-crm' );
 	if ( ! in_array( $deleted_string, $transaction_statuses ) ) {
 		$transaction_statuses[] = $deleted_string;
-	}
-	$transaction_statuses_str = implode( ',', $transaction_statuses );
 
-	// update
-	$customisedFields                              = $zbs->settings->get( 'customisedfields' );
-	$customisedFields['transactions']['status'][1] = $transaction_statuses_str;
-	$zbs->settings->update( 'customisedfields', $customisedFields );
-
-	// mark complete only once the column verifiably exists, else retry on next load.
-	if ( $origin_column_exists ) {
-		zeroBSCRM_migrations_markComplete( '50', array( 'updated' => 1 ) );
+		$customisedFields                              = $zbs->settings->get( 'customisedfields' );
+		$customisedFields['transactions']['status'][1] = implode( ',', $transaction_statuses );
+		$zbs->settings->update( 'customisedfields', $customisedFields );
 	}
+
+	// mark complete only once the column verifiably exists.
+	if ( is_wp_error( $origin_column ) ) {
+		jpcrm_migration_mark_failed( '50', $origin_column->get_error_message() );
+		return;
+	}
+
+	zeroBSCRM_migrations_markComplete( '50', array( 'updated' => 1 ) );
 }
 
 	/*
@@ -706,7 +851,11 @@ function zeroBSCRM_migration_54() {
 	global $zbs, $wpdb, $ZBSCRM_t;
 
 	// add zbsl_pinned to log table if not existing
-	$pinned_column_exists = jpcrm_migration_ensure_logs_pinned_column();
+	$pinned_column = jpcrm_migration_ensure_logs_pinned_column();
+	if ( is_wp_error( $pinned_column ) ) {
+		jpcrm_migration_mark_failed( '54', $pinned_column->get_error_message() );
+		return;
+	}
 
 	// get outdated log meta count
 	$outdated_log_meta_count = (int) $wpdb->get_var( 'SELECT COUNT(ID) FROM ' . $ZBSCRM_t['meta'] . ' WHERE zbsm_objtype = 8 AND zbsm_key = "logmeta"' );
@@ -741,7 +890,7 @@ function zeroBSCRM_migration_54() {
 
 	}
 
-	if ( $outdated_log_meta_count === 0 && $pinned_column_exists ) {
+	if ( $outdated_log_meta_count === 0 ) {
 
 		// mark complete
 		zeroBSCRM_migrations_markComplete( '54', array( 'updated' => 1 ) );
@@ -1345,18 +1494,25 @@ function zeroBSCRM_migration_ensure_notifications_table() {
 
 /**
  * Restore schema columns that older migrations (5.0 `zbss_origin`, 5.4 `zbsl_pinned`)
- * may have failed to add while still marking themselves complete, e.g. when the
- * original ALTER hit the index key length limit on older MySQL (see JETCRM-1460).
+ * may have failed to add while still marking themselves complete (see JETCRM-1460;
+ * the original failure's cause isn't confirmed).
  */
 function zeroBSCRM_migration_restore_missing_columns() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid -- the migration runner requires the zeroBSCRM_migration_ prefix.
 
-	$origin_column_exists = jpcrm_migration_ensure_externalsources_origin_column();
-	$pinned_column_exists = jpcrm_migration_ensure_logs_pinned_column();
-
-	// mark complete only once both columns verifiably exist, else retry on next load.
-	if ( $origin_column_exists && $pinned_column_exists ) {
-		zeroBSCRM_migrations_markComplete( 'restore_missing_columns', array( 'updated' => 1 ) );
+	$errors = array();
+	foreach ( array( jpcrm_migration_ensure_externalsources_origin_column(), jpcrm_migration_ensure_logs_pinned_column() ) as $result ) {
+		if ( is_wp_error( $result ) ) {
+			$errors[] = $result->get_error_message();
+		}
 	}
+
+	// mark complete only once both columns verifiably exist.
+	if ( ! empty( $errors ) ) {
+		jpcrm_migration_mark_failed( 'restore_missing_columns', implode( '; ', $errors ) );
+		return;
+	}
+
+	zeroBSCRM_migrations_markComplete( 'restore_missing_columns', array( 'updated' => 1 ) );
 }
 
 /*
@@ -1399,9 +1555,9 @@ function zeroBSCRM_migration_addErrToStack( $err = array(), $errKey = '' ) {
  *
  * The column and index are separate statements, and the index is a 191-char prefix:
  * a full-width VARCHAR(400) index exceeds the 767-byte key limit of older MySQL
- * configs, which fails the whole ALTER and leaves the column missing too.
+ * configs, and a combined ALTER can then leave the column missing too.
  *
- * @return bool True if the column exists.
+ * @return true|WP_Error True if the column exists, else the database error.
  */
 function jpcrm_migration_ensure_externalsources_origin_column() {
 
@@ -1410,9 +1566,10 @@ function jpcrm_migration_ensure_externalsources_origin_column() {
 	if ( ! zeroBSCRM_migration_tableHasColumn( $ZBSCRM_t['externalsources'], 'zbss_origin' ) ) {
 
 		$wpdb->query( 'ALTER TABLE ' . $ZBSCRM_t['externalsources'] . ' ADD COLUMN `zbss_origin` VARCHAR(400) NULL DEFAULT NULL AFTER `zbss_uid`;' ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQL.NotPrepared
+		$error = $wpdb->last_error;
 
 		if ( ! zeroBSCRM_migration_tableHasColumn( $ZBSCRM_t['externalsources'], 'zbss_origin' ) ) {
-			return false;
+			return jpcrm_migration_missing_column_error( $ZBSCRM_t['externalsources'], 'zbss_origin', $error );
 		}
 	}
 
@@ -1427,17 +1584,38 @@ function jpcrm_migration_ensure_externalsources_origin_column() {
 /**
  * Ensures the logs table has the `zbsl_pinned` column (added in v5.4).
  *
- * @return bool True if the column exists.
+ * @return true|WP_Error True if the column exists, else the database error.
  */
 function jpcrm_migration_ensure_logs_pinned_column() {
 
 	global $wpdb, $ZBSCRM_t;
 
 	if ( ! zeroBSCRM_migration_tableHasColumn( $ZBSCRM_t['logs'], 'zbsl_pinned' ) ) {
+
 		$wpdb->query( 'ALTER TABLE ' . $ZBSCRM_t['logs'] . ' ADD `zbsl_pinned` int(1) NULL AFTER `zbsl_longdesc`;' ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQL.NotPrepared
+		$error = $wpdb->last_error;
+
+		if ( ! zeroBSCRM_migration_tableHasColumn( $ZBSCRM_t['logs'], 'zbsl_pinned' ) ) {
+			return jpcrm_migration_missing_column_error( $ZBSCRM_t['logs'], 'zbsl_pinned', $error );
+		}
 	}
 
-	return zeroBSCRM_migration_tableHasColumn( $ZBSCRM_t['logs'], 'zbsl_pinned' );
+	return true;
+}
+
+/**
+ * The error for a column an ALTER failed to add.
+ *
+ * @param string $table    Table name.
+ * @param string $column   Column name.
+ * @param string $db_error The database error from the ALTER, if any.
+ * @return WP_Error
+ */
+function jpcrm_migration_missing_column_error( $table, $column, $db_error ) {
+	return new WP_Error(
+		'jpcrm_migration_missing_column',
+		sprintf( 'Could not add column %s to %s: %s', $column, $table, '' !== $db_error ? $db_error : 'no database error reported' )
+	);
 }
 
 // phpcs:enable WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
