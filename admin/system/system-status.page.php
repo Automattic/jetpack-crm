@@ -39,11 +39,14 @@ function zeroBSCRM_render_systemstatus_page() {
 
 	}
 
-		// migrations that failed and are waiting for a retry
+	// Migrations that failed and are waiting for a retry.
 	foreach ( jpcrm_migrations_get_failures() as $failed_key => $failure ) {
-		$generalErrors[ 'migrationfailed_' . $failed_key ]  = esc_html( sprintf( /* translators: %s: migration identifier */ __( 'Migration %s failed and won\'t run again until you retry it:', 'zero-bs-crm' ), $failed_key ) );
-		$generalErrors[ 'migrationfailed_' . $failed_key ] .= '<br /><code>' . esc_html( $failure['error'] ?? '' ) . '</code>';
-		$generalErrors[ 'migrationfailed_' . $failed_key ] .= '<br /><a href="' . esc_url( jpcrm_migration_retry_url( $failed_key ) ) . '">' . esc_html__( 'Retry the Migration', 'zero-bs-crm' ) . '</a>';
+		/* translators: %s: migration identifier */
+		$failure_message  = esc_html( sprintf( __( 'Migration %s failed and won\'t run again until you retry it:', 'zero-bs-crm' ), $failed_key ) );
+		$failure_message .= '<br /><code>' . esc_html( $failure['error'] ?? '' ) . '</code>';
+		$failure_message .= '<br /><a href="' . esc_url( jpcrm_migration_retry_url( $failed_key ) ) . '">' . esc_html__( 'Retry the Migration', 'zero-bs-crm' ) . '</a>';
+
+		$generalErrors[ 'migrationfailed_' . $failed_key ] = $failure_message; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 	}
 
 		// hard-check database tables & report
@@ -286,8 +289,8 @@ function zeroBSCRM_render_systemstatus_page() {
 						// 2.88 moved this to show all migrations, completed or failed.
 
 						global $zeroBSCRM_migrations;
-						$migratedAlreadyArr = zeroBSCRM_migrations_getCompleted();
-						$migration_failures = jpcrm_migrations_get_failures(); // from 2.88 $zbs->settings->get('migrations');
+						$migratedAlreadyArr = zeroBSCRM_migrations_getCompleted(); // from 2.88 $zbs->settings->get('migrations');
+						$migration_failures = jpcrm_migrations_get_failures();
 
 						// temp
 						// n/a, fixed $migrationVers = array('123'=>'1.2.3','1119' => '1.1.19','127'=>'1.2.7','2531'=>'2.53.1','2943'=>'2.94.3','2952' => '2.95.2');
