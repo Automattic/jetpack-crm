@@ -851,14 +851,12 @@ item"><?php esc_html_e( 'Tasks', 'zero-bs-crm' ); ?></div><?php } ?>
 											if ( isset( $task['complete'] ) && $task['complete'] === 1 ) {
 												$statusStr = __( 'Completed', 'zero-bs-crm' );
 											}
-											// Build the status label with proper escaping so the <span> renders as HTML, not as encoded text.
-											// esc_attr() on the class, esc_html() on the translatable string — mirrors the contact view pattern.
-											$status = "<span class='" . esc_attr( zeroBSCRM_html_taskStatusLabel( $task ) ) . "'>" . esc_html( $statusStr ) . '</span>';
 
 											echo '<tr>';
 											echo '<td>' . esc_html( zeroBSCRM_html_taskDate( $task ) ) . '</td>';
 											echo '<td>' . esc_html( $task['title'] ) . '</td>';
-											echo '<td>' . $status . '</td>'; // $status is already safely escaped above.
+											// The status is a label <span>, so it's built escaped here rather than escaped as a whole.
+											echo '<td><span class="' . esc_attr( zeroBSCRM_html_taskStatusLabel( $task ) ) . '">' . esc_html( $statusStr ) . '</span></td>'; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase -- legacy variable.
 											echo '<td style="text-align:center"><a href="' . esc_url( $taskURL ) . '">' . esc_html__( 'View', 'zero-bs-crm' ) . '</a></td>';
 											echo '</tr>';
 
