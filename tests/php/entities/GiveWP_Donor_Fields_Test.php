@@ -55,7 +55,9 @@ class GiveWP_Donor_Fields_Test extends JPCRM_Base_Integration_TestCase {
 	private function add_donor( array $user_info ): int {
 		$integration = new JPCRM_GiveWP();
 		$method      = new \ReflectionMethod( $integration, 'add_update_donor' );
-		$method->setAccessible( true );
+		if ( PHP_VERSION_ID < 80100 ) {
+			$method->setAccessible( true ); // A no-op from PHP 8.1, and deprecated in 8.5.
+		}
 
 		return (int) $method->invoke(
 			$integration,
