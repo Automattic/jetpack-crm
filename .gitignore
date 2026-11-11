@@ -18,4 +18,5 @@
 **/js/*.min.js.LICENSE.txt
 /templates/**/.htaccess
 /templates/**/index.html
+/templates/**/index.php
 /tests/codeception/acceptance.suite.yml

@@ -1587,7 +1587,13 @@ function jpcrm_create_and_secure_dir_from_external_access( $directory_path = '',
 
 	$safe = true;
 
+	// Both index files: servers pick whichever their directory index setting
+	// names, and some name only one of them (nginx often only index.php).
 	$files = array(
+		array(
+			'file'    => 'index.php',
+			'content' => '<?php' . PHP_EOL . '// Silence is golden.' . PHP_EOL,
+		),
 		array(
 			'file'    => 'index.html',
 			'content' => '<!--nope-->',

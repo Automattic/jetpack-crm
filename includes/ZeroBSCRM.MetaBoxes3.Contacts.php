@@ -1051,39 +1051,12 @@ class zeroBS__Metabox_ContactCustomFiles extends zeroBS__Metabox {
 						// verify file extension and mime type
 						if ( jpcrm_file_check_mime_extension( $_FILES[ 'zbsc_file_' . $cfSubKey ] ) ) {
 
-							$upload = wp_upload_bits( $_FILES[ 'zbsc_file_' . $cfSubKey ]['name'], null, file_get_contents( $_FILES[ 'zbsc_file_' . $cfSubKey ]['tmp_name'] ) );
+							// Save straight into the contact's private files folder.
+							$upload = jpcrm_save_contact_admin_upload( 'zbsc_file_' . $cfSubKey, $contact_id ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase -- legacy name.
 
 							if ( isset( $upload['error'] ) && $upload['error'] != 0 ) {
 								wp_die( 'There was an error uploading your file. The error is: ' . esc_html( $upload['error'] ) );
 							} else {
-								// update_post_meta($contact_id, 'zbsc_file_'.$cfSubKey, $upload);
-
-								// v2.13 - also privatise the file (move to our asset store)
-								// $upload will have 'file' and 'url'
-								$fileName        = basename( $upload['file'] );
-								$fileDir         = dirname( $upload['file'] );
-								$privateThatFile = zeroBSCRM_privatiseUploadedFile( $fileDir, $fileName );
-								if ( is_array( $privateThatFile ) && isset( $privateThatFile['file'] ) ) {
-
-									// successfully moved to our store
-
-										// modify URL + file attributes
-										$upload['file'] = $privateThatFile['file'];
-										$upload['url']  = $privateThatFile['url'];
-
-										// add this extra identifier if in privatised sys
-										$upload['priv'] = true;
-
-								} else {
-
-									// Could not move the file into private CRM storage.
-									// Delete the public copy left by `wp_upload_bits()`.
-									if ( file_exists( $upload['file'] ) ) {
-										wp_delete_file( $upload['file'] );
-									}
-									wp_die( 'There was an error storing your uploaded file.' );
-
-								}
 
 								// w mod - adds to array :)
 								$zbsCustomerFiles = zeroBSCRM_getCustomerFiles( $contact_id );
@@ -1396,39 +1369,12 @@ class zeroBS__Metabox_ContactFiles extends zeroBS__Metabox {
 			// verify file extension and mime type
 			if ( jpcrm_file_check_mime_extension( $_FILES['zbsc_file_attachment'] ) ) {
 
-				$upload = wp_upload_bits( $_FILES['zbsc_file_attachment']['name'], null, file_get_contents( $_FILES['zbsc_file_attachment']['tmp_name'] ) );
+				// Save straight into the contact's private files folder.
+				$upload = jpcrm_save_contact_admin_upload( 'zbsc_file_attachment', $contact_id );
 
 				if ( isset( $upload['error'] ) && $upload['error'] != 0 ) {
 					wp_die( 'There was an error uploading your file. The error is: ' . esc_html( $upload['error'] ) );
 				} else {
-					// update_post_meta($id, 'zbsc_file_attachment', $upload);
-
-						// v2.13 - also privatise the file (move to our asset store)
-						// $upload will have 'file' and 'url'
-						$fileName        = basename( $upload['file'] );
-						$fileDir         = dirname( $upload['file'] );
-						$privateThatFile = zeroBSCRM_privatiseUploadedFile( $fileDir, $fileName );
-					if ( is_array( $privateThatFile ) && isset( $privateThatFile['file'] ) ) {
-
-						// successfully moved to our store
-
-							// modify URL + file attributes
-							$upload['file'] = $privateThatFile['file'];
-							$upload['url']  = $privateThatFile['url'];
-
-							// add this extra identifier if in privatised sys
-							$upload['priv'] = true;
-
-					} else {
-
-						// Could not move the file into private CRM storage.
-						// Delete the public copy left by `wp_upload_bits()`.
-						if ( file_exists( $upload['file'] ) ) {
-							wp_delete_file( $upload['file'] );
-						}
-						wp_die( 'There was an error storing your uploaded file.' );
-
-					}
 
 						// w mod - adds to array :)
 						$zbsCustomerFiles = zeroBSCRM_getCustomerFiles( $contact_id );

@@ -320,37 +320,12 @@ function zeroBSCRM_invoicing_generateStatementPDF( $contactID = -1, $returnPDF =
 
 	$html = zeroBSCRM_invoicing_generateStatementHTML( $contactID );
 
-	// build PDF
-	$dompdf = $zbs->pdf_engine();
-	$dompdf->loadHtml( $html, 'UTF-8' );
-	$dompdf->render();
+	// Build the PDF in the CRM's private working folder.
+	// phpcs:disable WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase -- legacy names.
+	$statementFilename = jpcrm_generate_pdf( $html, wp_generate_password( 14, false ) . '-statement-' . $contactID . '.pdf' );
 
-	// target dir
-	$upload_dir      = wp_upload_dir();
-	$zbsInvoicingDir = $upload_dir['basedir'] . '/invoices/';
-
-	if ( ! file_exists( $zbsInvoicingDir ) ) {
-		wp_mkdir_p( $zbsInvoicingDir );
-	}
-	// got it?
-	if ( ! file_exists( $zbsInvoicingDir ) ) {
-		return false;
-	}
-
-	// make a hash
-	// here we've tried to protect against someone overriding the security,
-	// but if they're inside... it's too late anyhow.
-	$hash = wp_generate_password( 14, false );
-	if ( empty( $hash ) || strlen( $hash ) < 14 ) {
-		$hash = md5( time() . 'xcsac' ); // backup
-	}
-
-	$statementFilename = $zbsInvoicingDir . $hash . '-' . __( 'statement', 'zero-bs-crm' ) . '-' . $contactID . '.pdf';
-
-	// save the pdf file on the server
-	file_put_contents( $statementFilename, $dompdf->output() );
-
-	if ( file_exists( $statementFilename ) ) {
+	if ( $statementFilename && file_exists( $statementFilename ) ) {
+		// phpcs:enable WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 
 		// if return pdf, return, otherwise return filepath
 		if ( $returnPDF ) {
