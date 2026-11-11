@@ -549,6 +549,42 @@ function zeroBSCRM_getWordPressRoles() {
 	return $all_roles;
 }
 
+/**
+ * Whether a role may be given to the WordPress users CRM creates for client portal access.
+ *
+ * The "extra role" setting lets a site add a role those users need for another plugin,
+ * such as a membership role. Anything that grants staff access is refused: CRM's own
+ * roles, administrator, and any role that can manage the site, its users, plugins or
+ * themes, or edit other people's content.
+ *
+ * @param string $role_key Role slug.
+ * @return bool
+ */
+function jpcrm_portal_extra_role_is_allowed( $role_key ) {
+	if ( ! is_string( $role_key ) || $role_key === '' ) {
+		return false;
+	}
+
+	if ( $role_key === 'administrator' || str_starts_with( $role_key, 'zerobs_' ) ) {
+		return false;
+	}
+
+	$role = get_role( $role_key );
+	if ( ! $role ) {
+		return false;
+	}
+
+	$staff_capability = '/^(?:admin_zerobs_|manage_|edit_others_|delete_others_|publish_|promote_|install_|activate_|update_|unfiltered_|edit_(?:users|plugins|themes|files|theme_options|dashboard)$|(?:create|delete|list|remove)_users$|delete_(?:plugins|themes)$|switch_themes$|customize$|import$|export$|moderate_comments$)/';
+
+	foreach ( (array) $role->capabilities as $capability => $granted ) {
+		if ( $granted && preg_match( $staff_capability, $capability ) ) {
+			return false;
+		}
+	}
+
+	return true;
+}
+
 	// return current user capabilities
 function zeroBSCRM_getCurrentUserCaps() {
 
