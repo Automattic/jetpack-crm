@@ -86,7 +86,7 @@ function zeroBSCRM_CompanyTypeList( $jsCallbackFuncStr = '', $inputDefaultValue 
 		// } Wrap
 		$ret .= '<div class="zbstypeaheadwrap ' . $extraClasses . '">';
 
-		$ret .= '<input class="zbstypeaheadco" type="text" value="' . $inputDefaultValue . '" placeholder="' . __( jpcrm_label_company() . ' name...', 'zero-bs-crm' ) . '" data-zbsopencallback="' . $jsCallbackFuncStr . '" data-zbschangecallback="' . $jsChangeCallbackFuncStr . '" autocomplete="' . esc_attr( jpcrm_disable_browser_autocomplete() ) . '" data-autokey="cotypelist">'; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase,WordPress.WP.I18n.NonSingularStringLiteralText
+		$ret .= '<input class="zbstypeaheadco" type="text" value="' . esc_attr( $inputDefaultValue ) . '" placeholder="' . esc_attr( __( jpcrm_label_company() . ' name...', 'zero-bs-crm' ) ) . '" data-zbsopencallback="' . $jsCallbackFuncStr . '" data-zbschangecallback="' . $jsChangeCallbackFuncStr . '" autocomplete="' . esc_attr( jpcrm_disable_browser_autocomplete() ) . '" data-autokey="cotypelist">'; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase,WordPress.WP.I18n.NonSingularStringLiteralText
 
 		// } close wrap
 		$ret .= '</div>';

@@ -851,12 +851,12 @@ item"><?php esc_html_e( 'Tasks', 'zero-bs-crm' ); ?></div><?php } ?>
 											if ( isset( $task['complete'] ) && $task['complete'] === 1 ) {
 												$statusStr = __( 'Completed', 'zero-bs-crm' );
 											}
-											$status = "<span class='" . zeroBSCRM_html_taskStatusLabel( $task ) . "'>" . $statusStr . '</span>';
 
 											echo '<tr>';
 											echo '<td>' . esc_html( zeroBSCRM_html_taskDate( $task ) ) . '</td>';
 											echo '<td>' . esc_html( $task['title'] ) . '</td>';
-											echo '<td>' . esc_html( $status ) . '</td>';
+											// The status is a label <span>, so it's built escaped here rather than escaped as a whole.
+											echo '<td><span class="' . esc_attr( zeroBSCRM_html_taskStatusLabel( $task ) ) . '">' . esc_html( $statusStr ) . '</span></td>'; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase -- legacy variable.
 											echo '<td style="text-align:center"><a href="' . esc_url( $taskURL ) . '">' . esc_html__( 'View', 'zero-bs-crm' ) . '</a></td>';
 											echo '</tr>';
 

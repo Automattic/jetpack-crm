@@ -21,6 +21,27 @@ if ( ! defined( 'ZEROBSCRM_PATH' ) ) {
 	/ Breaking Checks
 	====================================================== */
 
+/**
+ * Neutralise CSV formula injection in a single exported cell.
+ *
+ * A spreadsheet treats a cell beginning with =, +, -, @, tab or carriage return
+ * as a formula, so a contact whose (attacker-supplied) field starts with one of
+ * those can run when a CRM user opens the export in Excel, LibreOffice or
+ * Sheets. Prefixing a single quote makes the spreadsheet render it as text.
+ *
+ * Done at the export boundary rather than on input, so stored records already
+ * carrying such values are covered too. Non-string cells are returned unchanged.
+ *
+ * @param mixed $value The cell value.
+ * @return mixed The value, prefixed with a single quote if it would be read as a formula.
+ */
+function jpcrm_csv_escape_formula( $value ) {
+	if ( is_string( $value ) && $value !== '' && strpos( "=+-@\t\r", $value[0] ) !== false ) {
+		return "'" . $value;
+	}
+	return $value;
+}
+
 // temp/mvp solution. Some fields need different labels for export!
 function zeroBSCRM_export_fieldReplacements() {
 
@@ -289,7 +310,7 @@ function jpcrm_export_process_file_export() {
 				}
 				}
 				// phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase -- Just ignore until someone fixes all of these, otherwise we wind up having to rewrite half the function.
-				fputcsv( $output, $columnHeaders, ',', '"', '' );
+				fputcsv( $output, array_map( 'jpcrm_csv_escape_formula', $columnHeaders ), ',', '"', '' );
 
 				// actual export lines
 
@@ -440,7 +461,7 @@ function jpcrm_export_process_file_export() {
 
 							// output row
 							// phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase -- Just ignore until someone fixes all of these, otherwise we wind up having to rewrite half the function.
-							fputcsv( $output, $objRow, ',', '"', '' );
+							fputcsv( $output, array_map( 'jpcrm_csv_escape_formula', $objRow ), ',', '"', '' );
 
 					} // / foreach obj
 				}

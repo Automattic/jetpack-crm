@@ -1,10 +1,18 @@
-/jetpack_vendor/
-/vendor/
-/node_modules/
+# No trailing slash on these three: `make worktree-link` puts a symlink here,
+# and a trailing slash matches directories only, so the links showed up as
+# untracked in every worktree.
+/jetpack_vendor
+/vendor
+/node_modules
 /build/
 /dist/
 /.cache/
 /.phpunit.cache/
+# The whole directory, not just worktrees/. It is scratch space: worktrees are
+# the thing that would do real damage staged by a `git add -A`, but screenshots
+# and notes collect in there too, and narrowing this to worktrees/ put three of
+# them straight into `git status`.
+/.claude/
 **/css/**/*.css
 **/js/*.min.js
 **/js/*.min.js.LICENSE.txt

@@ -341,8 +341,8 @@ function zeroBSCRM_createTables() {
 	`zbss_lastupdated` INT(14) NOT NULL,
 	PRIMARY KEY (`ID`),
 	INDEX (`zbss_objid`),
-	INDEX (`zbss_origin`),
-	KEY `zbss_uid+zbss_source+zbss_objtype` (`zbss_uid`,`zbss_source`,`zbss_objtype`) USING BTREE)
+	INDEX (`zbss_origin`(191)),
+	KEY `zbss_uid+zbss_source+zbss_objtype` (`zbss_uid`(191),`zbss_source`,`zbss_objtype`) USING BTREE)
 	" . $storageEngineLine . '
 	DEFAULT CHARACTER SET = ' . $characterSet . '
 	COLLATE = ' . $collation . ';';

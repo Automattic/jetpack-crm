@@ -1,14 +1,35 @@
-@import "@wordpress/theme/design-tokens.css";
+@use "sass:math";
+@use "../wpds-tokens";
+
+$bar-pad-y: var(--wpds-dimension-padding-xl);
+$bar-pad-x: var(--wpds-dimension-padding-2xl);
+$logo-row-height: 24px;
 
 #jpcrm-top-menu {
-	padding: var(--wpds-dimension-padding-xl) var(--wpds-dimension-padding-2xl) 0;
+	padding: $bar-pad-y $bar-pad-x 0;
 	display: block;
 	background-color: var(--wpds-color-background-surface-neutral-strong);
+
+	/*
+	 * The bar wraps when its items stop fitting, and the space it has depends on
+	 * whether WordPress' admin sidebar is expanded, folded or off-canvas — not on
+	 * the viewport. A container query asks the question that actually matters.
+	 */
+	container-type: inline-size;
+	position: relative;
+
+	/*
+	 * One stacking context for the whole bar. Semantic gives every dropdown
+	 * panel z-index 11, so inside this context each open panel paints over the
+	 * bar's other items -- including a second row once the bar wraps -- and the
+	 * bar as a whole clears the page content below it.
+	 */
+	z-index: 5;
 
 	.logo-cube {
 		cursor: pointer;
 		width: fit-content;
-		height: 24px;
+		height: $logo-row-height;
 		line-height: 1;
 		transition: transform 0.33s;
 		transform-style: preserve-3d;
@@ -18,13 +39,13 @@
 		}
 
 		.cube-side {
-			height: 24px;
+			height: $logo-row-height;
 
 			&.side1 {
 				display: flex;
 				align-items: center;
 				gap: var(--wpds-dimension-gap-sm);
-				transform: translateZ(12px);
+				transform: translateZ(math.div($logo-row-height, 2));
 
 				.jpcrm-header-logo__icon {
 					flex-shrink: 0;
@@ -42,7 +63,7 @@
 			&.side2 {
 				font-size: 24px;
 				text-align: center;
-				transform: rotateX(-90deg) translateZ(-12px);
+				transform: rotateX(-90deg) translateZ(math.div(-$logo-row-height, 2));
 
 				.jpcrm-fullscreen-toggle {
 					color: var(--wpds-color-foreground-content-neutral-weak);
@@ -57,12 +78,14 @@
 		margin-left: -1em;
 		padding-bottom: 0;
 		display: flex;
+		flex-wrap: wrap;
 		justify-content: space-between;
 		align-items: end;
 		border-bottom: var(--wpds-border-width-xs) solid var(--wpds-color-stroke-surface-neutral-weak);
 
 		menu-section {
 			display: flex;
+			flex-wrap: wrap;
 			align-items: center;
 
 			.item {
@@ -70,9 +93,16 @@
 				padding: 1em;
 				line-height: 1;
 
+				/* Without this the items shrink past their own text, clipping it. */
+				flex-shrink: 0;
+
 				&.current_menu_item {
 					border-bottom: 2px solid var(--wpds-color-stroke-interactive-neutral-strong);
 				}
+			}
+
+			#zbs-contacts-topmenu {
+				min-width: 114px;
 			}
 
 			#jpcrm-user-menu-item {
@@ -84,7 +114,9 @@
 
 			#jpcrm-user-menu {
 				width: 580px;
-				min-width: 580px;
+				min-width: 0;
+				/* The bar's content width; the viewport overstates it beside the admin sidebar. */
+				max-width: 100cqw;
 
 				i.icon {
 					margin-right: 8px;
@@ -111,6 +143,64 @@
 						color: var(--wpds-color-foreground-content-neutral);
 					}
 				}
+			}
+		}
+	}
+
+	/*
+	 * Once the nav no longer fits alongside the notifications and account
+	 * controls, those two move up into the logo row, which is empty to the right
+	 * of the wordmark. Left in place they wrap onto a row of their own, aligned
+	 * left under the nav.
+	 *
+	 * The threshold is roughly where the nav and the controls stop fitting side
+	 * by side with the menu as it stands; re-measure if items are added or
+	 * renamed. A container query measures the content box, so the bar's own
+	 * padding is already excluded.
+	 */
+	@container (max-width: 740px) {
+
+		menu-bar menu-section:last-of-type {
+			position: absolute;
+			top: $bar-pad-y;
+			right: $bar-pad-x;
+			height: $logo-row-height; /* So the controls centre against the logo row. */
+		}
+
+		/*
+		 * With the controls out of the way the nav can now reach the right edge,
+		 * and the last item's panel -- anchored to its left -- hangs off it. Hang
+		 * that one off its right edge instead.
+		 *
+		 * This is the fallback. It assumes the last item is at the right end of a
+		 * row, which stops being true once it wraps onto a row of its own; the
+		 * block below handles that where anchor positioning is available.
+		 */
+		menu-section:first-of-type > .item:last-child > .menu {
+			left: auto;
+			right: 0;
+		}
+
+		/*
+		 * Any panel that would overflow the bar's right edge flips to hang from
+		 * its item's right edge instead, and only then. The item goes static so
+		 * the panel's containing block -- what the overflow check measures
+		 * against -- is the bar rather than the item.
+		 */
+		@supports (position-try-fallbacks: flip-inline) {
+
+			menu-bar menu-section:first-of-type > .ui.dropdown.item {
+				position: static;
+				anchor-name: --jpcrm-nav-item;
+				anchor-scope: --jpcrm-nav-item;
+			}
+
+			menu-bar menu-section:first-of-type > .ui.dropdown.item > .menu {
+				position-anchor: --jpcrm-nav-item;
+				top: anchor(bottom);
+				left: anchor(left);
+				right: auto;
+				position-try-fallbacks: flip-inline;
 			}
 		}
 	}

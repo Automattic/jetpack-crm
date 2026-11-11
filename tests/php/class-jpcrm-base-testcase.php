@@ -3,6 +3,7 @@
 namespace Automattic\Jetpack\CRM\Tests;
 
 use WP_UnitTestCase;
+use WPDieException;
 use ZeroBSCRM;
 
 /**
@@ -211,5 +212,45 @@ abstract class JPCRM_Base_TestCase extends WP_UnitTestCase {
 				'show_on_calendar' => false,
 			)
 		);
+	}
+
+	/**
+	 * Run an AJAX handler and return the JSON body it answered with.
+	 *
+	 * Handlers built on wp_send_json() write the response and exit, so the
+	 * output has to be buffered and the exit intercepted; the response body is
+	 * the only thing actually observable.
+	 *
+	 * @param callable $handler The AJAX handler to invoke.
+	 * @return mixed The decoded response body, or null where it was not JSON.
+	 */
+	protected function capture_json_response( callable $handler ) {
+		// wp_send_json() calls a bare die() unless wp_doing_ajax() is true, which
+		// would take the whole PHP process with it rather than throwing.
+		add_filter( 'wp_doing_ajax', '__return_true' );
+
+		$die_handler = static function () {
+			return static function () {
+				throw new WPDieException( 'sent' );
+			};
+		};
+		add_filter( 'wp_die_ajax_handler', $die_handler );
+		add_filter( 'wp_die_json_handler', $die_handler );
+		add_filter( 'wp_die_handler', $die_handler );
+
+		ob_start();
+		try {
+			$handler();
+		} catch ( WPDieException $e ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedCatch
+			// Expected: wp_send_json always terminates.
+		}
+		$output = ob_get_clean();
+
+		remove_filter( 'wp_die_handler', $die_handler );
+		remove_filter( 'wp_die_json_handler', $die_handler );
+		remove_filter( 'wp_die_ajax_handler', $die_handler );
+		remove_filter( 'wp_doing_ajax', '__return_true' );
+
+		return json_decode( $output, true );
 	}
 }

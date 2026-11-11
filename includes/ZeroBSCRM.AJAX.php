@@ -248,7 +248,7 @@ function zeroBSCRM_AJAX_markFeedback() {
 	wp_send_json( array( 'fini' => 1 ), 200, JSON_UNESCAPED_SLASHES );
 }
 
-	// } Retrieve list of invoice deets for customer ID
+	// } Retrieve list of invoice deets for customer or company ID
 	add_action( 'wp_ajax_getinvs', 'zeroBSCRM_AJAX_getCustInvs' );
 function zeroBSCRM_AJAX_getCustInvs() {
 
@@ -258,18 +258,35 @@ function zeroBSCRM_AJAX_getCustInvs() {
 	$ret = array();
 
 	// } If perms?
-	if ( zeroBSCRM_permsCustomers() ) {
+	if ( zeroBSCRM_permsViewInvoices() ) {
 
-		// } Retrieve ID
-		$cID = -1;
-		if ( isset( $_POST['cid'] ) ) {
-			$cID = (int) $_POST['cid'];
-		}
+		// } Retrieve ID (the editor sends one of cid/coid)
+		$contact_id = isset( $_POST['cid'] ) ? (int) $_POST['cid'] : 0;
+		$company_id = isset( $_POST['coid'] ) ? (int) $_POST['coid'] : 0;
 
-		if ( $cID > 0 ) {
+		if ( $contact_id > 0 || $company_id > 0 ) {
 
-			// } Retrieve the customers invoices:
-			$ret = zeroBS_getInvoicesForCustomer( $cID, true, 100 );
+			// } Retrieve the contact's (or, failing that, the company's) invoices;
+			// the dropdown only renders id + ref, so skip line items and custom fields
+			global $zbs;
+
+			$args = array(
+				'sortByField'      => 'ID',
+				'sortOrder'        => 'DESC',
+				'page'             => 0,
+				'perPage'          => 100,
+				'withLineItems'    => false,
+				'withCustomFields' => false,
+				'ignoreowner'      => zeroBSCRM_DAL2_ignoreOwnership( ZBS_TYPE_INVOICE ),
+			);
+
+			if ( $contact_id > 0 ) {
+				$args['assignedContact'] = $contact_id;
+			} else {
+				$args['assignedCompany'] = $company_id;
+			}
+
+			$ret = $zbs->DAL->invoices->getInvoices( $args ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 
 		}
 	}
@@ -1185,6 +1202,44 @@ function zbs_lead_form_views() {
 	add_action( 'wp_ajax_nopriv_zbs_lead_form_views', 'zbs_lead_form_views' );
 	add_action( 'wp_ajax_zbs_lead_form_views', 'zbs_lead_form_views' );
 
+/**
+ * Whether a lead capture submission should leave blank fields alone.
+ *
+ * A lead capture form collects a name and an email address. It sends those to
+ * `addUpdateContact()` inside a full set of contact fields, everything else
+ * blank, so a submission matching an existing contact empties that contact's
+ * address, telephone numbers and social fields unless it is told not to.
+ *
+ * Nobody asked for that. The form has no input for any of those fields, so a
+ * blank arriving from it is an absence rather than an instruction, whoever
+ * submitted it. We always keep what is on record.
+ *
+ * This ignores the "Overwrite Option" setting, which otherwise decides this for
+ * every non-manual source. The setting still governs the API and the rest,
+ * where a caller sending a blank may well mean it. A public form is a different
+ * proposition: it takes submissions from anyone, against any email address.
+ *
+ * @param string $submitted_email The email address the form was submitted with.
+ *
+ * @return bool Whether blank fields should be left as they are.
+ */
+function jpcrm_form_capture_do_not_update_blanks( $submitted_email ) {
+
+	/**
+	 * Filters whether a lead capture submission leaves blank fields alone.
+	 *
+	 * Return false to let a submission clear the fields it did not send, which
+	 * is how this behaved on a site with "Overwrite Option" unticked.
+	 *
+	 * It restores the blanking and nothing else. A submission still leaves the
+	 * contact assigned to whoever owns it.
+	 *
+	 * @param bool   $do_not_update_blanks Whether to leave blank fields as they are.
+	 * @param string $submitted_email      The email address the form was submitted with.
+	 */
+	return (bool) apply_filters( 'jpcrm_form_capture_do_not_update_blanks', true, $submitted_email );
+}
+
 	// } Handle form submissions interesting to see how this works cross domain...
 function zbs_lead_form_capture() {
 	/**
@@ -1397,11 +1452,16 @@ function zbs_lead_form_capture() {
 			// TO LATER DO:
 			// COMBINE THE FOLLOWING RETRIEVES... no need to have separate input gathering...
 
+			// Every style submits the same email field, and the blanks decision hangs
+			// on nothing else, so both are resolved once for all the cases below. A
+			// style added later cannot silently miss the decision.
+			$zbs_email            = sanitize_email( wp_unslash( $_POST['zbs_email'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
+			$do_not_update_blanks = jpcrm_form_capture_do_not_update_blanks( $zbs_email );
+
 			switch ( $zbs_form_style ) {
 
 				case 'zbs_simple':
 					// simple just has email
-					$zbs_email = sanitize_email( wp_unslash( $_POST['zbs_email'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
 					// have added a new 'form' for 'externals'
 					$cID = zeroBS_integrations_addOrUpdateCustomer(
 						'form',
@@ -1425,7 +1485,8 @@ function zbs_lead_form_capture() {
 						'zbsc_',
 						// } This endpoint takes submissions from anyone, against any email address,
 						// } so a submission must not reset the status of an existing contact.
-						array( 'status' )
+						array( 'status' ),
+						$do_not_update_blanks
 					);
 
 					// 2.97.7 - added this:
@@ -1457,7 +1518,6 @@ function zbs_lead_form_capture() {
 					// } Naked only has name + email?
 
 					// validate these...  (use functions in form save down...)
-					$zbs_email = sanitize_email( wp_unslash( $_POST['zbs_email'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
 					$zbs_fname = sanitize_text_field( $_POST['zbs_fname'] );
 					// $zbs_lname = sanitize_text_field($_POST['zbs_lname']);
 					// $zbs_notes = "Customer Form Submit Message:\r\n===========\r\n".sanitize_text_field($_POST['zbs_notes'])."\r\n===========\r\n";
@@ -1488,13 +1548,13 @@ function zbs_lead_form_capture() {
 						'zbsc_',
 						// } This endpoint takes submissions from anyone, against any email address,
 						// } so a submission may fill these in on an existing contact but not replace them.
-						array( 'fname', 'status' )
+						array( 'fname', 'status' ),
+						$do_not_update_blanks
 					);
 
 					break;
 				case 'zbs_cgrab':
 					// validate these...  (use functions in form save down...)
-					$zbs_email = sanitize_email( wp_unslash( $_POST['zbs_email'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
 					$zbs_fname = sanitize_text_field( $_POST['zbs_fname'] );
 					$zbs_lname = sanitize_text_field( $_POST['zbs_lname'] );
 					// Raw: $zbs_notes = "Customer Form Submit Message:\r\n===========\r\n".zeroBSCRM_textProcess($_POST['zbs_notes'])."\r\n===========\r\n";
@@ -1536,7 +1596,8 @@ function zbs_lead_form_capture() {
 						'zbsc_',
 						// } This endpoint takes submissions from anyone, against any email address,
 						// } so a submission may fill these in on an existing contact but not replace them.
-						array( 'fname', 'lname', 'status' )
+						array( 'fname', 'lname', 'status' ),
+						$do_not_update_blanks
 					);
 
 					// 2.97.7 - added this:
@@ -1961,6 +2022,33 @@ function zeroBSCRM_AJAX_updateListViewColumns() {
 		exit( 0 );
 }
 
+/**
+ * Rejects a list view sort direction that isn't ASC or DESC.
+ *
+ * The sort direction is interpolated into an ORDER BY clause further down, so anything
+ * that isn't one of the two recognised directions is rejected rather than passed along.
+ *
+ * The check is case insensitive but the value itself is returned unchanged: it is passed
+ * on to extensions via zerobs_ajax_list_view_{listtype}, which have always seen the
+ * lowercase form the list view sends. buildSort() uppercases it for the query itself.
+ *
+ * @param string|false $sort_order Sort direction as supplied in the request.
+ *
+ * @return string|false The unmodified sort direction, or false if it was empty or unrecognised.
+ */
+function jpcrm_sanitize_list_view_sort_order( $sort_order ) {
+
+	if ( empty( $sort_order ) || ! is_string( $sort_order ) ) {
+		return false;
+	}
+
+	if ( ! in_array( strtoupper( $sort_order ), array( 'ASC', 'DESC' ), true ) ) {
+		return false;
+	}
+
+	return $sort_order;
+}
+
 	// } Retrieves data sets for list views, with passed params :)
 	add_action( 'wp_ajax_retrieveListViewData', 'zeroBSCRM_AJAX_listViewRetrieveData' );
 function zeroBSCRM_AJAX_listViewRetrieveData() {
@@ -2000,6 +2088,10 @@ function zeroBSCRM_AJAX_listViewRetrieveData() {
 	if ( ! empty( $listViewParams['sort'] ) && ! preg_match( '/^[a-zA-Z_][a-zA-Z0-9_-]*$/', $listViewParams['sort'] ) ) {
 		$listViewParams['sort'] = false;
 	}
+
+	// Security: validate sort direction for the same reason. The DAL normalises this as well,
+	// but this is the request-facing entry point, so reject anything that isn't ASC or DESC here.
+	$listViewParams['sortorder'] = jpcrm_sanitize_list_view_sort_order( $listViewParams['sortorder'] );
 
 	// deal with arrayed items
 
@@ -2085,25 +2177,7 @@ function zeroBSCRM_AJAX_listViewRetrieveData() {
 		global $zbs;
 
 		// } check perms first
-		if ( $listViewParams['listtype'] == 'customer' && ! zeroBSCRM_permsViewCustomers() ) {
-			wp_send_json_error( array( 'no-action-or-rights' => 1 ), 500, JSON_UNESCAPED_SLASHES );
-		}
-		if ( $listViewParams['listtype'] == 'company' && ! zeroBSCRM_permsViewCustomers() ) {
-			wp_send_json_error( array( 'no-action-or-rights' => 1 ), 500, JSON_UNESCAPED_SLASHES );
-		}
-		if ( $listViewParams['listtype'] == 'segment' && ! zeroBSCRM_permsViewCustomers() ) {
-			wp_send_json_error( array( 'no-action-or-rights' => 1 ), 500, JSON_UNESCAPED_SLASHES );
-		}
-		if ( $listViewParams['listtype'] == 'quote' && ! zeroBSCRM_permsViewQuotes() ) {
-			wp_send_json_error( array( 'no-action-or-rights' => 1 ), 500, JSON_UNESCAPED_SLASHES );
-		}
-		if ( $listViewParams['listtype'] == 'quotetemplate' && ! zeroBSCRM_permsViewQuotes() ) {
-			wp_send_json_error( array( 'no-action-or-rights' => 1 ), 500, JSON_UNESCAPED_SLASHES );
-		}
-		if ( $listViewParams['listtype'] == 'invoice' && ! zeroBSCRM_permsViewInvoices() ) {
-			wp_send_json_error( array( 'no-action-or-rights' => 1 ), 500, JSON_UNESCAPED_SLASHES );
-		}
-		if ( $listViewParams['listtype'] == 'transaction' && ! zeroBSCRM_permsViewTransactions() ) {
+		if ( ! jpcrm_perms_view_list_type( $listViewParams['listtype'] ) ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 			wp_send_json_error( array( 'no-action-or-rights' => 1 ), 500, JSON_UNESCAPED_SLASHES );
 		}
 
@@ -3738,6 +3812,37 @@ function zeroBSCRM_AJAX_enactListViewBulkAction() {
 			switch ( $objtype ) {
 
 				case 'customer':
+					// Bulk writes follow the same ownership rules as the edit page and
+					// the inline editor (see zeroBSCRM_AJAX_listViewInlineEdit_save()):
+					// without the permission to change owners, a user may only act on
+					// their own or unowned contacts, so filter the IDs to those.
+					$can_edit_all_contacts = current_user_can( 'admin_zerobs_customers' ) && $zbs->settings->get( 'perusercustomers' ) == 0; // phpcs:ignore Universal.Operators.StrictComparisons.LooseEqual,WordPress.WP.Capabilities.Unknown  -- capability was defined in ZeroBSCRM.Permissions.php
+					$can_give_ownership    = $zbs->settings->get( 'usercangiveownership' ) == 1; // phpcs:ignore Universal.Operators.StrictComparisons.LooseEqual -- the setting may arrive as a string, as elsewhere in the plugin.
+					$can_change_owner      = ( $can_give_ownership || current_user_can( 'manage_options' ) || $can_edit_all_contacts );
+
+					if ( ! $can_change_owner ) {
+
+						$current_user_id = get_current_user_id();
+						$editable_ids    = array();
+
+						foreach ( $legitIDs as $id ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+
+							$owner = (int) $zbs->DAL->contacts->getContactOwner( $id ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+
+							if ( ( $owner > 0 && $owner !== $current_user_id ) || $owner === -1 ) {
+								continue;
+							}
+
+							$editable_ids[] = $id;
+						}
+
+						$legitIDs = $editable_ids; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+
+						if ( count( $legitIDs ) === 0 ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+							wp_send_json_error( array( 'no-action-or-rights' => 1 ), 500, JSON_UNESCAPED_SLASHES );
+						}
+					}
+
 						// Actions:
 					switch ( $actionstr ) {
 
@@ -5096,6 +5201,24 @@ function zeroBSCRM_AJAX_listViewInlineEdit_save() {
 			// } check deets
 			if ( $id > 0 && ! empty( $field ) ) {
 
+				// This endpoint writes the same fields as the edit page, so it enforces
+				// the same ownership rules (see ZeroBSCRM.Edit.php and
+				// ZeroBSCRM.MetaBoxes3.Contacts.php): a contact owned by another user
+				// (or by nobody) may only be changed by a user who could change its
+				// owner, and reassignment itself always needs that permission.
+				$can_edit_all_contacts = current_user_can( 'admin_zerobs_customers' ) && $zbs->settings->get( 'perusercustomers' ) == 0; // phpcs:ignore Universal.Operators.StrictComparisons.LooseEqual,WordPress.WP.Capabilities.Unknown  -- capability was defined in ZeroBSCRM.Permissions.php
+				$can_give_ownership    = $zbs->settings->get( 'usercangiveownership' ) == 1; // phpcs:ignore Universal.Operators.StrictComparisons.LooseEqual -- the setting may arrive as a string, as elsewhere in the plugin.
+				$can_change_owner      = ( $can_give_ownership || current_user_can( 'manage_options' ) || $can_edit_all_contacts );
+
+				if ( ! $can_change_owner ) {
+
+					$owner = (int) $zbs->DAL->contacts->getContactOwner( $id ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+
+					if ( ( $owner > 0 && $owner !== get_current_user_id() ) || $owner === -1 ) {
+						wp_send_json_error( array( 'no-action-or-rights' => 1 ), 500, JSON_UNESCAPED_SLASHES );
+					}
+				}
+
 				$success = false;
 				switch ( $field ) {
 
@@ -5103,7 +5226,10 @@ function zeroBSCRM_AJAX_listViewInlineEdit_save() {
 						$success = $zbs->DAL->contacts->setContactStatus( $id, $v );
 						break;
 					case 'assigned':
-						$success = $zbs->DAL->contacts->setContactOwner( $id, $v );
+						if ( ! $can_change_owner ) {
+							wp_send_json_error( array( 'no-action-or-rights' => 1 ), 500, JSON_UNESCAPED_SLASHES );
+						}
+						$success = $zbs->DAL->contacts->setContactOwner( $id, (int) $v ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 						break;
 
 				}
@@ -5460,34 +5586,6 @@ function zeroBSCRM_AJAX_sendStatement() {
 		wp_send_json( $r, 200, JSON_UNESCAPED_SLASHES );
 }
 
-add_action( 'wp_ajax_zbs_invoice_mark_paid', 'zbs_invoice_mark_paid' );
-function zbs_invoice_mark_paid() {
-
-	// } get if poss
-	$zbs_invID = -1;
-	if ( isset( $_POST['id'] ) && ! empty( $_POST['id'] ) ) {
-		$zbs_invID = (int) sanitize_text_field( $_POST['id'] );  // accepts the post ID
-	}
-
-	// } Check id + perms + em
-	if ( $zbs_invID < 1 || ! zeroBSCRM_permsInvoices() ) {
-
-		die( 0 );
-
-	}
-
-	// } Continue
-
-	// once the invoice is sent it will mark it as unpaid (automatically)
-	$zbs_inv_meta           = get_post_meta( $zbs_invID, 'zbs_customer_invoice_meta', true ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
-	$zbs_inv_meta['status'] = 'Paid';
-	update_post_meta( $zbs_invID, 'zbs_customer_invoice_meta', $zbs_inv_meta ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
-
-	// all OK ....
-	$r = array( 'message' => 'All done OK' );
-	wp_send_json( $r, 200, JSON_UNESCAPED_SLASHES );
-}
-
 // } and send test so they can test before actually sending the invoice
 add_action( 'wp_ajax_zbs_invoice_send_test_invoice', 'zbs_invoice_send_test_invoice' );
 function zbs_invoice_send_test_invoice() {
@@ -5641,7 +5739,7 @@ function zeroBSCRM_AJAX_getInvoice() {
 	check_ajax_referer( 'zbscrmjs-ajax-nonce', 'sec' );
 
 	// check perms
-	if ( ! zeroBSCRM_permsIsZBSUser() ) {
+	if ( ! zeroBSCRM_permsViewInvoices() ) {
 		wp_send_json_error( null, 500, JSON_UNESCAPED_SLASHES );
 	}
 

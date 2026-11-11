@@ -19,12 +19,15 @@
 namespace Automattic\Jetpack\CRM\Entities\Tests;
 
 use Automattic\Jetpack\CRM\Tests\JPCRM_Base_Integration_TestCase;
+use Automattic\Jetpack\CRM\Tests\JPCRM_Lead_Capture_Form;
 use PHPUnit\Framework\Attributes\TestDox;
 
 /**
  * Test the populated-field protection used for self-reported contact details.
  */
 class Contact_Field_Protection_Test extends JPCRM_Base_Integration_TestCase {
+
+	use JPCRM_Lead_Capture_Form;
 
 	/**
 	 * Fields a self-reported source may fill in but not replace.
@@ -262,28 +265,6 @@ class Contact_Field_Protection_Test extends JPCRM_Base_Integration_TestCase {
 
 		$this->assertSame( 'Robin', $contact['fname'], 'A new contact should keep the details it was created with.' );
 		$this->assertSame( '1 Barrack Street', $contact['addr1'], 'A new contact should keep the details it was created with.' );
-	}
-
-	/**
-	 * Submit through the same helper, with the same arguments, the lead capture
-	 * endpoint uses for a 'zbs_cgrab' form.
-	 *
-	 * @param array $fields Contact fields, `zbsc_` prefixed as the endpoint passes them.
-	 * @return int|false The contact ID.
-	 */
-	private function submit_lead_form( array $fields ) {
-		return zeroBS_integrations_addOrUpdateCustomer(
-			'form',
-			$fields['zbsc_email'],
-			$fields,
-			'',
-			'none',
-			false,
-			false,
-			'update',
-			'zbsc_',
-			array( 'fname', 'lname', 'status' )
-		);
 	}
 
 	/**

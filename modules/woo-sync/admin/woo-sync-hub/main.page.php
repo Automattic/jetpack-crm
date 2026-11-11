@@ -45,9 +45,9 @@ function jpcrm_woosync_render_hub_page() {
 
 			foreach ( $sync_sites as $site_key => $site_info ) {
 
-				// mark that we've 'not completed first import'
-				$zbs->modules->woosync->set_sync_site_attribute( $site_key, 'first_import_complete', false );
-				$zbs->modules->woosync->set_sync_site_attribute( $site_key, 'resume_from_page', 1 );
+				// back to the start: progress reset, and the record of which contacts
+				// the last import created cleared along with it.
+				$zbs->modules->woosync->restart_first_import( $site_key );
 
 			}
 		}
@@ -202,9 +202,9 @@ function jpcrm_woosync_render_hub_page() {
 	?>
 	<div id="jpcrm-woosync-hub-page">
 		<div id="jpcrm-woo-logo">
-			<img id="jpcrm-woosync-jpcrm-logo" src="<?php echo esc_url( ZEROBSCRM_URL ); ?>i/jpcrm-logo-horizontal-black.png" alt="" />
+			<img id="jpcrm-woosync-jpcrm-logo" src="<?php echo esc_url( jpcrm_get_logo( false, 'black', 'svg' ) ); ?>" alt="" />
 			<i class="plus icon"></i>
-			<img id="jpcrm-woosync-woo-logo" src="<?php echo esc_url( ZEROBSCRM_URL ); ?>i/woocommerce-logo-color-black@2x.png" alt="" />
+			<img id="jpcrm-woosync-woo-logo" src="<?php echo esc_url( ZEROBSCRM_URL ); ?>i/welcome-to-zbs/woo-logo.svg" alt="" />
 		</div>
 		<?php
 
@@ -464,9 +464,9 @@ function jpcrm_woosync_render_hub_page_debug_mode() {
 	?>
 	<div id="jpcrm-woosync-hub-page">
 		<div id="jpcrm-woo-logo">
-			<img id="jpcrm-woosync-jpcrm-logo" src="<?php echo esc_url( ZEROBSCRM_URL ); ?>i/jpcrm-logo-horizontal-black.png" alt="" />
+			<img id="jpcrm-woosync-jpcrm-logo" src="<?php echo esc_url( jpcrm_get_logo( false, 'black', 'svg' ) ); ?>" alt="" />
 			<i class="plus icon"></i>
-			<img id="jpcrm-woosync-woo-logo" src="<?php echo esc_url( ZEROBSCRM_URL ); ?>i/woocommerce-logo-color-black@2x.png" alt="" />
+			<img id="jpcrm-woosync-woo-logo" src="<?php echo esc_url( ZEROBSCRM_URL ); ?>i/welcome-to-zbs/woo-logo.svg" alt="" />
 		</div>
 		<div class="ui segment" id="jpcrm-woosync-page-body">
 			<h2>Debug Mode:</h2>
