@@ -40,5 +40,8 @@
 		<testsuite name="portal">
 			<directory suffix="Test.php">tests/php/portal</directory>
 		</testsuite>
+		<testsuite name="metabox">
+			<directory suffix="Test.php">tests/php/metabox</directory>
+		</testsuite>
 	</testsuites>
 </phpunit>
