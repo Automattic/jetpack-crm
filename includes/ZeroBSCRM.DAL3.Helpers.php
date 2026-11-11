@@ -1781,7 +1781,9 @@ function zeroBS_addUpdateCustomer(
 	$extraMeta = false,
 	$automatorPassthrough = false,
 	$owner = -1,
-	$metaBuilderPrefix = 'zbsc_'
+	$metaBuilderPrefix = 'zbsc_',
+	$do_not_overwrite_populated = array(),
+	$do_not_update_blanks = false
 ) {
 
 	#} return
@@ -1955,11 +1957,13 @@ function zeroBS_addUpdateCustomer(
 		// DB2 update_post_meta($postID, 'zbs_customer_meta', $zbsCustomerMeta);
 		return $zbs->DAL->contacts->addUpdateContact(
 			array(
-				'id'                   => $cID,
-				'data'                 => $zbsCustomerMeta,
-				'extraMeta'            => $extraMeta,
-				'automatorPassthrough' => $automatorPassthrough,
-				'fallBackLog'          => $fallBackLog,
+				'id'                         => $cID,
+				'data'                       => $zbsCustomerMeta,
+				'extraMeta'                  => $extraMeta,
+				'automatorPassthrough'       => $automatorPassthrough,
+				'fallBackLog'                => $fallBackLog,
+				'do_not_overwrite_populated' => $do_not_overwrite_populated,
+				'do_not_update_blanks'       => $do_not_update_blanks,
 			)
 		);
 
@@ -5461,6 +5465,11 @@ function zeroBS_addUpdateEvent( $eventID = -1, $eventFields = array(), $reminder
 		$args['data']['companies'] = array( $eventFields['company'] );
 	}
 
+	// tags (array of tag names or IDs; the DAL creates missing ones).
+	if ( isset( $eventFields['tags'] ) && is_array( $eventFields['tags'] ) ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+		$args['data']['tags'] = $eventFields['tags']; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+	}
+
 	$args['data']['reminders'] = array();
 
 	// reminders into new DAL2 eventreminder format:
@@ -6655,7 +6664,13 @@ function zeroBSCRM_taxRates_deleteTaxRate( $args = array() ) {
 	#} Check ID & Delete :)
 	$id = (int) $id;
 	if ( ! empty( $id ) && $id > 0 ) {
-		return zeroBSCRM_db2_deleteGeneric( $id, 'tax' );
+		$deleted = zeroBSCRM_db2_deleteGeneric( $id, 'tax' );
+
+		// The duplicate check in zeroBSCRM_taxRates_addUpdateTaxRate() caches every rate;
+		// clear it as add and update do, so a deleted rate can be added again.
+		wp_cache_delete( 'all_tax_rates', 'zbscrm_tax_rates' );
+
+		return $deleted;
 	}
 
 	return false;

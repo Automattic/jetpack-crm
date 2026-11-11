@@ -1,0 +1,34 @@
+name: Update WordPress.org Readme/Assets
+
+# Push readme.txt and .wordpress-org assets to WordPress.org without cutting a
+# release — e.g. to bump "Tested up to" after a new WordPress version. Updates
+# SVN trunk, the assets directory, and the readme in the current stable tag.
+#
+# Caveat: this publishes trunk's readme.txt exactly as it stands, including
+# into the stable tag users see. If trunk's readme carries anything meant for
+# the *next* release (new changelog entries, a bumped stable tag), don't
+# dispatch this — ship the release instead. Before dispatching, check that
+# the only differences are ones meant to go live now:
+#
+#   curl -s https://plugins.svn.wordpress.org/zero-bs-crm/tags/<stable>/readme.txt | diff - readme.txt
+on:
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    name: Push readme and assets to WordPress.org
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+      - name: Install SVN
+        run: sudo apt-get update && sudo apt-get install -y subversion
+      - name: Update readme/assets on WordPress.org
+        uses: 10up/action-wordpress-plugin-asset-update@2480306f6f693672726d08b5917ea114cb2825f7 # 2.2.0
+        env:
+          SVN_PASSWORD: ${{ secrets.WORDPRESSORG_SVN_PASSWORD }}
+          SVN_USERNAME: ${{ secrets.WORDPRESSORG_SVN_USERNAME }}
+          SLUG: zero-bs-crm
+          # SVN trunk holds the *built* plugin while git trunk is source, so
+          # everything except readme.txt and assets always differs. Only copy
+          # readme.txt and .wordpress-org/; ignore all other differences.
+          IGNORE_OTHER_FILES: true

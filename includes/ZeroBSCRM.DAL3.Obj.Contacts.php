@@ -2522,6 +2522,10 @@ class zbsDAL_contacts extends zbsDAL_ObjectLayer {
 
 			'do_not_update_blanks' => false, // this allows you to not update fields if blank (same as fieldoverride for extsource -> in)
 
+			// Field keys (unprefixed) which may be filled in on an existing contact, but not replaced.
+			// For callers passing details self-reported through a checkout or form. See below.
+			'do_not_overwrite_populated' => array(),
+
 		);
 		foreach ( $defaultArgs as $argK => $argV ) {
 			$$argK = $argV;
@@ -2734,6 +2738,64 @@ class zbsDAL_contacts extends zbsDAL_ObjectLayer {
 
 		#} ========= / CHECK FIELDS ===========
 
+		// ========= SELF-REPORTED SOURCE (Deny overwrites of populated fields) ===========
+
+		/*
+		 * Contacts are matched by email address, so a caller which passes contact data
+		 * without an ID updates whichever contact already holds that email (see the email
+		 * lookup above). Where the details came from a CRM user, or from someone signed in
+		 * to an account, replacing what is on record is the right outcome.
+		 *
+		 * Details typed into a checkout or a form that anyone can fill in are weaker than
+		 * that: the email address was entered alongside everything else, and the contact it
+		 * matches may hold details a CRM user has since corrected. Callers handling those
+		 * name the fields here, and we fill them in when blank rather than replace them.
+		 */
+		if ( is_array( $do_not_overwrite_populated ) && count( $do_not_overwrite_populated ) > 0 && ! empty( $id ) && $id > 0 ) {
+
+			$existing_contact = $this->getContact( $id, array( 'withCustomFields' => false ) );
+
+			if ( is_array( $existing_contact ) ) {
+
+				/*
+				 * Until we add multi-address support, `getContact()` hands the second
+				 * address back under its old field names, so a field written as
+				 * `secaddr1` reads back as `secaddr_addr1`. Translate before looking a
+				 * protected field up on the record, or it never matches and the field is
+				 * replaced as though it had been left out of the list.
+				 */
+				$stored_field_names = array(
+					'secaddr1'    => 'secaddr_addr1',
+					'secaddr2'    => 'secaddr_addr2',
+					'seccity'     => 'secaddr_city',
+					'seccounty'   => 'secaddr_county',
+					'seccountry'  => 'secaddr_country',
+					'secpostcode' => 'secaddr_postcode',
+				);
+
+				foreach ( $do_not_overwrite_populated as $protected_field ) {
+
+					// Nothing to overwrite with.
+					if ( ! isset( $data[ $protected_field ] ) ) {
+						continue;
+					}
+
+					$stored_field = isset( $stored_field_names[ $protected_field ] ) ? $stored_field_names[ $protected_field ] : $protected_field;
+
+					// Nothing on record yet, so let it be filled in.
+					if ( ! isset( $existing_contact[ $stored_field ] ) || '' === $existing_contact[ $stored_field ] ) {
+						continue;
+					}
+
+					// Hold the stored value rather than unsetting the key, so this behaves the
+					// same way whether or not the caller also passed `do_not_update_blanks`.
+					$data[ $protected_field ] = $existing_contact[ $stored_field ];
+				}
+			}
+		}
+
+		// ========= / SELF-REPORTED SOURCE ===========
+
 		#} ========= OVERRIDE SETTING (Deny blank overrides) ===========
 
 		// this only functions if externalsource is set (e.g. api/form, etc.)
@@ -2833,7 +2895,8 @@ class zbsDAL_contacts extends zbsDAL_ObjectLayer {
 			// UPDATE
 			$dataArr = array(
 
-				'zbs_owner'        => $owner,
+				// ownership
+				// 'zbs_owner' => $owner, // appended below: on update only when the caller named one.
 
 				// phpcs:disable VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable -- to be refactored.
 				// fields
@@ -2875,7 +2938,7 @@ class zbsDAL_contacts extends zbsDAL_ObjectLayer {
 			$typeArr = array( // field data types
 				// '%d',  // site
 				// '%d',  // team
-				'%d',    // owner
+				// '%d',  // owner, appended below.
 				'%s',
 				'%s',
 				'%s',
@@ -2913,6 +2976,21 @@ class zbsDAL_contacts extends zbsDAL_ObjectLayer {
 				// is update
 				$update = true;
 
+				// Only write the owner when the caller named one, as the
+				// companies DAL does.
+				//
+				// -1 is the default, and it means "not specified" rather than
+				// "unassign": nothing sets an owner through this path. Both
+				// setContactOwner() and the ownership box on the contact edit
+				// screen refuse anything below 1. But this path writes every
+				// column, so a caller updating a contact without naming an owner,
+				// which is most of them, cleared whoever the contact was assigned
+				// to. A lead capture submission and a client portal profile save
+				// both did it.
+				if ( (int) $owner > 0 ) {
+					$dataArr['zbs_owner'] = $owner;
+					$typeArr[]            = '%d';
+				}
 			} else {
 
 				// INSERT (get's few extra :D)
@@ -2921,6 +2999,11 @@ class zbsDAL_contacts extends zbsDAL_ObjectLayer {
 				$typeArr[]           = '%d';
 				$dataArr['zbs_team'] = zeroBSCRM_team();
 				$typeArr[]           = '%d';
+
+				// A new contact needs the column set, and -1 is what an unowned
+				// contact holds.
+				$dataArr['zbs_owner'] = $owner;
+				$typeArr[]            = '%d';
 
 				if ( isset( $data['created'] ) && ! empty( $data['created'] ) && $data['created'] !== -1 ) {
 					$dataArr['zbsc_created'] = $data['created'];
@@ -2993,6 +3076,23 @@ class zbsDAL_contacts extends zbsDAL_ObjectLayer {
 				)
 			) !== false ) {
 
+				// externalSources, outside the limitedFields check below.
+				//
+				// Where a contact came from is worth recording whether or not the caller
+				// sent a full set of fields, and a caller that sends none is the norm now
+				// that `do_not_update_blanks` converts a form submission to limitedFields.
+				// Skipping this here lost the 'form' source on every existing contact that
+				// filled a form in.
+				//
+				// Passing no sources is a no-op: this adds and updates, never removes.
+				$this->DAL()->addUpdateExternalSources(
+					array(
+						'obj_id'           => $id,
+						'obj_type_id'      => ZBS_TYPE_CONTACT,
+						'external_sources' => isset( $data['externalSources'] ) ? $data['externalSources'] : array(),
+					)
+				);
+
 				// if passing limitedFields instead of data, we ignore the following
 				// this doesn't work, because data is in args default as arr
 				// if (isset($data) && is_array($data)){
@@ -3011,15 +3111,6 @@ class zbsDAL_contacts extends zbsDAL_ObjectLayer {
 						);
 
 					}
-
-					// externalSources
-					$approvedExternalSource = $this->DAL()->addUpdateExternalSources(
-						array(
-							'obj_id'           => $id,
-							'obj_type_id'      => ZBS_TYPE_CONTACT,
-							'external_sources' => isset( $data['externalSources'] ) ? $data['externalSources'] : array(),
-						)
-					); // for IA below
 
 					// co's work?
 					// OBJ LINKS - to companies (1liner now as genericified)

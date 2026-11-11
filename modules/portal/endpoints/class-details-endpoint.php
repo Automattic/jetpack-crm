@@ -269,24 +269,6 @@ class Details_Endpoint extends Client_Portal_Endpoint {
 		if ( $click2call == '1' && isset( $zbsCustomer[ $fieldK ] ) && ! empty( $zbsCustomer[ $fieldK ] ) ) {
 			echo '<a href="' . esc_attr( zeroBSCRM_clickToCallPrefix() . $zbsCustomer[ $fieldK ] ) . '" class="button"><i class="fa fa-phone"></i> ' . esc_html( $zbsCustomer[ $fieldK ] ) . '</a>';}
 		?>
-		<?php
-		if ( $fieldK == 'mobtel' ) {
-
-			$sms_class = 'send-sms-none';
-			$sms_class = apply_filters( 'zbs_twilio_sms', $sms_class );
-			do_action( 'zbs_twilio_nonce' );
-
-			$customerMob = ''; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
-			if ( is_array( $zbsCustomer ) && isset( $zbsCustomer[ $fieldK ] ) && ! empty( $zbsCustomer['id'] ) ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
-				$customerMob = zeroBS_customerMobile( $zbsCustomer['id'], $zbsCustomer ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
-			}
-
-			if ( ! empty( $customerMob ) ) {
-				echo '<a class="' . esc_attr( $sms_class ) . ' button" data-smsnum="' . esc_attr( $customerMob ) . '"><i class="mobile alternate icon"></i> ' . esc_html__( 'SMS', 'zero-bs-crm' ) . ': ' . esc_html( $customerMob ) . '</a>';
-			}
-		}
-
-		?>
 		</p>
 		<?php
 	}

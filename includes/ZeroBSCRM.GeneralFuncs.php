@@ -840,11 +840,25 @@ function zeroBSCRM_getDefaultContactAvatar() {
 	return plugins_url( '/i/default-contact.png', ZBS_ROOTFILE );
 }
 
-	// return logo
-function jpcrm_get_logo( $stacked = true, $color = 'black' ) {
+/**
+ * Return a URL for the Jetpack CRM logo.
+ *
+ * PNG stays the default: ZeroBSCRM.NotifyMe.php passes this to Push.create()
+ * as a notification icon, and $zbs->urls['crm-logo'] (the same artwork, set in
+ * ZeroBSCRM.Core.php) goes into emails; neither can rely on SVG. Callers that
+ * render into a browser can ask for the SVG, which is half the PNG's pixel
+ * size (the PNGs are 2x exports), so set an explicit width and height.
+ *
+ * @param bool   $stacked Stacked lockup rather than horizontal.
+ * @param string $color   'black' or 'white'.
+ * @param string $format  'svg', or anything else for 'png'.
+ * @return string
+ */
+function jpcrm_get_logo( $stacked = true, $color = 'black', $format = 'png' ) {
+	$format   = 'svg' === $format ? 'svg' : 'png';
 	$logo_url = plugins_url( '/i/icon-32.png', ZBS_ROOTFILE );
 	##WLREMOVE
-	$logo_url = plugins_url( '/i/jpcrm-logo-' . ( $stacked ? 'stacked' : 'horizontal' ) . '-' . $color . '.png', ZBS_ROOTFILE );
+	$logo_url = plugins_url( '/i/jpcrm-logo-' . ( $stacked ? 'stacked' : 'horizontal' ) . '-' . $color . '.' . $format, ZBS_ROOTFILE );
 	##/WLREMOVE
 	return $logo_url;
 }

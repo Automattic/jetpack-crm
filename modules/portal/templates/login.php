@@ -67,8 +67,16 @@ $portal_link = get_page_link( $portal_page );
 			<p><?php echo esc_html( apply_filters( 'zbs_portal_login_content', $login_subtitle ) ); ?></p>
 			<div class="login-form">
 				<?php
+				// Fields other plugins add on `login_form` (brute force challenges, 2FA) must be inside the form
+				// to be submitted. wp-login.php prints them after the password field, as `login_form_middle` does.
+				$login_form_fields = static function ( $content ) {
+					ob_start();
+					do_action( 'login_form' ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- core hook.
+					return $content . ob_get_clean();
+				};
+				add_filter( 'login_form_middle', $login_form_fields );
 				wp_login_form( $args );
-				do_action( 'login_form' );
+				remove_filter( 'login_form_middle', $login_form_fields );
 				?>
 				<a href="<?php echo esc_url( wp_lostpassword_url( get_permalink() ) ); ?>" alt="<?php esc_attr_e( 'Lost Password', 'zero-bs-crm' ); ?>"><?php esc_html_e( 'Lost Password', 'zero-bs-crm' ); ?></a>
 			</div>
