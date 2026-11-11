@@ -1102,6 +1102,20 @@ function ZeroBSCRM_accept_quote() {
 		}
 	}
 
+	// A quote returned to Draft has been withdrawn, so it can't be accepted, the same
+	// as it can't be viewed (see the portal router). Staff with quote access still can.
+	if ( ! zeroBSCRM_isZBSAdminOrAdmin() && ! zeroBSCRM_permsQuotes() && jpcrm_portal_hash_object_is_draft( $quoteID, ZBS_TYPE_QUOTE ) ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+		wp_send_json_error( array( 'access' => 1 ), 403, JSON_UNESCAPED_SLASHES );
+	}
+
+	// A quote is accepted once. Accepting again would overwrite when, from where and by
+	// whom it was accepted, and re-send the notification. The quote page hides the
+	// button once accepted; this keeps the action in line with it.
+	$quote_to_accept = zeroBS_getQuote( $quoteID ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+	if ( is_array( $quote_to_accept ) && ! empty( $quote_to_accept['accepted'] ) ) {
+		wp_send_json_error( array( 'accepted' => 1 ), 409, JSON_UNESCAPED_SLASHES );
+	}
+
 	// We can accept the quote
 
 	// mark quote as accepted

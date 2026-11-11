@@ -1154,8 +1154,8 @@ function jpcrm_can_wp_user_view_object( $wp_user, $obj_id, $obj_type_id ) {
 		case ZBS_TYPE_QUOTE:
 			$is_quote_admin = $wp_user->has_cap( 'admin_zerobs_quotes' );
 			$obj_data       = zeroBS_getQuote( $obj_id );
-			// draft quote
-			if ( is_array( $obj_data ) && $obj_data['template'] == -1 && ! $is_quote_admin ) { // phpcs:ignore Universal.Operators.StrictComparisons.LooseEqual
+			// Draft quote: no template yet (-1, or 0 for one saved with "Blank Template").
+			if ( is_array( $obj_data ) && (int) $obj_data['template'] <= 0 && ! $is_quote_admin ) {
 				return false;
 			}
 			$assigned_contact_id = $zbs->DAL->quotes->getQuoteContactID( $obj_id ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
