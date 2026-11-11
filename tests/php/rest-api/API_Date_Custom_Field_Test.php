@@ -1,4 +1,9 @@
 <?php
+/**
+ * Tests for date custom fields sent to the legacy create/update API.
+ *
+ * @package Automattic\Jetpack\CRM
+ */
 
 namespace Automattic\Jetpack\CRM\API\Tests;
 
@@ -74,10 +79,10 @@ class API_Date_Custom_Field_Test extends JPCRM_Base_Integration_TestCase {
 			self::FIELD_SLUG => self::DATE_STR,
 		);
 
-		// api/create_customer.php:51
+		// As in api/create_customer.php:51.
 		$update_args = zeroBS_buildContactMeta( $payload, array(), '', 'zbsc_', false, true );
 
-		// api/create_customer.php:220
+		// As in api/create_customer.php:220.
 		$contact_id = zeroBS_integrations_addOrUpdateCustomer( 'api', $email, $update_args );
 
 		$this->assertGreaterThan( 0, $contact_id, 'The contact was not created.' );
@@ -115,10 +120,10 @@ class API_Date_Custom_Field_Test extends JPCRM_Base_Integration_TestCase {
 			self::FIELD_SLUG => self::DATE_STR,
 		);
 
-		// api/create_company.php:30
+		// As in api/create_company.php:30.
 		$update_args = zeroBS_buildObjArr( $payload, array(), '', 'zbsc_', false, ZBS_TYPE_COMPANY, true );
 
-		// api/create_company.php:183
+		// As in api/create_company.php:183.
 		$company_id = zeroBS_integrations_addOrUpdateCompany( 'api', $email, $update_args, '', 'none', false, false, 'update', 'zbsc_' );
 
 		$this->assertGreaterThan( 0, $company_id, 'The company was not created.' );

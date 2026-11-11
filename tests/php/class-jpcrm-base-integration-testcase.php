@@ -11,6 +11,13 @@ use Automattic\Jetpack\CRM\Entities\Factories\Contact_Factory;
 abstract class JPCRM_Base_Integration_TestCase extends JPCRM_Base_TestCase {
 
 	/**
+	 * Custom field settings as they were before register_custom_field() changed them.
+	 *
+	 * @var array|null Keys `legacy` (the `customfields` setting) and `types` (object type ID => fields).
+	 */
+	private $custom_fields_before = null;
+
+	/**
 	 * Clean up the database after each test.
 	 *
 	 * @since 6.2.0
@@ -18,6 +25,8 @@ abstract class JPCRM_Base_Integration_TestCase extends JPCRM_Base_TestCase {
 	 * @return void
 	 */
 	public function tear_down(): void {
+		$this->restore_custom_fields();
+
 		parent::tear_down();
 
 		zeroBSCRM_database_reset( false );
@@ -118,6 +127,19 @@ abstract class JPCRM_Base_Integration_TestCase extends JPCRM_Base_TestCase {
 	public function register_custom_field( $slug, $type, $label, array $object_keys ) {
 		global $zbs;
 
+		// Settings outlive the test: tear_down() puts these back.
+		if ( null === $this->custom_fields_before ) {
+			$this->custom_fields_before = array(
+				'legacy' => $zbs->settings->get( 'customfields' ),
+				'types'  => array(),
+			);
+		}
+		foreach ( $object_keys as $obj_type_id ) {
+			if ( ! array_key_exists( $obj_type_id, $this->custom_fields_before['types'] ) ) {
+				$this->custom_fields_before['types'][ $obj_type_id ] = $zbs->DAL->getActiveCustomFields( array( 'objtypeid' => $obj_type_id ) ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+			}
+		}
+
 		$field_definition = array( $type, $label, '', $slug );
 
 		$legacy_setting = array();
@@ -139,6 +161,34 @@ abstract class JPCRM_Base_Integration_TestCase extends JPCRM_Base_TestCase {
 		// the custom fields.
 		zeroBSCRM_fields_initialise();
 		zeroBSCRM_unpackCustomFields();
+	}
+
+	/**
+	 * Undo register_custom_field(): put the settings and field globals back.
+	 *
+	 * @return void
+	 */
+	private function restore_custom_fields() {
+		global $zbs;
+
+		if ( null === $this->custom_fields_before ) {
+			return;
+		}
+
+		foreach ( $this->custom_fields_before['types'] as $obj_type_id => $fields ) {
+			$zbs->DAL->updateActiveCustomFields( // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+				array(
+					'objtypeid' => $obj_type_id,
+					'fields'    => is_array( $fields ) ? $fields : array(),
+				)
+			);
+		}
+		$zbs->settings->update( 'customfields', $this->custom_fields_before['legacy'] );
+
+		zeroBSCRM_fields_initialise();
+		zeroBSCRM_unpackCustomFields();
+
+		$this->custom_fields_before = null;
 	}
 
 	/**

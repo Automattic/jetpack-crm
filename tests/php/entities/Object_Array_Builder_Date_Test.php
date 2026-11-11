@@ -1,4 +1,9 @@
 <?php
+/**
+ * Tests for date normalisation in the shared object array builder.
+ *
+ * @package Automattic\Jetpack\CRM
+ */
 
 namespace Automattic\Jetpack\CRM\Entities\Tests;
 

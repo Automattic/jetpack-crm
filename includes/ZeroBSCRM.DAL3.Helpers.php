@@ -2770,7 +2770,7 @@ function zeroBS_buildObjArr( $arraySource = array(), $startingArray = array(), $
 							break;
 						}
 
-						$retArray[ $outputPrefix . $fK ] = sanitize_text_field( $raw_value );
+						$retArray[ $outputPrefix . $fK ] = sanitize_text_field( $raw_value ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 
 						// translate datetime to UTS (without time)
 						// ... by default from DAL3.0
