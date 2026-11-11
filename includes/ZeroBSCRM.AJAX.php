@@ -383,6 +383,19 @@ function zeroBSCRM_AJAX_filterCustomers() {
 	wp_send_json( $res, 200, JSON_UNESCAPED_SLASHES );
 }
 
+/**
+ * Sanitise a log type posted from the activity log box.
+ *
+ * A log type is a short label such as "Note" or "Call"; quotes, backticks,
+ * backslashes and angle brackets are never part of one.
+ *
+ * @param string $raw_type Posted (slashed) log type.
+ * @return string
+ */
+function jpcrm_sanitize_log_type( $raw_type ) {
+	return str_replace( array( '"', "'", '`', '\\', '<', '>' ), '', sanitize_text_field( wp_unslash( (string) $raw_type ) ) );
+}
+
 	// Add log
 	add_action( 'wp_ajax_zbsaddlog', 'zeroBSCRM_AJAX_addLog' );
 function zeroBSCRM_AJAX_addLog() {
@@ -404,7 +417,7 @@ function zeroBSCRM_AJAX_addLog() {
 		$zbsNoteAgainstPostID = (int) $_POST['zbsnagainstid'];
 	}
 	if ( ! empty( $_POST['zbsntype'] ) ) {
-		$zbsNoteType = sanitize_text_field( $_POST['zbsntype'] );
+		$zbsNoteType = jpcrm_sanitize_log_type( $_POST['zbsntype'] ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized,WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- sanitised and unslashed by the function.
 	}
 	if ( ! empty( $_POST['zbsnshortdesc'] ) ) {
 		$zbsNoteShortDesc = zeroBSCRM_preDBStr( sanitize_text_field( $_POST['zbsnshortdesc'] ) );
@@ -485,7 +498,7 @@ function zeroBSCRM_AJAX_updateLog() {
 		$zbsNoteAgainstPostID = (int) $_POST['zbsnagainstid'];
 	}
 	if ( ! empty( $_POST['zbsntype'] ) ) {
-		$zbsNoteType = sanitize_text_field( $_POST['zbsntype'] );
+		$zbsNoteType = jpcrm_sanitize_log_type( $_POST['zbsntype'] ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized,WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- sanitised and unslashed by the function.
 	}
 	if ( ! empty( $_POST['zbsnshortdesc'] ) ) {
 		$zbsNoteShortDesc = zeroBSCRM_preDBStr( sanitize_text_field( $_POST['zbsnshortdesc'] ) );

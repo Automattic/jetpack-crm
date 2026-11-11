@@ -795,7 +795,7 @@ class zeroBS__Metabox_LogsV2 extends zeroBS__Metabox {
 						}
 
 						// build it
-						var thisLogHTML = '<div class="zbsLogOut' + classes + '" data-logid="' + ele.id + '" id="zbsLogOutLine' + ele.id + '" data-logtype="' + logPerm + '">';
+						var thisLogHTML = '<div class="zbsLogOut' + classes + '" data-logid="' + ele.id + '" id="zbsLogOutLine' + ele.id + '" data-logtype="' + jpcrm.esc_attr( logPerm ) + '">';
 
 
 							// type ico
@@ -840,7 +840,7 @@ class zeroBS__Metabox_LogsV2 extends zeroBS__Metabox {
 								if (typeof window.zbsLogTypes[logPerm] != "undefined") thisType = window.zbsLogTypes[logPerm].label;
 
 								// type
-								if (typeof thisType !== "undefined") thisTitle += '<span>' + thisType + '</span>';
+								if (typeof thisType !== "undefined") thisTitle += '<span>' + jpcrm.esc_html( thisType ) + '</span>';
 
 								// desc
 								if (typeof logMeta.shortdesc !== "undefined") {
