@@ -126,7 +126,9 @@ function zeroBSCRM_migrations_run( $settingsArr = false, $run_at = 'init' ) {
 	global $zeroBSCRM_migrations, $zeroBSCRM_migrations_requirements;
 
 	// Catch a retry of a failed migration (linked from the admin notice and system status).
-	if ( jpcrm_perms_manage_options() && isset( $_GET['jpcrm_retry_migration'] ) ) {
+	// Only on the first run of the request: the runner fires again at wp_loaded, and
+	// clearing the failure there too would attempt a still-failing migration twice.
+	if ( 'init' === $run_at && jpcrm_perms_manage_options() && isset( $_GET['jpcrm_retry_migration'] ) ) {
 		$retry_key = sanitize_key( wp_unslash( $_GET['jpcrm_retry_migration'] ) );
 		if ( wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ?? '' ) ), 'jpcrm_retry_migration_' . $retry_key ) ) {
 			jpcrm_migration_clear_failure( $retry_key );

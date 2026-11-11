@@ -177,6 +177,34 @@ class Restore_Missing_Columns_Test extends JPCRM_Base_TestCase {
 	}
 
 	/**
+	 * @testdox A retry link attempts a still-failing migration once per request, not once per runner pass.
+	 */
+	#[TestDox( 'A retry link attempts a still-failing migration once per request, not once per runner pass.' )]
+	public function test_retry_link_attempts_once_per_request() {
+		$this->only_run_restore_migration();
+		$this->drop_origin_column();
+		$this->break_origin_alter();
+
+		zeroBSCRM_migrations_run( false, 'init' );
+		$this->assertSame( 1, $this->origin_alter_attempts );
+
+		// an admin follows the retry link: the runner fires at init, then again at wp_loaded.
+		wp_set_current_user( self::factory()->user->create( array( 'role' => 'administrator' ) ) );
+		$_GET['jpcrm_retry_migration'] = 'restore_missing_columns';
+		$_GET['_wpnonce']              = wp_create_nonce( 'jpcrm_retry_migration_restore_missing_columns' );
+
+		try {
+			zeroBSCRM_migrations_run( false, 'init' );
+			zeroBSCRM_migrations_run( false, 'wp_loaded' );
+		} finally {
+			unset( $_GET['jpcrm_retry_migration'], $_GET['_wpnonce'] );
+		}
+
+		$this->assertSame( 2, $this->origin_alter_attempts );
+		$this->assertArrayHasKey( 'restore_missing_columns', jpcrm_migrations_get_failures() );
+	}
+
+	/**
 	 * Make restore_missing_columns the only migration the runner knows about.
 	 *
 	 * @return void
