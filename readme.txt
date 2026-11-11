@@ -362,6 +362,26 @@ We offer a full, no-hassle refund within 14 days. You can read more about that, 
 
 
 == Changelog ==
+### 6.8.6 - 2026-11-11
+* Print login_form fields inside the Client Portal login form (#106)
+* Restore the external sources uid index with a prefix (#105)
+* Clear the tax rate cache on delete, and escape the segment preview (#102)
+* Read settings back correctly after they're first written or deleted (#101)
+* Save company custom fields and sources on limited field updates (#100)
+* Restore missing schema columns and stop marking failed migrations complete (#97)
+* Guard against non-array update API responses in the plugin updater (#96)
+* Let the create_event API endpoint set a task's company and tags (#95)
+* Carry the metabox icon as its own field (#39)
+* Fix date custom fields being dropped by the create/update API (#25)
+* Fix task status badge (#4)
+* Improve storage of contact uploads and statement PDFs
+* Change how WooSync records order billing emails
+* Restrict the roles available as the Client Portal extra role
+* Improve quote acceptance status checks
+* Apply the Client Portal field settings to My Account edits
+* Improve activity log type handling
+* Improve GiveWP donor field mapping
+
 ### 6.8.5 - 2026-10-05
 * Restore the wizard's desktop layout and tidy the audit stack (#64)
 * Replace the bundle banner's outdated logos (#63)
@@ -397,11 +417,3 @@ We offer a full, no-hassle refund within 14 days. You can read more about that, 
 
 ### 6.8.2 - 2026-07-27
 * Improve remote image handling in PDF generation (#10)
-
-### 6.8.1 - 2026-05-28
-#### Changed
-- Remove unneeded development and documentation files from the published plugin.
-- Update package dependencies.
-
-#### Fixed
-- Client Portal: Prevent PHP fatal when downloading PDFs.
