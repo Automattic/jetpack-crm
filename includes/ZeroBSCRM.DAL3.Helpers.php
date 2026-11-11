@@ -629,8 +629,8 @@ function zeroBSCRM_createClientPortalUser( $cID = -1, $email = '', $passwordLeng
 	// any extra assigned role? (from settings)
 	$extraRole = zeroBSCRM_getSetting( 'portalusers_extrarole' );
 
-	// add role(s)
-	if ( ! empty( $extraRole ) ) {
+	// Add role(s), re-checking the setting in case it was saved before the check existed.
+	if ( ! empty( $extraRole ) && jpcrm_portal_extra_role_is_allowed( $extraRole ) ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 		// Set the WP role first, then the JPCRM role
 		$user->set_role( $extraRole );
 		$user->add_role( 'zerobs_customer' );

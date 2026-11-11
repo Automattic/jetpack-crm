@@ -1706,15 +1706,11 @@ class Woo_Sync_Background_Sync_Job {
 				}
 			}
 
-			// Store the billing email as an alias, and as an extraMeta (for later potential origin work)
+			// Keep the billing email as extra meta. It isn't added as an alias: aliases
+			// are used to recognise a contact, and the billing email is whatever was
+			// typed at checkout.
 			if ( ! empty( $billing_email ) ) {
-
 				$data['contact_extra_meta']['billingemail'] = $billing_email;
-
-				// we only need to add the alias if it's different to the $contact_email
-				if ( $billing_email !== $contact_email ) {
-					$data['contact']['aliases'] = array( $billing_email );
-				}
 			}
 
 			// Store any customer notes

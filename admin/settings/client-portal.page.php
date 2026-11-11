@@ -54,7 +54,10 @@ if ( isset( $_POST['editwplf'] ) && zeroBSCRM_isZBSAdminOrAdmin() ) {
 	// any extra roles to assign?
 	$updatedSettings['portalusers_extrarole'] = '';
 	if ( isset( $_POST['wpzbscrm_portalusers_extrarole'] ) && ! empty( $_POST['wpzbscrm_portalusers_extrarole'] ) ) {
-		$updatedSettings['portalusers_extrarole'] = sanitize_text_field( $_POST['wpzbscrm_portalusers_extrarole'] );
+		$extra_role = sanitize_key( wp_unslash( $_POST['wpzbscrm_portalusers_extrarole'] ) );
+		if ( jpcrm_portal_extra_role_is_allowed( $extra_role ) ) {
+			$updatedSettings['portalusers_extrarole'] = $extra_role; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+		}
 	}
 
 	// status based auto-gen
@@ -412,10 +415,8 @@ if ( $sbupdated ) {
 
 						foreach ( $roles as $roleKey => $roleArr ) {
 
-							// for their protection, gonna NOT include admin roles here..
-							$blocked_array = array( 'zerobs_admin', 'administrator' );
-							// in fact no other zbs role... either...
-							if ( str_starts_with( $roleKey, 'zerobs_' ) && ! in_array( $roleKey, $blocked_array, true ) ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+							// Only roles that don't grant staff access; see jpcrm_portal_extra_role_is_allowed().
+							if ( jpcrm_portal_extra_role_is_allowed( $roleKey ) ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 
 								?>
 								<option value="<?php echo esc_attr( $roleKey ); ?>"

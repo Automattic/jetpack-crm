@@ -549,6 +549,42 @@ function zeroBSCRM_getWordPressRoles() {
 	return $all_roles;
 }
 
+/**
+ * Whether a role may be given to the WordPress users CRM creates for client portal access.
+ *
+ * The "extra role" setting lets a site add a role those users need for another plugin,
+ * such as a membership role. Anything that grants staff access is refused: CRM's own
+ * roles, administrator, and any role that can manage the site, its users, plugins or
+ * themes, or edit other people's content.
+ *
+ * @param string $role_key Role slug.
+ * @return bool
+ */
+function jpcrm_portal_extra_role_is_allowed( $role_key ) {
+	if ( ! is_string( $role_key ) || $role_key === '' ) {
+		return false;
+	}
+
+	if ( $role_key === 'administrator' || str_starts_with( $role_key, 'zerobs_' ) ) {
+		return false;
+	}
+
+	$role = get_role( $role_key );
+	if ( ! $role ) {
+		return false;
+	}
+
+	$staff_capability = '/^(?:admin_zerobs_|manage_|edit_others_|delete_others_|publish_|promote_|install_|activate_|update_|unfiltered_|edit_(?:users|plugins|themes|files|theme_options|dashboard)$|(?:create|delete|list|remove)_users$|delete_(?:plugins|themes)$|switch_themes$|customize$|import$|export$|moderate_comments$)/';
+
+	foreach ( (array) $role->capabilities as $capability => $granted ) {
+		if ( $granted && preg_match( $staff_capability, $capability ) ) {
+			return false;
+		}
+	}
+
+	return true;
+}
+
 	// return current user capabilities
 function zeroBSCRM_getCurrentUserCaps() {
 
@@ -906,6 +942,59 @@ function zeroBSCRM_permsClient() {
 	}
 	return false;
 }
+
+/**
+ * Whether a contact may change one of their own contact fields from the front end
+ * (Client Portal "Your details", WooCommerce My Account).
+ *
+ * Follows the same settings the front-end forms use to decide what to show:
+ * - the client portal's hidden and read-only fields (portal_hidefields, which
+ *   replaces the built-in front-end hide list, and portal_readonlyfields), each of
+ *   which may name a field or a whole address group;
+ * - fields hidden for contacts everywhere (fieldhides).
+ *
+ * @param string $field_key Contact field key, as in $zbsCustomerFields.
+ * @return bool
+ */
+function jpcrm_contact_field_is_self_editable( $field_key ) {
+	global $zbs, $zbsCustomerFields; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+
+	if ( ! isset( $zbsCustomerFields[ $field_key ] ) ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+		return false;
+	}
+
+	$hidden_setting = $zbs->settings->get( 'portal_hidefields' );
+	if ( $hidden_setting === null || $hidden_setting === false ) {
+		$hidden = $zbs->DAL->fields_to_hide_on_frontend( ZBS_TYPE_CONTACT ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+	} else {
+		$hidden = $hidden_setting !== '' ? explode( ',', $hidden_setting ) : array();
+	}
+
+	$read_only_setting = $zbs->settings->get( 'portal_readonlyfields' );
+	$read_only         = ! empty( $read_only_setting ) ? explode( ',', $read_only_setting ) : array();
+
+	$field_hides = $zbs->settings->get( 'fieldhides' );
+	if ( isset( $field_hides['customer'] ) && is_array( $field_hides['customer'] ) ) {
+		$hidden = array_merge( $hidden, $field_hides['customer'] );
+	}
+
+	$blocked = array_merge( $hidden, $read_only );
+	if ( in_array( $field_key, $blocked, true ) ) {
+		return false;
+	}
+
+	$address_groups = array(
+		'Main Address'   => 'jpcrm-main-address',
+		'Second Address' => 'jpcrm-second-address',
+	);
+	$area           = $zbsCustomerFields[ $field_key ]['area'] ?? ''; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+	if ( isset( $address_groups[ $area ] ) && in_array( $address_groups[ $area ], $blocked, true ) ) {
+		return false;
+	}
+
+	return true;
+}
+
 function zeroBSCRM_permsWPEditPosts() {
 
 	$cu = wp_get_current_user();
@@ -1118,8 +1207,8 @@ function jpcrm_can_wp_user_view_object( $wp_user, $obj_id, $obj_type_id ) {
 		case ZBS_TYPE_QUOTE:
 			$is_quote_admin = $wp_user->has_cap( 'admin_zerobs_quotes' );
 			$obj_data       = zeroBS_getQuote( $obj_id );
-			// draft quote
-			if ( is_array( $obj_data ) && $obj_data['template'] == -1 && ! $is_quote_admin ) { // phpcs:ignore Universal.Operators.StrictComparisons.LooseEqual
+			// Draft quote: no template yet (-1, or 0 for one saved with "Blank Template").
+			if ( is_array( $obj_data ) && (int) $obj_data['template'] <= 0 && ! $is_quote_admin ) {
 				return false;
 			}
 			$assigned_contact_id = $zbs->DAL->quotes->getQuoteContactID( $obj_id ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase

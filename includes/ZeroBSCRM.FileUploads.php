@@ -666,6 +666,24 @@ function jpcrm_save_admin_upload_to_folder( $param_name, $target_dir_info ) {
 	);
 }
 
+/**
+ * Saves a file uploaded by an admin from $_FILES[ $param_name ] into the
+ * contact's own files folder. Same return shape as
+ * jpcrm_save_admin_upload_to_folder().
+ *
+ * @param string $param_name The $_FILES key.
+ * @param int    $contact_id The contact the file belongs to.
+ * @return array
+ */
+function jpcrm_save_contact_admin_upload( $param_name, $contact_id ) {
+	$contact_dir_info = jpcrm_storage_dir_info_for_contact( $contact_id );
+	if ( ! $contact_dir_info ) {
+		return array( 'error' => 'Could not prepare upload directory.' );
+	}
+
+	return jpcrm_save_admin_upload_to_folder( $param_name, $contact_dir_info['files'] );
+}
+
 // 2.95.5+ we also add a subdir for 'work' (this is used by CPP when making thumbs, for example)
 function zeroBSCRM_privatisedDirCheckWorks( $echo = false ) {
 	$uploads_dir      = WP_CONTENT_DIR;

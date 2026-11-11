@@ -383,6 +383,19 @@ function zeroBSCRM_AJAX_filterCustomers() {
 	wp_send_json( $res, 200, JSON_UNESCAPED_SLASHES );
 }
 
+/**
+ * Sanitise a log type posted from the activity log box.
+ *
+ * A log type is a short label such as "Note" or "Call"; quotes, backticks,
+ * backslashes and angle brackets are never part of one.
+ *
+ * @param string $raw_type Posted (slashed) log type.
+ * @return string
+ */
+function jpcrm_sanitize_log_type( $raw_type ) {
+	return str_replace( array( '"', "'", '`', '\\', '<', '>' ), '', sanitize_text_field( wp_unslash( (string) $raw_type ) ) );
+}
+
 	// Add log
 	add_action( 'wp_ajax_zbsaddlog', 'zeroBSCRM_AJAX_addLog' );
 function zeroBSCRM_AJAX_addLog() {
@@ -404,7 +417,7 @@ function zeroBSCRM_AJAX_addLog() {
 		$zbsNoteAgainstPostID = (int) $_POST['zbsnagainstid'];
 	}
 	if ( ! empty( $_POST['zbsntype'] ) ) {
-		$zbsNoteType = sanitize_text_field( $_POST['zbsntype'] );
+		$zbsNoteType = jpcrm_sanitize_log_type( $_POST['zbsntype'] ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized,WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- sanitised and unslashed by the function.
 	}
 	if ( ! empty( $_POST['zbsnshortdesc'] ) ) {
 		$zbsNoteShortDesc = zeroBSCRM_preDBStr( sanitize_text_field( $_POST['zbsnshortdesc'] ) );
@@ -485,7 +498,7 @@ function zeroBSCRM_AJAX_updateLog() {
 		$zbsNoteAgainstPostID = (int) $_POST['zbsnagainstid'];
 	}
 	if ( ! empty( $_POST['zbsntype'] ) ) {
-		$zbsNoteType = sanitize_text_field( $_POST['zbsntype'] );
+		$zbsNoteType = jpcrm_sanitize_log_type( $_POST['zbsntype'] ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized,WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- sanitised and unslashed by the function.
 	}
 	if ( ! empty( $_POST['zbsnshortdesc'] ) ) {
 		$zbsNoteShortDesc = zeroBSCRM_preDBStr( sanitize_text_field( $_POST['zbsnshortdesc'] ) );
@@ -1100,6 +1113,20 @@ function ZeroBSCRM_accept_quote() {
 		if ( ! $quote_from_hash['success'] || $quoteID !== (int) $quote_from_hash['data']['ID'] ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 			wp_send_json_error( array( 'hash' => 1 ), 403, JSON_UNESCAPED_SLASHES );
 		}
+	}
+
+	// A quote returned to Draft has been withdrawn, so it can't be accepted, the same
+	// as it can't be viewed (see the portal router). Staff with quote access still can.
+	if ( ! zeroBSCRM_isZBSAdminOrAdmin() && ! zeroBSCRM_permsQuotes() && jpcrm_portal_hash_object_is_draft( $quoteID, ZBS_TYPE_QUOTE ) ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+		wp_send_json_error( array( 'access' => 1 ), 403, JSON_UNESCAPED_SLASHES );
+	}
+
+	// A quote is accepted once. Accepting again would overwrite when, from where and by
+	// whom it was accepted, and re-send the notification. The quote page hides the
+	// button once accepted; this keeps the action in line with it.
+	$quote_to_accept = zeroBS_getQuote( $quoteID ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+	if ( is_array( $quote_to_accept ) && ! empty( $quote_to_accept['accepted'] ) ) {
+		wp_send_json_error( array( 'accepted' => 1 ), 409, JSON_UNESCAPED_SLASHES );
 	}
 
 	// We can accept the quote
