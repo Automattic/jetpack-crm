@@ -39,6 +39,7 @@ global $zeroBSCRM_migrations; $zeroBSCRM_migrations = array(
 	'tax_rate_precision_fix', // increase tax rate precision from 2 to 10 decimal places
 	'ensure_notifications_table', // Ensure notifications table exists
 	'restore_missing_columns', // Restore columns (5.0 zbss_origin, 5.4 zbsl_pinned) on sites where the original ALTER failed but was marked complete.
+	'restore_externalsources_uid_index', // Restore the external sources uid index on sites where the full-width index couldn't be created.
 );
 
 global $zeroBSCRM_migrations_requirements; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
@@ -793,10 +794,7 @@ function zeroBSCRM_migration_53() {
 		$sql = 'ALTER TABLE ' . $ZBSCRM_t['taglinks'] . ' ADD INDEX `zbstl_tagid+zbstl_objtype` (`zbstl_tagid`,`zbstl_objtype`) USING BTREE;';
 		$wpdb->query( $sql );
 	}
-	if ( ! jpcrm_migration_table_has_index( $ZBSCRM_t['externalsources'], 'zbss_uid+zbss_source+zbss_objtype' ) ) {
-		$sql = 'ALTER TABLE ' . $ZBSCRM_t['externalsources'] . ' ADD INDEX `zbss_uid+zbss_source+zbss_objtype` (`zbss_uid`,`zbss_source`,`zbss_objtype`) USING BTREE;';
-		$wpdb->query( $sql );
-	}
+	jpcrm_migration_ensure_externalsources_uid_index();
 	if ( ! jpcrm_migration_table_has_index( $ZBSCRM_t['meta'], 'zbsm_objid+zbsm_key+zbsm_objtype' ) ) {
 		$sql = 'ALTER TABLE ' . $ZBSCRM_t['meta'] . ' ADD INDEX `zbsm_objid+zbsm_key+zbsm_objtype` (`zbsm_objid`,`zbsm_key`,`zbsm_objtype`) USING BTREE;';
 		$wpdb->query( $sql );
@@ -1494,6 +1492,22 @@ function zeroBSCRM_migration_restore_missing_columns() { // phpcs:ignore WordPre
 	zeroBSCRM_migrations_markComplete( 'restore_missing_columns', array( 'updated' => 1 ) );
 }
 
+/**
+ * Restore the external sources `zbss_uid+zbss_source+zbss_objtype` index where
+ * migration 5.3 or the fresh-install schema couldn't create it full-width (see #103).
+ */
+function zeroBSCRM_migration_restore_externalsources_uid_index() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid -- the migration runner requires the zeroBSCRM_migration_ prefix.
+
+	$result = jpcrm_migration_ensure_externalsources_uid_index();
+
+	if ( is_wp_error( $result ) ) {
+		jpcrm_migration_mark_failed( 'restore_externalsources_uid_index', $result->get_error_message() );
+		return;
+	}
+
+	zeroBSCRM_migrations_markComplete( 'restore_externalsources_uid_index', array( 'updated' => 1 ) );
+}
+
 /*
 ======================================================
 	/ MIGRATIONS
@@ -1548,13 +1562,41 @@ function jpcrm_migration_ensure_externalsources_origin_column() {
 		$error = $wpdb->last_error;
 
 		if ( ! zeroBSCRM_migration_tableHasColumn( $ZBSCRM_t['externalsources'], 'zbss_origin' ) ) {
-			return jpcrm_migration_missing_column_error( $ZBSCRM_t['externalsources'], 'zbss_origin', $error );
+			return jpcrm_migration_schema_error( $ZBSCRM_t['externalsources'], 'zbss_origin', $error );
 		}
 	}
 
 	// the index is an optimisation: its failure never blocks completion.
 	if ( ! jpcrm_migration_table_has_index( $ZBSCRM_t['externalsources'], 'zbss_origin' ) ) {
 		$wpdb->query( 'ALTER TABLE ' . $ZBSCRM_t['externalsources'] . ' ADD INDEX `zbss_origin` (`zbss_origin`(191));' ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQL.NotPrepared
+	}
+
+	return true;
+}
+
+/**
+ * Ensures the external sources table has its uid+source+objtype lookup index (added in v5.3).
+ *
+ * `zbss_uid` is a 191-char prefix: full-width, the VARCHAR(300) column is 900 bytes
+ * at utf8, over the 767-byte key limit of InnoDB's COMPACT and REDUNDANT row formats.
+ * Lookups compare the whole uid, so a prefix index serves them. A site that already
+ * has the full-width index keeps it.
+ *
+ * @return true|WP_Error True if the index exists, else the database error.
+ */
+function jpcrm_migration_ensure_externalsources_uid_index() {
+
+	global $wpdb, $ZBSCRM_t;
+
+	if ( jpcrm_migration_table_has_index( $ZBSCRM_t['externalsources'], 'zbss_uid+zbss_source+zbss_objtype' ) ) {
+		return true;
+	}
+
+	$wpdb->query( 'ALTER TABLE ' . $ZBSCRM_t['externalsources'] . ' ADD INDEX `zbss_uid+zbss_source+zbss_objtype` (`zbss_uid`(191),`zbss_source`,`zbss_objtype`) USING BTREE;' ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQL.NotPrepared
+	$error = $wpdb->last_error;
+
+	if ( ! jpcrm_migration_table_has_index( $ZBSCRM_t['externalsources'], 'zbss_uid+zbss_source+zbss_objtype' ) ) {
+		return jpcrm_migration_schema_error( $ZBSCRM_t['externalsources'], 'zbss_uid+zbss_source+zbss_objtype', $error, 'index' );
 	}
 
 	return true;
@@ -1575,7 +1617,7 @@ function jpcrm_migration_ensure_logs_pinned_column() {
 		$error = $wpdb->last_error;
 
 		if ( ! zeroBSCRM_migration_tableHasColumn( $ZBSCRM_t['logs'], 'zbsl_pinned' ) ) {
-			return jpcrm_migration_missing_column_error( $ZBSCRM_t['logs'], 'zbsl_pinned', $error );
+			return jpcrm_migration_schema_error( $ZBSCRM_t['logs'], 'zbsl_pinned', $error );
 		}
 	}
 
@@ -1583,17 +1625,18 @@ function jpcrm_migration_ensure_logs_pinned_column() {
 }
 
 /**
- * The error for a column an ALTER failed to add.
+ * The error for a column or index an ALTER failed to add.
  *
  * @param string $table    Table name.
- * @param string $column   Column name.
+ * @param string $name     Column or index name.
  * @param string $db_error The database error from the ALTER, if any.
+ * @param string $kind     'column' or 'index'.
  * @return WP_Error
  */
-function jpcrm_migration_missing_column_error( $table, $column, $db_error ) {
+function jpcrm_migration_schema_error( $table, $name, $db_error, $kind = 'column' ) {
 	return new WP_Error(
-		'jpcrm_migration_missing_column',
-		sprintf( 'Could not add column %s to %s: %s', $column, $table, '' !== $db_error ? $db_error : 'no database error reported' )
+		'jpcrm_migration_missing_' . $kind,
+		sprintf( 'Could not add %s %s to %s: %s', $kind, $name, $table, '' !== $db_error ? $db_error : 'no database error reported' )
 	);
 }
 
