@@ -224,19 +224,9 @@ class Client_Portal {
 
 		global $zbs, $zbsCustomerFields;
 
-		/**
-		* This gets fields hidden in Client Portal settings.
-		* Eventually we should expand this to preprocess and filter
-		* the following fields altogether if disabled:
-		*   - countries: zeroBSCRM_getSetting('countries')
-		*   - second addresses: zeroBSCRM_getSetting('secondaddress')
-		*   - all addresses: zeroBSCRM_getSetting('showaddress')
-		*   - not sure what this is: $zbs->settings->get('fieldhides')
-		*/
-		$hidden_fields    = $zbs->settings->get( 'portal_hidefields' );
-		$hidden_fields    = ! empty( $hidden_fields ) ? explode( ',', $hidden_fields ) : array();
-		$read_only_fields = $zbs->settings->get( 'portal_readonlyfields' );
-		$read_only_fields = ! empty( $read_only_fields ) ? explode( ',', $read_only_fields ) : array();
+		// Which fields the contact may change is decided by jpcrm_contact_field_is_self_editable(),
+		// shared with WooCommerce My Account. Eventually it should also honour the countries,
+		// secondaddress and showaddress settings.
 
 		// get existing contact data
 		$old_contact_data = $zbs->DAL->contacts->getContact( $cID );
@@ -263,18 +253,8 @@ class Client_Portal {
 		// process fields
 		$fields_to_change = array();
 		foreach ( $new_contact_data as $key => $value ) {
-			// check for hidden or read only field groups
-			$is_hidden_or_readonly_field_group = false;
-			if ( isset( $zbsCustomerFields[ $key ] ) && isset( $zbsCustomerFields[ $key ]['area'] ) ) {
-				$area_key = ( $zbsCustomerFields[ $key ]['area'] == 'Main Address' ) ? 'jpcrm-main-address' : '';
-				$area_key = ( $zbsCustomerFields[ $key ]['area'] == 'Second Address' ) ? 'jpcrm-main-address' : $area_key;
-				if ( in_array( $area_key, $hidden_fields ) || in_array( $area_key, $read_only_fields ) ) {
-					$is_hidden_or_readonly_field_group = true;
-				}
-			}
-
 			// if invalid or unauthorised field, keep old value
-			if ( ! isset( $zbsCustomerFields[ $key ] ) || in_array( $key, $hidden_fields ) || in_array( $key, $read_only_fields ) || $is_hidden_or_readonly_field_group ) {
+			if ( ! jpcrm_contact_field_is_self_editable( $key ) ) {
 				$new_contact_data[ $key ] = $old_contact_data[ $key ];
 			}
 

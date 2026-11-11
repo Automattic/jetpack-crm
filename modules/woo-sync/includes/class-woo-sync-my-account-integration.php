@@ -600,6 +600,24 @@ class Woo_Sync_My_Account_Integration {
 
 		$contact_id       = zeroBS_getCustomerIDFromWPID( $wordpress_user_id );
 		$old_contact_data = $zbs->DAL->contacts->getContact( $contact_id );
+
+		// Downgrade to old-style second address keys so field names match the object
+		// zeroBS_buildContactMeta() builds, as the Client Portal does.
+		$key_map = array(
+			'secaddr_addr1'    => 'secaddr1',
+			'secaddr_addr2'    => 'secaddr2',
+			'secaddr_city'     => 'seccity',
+			'secaddr_county'   => 'seccounty',
+			'secaddr_country'  => 'seccountry',
+			'secaddr_postcode' => 'secpostcode',
+		);
+		foreach ( $key_map as $newstyle_key => $oldstyle_key ) {
+			if ( is_array( $old_contact_data ) && array_key_exists( $newstyle_key, $old_contact_data ) ) {
+				$old_contact_data[ $oldstyle_key ] = $old_contact_data[ $newstyle_key ];
+				unset( $old_contact_data[ $newstyle_key ] );
+			}
+		}
+
 		$new_contact_data = zeroBS_buildContactMeta( $_POST, $old_contact_data ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
 
 		// Here we check for fields already updated via core WordPress User integration
@@ -618,7 +636,8 @@ class Woo_Sync_My_Account_Integration {
 				'account_email'      => 'email',
 			);
 
-			foreach ( $_POST as $post_key => $post_value ) {
+			$account_fields = array();
+			foreach ( $_POST as $post_key => $post_value ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing -- WooCommerce verifies the account details form before this action fires.
 				if ( ! isset( $woo_field_to_crm_field[ $post_key ] ) ) {
 					continue;
 				}
@@ -631,14 +650,22 @@ class Woo_Sync_My_Account_Integration {
 					} else {
 						$new_contact_data[ $crm_field ] = sanitize_text_field( wp_unslash( $post_value ) );
 					}
+					$account_fields[] = $crm_field;
 				}
 			}
 
-			// TODO: This is the same code from Client Portal. This should be centralised somehow.
+			// CRM fields can only change if they're shown on My Account (`wcport`) and the
+			// contact is allowed to edit them, the same rule as the Client Portal.
+			$woo_sync_settings = $zbs->modules->woosync->settings->getAll();
+			$shown_fields      = ! empty( $woo_sync_settings['wcport'] ) ? explode( ',', $woo_sync_settings['wcport'] ) : array();
+
 			// process fields
 			$fields_to_change = array();
 			foreach ( $new_contact_data as $key => $value ) {
-				if ( ! isset( $zbsCustomerFields[ $key ] ) || in_array( $key, $do_not_update ) ) {
+				$editable = in_array( $key, $account_fields, true )
+					|| ( in_array( $key, $shown_fields, true ) && jpcrm_contact_field_is_self_editable( $key ) );
+
+				if ( ! isset( $zbsCustomerFields[ $key ] ) || in_array( $key, $do_not_update, true ) || ! $editable ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 					$new_contact_data[ $key ] = $old_contact_data[ $key ];
 				}
 				// collect fields that changed

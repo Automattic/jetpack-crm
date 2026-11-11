@@ -942,6 +942,59 @@ function zeroBSCRM_permsClient() {
 	}
 	return false;
 }
+
+/**
+ * Whether a contact may change one of their own contact fields from the front end
+ * (Client Portal "Your details", WooCommerce My Account).
+ *
+ * Follows the same settings the front-end forms use to decide what to show:
+ * - the client portal's hidden and read-only fields (portal_hidefields, which
+ *   replaces the built-in front-end hide list, and portal_readonlyfields), each of
+ *   which may name a field or a whole address group;
+ * - fields hidden for contacts everywhere (fieldhides).
+ *
+ * @param string $field_key Contact field key, as in $zbsCustomerFields.
+ * @return bool
+ */
+function jpcrm_contact_field_is_self_editable( $field_key ) {
+	global $zbs, $zbsCustomerFields; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+
+	if ( ! isset( $zbsCustomerFields[ $field_key ] ) ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+		return false;
+	}
+
+	$hidden_setting = $zbs->settings->get( 'portal_hidefields' );
+	if ( $hidden_setting === null || $hidden_setting === false ) {
+		$hidden = $zbs->DAL->fields_to_hide_on_frontend( ZBS_TYPE_CONTACT ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+	} else {
+		$hidden = $hidden_setting !== '' ? explode( ',', $hidden_setting ) : array();
+	}
+
+	$read_only_setting = $zbs->settings->get( 'portal_readonlyfields' );
+	$read_only         = ! empty( $read_only_setting ) ? explode( ',', $read_only_setting ) : array();
+
+	$field_hides = $zbs->settings->get( 'fieldhides' );
+	if ( isset( $field_hides['customer'] ) && is_array( $field_hides['customer'] ) ) {
+		$hidden = array_merge( $hidden, $field_hides['customer'] );
+	}
+
+	$blocked = array_merge( $hidden, $read_only );
+	if ( in_array( $field_key, $blocked, true ) ) {
+		return false;
+	}
+
+	$address_groups = array(
+		'Main Address'   => 'jpcrm-main-address',
+		'Second Address' => 'jpcrm-second-address',
+	);
+	$area           = $zbsCustomerFields[ $field_key ]['area'] ?? ''; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+	if ( isset( $address_groups[ $area ] ) && in_array( $address_groups[ $area ], $blocked, true ) ) {
+		return false;
+	}
+
+	return true;
+}
+
 function zeroBSCRM_permsWPEditPosts() {
 
 	$cu = wp_get_current_user();
