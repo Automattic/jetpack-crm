@@ -71,42 +71,38 @@ function jpcrm_render_dashboard_page() {
 
 	$funnel_data = array_reverse( $funnel_data );
 
-	/* Transactions - Revenue Chart data gen */
-	$labels = array();
-
-	$labels[0] = gmdate( 'F Y' );
-
-	for ( $i = 0; $i < 12; $i++ ) {
-		$labels[ $i ] = gmdate( 'M y', mktime( 0, 0, 0, gmdate( 'm' ) - $i, 1, (int) gmdate( 'Y' ) ) );
-	}
-
-	$labels = array_reverse( $labels );
-
+	// Transactions - Revenue Chart data gen.
+	// One pass over the 12-month window, oldest month first: each month-start
+	// timestamp drives the chart label, the zero-prefill key, and (for the oldest
+	// month) the query window start, so the three cannot drift apart. They used
+	// to: the window start came from strtotime( '11 month ago' ), which overflows
+	// on month-end days (e.g. May 31 -> "June 31" -> July 1) and silently
+	// excluded the oldest labeled month from the query.
+	$labels                      = array();
 	$transaction_totals_by_month = array();
-	$transaction_totals_array    = array();
+	$window_start                = 0;
 
-	// fill with zeros if months aren't present
-	for ( $i = 11; $i > 0; $i-- ) {
-		$key                                 = gmdate( 'nY', mktime( 0, 0, 0, gmdate( 'm' ) - $i, 1, (int) gmdate( 'Y' ) ) );
-		$transaction_totals_by_month[ $key ] = 0;
+	$this_month = (int) gmdate( 'm' );
+	$this_year  = (int) gmdate( 'Y' );
+	for ( $i = 11; $i >= 0; $i-- ) {
+		$month_start = mktime( 0, 0, 0, $this_month - $i, 1, $this_year );
+		if ( ! $window_start ) {
+			$window_start = $month_start;
+		}
+		$labels[] = gmdate( 'M y', $month_start );
+
+		$transaction_totals_by_month[ gmdate( 'nY', $month_start ) ] = 0;
 	}
 
 	$args = array(
-		'paidAfter'  => strtotime( 'first day of ' . gmdate( 'F Y', strtotime( '11 month ago' ) ) ),
+		'paidAfter'  => $window_start,
 		'paidBefore' => time(),
 	);
 
 	$recent_transactions = $zbs->DAL->transactions->getTransactionTotalByMonth( $args ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
-	foreach ( $recent_transactions as $k => $v ) {
-		$transaction_totals_array[ $k ]       = $v['total'];
+	foreach ( $recent_transactions as $v ) {
 		$dkey                                 = $v['month'] . $v['year'];
 		$transaction_totals_by_month[ $dkey ] = $v['total'];
-	}
-
-	$i = 0;
-	foreach ( $transaction_totals_by_month as $k => $v ) {
-		$transaction_totals_array[ $i ] = $v;
-		++$i;
 	}
 
 	$chartdata = array_values( $transaction_totals_by_month );
@@ -198,7 +194,7 @@ function jpcrm_render_dashboard_page() {
 
 				<div class="jpcrm-listview-table-container">
 					<?php
-					if ( is_array( $transaction_totals_array ) && array_sum( $transaction_totals_array ) > 0 ) {
+					if ( ! empty( $recent_transactions ) ) {
 						?>
 						<div>
 							<canvas id="bar-chart" height="400"></canvas>

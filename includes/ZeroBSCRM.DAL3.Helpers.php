@@ -1781,7 +1781,9 @@ function zeroBS_addUpdateCustomer(
 	$extraMeta = false,
 	$automatorPassthrough = false,
 	$owner = -1,
-	$metaBuilderPrefix = 'zbsc_'
+	$metaBuilderPrefix = 'zbsc_',
+	$do_not_overwrite_populated = array(),
+	$do_not_update_blanks = false
 ) {
 
 	#} return
@@ -1955,11 +1957,13 @@ function zeroBS_addUpdateCustomer(
 		// DB2 update_post_meta($postID, 'zbs_customer_meta', $zbsCustomerMeta);
 		return $zbs->DAL->contacts->addUpdateContact(
 			array(
-				'id'                   => $cID,
-				'data'                 => $zbsCustomerMeta,
-				'extraMeta'            => $extraMeta,
-				'automatorPassthrough' => $automatorPassthrough,
-				'fallBackLog'          => $fallBackLog,
+				'id'                         => $cID,
+				'data'                       => $zbsCustomerMeta,
+				'extraMeta'                  => $extraMeta,
+				'automatorPassthrough'       => $automatorPassthrough,
+				'fallBackLog'                => $fallBackLog,
+				'do_not_overwrite_populated' => $do_not_overwrite_populated,
+				'do_not_update_blanks'       => $do_not_update_blanks,
 			)
 		);
 

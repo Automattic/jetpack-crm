@@ -11,6 +11,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit( 0 ); // Exit if accessed directly.
 }
 
+// `VERSION` below reads JPCRM_VERSION, which the main plugin file (ZeroBSCRM.php)
+// defines before it includes this class. Guard against this class being loaded in
+// isolation (a test harness, or the autoloader pulling it in early) so the class
+// constant can't fatal on an undefined constant. In normal loading ZeroBSCRM.php
+// has already defined the real version, so this is a no-op.
+if ( ! defined( 'JPCRM_VERSION' ) ) {
+	define( 'JPCRM_VERSION', '0.0.0' );
+}
+
 /**
  * Main ZeroBSCRM Class.
  *
@@ -24,7 +33,7 @@ final class ZeroBSCRM {
 	 *
 	 * @var string
 	 */
-	const VERSION = '6.8.1';
+	const VERSION = JPCRM_VERSION;
 
 	/**
 	 * Jetpack CRM version (used in various extensions as of January 2025).
@@ -39,7 +48,7 @@ final class ZeroBSCRM {
 	 *
 	 * @var string
 	 */
-	public $wp_tested = '7.0';
+	public $wp_tested = '7.1';
 
 	/**
 	 * WordPress update API version.
@@ -3044,9 +3053,12 @@ final class ZeroBSCRM {
 			$options->setTempDir( $jpcrm_storage_path . '/tmp' );
 		}
 
-		// Commented: Not necessary. Using CDN sites (Jetpack Boost) for assets will fail because of the validation.
-		// $options->addAllowedProtocol( 'http://', 'jpcrm_dompdf_assist_validate_remote_uri' );
-		// $options->addAllowedProtocol( 'https://', 'jpcrm_dompdf_assist_validate_remote_uri' );
+		// Route every remote http/https asset fetch through
+		// jpcrm_dompdf_assist_validate_remote_uri(), which allows same-site and
+		// public-host URLs but rejects private, loopback, link-local and reserved
+		// addresses. Public CDN assets (e.g. Jetpack Boost) still load.
+		$options->addAllowedProtocol( 'http://', 'jpcrm_dompdf_assist_validate_remote_uri' );
+		$options->addAllowedProtocol( 'https://', 'jpcrm_dompdf_assist_validate_remote_uri' );
 
 		// use JPCRM storage dir for extra fonts
 		$options->set( 'fontDir', jpcrm_storage_fonts_dir_path() );
@@ -3056,14 +3068,21 @@ final class ZeroBSCRM {
 
 		// set some generic defaults, (can be overriden later)
 		$dompdf->set_paper( 'A4', 'portrait' );
+		// SSL context for remote asset fetches. Verifies the peer certificate and
+		// hostname by default; filterable so an install using a self-signed
+		// certificate on its own site can relax it deliberately.
+		$ssl_context = apply_filters(
+			'jpcrm_pdf_ssl_context',
+			array(
+				'verify_peer'       => true,
+				'verify_peer_name'  => true,
+				'allow_self_signed' => false,
+			)
+		);
 		$dompdf->setHttpContext(
 			stream_context_create(
 				array(
-					'ssl' => array(
-						'verify_peer'       => false,
-						'verify_peer_name'  => false,
-						'allow_self_signed' => true,
-					),
+					'ssl' => $ssl_context,
 				)
 			)
 		);

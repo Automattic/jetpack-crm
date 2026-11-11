@@ -935,6 +935,7 @@ class zbsDAL_companies extends zbsDAL_ObjectLayer {
 				if ( $withExternalSources ) {
 
 					$res['external_sources'] = $zbs->DAL->getExternalSources(
+						-1,
 						array(
 
 							'objectID'    => $potentialRes->ID,
@@ -1877,6 +1878,7 @@ class zbsDAL_companies extends zbsDAL_ObjectLayer {
 					if ( $withExternalSources ) {
 
 						$res['external_sources'] = $zbs->DAL->getExternalSources(
+							-1,
 							array(
 
 								'objectID'    => $resDataLine->ID,
@@ -2472,6 +2474,22 @@ class zbsDAL_companies extends zbsDAL_ObjectLayer {
 				)
 			) !== false ) {
 
+				// externalSources, outside the limitedFields check below, as for contacts.
+				//
+				// Where a company came from is worth recording whether or not the caller
+				// sent a full set of fields. With "Overwrite Option" (fieldoverride) on, an
+				// update from any external source is converted to limitedFields, so skipping
+				// this there lost the source on every existing company that was updated.
+				//
+				// Passing no sources is a no-op: this adds and updates, never removes.
+				$this->DAL()->addUpdateExternalSources(
+					array(
+						'obj_id'           => $id,
+						'obj_type_id'      => ZBS_TYPE_COMPANY,
+						'external_sources' => isset( $data['externalSources'] ) ? $data['externalSources'] : array(),
+					)
+				);
+
 						// if passing limitedFields instead of data, we ignore the following
 							// this doesn't work, because data is in args default as arr
 							// if (isset($data) && is_array($data)){
@@ -2514,98 +2532,37 @@ class zbsDAL_companies extends zbsDAL_ObjectLayer {
 						);
 
 					}
-
-					// externalSources
-					$approvedExternalSource = $this->DAL()->addUpdateExternalSources(
-						array(
-							'obj_id'           => $id,
-							'obj_type_id'      => ZBS_TYPE_COMPANY,
-							'external_sources' => isset( $data['externalSources'] ) ? $data['externalSources'] : array(),
-						)
-					); // for IA below
-
-					// Custom fields?
-
-						#} Cycle through + add/update if set
-					if ( is_array( $customFields ) ) {
-						foreach ( $customFields as $cK => $cF ) {
-
-							// any?
-							if ( isset( $data[ $cK ] ) ) {
-
-								// add update
-								$cfID = $this->DAL()->addUpdateCustomField(
-									array(
-										'data' => array(
-											'objtype' => ZBS_TYPE_COMPANY,
-											'objid'   => $id,
-											'objkey'  => $cK,
-											'objval'  => $data[ $cK ],
-										),
-									)
-								);
-
-							}
-						}
-					}
-
-						// Also got to catch any 'addr' custom fields :)
-					if ( is_array( $addrCustomFields ) && count( $addrCustomFields ) > 0 ) {
-
-						// cycle through addr custom fields + save
-						// see #ZBS-518, not easy until addr's get DAL2
-						// WH deferring here
-
-						// WH later added via the addUpdateContactField method - should work fine if we catch properly in get
-						foreach ( $addrCustomFields as $cK => $cF ) {
-
-							// v2:
-							// $cKN = (int)$cK+1;
-							// $cKey = 'addr_cf'.$cKN;
-							// $cKey2 = 'secaddr_cf'.$cKN;
-							// v3:
-							$cKey  = 'addr_' . $cK;
-							$cKey2 = 'secaddr_' . $cK;
-
-							// any?
-							if ( isset( $data[ $cKey ] ) ) {
-
-								// add update
-								$cfID = $this->DAL()->addUpdateCustomField(
-									array(
-										'data' => array(
-											'objtype' => ZBS_TYPE_COMPANY,
-											'objid'   => $id,
-											'objkey'  => $cKey,
-											'objval'  => $data[ $cKey ],
-										),
-									)
-								);
-
-							}
-
-							// any?
-							if ( isset( $data[ $cKey2 ] ) ) {
-
-								// add update
-								$cfID = $this->DAL()->addUpdateCustomField(
-									array(
-										'data' => array(
-											'objtype' => ZBS_TYPE_COMPANY,
-											'objid'   => $id,
-											'objkey'  => $cKey2,
-											'objval'  => $data[ $cKey2 ],
-										),
-									)
-								);
-
-							}
-						}
-					}
-
-						// / Custom Fields
-
 				} // / if $data
+
+				// Custom fields, outside the limitedFields check above, as for contacts.
+				//
+				// A limited field update moves any custom field keys it is given into $data
+				// (see LOAD ARGS), and fieldoverride converts an external-source update to
+				// one, so saving these only on the full update path silently dropped them.
+				// Under do_not_update_blanks a blank means 'not supplied', not 'clear it',
+				// as for the base columns above.
+				// phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase -- legacy name.
+				$custom_field_keys = is_array( $customFields ) ? array_keys( $customFields ) : array();
+				// phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase -- legacy name.
+				$addr_field_keys = is_array( $addrCustomFields ) ? array_keys( $addrCustomFields ) : array();
+				foreach ( $addr_field_keys as $addr_field_key ) {
+					$custom_field_keys[] = 'addr_' . $addr_field_key;
+					$custom_field_keys[] = 'secaddr_' . $addr_field_key;
+				}
+				foreach ( $custom_field_keys as $custom_field_key ) {
+					if ( isset( $data[ $custom_field_key ] ) && ! ( $do_not_update_blanks && empty( $data[ $custom_field_key ] ) ) ) {
+						$this->DAL()->addUpdateCustomField(
+							array(
+								'data' => array(
+									'objtype' => ZBS_TYPE_COMPANY,
+									'objid'   => $id,
+									'objkey'  => $custom_field_key,
+									'objval'  => $data[ $custom_field_key ],
+								),
+							)
+						);
+					}
+				}
 
 						#} Any extra meta keyval pairs?
 						// BRUTALLY updates (no checking)

@@ -28,7 +28,7 @@ wp_enqueue_style( 'zbswelcomeadmin', plugins_url( '/css/welcome-to-zbs/admin.min
 wp_enqueue_style( 'zbswelcomeexitform', plugins_url( '/css/welcome-to-zbs/zbs-exitform' . wp_scripts_get_suffix() . '.css', ZBS_ROOTFILE ), array(), $zbs::VERSION );
 wp_enqueue_style( 'zbswelcomeactivation', plugins_url( '/css/welcome-to-zbs/activation.min.css', ZBS_ROOTFILE ), array(), $zbs::VERSION );
 wp_enqueue_style( 'zbswelcomewizard', plugins_url( '/css/jpcrm-welcome-wizard' . wp_scripts_get_suffix() . '.css', ZBS_ROOTFILE ), array(), $zbs::VERSION );
-$style_handles = array( 'zbswelcomebootstrap', 'zbswelcomeloadstyles', 'zbswelcomeopensans', 'zbswelcomeadmin', 'zbswelcomeexitform', 'zbswelcomeactivation', 'zbswelcomewizard' );
+$style_handles = array( 'zbswelcomeloadstyles', 'zbswelcomeopensans', 'zbswelcomeadmin', 'zbswelcomeexitform', 'zbswelcomeactivation', 'zbswelcomewizard' );
 // phpcs:enable WordPress.WP.EnqueuedResourceParameters.NotInFooter
 
 global $zeroBSCRM_killDenied; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
@@ -42,9 +42,9 @@ update_option( 'zbs_wizard_run', $run_count );
 <html lang="en-US">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<meta name="viewport" content="width=device-width">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title><?php esc_html_e( 'Welcome to Jetpack CRM', 'zero-bs-crm' ); ?></title>
-		<style type="text/css">img.wp-smiley,img.emoji{display:inline !important;border:none !important;box-shadow:none !important;height:1em !important;width:1em !important;margin:0 .07em !important;vertical-align:-0.1em !important;background:none !important;padding:0 !important}#zbscrm-logo img{max-width:20% !important}#feedbackPage{display:none}.zbscrm-setup .zbscrm-setup-actions .button-primary{background-color:#408bc9 !important;border-color:#408bc9 !important;-webkit-box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 1px 0 #408bc9 !important;box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 1px 0 #408bc9 !important;text-shadow:0 -1px 1px #408bc9,1px 0 1px #408bc9,0 1px 1px #408bc9,-1px 0 1px #408bc9 !important;float:right;margin:0;opacity:1}</style>
+		<style type="text/css">img.wp-smiley,img.emoji{display:inline !important;border:none !important;box-shadow:none !important;height:1em !important;width:1em !important;margin:0 .07em !important;vertical-align:-0.1em !important;background:none !important;padding:0 !important}#feedbackPage{display:none}.zbscrm-setup .zbscrm-setup-actions .button-primary{background-color:#408bc9 !important;border-color:#408bc9 !important;-webkit-box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 1px 0 #408bc9 !important;box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 1px 0 #408bc9 !important;text-shadow:0 -1px 1px #408bc9,1px 0 1px #408bc9,0 1px 1px #408bc9,-1px 0 1px #408bc9 !important;float:right;margin:0;opacity:1}</style>
 		<?php
 		wp_print_styles( $style_handles );
 		wp_print_scripts(); // wp_scripts
@@ -90,9 +90,9 @@ update_option( 'zbs_wizard_run', $run_count );
 									?>
 								</label>
 								<p style="margin-bottom:0"><?php esc_html_e( "This name will be shown at the top left of your CRM. E.g. 'Widget Co CRM'", 'zero-bs-crm' ); ?></p>
-								<div style="width:90%;">
-									<div style="width:50%;float:left">
-										<input class='form-control' type="text" name="zbs_crm_name" id='zbs_crm_name' value="" placeholder="<?php esc_html_e( 'Name of your CRM (e.g Jetpack CRM)', 'zero-bs-crm' ); ?>" style="width:90%" onchange="zbs_crm_name_change();"/>
+								<div class="jpcrm-wizard-field">
+									<div class="jpcrm-wizard-field-col">
+										<input class='form-control jpcrm-wizard-field-input' type="text" name="zbs_crm_name" id='zbs_crm_name' value="" placeholder="<?php esc_html_e( 'Name of your CRM (e.g Jetpack CRM)', 'zero-bs-crm' ); ?>" onchange="zbs_crm_name_change();"/>
 									</div>
 								</div>
 								<div class='clear'></div>
@@ -220,10 +220,10 @@ update_option( 'zbs_wizard_run', $run_count );
 								<div>
 
 									<div class="switchBox">
-										<div class="switchBoxLabel">B2B <?php esc_html_e( 'Mode', 'zero-bs-crm' ); ?></div>
+										<div class="switchBoxLabel" id="zbs_b2b_label">B2B <?php esc_html_e( 'Mode', 'zero-bs-crm' ); ?></div>
 										<div class="switchCheckbox">
-											<input type="checkbox" id="zbs_b2b" value="zbs_b2b" />
-											<label for="zbs_b2b"></label>
+											<input type="checkbox" id="zbs_b2b" value="zbs_b2b" aria-labelledby="zbs_b2b_label" />
+											<span class="jpcrm-switch-knob"></span>
 										</div>
 									</div>
 
@@ -233,11 +233,11 @@ update_option( 'zbs_wizard_run', $run_count );
 							<div class="wizopt">
 								<label for="zbs_ess"><?php esc_html_e( 'Usage Tracking', 'zero-bs-crm' ); ?></label>
 
-								<div style="width:100%;">
-									<div style="width:25%;float:left;">
+								<div class="jpcrm-wizard-split">
+									<div class="jpcrm-wizard-split-narrow">
 										<div class='yesplsess'><p><?php esc_html_e( 'Track CRM Usage', 'zero-bs-crm' ); ?> <input type="checkbox" id="zbs_ess" value="zbs_ess"/></p></div>
 									</div>
-									<div style="width:75%;float:right;">
+									<div class="jpcrm-wizard-split-wide">
 										<div class="zbs-extrainfo">
 											<?php esc_html_e( 'Share CRM usage data with us. No contact or sensitive CRM data is shared. This helps us build a better CRM by understanding how our users are using it.', 'zero-bs-crm' ); ?> <a href="<?php echo esc_url( $zbs->urls['usagetrackinginfo'] ); ?>" style="color: #000000;" target="_blank" ><?php esc_html_e( 'Click here to learn more.', 'zero-bs-crm' ); ?></a>
 										</div>
@@ -287,7 +287,30 @@ update_option( 'zbs_wizard_run', $run_count );
 											<a href="<?php echo esc_url( $zbs->urls['pricing'] ); ?>" target="_blank" class="btn btn-jetpack">Connect your CRM to other services</a>
 										</div>
 										<div id="zbs-starterbundle-img" class="zbs-sync-img">
-											<a href="<?php echo esc_url( $zbs->urls['pricing'] ); ?>" target="_blank"><img src="<?php echo esc_url( ZEROBSCRM_URL ); ?>i/welcome-to-zbs/entrepreneur-bundle.png" alt="Entrepreneur Bundle" /></a>
+											<?php
+											/*
+											 * The logos illustrate the bundle rather than label anything, and
+											 * they sit inside a single link to pricing, so they carry empty alt
+											 * text and the link is named instead. Naming all five would make
+											 * the link read as a list of brands.
+											 *
+											 * Provenance and licensing for these files: i/welcome-to-zbs/LOGOS.md
+											 */
+											$jpcrm_bundle_logos = array(
+												'woo'    => 'woo-logo.svg',
+												'twilio' => 'twilio-logo.svg',
+												'stripe' => 'stripe-logo.svg',
+												'paypal' => 'paypal-logo@2x.png',
+												'gravity-forms' => 'gravity-forms-logo.svg',
+											);
+											?>
+											<a href="<?php echo esc_url( $zbs->urls['pricing'] ); ?>" target="_blank" class="jpcrm-bundle-logos" aria-label="<?php esc_attr_e( 'See pricing for Jetpack CRM extensions', 'zero-bs-crm' ); ?>">
+												<?php foreach ( $jpcrm_bundle_logos as $jpcrm_bundle_logo_slug => $jpcrm_bundle_logo_file ) : ?>
+													<span class="jpcrm-bundle-logo jpcrm-bundle-logo-<?php echo esc_attr( $jpcrm_bundle_logo_slug ); ?>">
+														<img src="<?php echo esc_url( ZEROBSCRM_URL . 'i/welcome-to-zbs/' . $jpcrm_bundle_logo_file ); ?>" alt="" />
+													</span>
+												<?php endforeach; ?>
+											</a>
 										</div>
 
 									</div>
@@ -316,12 +339,12 @@ update_option( 'zbs_wizard_run', $run_count );
 									<div class="switchBox">
 										<div class="switchCheckbox">
 											<input type="checkbox" id="zbs_quotes" value="zbs_quotes" checked="checked" />
-											<label for="zbs_quotes"></label>
+											<span class="jpcrm-switch-knob"></span>
 										</div>
 									</div>
 								</div>
 
-								<label><?php esc_html_e( 'Enable Quotes', 'zero-bs-crm' ); ?></label>
+								<label for="zbs_quotes"><?php esc_html_e( 'Enable Quotes', 'zero-bs-crm' ); ?></label>
 								<p><?php esc_html_e( 'Quotes (or proposals) are a super powerful part of', 'zero-bs-crm' ); ?> Jetpack CRM. <?php esc_html_e( "We recommend you use this feature, but if you don't want quotes you can turn it off here.", 'zero-bs-crm' ); ?></p>
 							</div>
 
@@ -332,12 +355,12 @@ update_option( 'zbs_wizard_run', $run_count );
 									<div class="switchBox">
 										<div class="switchCheckbox">
 											<input type="checkbox" id="zbs_invoicing" value="zbs_invoicing" checked="checked" />
-											<label for="zbs_invoicing"></label>
+											<span class="jpcrm-switch-knob"></span>
 										</div>
 									</div>
 								</div>
 
-								<label><?php esc_html_e( 'Enable Invoices', 'zero-bs-crm' ); ?></label>
+								<label for="zbs_invoicing"><?php esc_html_e( 'Enable Invoices', 'zero-bs-crm' ); ?></label>
 								<p><?php esc_html_e( "You can run Jetpack CRM with or without Invoicing. We recommend you use this though, as it's very useful (you can invoice online!)", 'zero-bs-crm' ); ?></p>
 								<div class="zbs-extrainfo"><?php esc_html_e( 'Accept online payments with', 'zero-bs-crm' ); ?> <a href="https://jetpackcrm.com/product/invoicing-pro/?utm_content=zbsplugin_welcomewiz" target="_blank" style="color:#0073aa;">Invoicing Pro</a> <?php esc_html_e( '(Let your clients pay with Stripe or PayPal)', 'zero-bs-crm' ); ?></div>
 							</div>
@@ -349,12 +372,12 @@ update_option( 'zbs_wizard_run', $run_count );
 									<div class="switchBox">
 										<div class="switchCheckbox">
 											<input type="checkbox" id="jpcrm_woo_module" value="jpcrm_woo_module" checked="checked" />
-											<label for="jpcrm_woo_module"></label>
+											<span class="jpcrm-switch-knob"></span>
 										</div>
 									</div>
 								</div>
 
-								<label><?php esc_html_e( 'Enable WooSync', 'zero-bs-crm' ); ?></label>
+								<label for="jpcrm_woo_module"><?php esc_html_e( 'Enable WooSync', 'zero-bs-crm' ); ?></label>
 								<p><?php esc_html_e( 'Automatically import all your customers, transactions, and invoices from WooCommerce, a full-featured eCommerce solution for WordPress.', 'zero-bs-crm' ); ?></p>
 								<div class="zbs-extrainfo"><?php esc_html_e( 'Note that you will also need a site that has the free WooCommerce plugin installed.', 'zero-bs-crm' ); ?></div>
 							</div>
@@ -391,8 +414,8 @@ update_option( 'zbs_wizard_run', $run_count );
 
 							<p style="text-align:center">
 								<input type="hidden" id="zbs_crm_subblogname" name="zbs_crm_subblogname" value="<?php bloginfo( 'name' ); ?>" />
-								<input class='form-control' style="width:40%;margin-right:5%;display:inline-block;font-size:15px;line-height:16px;" type="text" name="zbs_crm_first_name" id="zbs_crm_first_name" value="<?php echo esc_attr( $fname ); ?>" placeholder="<?php esc_attr_e( 'Type your first name', 'zero-bs-crm' ); ?>..." />                    
-								<input class='form-control' style="width:40%;margin-right:5%;display:inline-block;font-size:15px;line-height:16px;"  type="text" name="zbs_crm_email" id="zbs_crm_email" value="<?php echo esc_attr( $em ); ?>" placeholder="<?php esc_attr_e( 'Enter your best email', 'zero-bs-crm' ); ?>..." />
+								<input class='form-control jpcrm-wizard-signup-input' type="text" name="zbs_crm_first_name" id="zbs_crm_first_name" value="<?php echo esc_attr( $fname ); ?>" placeholder="<?php esc_attr_e( 'Type your first name', 'zero-bs-crm' ); ?>..." />                    
+								<input class='form-control jpcrm-wizard-signup-input'  type="text" name="zbs_crm_email" id="zbs_crm_email" value="<?php echo esc_attr( $em ); ?>" placeholder="<?php esc_attr_e( 'Enter your best email', 'zero-bs-crm' ); ?>..." />
 
 								<input class='form-control' style="display:none !important"  type="text" name="zbs_crm_last_name" id="zbs_crm_last_name" value="<?php echo esc_attr( $lname ); ?>" placeholder="<?php esc_attr_e( 'And your last name', 'zero-bs-crm' ); ?>..." />
 							</p>

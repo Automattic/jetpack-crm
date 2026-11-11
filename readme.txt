@@ -1,8 +1,8 @@
 === Jetpack CRM - Clients, Leads, Invoices, Billing, Email Marketing, & Automation ===
 Contributors: automattic, kallehauge, cleacos, diegogarciarodrigues, bradshawtm, wpkaren, robertf4, woodyhayday, mikemayhem3030
 Tags: CRM, Woocommerce CRM, Client Portal, Marketing Automation, Lead Generation
-Tested up to: 7.0
-Stable tag: 6.8.1
+Tested up to: 7.1
+Stable tag: 6.8.5
 Requires at least: 6.0
 Requires PHP: 7.4
 License: GPLv2
@@ -362,6 +362,42 @@ We offer a full, no-hassle refund within 14 days. You can read more about that, 
 
 
 == Changelog ==
+### 6.8.5 - 2026-10-05
+* Restore the wizard's desktop layout and tidy the audit stack (#64)
+* Replace the bundle banner's outdated logos (#63)
+* Make the setup wizard's toggles usable and legible (#62)
+* Update the CRM dashboard logos and make the dashboard responsive (#61)
+* Make the setup wizard responsive on mobile (#58)
+* Align the contact list's inline editing and bulk actions with the contact edit page's assignment rules
+* Remove an unusable messaging control from the client portal and My Account forms
+
+### 6.8.4 - 2026-09-02
+* Allow assigning a transaction to a company invoice (#52)
+* Fix the revenue chart's 12-month window start and current-month zero-prefill (#51)
+* Show the Revenue Chart when transactions net to zero or below (#45)
+* Let a first Woo Sync import overwrite the contacts it created itself (#33)
+* Stop forms clearing contact details, and updates clearing the owner (#34)
+* Escape email addresses, the reCAPTCHA site key, and spreadsheet output.
+* Expire a quote's easy-access link when it returns to Draft.
+* Correct the permission check on the single-quote client portal endpoint.
+* Require the dashboard capability for the dashboard data endpoint.
+* Remove an unused invoice AJAX handler.
+* Show the SMS button only to roles permitted to send SMS.
+
+### 6.8.3 - 2026-08-18
+* Fix Activity panel header icon rendering (#37)
+* Don't let self-reported details replace contact fields already filled in (#30)
+* Check that the current user may view a list view type before returning its data. Task and form list views were not checked before.
+* Add a `jpcrm_perms_view_list_type` filter, so a site can grant or deny access to any list view. Use it if custom code shows a task or form list view behind a different capability.
+* Bump @wordpress/theme to 1.0.0 and migrate WPDS token names (#14)
+* CRM: Align admin footer with the unified Jetpack footer (#8)
+* Only accept a recognised sort direction on list views.
+* Require the invoice viewing capability to read invoice data over AJAX.
+* Escape the prefilled company name in the company field.
+
+### 6.8.2 - 2026-07-27
+* Improve remote image handling in PDF generation (#10)
+
 ### 6.8.1 - 2026-05-28
 #### Changed
 - Remove unneeded development and documentation files from the published plugin.
@@ -369,4 +405,3 @@ We offer a full, no-hassle refund within 14 days. You can read more about that, 
 
 #### Fixed
 - Client Portal: Prevent PHP fatal when downloading PDFs.
-

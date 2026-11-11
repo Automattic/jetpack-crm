@@ -1,0 +1,9 @@
+/*
+ * WordPress Design System tokens. `@use` this from any stylesheet that needs
+ * `--wpds-*` custom properties.
+ *
+ * A CSS `@import` rather than `@use` because the package specifier resolves
+ * through @wordpress/theme's exports map, which css-loader honours and Sass
+ * does not; Sass passes the .css import through and css-loader inlines it.
+ */
+@import "@wordpress/theme/design-tokens.css";

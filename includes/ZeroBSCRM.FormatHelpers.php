@@ -1503,7 +1503,9 @@ function zeroBSCRM_html_editField( $dataArr = array(), $fieldKey = false, $field
 
 			   <?php 
 
-			   if ($fieldKey == 'mobtel'){
+			   // The Twilio extension's send handler requires this same capability
+			   // (jetpack-crm-extensions#884), so without it the button only ever fails.
+			   if ($fieldKey == 'mobtel' && zeroBSCRM_permsSendEmailContacts()){
 
 								$sms_class = 'send-sms-none';
 								$sms_class = apply_filters('zbs_twilio_sms', $sms_class); 
@@ -1986,7 +1988,9 @@ if (!empty($fieldKey) && is_array($fieldVal)){
 
 										<?php 
 
-											if ($fieldKey == 'mobtel'){
+											// The Twilio extension's send handler requires this same capability
+											// (jetpack-crm-extensions#884), so without it the button only ever fails.
+											if ($fieldKey == 'mobtel' && zeroBSCRM_permsSendEmailContacts()){
 
 											$sms_class = 'send-sms-none';
 											$sms_class = apply_filters('zbs_twilio_sms', $sms_class); 
