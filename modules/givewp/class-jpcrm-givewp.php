@@ -146,13 +146,19 @@ class JPCRM_GiveWP {
 
 		global $zbs;
 
-		// inspired by Jetpack Forms implementation
+		// inspired by Jetpack Forms implementation; also keeps donor-supplied fields from
+		// setting who the contact is, who owns it, or its status.
 		$restricted_keys    = array(
 			'externalSources',
 			'companies',
 			'lastcontacted',
 			'created',
 			'aliases',
+			'id',
+			'wpid',
+			'owner',
+			'email',
+			'status',
 		);
 		$jpcrm_field_prefix = 'jpcrm-';
 
