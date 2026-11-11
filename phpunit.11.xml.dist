@@ -46,6 +46,9 @@
 		<testsuite name="ajax">
 			<directory suffix="Test.php">tests/php/ajax</directory>
 		</testsuite>
+		<testsuite name="portal">
+			<directory suffix="Test.php">tests/php/portal</directory>
+		</testsuite>
 	</testsuites>
 
 	<source>
