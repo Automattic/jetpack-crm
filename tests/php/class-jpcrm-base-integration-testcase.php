@@ -11,6 +11,13 @@ use Automattic\Jetpack\CRM\Entities\Factories\Contact_Factory;
 abstract class JPCRM_Base_Integration_TestCase extends JPCRM_Base_TestCase {
 
 	/**
+	 * Custom field settings as they were before register_custom_field() changed them.
+	 *
+	 * @var array|null Keys `legacy` (the `customfields` setting) and `types` (object type ID => fields).
+	 */
+	private $custom_fields_before = null;
+
+	/**
 	 * Clean up the database after each test.
 	 *
 	 * @since 6.2.0
@@ -18,6 +25,8 @@ abstract class JPCRM_Base_Integration_TestCase extends JPCRM_Base_TestCase {
 	 * @return void
 	 */
 	public function tear_down(): void {
+		$this->restore_custom_fields();
+
 		parent::tear_down();
 
 		zeroBSCRM_database_reset( false );
@@ -98,6 +107,88 @@ abstract class JPCRM_Base_Integration_TestCase extends JPCRM_Base_TestCase {
 	public function add_wp_user() {
 
 		return wp_create_user( 'testuser', 'password', 'user@demo.com' );
+	}
+
+	/**
+	 * Register a custom field against one or more object types and rebuild the field globals.
+	 *
+	 * Custom fields are stored twice: once per object type for DAL3, and once in the legacy
+	 * `customfields` setting. zeroBSCRM_unpackCustomFields() gates the DAL3 overload on the
+	 * object key existing in the legacy setting, so both are needed before the field reaches
+	 * $zbsCustomerFields / $zbsCompanyFields.
+	 *
+	 * @param string $slug        Field slug, e.g. 'contract-date'.
+	 * @param string $type        Field type, e.g. 'date'. Must be in zeroBSCRM_customfields_acceptableCFTypes().
+	 * @param string $label       Human readable field name.
+	 * @param array  $object_keys Legacy object key => object type ID, e.g. array( 'customers' => ZBS_TYPE_CONTACT ).
+	 *
+	 * @return void
+	 */
+	public function register_custom_field( $slug, $type, $label, array $object_keys ) {
+		global $zbs;
+
+		// Settings outlive the test: tear_down() puts these back.
+		if ( null === $this->custom_fields_before ) {
+			$this->custom_fields_before = array(
+				'legacy' => $zbs->settings->get( 'customfields' ),
+				'types'  => array(),
+			);
+		}
+		foreach ( $object_keys as $obj_type_id ) {
+			if ( ! array_key_exists( $obj_type_id, $this->custom_fields_before['types'] ) ) {
+				$this->custom_fields_before['types'][ $obj_type_id ] = $zbs->DAL->getActiveCustomFields( array( 'objtypeid' => $obj_type_id ) ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+			}
+		}
+
+		$field_definition = array( $type, $label, '', $slug );
+
+		$legacy_setting = array();
+
+		foreach ( $object_keys as $object_key => $obj_type_id ) {
+			$zbs->DAL->updateActiveCustomFields( // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+				array(
+					'objtypeid' => $obj_type_id,
+					'fields'    => array( $slug => $field_definition ),
+				)
+			);
+
+			$legacy_setting[ $object_key ] = array( $field_definition );
+		}
+
+		$zbs->settings->update( 'customfields', $legacy_setting );
+
+		// Same order as ZeroBSCRM.Core.php: build the globals from the models, then overlay
+		// the custom fields.
+		zeroBSCRM_fields_initialise();
+		zeroBSCRM_unpackCustomFields();
+	}
+
+	/**
+	 * Undo register_custom_field(): put the settings and field globals back.
+	 *
+	 * @return void
+	 */
+	private function restore_custom_fields() {
+		global $zbs;
+
+		if ( null === $this->custom_fields_before ) {
+			return;
+		}
+
+		foreach ( $this->custom_fields_before['types'] as $obj_type_id => $fields ) {
+			$zbs->DAL->updateActiveCustomFields( // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+				array(
+					'objtypeid' => $obj_type_id,
+					'fields'    => is_array( $fields ) ? $fields : array(),
+				)
+			);
+		}
+		$zbs->settings->update( 'customfields', $this->custom_fields_before['legacy'] );
+
+		zeroBSCRM_fields_initialise();
+		zeroBSCRM_unpackCustomFields();
+
+		$this->custom_fields_before = null;
 	}
 
 	/**

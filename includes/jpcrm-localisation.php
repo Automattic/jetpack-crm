@@ -95,6 +95,37 @@ function jpcrm_uts_to_time_str( $timestamp, $format = false ) {
 }
 
 /**
+ * Checks whether a value is already a UTS, rather than a date string awaiting conversion.
+ *
+ * The date conversion functions here cannot read their own output: given a
+ * timestamp, DateTime::createFromFormat() fails and they return false. This lets
+ * callers which may be handed an already-converted value treat that value as a
+ * no-op instead of losing it.
+ *
+ * An int is accepted as-is, because that is what the conversion functions return.
+ * A string must hold nine or more digits (optionally signed), which is a plausible
+ * timestamp. That floor stops a short numeric string (a date custom field submitted
+ * as "2026", say) being read as a timestamp in 1970. Such a string fails to parse as
+ * a date today and continues to.
+ *
+ * @param mixed $value Value to test.
+ *
+ * @return bool True if the value is already a UTS.
+ */
+function jpcrm_value_is_uts( $value ) {
+
+	if ( is_int( $value ) ) {
+		return true;
+	}
+
+	if ( ! is_string( $value ) ) {
+		return false;
+	}
+
+	return preg_match( '/^-?[0-9]{9,}$/', $value ) === 1;
+}
+
+/**
  * Creates a UTS from a date time string
  *
  * @param string $datetime_str String containing date and time (in WP timezone).
