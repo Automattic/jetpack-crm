@@ -19,6 +19,14 @@ import 'zx/globals'
  * repeat. If the tag and GitHub release already exist, it short-circuits so the
  * SVN step (which self-skips an existing tag) can still run.
  *
+ * The changelog commit is pushed straight to the release PR's base branch. On
+ * a repo whose base branch requires status checks, set `requiredCheckWorkflows`
+ * in `release.config.json` to the workflow files that report those checks: the
+ * commit is then pushed to a temporary `release-changelog/<version>` branch,
+ * the workflows are run against it, and the base branch is fast-forwarded once
+ * they pass. Each of those workflows needs a `workflow_dispatch` trigger, and
+ * the release job needs `actions: write` to start them.
+ *
  * Usage: `node scripts/create-release.mjs <pr-number>`.
  *
  * External dependencies
@@ -61,7 +69,7 @@ if ( alreadyReleased ) {
 	console.log( chalk.yellow( `Release ${ pluginVersion } is already tagged and published on GitHub — rebuilding for the deploy step.` ) );
 } else {
 	updateChangelog();
-	commitChangelog();
+	await commitChangelog();
 	tagRelease();
 }
 
@@ -171,7 +179,7 @@ function updateChangelog() {
 	console.log( chalk.green( '✓' ), cfg.readme );
 }
 
-function commitChangelog() {
+async function commitChangelog() {
 	execSync( `git add ${ cfg.readme }` );
 	// Idempotent: only commit if the readme actually changed. `git diff --cached
 	// --quiet` exits 0 when nothing is staged.
@@ -183,7 +191,114 @@ function commitChangelog() {
 		// Non-zero exit means there are staged changes; fall through and commit.
 	}
 	execSync( `git commit -m "Update changelog for ${ pluginVersion }"` );
-	execSync( `git push ${ REMOTE } HEAD` );
+	await pushChangelog();
+}
+
+/**
+ * Push the changelog commit to the base branch.
+ *
+ * A branch that requires status checks rejects a direct push of a commit those
+ * checks haven't run on (GH013), and a push made with the workflow's token
+ * doesn't start `push` or `pull_request` workflows. So when the repo lists
+ * `requiredCheckWorkflows`, the commit goes to a temporary branch first, the
+ * workflows are started on it by hand (`workflow_dispatch` is the one event the
+ * workflow token may trigger), and the base branch is fast-forwarded to the
+ * same commit once they pass.
+ */
+async function pushChangelog() {
+	const workflows = cfg.requiredCheckWorkflows || [];
+	if ( ! workflows.length ) {
+		execSync( `git push ${ REMOTE } HEAD` );
+		return;
+	}
+
+	const baseBranch  = execSync( 'git rev-parse --abbrev-ref HEAD' ).toString().trim();
+	const checkBranch = `release-changelog/${ pluginVersion }`;
+	const headSha     = () => execSync( 'git rev-parse HEAD' ).toString().trim();
+
+	// More than one attempt only when the base branch moved while the checks
+	// ran: the commit is rebased, so it is a new commit and is checked again.
+	for ( let attempt = 1; attempt <= 3; attempt++ ) {
+		const sha = headSha();
+		execSync( `git push --force ${ REMOTE } HEAD:refs/heads/${ checkBranch }` );
+		await runRequiredChecks( workflows, checkBranch, sha );
+
+		let pushError;
+		try {
+			execSync( `git push ${ REMOTE } HEAD:refs/heads/${ baseBranch }`, { stdio: 'pipe' } );
+		} catch ( error ) {
+			pushError = error;
+		}
+
+		if ( ! pushError ) {
+			// The temporary branch has done its job. Leaving it behind is harmless
+			// (the next run force-pushes over it), so a failed delete isn't fatal.
+			try {
+				execSync( `git push ${ REMOTE } --delete ${ checkBranch }`, { stdio: 'ignore' } );
+			} catch {
+				console.log( chalk.yellow( `Could not delete ${ checkBranch } — delete it by hand.` ) );
+			}
+			return;
+		}
+
+		// --autostash: installing dependencies can leave tracked files modified
+		// (a lock file, say), and a rebase refuses to start on a dirty tree.
+		execSync( `git pull --rebase --autostash ${ REMOTE } ${ baseBranch }` );
+		if ( headSha() === sha ) {
+			// Nothing new on the base branch, so the push was refused for another
+			// reason. Retrying would only repeat it.
+			throw new Error(
+				`Could not push the changelog commit to ${ baseBranch } after its checks passed. ` +
+				`It is on the ${ checkBranch } branch.\n${ pushError.stderr || pushError.message }`,
+			);
+		}
+		console.log( chalk.yellow( `${ baseBranch } moved while the checks ran — rebased, checking the new commit.` ) );
+	}
+
+	throw new Error( `Could not push the changelog commit to ${ baseBranch }: it kept moving. The commit is on the ${ checkBranch } branch.` );
+}
+
+/**
+ * Start each required-check workflow on a branch and wait for all of them to
+ * pass on the given commit. Throws if a run can't be found, fails or times out.
+ *
+ * @param {string[]} workflows Workflow file names, e.g. `phpunit.yml`.
+ * @param {string}   ref       Branch to run them on.
+ * @param {string}   sha       Commit the runs must be for.
+ */
+async function runRequiredChecks( workflows, ref, sha ) {
+	for ( const workflow of workflows ) {
+		await $`gh workflow run ${ workflow } -R ${ cfg.repo } --ref ${ ref }`;
+	}
+	for ( const workflow of workflows ) {
+		const runId = await findWorkflowRun( workflow, ref, sha );
+		console.log( chalk.bold( `Waiting for ${ workflow } (run ${ runId })…` ) );
+		// --exit-status makes a failed run a non-zero exit, which zx throws on.
+		await $`gh run watch ${ runId } -R ${ cfg.repo } --exit-status --interval 10`.quiet().timeout( '1200s' );
+	}
+}
+
+/**
+ * Find the run a `gh workflow run` call just started. The dispatch call returns
+ * before the run exists, so poll for it.
+ *
+ * @param {string} workflow Workflow file name.
+ * @param {string} ref      Branch it was started on.
+ * @param {string} sha      Commit it must be for.
+ * @return {Promise<number>} The run's ID.
+ */
+async function findWorkflowRun( workflow, ref, sha ) {
+	for ( let tries = 0; tries < 24; tries++ ) {
+		const runs = JSON.parse(
+			( await $`gh run list -R ${ cfg.repo } --workflow ${ workflow } --branch ${ ref } --event workflow_dispatch --json databaseId,headSha --limit 20`.quiet() ).stdout,
+		);
+		const run  = runs.find( ( candidate ) => candidate.headSha === sha );
+		if ( run ) {
+			return run.databaseId;
+		}
+		await sleep( 5000 );
+	}
+	throw new Error( `${ workflow } did not start on ${ ref } (${ sha }). Does it have a workflow_dispatch trigger?` );
 }
 
 function tagRelease() {

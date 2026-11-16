@@ -18,7 +18,10 @@ jobs:
     # The default GITHUB_TOKEN is read-only on repos that don't opt into
     # read-write workflow permissions. This job pushes commits and tags, creates
     # a GitHub release, and comments on the PR, so grant those writes explicitly.
+    # `actions: write` lets create-release.mjs start the required-check workflows
+    # on the changelog commit before it goes to trunk (see pushChangelog() there).
     permissions:
+      actions: write
       contents: write
       pull-requests: write
       issues: write
