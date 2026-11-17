@@ -115,6 +115,10 @@ function jpcrm_get_external_source_info( $source_key ) {
 // Returns a simplified 1 line explanation of an external source
 function zeroBS_getExternalSourceTitle( $srcKey = '', $srcUID = '' ) {
 
+	// The ID is whatever the source gave us (an order number, an email address
+	// typed into a form), and is shown as text.
+	$srcUID = esc_html( (string) $srcUID ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+
 	// some old hard typed:
 
 	switch ( $srcKey ) {
@@ -165,12 +169,12 @@ function zeroBS_getExternalSourceTitle( $srcKey = '', $srcUID = '' ) {
 					$name = $zbs->external_sources[ $srcKey ][0];
 				}
 
-				return '<i class="fa ' . $ico . '"></i> ' . $name . ':<br /><span>' . $srcUID . '</span>';
+				return '<i class="fa ' . esc_attr( $ico ) . '"></i> ' . esc_html( $name ) . ':<br /><span>' . $srcUID . '</span>'; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 
 			} else {
 
 				#} Generic for now
-				return '<i class="fa fa-users"></i> ' . ucwords( str_replace( '_', ' ', $srcKey ) ) . ':<br /><span>' . $srcUID . '</span>';
+				return '<i class="fa fa-users"></i> ' . esc_html( ucwords( str_replace( '_', ' ', $srcKey ) ) ) . ':<br /><span>' . $srcUID . '</span>'; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 
 			}
 

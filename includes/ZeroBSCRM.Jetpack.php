@@ -37,6 +37,26 @@ if ( ! defined( 'ZEROBSCRM_PATH' ) ) {
 add_action( 'grunion_after_feedback_post_inserted', 'zero_bs_crm_capture_jetpack_form', 10, 4 );
 
 /**
+ * A value submitted through a Jetpack form, as the text to store on a contact.
+ *
+ * @param mixed $value      The submitted value. Choice fields submit an array.
+ * @param bool  $multi_line Whether to keep line breaks.
+ * @return string
+ */
+function jpcrm_jetpack_form_text_value( $value, $multi_line = false ) {
+
+	if ( is_array( $value ) ) {
+		$value = implode( ', ', array_filter( $value, 'is_scalar' ) );
+	}
+
+	if ( ! is_scalar( $value ) ) {
+		return '';
+	}
+
+	return $multi_line ? sanitize_textarea_field( (string) $value ) : sanitize_text_field( (string) $value );
+}
+
+/**
  * Creates a ZBS contact from a Jetpack form submission.
  *
  * @param integer $post_id The post id that contains the contact form data.
@@ -69,6 +89,9 @@ function zero_bs_crm_capture_jetpack_form( $post_id, $all_field_data, $is_spam, 
 		'lastcontacted',
 		'created',
 		'aliases',
+		'id',
+		'wpid',
+		'owner',
 	);
 
 	/*
@@ -92,10 +115,11 @@ function zero_bs_crm_capture_jetpack_form( $post_id, $all_field_data, $is_spam, 
 					} else {
 						$contact_data[ $data_key ] = explode( ',', $field_data->value );
 					}
+					$contact_data[ $data_key ] = array_map( 'jpcrm_jetpack_form_text_value', $contact_data[ $data_key ] );
 				} elseif ( $field_data->get_attribute( 'type' ) === 'date' ) {
 					$contact_data[ $data_key ] = jpcrm_date_str_wp_format_to_uts( $field_data->value, true );
 				} else {
-					$contact_data[ $data_key ] = $field_data->value;
+					$contact_data[ $data_key ] = jpcrm_jetpack_form_text_value( $field_data->value, $field_data->get_attribute( 'type' ) === 'textarea' );
 				}
 			}
 		}
@@ -112,7 +136,7 @@ function zero_bs_crm_capture_jetpack_form( $post_id, $all_field_data, $is_spam, 
 				&& ! empty( $field_data->value )
 			) {
 				// Use the first email field that's found.
-				$contact_data['email'] = $field_data->value;
+				$contact_data['email'] = jpcrm_jetpack_form_text_value( $field_data->value );
 			}
 
 			if ( 'telephone' === $field_data->get_attribute( 'type' )
@@ -120,7 +144,7 @@ function zero_bs_crm_capture_jetpack_form( $post_id, $all_field_data, $is_spam, 
 				&& ! empty( $field_data->value )
 			) {
 				// Use the first phone field that's found.
-				$contact_data['hometel'] = $field_data->value;
+				$contact_data['hometel'] = jpcrm_jetpack_form_text_value( $field_data->value );
 			}
 
 			if ( 'name' === $field_data->get_attribute( 'type' )
@@ -128,7 +152,7 @@ function zero_bs_crm_capture_jetpack_form( $post_id, $all_field_data, $is_spam, 
 				&& ! empty( $field_data->value )
 			) {
 				// Use the first name field that's found.
-				$name                  = explode( ' ', $field_data->value, 2 );
+				$name                  = explode( ' ', jpcrm_jetpack_form_text_value( $field_data->value ), 2 );
 				$contact_data['fname'] = $name[0];
 				if ( ! empty( $name[1] ) ) {
 					$contact_data['lname'] = $name[1];
@@ -139,6 +163,12 @@ function zero_bs_crm_capture_jetpack_form( $post_id, $all_field_data, $is_spam, 
 
 	// If we couldn't find an email, bail.
 	if ( empty( $contact_data['email'] ) ) {
+		return;
+	}
+
+	// The contact is matched on this, and it becomes the ID of its source, so it has
+	// to be an email address whichever kind of field it was typed into.
+	if ( ! zeroBSCRM_validateEmail( $contact_data['email'] ) ) {
 		return;
 	}
 
