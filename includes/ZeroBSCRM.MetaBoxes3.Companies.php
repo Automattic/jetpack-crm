@@ -266,6 +266,16 @@ class zeroBS__Metabox_Company extends zeroBS__Metabox {
 				}
 			}
 
+			// Only an email address is kept as the company's email. The posted value is still
+			// slashed here; it is unslashed below, before it is stored.
+			$posted_email = isset( $dataArr['email'] ) ? stripslashes( (string) $dataArr['email'] ) : ''; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+			if ( '' !== $posted_email && ! zeroBSCRM_validateEmail( $posted_email ) ) {
+
+				// Say so, and leave the email as it was.
+				$this->update_invalid_email( $posted_email );
+				$dataArr['email'] = $company_id > 0 ? (string) zeroBS_companyEmail( $company_id ) : ''; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+			}
+
 			// now we check whether a user with this email already exists (separate to this company id), so we can warn them
 			// ... that it wont have changed the email
 			if ( isset( $dataArr['email'] ) && ! empty( $dataArr['email'] ) ) {
@@ -394,6 +404,24 @@ class zeroBS__Metabox_Company extends zeroBS__Metabox {
 		$zbs->pageMessages[] = $msg;
 	}
 
+	/**
+	 * Queue a notice saying the email entered for the company was not saved.
+	 *
+	 * @param string $invalid_email The value that was entered.
+	 */
+	public function update_invalid_email( $invalid_email ) {
+		global $zbs;
+
+		$zbs->pageMessages[] = zeroBSCRM_UI2_messageHTML( // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+			'info orange mini',
+			/* translators: %s: the email address that was entered. */
+			sprintf( __( 'The company email specified (%s) is not valid.', 'zero-bs-crm' ), esc_html( $invalid_email ) ),
+			'',
+			'address book outline',
+			'companyUpdated'
+		);
+	}
+
 	public function updateEmailDupeMessage( $otherCompanyID = -1 ) {
 
 		global $zbs;
@@ -508,7 +536,7 @@ class zeroBS__Metabox_CompanyContacts extends zeroBS__Metabox {
 							#} Description
 							$contactDesc = '<i class="calendar alternate outline icon"></i>' . __( 'Contact since', 'zero-bs-crm' ) . ' ' . zeroBSCRM_date_i18n( zeroBSCRM_getDateFormat(), $contact['createduts'], true, false );
 							if ( isset( $contact['email'] ) && ! empty( $contact['email'] ) ) {
-								$contactDesc .= '<br /><a href="' . $contactUrl . '" target="_blank">' . $contact['email'] . '</a>';
+								$contactDesc .= '<br /><a href="' . $contactUrl . '" target="_blank">' . esc_html( $contact['email'] ) . '</a>'; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 							}
 
 							?>
