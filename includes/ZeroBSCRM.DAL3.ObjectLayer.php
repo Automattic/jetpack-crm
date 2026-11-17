@@ -931,7 +931,7 @@ class zbsDAL_ObjectLayer {
 				if ( ! empty( $fieldKey ) && isset( $this->objectModel[ $fieldKey ] ) && isset( $this->objectModel[ $fieldKey ]['max_len'] ) ) {
 
 					// check length
-					if ( strlen( $val ) > $this->objectModel[ $fieldKey ]['max_len'] ) {
+					if ( strlen( (string) $val ) > $this->objectModel[ $fieldKey ]['max_len'] ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase, WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 
 						// > max_len
 						// .. abbreviate
