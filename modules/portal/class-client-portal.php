@@ -319,17 +319,7 @@ class Client_Portal {
 			return false;
 		}
 
-		global $wpdb;
-		$uid = get_current_user_id();
-		$cID = zeroBS_getCustomerIDFromWPID( $uid );
-
-		// these ones definitely work
-		$uinfo          = get_userdata( $uid );
-		$potentialEmail = '';
-		if ( isset( $uinfo->user_email ) ) {
-			$potentialEmail = $uinfo->user_email;
-		}
-		$cID = zeroBS_getCustomerIDWithEmail( $potentialEmail );
+		$cID = jpcrm_portal_contact_id_for_user( get_current_user_id() ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 
 		$disabled = zeroBSCRM_isCustomerPortalDisabled( $cID );
 

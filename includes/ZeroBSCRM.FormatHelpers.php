@@ -527,7 +527,7 @@ function zeroBSCRM_html_companyIntroSentence( $company ) {
 	$return = '';
 	if ( isset( $company['email'] ) && ! empty( $company['email'] ) ) {
 		$return .= __( 'Email:', 'zero-bs-crm' );
-		$return .= '<a href="mailto:' . $company['email'] . '" class="coemail"> ' . $company['email'] . '</a><br/>';
+		$return .= '<a href="' . esc_url( 'mailto:' . $company['email'] ) . '" class="coemail"> ' . esc_html( $company['email'] ) . '</a><br/>';
 	}
 
 	if ( is_array( $company ) && $company['created'] > 0 && isset( $company['created_date'] ) ) {

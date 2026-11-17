@@ -46,7 +46,7 @@ add_action( 'wp_enqueue_scripts', array( $portal, 'portal_enqueue_scripts_and_st
 		<?php
 		$uid        = get_current_user_id();
 		$uinfo      = get_userdata( $uid );
-		$contact_id = zeroBS_getCustomerIDWithEmail( $uinfo->user_email );
+		$contact_id = jpcrm_portal_contact_id_for_user( $uid );
 
 		$is_quote_admin = $uinfo->has_cap( 'admin_zerobs_quotes' );
 

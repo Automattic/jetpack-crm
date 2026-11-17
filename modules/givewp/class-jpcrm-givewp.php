@@ -212,12 +212,6 @@ class JPCRM_GiveWP {
 			}
 		}
 
-		// If this is an existing WordPress user, make sure not to lose that association.
-		$wp_user = get_user_by( 'email', $new_contact_data['email'] );
-		if ( is_object( $wp_user ) ) {
-			$new_contact_data['wpid'] = $wp_user->ID;
-		}
-
 		// specify contact source
 		$new_contact_data['externalSources'] = array(
 			array(
@@ -248,10 +242,15 @@ class JPCRM_GiveWP {
 		// add or update contact
 		$contact_id = $zbs->DAL->contacts->addUpdateContact(
 			array(
-				'data'                 => $new_contact_data,
-				'automatorPassthrough' => $created_meta,
-				'fallBackLog'          => $exists_meta,
-				'extraMeta'            => array(),
+				'data'                       => $new_contact_data,
+				'automatorPassthrough'       => $created_meta,
+				'fallBackLog'                => $exists_meta,
+				'extraMeta'                  => array(),
+				// A donation names its donor by email address only: fill in what an existing
+				// contact is missing, and leave what it has, its status included. A new
+				// contact gets the Donor status.
+				'do_not_overwrite_populated' => jpcrm_public_submission_fields_to_protect( $new_contact_data, 'givewp' ),
+				'do_not_update_blanks'       => true,
 			)
 		);
 		return $contact_id;

@@ -33,6 +33,17 @@ abstract class JPCRM_Base_Integration_TestCase extends JPCRM_Base_TestCase {
 	}
 
 	/**
+	 * Mark a user's current email address as confirmed, as opening the link in
+	 * the confirmation email does.
+	 *
+	 * @param int $user_id WordPress user ID.
+	 * @return void
+	 */
+	public function confirm_user_email( $user_id ) {
+		update_user_meta( $user_id, JPCRM_PORTAL_CONFIRMED_EMAIL_META, jpcrm_portal_user_email( $user_id ) );
+	}
+
+	/**
 	 * Add a contact.
 	 *
 	 * @param array $args (Optional) A list of arguments we should use for the contact.

@@ -61,127 +61,51 @@ class Wordpress_User_Integration {
 		// This var will be defined as JPCRM_PROFILE_UPDATE_CHANGES, which will allow WooSync's save_my_account_crm_field_changes to sidestep repeating changes
 		$profile_update_changes = array();
 
-		// retrieve id's
+		// The contact this user is. Only a user who has confirmed their email address, and
+		// is linked to the contact that has it, changes a contact from their profile.
 		$old_user_contact_id = false;
-		$new_user_contact_id = false;
 		$email_conflict      = false;
-		if ( isset( $old_user_data->data->user_email ) ) {
 
-			// check if we have contacts with emails
-			$old_user_contact_id = $zbs->DAL->contacts->getContact(
-				-1,
-				array(
+		$old_email = isset( $old_user_data->data->user_email ) ? jpcrm_portal_normalise_email( $old_user_data->data->user_email ) : '';
+		$new_email = isset( $new_user_data['user_email'] ) ? jpcrm_portal_normalise_email( $new_user_data['user_email'] ) : $old_email;
 
-					'email'       => $old_user_data->data->user_email,
-					'onlyID'      => true,
-					'ignoreowner' => zeroBSCRM_DAL2_ignoreOwnership( ZBS_TYPE_CONTACT ),
+		if ( $old_email === $new_email ) {
 
-				)
-			);
+			$old_user_contact_id = jpcrm_portal_contact_id_for_user( $user_id );
 
-		}
+		} elseif ( jpcrm_portal_email_is_confirmed( $user_id ) ) {
 
-		if ( isset( $new_user_data['user_email'] ) ) {
+			// An administrator made the change, which confirms the new address: the contact
+			// has already followed it (see jpcrm_portal_admin_email_change_confirms()).
+			$old_user_contact_id = jpcrm_portal_contact_id_for_user( $user_id );
 
-			$new_user_contact_id = $zbs->DAL->contacts->getContact(
-				-1,
-				array(
+			// Flag so woosync doesn't also update.
+			$profile_update_changes[] = 'email';
 
-					'email'       => $new_user_data['user_email'],
-					'onlyID'      => true,
-					'ignoreowner' => zeroBSCRM_DAL2_ignoreOwnership( ZBS_TYPE_CONTACT ),
+		} else {
 
-				)
-			);
-
-		}
-
-		// Email change (For Client Portal Users & WooSync originated contacts)
-		if ( $old_user_data->data->user_email != $new_user_data['user_email'] ) {
-
-			// if we had a contact with this users email...
-			if ( $old_user_contact_id > 0 ) {
-
-				// if we don't already have a contact with this new email (no collision)
-				if ( ! $new_user_contact_id ) {
-
-					// update contacts email address:
-					$zbs->DAL->contacts->update_contact_email( $old_user_contact_id, $new_user_data['user_email'] );
-
-					// flag so woosync doesn't also update
-					$profile_update_changes[] = 'email';
-
-					// Add log noting the email change
-					$note_type         = 'contact_changed_details_via_wpprofile';
-					$short_description = __( 'Email changed', 'zero-bs-crm' );
-					if ( $change_via_woo_account ) {
-						$note_type = 'contact_changed_details_via_woomyacc';
-					}
-					$zbs->DAL->logs->addUpdateLog(
-						array(
-
-							'id'    => -1,
-							'owner' => -1,
-							'data'  => array(
-
-								'objtype'   => ZBS_TYPE_CONTACT,
-								'objid'     => $old_user_contact_id,
-								'type'      => $note_type, // contact_changed_details_via_wpprofile or contact_changed_details_via_woomyacc
-								'shortdesc' => $short_description,
-								'longdesc'  => sprintf( __( 'Contact email changed from `%1$s` to `%2$s`', 'zero-bs-crm' ), $old_user_data->data->user_email, $new_user_data['user_email'] ),
-
-							),
-
-						)
-					);
-
-				} else {
-
-					// the email this contact has changed their email to is already in use
-					// on another contact :o
-
-					// flag so that we don't also update the new users details below
-					$email_conflict = true;
-
-					// Add a log to both contacts.
-					$short_description = __( 'Attempted email Change', 'zero-bs-crm' );
-					$zbs->DAL->logs->addUpdateLog(
-						array(
-
-							'id'    => -1,
-							'owner' => -1,
-							'data'  => array(
-
-								'objtype'   => ZBS_TYPE_CONTACT,
-								'objid'     => $old_user_contact_id,
-								'type'      => 'contact_change_details_attempt',
-								'shortdesc' => $short_description,
-								'longdesc'  => sprintf( __( 'There was an attempt to change this contacts email from `%1$s` to `%2$s`, unfortunately this was not possible because another contact (#%3$d) already uses that email address.', 'zero-bs-crm' ), $old_user_data->data->user_email, $new_user_data['user_email'], $new_user_contact_id ),
-
-							),
-
-						)
-					);
-					$zbs->DAL->logs->addUpdateLog(
-						array(
-
-							'id'    => -1,
-							'owner' => -1,
-							'data'  => array(
-
-								'objtype'   => ZBS_TYPE_CONTACT,
-								'objid'     => $new_user_contact_id,
-								'type'      => 'contact_change_details_attempt',
-								'shortdesc' => $short_description,
-								'longdesc'  => sprintf( __( 'There was an attempt to change another contact\'s (#%1$d) email from `%2$s` to `%3$s`, this was not possible because this contact already uses that email address.', 'zero-bs-crm' ), $old_user_contact_id, $old_user_data->data->user_email, $new_user_data['user_email'] ),
-
-							),
-
-						)
-					);
-
-				}
+			// The user changed their own address. Their contact keeps the address it has until
+			// the new one is confirmed, and until then they are not that contact.
+			$previous_contact = false;
+			if ( jpcrm_portal_normalise_email( get_user_meta( $user_id, JPCRM_PORTAL_CONFIRMED_EMAIL_META, true ) ) === $old_email ) {
+				$previous_contact = jpcrm_portal_contact_with_email( $old_email );
 			}
+
+			if ( $previous_contact && (int) $previous_contact['wpid'] === (int) $user_id ) {
+
+				jpcrm_portal_identity_log(
+					$previous_contact['id'],
+					'contact_change_details_attempt',
+					__( 'Email change awaiting confirmation', 'zero-bs-crm' ),
+					/* translators: 1: old email address, 2: new email address. */
+					sprintf( __( 'The WordPress user for this contact changed their email from `%1$s` to `%2$s`. The contact keeps its email address until the new one is confirmed, and a confirmation email has been sent to it.', 'zero-bs-crm' ), $old_email, $new_email )
+				);
+
+				jpcrm_portal_send_email_confirmation( $user_id );
+			}
+
+			// Flag so woosync doesn't also update.
+			$profile_update_changes[] = 'email';
 		}
 
 		// First and last names are available in $new_user_data but not in old.

@@ -412,12 +412,7 @@ class Woo_Sync_Background_Sync {
 		global $zbs;
 
 		// retrieve contact ID from WP user ID
-		$contact_id = $zbs->DAL->contacts->getContact(
-			array(
-				'WPID'   => $user_id,
-				'onlyID' => true,
-			)
-		);
+		$contact_id = jpcrm_portal_contact_id_for_user( $user_id );
 
 		if ( $contact_id > 0 ) {
 

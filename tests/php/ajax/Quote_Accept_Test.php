@@ -146,6 +146,7 @@ class Quote_Accept_Test extends JPCRM_Base_Integration_TestCase {
 		$user_id    = self::factory()->user->create( array( 'user_email' => $email ) );
 		$contact_id = (int) $this->add_contact( array( 'email' => $email ) );
 		zeroBS_setCustomerWPID( $contact_id, $user_id );
+		$this->confirm_user_email( $user_id );
 
 		return array(
 			'wp_user'    => new \WP_User( $user_id ),

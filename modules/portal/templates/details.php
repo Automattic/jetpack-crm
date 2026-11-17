@@ -24,7 +24,7 @@ if ( array_key_exists( 'save', $_POST ) ) { // phpcs:ignore WordPress.Security.N
 
 $uid        = get_current_user_id();
 $uinfo      = get_userdata( $uid );
-$contact_id = zeroBS_getCustomerIDWithEmail( $uinfo->user_email );
+$contact_id = jpcrm_portal_contact_id_for_user( $uid );
 
 ?>
 <div class="alignwide zbs-site-main zbs-portal-grid">

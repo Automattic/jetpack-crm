@@ -39,7 +39,7 @@ class Details_Endpoint extends Client_Portal_Endpoint {
 		) {
 			$uid   = get_current_user_id();
 			$uinfo = get_userdata( $uid );
-			$cID   = zeroBS_getCustomerIDWithEmail( $uinfo->user_email );
+			$cID   = jpcrm_portal_contact_id_for_user( $uid ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 
 			// added !empty check - because if logged in as admin, saved deets, it made a new contact for them
 			if ( (int) $_POST['customer_id'] == $cID && ! empty( $cID ) ) {

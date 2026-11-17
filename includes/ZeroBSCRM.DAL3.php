@@ -3788,6 +3788,13 @@ class zbsDAL {
 		if ( ! isset( $data['name'] ) || empty( $data['name'] ) ) {
 			return false;
 		}
+
+		// Tag names are plain text, whichever caller they arrive from.
+		$data['name'] = sanitize_text_field( $data['name'] );
+		if ( '' === $data['name'] ) {
+			return false;
+		}
+
 		if ( empty( $data['slug'] ) ) {
 
 			$potential_slug = sanitize_key( $data['name'] ); // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable

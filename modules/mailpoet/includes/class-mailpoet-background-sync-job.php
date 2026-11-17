@@ -471,13 +471,47 @@ class Mailpoet_Background_Sync_Job {
 
 		// $this->debug( 'Add/Update contact: <pre>' . var_export( $contact_args ) . '</pre>' );
 
+		$update_args = array(
+			'data'                 => $contact_args['data'],
+			'do_not_update_blanks' => true,
+		);
+
+		// Anyone can subscribe, with any email address. Until a contact is this
+		// subscriber's own, fill in what it is missing and leave what it has.
+		if ( ! $this->subscriber_has_contact( $subscriber ) ) {
+			$update_args['do_not_overwrite_populated'] = jpcrm_public_submission_fields_to_protect( $contact_args['data'], 'mailpoet' );
+		}
+
 		// Add/update the contact & return id
-		return $zbs->DAL->contacts->addUpdateContact( // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+		return $zbs->DAL->contacts->addUpdateContact( $update_args ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+	}
+
+	/**
+	 * Whether a contact is already recorded as this subscriber, under the same email address.
+	 *
+	 * @param array $subscriber MailPoet subscriber.
+	 *
+	 * @return bool
+	 */
+	private function subscriber_has_contact( $subscriber ) {
+
+		global $zbs;
+
+		if ( empty( $subscriber['id'] ) || empty( $subscriber['email'] ) ) {
+			return false;
+		}
+
+		$contact = $zbs->DAL->contacts->getContact( // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+			-1,
 			array(
-				'data'                 => $contact_args['data'],
-				'do_not_update_blanks' => true,
+				'externalSource'    => 'mailpoet',
+				'externalSourceUID' => $subscriber['id'],
 			)
 		);
+
+		return is_array( $contact )
+			&& isset( $contact['email'] )
+			&& strtolower( trim( $contact['email'] ) ) === strtolower( trim( sanitize_email( $subscriber['email'] ) ) );
 	}
 
 	/**

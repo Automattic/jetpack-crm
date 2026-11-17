@@ -1101,7 +1101,7 @@ function ZeroBSCRM_accept_quote() {
 				wp_send_json_error( array( 'access' => 1 ), 403, JSON_UNESCAPED_SLASHES );
 			}
 			// Resolve IDs safely
-			$customer_id      = (int) zeroBS_getCustomerIDWithEmail( $uinfo->user_email );
+			$customer_id      = jpcrm_portal_contact_id_for_user( get_current_user_id() );
 			$quote_contact_id = (int) $zbs->DAL->quotes->getQuoteContactID( $quoteID ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase,WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 			// Both IDs must exist and match
 			if ( $customer_id <= 0 || $quote_contact_id <= 0 || $customer_id !== $quote_contact_id ) {

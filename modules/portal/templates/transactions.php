@@ -36,7 +36,7 @@ do_action( 'zbs_enqueue_scripts_and_styles' );
 		<?php
 		$uid        = get_current_user_id();
 		$uinfo      = get_userdata( $uid );
-		$contact_id = zeroBS_getCustomerIDWithEmail( $uinfo->user_email );
+		$contact_id = jpcrm_portal_contact_id_for_user( $uid );
 
 		if ( $contact_id > 0 || $uinfo->has_cap( 'admin_zerobs_transactions' ) ) {
 			// TODO: use pagination while getting from the db.

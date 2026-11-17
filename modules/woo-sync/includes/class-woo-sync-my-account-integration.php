@@ -71,6 +71,86 @@ class Woo_Sync_My_Account_Integration {
 		add_action( 'woocommerce_save_account_details', array( $this, 'save_my_account_crm_field_changes' ), 10, 1 );
 
 		// See also $zbs->wordpress_user_integration->wordpress_profile_update (catches woo my account + wp profile update changes)
+
+		// A customer sees their CRM details and invoices here once they have confirmed their
+		// email address. Ask them to, and send the email when they say so.
+		add_action( 'template_redirect', array( $this, 'catch_email_confirmation_request' ), 5 );
+		add_action( 'woocommerce_account_content', array( $this, 'render_email_confirmation_notice' ), 5 );
+	}
+
+	/**
+	 * Whether the current customer should be asked to confirm their email address
+	 * on My Account: only when something here depends on it.
+	 *
+	 * @return bool
+	 */
+	private function should_ask_for_email_confirmation() {
+		global $zbs;
+
+		if ( ! jpcrm_portal_user_needs_email_confirmation() ) {
+			return false;
+		}
+
+		$settings = $zbs->modules->woosync->settings->getAll();
+
+		return ! empty( $settings['wcport'] ) || ( isset( $settings['wcinv'] ) && 1 === (int) $settings['wcinv'] );
+	}
+
+	/**
+	 * Send the confirmation email when a customer asks for it from My Account.
+	 *
+	 * @return void
+	 */
+	public function catch_email_confirmation_request() {
+
+		if ( ! isset( $_GET['jpcrm_send_confirmation'], $_GET['_wpnonce'] ) || ! is_user_logged_in() ) {
+			return;
+		}
+
+		if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), 'jpcrm-send-email-confirmation' ) ) {
+			return;
+		}
+
+		$sent = jpcrm_portal_send_email_confirmation( get_current_user_id() );
+
+		if ( is_wp_error( $sent ) ) {
+			wc_add_notice( $sent->get_error_message(), 'error' );
+		} else {
+			wc_add_notice( __( 'We have sent you an email. Open the link in it to confirm your email address.', 'zero-bs-crm' ), 'success' );
+		}
+
+		wp_safe_redirect( wc_get_page_permalink( 'myaccount' ) );
+		exit( 0 );
+	}
+
+	/**
+	 * Ask a customer who has not confirmed their email address to do so, and thank
+	 * one who just has.
+	 *
+	 * @return void
+	 */
+	public function render_email_confirmation_notice() {
+
+		if ( isset( $_GET['jpcrm_email_confirmed'] ) && '1' === $_GET['jpcrm_email_confirmed'] && jpcrm_portal_email_is_confirmed() ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- display only.
+			wc_print_notice( esc_html__( 'Thank you. Your email address is confirmed.', 'zero-bs-crm' ), 'success' );
+			return;
+		}
+
+		if ( ! $this->should_ask_for_email_confirmation() ) {
+			return;
+		}
+
+		$send_url = wp_nonce_url( add_query_arg( 'jpcrm_send_confirmation', '1', wc_get_page_permalink( 'myaccount' ) ), 'jpcrm-send-email-confirmation' );
+
+		wc_print_notice(
+			sprintf(
+				'%1$s <a href="%2$s" class="button wc-forward">%3$s</a>',
+				esc_html__( 'Please confirm your email address to access your invoices and other account details.', 'zero-bs-crm' ),
+				esc_url( $send_url ),
+				esc_html__( 'Send me the confirmation email', 'zero-bs-crm' )
+			),
+			'notice'
+		);
 	}
 
 	/**
@@ -110,7 +190,7 @@ class Woo_Sync_My_Account_Integration {
 
 		$wordpress_user_id = get_current_user_id();
 		$uinfo             = get_userdata( $wordpress_user_id );
-		$contact_id        = zeroBS_getCustomerIDWithEmail( $uinfo->user_email );
+		$contact_id        = jpcrm_portal_contact_id_for_user( $wordpress_user_id );
 
 		if ( $contact_id > 0 ) {
 
@@ -187,8 +267,15 @@ class Woo_Sync_My_Account_Integration {
 			// Retrieve current user data
 			$wordpress_user_id = get_current_user_id();
 			$uinfo             = get_userdata( $wordpress_user_id );
-			$contact_id        = zeroBS_getCustomerIDWithEmail( $uinfo->user_email );
-			$crm_contact       = zeroBS_getCustomerMeta( $contact_id );
+			$contact_id        = jpcrm_portal_contact_id_for_user( $wordpress_user_id );
+
+			// Nobody's details to show: the customer is not a contact, or has yet to confirm
+			// their email address (see render_email_confirmation_notice()).
+			if ( $contact_id < 1 ) {
+				return;
+			}
+
+			$crm_contact = zeroBS_getCustomerMeta( $contact_id );
 
 			// Field models/settings
 
@@ -598,7 +685,7 @@ class Woo_Sync_My_Account_Integration {
 	public function save_my_account_crm_field_changes( $wordpress_user_id ) {
 		global $zbs, $zbsCustomerFields;
 
-		$contact_id       = zeroBS_getCustomerIDFromWPID( $wordpress_user_id );
+		$contact_id       = jpcrm_portal_contact_id_for_user( $wordpress_user_id );
 		$old_contact_data = $zbs->DAL->contacts->getContact( $contact_id );
 
 		// Downgrade to old-style second address keys so field names match the object
