@@ -1610,7 +1610,15 @@ function empty( str ) {
  * @param extraClasses
  */
 function zeroBSCRMJS_telLinkFromNo( telno, internalHTML, extraClasses ) {
-	return '<a href="tel:' + telno + '" class="' + extraClasses + '">' + internalHTML + '</a>';
+	return (
+		'<a href="' +
+		jpcrm.esc_attr( 'tel:' + telno ) +
+		'" class="' +
+		jpcrm.esc_attr( extraClasses ) +
+		'">' +
+		internalHTML +
+		'</a>'
+	);
 }
 
 // returns a click 2 call url

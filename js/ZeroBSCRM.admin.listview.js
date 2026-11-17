@@ -2369,7 +2369,7 @@ function zeroBSCRMJS_listView_generic_phonelink( dataLine ) {
 	if ( typeof dataLine.hometel !== 'undefined' && dataLine.hometel != '' ) {
 		phoneLinkStr +=
 			'<a href="' +
-			zeroBSCRMJS_telURLFromNo( dataLine.hometel ) +
+			jpcrm.esc_attr( jpcrm.decodeHTMLEntities( zeroBSCRMJS_telURLFromNo( dataLine.hometel ) ) ) +
 			'" class="ui tiny basic button"><i class="icon call"></i> ' +
 			jpcrm.esc_html( dataLine.hometel ) +
 			' (' +
@@ -2379,7 +2379,7 @@ function zeroBSCRMJS_listView_generic_phonelink( dataLine ) {
 	if ( typeof dataLine.worktel !== 'undefined' && dataLine.worktel != '' ) {
 		phoneLinkStr +=
 			'<a href="' +
-			zeroBSCRMJS_telURLFromNo( dataLine.worktel ) +
+			jpcrm.esc_attr( jpcrm.decodeHTMLEntities( zeroBSCRMJS_telURLFromNo( dataLine.worktel ) ) ) +
 			'" class="ui tiny basic button"><i class="icon call"></i> ' +
 			jpcrm.esc_html( dataLine.worktel ) +
 			' (' +
@@ -2389,7 +2389,7 @@ function zeroBSCRMJS_listView_generic_phonelink( dataLine ) {
 	if ( typeof dataLine.mobtel !== 'undefined' && dataLine.mobtel != '' ) {
 		phoneLinkStr +=
 			'<a href="' +
-			zeroBSCRMJS_telURLFromNo( dataLine.mobtel ) +
+			jpcrm.esc_attr( jpcrm.decodeHTMLEntities( zeroBSCRMJS_telURLFromNo( dataLine.mobtel ) ) ) +
 			'" class="ui tiny basic button"><i class="icon call"></i> ' +
 			jpcrm.esc_html( dataLine.mobtel ) +
 			' (' +
@@ -2745,7 +2745,7 @@ function zeroBSCRMJS_listView_customer_phonelink( dataLine ) {
 	if ( typeof dataLine.hometel !== 'undefined' && dataLine.hometel != '' ) {
 		phoneLinkStr +=
 			'<a href="' +
-			zeroBSCRMJS_telURLFromNo( dataLine.hometel ) +
+			jpcrm.esc_attr( jpcrm.decodeHTMLEntities( zeroBSCRMJS_telURLFromNo( dataLine.hometel ) ) ) +
 			'" class="ui tiny basic button"><i class="icon call"></i> ' +
 			jpcrm.esc_html( dataLine.hometel ) +
 			' (' +
@@ -2755,7 +2755,7 @@ function zeroBSCRMJS_listView_customer_phonelink( dataLine ) {
 	if ( typeof dataLine.worktel !== 'undefined' && dataLine.worktel != '' ) {
 		phoneLinkStr +=
 			'<a href="' +
-			zeroBSCRMJS_telURLFromNo( dataLine.worktel ) +
+			jpcrm.esc_attr( jpcrm.decodeHTMLEntities( zeroBSCRMJS_telURLFromNo( dataLine.worktel ) ) ) +
 			'" class="ui tiny basic button"><i class="icon call"></i> ' +
 			jpcrm.esc_html( dataLine.worktel ) +
 			' (' +
@@ -2765,7 +2765,7 @@ function zeroBSCRMJS_listView_customer_phonelink( dataLine ) {
 	if ( typeof dataLine.mobtel !== 'undefined' && dataLine.mobtel != '' ) {
 		phoneLinkStr +=
 			'<a href="' +
-			zeroBSCRMJS_telURLFromNo( dataLine.mobtel ) +
+			jpcrm.esc_attr( jpcrm.decodeHTMLEntities( zeroBSCRMJS_telURLFromNo( dataLine.mobtel ) ) ) +
 			'" class="ui tiny basic button"><i class="icon call"></i> ' +
 			jpcrm.esc_html( dataLine.mobtel ) +
 			' (' +
@@ -3263,7 +3263,7 @@ function zeroBSCRMJS_listView_company_phonelink( dataLine ) {
 	if ( typeof dataLine.maintel !== 'undefined' && dataLine.maintel != '' ) {
 		phoneLinkStr +=
 			'<a href="' +
-			zeroBSCRMJS_telURLFromNo( dataLine.maintel ) +
+			jpcrm.esc_attr( jpcrm.decodeHTMLEntities( zeroBSCRMJS_telURLFromNo( dataLine.maintel ) ) ) +
 			'" class="ui tiny basic button"><i class="icon call"></i> ' +
 			jpcrm.esc_html( dataLine.maintel ) +
 			'</a>';
@@ -3271,7 +3271,7 @@ function zeroBSCRMJS_listView_company_phonelink( dataLine ) {
 	if ( typeof dataLine.sectel !== 'undefined' && dataLine.sectel != '' ) {
 		phoneLinkStr +=
 			'<a href="' +
-			zeroBSCRMJS_telURLFromNo( dataLine.sectel ) +
+			jpcrm.esc_attr( jpcrm.decodeHTMLEntities( zeroBSCRMJS_telURLFromNo( dataLine.sectel ) ) ) +
 			'" class="ui tiny basic button"><i class="icon call"></i> ' +
 			jpcrm.esc_html( dataLine.sectel ) +
 			'</a>';
@@ -4558,13 +4558,13 @@ function zeroBSCRMJS_listView_transaction_bulkActionFire_addtag() {
 		jQuery.each( window.zbsTagsForBulkActions, function ( ind, tag ) {
 			tagSelectList +=
 				'<div class="zbs-select-tag ui label"><div class="ui checkbox"><input type="checkbox" data-tagid="' +
-				tag.id +
+				jpcrm.esc_attr( tag.id ) +
 				'" id="zbs-tag-' +
-				tag.id +
+				jpcrm.esc_attr( tag.id ) +
 				'" /><label for="zbs-tag-' +
-				tag.id +
+				jpcrm.esc_attr( tag.id ) +
 				'">' +
-				tag.name +
+				jpcrm.esc_html( tag.name ) +
 				'</label></div></div>';
 		} );
 	} else {
