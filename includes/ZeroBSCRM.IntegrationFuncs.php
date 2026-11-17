@@ -58,6 +58,40 @@ function zeroBS_integrations_getCustomer( $externalSource = '', $externalID = ''
 	return false;
 }
 
+/**
+ * The contact fields a submission from the public may fill in but not replace.
+ *
+ * A form or donation that anyone can submit names a contact by its email
+ * address, without showing the address is theirs. So when the contact already
+ * exists, what was sent fills in fields that are empty and leaves the rest as
+ * they are. Tags are added to, and the source is recorded, as before.
+ *
+ * @param array  $contact_data The contact data built from the submission.
+ * @param string $source       Where it came from, e.g. 'jetpack_form'.
+ * @return string[] Keys of `$contact_data` to pass as `do_not_overwrite_populated`.
+ */
+function jpcrm_public_submission_fields_to_protect( $contact_data, $source ) {
+
+	$fields = array_values(
+		array_diff(
+			array_keys( (array) $contact_data ),
+			array( 'email', 'externalSources', 'tags', 'tag_mode' )
+		)
+	);
+
+	/**
+	 * Filters the contact fields a public submission may fill in but not replace.
+	 *
+	 * Returning an empty array restores the previous behaviour, where a submission
+	 * replaced these fields on whichever contact held the email address.
+	 *
+	 * @param string[] $fields       Field keys to protect.
+	 * @param array    $contact_data The contact data built from the submission.
+	 * @param string   $source       Where it came from, e.g. 'jetpack_form'.
+	 */
+	return (array) apply_filters( 'jpcrm_public_submission_fields_to_protect', $fields, $contact_data, $source );
+}
+
 /*
 	|=======================================
 	|   zeroBS_integrations_addOrUpdateCustomer

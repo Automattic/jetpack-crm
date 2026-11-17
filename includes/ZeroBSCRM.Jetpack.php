@@ -190,10 +190,14 @@ function zero_bs_crm_capture_jetpack_form( $post_id, $all_field_data, $is_spam, 
 	//phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 	$zbs->DAL->contacts->addUpdateContact(
 		array(
-			'data'                 => $contact_data,
-			'automatorPassthrough' => $success_log,
-			'fallBackLog'          => $exists_log,
-			'extraMeta'            => $extra_meta,
+			'data'                       => $contact_data,
+			'automatorPassthrough'       => $success_log,
+			'fallBackLog'                => $exists_log,
+			'extraMeta'                  => $extra_meta,
+			// Anyone can submit the form, against any email address: fill in what an
+			// existing contact is missing, and leave what it has.
+			'do_not_overwrite_populated' => jpcrm_public_submission_fields_to_protect( $contact_data, 'jetpack_form' ),
+			'do_not_update_blanks'       => true,
 		)
 	);
 }

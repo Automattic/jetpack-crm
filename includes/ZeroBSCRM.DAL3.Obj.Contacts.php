@@ -2753,7 +2753,7 @@ class zbsDAL_contacts extends zbsDAL_ObjectLayer {
 		 */
 		if ( is_array( $do_not_overwrite_populated ) && count( $do_not_overwrite_populated ) > 0 && ! empty( $id ) && $id > 0 ) {
 
-			$existing_contact = $this->getContact( $id, array( 'withCustomFields' => false ) );
+			$existing_contact = $this->getContact( $id, array( 'withCustomFields' => true ) );
 
 			if ( is_array( $existing_contact ) ) {
 
@@ -3092,6 +3092,24 @@ class zbsDAL_contacts extends zbsDAL_ObjectLayer {
 						'external_sources' => isset( $data['externalSources'] ) ? $data['externalSources'] : array(),
 					)
 				);
+
+				// tags, outside the limitedFields check below, for the same reason.
+				//
+				// An update that leaves blanks alone is a limitedFields update, and the
+				// tags the caller sent with it used to be dropped. They are added to the
+				// contact's tags here, never swapped for them: this path exists so that
+				// what a contact already has is kept.
+				if ( $do_not_update_blanks && isset( $limitedFields ) && is_array( $limitedFields ) && isset( $data['tags'] ) && is_array( $data['tags'] ) ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+
+					$this->addUpdateContactTags(
+						array(
+							'id'        => $id,
+							'tag_input' => $data['tags'],
+							'mode'      => 'append',
+						)
+					);
+
+				}
 
 				// if passing limitedFields instead of data, we ignore the following
 				// this doesn't work, because data is in args default as arr
