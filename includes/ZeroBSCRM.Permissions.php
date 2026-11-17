@@ -666,8 +666,12 @@ function jpcrm_perms_view_list_type( $list_type ) {
 			break;
 
 		case 'quote':
-		case 'quotetemplate':
 			$allowed = zeroBSCRM_permsViewQuotes();
+			break;
+
+		case 'quotetemplate':
+			// The Quote Templates page asks for the quote edit capability, so its list does too.
+			$allowed = zeroBSCRM_permsQuotes();
 			break;
 
 		case 'invoice':

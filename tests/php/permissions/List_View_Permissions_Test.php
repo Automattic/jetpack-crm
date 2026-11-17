@@ -49,7 +49,7 @@ class List_View_Permissions_Test extends JPCRM_Base_TestCase {
 			'companies'       => array( 'company', 'admin_zerobs_view_customers' ),
 			'segments'        => array( 'segment', 'admin_zerobs_view_customers' ),
 			'quotes'          => array( 'quote', 'admin_zerobs_view_quotes' ),
-			'quote templates' => array( 'quotetemplate', 'admin_zerobs_view_quotes' ),
+			'quote templates' => array( 'quotetemplate', 'admin_zerobs_quotes' ),
 			'invoices'        => array( 'invoice', 'admin_zerobs_view_invoices' ),
 			'transactions'    => array( 'transaction', 'admin_zerobs_view_transactions' ),
 			'tasks'           => array( 'event', 'admin_zerobs_view_events' ),
@@ -127,6 +127,25 @@ class List_View_Permissions_Test extends JPCRM_Base_TestCase {
 		$this->assertTrue( jpcrm_perms_view_list_type( 'quote' ) );
 		$this->assertFalse( jpcrm_perms_view_list_type( 'event' ) );
 		$this->assertFalse( jpcrm_perms_view_list_type( 'form' ) );
+	}
+
+	/**
+	 * A Mail Manager cannot reach the Quote Templates list view.
+	 *
+	 * Mail Managers can view quotes but not edit them, and the Quote Templates
+	 * page is registered with the edit capability.
+	 *
+	 * @return void
+	 */
+	#[TestDox( 'A mail manager can view the quote list view but not the quote template one.' )]
+	public function test_mail_manager_cannot_view_quote_templates() {
+
+		$user_id = self::factory()->user->create( array( 'role' => 'zerobs_mailmgr' ) );
+		wp_set_current_user( $user_id );
+		unset( $GLOBALS['zeroBSCRM_isZBSUser'], $GLOBALS['zeroBSCRM_isZBSBackendUser'] );
+
+		$this->assertTrue( jpcrm_perms_view_list_type( 'quote' ) );
+		$this->assertFalse( jpcrm_perms_view_list_type( 'quotetemplate' ) );
 	}
 
 	/**
