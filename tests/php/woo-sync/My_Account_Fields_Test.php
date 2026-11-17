@@ -112,6 +112,7 @@ class My_Account_Fields_Test extends JPCRM_Base_Integration_TestCase {
 			)
 		);
 		zeroBS_setCustomerWPID( $contact_id, $user_id );
+		$this->confirm_user_email( $user_id );
 
 		$_POST = array(
 			'account_first_name' => 'Alex',

@@ -212,12 +212,6 @@ class JPCRM_GiveWP {
 			}
 		}
 
-		// If this is an existing WordPress user, make sure not to lose that association.
-		$wp_user = get_user_by( 'email', $new_contact_data['email'] );
-		if ( is_object( $wp_user ) ) {
-			$new_contact_data['wpid'] = $wp_user->ID;
-		}
-
 		// specify contact source
 		$new_contact_data['externalSources'] = array(
 			array(

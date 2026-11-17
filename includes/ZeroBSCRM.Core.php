@@ -1181,6 +1181,9 @@ final class ZeroBSCRM {
 		// Generic CRM exceptions
 		require_once ZEROBSCRM_INCLUDE_PATH . 'class-crm-exception.php';
 
+		// Which contact a WordPress user is (Client Portal identity).
+		require_once ZEROBSCRM_INCLUDE_PATH . 'jpcrm-portal-identity.php';
+
 		// WordPress user integrations
 		require_once ZEROBSCRM_INCLUDE_PATH . 'class-wordpress-user-integration.php';
 

@@ -1247,7 +1247,7 @@ function jpcrm_can_wp_user_view_object( $wp_user, $obj_id, $obj_type_id ) {
 	}
 
 	// verify current user is assigned user
-	$contact_id = zeroBS_getCustomerIDWithEmail( $wp_user->user_email );
+	$contact_id = jpcrm_portal_contact_id_for_user( $wp_user->ID );
 	if ( $assigned_contact_id != $contact_id ) {
 		return false;
 	}

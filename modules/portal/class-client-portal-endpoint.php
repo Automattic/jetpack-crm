@@ -55,9 +55,24 @@ abstract class Client_Portal_Endpoint {
 				return $this->portal->get_template( 'login.php' );
 			}
 
+			// A user is only shown a contact's records once they have confirmed their email address.
+			if ( jpcrm_portal_user_needs_email_confirmation() ) {
+				return $this->portal->get_template( 'confirm-email.php' );
+			}
+
 			if ( ! $this->portal->is_user_enabled() ) {
 				return $this->portal->get_template( 'disabled.php' );
 			}
+		}
+
+		// Back from the link in the confirmation email.
+		if (
+			$this->should_check_user_permission
+			&& isset( $_GET['jpcrm_email_confirmed'] ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- display only.
+			&& '1' === $_GET['jpcrm_email_confirmed'] // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			&& jpcrm_portal_email_is_confirmed()
+		) {
+			echo "<div class='zbs_alert'>" . esc_html__( 'Thank you. Your email address is confirmed.', 'zero-bs-crm' ) . '</div>';
 		}
 
 		$this->pre_content_action();

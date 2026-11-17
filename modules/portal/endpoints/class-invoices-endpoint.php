@@ -59,7 +59,7 @@ class Invoices_Endpoint extends Client_Portal_Endpoint {
 
 		$uid              = get_current_user_id();
 		$uinfo            = get_userdata( $uid );
-		$cID              = zeroBS_getCustomerIDWithEmail( $uinfo->user_email );
+		$cID              = jpcrm_portal_contact_id_for_user( $uid ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 		$is_invoice_admin = $uinfo->has_cap( 'admin_zerobs_invoices' );
 
 		// if the current is a valid contact or a WP user with permissions to view invoices...

@@ -522,25 +522,11 @@ function zeroBSCRM_getClientPortalUserID( $cID = -1 ) {
 
 		global $zbs;
 
-		// first lets check if a user already exists with that email..
-		$email = $zbs->DAL->contacts->getContactEmail( $cID );
-		if ( ! empty( $email ) ) {
-			$userID = email_exists( $email );
-			if ( $userID != null ) {
-				// update_post_meta($cID, 'zbs_portal_wpid', $userID);
-				$zbs->DAL->contacts->addUpdateContactWPID(
-					array(
-						'id'   => $cID,
-						'WPID' => $userID,
-					)
-				);
-			}
-		} else {
-			// no email in meta, but might be linked?
-			// $userID = get_post_meta($cID, 'zbs_portal_wpid', true);
-			$userID = $zbs->DAL->contacts->getContactWPID( $cID );
-		}
-		return $userID;
+		// The user this contact is linked to. A user who merely has the contact's email
+		// address is not linked by looking: see includes/jpcrm-portal-identity.php.
+		$linked_user_id = (int) $zbs->DAL->contacts->getContactWPID( $cID ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase,WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+
+		return $linked_user_id > 0 ? $linked_user_id : false;
 	}
 	return false;
 }
@@ -625,6 +611,10 @@ function zeroBSCRM_createClientPortalUser( $cID = -1, $email = '', $passwordLeng
 			'WPID' => $user_id,
 		)
 	);
+
+	// The account was made for this contact, with the contact's email address, and its
+	// password goes to that address: there is nothing further for the user to confirm.
+	update_user_meta( $user_id, JPCRM_PORTAL_CONFIRMED_EMAIL_META, jpcrm_portal_normalise_email( $email ) );
 
 	// any extra assigned role? (from settings)
 	$extraRole = zeroBSCRM_getSetting( 'portalusers_extrarole' );
