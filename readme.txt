@@ -362,6 +362,15 @@ We offer a full, no-hassle refund within 14 days. You can read more about that, 
 
 
 == Changelog ==
+### 6.8.7 - 2026-11-17
+* Cover date custom fields in contact merges (#110)
+* Ask for the quote edit capability on the Quote Templates list view (#109)
+* Client Portal and My Account users confirm their email address once before viewing their documents
+* Change how Jetpack Forms, GiveWP and MailPoet submissions update existing contacts
+* Improve Jetpack Forms field handling
+* Improve company email handling
+* Improve list view phone link and tag handling
+
 ### 6.8.6 - 2026-11-11
 * Print login_form fields inside the Client Portal login form (#106)
 * Restore the external sources uid index with a prefix (#105)
@@ -414,6 +423,3 @@ We offer a full, no-hassle refund within 14 days. You can read more about that, 
 * Only accept a recognised sort direction on list views.
 * Require the invoice viewing capability to read invoice data over AJAX.
 * Escape the prefilled company name in the company field.
-
-### 6.8.2 - 2026-07-27
-* Improve remote image handling in PDF generation (#10)
