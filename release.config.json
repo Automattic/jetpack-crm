@@ -6,5 +6,6 @@
 	"versionConstant": "JPCRM_VERSION",
 	"readme": "readme.txt",
 	"bumpPackageJson": true,
-	"nextVersionPlaceholder": true
+	"nextVersionPlaceholder": true,
+	"requiredCheckWorkflows": [ "lint-php.yml", "phpunit.yml" ]
 }

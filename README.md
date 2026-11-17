@@ -117,7 +117,8 @@ description** in the browser before merging.
 
 Merging the release PR triggers `.github/workflows/create-release.yml`, which:
 
-1. writes the (edited) changelog from the PR body into `readme.txt`,
+1. writes the (edited) changelog from the PR body into `readme.txt`, runs the
+   required checks on that commit and pushes it to `trunk`,
 2. builds the plugin (`make build`),
 3. tags the release and creates the GitHub release (with the built `zero-bs-crm.zip` attached), and
 4. deploys the built plugin to WordPress.org.

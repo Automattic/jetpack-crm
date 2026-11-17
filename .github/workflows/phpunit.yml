@@ -21,6 +21,10 @@ on:
   push:
     branches:
       - trunk
+  # The release workflow starts this on the changelog commit, which it can't
+  # push to trunk until the required checks have run on it. See pushChangelog()
+  # in scripts/create-release.mjs.
+  workflow_dispatch:
 
 jobs:
   phpunit:
