@@ -77,6 +77,80 @@ function jpcrm_api_process_external_api_name() {
 }
 
 /**
+ * Prepare contact fields from an API payload.
+ *
+ * Existing values are included for updates because the legacy contact integration
+ * performs a full-row update. This gives the endpoint PATCH-like semantics: a
+ * field is only changed when it is present in the payload.
+ *
+ * @param array      $payload          Decoded request payload.
+ * @param array|false $existing_contact Existing contact, or false for a new contact.
+ * @return array Contact fields using the prefix expected by the integration layer.
+ */
+function jpcrm_api_prepare_contact_fields( $payload, $existing_contact = false ) {
+	global $zbs, $zbsCustomerFields;
+
+	$contact_model    = $zbs->DAL->contacts->objModel(); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+	$supported_fields = $zbsCustomerFields;
+
+	// Continue accepting the pre-DAL3 second-address field names.
+	foreach ( $contact_model as $field_key => $field ) {
+		if ( isset( $field['dal1key'] ) && array_key_exists( $field['dal1key'], $payload ) && ! array_key_exists( $field_key, $payload ) ) {
+			$payload[ $field_key ] = $payload[ $field['dal1key'] ];
+		}
+	}
+
+	// These non-form fields are writable by the legacy endpoint and full-row DAL update.
+	foreach ( array( 'wpid', 'avatar', 'tw', 'fb', 'li' ) as $field_key ) {
+		if ( isset( $contact_model[ $field_key ] ) ) {
+			$supported_fields[ $field_key ] = $contact_model[ $field_key ];
+		}
+	}
+
+	$contact_fields = array();
+	$is_update      = is_array( $existing_contact );
+
+	foreach ( $supported_fields as $field_key => $field ) {
+		if ( array_key_exists( $field_key, $payload ) ) {
+			$contact_fields[ 'zbsc_' . $field_key ] = $payload[ $field_key ];
+		} elseif ( $is_update && array_key_exists( $field_key, $existing_contact ) ) {
+			$contact_fields[ 'zbsc_' . $field_key ] = $existing_contact[ $field_key ];
+		} elseif ( ! $is_update && isset( $field[0] ) && 'autonumber' === $field[0] ) {
+			// A blank value tells the integration layer to generate the autonumber.
+			$contact_fields[ 'zbsc_' . $field_key ] = '';
+		}
+	}
+
+	return $contact_fields;
+}
+
+/**
+ * Sanitize a list of tag names received by the API.
+ *
+ * @param mixed $tags Potential list of tag names.
+ * @return array Sanitized, non-empty tag names.
+ */
+function jpcrm_api_sanitize_tags( $tags ) {
+	if ( ! is_array( $tags ) ) {
+		return array();
+	}
+
+	$sanitized_tags = array();
+	foreach ( $tags as $tag ) {
+		if ( ! is_scalar( $tag ) ) {
+			continue;
+		}
+
+		$tag = trim( sanitize_text_field( (string) $tag ) );
+		if ( '' !== $tag ) {
+			$sanitized_tags[] = $tag;
+		}
+	}
+
+	return $sanitized_tags;
+}
+
+/**
  * Generate API invalid request error
  */
 function jpcrm_api_invalid_request() {
