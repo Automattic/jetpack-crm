@@ -122,6 +122,25 @@ class Jetpack_Form_Capture_Values_Test extends JPCRM_Base_Integration_TestCase {
 	}
 
 	/**
+	 * @testdox A phone field with the country selector is stored as the contact's phone number.
+	 */
+	#[TestDox( 'A phone field with the country selector is stored as the contact\'s phone number.' )]
+	public function test_a_phone_field_with_the_country_selector_is_stored() {
+
+		$this->submit(
+			array(
+				$this->form_field( 'g1-email', 'email', 'astrid@example.test' ),
+				$this->form_field( 'g1-phone', 'phone', '+46 701234567' ),
+			)
+		);
+
+		$contact = $this->contact_with_email( 'astrid@example.test' );
+
+		$this->assertIsArray( $contact, 'No contact was created.' );
+		$this->assertSame( '+46 701234567', $contact['hometel'] );
+	}
+
+	/**
 	 * @testdox Submitted values are stored as plain text.
 	 */
 	#[TestDox( 'Submitted values are stored as plain text.' )]
