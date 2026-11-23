@@ -139,7 +139,8 @@ function zero_bs_crm_capture_jetpack_form( $post_id, $all_field_data, $is_spam, 
 				$contact_data['email'] = jpcrm_jetpack_form_text_value( $field_data->value );
 			}
 
-			if ( 'telephone' === $field_data->get_attribute( 'type' )
+			// A phone field with the country selector switched on has the type 'phone'.
+			if ( in_array( $field_data->get_attribute( 'type' ), array( 'telephone', 'phone' ), true )
 				&& ! isset( $contact_data['hometel'] )
 				&& ! empty( $field_data->value )
 			) {
