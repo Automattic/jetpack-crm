@@ -1810,7 +1810,7 @@ class Woo_Sync {
 		// get existing (but side-step the woo local check because that can cause an infinite loop)
 		$pre_state = $this->skip_local_woo_check;
 		$this->skip_local_woo_check = true;
-
+		$sync_sites = $this->get_active_sync_sites( 'default' );
 		$this->skip_local_woo_check = $pre_state;
 
 		// phpcs:disable VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
