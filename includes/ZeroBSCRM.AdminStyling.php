@@ -292,6 +292,9 @@ function zbs_color_grabber() {
 /**
  * Whether the Disable Front-End setting should stop this request.
  *
+ * The handler, zeroBSCRM_stopFrontEnd(), also lets Client Portal pages through,
+ * so a true result does not always mean a redirect.
+ *
  * @return bool
  */
 function jpcrm_should_stop_front_end() {
