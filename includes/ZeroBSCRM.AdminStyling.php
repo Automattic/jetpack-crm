@@ -289,6 +289,36 @@ function zbs_color_grabber() {
 	WP Override specifically
 	====================================================== */
 
+/**
+ * Whether the Disable Front-End setting should stop this request.
+ *
+ * Called on `init`, before the main query runs.
+ *
+ * @return bool
+ */
+function jpcrm_should_stop_front_end() {
+	global $zbs, $pagenow;
+
+	if ( is_admin() || defined( 'WP_CLI' ) || 1 !== (int) $zbs->settings->get( 'killfrontend' ) ) {
+		return false;
+	}
+
+	// WordPress runs due scheduled jobs (from CRM and other plugins) on a request
+	// to wp-cron.php, which loads like a front-end page. Redirecting that request
+	// stops the jobs, and it shows visitors no page, so let it through.
+	if ( wp_doing_cron() ) {
+		return false;
+	}
+
+	return ! zeroBSCRM_isLoginPage()
+		&& ! zeroBSCRM_isWelcomeWizPage()
+		&& ! zeroBSCRM_isAPIRequest()
+		&& ! defined( 'XMLRPC_REQUEST' )
+		&& ! defined( 'REST_REQUEST' )
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		&& ! ( 'index.php' === $pagenow && ! empty( $_GET['rest_route'] ) );
+}
+
 function zeroBSCRM_stopFrontEnd() {
 
 	// } Harsh redir!

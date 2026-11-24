@@ -1770,26 +1770,9 @@ final class ZeroBSCRM {
 		// } Post Init hook
 		do_action( 'zerobscrm_post_init' );
 
-		// } Public & non wp-cli only
-		if ( ! is_admin() && ! defined( 'WP_CLI' ) ) {
-
-			// } Catch front end loads :)
-			if ( $this->settings->get( 'killfrontend' ) == 1 ) {
-				global $pagenow;
-
-				if ( ! zeroBSCRM_isLoginPage()
-					&& ! zeroBSCRM_isWelcomeWizPage()
-					&& ! zeroBSCRM_isAPIRequest()
-					&& ! defined( 'XMLRPC_REQUEST' )
-					&& ! defined( 'REST_REQUEST' )
-					// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-					&& ! ( 'index.php' === $pagenow && ! empty( $_GET['rest_route'] ) )
-				) {
-
-					zeroBSCRM_stopFrontEnd();
-
-				}
-			}
+		// } Catch front end loads, when Disable Front-End is on
+		if ( jpcrm_should_stop_front_end() ) {
+			zeroBSCRM_stopFrontEnd();
 		}
 
 		// } Finally, if it's an edit page for a (obj) which is hard owned by another, redir away
