@@ -88,7 +88,7 @@ class Disable_Front_End_Test extends JPCRM_Base_TestCase {
 	 */
 	public static function requests_let_through(): array {
 		return array(
-			'setting off'      => array( 'any request while the setting is off' ),
+			'setting off'      => array( 'a front-end request while the setting is off' ),
 			'wp-admin page'    => array( 'a wp-admin page' ),
 			'login page'       => array( 'the login page' ),
 			'rest_route query' => array( 'a ?rest_route= request' ),
@@ -107,15 +107,17 @@ class Disable_Front_End_Test extends JPCRM_Base_TestCase {
 	public function test_lets_request_through( string $request ) {
 		global $zbs;
 
-		if ( 'any request while the setting is off' === $request ) {
+		if ( 'a front-end request while the setting is off' === $request ) {
 			$zbs->settings->update( 'killfrontend', 0 );
 		} elseif ( 'a wp-admin page' === $request ) {
 			set_current_screen( 'dashboard' );
 		} elseif ( 'the login page' === $request ) {
 			$GLOBALS['pagenow'] = 'wp-login.php'; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
-		} else {
+		} elseif ( 'a ?rest_route= request' === $request ) {
 			$GLOBALS['pagenow'] = 'index.php'; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 			$_GET['rest_route'] = '/';
+		} else {
+			$this->fail( "No set-up for the case '$request'." );
 		}
 
 		$this->assertFalse( jpcrm_should_stop_front_end() );
