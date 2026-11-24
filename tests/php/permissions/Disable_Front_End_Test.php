@@ -84,41 +84,46 @@ class Disable_Front_End_Test extends JPCRM_Base_TestCase {
 	 * constants would stay defined for every later test, and the welcome wizard
 	 * and api_key= API requests.
 	 *
-	 * @return array<string, array{string}>
+	 * @return array<string, array{callable}>
 	 */
 	public static function requests_let_through(): array {
 		return array(
-			'setting off'      => array( 'a front-end request while the setting is off' ),
-			'wp-admin page'    => array( 'a wp-admin page' ),
-			'login page'       => array( 'the login page' ),
-			'rest_route query' => array( 'a ?rest_route= request' ),
+			'the setting off'      => array(
+				static function () {
+					global $zbs;
+					$zbs->settings->update( 'killfrontend', 0 );
+				},
+			),
+			'a wp-admin page'      => array(
+				static function () {
+					set_current_screen( 'dashboard' );
+				},
+			),
+			'the login page'       => array(
+				static function () {
+					$GLOBALS['pagenow'] = 'wp-login.php'; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+				},
+			),
+			'a ?rest_route= query' => array(
+				static function () {
+					$GLOBALS['pagenow'] = 'index.php'; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+					$_GET['rest_route'] = '/';
+				},
+			),
 		);
 	}
 
 	/**
-	 * @testdox The Disable Front-End check does not stop $request.
+	 * @testdox The Disable Front-End check lets a request through
 	 *
 	 * @dataProvider requests_let_through
 	 *
-	 * @param string $request The request to set up, in words.
+	 * @param callable $set_up Sets up the request.
 	 */
 	#[DataProvider( 'requests_let_through' )]
-	#[TestDox( 'The Disable Front-End check does not stop $request.' )]
-	public function test_lets_request_through( string $request ) {
-		global $zbs;
-
-		if ( 'a front-end request while the setting is off' === $request ) {
-			$zbs->settings->update( 'killfrontend', 0 );
-		} elseif ( 'a wp-admin page' === $request ) {
-			set_current_screen( 'dashboard' );
-		} elseif ( 'the login page' === $request ) {
-			$GLOBALS['pagenow'] = 'wp-login.php'; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
-		} elseif ( 'a ?rest_route= request' === $request ) {
-			$GLOBALS['pagenow'] = 'index.php'; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
-			$_GET['rest_route'] = '/';
-		} else {
-			$this->fail( "No set-up for the case '$request'." );
-		}
+	#[TestDox( 'The Disable Front-End check lets a request through' )]
+	public function test_lets_request_through( callable $set_up ) {
+		$set_up();
 
 		$this->assertFalse( jpcrm_should_stop_front_end() );
 	}

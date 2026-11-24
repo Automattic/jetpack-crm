@@ -292,10 +292,7 @@ function zbs_color_grabber() {
 /**
  * Whether the Disable Front-End setting should stop this request.
  *
- * Called on init. A true result then means zeroBSCRM_stopFrontEnd() redirects
- * the request: its API check cannot match, because this function returns false
- * for API requests, and its Client Portal check cannot match before the main
- * query runs.
+ * Called on `init`, before the main query runs.
  *
  * @return bool
  */
